@@ -9,6 +9,11 @@
 #import "CustomTabBarViewController.h"
 #import "UIImage+NSBundle.h"
 #import "Toolkit.h"
+#import "HomePageViewController.h"
+#import "BusinessSchoolViewController.h"
+#import "WebStroeViewController.h"
+#import "ShoppingCarViewController.h"
+#import "MineViewController.h"
 
 #define tabBarButtonNum 5
 
@@ -87,43 +92,43 @@
     
     
    
-//    KongFuerViewController *HomeView=[[KongFuerViewController alloc]init];
-//    if ([Toolkit isSystemIOS7]||[Toolkit isSystemIOS8])
-//        HomeView.automaticallyAdjustsScrollViewInsets = NO;
-//    UINavigationController * homeviewnav=[[UINavigationController alloc]initWithRootViewController:HomeView];
-////    homePageNavigation.automaticallyAdjustsScrollViewInsets = YES;
-//    HomeView.hidesBottomBarWhenPushed = YES;
-//    homeviewnav.navigationBar.hidden=YES;
-//    
-//    KongFuUnionViewController *typeView=[[KongFuUnionViewController alloc]init];
-//    UINavigationController *typeViewnav = [[UINavigationController alloc] initWithRootViewController:typeView];
-//    typeView.hidesBottomBarWhenPushed=YES;
-//    typeViewnav.navigationBar.hidden=YES;
-//    
-//    KongFuPowerViewController *shoplistView=[[KongFuPowerViewController alloc]init];
-//    UINavigationController *shoplistViewnav = [[UINavigationController alloc] initWithRootViewController:shoplistView];
-//    shoplistView.hidesBottomBarWhenPushed = YES;
-//    shoplistViewnav.navigationBarHidden=YES;
-//    //消息
-//    
-//    KongFuStoreViewController *store = [[KongFuStoreViewController alloc] init];
-//    UINavigationController *storenav = [[UINavigationController alloc] initWithRootViewController:store];
-//    store.hidesBottomBarWhenPushed=YES;
-//    storenav.navigationBar.hidden=YES;
-//    
-//    
-//    MoreViewController *ShoppingCart=[[MoreViewController alloc]init];
-//    UINavigationController *ShoppingCartnav = [[UINavigationController alloc] initWithRootViewController:ShoppingCart];
-//    ShoppingCart.hidesBottomBarWhenPushed=YES;
-//    ShoppingCartnav.navigationBar.hidden=YES;
-// 
-//
-//    //加入到真正的tabbar
-//    //fix me 商铺选项卡暂时隐藏
-//    self.viewControllers=[NSArray arrayWithObjects:homeviewnav,typeViewnav,shoplistViewnav,storenav,ShoppingCartnav,nil];
-//    
-//    UIButton *btnSender = (UIButton *)[self.view viewWithTag:0 + 1000];
-//    [self onTabButtonPressed:btnSender];
+    HomePageViewController *HomeView=[[HomePageViewController alloc]init];
+    if ([Toolkit isSystemIOS7]||[Toolkit isSystemIOS8])
+        HomeView.automaticallyAdjustsScrollViewInsets = NO;
+    UINavigationController * homeviewnav=[[UINavigationController alloc]initWithRootViewController:HomeView];
+//    homePageNavigation.automaticallyAdjustsScrollViewInsets = YES;
+    HomeView.hidesBottomBarWhenPushed = YES;
+    homeviewnav.navigationBar.hidden=YES;
+    
+    BusinessSchoolViewController *typeView=[[BusinessSchoolViewController alloc]init];
+    UINavigationController *typeViewnav = [[UINavigationController alloc] initWithRootViewController:typeView];
+    typeView.hidesBottomBarWhenPushed=YES;
+    typeViewnav.navigationBar.hidden=YES;
+    
+    WebStroeViewController *shoplistView=[[WebStroeViewController alloc]init];
+    UINavigationController *shoplistViewnav = [[UINavigationController alloc] initWithRootViewController:shoplistView];
+    shoplistView.hidesBottomBarWhenPushed = YES;
+    shoplistViewnav.navigationBarHidden=YES;
+    //消息
+    
+    ShoppingCarViewController *store = [[ShoppingCarViewController alloc] init];
+    UINavigationController *storenav = [[UINavigationController alloc] initWithRootViewController:store];
+    store.hidesBottomBarWhenPushed=YES;
+    storenav.navigationBar.hidden=YES;
+    
+    
+    MineViewController *ShoppingCart=[[MineViewController alloc]init];
+    UINavigationController *ShoppingCartnav = [[UINavigationController alloc] initWithRootViewController:ShoppingCart];
+    ShoppingCart.hidesBottomBarWhenPushed=YES;
+    ShoppingCartnav.navigationBar.hidden=YES;
+ 
+
+    //加入到真正的tabbar
+    //fix me 商铺选项卡暂时隐藏
+    self.viewControllers=[NSArray arrayWithObjects:homeviewnav,typeViewnav,shoplistViewnav,storenav,ShoppingCartnav,nil];
+    
+    UIButton *btnSender = (UIButton *)[self.view viewWithTag:0 + 1000];
+    [self onTabButtonPressed:btnSender];
     
     
 }

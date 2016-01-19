@@ -32,6 +32,11 @@
 		8043C7091C4E13E500369EEF /* Toolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C7021C4E13E500369EEF /* Toolkit.m */; };
 		8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C7061C4E13E500369EEF /* UploadDataToServer.m */; };
 		8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C70F1C4E1DE600369EEF /* DataProvider.m */; };
+		80937EAD1C4E29FF00CAD5D0 /* hedongli@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80937EA81C4E29FF00CAD5D0 /* hedongli@2x.png */; };
+		80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80937EA91C4E29FF00CAD5D0 /* helianmeng@2x.png */; };
+		80937EAF1C4E29FF00CAD5D0 /* hewuzhe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80937EAA1C4E29FF00CAD5D0 /* hewuzhe@2x.png */; };
+		80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80937EAB1C4E29FF00CAD5D0 /* hezhuangbei@2x.png */; };
+		80937EB11C4E29FF00CAD5D0 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80937EAC1C4E29FF00CAD5D0 /* more@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +107,11 @@
 		8043C7061C4E13E500369EEF /* UploadDataToServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDataToServer.m; sourceTree = "<group>"; };
 		8043C70E1C4E1DE600369EEF /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
 		8043C70F1C4E1DE600369EEF /* DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataProvider.m; sourceTree = "<group>"; };
+		80937EA81C4E29FF00CAD5D0 /* hedongli@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hedongli@2x.png"; sourceTree = "<group>"; };
+		80937EA91C4E29FF00CAD5D0 /* helianmeng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "helianmeng@2x.png"; sourceTree = "<group>"; };
+		80937EAA1C4E29FF00CAD5D0 /* hewuzhe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hewuzhe@2x.png"; sourceTree = "<group>"; };
+		80937EAB1C4E29FF00CAD5D0 /* hezhuangbei@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hezhuangbei@2x.png"; sourceTree = "<group>"; };
+		80937EAC1C4E29FF00CAD5D0 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.release.xcconfig"; sourceTree = "<group>"; };
 		DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -362,6 +372,11 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				80937EA81C4E29FF00CAD5D0 /* hedongli@2x.png */,
+				80937EA91C4E29FF00CAD5D0 /* helianmeng@2x.png */,
+				80937EAA1C4E29FF00CAD5D0 /* hewuzhe@2x.png */,
+				80937EAB1C4E29FF00CAD5D0 /* hezhuangbei@2x.png */,
+				80937EAC1C4E29FF00CAD5D0 /* more@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -482,9 +497,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80937EB11C4E29FF00CAD5D0 /* more@2x.png in Resources */,
 				8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */,
+				80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */,
 				8043C6FC1C4E0C0900369EEF /* FirstScrollController.xib in Resources */,
+				80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */,
 				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
+				80937EAD1C4E29FF00CAD5D0 /* hedongli@2x.png in Resources */,
+				80937EAF1C4E29FF00CAD5D0 /* hewuzhe@2x.png in Resources */,
 				8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

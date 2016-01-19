@@ -7,11 +7,10 @@
 //
 
 #import "HomePageViewController.h"
-
 #import "JCCollectionViewCell.h"
 #import "JCStroeCollectionViewCell.h"
 #import "JCVideoCollectionViewCell.h"
-@interface HomePageViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
 //轮播图
@@ -63,7 +62,7 @@
 - (void)p_setupView
 {
     //tableView
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStylePlain)];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

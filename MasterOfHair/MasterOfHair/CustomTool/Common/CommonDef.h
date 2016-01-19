@@ -40,7 +40,7 @@
 #define USER_ID @"id"
 #define TEAM_ID @"TeamId"
 
-#define navi_bar_bg_color   [UIColor colorWithRed:0x1e/255.0 green:0x1d/255.0 blue:0x22/255.0 alpha:1.0]
+#define navi_bar_bg_color   [UIColor colorWithRed:153/255.0 green:205/255.0 blue:255/255.0 alpha:1.0]
 #define BACKGROUND_COLOR [UIColor colorWithRed:0x3e/255.0 green:0x3e/255.0 blue:0x40/255.0 alpha:1.0]
 #define ItemsBaseColor  [UIColor colorWithRed:0x29/255.0 green:0x2a/255.0 blue:0x2f/255.0 alpha:1.0]
 #define Separator_Color [UIColor colorWithRed:0x81/255.0 green:0x81/255.0 blue:0x81/255.0 alpha:1.0]

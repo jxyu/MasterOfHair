@@ -54,7 +54,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-//    self.navigationItem.title = @"个人中心";
+    _lblTitle.text = @"个人中心";
 }
 
 #pragma mark - 总布局
@@ -62,7 +62,7 @@
 {
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:(UITableViewStyleGrouped)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStyleGrouped)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
