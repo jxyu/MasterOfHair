@@ -17,6 +17,7 @@
 #import "UIImageView+WebCache.h"
 #import "CommonDef.h"
 #import "MJRefresh.h"
+#import "DataProvider.h"
 
 
 #endif /* MasterOfHair_pch */

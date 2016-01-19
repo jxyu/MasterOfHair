@@ -23,6 +23,7 @@
 		8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6F81C4E0C0900369EEF /* UIImage+NSBundle.m */; };
 		8043C7091C4E13E500369EEF /* Toolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C7021C4E13E500369EEF /* Toolkit.m */; };
 		8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C7061C4E13E500369EEF /* UploadDataToServer.m */; };
+		8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C70F1C4E1DE600369EEF /* DataProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		8043C7021C4E13E500369EEF /* Toolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolkit.m; sourceTree = "<group>"; };
 		8043C7051C4E13E500369EEF /* UploadDataToServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadDataToServer.h; sourceTree = "<group>"; };
 		8043C7061C4E13E500369EEF /* UploadDataToServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDataToServer.m; sourceTree = "<group>"; };
+		8043C70E1C4E1DE600369EEF /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
+		8043C70F1C4E1DE600369EEF /* DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataProvider.m; sourceTree = "<group>"; };
 		A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.release.xcconfig"; sourceTree = "<group>"; };
 		DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +141,8 @@
 		8043C6BA1C4DC94500369EEF /* MasterOfHair */ = {
 			isa = PBXGroup;
 			children = (
+				8043C7111C4E1DFC00369EEF /* Images */,
+				8043C70D1C4E1DE600369EEF /* DataProvider */,
 				8043C6EE1C4E0C0000369EEF /* CustomTool */,
 				8043C6BE1C4DC94500369EEF /* AppDelegate.h */,
 				8043C6BF1C4DC94500369EEF /* AppDelegate.m */,
@@ -214,6 +219,22 @@
 				8043C7061C4E13E500369EEF /* UploadDataToServer.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8043C70D1C4E1DE600369EEF /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				8043C70E1C4E1DE600369EEF /* DataProvider.h */,
+				8043C70F1C4E1DE600369EEF /* DataProvider.m */,
+			);
+			path = DataProvider;
+			sourceTree = "<group>";
+		};
+		8043C7111C4E1DFC00369EEF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		FF5C9EFFE407E2D162E535C3 /* Pods */ = {
@@ -412,6 +433,7 @@
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
+				8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */,
 				8043C6C31C4DC94500369EEF /* ViewController.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
