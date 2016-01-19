@@ -10,7 +10,6 @@
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
-		8043C6C31C4DC94500369EEF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6C21C4DC94500369EEF /* ViewController.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
 		8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C71C4DC94500369EEF /* Assets.xcassets */; };
 		8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */; };
@@ -49,8 +48,6 @@
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8043C6BF1C4DC94500369EEF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8043C6C11C4DC94500369EEF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8043C6C21C4DC94500369EEF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8043C6C51C4DC94500369EEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8043C6C71C4DC94500369EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8043C6CA1C4DC94500369EEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -116,6 +113,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7BA596871C4E214900DBC69D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7BA5968D1C4E218800DBC69D /* Mine */,
+				7BA5968B1C4E217500DBC69D /* Shopping Car */,
+				7BA5968A1C4E217300DBC69D /* Web Stroe */,
+				7BA596891C4E216F00DBC69D /* Business School */,
+				7BA596881C4E216D00DBC69D /* HomePage */,
+			);
+			name = UI;
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		7BA596881C4E216D00DBC69D /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = HomePage;
+			sourceTree = "<group>";
+		};
+		7BA596891C4E216F00DBC69D /* Business School */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Business School";
+			sourceTree = "<group>";
+		};
+		7BA5968A1C4E217300DBC69D /* Web Stroe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Web Stroe";
+			sourceTree = "<group>";
+		};
+		7BA5968B1C4E217500DBC69D /* Shopping Car */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Shopping Car";
+			sourceTree = "<group>";
+		};
+		7BA5968D1C4E218800DBC69D /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Mine;
+			sourceTree = "<group>";
+		};
 		8043C6AF1C4DC94500369EEF = {
 			isa = PBXGroup;
 			children = (
@@ -144,14 +189,9 @@
 				8043C7111C4E1DFC00369EEF /* Images */,
 				8043C70D1C4E1DE600369EEF /* DataProvider */,
 				8043C6EE1C4E0C0000369EEF /* CustomTool */,
+				7BA596871C4E214900DBC69D /* UI */,
 				8043C6BE1C4DC94500369EEF /* AppDelegate.h */,
 				8043C6BF1C4DC94500369EEF /* AppDelegate.m */,
-				8043C6C11C4DC94500369EEF /* ViewController.h */,
-				8043C6C21C4DC94500369EEF /* ViewController.m */,
-				8043C6C41C4DC94500369EEF /* Main.storyboard */,
-				8043C6C71C4DC94500369EEF /* Assets.xcassets */,
-				8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */,
-				8043C6CC1C4DC94500369EEF /* Info.plist */,
 				8043C6BB1C4DC94500369EEF /* Supporting Files */,
 			);
 			path = MasterOfHair;
@@ -161,7 +201,11 @@
 			isa = PBXGroup;
 			children = (
 				8043C6BC1C4DC94500369EEF /* main.m */,
+				8043C6CC1C4DC94500369EEF /* Info.plist */,
 				8043C6FE1C4E105D00369EEF /* MasterOfHair.pch */,
+				8043C6C71C4DC94500369EEF /* Assets.xcassets */,
+				8043C6C41C4DC94500369EEF /* Main.storyboard */,
+				8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -434,7 +478,6 @@
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
 				8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */,
-				8043C6C31C4DC94500369EEF /* ViewController.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,

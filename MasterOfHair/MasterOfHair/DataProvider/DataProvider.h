@@ -13,6 +13,7 @@
     id CallBackObject;
     NSString * callBackFunctionName;
 }
+
 /**
  *  设置回调函数
  *
