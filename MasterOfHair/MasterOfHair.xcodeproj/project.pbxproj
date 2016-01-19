@@ -1,0 +1,604 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
+		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
+		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
+		8043C6C31C4DC94500369EEF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6C21C4DC94500369EEF /* ViewController.m */; };
+		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
+		8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C71C4DC94500369EEF /* Assets.xcassets */; };
+		8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */; };
+		8043C6D61C4DC94500369EEF /* MasterOfHairTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6D51C4DC94500369EEF /* MasterOfHairTests.m */; };
+		8043C6E11C4DC94500369EEF /* MasterOfHairUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6E01C4DC94500369EEF /* MasterOfHairUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8043C6D21C4DC94500369EEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8043C6B01C4DC94500369EEF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8043C6B71C4DC94500369EEF;
+			remoteInfo = MasterOfHair;
+		};
+		8043C6DD1C4DC94500369EEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8043C6B01C4DC94500369EEF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8043C6B71C4DC94500369EEF;
+			remoteInfo = MasterOfHair;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
+		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8043C6BF1C4DC94500369EEF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8043C6C11C4DC94500369EEF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8043C6C21C4DC94500369EEF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8043C6C51C4DC94500369EEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8043C6C71C4DC94500369EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8043C6CA1C4DC94500369EEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8043C6CC1C4DC94500369EEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8043C6D11C4DC94500369EEF /* MasterOfHairTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterOfHairTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8043C6D51C4DC94500369EEF /* MasterOfHairTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterOfHairTests.m; sourceTree = "<group>"; };
+		8043C6D71C4DC94500369EEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8043C6DC1C4DC94500369EEF /* MasterOfHairUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasterOfHairUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8043C6E01C4DC94500369EEF /* MasterOfHairUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterOfHairUITests.m; sourceTree = "<group>"; };
+		8043C6E21C4DC94500369EEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.release.xcconfig"; sourceTree = "<group>"; };
+		DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8043C6B51C4DC94500369EEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6CE1C4DC94500369EEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6D91C4DC94500369EEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C25656B33009E933F65CD5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8043C6AF1C4DC94500369EEF = {
+			isa = PBXGroup;
+			children = (
+				8043C6BA1C4DC94500369EEF /* MasterOfHair */,
+				8043C6D41C4DC94500369EEF /* MasterOfHairTests */,
+				8043C6DF1C4DC94500369EEF /* MasterOfHairUITests */,
+				8043C6B91C4DC94500369EEF /* Products */,
+				FF5C9EFFE407E2D162E535C3 /* Pods */,
+				5C25656B33009E933F65CD5E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8043C6B91C4DC94500369EEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8043C6B81C4DC94500369EEF /* MasterOfHair.app */,
+				8043C6D11C4DC94500369EEF /* MasterOfHairTests.xctest */,
+				8043C6DC1C4DC94500369EEF /* MasterOfHairUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8043C6BA1C4DC94500369EEF /* MasterOfHair */ = {
+			isa = PBXGroup;
+			children = (
+				8043C6BE1C4DC94500369EEF /* AppDelegate.h */,
+				8043C6BF1C4DC94500369EEF /* AppDelegate.m */,
+				8043C6C11C4DC94500369EEF /* ViewController.h */,
+				8043C6C21C4DC94500369EEF /* ViewController.m */,
+				8043C6C41C4DC94500369EEF /* Main.storyboard */,
+				8043C6C71C4DC94500369EEF /* Assets.xcassets */,
+				8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */,
+				8043C6CC1C4DC94500369EEF /* Info.plist */,
+				8043C6BB1C4DC94500369EEF /* Supporting Files */,
+			);
+			path = MasterOfHair;
+			sourceTree = "<group>";
+		};
+		8043C6BB1C4DC94500369EEF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8043C6BC1C4DC94500369EEF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8043C6D41C4DC94500369EEF /* MasterOfHairTests */ = {
+			isa = PBXGroup;
+			children = (
+				8043C6D51C4DC94500369EEF /* MasterOfHairTests.m */,
+				8043C6D71C4DC94500369EEF /* Info.plist */,
+			);
+			path = MasterOfHairTests;
+			sourceTree = "<group>";
+		};
+		8043C6DF1C4DC94500369EEF /* MasterOfHairUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8043C6E01C4DC94500369EEF /* MasterOfHairUITests.m */,
+				8043C6E21C4DC94500369EEF /* Info.plist */,
+			);
+			path = MasterOfHairUITests;
+			sourceTree = "<group>";
+		};
+		FF5C9EFFE407E2D162E535C3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */,
+				A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8043C6B71C4DC94500369EEF /* MasterOfHair */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8043C6E51C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHair" */;
+			buildPhases = (
+				075FAF89378CDDC7758D3E5C /* Check Pods Manifest.lock */,
+				8043C6B41C4DC94500369EEF /* Sources */,
+				8043C6B51C4DC94500369EEF /* Frameworks */,
+				8043C6B61C4DC94500369EEF /* Resources */,
+				C5DB0279D68F5DC5133FE2C9 /* Embed Pods Frameworks */,
+				E643CFD1C84AB0FDE3027253 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MasterOfHair;
+			productName = MasterOfHair;
+			productReference = 8043C6B81C4DC94500369EEF /* MasterOfHair.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8043C6D01C4DC94500369EEF /* MasterOfHairTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8043C6E81C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHairTests" */;
+			buildPhases = (
+				8043C6CD1C4DC94500369EEF /* Sources */,
+				8043C6CE1C4DC94500369EEF /* Frameworks */,
+				8043C6CF1C4DC94500369EEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8043C6D31C4DC94500369EEF /* PBXTargetDependency */,
+			);
+			name = MasterOfHairTests;
+			productName = MasterOfHairTests;
+			productReference = 8043C6D11C4DC94500369EEF /* MasterOfHairTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8043C6DB1C4DC94500369EEF /* MasterOfHairUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8043C6EB1C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHairUITests" */;
+			buildPhases = (
+				8043C6D81C4DC94500369EEF /* Sources */,
+				8043C6D91C4DC94500369EEF /* Frameworks */,
+				8043C6DA1C4DC94500369EEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8043C6DE1C4DC94500369EEF /* PBXTargetDependency */,
+			);
+			name = MasterOfHairUITests;
+			productName = MasterOfHairUITests;
+			productReference = 8043C6DC1C4DC94500369EEF /* MasterOfHairUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8043C6B01C4DC94500369EEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = zykj;
+				TargetAttributes = {
+					8043C6B71C4DC94500369EEF = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = M7YC435M3S;
+					};
+					8043C6D01C4DC94500369EEF = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 8043C6B71C4DC94500369EEF;
+					};
+					8043C6DB1C4DC94500369EEF = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 8043C6B71C4DC94500369EEF;
+					};
+				};
+			};
+			buildConfigurationList = 8043C6B31C4DC94500369EEF /* Build configuration list for PBXProject "MasterOfHair" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8043C6AF1C4DC94500369EEF;
+			productRefGroup = 8043C6B91C4DC94500369EEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8043C6B71C4DC94500369EEF /* MasterOfHair */,
+				8043C6D01C4DC94500369EEF /* MasterOfHairTests */,
+				8043C6DB1C4DC94500369EEF /* MasterOfHairUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8043C6B61C4DC94500369EEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */,
+				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
+				8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6CF1C4DC94500369EEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6DA1C4DC94500369EEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		075FAF89378CDDC7758D3E5C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C5DB0279D68F5DC5133FE2C9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E643CFD1C84AB0FDE3027253 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8043C6B41C4DC94500369EEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8043C6C31C4DC94500369EEF /* ViewController.m in Sources */,
+				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
+				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6CD1C4DC94500369EEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8043C6D61C4DC94500369EEF /* MasterOfHairTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8043C6D81C4DC94500369EEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8043C6E11C4DC94500369EEF /* MasterOfHairUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8043C6D31C4DC94500369EEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8043C6B71C4DC94500369EEF /* MasterOfHair */;
+			targetProxy = 8043C6D21C4DC94500369EEF /* PBXContainerItemProxy */;
+		};
+		8043C6DE1C4DC94500369EEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8043C6B71C4DC94500369EEF /* MasterOfHair */;
+			targetProxy = 8043C6DD1C4DC94500369EEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8043C6C41C4DC94500369EEF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8043C6C51C4DC94500369EEF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8043C6C91C4DC94500369EEF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8043C6CA1C4DC94500369EEF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8043C6E31C4DC94500369EEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8043C6E41C4DC94500369EEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8043C6E61C4DC94500369EEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = MasterOfHair/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHair;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8043C6E71C4DC94500369EEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = MasterOfHair/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHair;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8043C6E91C4DC94500369EEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MasterOfHairTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHairTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MasterOfHair.app/MasterOfHair";
+			};
+			name = Debug;
+		};
+		8043C6EA1C4DC94500369EEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MasterOfHairTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHairTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MasterOfHair.app/MasterOfHair";
+			};
+			name = Release;
+		};
+		8043C6EC1C4DC94500369EEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MasterOfHairUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHairUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MasterOfHair;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		8043C6ED1C4DC94500369EEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MasterOfHairUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.MasterOfHairUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MasterOfHair;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8043C6B31C4DC94500369EEF /* Build configuration list for PBXProject "MasterOfHair" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8043C6E31C4DC94500369EEF /* Debug */,
+				8043C6E41C4DC94500369EEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8043C6E51C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHair" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8043C6E61C4DC94500369EEF /* Debug */,
+				8043C6E71C4DC94500369EEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8043C6E81C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHairTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8043C6E91C4DC94500369EEF /* Debug */,
+				8043C6EA1C4DC94500369EEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8043C6EB1C4DC94500369EEF /* Build configuration list for PBXNativeTarget "MasterOfHairUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8043C6EC1C4DC94500369EEF /* Debug */,
+				8043C6ED1C4DC94500369EEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8043C6B01C4DC94500369EEF /* Project object */;
+}

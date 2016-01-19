@@ -1,0 +1,5 @@
+use_frameworks!
+target 'MasterOfHair' do
+pod "AFNetworking", "~> 2.0"
+pod 'SVProgressHUD'
+end
