@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '89D76DD4032FD9365CE1FB2F'
+               BlueprintIdentifier = 'FD51209355CF656F124F57FC'
                BlueprintName = 'Pods-MasterOfHair'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_MasterOfHair.framework'>

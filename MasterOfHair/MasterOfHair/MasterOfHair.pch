@@ -1,0 +1,22 @@
+//
+//  MasterOfHair.pch
+//  MasterOfHair
+//
+//  Created by 于金祥 on 16/1/19.
+//  Copyright © 2016年 zykj. All rights reserved.
+//
+
+#ifndef MasterOfHair_pch
+#define MasterOfHair_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "ZXPAutoLayout.h"
+#import "SVProgressHUD.h"
+#import "UIImageView+WebCache.h"
+#import "CommonDef.h"
+#import "MJRefresh.h"
+
+
+#endif /* MasterOfHair_pch */

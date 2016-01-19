@@ -85,9 +85,15 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MasterOfHair/AFNetworking.framework"
+  install_framework "Pods-MasterOfHair/MJRefresh.framework"
+  install_framework "Pods-MasterOfHair/SDWebImage.framework"
   install_framework "Pods-MasterOfHair/SVProgressHUD.framework"
+  install_framework "Pods-MasterOfHair/ZXPAutoLayout.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MasterOfHair/AFNetworking.framework"
+  install_framework "Pods-MasterOfHair/MJRefresh.framework"
+  install_framework "Pods-MasterOfHair/SDWebImage.framework"
   install_framework "Pods-MasterOfHair/SVProgressHUD.framework"
+  install_framework "Pods-MasterOfHair/ZXPAutoLayout.framework"
 fi
