@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
+		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
+		7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596931C4E243C00DBC69D /* JCStroeCollectionViewCell.m */; };
+		7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596961C4E244A00DBC69D /* JCCollectionViewCell.m */; };
+		7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596981C4E244A00DBC69D /* JCVideoCollectionViewCell.m */; };
+		7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA5969D1C4E24D600DBC69D /* MineViewController.m */; };
+		7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596A01C4E255200DBC69D /* JCMineTableViewCell.m */; };
+		7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */; };
+		7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B01C4E269200DBC69D /* WebStroeViewController.m */; };
+		7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
@@ -44,6 +53,24 @@
 
 /* Begin PBXFileReference section */
 		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
+		7BA5968F1C4E237300DBC69D /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		7BA596901C4E237300DBC69D /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		7BA596921C4E243C00DBC69D /* JCStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCStroeCollectionViewCell.h; sourceTree = "<group>"; };
+		7BA596931C4E243C00DBC69D /* JCStroeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCStroeCollectionViewCell.m; sourceTree = "<group>"; };
+		7BA596951C4E244A00DBC69D /* JCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCollectionViewCell.h; sourceTree = "<group>"; };
+		7BA596961C4E244A00DBC69D /* JCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCollectionViewCell.m; sourceTree = "<group>"; };
+		7BA596971C4E244A00DBC69D /* JCVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCVideoCollectionViewCell.h; sourceTree = "<group>"; };
+		7BA596981C4E244A00DBC69D /* JCVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCVideoCollectionViewCell.m; sourceTree = "<group>"; };
+		7BA5969C1C4E24D600DBC69D /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		7BA5969D1C4E24D600DBC69D /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		7BA5969F1C4E255200DBC69D /* JCMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMineTableViewCell.h; sourceTree = "<group>"; };
+		7BA596A01C4E255200DBC69D /* JCMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMineTableViewCell.m; sourceTree = "<group>"; };
+		7BA596AB1C4E267D00DBC69D /* ShoppingCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarViewController.h; sourceTree = "<group>"; };
+		7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarViewController.m; sourceTree = "<group>"; };
+		7BA596AF1C4E269200DBC69D /* WebStroeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStroeViewController.h; sourceTree = "<group>"; };
+		7BA596B01C4E269200DBC69D /* WebStroeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeViewController.m; sourceTree = "<group>"; };
+		7BA596B31C4E26A600DBC69D /* BusinessSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSchoolViewController.h; sourceTree = "<group>"; };
+		7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSchoolViewController.m; sourceTree = "<group>"; };
 		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +156,7 @@
 		7BA596881C4E216D00DBC69D /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				7BA5968E1C4E231500DBC69D /* Main */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -136,6 +164,7 @@
 		7BA596891C4E216F00DBC69D /* Business School */ = {
 			isa = PBXGroup;
 			children = (
+				7BA596B21C4E269800DBC69D /* Main */,
 			);
 			name = "Business School";
 			sourceTree = "<group>";
@@ -143,6 +172,7 @@
 		7BA5968A1C4E217300DBC69D /* Web Stroe */ = {
 			isa = PBXGroup;
 			children = (
+				7BA596AE1C4E268800DBC69D /* Main */,
 			);
 			name = "Web Stroe";
 			sourceTree = "<group>";
@@ -150,6 +180,7 @@
 		7BA5968B1C4E217500DBC69D /* Shopping Car */ = {
 			isa = PBXGroup;
 			children = (
+				7BA596AA1C4E266A00DBC69D /* Main */,
 			);
 			name = "Shopping Car";
 			sourceTree = "<group>";
@@ -157,8 +188,62 @@
 		7BA5968D1C4E218800DBC69D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				7BA5969B1C4E24C000DBC69D /* Main */,
 			);
 			name = Mine;
+			sourceTree = "<group>";
+		};
+		7BA5968E1C4E231500DBC69D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BA5968F1C4E237300DBC69D /* HomePageViewController.h */,
+				7BA596901C4E237300DBC69D /* HomePageViewController.m */,
+				7BA596951C4E244A00DBC69D /* JCCollectionViewCell.h */,
+				7BA596961C4E244A00DBC69D /* JCCollectionViewCell.m */,
+				7BA596921C4E243C00DBC69D /* JCStroeCollectionViewCell.h */,
+				7BA596931C4E243C00DBC69D /* JCStroeCollectionViewCell.m */,
+				7BA596971C4E244A00DBC69D /* JCVideoCollectionViewCell.h */,
+				7BA596981C4E244A00DBC69D /* JCVideoCollectionViewCell.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		7BA5969B1C4E24C000DBC69D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BA5969C1C4E24D600DBC69D /* MineViewController.h */,
+				7BA5969D1C4E24D600DBC69D /* MineViewController.m */,
+				7BA5969F1C4E255200DBC69D /* JCMineTableViewCell.h */,
+				7BA596A01C4E255200DBC69D /* JCMineTableViewCell.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		7BA596AA1C4E266A00DBC69D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BA596AB1C4E267D00DBC69D /* ShoppingCarViewController.h */,
+				7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		7BA596AE1C4E268800DBC69D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BA596AF1C4E269200DBC69D /* WebStroeViewController.h */,
+				7BA596B01C4E269200DBC69D /* WebStroeViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		7BA596B21C4E269800DBC69D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7BA596B31C4E26A600DBC69D /* BusinessSchoolViewController.h */,
+				7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		8043C6AF1C4DC94500369EEF = {
@@ -474,13 +559,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
+				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
+				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
+				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,
+				7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */,
+				7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
 				8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */,
+				7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
+				7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */,
 				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
+				7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */,
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
+				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				8043C6FB1C4E0C0900369EEF /* FirstScrollController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
