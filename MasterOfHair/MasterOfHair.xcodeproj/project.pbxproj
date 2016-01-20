@@ -10,6 +10,8 @@
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
 		7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F1A381C4F101900783F3B /* SettingViewController.m */; };
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
+		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
+		7BA007901C4F374B009B3ABD /* iconfont-fanhui.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
 		7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596931C4E243C00DBC69D /* JCStroeCollectionViewCell.m */; };
 		7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596961C4E244A00DBC69D /* JCCollectionViewCell.m */; };
@@ -63,6 +65,8 @@
 		7B3F1A371C4F101900783F3B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		7B3F1A381C4F101900783F3B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
+		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
+		7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhui.png"; sourceTree = "<group>"; };
 		7BA5968F1C4E237300DBC69D /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		7BA596901C4E237300DBC69D /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
 		7BA596921C4E243C00DBC69D /* JCStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCStroeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -153,6 +157,16 @@
 				DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */,
+				7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */,
+				7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */,
+			);
+			name = wolaji;
 			sourceTree = "<group>";
 		};
 		7BA596871C4E214900DBC69D /* UI */ = {
@@ -379,7 +393,7 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */,
+				7BA0078C1C4F316C009B3ABD /* wolaji */,
 				80937EA81C4E29FF00CAD5D0 /* hedongli@2x.png */,
 				80937EA91C4E29FF00CAD5D0 /* helianmeng@2x.png */,
 				80937EAA1C4E29FF00CAD5D0 /* hewuzhe@2x.png */,
@@ -510,6 +524,8 @@
 				80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */,
 				8043C6FC1C4E0C0900369EEF /* FirstScrollController.xib in Resources */,
 				80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */,
+				7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */,
+				7BA007901C4F374B009B3ABD /* iconfont-fanhui.png in Resources */,
 				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
 				7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */,
 				80937EAD1C4E29FF00CAD5D0 /* hedongli@2x.png in Resources */,

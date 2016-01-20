@@ -38,8 +38,9 @@
     _lblTitle.text = @"设置";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
-    [self addLeftbuttontitle:@"返回"];
-    _lblLeft.frame = CGRectMake(15, _lblLeft.frame.origin.y + 3, 50, _lblLeft.frame.size.height);
+//    [self addLeftbuttontitle:@"返回"];
+//    _lblLeft.frame = CGRectMake(15, _lblLeft.frame.origin.y + 3, 50, _lblLeft.frame.size.height);
+    [self addLeftButton:@"iconfont-fanhui"];
 }
 //返回
 - (void)clickLeftButton:(UIButton *)sender

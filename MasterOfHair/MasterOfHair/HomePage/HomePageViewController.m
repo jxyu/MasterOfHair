@@ -34,6 +34,9 @@
 @property (nonatomic, strong) UICollectionView * video_collectionView;
 @property (nonatomic, strong) UILabel * video_name;
 
+//最上面的搜索框
+@property (nonatomic, strong) UIView * search_view;
+
 @end
 
 @implementation HomePageViewController
@@ -54,12 +57,60 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    self.automaticallyAdjustsScrollViewInsets = YES;
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
     //左边为定位
+    [self addLeftbuttontitle:@"临沂临沂你"];
+    _btnLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
+    _lblLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
+    _lblLeft.font = [UIFont systemFontOfSize:15];
+    _lblLeft.textAlignment = NSTextAlignmentCenter;
+//    _lblLeft.backgroundColor = [UIColor orangeColor];
+    
     //右边为签到
+//    [self addRightButton:@""];
+    [self addRightbuttontitle:@"签到"];
+//    _btnRight.backgroundColor = [UIColor orangeColor];
+    _btnRight.frame = CGRectMake(SCREEN_WIDTH - 10 - 40, _lblRight.frame.origin.y + 0, 40, _lblRight.frame.size.height - 10);
+    
     //中间为搜索框
+    _lblTitle.hidden = YES;
+    self.search_view = [[UIView alloc] initWithFrame:CGRectMake(80 , 25, SCREEN_WIDTH - 140, 34)];
+    self.search_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.search_view.layer.cornerRadius = 0.05 * SCREEN_WIDTH;
+    [self.view addSubview:self.search_view];
+    //图标
+    UIImageView * search_image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
+    search_image.image = [UIImage imageNamed:@"iconfont-sousuo"];
+    [self.search_view addSubview:search_image];
+    //文字
+    UILabel * search_text = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(search_image.frame) + 6, 5, 120, 25)];
+    search_text.text = @"请输入关键字";
+    search_text.font = [UIFont systemFontOfSize:15];
+    search_text.textColor = [UIColor grayColor];
+    [self.search_view addSubview:search_text];
+    
+    UIButton * search_btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    search_btn.frame = CGRectMake(0 , 0, self.search_view.frame.size.width, self.search_view.frame.size.height);
+//    search_btn.backgroundColor = [UIColor orangeColor];
+    [self.search_view addSubview:search_btn];
+    [search_btn addTarget:self action:@selector(search_btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+//定位
+- (void)clickLeftButton:(UIButton *)sender
+{
+    NSLog(@"定位");
+}
+
+//签到
+- (void)clickRightButton:(UIButton *)sender
+{
+    NSLog(@"签到");
+}
+
+//搜索框点击事件
+- (void)search_btnAction:(UIButton *)sender
+{
+    NSLog(@"搜索");
 }
 
 //显示tabbar
@@ -71,6 +122,8 @@
 #pragma mark - 总布局
 - (void)p_setupView
 {
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     //tableView
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStylePlain)];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
