@@ -7,9 +7,12 @@
 //
 
 #import "HomePageViewController.h"
+
+
 #import "JCCollectionViewCell.h"
 #import "JCStroeCollectionViewCell.h"
 #import "JCVideoCollectionViewCell.h"
+#import "AppDelegate.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -53,9 +56,16 @@
 {
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
     //左边为定位
     //右边为签到
     //中间为搜索框
+}
+
+//显示tabbar
+-(void)viewWillAppear:(BOOL)animated
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
 #pragma mark - 总布局

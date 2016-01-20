@@ -15,5 +15,7 @@
 
 @property (nonatomic,strong) CustomTabBarViewController *tabBarViewCol;
 
+- (void)showTabBar;
+- (void)hiddenTabBar;
 @end
 

@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BD4691AE72B1B8CD92C9DE2C66DD042A397524A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "d1172e3f-1812-6f49-83ca-d74b34ffb609++9134" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "d1172e3f-1812-6f49-83ca-d74b34ffb609++9134" : 0,
+    "BD4691AE72B1B8CD92C9DE2C66DD042A397524A7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ACEC620B-091D-4263-B16A-F0806588A8D6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "d1172e3f-1812-6f49-83ca-d74b34ffb609++9134" : "%E5%89%83%E5%A4%B4%E5%8C%A0\/MasterOfHair\/MasterOfHair\/CustomTool\/CustomViewController\/",
+    "BD4691AE72B1B8CD92C9DE2C66DD042A397524A7" : "%E5%89%83%E5%A4%B4%E5%8C%A0\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MasterOfHair",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MasterOfHair\/MasterOfHair.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jxyu\/MasterOfHair.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BD4691AE72B1B8CD92C9DE2C66DD042A397524A7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/42.121.145.175\/svn\/aiwoba_ios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "d1172e3f-1812-6f49-83ca-d74b34ffb609++9134"
+    }
+  ]
+}
