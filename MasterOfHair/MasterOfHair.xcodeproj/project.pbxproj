@@ -12,6 +12,7 @@
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
 		7BA007901C4F374B009B3ABD /* iconfont-fanhui.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */; };
+		7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
 		7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596931C4E243C00DBC69D /* JCStroeCollectionViewCell.m */; };
 		7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596961C4E244A00DBC69D /* JCCollectionViewCell.m */; };
@@ -67,6 +68,8 @@
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
 		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
 		7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhui.png"; sourceTree = "<group>"; };
+		7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicAndVideoCollectionViewCell.h; sourceTree = "<group>"; };
+		7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicAndVideoCollectionViewCell.m; sourceTree = "<group>"; };
 		7BA5968F1C4E237300DBC69D /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		7BA596901C4E237300DBC69D /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
 		7BA596921C4E243C00DBC69D /* JCStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCStroeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -273,6 +276,8 @@
 			children = (
 				7BA596B31C4E26A600DBC69D /* BusinessSchoolViewController.h */,
 				7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */,
+				7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */,
+				7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,
 				7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */,
 				7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */,
+				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,

@@ -58,7 +58,7 @@
 - (void)p_navi
 {
     //左边为定位
-    [self addLeftbuttontitle:@"临沂临沂你"];
+    [self addLeftbuttontitle:@"临沂"];
     _btnLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
     _lblLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
     _lblLeft.font = [UIFont systemFontOfSize:15];
@@ -165,13 +165,13 @@
         //判断奇数还是偶数
         //        if(8 % 2 == 0)
         //        {
-        //            return 4 * (SCREEN_WIDTH / 4.5) + 100;
+        //            return 4 * (SCREEN_WIDTH / 4) + 100;
         //        }
         //        else
         //        {
-        //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4.5) + 100;
+        //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
         //        }
-        return 4 * (SCREEN_WIDTH / 4.5) + 100;
+        return 4 * (SCREEN_WIDTH / 4) + 100;
     }
     return 0;
 }
@@ -212,7 +212,7 @@
     }
     else if(indexPath.row == 3)
     {
-        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4.5) + 100);
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100);
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
         [self p_videoList];
@@ -297,7 +297,6 @@
     else
     {
         self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
-        
     }
     //手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -516,12 +515,8 @@
     }
     else
     {
-        JCStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
+        JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        
-        cell.image.image = [UIImage imageNamed:@"1.jpeg"];
-        
         
         return cell;
     }
@@ -642,10 +637,10 @@
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
-    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 3 * 2);
+    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 4 * 3);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4.5) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
+    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
     self.video_collectionView.delegate = self;
     self.video_collectionView.dataSource = self;
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
