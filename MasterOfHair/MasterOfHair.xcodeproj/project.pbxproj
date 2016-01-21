@@ -22,6 +22,7 @@
 		7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */; };
 		7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B01C4E269200DBC69D /* WebStroeViewController.m */; };
 		7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */; };
+		7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
@@ -88,6 +89,8 @@
 		7BA596B01C4E269200DBC69D /* WebStroeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeViewController.m; sourceTree = "<group>"; };
 		7BA596B31C4E26A600DBC69D /* BusinessSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSchoolViewController.h; sourceTree = "<group>"; };
 		7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSchoolViewController.m; sourceTree = "<group>"; };
+		7BB073921C50B26000AAFF07 /* WebStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStroeCollectionViewCell.h; sourceTree = "<group>"; };
+		7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeCollectionViewCell.m; sourceTree = "<group>"; };
 		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 			children = (
 				7BA596AF1C4E269200DBC69D /* WebStroeViewController.h */,
 				7BA596B01C4E269200DBC69D /* WebStroeViewController.m */,
+				7BB073921C50B26000AAFF07 /* WebStroeCollectionViewCell.h */,
+				7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
