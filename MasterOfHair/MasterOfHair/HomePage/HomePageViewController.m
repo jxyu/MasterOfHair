@@ -365,7 +365,7 @@
 //有几个分区
 - (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 1; 
 }
 //每个分区有多少个
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -383,6 +383,7 @@
         return 7;
     }
 }
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
