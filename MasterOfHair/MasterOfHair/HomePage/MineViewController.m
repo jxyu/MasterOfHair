@@ -9,6 +9,8 @@
 #import "MineViewController.h"
 
 #import "JCMineTableViewCell.h"
+#import "SettingViewController.h"
+#import "AppDelegate.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -55,6 +57,22 @@
 - (void)p_navi
 {
     _lblTitle.text = @"个人中心";
+    _lblTitle.font = [UIFont systemFontOfSize:19];
+    
+    [self addRightbuttontitle:@"设置"];
+}
+//点击设置按钮
+- (void)clickRightButton:(UIButton *)sender
+{
+    SettingViewController * settingViewController = [[SettingViewController alloc] init];
+    
+    [self showViewController:settingViewController sender:nil];
+}
+
+//显示tabbar
+-(void)viewWillAppear:(BOOL)animated
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
 #pragma mark - 总布局
@@ -62,7 +80,7 @@
 {
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStyleGrouped)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) style:(UITableViewStyleGrouped)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];

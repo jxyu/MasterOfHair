@@ -7,9 +7,12 @@
 //
 
 #import "HomePageViewController.h"
+
+
 #import "JCCollectionViewCell.h"
 #import "JCStroeCollectionViewCell.h"
 #import "JCVideoCollectionViewCell.h"
+#import "AppDelegate.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -31,6 +34,9 @@
 @property (nonatomic, strong) UICollectionView * video_collectionView;
 @property (nonatomic, strong) UILabel * video_name;
 
+//最上面的搜索框
+@property (nonatomic, strong) UIView * search_view;
+
 @end
 
 @implementation HomePageViewController
@@ -51,16 +57,73 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    self.automaticallyAdjustsScrollViewInsets = YES;
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     //左边为定位
+    [self addLeftbuttontitle:@"临沂"];
+    _btnLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
+    _lblLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
+    _lblLeft.font = [UIFont systemFontOfSize:15];
+    _lblLeft.textAlignment = NSTextAlignmentCenter;
+//    _lblLeft.backgroundColor = [UIColor orangeColor];
+    
     //右边为签到
+//    [self addRightButton:@""];
+    [self addRightbuttontitle:@"签到"];
+//    _btnRight.backgroundColor = [UIColor orangeColor];
+    _btnRight.frame = CGRectMake(SCREEN_WIDTH - 10 - 40, _lblRight.frame.origin.y + 0, 40, _lblRight.frame.size.height - 10);
+    
     //中间为搜索框
+    _lblTitle.hidden = YES;
+    self.search_view = [[UIView alloc] initWithFrame:CGRectMake(80 , 25, SCREEN_WIDTH - 140, 34)];
+    self.search_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.search_view.layer.cornerRadius = 0.05 * SCREEN_WIDTH;
+    [self.view addSubview:self.search_view];
+    //图标
+    UIImageView * search_image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
+    search_image.image = [UIImage imageNamed:@"iconfont-sousuo"];
+    [self.search_view addSubview:search_image];
+    //文字
+    UILabel * search_text = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(search_image.frame) + 6, 5, 120, 25)];
+    search_text.text = @"请输入关键字";
+    search_text.font = [UIFont systemFontOfSize:15];
+    search_text.textColor = [UIColor grayColor];
+    [self.search_view addSubview:search_text];
+    
+    UIButton * search_btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    search_btn.frame = CGRectMake(0 , 0, self.search_view.frame.size.width, self.search_view.frame.size.height);
+//    search_btn.backgroundColor = [UIColor orangeColor];
+    [self.search_view addSubview:search_btn];
+    [search_btn addTarget:self action:@selector(search_btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+//定位
+- (void)clickLeftButton:(UIButton *)sender
+{
+    NSLog(@"定位");
+}
+
+//签到
+- (void)clickRightButton:(UIButton *)sender
+{
+    NSLog(@"签到");
+}
+
+//搜索框点击事件
+- (void)search_btnAction:(UIButton *)sender
+{
+    NSLog(@"搜索");
+}
+
+//显示tabbar
+-(void)viewWillAppear:(BOOL)animated
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
 #pragma mark - 总布局
 - (void)p_setupView
 {
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     //tableView
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStylePlain)];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -102,13 +165,13 @@
         //判断奇数还是偶数
         //        if(8 % 2 == 0)
         //        {
-        //            return 4 * (SCREEN_WIDTH / 4.5) + 100;
+        //            return 4 * (SCREEN_WIDTH / 4) + 100;
         //        }
         //        else
         //        {
-        //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4.5) + 100;
+        //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
         //        }
-        return 4 * (SCREEN_WIDTH / 4.5) + 100;
+        return 4 * (SCREEN_WIDTH / 4) + 100;
     }
     return 0;
 }
@@ -149,7 +212,7 @@
     }
     else if(indexPath.row == 3)
     {
-        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4.5) + 100);
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100);
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
         [self p_videoList];
@@ -234,7 +297,6 @@
     else
     {
         self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
-        
     }
     //手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -454,12 +516,8 @@
     }
     else
     {
-        JCStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
+        JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        
-        cell.image.image = [UIImage imageNamed:@"1.jpeg"];
-        
         
         return cell;
     }
@@ -580,10 +638,10 @@
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
-    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 3 * 2);
+    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 4 * 3);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4.5) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
+    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
     self.video_collectionView.delegate = self;
     self.video_collectionView.dataSource = self;
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];

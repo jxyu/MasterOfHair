@@ -41,7 +41,7 @@
     [self.contentView addSubview:self.arrows];
     
     self.arrows_switch = [[UISwitch alloc] init];
-    [self.contentView addSubview:self.arrows_switch];
+//    [self.contentView addSubview:self.arrows_switch];
     
 }
 
