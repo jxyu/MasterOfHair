@@ -12,7 +12,9 @@
 #import "JCCollectionViewCell.h"
 #import "JCStroeCollectionViewCell.h"
 #import "JCVideoCollectionViewCell.h"
+#import "SearchViewController.h"
 #import "AppDelegate.h"
+
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -98,6 +100,7 @@
 //定位
 - (void)clickLeftButton:(UIButton *)sender
 {
+    //这个调定位，不跳页，返回一个当前的位置就可
     NSLog(@"定位");
 }
 
@@ -111,6 +114,9 @@
 - (void)search_btnAction:(UIButton *)sender
 {
     NSLog(@"搜索");
+    
+    SearchViewController * searchViewController = [[SearchViewController alloc] init];
+    [self showViewController:searchViewController sender:nil];
 }
 
 //显示tabbar

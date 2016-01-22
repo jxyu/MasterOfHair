@@ -10,6 +10,10 @@
 
 #import "WebStroeCollectionViewCell.h"
 #import "AppDelegate.h"
+#import "LocationViewController.h"
+#import "SearchViewController.h"
+#import "FactroySearchViewController.h"
+
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的两个btn
@@ -48,6 +52,7 @@
 
 @implementation WebStroeViewController
 
+#warning 可能后期加数据的时候要改
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -77,7 +82,6 @@
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
-
 
 
 #pragma mark - 总布局
@@ -363,6 +367,11 @@
 - (void)delegate_addressAction:(UIButton *)sender
 {
     NSLog(@"代理中的地址范围");
+    
+    LocationViewController * locationViewController = [[LocationViewController alloc] init];
+    
+    [self showViewController:locationViewController sender:nil];
+    
 }
 //代理中的分类
 - (void)delegate_classAction:(UIButton *)sender
@@ -373,6 +382,9 @@
 - (void)delegate_searchAction:(UIButton *)sender
 {
     NSLog(@"代理中的查找关键字");
+    
+    SearchViewController * searchViewController = [[SearchViewController alloc] init];
+    [self showViewController:searchViewController sender:nil];
 }
 
 #pragma mark - 头视图+++++++++++++++++++++++++++++++++++厂家
@@ -418,6 +430,9 @@
 - (void)factory_searchAction:(UIButton *)sender
 {
     NSLog(@"厂家中的查找关键字");
+    
+    FactroySearchViewController * factroySearchViewController = [[FactroySearchViewController alloc] init];
+    [self showViewController:factroySearchViewController sender:nil];
 }
 
 #pragma mark - 下拉刷新
