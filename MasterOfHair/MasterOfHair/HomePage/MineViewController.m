@@ -11,6 +11,7 @@
 #import "JCMineTableViewCell.h"
 #import "SettingViewController.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -91,9 +92,9 @@
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
     //头视图
-    [self p_headView];
+//    [self p_headView];
     
-    //    [self p_headView1];
+    [self p_headView1];
     
     self.tableView.tableHeaderView = self.head_view;
 }
@@ -201,6 +202,7 @@
     self.head_login.frame = CGRectMake(CGRectGetMinX(label_title.frame), CGRectGetMaxY(label_title.frame) + 15, SCREEN_WIDTH / 3.5, 30 * SCREEN_WIDTH /375);
     self.head_login.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_login];
+    [self.head_login addTarget:self action:@selector(head_loginAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
     UIView * view_mid = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white.frame) + 5, SCREEN_WIDTH, 60)];
@@ -225,7 +227,13 @@
     [view_mid addSubview:self.mid_btn3];
 }
 
-
+#pragma mark - login
+- (void)head_loginAction:(UIButton *)sender
+{
+    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+    
+    [self showViewController:loginViewController sender:nil];
+}
 
 #pragma mark - tableView的代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView

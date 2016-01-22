@@ -26,6 +26,8 @@
 		7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */; };
 		7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F0C1C51BC29005FA5C4 /* SearchViewController.m */; };
 		7BF67F101C51D0EE005FA5C4 /* FactroySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F0F1C51D0EE005FA5C4 /* FactroySearchViewController.m */; };
+		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
+		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
@@ -100,6 +102,10 @@
 		7BF67F0C1C51BC29005FA5C4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		7BF67F0E1C51D0EE005FA5C4 /* FactroySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactroySearchViewController.h; sourceTree = "<group>"; };
 		7BF67F0F1C51D0EE005FA5C4 /* FactroySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactroySearchViewController.m; sourceTree = "<group>"; };
+		7BF67F121C51D9C0005FA5C4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7BF67F151C51D9D6005FA5C4 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
+		7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 		7BA596871C4E214900DBC69D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7BF67F111C51D987005FA5C4 /* Login and regist */,
 				7BA5968D1C4E218800DBC69D /* Mine */,
 				7BA5968B1C4E217500DBC69D /* Shopping Car */,
 				7BA5968A1C4E217300DBC69D /* Web Stroe */,
@@ -300,6 +307,17 @@
 				7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		7BF67F111C51D987005FA5C4 /* Login and regist */ = {
+			isa = PBXGroup;
+			children = (
+				7BF67F121C51D9C0005FA5C4 /* LoginViewController.h */,
+				7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */,
+				7BF67F151C51D9D6005FA5C4 /* RegistViewController.h */,
+				7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */,
+			);
+			name = "Login and regist";
 			sourceTree = "<group>";
 		};
 		8043C6AF1C4DC94500369EEF = {
@@ -628,10 +646,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */,
+				7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
 				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,

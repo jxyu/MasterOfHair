@@ -40,7 +40,7 @@
     
     //右边为搜索
     [self addRightbuttontitle:@"搜索"];
-    _lblRight.font = [UIFont systemFontOfSize:20];
+    _lblRight.font = [UIFont systemFontOfSize:18];
 //    _lblRight.backgroundColor = [UIColor orangeColor];
     _lblRight.frame = CGRectMake(SCREEN_WIDTH - 65, 20, 50, 44);
     _btnRight.frame = _lblRight.frame;
