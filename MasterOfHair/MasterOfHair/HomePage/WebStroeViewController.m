@@ -14,6 +14,7 @@
 #import "SearchViewController.h"
 #import "FactroySearchViewController.h"
 
+#import "chanpingxiangqingViewController.h"
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的两个btn
@@ -318,6 +319,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld",(long)indexPath.item);
+    
+    chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+    
+    [self showViewController:chanpingxiangqing sender:nil];
 }
 
 #pragma mark - 头视图+++++++++++++++++++++++++++++++++++代理商
