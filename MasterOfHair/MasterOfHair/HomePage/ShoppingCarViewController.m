@@ -155,6 +155,12 @@
     
     
     [cell.btn_select addTarget:self action:@selector(btn_selectAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    
+    [cell.btn_Add addTarget:self action:@selector(btn_AddAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+   [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
     return cell;
 }
 
@@ -181,6 +187,17 @@
 {
     NSLog(@"点击选中");
 }
+
+- (void)btn_AddAction:(UIButton *)sender
+{
+    NSLog(@"加");
+}
+
+- (void)btn_SubtractAction:(UIButton *)sender
+{
+    NSLog(@"减");
+}
+
 
 
 

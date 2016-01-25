@@ -15,6 +15,10 @@
 #import "SearchViewController.h"
 #import "AppDelegate.h"
 
+#import "BusinessSchoolViewController.h"
+
+#import "wenxiulianmengViewController.h"
+#import "MingshiViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -536,23 +540,29 @@
         NSLog(@"%ld",(long)indexPath.item);
         switch (indexPath.row) {
             case 0:
-            {
+            {//跳转商学院
                 
+                [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:1];
             }
                 break;
             case 1:
-            {
-                
+            {//商城
+                [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
             }
                 break;
             case 2:
-            {
+            {//纹绣联盟
+                wenxiulianmengViewController * wenxiulianmeng = [[wenxiulianmengViewController alloc] init];
+                
+                [self showViewController:wenxiulianmeng sender:nil];
                 
             }
                 break;
             case 3:
             {
+                MingshiViewController * mingshiViewController = [[MingshiViewController alloc] init];
                 
+                [self showViewController:mingshiViewController sender:nil];
             }
                 break;
             case 4:

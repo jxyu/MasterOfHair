@@ -23,6 +23,10 @@
 		7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B01C4E269200DBC69D /* WebStroeViewController.m */; };
 		7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */; };
 		7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */; };
+		7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */; };
+		7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */; };
+		7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */; };
+		7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55261C55D39500F32F16 /* MingshiViewController.m */; };
 		7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */; };
 		7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */; };
 		7BEE19221C53291F002C2ADA /* white_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19211C53291F002C2ADA /* white_bg.png */; };
@@ -101,6 +105,14 @@
 		7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSchoolViewController.m; sourceTree = "<group>"; };
 		7BB073921C50B26000AAFF07 /* WebStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStroeCollectionViewCell.h; sourceTree = "<group>"; };
 		7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeCollectionViewCell.m; sourceTree = "<group>"; };
+		7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulianmengViewController.h; sourceTree = "<group>"; };
+		7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulianmengViewController.m; sourceTree = "<group>"; };
+		7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuFactoryTableViewCell.h; sourceTree = "<group>"; };
+		7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiuFactoryTableViewCell.m; sourceTree = "<group>"; };
+		7BCD55201C55C13900F32F16 /* wenxiuPeopleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuPeopleTableViewCell.h; sourceTree = "<group>"; };
+		7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiuPeopleTableViewCell.m; sourceTree = "<group>"; };
+		7BCD55251C55D39500F32F16 /* MingshiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MingshiViewController.h; sourceTree = "<group>"; };
+		7BCD55261C55D39500F32F16 /* MingshiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MingshiViewController.m; sourceTree = "<group>"; };
 		7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconquanxuan.png"; sourceTree = "<group>"; };
 		7BEE191E1C532069002C2ADA /* ShoppingCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarTableViewCell.h; sourceTree = "<group>"; };
 		7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarTableViewCell.m; sourceTree = "<group>"; };
@@ -223,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				7BA5968E1C4E231500DBC69D /* Main */,
+				7BCD55231C55D2E700F32F16 /* wenxiulianmeng */,
+				7BCD55241C55D37400F32F16 /* mingshimingdian */,
 				7BF67F081C51B7D2005FA5C4 /* LocationViewController.h */,
 				7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */,
 				7BF67F0B1C51BC29005FA5C4 /* SearchViewController.h */,
@@ -324,6 +338,28 @@
 				7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		7BCD55231C55D2E700F32F16 /* wenxiulianmeng */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */,
+				7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */,
+				7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */,
+				7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */,
+				7BCD55201C55C13900F32F16 /* wenxiuPeopleTableViewCell.h */,
+				7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */,
+			);
+			name = wenxiulianmeng;
+			sourceTree = "<group>";
+		};
+		7BCD55241C55D37400F32F16 /* mingshimingdian */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD55251C55D39500F32F16 /* MingshiViewController.h */,
+				7BCD55261C55D39500F32F16 /* MingshiViewController.m */,
+			);
+			name = mingshimingdian;
 			sourceTree = "<group>";
 		};
 		7BF67F111C51D987005FA5C4 /* Login and regist */ = {
@@ -668,13 +704,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
+				7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */,
 				7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */,
 				7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
+				7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */,
+				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
 				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
 				7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */,
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,

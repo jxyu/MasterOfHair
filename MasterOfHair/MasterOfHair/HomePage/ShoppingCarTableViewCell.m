@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIImageView * bg_image;
 
-@property (nonatomic, strong) UIImageView * white_view;
+//@property (nonatomic, strong) UIImageView * white_view;
 
 @property (nonatomic, strong) UILabel * label_X;
 
@@ -44,16 +44,16 @@
     [self.contentView addSubview:self.btn_select];
     
     //背景底
-    self.white_view = [[UIImageView alloc] init];
-    self.white_view.image = [UIImage imageNamed:@"white_bg"];
-    self.white_view.layer.cornerRadius = 5;
-    self.white_view.layer.masksToBounds = YES;
-    [self.contentView addSubview:self.white_view];
+//    self.white_view = [[UIImageView alloc] init];
+//    self.white_view.image = [UIImage imageNamed:@"white_bg"];
+//    self.white_view.layer.cornerRadius = 5;
+//    self.white_view.layer.masksToBounds = YES;
+//    [self.contentView addSubview:self.white_view];
     
     
     self.image = [[UIImageView alloc] init];
     self.image.backgroundColor = [UIColor orangeColor];
-    [self.white_view addSubview:self.image];
+    [self.contentView addSubview:self.image];
     
     
     self.title = [[UILabel alloc] init];
@@ -61,7 +61,7 @@
     self.title.font = [UIFont systemFontOfSize:14];
     self.title.numberOfLines = 2;
 //    self.title.backgroundColor = [UIColor orangeColor];
-    [self.white_view addSubview:self.title];
+    [self.contentView addSubview:self.title];
     
     
     self.detail = [[UILabel alloc] init];
@@ -69,7 +69,7 @@
     self.detail.font = [UIFont systemFontOfSize:11];
     self.detail.numberOfLines = 2;
 //    self.detail.backgroundColor = [UIColor orangeColor];
-    [self.white_view addSubview:self.detail];
+    [self.contentView addSubview:self.detail];
     
     
     self.price = [[UILabel alloc] init];
@@ -78,13 +78,13 @@
     self.price.font = [UIFont systemFontOfSize:12];
 //    self.price.backgroundColor = [UIColor cyanColor];
     self.price.textColor = [UIColor orangeColor];
-    [self.white_view addSubview:self.price];
+    [self.contentView addSubview:self.price];
     
     
     self.label_X = [[UILabel alloc] init];
     self.label_X.text = @"X";
     self.label_X.font = [UIFont systemFontOfSize:9];
-    [self.white_view addSubview:self.label_X];
+    [self.contentView addSubview:self.label_X];
     
     
     self.btn_Subtract = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -94,7 +94,7 @@
 //    self.btn_Subtract.titleLabel.font = [UIFont systemFontOfSize:35];
 //    self.btn_Subtract.layer.borderWidth = 1;
 //    self.btn_Subtract.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.white_view addSubview:self.btn_Subtract];
+    [self.contentView addSubview:self.btn_Subtract];
     
     
     self.number = [[UILabel alloc] init];
@@ -102,12 +102,12 @@
     self.number.textAlignment = NSTextAlignmentCenter;
 //    self.number.backgroundColor = [UIColor blackColor];
     self.number.font = [UIFont systemFontOfSize:15];
-    [self.white_view addSubview:self.number];
+    [self.contentView addSubview:self.number];
     
     
     self.btn_Add = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_Add.backgroundColor = [UIColor orangeColor];
-    [self.white_view addSubview:self.btn_Add];
+    [self.contentView addSubview:self.btn_Add];
     
 }
 
@@ -119,11 +119,11 @@
     
     self.btn_select.frame = CGRectMake(0, 10, 35, 130);
     
-    self.white_view.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame), 10, SCREEN_WIDTH - CGRectGetMaxX(self.btn_select.frame) - 10, 130);
+//    self.white_view.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame), 10, SCREEN_WIDTH - CGRectGetMaxX(self.btn_select.frame) - 10, 130);
     
-    self.image.frame = CGRectMake(10, 10, 110, 110);
+    self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 10, 20, 110, 110);
     
-    self.title.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, 10, self.white_view.frame.size.width - 20 - CGRectGetMaxX(self.image.frame), 35);
+    self.title.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, 20, self.contentView.frame.size.width - 20 - CGRectGetMaxX(self.image.frame), 35);
     
     self.detail.frame = CGRectMake(CGRectGetMinX(self.title.frame), CGRectGetMaxY(self.title.frame) + 5, CGRectGetWidth(self.title.frame), 30);
     

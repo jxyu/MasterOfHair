@@ -145,7 +145,6 @@
 }
 
 #pragma mark - 代理商 和 厂家的btn
-
 //代理商的btn
 - (void)top_btnDelegateAction:(UIButton *)sender
 {

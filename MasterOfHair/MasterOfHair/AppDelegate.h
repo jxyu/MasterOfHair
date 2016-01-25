@@ -17,5 +17,7 @@
 
 - (void)showTabBar;
 - (void)hiddenTabBar;
+- (void)selectTableBarIndex:(NSInteger)index;
+
 @end
 
