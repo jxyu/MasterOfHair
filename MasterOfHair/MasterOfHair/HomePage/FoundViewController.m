@@ -1,20 +1,18 @@
 //
-//  RegistViewController.m
+//  FoundViewController.m
 //  MasterOfHair
 //
 //  Created by 鞠超 on 16/1/22.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "RegistViewController.h"
+#import "FoundViewController.h"
 
 #import "AppDelegate.h"
-@interface RegistViewController () <UITextFieldDelegate>
+@interface FoundViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
-//推广ID
-@property (nonatomic, strong) UITextField * text_extend;
 //电话
 @property (nonatomic, strong) UITextField * text_tel;
 //验证码
@@ -26,7 +24,7 @@
 
 @end
 
-@implementation RegistViewController
+@implementation FoundViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,7 +43,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"注册"];
+    _lblTitle.text = [NSString stringWithFormat:@"重置密码"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
@@ -75,28 +73,13 @@
     
     [self.view addSubview:self.scrollView];
     
-    [self p_Other];
-    
+    [self p_setupView1];
 }
 
-- (void)p_Other
+- (void)p_setupView1
 {
-    //推广ID
-    UIView * view_5 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width - 20, 50)];
-    view_5.backgroundColor = [UIColor whiteColor];
-    view_5.layer.cornerRadius = 5;
-    view_5.layer.borderColor = navi_bar_bg_color.CGColor;
-    view_5.layer.borderWidth = 1;
-    [self.scrollView addSubview:view_5];
-    
-    self.text_extend = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view_5.frame.size.width - 30, 40)];
-    self.text_extend.placeholder = @"请输入推广ID (选填)";
-    self.text_extend.delegate = self;
-    [view_5 addSubview:self.text_extend];
-    
-    
     //电话
-    UIView * view_1 = [[UIView alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(view_5.frame) + 10, self.view.frame.size.width - 20, 50)];
+    UIView * view_1 = [[UIView alloc] initWithFrame:CGRectMake(10,  10, self.view.frame.size.width - 20, 50)];
     view_1.backgroundColor = [UIColor whiteColor];
     view_1.layer.cornerRadius = 5;
     view_1.layer.borderColor = navi_bar_bg_color.CGColor;
@@ -163,14 +146,43 @@
     //btn注册
     UIButton * btn_change = [UIButton buttonWithType:(UIButtonTypeSystem)];
     btn_change.frame = CGRectMake(20, CGRectGetMaxY(view_4.frame) + 20, self.view.frame.size.width - 40 , 40);
-    [btn_change setTitle:@"立 即 注 册" forState:(UIControlStateNormal)];
+    [btn_change setTitle:@"立 即 重 置" forState:(UIControlStateNormal)];
     [btn_change setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     btn_change.layer.cornerRadius = 4;
     btn_change.backgroundColor = navi_bar_bg_color;
     [self.scrollView addSubview:btn_change];
     [btn_change addTarget:self action:@selector(btn_changeAction:) forControlEvents:(UIControlEventTouchUpInside)];
-
 }
+
+#pragma mark - btn重置, 验证二维码
+- (void)btnbtn_captchaAction:(UIButton *)sender
+{
+    [self.text_tel resignFirstResponder];
+    [self.text_password resignFirstResponder];
+    [self.text_pass resignFirstResponder];
+    [self.text_captcha resignFirstResponder];
+    
+    NSLog(@"点击验证二维码");
+}
+
+- (void)btn_changeAction:(UIButton *)sender
+{
+    [self.text_tel resignFirstResponder];
+    [self.text_password resignFirstResponder];
+    [self.text_pass resignFirstResponder];
+    [self.text_captcha resignFirstResponder];
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    NSLog(@"立即重置");
+}
+
 
 #pragma mark - textField代理
 - (BOOL )textFieldShouldReturn:(UITextField *)textField
@@ -190,11 +202,10 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-
+    
     [self.text_tel resignFirstResponder];
     [self.text_password resignFirstResponder];
     [self.text_pass resignFirstResponder];
-    [self.text_extend resignFirstResponder];
     [self.text_captcha resignFirstResponder];
     
     [UIView animateWithDuration:0.7 animations:^{
@@ -210,22 +221,11 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     
-    if([textField isEqual:self.text_captcha])
-    {
-        [UIView animateWithDuration:0.7 animations:^{
-            
-            self.scrollView.contentOffset = CGPointMake(0, 100);
-
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    
     if([textField isEqual:self.text_pass])
     {
         [UIView animateWithDuration:0.7 animations:^{
             
-            self.scrollView.contentOffset = CGPointMake(0, 150);
+            self.scrollView.contentOffset = CGPointMake(0, 100);
             
         } completion:^(BOOL finished) {
             
@@ -236,7 +236,7 @@
     {
         [UIView animateWithDuration:0.7 animations:^{
             
-            self.scrollView.contentOffset = CGPointMake(0, 180);
+            self.scrollView.contentOffset = CGPointMake(0, 150);
             
         } completion:^(BOOL finished) {
             
@@ -244,42 +244,21 @@
     }
 }
 
-#pragma mark - btn注册, 验证二维码
-- (void)btnbtn_captchaAction:(UIButton *)sender
-{
-    [self.text_tel resignFirstResponder];
-    [self.text_password resignFirstResponder];
-    [self.text_pass resignFirstResponder];
-    [self.text_extend resignFirstResponder];
-    [self.text_captcha resignFirstResponder];
-    
-    [UIView animateWithDuration:0.7 animations:^{
-        
-        self.scrollView.contentOffset = CGPointMake(0, 0);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    NSLog(@"点击验证二维码");
-}
 
-- (void)btn_changeAction:(UIButton *)sender
-{
-    [self.text_tel resignFirstResponder];
-    [self.text_password resignFirstResponder];
-    [self.text_pass resignFirstResponder];
-    [self.text_extend resignFirstResponder];
-    [self.text_captcha resignFirstResponder];
-    
-    [UIView animateWithDuration:0.7 animations:^{
-        
-        self.scrollView.contentOffset = CGPointMake(0, 0);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

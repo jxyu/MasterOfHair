@@ -23,11 +23,16 @@
 		7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B01C4E269200DBC69D /* WebStroeViewController.m */; };
 		7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */; };
 		7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */; };
+		7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */; };
+		7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */; };
+		7BEE19221C53291F002C2ADA /* white_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19211C53291F002C2ADA /* white_bg.png */; };
+		7BEE19241C53544E002C2ADA /* gary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19231C53544E002C2ADA /* gary_bg.png */; };
 		7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */; };
 		7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F0C1C51BC29005FA5C4 /* SearchViewController.m */; };
 		7BF67F101C51D0EE005FA5C4 /* FactroySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F0F1C51D0EE005FA5C4 /* FactroySearchViewController.m */; };
 		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
 		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
+		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
@@ -96,6 +101,11 @@
 		7BA596B41C4E26A600DBC69D /* BusinessSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSchoolViewController.m; sourceTree = "<group>"; };
 		7BB073921C50B26000AAFF07 /* WebStroeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStroeCollectionViewCell.h; sourceTree = "<group>"; };
 		7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeCollectionViewCell.m; sourceTree = "<group>"; };
+		7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconquanxuan.png"; sourceTree = "<group>"; };
+		7BEE191E1C532069002C2ADA /* ShoppingCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarTableViewCell.h; sourceTree = "<group>"; };
+		7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarTableViewCell.m; sourceTree = "<group>"; };
+		7BEE19211C53291F002C2ADA /* white_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_bg.png; sourceTree = "<group>"; };
+		7BEE19231C53544E002C2ADA /* gary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gary_bg.png; sourceTree = "<group>"; };
 		7BF67F081C51B7D2005FA5C4 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
 		7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		7BF67F0B1C51BC29005FA5C4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -106,6 +116,8 @@
 		7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		7BF67F151C51D9D6005FA5C4 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		7BF67F181C522466005FA5C4 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
+		7BF67F191C522466005FA5C4 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
 		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,6 +195,9 @@
 		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
 			isa = PBXGroup;
 			children = (
+				7BEE19231C53544E002C2ADA /* gary_bg.png */,
+				7BEE19211C53291F002C2ADA /* white_bg.png */,
+				7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */,
 				7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */,
 				7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */,
 				7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */,
@@ -283,6 +298,8 @@
 			children = (
 				7BA596AB1C4E267D00DBC69D /* ShoppingCarViewController.h */,
 				7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */,
+				7BEE191E1C532069002C2ADA /* ShoppingCarTableViewCell.h */,
+				7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -316,6 +333,8 @@
 				7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */,
 				7BF67F151C51D9D6005FA5C4 /* RegistViewController.h */,
 				7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */,
+				7BF67F181C522466005FA5C4 /* FoundViewController.h */,
+				7BF67F191C522466005FA5C4 /* FoundViewController.m */,
 			);
 			name = "Login and regist";
 			sourceTree = "<group>";
@@ -565,12 +584,15 @@
 				80937EB11C4E29FF00CAD5D0 /* more@2x.png in Resources */,
 				8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */,
 				80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */,
+				7BEE19241C53544E002C2ADA /* gary_bg.png in Resources */,
 				8043C6FC1C4E0C0900369EEF /* FirstScrollController.xib in Resources */,
+				7BEE19221C53291F002C2ADA /* white_bg.png in Resources */,
 				80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */,
 				7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */,
 				7BA007901C4F374B009B3ABD /* iconfont-fanhui.png in Resources */,
 				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
 				7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */,
+				7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */,
 				80937EAD1C4E29FF00CAD5D0 /* hedongli@2x.png in Resources */,
 				80937EAF1C4E29FF00CAD5D0 /* hewuzhe@2x.png in Resources */,
 				8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */,
@@ -654,7 +676,9 @@
 				7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
 				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
+				7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */,
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,
+				7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */,
 				7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */,
 				7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */,
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,

@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "RegistViewController.h"
+#import "FoundViewController.h"
 @interface LoginViewController () <UITextFieldDelegate>
 
 //账号
@@ -164,6 +165,10 @@
     NSLog(@"找回密码");
     [self.text_account resignFirstResponder];
     [self.text_password resignFirstResponder];
+    
+    FoundViewController * foundViewController = [[FoundViewController alloc] init];
+    
+    [self showViewController:foundViewController sender:nil];
 }
 
 
