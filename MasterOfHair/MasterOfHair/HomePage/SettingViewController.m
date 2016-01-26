@@ -10,6 +10,8 @@
 
 #import "AppDelegate.h"
 #import "JCMineTableViewCell.h"
+
+#import "shouhuodizhiViewController.h"
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -171,6 +173,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+   
+    if(indexPath.section == 0)
+    {
+        shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
+        [self showViewController:shouhuodizhi sender:nil];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
 		7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFAB1C56FD2B003A020B /* VOTagList.m */; };
+		7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFAF1C570CC3003A020B /* shouhuodizhiViewController.m */; };
+		7B29EFB21C5712DA003A020B /* iconfont-tianjia.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29EFB11C5712DA003A020B /* iconfont-tianjia.png */; };
+		7B29EFB51C5714FE003A020B /* shouhudizhiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB41C5714FE003A020B /* shouhudizhiTableViewCell.m */; };
+		7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */; };
+		7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */; };
 		7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F1A381C4F101900783F3B /* SettingViewController.m */; };
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
@@ -82,6 +87,15 @@
 		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
 		7B29EFAA1C56FD2B003A020B /* VOTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOTagList.h; sourceTree = "<group>"; };
 		7B29EFAB1C56FD2B003A020B /* VOTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOTagList.m; sourceTree = "<group>"; };
+		7B29EFAE1C570CC3003A020B /* shouhuodizhiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shouhuodizhiViewController.h; sourceTree = "<group>"; };
+		7B29EFAF1C570CC3003A020B /* shouhuodizhiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shouhuodizhiViewController.m; sourceTree = "<group>"; };
+		7B29EFB11C5712DA003A020B /* iconfont-tianjia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-tianjia.png"; sourceTree = "<group>"; };
+		7B29EFB31C5714FE003A020B /* shouhudizhiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shouhudizhiTableViewCell.h; sourceTree = "<group>"; };
+		7B29EFB41C5714FE003A020B /* shouhudizhiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shouhudizhiTableViewCell.m; sourceTree = "<group>"; };
+		7B29EFB61C571D93003A020B /* EditshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditshouhuoViewController.h; sourceTree = "<group>"; };
+		7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditshouhuoViewController.m; sourceTree = "<group>"; };
+		7B29EFB91C5725F9003A020B /* NewshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewshouhuoViewController.h; sourceTree = "<group>"; };
+		7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewshouhuoViewController.m; sourceTree = "<group>"; };
 		7B3F1A371C4F101900783F3B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		7B3F1A381C4F101900783F3B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
@@ -227,11 +241,27 @@
 			name = VOTagList;
 			sourceTree = "<group>";
 		};
+		7B29EFAD1C570CAA003A020B /* shouhudizhi */ = {
+			isa = PBXGroup;
+			children = (
+				7B29EFAE1C570CC3003A020B /* shouhuodizhiViewController.h */,
+				7B29EFAF1C570CC3003A020B /* shouhuodizhiViewController.m */,
+				7B29EFB31C5714FE003A020B /* shouhudizhiTableViewCell.h */,
+				7B29EFB41C5714FE003A020B /* shouhudizhiTableViewCell.m */,
+				7B29EFB61C571D93003A020B /* EditshouhuoViewController.h */,
+				7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */,
+				7B29EFB91C5725F9003A020B /* NewshouhuoViewController.h */,
+				7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */,
+			);
+			name = shouhudizhi;
+			sourceTree = "<group>";
+		};
 		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
 			isa = PBXGroup;
 			children = (
 				7BEE19231C53544E002C2ADA /* gary_bg.png */,
 				7BEE19211C53291F002C2ADA /* white_bg.png */,
+				7B29EFB11C5712DA003A020B /* iconfont-tianjia.png */,
 				7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */,
 				7BA0078F1C4F374B009B3ABD /* iconfont-fanhui.png */,
 				7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */,
@@ -300,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B29EFAD1C570CAA003A020B /* shouhudizhi */,
 				7B3F1A371C4F101900783F3B /* SettingViewController.h */,
 				7B3F1A381C4F101900783F3B /* SettingViewController.m */,
 			);
@@ -647,6 +678,7 @@
 				8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */,
 				80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */,
 				7BEE19241C53544E002C2ADA /* gary_bg.png in Resources */,
+				7B29EFB21C5712DA003A020B /* iconfont-tianjia.png in Resources */,
 				8043C6FC1C4E0C0900369EEF /* FirstScrollController.xib in Resources */,
 				7BEE19221C53291F002C2ADA /* white_bg.png in Resources */,
 				80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */,
@@ -733,6 +765,7 @@
 				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
+				7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */,
@@ -750,10 +783,12 @@
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */,
+				7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
 				7BF67F101C51D0EE005FA5C4 /* FactroySearchViewController.m in Sources */,
 				8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */,
+				7B29EFB51C5714FE003A020B /* shouhudizhiTableViewCell.m in Sources */,
 				7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */,
@@ -762,6 +797,7 @@
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				8043C6FB1C4E0C0900369EEF /* FirstScrollController.m in Sources */,
+				7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */,
 				7BCD552A1C55EFC200F32F16 /* chanpingxiangqingViewController.m in Sources */,
 				7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */,
 			);
