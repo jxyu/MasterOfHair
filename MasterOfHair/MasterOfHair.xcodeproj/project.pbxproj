@@ -14,6 +14,7 @@
 		7B29EFB51C5714FE003A020B /* shouhudizhiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB41C5714FE003A020B /* shouhudizhiTableViewCell.m */; };
 		7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */; };
 		7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */; };
+		7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */; };
 		7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F1A381C4F101900783F3B /* SettingViewController.m */; };
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
@@ -96,6 +97,8 @@
 		7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditshouhuoViewController.m; sourceTree = "<group>"; };
 		7B29EFB91C5725F9003A020B /* NewshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewshouhuoViewController.h; sourceTree = "<group>"; };
 		7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewshouhuoViewController.m; sourceTree = "<group>"; };
+		7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = querendingdanViewController.h; sourceTree = "<group>"; };
+		7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = querendingdanViewController.m; sourceTree = "<group>"; };
 		7B3F1A371C4F101900783F3B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		7B3F1A381C4F101900783F3B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				7BF67F0F1C51D0EE005FA5C4 /* FactroySearchViewController.m */,
 				7BCD55281C55EFC200F32F16 /* chanpingxiangqingViewController.h */,
 				7BCD55291C55EFC200F32F16 /* chanpingxiangqingViewController.m */,
+				7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */,
+				7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */,
 			);
 			name = "Web Stroe";
 			sourceTree = "<group>";
@@ -783,6 +788,7 @@
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */,
+				7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */,
 				7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
