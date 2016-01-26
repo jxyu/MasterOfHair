@@ -19,6 +19,8 @@
 
 #import "wenxiulianmengViewController.h"
 #import "MingshiViewController.h"
+#import "chanpingxiangqingViewController.h"
+
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -601,7 +603,11 @@
     }
     else if([self.stroe_collectionView isEqual:collectionView])
     {
-        NSLog(@"%ld",(long)indexPath.item);
+        NSLog(@"111 ~~ %ld",(long)indexPath.item);
+        
+        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+        
+        [self showViewController:chanpingxiangqing sender:nil];
     }
     else
     {

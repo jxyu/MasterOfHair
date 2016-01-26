@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 
+#import "VOTagList.h"
 @interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -27,6 +28,8 @@
 @property (nonatomic, strong) UIButton * btn_share;
 @property (nonatomic, strong) UILabel * old_price;
 
+//规格
+@property (nonatomic, strong) VOTagList * tagList;
 
 //底部栏
 @property (nonatomic, strong) UIButton * btn_collect;
@@ -125,7 +128,7 @@
     {
         return 150;
     }
-    return 500;
+    return SCREEN_HEIGHT / 3 * 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -215,6 +218,21 @@
         
         //使用第三方
         
+        NSArray *tags = @[@"AAA", @"BB", @"C", @"DDDD",@"EEEEEEE", @"FFFFF", @"G", @"HHHH"];
+        self.tagList = [[VOTagList alloc] initWithTags:tags];
+        self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 5, SCREEN_WIDTH - 40, 150 - CGRectGetMaxY(view_line1.frame) - 10);
+        self.tagList.multiLine = YES;
+        self.tagList.multiSelect = NO;
+        self.tagList.allowNoSelection = YES;
+        self.tagList.vertSpacing = 20;
+        self.tagList.horiSpacing = 20;
+//        self.tagList.selectedTextColor = [UIColor whiteColor];
+        self.tagList.tagBackgroundColor = [UIColor groupTableViewBackgroundColor];
+        self.tagList.selectedTagBackgroundColor = [UIColor orangeColor];
+        self.tagList.tagCornerRadius = 3;
+        self.tagList.tagEdge = UIEdgeInsetsMake(8, 8, 8, 8);
+        [self.tagList addTarget:self action:@selector(selectedTagsChanged:) forControlEvents:UIControlEventValueChanged];
+        [cell addSubview:self.tagList];
     }
     else
     {
@@ -237,7 +255,7 @@
         [cell addSubview:view_line1];
         
         //添加web界面
-        UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_line1.frame) + 5, SCREEN_WIDTH, 500 - CGRectGetMaxY(view_line1.frame) - 5)];
+        UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_line1.frame) + 5, SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2 - CGRectGetMaxY(view_line1.frame) - 5)];
         
         NSString * path = @"http://www.baidu.com";
         NSURL * url = [NSURL URLWithString:path];
@@ -249,11 +267,17 @@
     return cell;
 }
 
-#pragma mark - 点击分享
+#pragma mark - 点击分享 和规格
 - (void)shareAction:(UIButton *)sender
 {
     NSLog(@"分享");
 }
+
+- (void)selectedTagsChanged: (VOTagList *)tagList{
+    NSLog(@"selected: %@", tagList.selectedIndexSet);
+    
+}
+
 
 #pragma mark - 底部栏
 - (void)p_bottomView
@@ -292,11 +316,50 @@
 - (void)btn_addShoppingAction:(UIButton *)sender
 {
     NSLog(@"购物车");
+    
+    if(self.tagList.selectedIndexSet.count == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再加入购物车" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        NSLog(@"走加入购物车");
+    }
+    
 }
-//分享
+//购买
 - (void)btn_shareAction:(UIButton *)sender
 {
-    NSLog(@"分享");
+    NSLog(@"购买");
+    
+    if(self.tagList.selectedIndexSet.count == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再确定下单" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        NSLog(@"跳页");
+    }
 }
 
 #pragma mark - 轮播图
