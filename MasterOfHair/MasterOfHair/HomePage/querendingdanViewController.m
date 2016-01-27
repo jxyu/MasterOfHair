@@ -33,6 +33,8 @@
 //确认支付
 @property (nonatomic, strong) UIButton * btn_zhifuOK;
 
+//测试
+@property (nonatomic, strong) NSMutableArray * arr;
 @end
 
 @implementation querendingdanViewController
@@ -40,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.arr = @[@"1",@"1"].mutableCopy;
     
     [self p_navi];
     
@@ -90,7 +94,7 @@
     self.tableView.tableFooterView = self.bottom_view;
     
     //注册
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_queren"];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_queren"];
 }
 
 
@@ -102,16 +106,60 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.arr.count + 4;
 }
+
+- (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(indexPath.row == 0 || indexPath.row == self.arr.count + 3 || indexPath.row == self.arr.count + 2 || indexPath.row == self.arr.count + 1)
+    {
+        return 50;
+    }
+    else
+    {
+        return 200;
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_queren"];
+    UITableViewCell * cell = [[UITableViewCell alloc] init];
+    
+    if(indexPath.row == 0)
+    {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+        
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
+        image.image = [UIImage imageNamed:@"03-hezuodian"];
+        
+        [cell addSubview:image];
+        
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 10, 150, 30)];
+        name.text = @"商铺名称";
+//        name.font = [UIFont systemFontOfSize:15];
+        [cell addSubview:name];
+    }
+    else if (indexPath.row == self.arr.count + 1)
+    {
+        
+    }
+    else if (indexPath.row == self.arr.count + 2)
+    {
+        
+    }
+    else if(indexPath.row == self.arr.count + 3)
+    {
+        
+    }
+    else
+    {
+        
+    }
     
     return cell;
 }
-
 
 #pragma mark - 头视图
 - (void)p_headView
@@ -126,7 +174,7 @@
         [self.head_view addSubview:view_white];
         
         UIImageView * head_image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
-        head_image.image = [UIImage imageNamed:@"iconfont-tianjia"];
+        head_image.image = [UIImage imageNamed:@"05__03"];
         [view_white addSubview:head_image];
         
         UILabel * head_label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(head_image.frame) + 10, 10, 150, 30)];

@@ -120,7 +120,7 @@
     [self.view_head addSubview:view_whith];
     
     UIImageView * head_image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
-    head_image.image = [UIImage imageNamed:@"iconfont-tianjia"];
+    head_image.image = [UIImage imageNamed:@"05__03"];
     [view_whith addSubview:head_image];
     
     UILabel * head_label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(head_image.frame) + 10, 10, 150, 30)];
