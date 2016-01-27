@@ -35,6 +35,10 @@
 
 //测试
 @property (nonatomic, strong) NSMutableArray * arr;
+
+
+
+
 @end
 
 @implementation querendingdanViewController
@@ -118,7 +122,7 @@
     }
     else
     {
-        return 200;
+        return 120;
     }
 }
 
@@ -130,6 +134,7 @@
     if(indexPath.row == 0)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
         image.image = [UIImage imageNamed:@"03-hezuodian"];
@@ -143,22 +148,173 @@
     }
     else if (indexPath.row == self.arr.count + 1)
     {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = @"配送方式";
+        [cell addSubview:label];
+        
+        UILabel * distribution = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 100, 10, 100, 30)];
+        distribution.textAlignment = NSTextAlignmentRight;
+        distribution.text = @"配送方式 >";
+        distribution.font = [UIFont systemFontOfSize:14];
+        distribution.tag = 100 + indexPath.section;
+        [cell addSubview:distribution];
         
     }
     else if (indexPath.row == self.arr.count + 2)
     {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 80, 30)];
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = @"买家留言:";
+//        label.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:label];
+        
+        UITextField * text = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) , 11, SCREEN_WIDTH - CGRectGetMaxY(label.frame) - 10, 30)];
+        text.userInteractionEnabled = NO;
+        text.tag = 1000 + indexPath.section;
+        text.font = [UIFont systemFontOfSize:14];
+        text.placeholder = @"想对卖家说什么(选填)";
+        [cell addSubview:text];
     }
     else if(indexPath.row == self.arr.count + 3)
     {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
+        price.text = @"¥ 400.00";
+        price.textColor = [UIColor orangeColor];
+        price.font = [UIFont systemFontOfSize:14];
+        [cell addSubview:price];
+        
+        UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, 10, 40, 30)];
+        sum.text = @"合计:";
+        sum.font = [UIFont systemFontOfSize:14];
+        [cell addSubview:sum];
     }
     else
     {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 120);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
+        image.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:image];
+        
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];
+        name.text = @"VS 洗发水护发素护发素";
+        name.font = [UIFont systemFontOfSize:14];
+//        name.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:name];
+        
+        UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(name.frame) + 5, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 30)];
+        detail.text = @"VS 洗发水护发素护发素 VS 洗发水护发素护发素";
+        detail.textColor = [UIColor grayColor];
+        detail.font = [UIFont systemFontOfSize:12];
+        detail.numberOfLines = 2;
+//        detail.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:detail];
+        
+        
+        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 60, 20)];
+        price.text = @"¥20.00";
+//        price.backgroundColor = [UIColor blackColor];
+//        price.textAlignment = NSTextAlignmentRight;
+        price.font = [UIFont systemFontOfSize:13];
+        price.textColor = [UIColor orangeColor];
+        [cell addSubview:price];
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(price.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 10, 20)];
+        label.font = [UIFont systemFontOfSize:9];
+        label.text = @"X";
+        [cell addSubview:label];
+        
+        UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 1, CGRectGetMaxY(detail.frame) + 10, 50, 20)];
+        number.text = @"11";
+        number.font = [UIFont systemFontOfSize:13];
+        [cell addSubview:number];
         
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+#warning 要保存数据+++++++++++++
+    if(indexPath.row == self.arr.count + 1)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择配送方式" preferredStyle:(UIAlertControllerStyleActionSheet)];
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action_1 = [UIAlertAction actionWithTitle:@"自取" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+           UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
+            
+            peisong.text = @"自取";
+        }];
+        
+        UIAlertAction * action_2 = [UIAlertAction actionWithTitle:@"同城派送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
+            peisong.text = @"同城派送";
+        }];
+        
+        UIAlertAction * action_3 = [UIAlertAction actionWithTitle:@"快递" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
+            peisong.text = @"快递";
+        }];
+        
+        UIAlertAction * action_4 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action_1];
+        [alert addAction:action_2];
+        [alert addAction:action_3];
+        [alert addAction:action_4];
+    }
+    else if (indexPath.row == self.arr.count + 2)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"请输入对卖家的留言" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [alert addTextFieldWithConfigurationHandler:^(UITextField *textField){
+            
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        }];
+        
+        UIAlertAction * action_ok = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            UITextField * textField = alert.textFields.firstObject;
+            NSLog(@"%@",textField.text);
+            
+            UITextField * liuyan = [self.view viewWithTag:(1000 + indexPath.section)];
+            liuyan.text = textField.text;
+        }];
+        
+        UIAlertAction * action_cancel = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            //不做任何操作
+        }];
+        
+        [alert addAction:action_cancel];
+        [alert addAction:action_ok];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+
+    }
+    
 }
 
 #pragma mark - 头视图
