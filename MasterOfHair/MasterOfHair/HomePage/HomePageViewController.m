@@ -138,6 +138,7 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     //tableView
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0 , 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:(UITableViewStylePlain)];
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
