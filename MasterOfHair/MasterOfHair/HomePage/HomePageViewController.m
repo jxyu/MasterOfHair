@@ -74,11 +74,12 @@
 //    _lblLeft.backgroundColor = [UIColor orangeColor];
     
     //右边为签到
-//    [self addRightButton:@""];
-    [self addRightbuttontitle:@"签到"];
-//    _btnRight.backgroundColor = [UIColor orangeColor];
+    [self addRightButton:@"01_33"];
+    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 5 - 40, _imgRight.frame.origin.y, _imgRight.frame.size.width, _imgRight.frame.size.height);
+//    [self addRightbuttontitle:@"签到"];
     _btnRight.frame = CGRectMake(SCREEN_WIDTH - 10 - 40, _lblRight.frame.origin.y + 0, 40, _lblRight.frame.size.height - 10);
-    
+//    _btnRight.backgroundColor = [UIColor orangeColor];
+
     //中间为搜索框
     _lblTitle.hidden = YES;
     self.search_view = [[UIView alloc] initWithFrame:CGRectMake(80 , 25, SCREEN_WIDTH - 140, 34)];
@@ -469,6 +470,7 @@
             case 0:
             {
                 cell.name.text = @"商学院";
+                cell.imageView.image = [UIImage imageNamed:@""];
             }
                 break;
             case 1:

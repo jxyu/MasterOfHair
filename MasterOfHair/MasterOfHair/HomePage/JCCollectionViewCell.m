@@ -25,7 +25,7 @@
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.width)];
     self.imageView.layer.cornerRadius = self.contentView.frame.size.width / 2;
     self.imageView.backgroundColor = [UIColor orangeColor];
-    self.imageView.layer.masksToBounds = YES;
+//    self.imageView.layer.masksToBounds = YES;
     [self.contentView addSubview:self.imageView];
     
     self.name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxX(self.imageView.frame), self.contentView.frame.size.width, 20)];

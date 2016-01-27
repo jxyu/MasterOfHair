@@ -11,6 +11,7 @@
 
 
 #import "VOTagList.h"
+#import "querendingdanViewController.h"
 @interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -229,7 +230,7 @@
 //        self.tagList.selectedTextColor = [UIColor whiteColor];
         self.tagList.tagBackgroundColor = [UIColor groupTableViewBackgroundColor];
         self.tagList.selectedTagBackgroundColor = [UIColor orangeColor];
-        self.tagList.tagCornerRadius = 3;
+        self.tagList.tagCornerRadius = 2;
         self.tagList.tagEdge = UIEdgeInsetsMake(8, 8, 8, 8);
         [self.tagList addTarget:self action:@selector(selectedTagsChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:self.tagList];
@@ -262,6 +263,9 @@
         [webView loadRequest:[NSURLRequest requestWithURL:url]];
         
         [cell addSubview:webView];
+        
+//        UIScrollView *tempView=(UIScrollView *)[webView.subviews objectAtIndex:0];
+//        tempView.scrollEnabled=NO;
     }
     
     return cell;
@@ -342,24 +346,30 @@
 {
     NSLog(@"购买");
     
-    if(self.tagList.selectedIndexSet.count == 0)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再确定下单" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        
-        [alert addAction:action];
-    }
-    else
-    {
-        NSLog(@"跳页");
-    }
+    querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+    [self showViewController:querendingdan sender:nil];
+    
+//    if(self.tagList.selectedIndexSet.count == 0)
+//    {
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再确定下单" preferredStyle:(UIAlertControllerStyleAlert)];
+//        
+//        [self presentViewController:alert animated:YES completion:^{
+//            
+//        }];
+//        
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//            
+//        }];
+//        
+//        [alert addAction:action];
+//    }
+//    else
+//    {
+//        NSLog(@"跳页");
+//        
+//        querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+//        [self showViewController:querendingdan sender:nil];
+//    }
 }
 
 #pragma mark - 轮播图
