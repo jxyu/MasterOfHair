@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
+		7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */; };
+		7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */; };
+		7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */; };
+		7B142E311C5870D000B32809 /* 01_33.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E301C5870D000B32809 /* 01_33.png */; };
 		7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFAB1C56FD2B003A020B /* VOTagList.m */; };
 		7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFAF1C570CC3003A020B /* shouhuodizhiViewController.m */; };
 		7B29EFB21C5712DA003A020B /* iconfont-tianjia.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29EFB11C5712DA003A020B /* iconfont-tianjia.png */; };
@@ -86,6 +90,11 @@
 
 /* Begin PBXFileReference section */
 		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
+		7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectshouhuoViewController.h; sourceTree = "<group>"; };
+		7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectshouhuoViewController.m; sourceTree = "<group>"; };
+		7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_03.png"; sourceTree = "<group>"; };
+		7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_06.png"; sourceTree = "<group>"; };
+		7B142E301C5870D000B32809 /* 01_33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_33.png; sourceTree = "<group>"; };
 		7B29EFAA1C56FD2B003A020B /* VOTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VOTagList.h; sourceTree = "<group>"; };
 		7B29EFAB1C56FD2B003A020B /* VOTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VOTagList.m; sourceTree = "<group>"; };
 		7B29EFAE1C570CC3003A020B /* shouhuodizhiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shouhuodizhiViewController.h; sourceTree = "<group>"; };
@@ -227,6 +236,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B142DC91C584D8900B32809 /* gouwuliucheng */ = {
+			isa = PBXGroup;
+			children = (
+				7BCD55281C55EFC200F32F16 /* chanpingxiangqingViewController.h */,
+				7BCD55291C55EFC200F32F16 /* chanpingxiangqingViewController.m */,
+				7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */,
+				7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */,
+				7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */,
+				7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */,
+			);
+			name = gouwuliucheng;
+			sourceTree = "<group>";
+		};
+		7B142E2A1C586DA200B32809 /* 3 */ = {
+			isa = PBXGroup;
+			children = (
+				7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */,
+				7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */,
+			);
+			name = 3;
+			sourceTree = "<group>";
+		};
+		7B142E2F1C58708500B32809 /* 1 */ = {
+			isa = PBXGroup;
+			children = (
+				7B142E301C5870D000B32809 /* 01_33.png */,
+			);
+			name = 1;
+			sourceTree = "<group>";
+		};
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,13 +351,10 @@
 		7BA5968A1C4E217300DBC69D /* Web Stroe */ = {
 			isa = PBXGroup;
 			children = (
+				7B142DC91C584D8900B32809 /* gouwuliucheng */,
 				7BA596AE1C4E268800DBC69D /* Main */,
 				7BF67F0E1C51D0EE005FA5C4 /* FactroySearchViewController.h */,
 				7BF67F0F1C51D0EE005FA5C4 /* FactroySearchViewController.m */,
-				7BCD55281C55EFC200F32F16 /* chanpingxiangqingViewController.h */,
-				7BCD55291C55EFC200F32F16 /* chanpingxiangqingViewController.m */,
-				7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */,
-				7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */,
 			);
 			name = "Web Stroe";
 			sourceTree = "<group>";
@@ -462,8 +498,8 @@
 			isa = PBXGroup;
 			children = (
 				7B29EFA81C56FCDF003A020B /* frameWork */,
-				8043C7111C4E1DFC00369EEF /* Images */,
 				8043C70D1C4E1DE600369EEF /* DataProvider */,
+				8043C7111C4E1DFC00369EEF /* Images */,
 				8043C6EE1C4E0C0000369EEF /* CustomTool */,
 				7BA596871C4E214900DBC69D /* UI */,
 				8043C6BE1C4DC94500369EEF /* AppDelegate.h */,
@@ -553,6 +589,8 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7B142E2F1C58708500B32809 /* 1 */,
+				7B142E2A1C586DA200B32809 /* 3 */,
 				7BA0078C1C4F316C009B3ABD /* wolaji */,
 				80937EA81C4E29FF00CAD5D0 /* hedongli@2x.png */,
 				80937EA91C4E29FF00CAD5D0 /* helianmeng@2x.png */,
@@ -684,6 +722,8 @@
 				80937EB01C4E29FF00CAD5D0 /* hezhuangbei@2x.png in Resources */,
 				7BEE19241C53544E002C2ADA /* gary_bg.png in Resources */,
 				7B29EFB21C5712DA003A020B /* iconfont-tianjia.png in Resources */,
+				7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */,
+				7B142E311C5870D000B32809 /* 01_33.png in Resources */,
 				8043C6FC1C4E0C0900369EEF /* FirstScrollController.xib in Resources */,
 				7BEE19221C53291F002C2ADA /* white_bg.png in Resources */,
 				80937EAE1C4E29FF00CAD5D0 /* helianmeng@2x.png in Resources */,
@@ -691,6 +731,7 @@
 				7BA007901C4F374B009B3ABD /* iconfont-fanhui.png in Resources */,
 				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
 				7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */,
+				7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */,
 				7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */,
 				80937EAD1C4E29FF00CAD5D0 /* hedongli@2x.png in Resources */,
 				80937EAF1C4E29FF00CAD5D0 /* hewuzhe@2x.png in Resources */,
@@ -769,6 +810,7 @@
 			files = (
 				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
+				7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,

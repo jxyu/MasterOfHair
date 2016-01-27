@@ -9,6 +9,7 @@
 #import "querendingdanViewController.h"
 
 #import "AppDelegate.h"
+#import "SelectshouhuoViewController.h"
 @interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -16,13 +17,21 @@
 @property (nonatomic, strong) UIView * head_view;
 @property (nonatomic, assign) BOOL isMoren;
 
-
 @property (nonatomic, strong) UILabel * name;
 @property (nonatomic, strong) UILabel * tel;
 @property (nonatomic, strong) UILabel * address;
 
+
 //尾视图
 @property (nonatomic, strong) UIView * bottom_view;
+
+@property (nonatomic, strong) UILabel * price_sum;
+
+@property (nonatomic, strong) UIButton * btn_myPurse;
+@property (nonatomic, strong) UIButton * btn_zhifubo;
+@property (nonatomic, strong) UIButton * btn_weixin;
+//确认支付
+@property (nonatomic, strong) UIButton * btn_zhifuOK;
 
 @end
 
@@ -93,7 +102,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,16 +178,170 @@
 -(void)tapGesture:(id)sender
 {
     NSLog(@"跳到选择页");
+    
+    SelectshouhuoViewController * Selectshouhuo = [[SelectshouhuoViewController alloc] init];
+    
+    [self showViewController:Selectshouhuo sender:nil];
 }
 
 #pragma mark - 尾视图
 - (void)p_bottomView
 {
+    self.bottom_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 170)];
+    self.bottom_view.backgroundColor = [UIColor whiteColor];
     
+    UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.bottom_view addSubview:view_line];
+    
+    
+    self.price_sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, CGRectGetMaxY(view_line.frame) + 5, 90, 25)];
+    self.price_sum.text = @"¥ 4000.00";
+    self.price_sum.textColor = [UIColor orangeColor];
+    self.price_sum.font = [UIFont systemFontOfSize:14];
+//    self.price_sum.backgroundColor = [UIColor orangeColor];
+    [self.bottom_view addSubview:self.price_sum];
+    
+    UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, CGRectGetMaxY(view_line.frame) + 5, 40, 25)];
+    sum.text = @"合计:";
+    sum.font = [UIFont systemFontOfSize:14];
+    [self.bottom_view addSubview:sum];
+    
+    UILabel * line_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(sum.frame) + 5, SCREEN_WIDTH, 1)];
+    line_1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.bottom_view addSubview:line_1];
+    
+    UILabel * type = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(line_1.frame) + 5, 100, 15)];
+    type.text = @"选择支付方式";
+    type.textColor = [UIColor grayColor];
+    type.font = [UIFont systemFontOfSize:12];
+    [self.bottom_view addSubview:type];
+    
+    CGFloat length_x = SCREEN_WIDTH / 3;
+    //我的钱包
+    self.btn_myPurse = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.btn_myPurse.frame = CGRectMake(15, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
+//    self.btn_myPurse.backgroundColor = [UIColor orangeColor];
+    self.btn_myPurse.selected = 0;
+    [self.bottom_view addSubview:self.btn_myPurse];
+    [self.btn_myPurse addTarget:self action:@selector(btn_myPurseAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.btn_myPurse setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    
+    UILabel * label_myPurse = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_myPurse.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) - 5, 30)];
+//    label_myPurse.backgroundColor = [UIColor orangeColor];
+    label_myPurse.text = @"我的钱包";
+    label_myPurse.font = [UIFont systemFontOfSize:12];
+    [self.bottom_view addSubview:label_myPurse];
+    
+    //支付宝
+    self.btn_zhifubo = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.btn_zhifubo.frame = CGRectMake(10 + length_x, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
+//    self.btn_zhifubo.backgroundColor = [UIColor orangeColor];
+    self.btn_zhifubo.selected = 0;
+    [self.bottom_view addSubview:self.btn_zhifubo];
+    [self.btn_zhifubo addTarget:self action:@selector(btn_zhifuboAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.btn_zhifubo setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    
+    
+    UILabel * label_zhifubo = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_zhifubo.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) , 30)];
+//    label_zhifubo.backgroundColor = [UIColor orangeColor];
+    label_zhifubo.text = @"支付宝支付";
+    label_zhifubo.font = [UIFont systemFontOfSize:12];
+    [self.bottom_view addSubview:label_zhifubo];
+    
+    //微信
+    self.btn_weixin = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.btn_weixin.frame = CGRectMake(15 + length_x * 2, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
+//    self.btn_weixin.backgroundColor = [UIColor orangeColor];
+    self.btn_weixin.selected = 0;
+    [self.bottom_view addSubview:self.btn_weixin];
+    [self.btn_weixin addTarget:self action:@selector(btn_weixinAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.btn_weixin setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    
+    UILabel * label_weixin = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_weixin.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) - 5, 30)];
+//    label_weixin.backgroundColor = [UIColor orangeColor];
+    label_weixin.text = @"微信支付";
+    label_weixin.font = [UIFont systemFontOfSize:12];
+    [self.bottom_view addSubview:label_weixin];
+    
+    //确认支付
+    self.btn_zhifuOK = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.btn_zhifuOK.frame = CGRectMake(15, CGRectGetMaxY(self.btn_zhifubo.frame) + 10, SCREEN_WIDTH - 30, 45);
+    self.btn_zhifuOK.backgroundColor = navi_bar_bg_color;
+    [self.btn_zhifuOK setTitle:@"确认支付" forState:(UIControlStateNormal)];
+    [self.btn_zhifuOK setTintColor:[UIColor whiteColor]];
+    self.btn_zhifuOK.titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.bottom_view addSubview:self.btn_zhifuOK];
+    
+    [self.btn_zhifuOK addTarget:self action:@selector(btn_zhifuOKAction:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
+#pragma mark - bottom的4个btn
 
+- (void)btn_zhifuOKAction:(UIButton *)sender
+{//做大量判断
+    NSLog(@"提交订单");
+}
 
+- (void)btn_myPurseAction:(UIButton *)sender
+{
+    if(sender.selected == 0)
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
+        sender.selected = 1;
+        
+        self.btn_zhifubo.selected = 0;
+        [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        
+        self.btn_weixin.selected = 0;
+        [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        sender.selected = 0;
+    }
+}
+
+- (void)btn_zhifuboAction:(UIButton *)sender
+{
+    if(sender.selected == 0)
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
+        sender.selected = 1;
+        
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        
+        self.btn_weixin.selected = 0;
+        [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        sender.selected = 0;
+    }
+}
+
+- (void)btn_weixinAction:(UIButton *)sender
+{
+    if(sender.selected == 0)
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
+        sender.selected = 1;
+        
+        self.btn_zhifubo.selected = 0;
+        [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        sender.selected = 0;
+    }
+}
 
 
 

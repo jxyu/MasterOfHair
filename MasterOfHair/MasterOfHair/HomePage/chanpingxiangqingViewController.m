@@ -264,8 +264,8 @@
         
         [cell addSubview:webView];
         
-        UIScrollView *tempView=(UIScrollView *)[webView.subviews objectAtIndex:0];
-        tempView.scrollEnabled=NO;
+//        UIScrollView *tempView=(UIScrollView *)[webView.subviews objectAtIndex:0];
+//        tempView.scrollEnabled=NO;
     }
     
     return cell;
