@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UILabel * head_name;
 
 @property (nonatomic, strong) UIImageView * head_diamond;
-@property (nonatomic, strong) UIImageView * head_delegate;
+@property (nonatomic, strong) UILabel * head_delegate;
 
 @property (nonatomic, strong) UIButton * head_vip;
 @property (nonatomic, strong) UIButton * head_edit;
@@ -92,9 +92,9 @@
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
     //头视图
-//    [self p_headView];
+    [self p_headView];
     
-    [self p_headView1];
+//    [self p_headView1];
     
     self.tableView.tableHeaderView = self.head_view;
 }
@@ -128,29 +128,51 @@
     [view_white addSubview:self.head_name];
     
     self.head_diamond = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(label_1.frame) + 8, 28, 28)];
-    self.head_diamond.backgroundColor = [UIColor orangeColor];
+    self.head_diamond.image = [UIImage imageNamed:@"05zuanshi03"];
     [view_white addSubview:self.head_diamond];
     
     self.head_vip = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 10, CGRectGetMaxY(label_1.frame) + 8, 70, 28);
-    self.head_vip.backgroundColor = [UIColor orangeColor];
+    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 100, 28);
+    self.head_vip.backgroundColor = [UIColor whiteColor];
+    self.head_vip.layer.cornerRadius = 5;
+    self.head_vip.layer.borderWidth = 1;
+    self.head_vip.layer.borderColor = [UIColor orangeColor].CGColor;
+    [self.head_vip setTitle:@"开通金卡会员" forState:(UIControlStateNormal)];
+    [self.head_vip setTintColor:[UIColor orangeColor]];
     [view_white addSubview:self.head_vip];
     
-    self.head_delegate = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_vip.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 60, 28)];
-    self.head_delegate.backgroundColor = [UIColor orangeColor];
+    
+    self.head_delegate = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_vip.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 60, 28)];
+//    self.head_delegate.backgroundColor = [UIColor orangeColor];
+    self.head_delegate.layer.borderColor = [UIColor redColor].CGColor;
+    self.head_delegate.layer.borderWidth = 1;
+    self.head_delegate.layer.cornerRadius = 5;
+    self.head_delegate.text = @"代理商";
+    self.head_delegate.textAlignment = NSTextAlignmentCenter;
+    self.head_delegate.textColor = [UIColor redColor];
     [view_white addSubview:self.head_delegate];
     
     
     CGFloat length_x = (SCREEN_WIDTH - CGRectGetMinX(label_1.frame) - 45) / 2;
     
     self.head_edit = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_edit.frame = CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(self.head_vip.frame) + 8, length_x, 25 * (SCREEN_WIDTH / 320));
-    self.head_edit.backgroundColor = [UIColor orangeColor];
+    self.head_edit.frame = CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(self.head_vip.frame) + 8, length_x, 27 * (SCREEN_WIDTH / 320));
+    self.head_edit.backgroundColor = [UIColor whiteColor];
+    self.head_edit.layer.cornerRadius = 5;
+    self.head_edit.layer.borderWidth = 1;
+    self.head_edit.layer.borderColor = navi_bar_bg_color.CGColor;
+    [self.head_edit setTitle:@"编辑资料" forState:(UIControlStateNormal)];
+    [self.head_edit setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_edit];
     
     self.head_cancel = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 25 * (SCREEN_WIDTH / 320));
-    self.head_cancel.backgroundColor = [UIColor orangeColor];
+    self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 27 * (SCREEN_WIDTH / 320));
+    self.head_cancel.backgroundColor = [UIColor whiteColor];
+    self.head_cancel.layer.cornerRadius = 5;
+    self.head_cancel.layer.borderWidth = 1;
+    self.head_cancel.layer.borderColor = navi_bar_bg_color.CGColor;
+    [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
+    [self.head_cancel setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_cancel];
     
     
@@ -160,19 +182,32 @@
     
     int length_x1 = (SCREEN_WIDTH - 2) / 15;
     
+    UIImageView * image1 = [[UIImageView alloc] initWithFrame:CGRectMake(1, 0, length_x1 * 4.3, 60)];
+    image1.image = [UIImage imageNamed:@"05pianbao_11"];
+    [view_mid addSubview:image1];
+    
     self.mid_btn1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4, 60);
-    self.mid_btn1.backgroundColor = [UIColor redColor];
+    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4.3, 60);
     [view_mid addSubview:self.mid_btn1];
     
+    
+    UIImageView * image2 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60)];
+    image2.image = [UIImage imageNamed:@"05ceshan_13"];
+    [view_mid addSubview:image2];
+    
     self.mid_btn2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 6, 60);
-    self.mid_btn2.backgroundColor = [UIColor cyanColor];
+    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60);
+    //    self.mid_btn2.backgroundColor = [UIColor cyanColor];
     [view_mid addSubview:self.mid_btn2];
+    
+    
+    UIImageView * image3 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60)];
+    image3.image = [UIImage imageNamed:@"05fenxiao_15"];
+    [view_mid addSubview:image3];
     
     self.mid_btn3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.mid_btn3.frame = CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60);
-    self.mid_btn3.backgroundColor = [UIColor orangeColor];
+    //    self.mid_btn3.backgroundColor = [UIColor orangeColor];
     [view_mid addSubview:self.mid_btn3];
 }
 
@@ -200,7 +235,12 @@
     
     self.head_login = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.head_login.frame = CGRectMake(CGRectGetMinX(label_title.frame), CGRectGetMaxY(label_title.frame) + 15, SCREEN_WIDTH / 3.5, 30 * SCREEN_WIDTH /375);
-    self.head_login.backgroundColor = [UIColor orangeColor];
+    self.head_login.backgroundColor = [UIColor whiteColor];
+    self.head_login.layer.cornerRadius = 5;
+    self.head_login.layer.borderColor = navi_bar_bg_color.CGColor;
+    self.head_login.layer.borderWidth = 1;
+    [self.head_login setTitle:@"请登录" forState:(UIControlStateNormal)];
+    [self.head_login setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_login];
     [self.head_login addTarget:self action:@selector(head_loginAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
@@ -211,19 +251,32 @@
     
     int length_x1 = (SCREEN_WIDTH - 2) / 15;
     
+    
+    UIImageView * image1 = [[UIImageView alloc] initWithFrame:CGRectMake(1, 0, length_x1 * 4.3, 60)];
+    image1.image = [UIImage imageNamed:@"05pianbao_11"];
+    [view_mid addSubview:image1];
+    
     self.mid_btn1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4, 60);
-    self.mid_btn1.backgroundColor = [UIColor redColor];
+    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4.3, 60);
     [view_mid addSubview:self.mid_btn1];
     
+    
+    UIImageView * image2 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60)];
+    image2.image = [UIImage imageNamed:@"05ceshan_13"];
+    [view_mid addSubview:image2];
+    
     self.mid_btn2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 6, 60);
-    self.mid_btn2.backgroundColor = [UIColor cyanColor];
+    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60);
+//    self.mid_btn2.backgroundColor = [UIColor cyanColor];
     [view_mid addSubview:self.mid_btn2];
+    
+    UIImageView * image3 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60)];
+    image3.image = [UIImage imageNamed:@"05fenxiao_15"];
+    [view_mid addSubview:image3];
     
     self.mid_btn3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.mid_btn3.frame = CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60);
-    self.mid_btn3.backgroundColor = [UIColor orangeColor];
+//    self.mid_btn3.backgroundColor = [UIColor orangeColor];
     [view_mid addSubview:self.mid_btn3];
 }
 
@@ -275,13 +328,13 @@
             if(indexPath.row == 0)
             {
                 cell.name.text = @"纹绣联盟订单";
-                //                cell.image.image = [UIImage imageNamed:@""];
+                cell.image.image = [UIImage imageNamed:@"00004"];
                 cell.arrows_switch.hidden = YES;
             }
             else
             {
                 cell.name.text = @"商城订单";
-                //                cell.image.image = [UIImage imageNamed:@""];
+                                cell.image.image = [UIImage imageNamed:@"00002"];
                 cell.arrows_switch.hidden = YES;
             }
         }
@@ -291,19 +344,19 @@
             if(indexPath.row == 0)
             {
                 cell.name.text = @"收藏的产品";
-                //                cell.image.image = [UIImage imageNamed:@""];
+                                cell.image.image = [UIImage imageNamed:@"00005"];
                 cell.arrows_switch.hidden = YES;
             }
             else if(indexPath.row == 1)
             {
                 cell.name.text = @"收藏的视频";
-                //                cell.image.image = [UIImage imageNamed:@""];
+                                cell.image.image = [UIImage imageNamed:@"000006"];
                 cell.arrows_switch.hidden = YES;
             }
             else
             {
                 cell.name.text = @"收藏的图文";
-                //                cell.image.image = [UIImage imageNamed:@""];
+                                cell.image.image = [UIImage imageNamed:@"00003"];
                 cell.arrows_switch.hidden = YES;
             }
         }
@@ -311,7 +364,7 @@
         case 2:
         {
             cell.name.text = @"申请成为代理商";
-            //                cell.image.image = [UIImage imageNamed:@""];
+                            cell.image.image = [UIImage imageNamed:@"00001"];
             cell.arrows_switch.hidden = YES;
         }
             break;
