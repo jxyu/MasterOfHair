@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIButton * head_edit;
 @property (nonatomic, strong) UIButton * head_cancel;
 
+@property (nonatomic, strong) UIView * head_view_white;
 //登陆
 @property (nonatomic, strong) UIButton * head_login;
 
@@ -92,9 +93,9 @@
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
     //头视图
-    [self p_headView];
+//    [self p_headView];
     
-//    [self p_headView1];
+    [self p_headView1];
     
     self.tableView.tableHeaderView = self.head_view;
 }
@@ -175,41 +176,13 @@
     [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
     [self.head_cancel setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_cancel];
+    self.head_view_white = view_white;
     
+    [self p_fenlei];
     
-    UIView * view_mid = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white.frame) + 5, SCREEN_WIDTH, 60)];
-    view_mid.backgroundColor = [UIColor whiteColor];
-    [self.head_view addSubview:view_mid];
-    
-    int length_x1 = (SCREEN_WIDTH - 2) / 15;
-    
-    UIImageView * image1 = [[UIImageView alloc] initWithFrame:CGRectMake(1, 0, length_x1 * 4.3, 60)];
-    image1.image = [UIImage imageNamed:@"05pianbao_11"];
-    [view_mid addSubview:image1];
-    
-    self.mid_btn1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4.3, 60);
-    [view_mid addSubview:self.mid_btn1];
-    
-    
-    UIImageView * image2 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60)];
-    image2.image = [UIImage imageNamed:@"05ceshan_13"];
-    [view_mid addSubview:image2];
-    
-    self.mid_btn2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60);
-    //    self.mid_btn2.backgroundColor = [UIColor cyanColor];
-    [view_mid addSubview:self.mid_btn2];
-    
-    
-    UIImageView * image3 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60)];
-    image3.image = [UIImage imageNamed:@"05fenxiao_15"];
-    [view_mid addSubview:image3];
-    
-    self.mid_btn3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn3.frame = CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60);
-    //    self.mid_btn3.backgroundColor = [UIColor orangeColor];
-    [view_mid addSubview:self.mid_btn3];
+    [self.mid_btn1 addTarget:self action:@selector(mid_btn1Action:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.mid_btn2 addTarget:self action:@selector(mid_btn2Action:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.mid_btn3 addTarget:self action:@selector(mid_btn3Action:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
 //这个为非登陆状态的头布局
@@ -244,41 +217,14 @@
     [self.head_login setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_login];
     [self.head_login addTarget:self action:@selector(head_loginAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.head_view_white = view_white;
     
+    [self p_fenlei];
     
-    UIView * view_mid = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white.frame) + 5, SCREEN_WIDTH, 60)];
-    view_mid.backgroundColor = [UIColor whiteColor];
-    [self.head_view addSubview:view_mid];
-    
-    int length_x1 = (SCREEN_WIDTH - 2) / 15;
-    
-    
-    UIImageView * image1 = [[UIImageView alloc] initWithFrame:CGRectMake(1, 0, length_x1 * 4.3, 60)];
-    image1.image = [UIImage imageNamed:@"05pianbao_11"];
-    [view_mid addSubview:image1];
-    
-    self.mid_btn1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4.3, 60);
-    [view_mid addSubview:self.mid_btn1];
-    
-    
-    UIImageView * image2 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60)];
-    image2.image = [UIImage imageNamed:@"05ceshan_13"];
-    [view_mid addSubview:image2];
-    
-    self.mid_btn2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.7, 60);
-//    self.mid_btn2.backgroundColor = [UIColor cyanColor];
-    [view_mid addSubview:self.mid_btn2];
-    
-    UIImageView * image3 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60)];
-    image3.image = [UIImage imageNamed:@"05fenxiao_15"];
-    [view_mid addSubview:image3];
-    
-    self.mid_btn3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.mid_btn3.frame = CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60);
-//    self.mid_btn3.backgroundColor = [UIColor orangeColor];
-    [view_mid addSubview:self.mid_btn3];
+    [self.mid_btn1 addTarget:self action:@selector(mid_LoginAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.mid_btn2 addTarget:self action:@selector(mid_LoginAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.mid_btn3 addTarget:self action:@selector(mid_LoginAction:) forControlEvents:(UIControlEventTouchUpInside)];
+
 }
 
 #pragma mark - login
@@ -298,6 +244,30 @@
     [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
     self.head_vip.userInteractionEnabled = NO;
 }
+
+//未登录时点分类
+- (void)mid_LoginAction:(UIButton *)sender
+{
+    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+    [self showViewController:loginViewController sender:nil];
+}
+
+//钱包
+- (void)mid_btn1Action:(UIButton *)sender
+{
+    NSLog(@"钱包");
+}
+//慈善基金会
+- (void)mid_btn2Action:(UIButton *)sender
+{
+    NSLog(@"慈善基金会");
+}
+//分销中心
+- (void)mid_btn3Action:(UIButton *)sender
+{
+    NSLog(@"分销中心");
+}
+
 
 #pragma mark - tableView的代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
@@ -419,6 +389,78 @@
     {
         return 13;
     }
+}
+
+#pragma mark - 3个分类
+- (void)p_fenlei
+{
+    UIView * view_mid = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.head_view_white.frame) + 5, SCREEN_WIDTH, 60)];
+    view_mid.backgroundColor = [UIColor whiteColor];
+    [self.head_view addSubview:view_mid];
+    
+    int length_x1 = (SCREEN_WIDTH - 2) / 15;
+    
+    UIView * view_white1 = [[UIView alloc] initWithFrame:CGRectMake(1, 0, length_x1 * 4.6, 60)];
+    view_white1.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:244 / 255.0 blue:230 / 255.0 alpha:1];
+    [view_mid addSubview:view_white1];
+    
+    UIImageView * image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(5, 17.5, 25, 25)];
+    image_1.image = [UIImage imageNamed:@"000000005"];
+    [view_white1 addSubview:image_1];
+    
+    UILabel * lbl_1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_1.frame) + 5, 17.5, length_x1 * 4.6 - CGRectGetMaxX(image_1.frame) - 5 , 25)];
+    //    lbl_1.backgroundColor = [UIColor orangeColor];
+    lbl_1.text = @"我的钱包";
+    lbl_1.textAlignment = NSTextAlignmentCenter;
+    lbl_1.font = [UIFont systemFontOfSize:14];
+    [view_white1 addSubview:lbl_1];
+    
+    self.mid_btn1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.mid_btn1.frame = CGRectMake(1, 0, length_x1 * 4.6, 60);
+    [view_mid addSubview:self.mid_btn1];
+    
+    
+    UIView * view_white2 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.6, 60)];
+    view_white2.backgroundColor = [UIColor colorWithRed:255 / 255.0 green:230 / 255.0 blue:241 / 255.0 alpha:1];
+    [view_mid addSubview:view_white2];
+    
+    UIImageView * image_2 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 17.5, 25, 25)];
+    image_2.image = [UIImage imageNamed:@"000000000007"];
+    [view_white2 addSubview:image_2];
+    
+    UILabel * lbl_2 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_2.frame) + 5, 17.5, length_x1 * 5.6 - CGRectGetMaxX(image_2.frame) - 5, 25)];
+    //        lbl_2.backgroundColor = [UIColor orangeColor];
+    lbl_2.text = @"慈善基金会";
+    lbl_2.textAlignment = NSTextAlignmentCenter;
+    lbl_2.font = [UIFont systemFontOfSize:14];
+    [view_white2 addSubview:lbl_2];
+    
+    self.mid_btn2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.mid_btn2.frame = CGRectMake(CGRectGetMaxX(self.mid_btn1.frame) + 1, 0, length_x1 * 5.6, 60);
+    //    self.mid_btn2.backgroundColor = [UIColor cyanColor];
+    [view_mid addSubview:self.mid_btn2];
+    
+    
+    UIView * view_white3 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60)];
+    view_white3.backgroundColor = [UIColor colorWithRed:234 / 255.0 green:254 / 255.0 blue:231 / 255.0 alpha:1];
+    [view_mid addSubview:view_white3];
+    
+    UIImageView * image_3 = [[UIImageView alloc] initWithFrame:CGRectMake(5, 17.5, 25, 25)];
+    image_3.image = [UIImage imageNamed:@"00000000000004"];
+    [view_white3 addSubview:image_3];
+    
+    UILabel * lbl_3 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_3.frame) + 5, 17.5, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2 - CGRectGetMaxX(image_3.frame) - 5, 25)];
+    //        lbl_2.backgroundColor = [UIColor orangeColor];
+    lbl_3.text = @"分销中心";
+    lbl_3.textAlignment = NSTextAlignmentCenter;
+    lbl_3.font = [UIFont systemFontOfSize:14];
+    [view_white3 addSubview:lbl_3];
+    
+    self.mid_btn3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.mid_btn3.frame = CGRectMake(CGRectGetMaxX(self.mid_btn2.frame) + 1, 0, SCREEN_WIDTH - CGRectGetMaxX(self.mid_btn2.frame) - 2, 60);
+    //    self.mid_btn3.backgroundColor = [UIColor orangeColor];
+    [view_mid addSubview:self.mid_btn3];
+
 }
 
 
