@@ -137,7 +137,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
-        image.image = [UIImage imageNamed:@"03-hezuodian"];
+        image.image = [UIImage imageNamed:@"01dian_07"];
         
         [cell addSubview:image];
         
@@ -256,11 +256,11 @@
             
         }];
         
-        UIAlertAction * action_1 = [UIAlertAction actionWithTitle:@"自取" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction * action_1 = [UIAlertAction actionWithTitle:@"到店自取" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
            UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             
-            peisong.text = @"自取";
+            peisong.text = @"到店自取";
         }];
         
         UIAlertAction * action_2 = [UIAlertAction actionWithTitle:@"同城派送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -269,10 +269,10 @@
             peisong.text = @"同城派送";
         }];
         
-        UIAlertAction * action_3 = [UIAlertAction actionWithTitle:@"快递" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction * action_3 = [UIAlertAction actionWithTitle:@"物流配送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
-            peisong.text = @"快递";
+            peisong.text = @"物流配送";
         }];
         
         UIAlertAction * action_4 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {

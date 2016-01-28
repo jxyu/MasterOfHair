@@ -27,7 +27,7 @@
 - (void)p_setupView
 {
     self.image = [[UIImageView alloc] init];
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.image];
     
     self.name = [[UILabel alloc] init];
@@ -49,7 +49,7 @@
 {
     [super layoutSubviews];
     
-    self.image.frame = CGRectMake(10, 10, 30, 30);
+    self.image.frame = CGRectMake(15, 10, 30, 30);
     
     self.name.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 15, 10, self.contentView.frame.size.width - CGRectGetMaxX(self.image.frame) - 15 - 3 - 60, 30);
     

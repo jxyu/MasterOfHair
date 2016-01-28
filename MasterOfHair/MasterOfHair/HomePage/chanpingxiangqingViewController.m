@@ -64,8 +64,9 @@
     
     [self addLeftButton:@"iconfont-fanhui"];
     
-//    [self addRightButton:@""];
-    _imgRight.backgroundColor = [UIColor orangeColor];
+    [self addRightButton:@"01shoppingCar_03"];
+    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 20 - 40, _imgRight.frame.origin.y, _imgRight.frame.size.width, _imgRight.frame.size.height);
+    //    [self addRightbuttontitle:@"签到"];
 }
 
 //返回
@@ -153,9 +154,9 @@
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
-//        image.image = [UIImage imageNamed:@""];
-        image.backgroundColor = [UIColor orangeColor];
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 6, 20, 20)];
+        image.image = [UIImage imageNamed:@"01dian_07"];
+//        image.backgroundColor = [UIColor orangeColor];
         [cell addSubview:image];
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 6, 100, 20)];
@@ -190,8 +191,10 @@
         
         
         self.btn_share = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_share.frame = CGRectMake(SCREEN_WIDTH - 50, 35 + 10, 35, 40);
-        self.btn_share.backgroundColor = [UIColor orangeColor];
+        self.btn_share.frame = CGRectMake(SCREEN_WIDTH - 50, 35 + 10, 40, 40);
+//        self.btn_share.backgroundColor = [UIColor orangeColor];
+        [self.btn_share setImage:[UIImage imageNamed:@"01share_21"] forState:(UIControlStateNormal)];
+        [self.btn_share setTintColor:[UIColor grayColor]];
         [cell addSubview:self.btn_share];
         
         [self.btn_share addTarget:self action:@selector(shareAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -288,7 +291,9 @@
 {
     self.btn_collect = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_collect.frame = CGRectMake(15, SCREEN_HEIGHT - 45 , 40, 40);
-    self.btn_collect.backgroundColor = [UIColor orangeColor];
+//    self.btn_collect.backgroundColor = [UIColor orangeColor];
+    [self.btn_collect setImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+    [self.btn_collect setTintColor:[UIColor grayColor]];
     [self.view addSubview:self.btn_collect];
     
     [self.btn_collect addTarget:self action:@selector(btn_collectAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -297,15 +302,25 @@
     
     self.btn_addShopping = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_addShopping.frame = CGRectMake(CGRectGetMaxX(self.btn_collect.frame) + 20, SCREEN_HEIGHT - 45, length_x, 40);
-    self.btn_addShopping.backgroundColor = [UIColor orangeColor];
+//    self.btn_addShopping.backgroundColor = [UIColor orangeColor];
+    self.btn_addShopping.layer.cornerRadius = 5;
+    self.btn_addShopping.layer.borderWidth = 1;
+    self.btn_addShopping.layer.borderColor = [UIColor orangeColor].CGColor;
+    [self.btn_addShopping setTitle:@"加入购物车" forState:(UIControlStateNormal)];
+    [self.btn_addShopping setTintColor:[UIColor orangeColor]];
+    self.btn_addShopping.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.btn_addShopping];
     [self.btn_addShopping addTarget:self action:@selector(btn_addShoppingAction:) forControlEvents:(UIControlEventTouchUpInside)];
 
     
-    
     self.btn_share = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_share.frame = CGRectMake(CGRectGetMaxX(self.btn_addShopping.frame) + 20, SCREEN_HEIGHT - 45, length_x, 40);
     self.btn_share.backgroundColor = [UIColor orangeColor];
+    self.btn_share.layer.cornerRadius = 5;
+    self.btn_share.layer.borderWidth = 1;
+    self.btn_share.layer.borderColor = [UIColor orangeColor].CGColor;
+    [self.btn_share setTitle:@"立即购买" forState:(UIControlStateNormal)];
+    [self.btn_share setTintColor:[UIColor whiteColor]];
     [self.view addSubview:self.btn_share];
     [self.btn_share addTarget:self action:@selector(btn_shareAction:) forControlEvents:(UIControlEventTouchUpInside)];
 }
