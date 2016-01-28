@@ -132,7 +132,7 @@
     [view_white addSubview:self.head_diamond];
     
     self.head_vip = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 100, 28);
+    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 3, CGRectGetMaxY(label_1.frame) + 8, 105, 28);
     self.head_vip.backgroundColor = [UIColor whiteColor];
     self.head_vip.layer.cornerRadius = 5;
     self.head_vip.layer.borderWidth = 1;
@@ -140,6 +140,7 @@
     [self.head_vip setTitle:@"开通金卡会员" forState:(UIControlStateNormal)];
     [self.head_vip setTintColor:[UIColor orangeColor]];
     [view_white addSubview:self.head_vip];
+    [self.head_vip addTarget:self action:@selector(head_vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
     self.head_delegate = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_vip.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 60, 28)];
@@ -286,6 +287,16 @@
     LoginViewController * loginViewController = [[LoginViewController alloc] init];
     
     [self showViewController:loginViewController sender:nil];
+}
+
+#pragma mark - 头视图
+//开通会员
+- (void)head_vipAction:(UIButton *)sender
+{
+    //成功走这个代码
+    self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
+    [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
+    self.head_vip.userInteractionEnabled = NO;
 }
 
 #pragma mark - tableView的代理

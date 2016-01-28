@@ -144,8 +144,10 @@
     
     //找回密码
     UIButton * btn_found = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 30, 10, 30, 30);
-    btn_found.backgroundColor = [UIColor orangeColor];
+    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 25, 12.5, 25, 25);
+//    btn_found.backgroundColor = [UIColor orangeColor];
+    [btn_found setImage:[UIImage imageNamed:@"06wenhao_03"] forState:(UIControlStateNormal)];
+    [btn_found setTintColor:navi_bar_bg_color];
     [view_password addSubview:btn_found];
     [btn_found addTarget:self action:@selector(btn_foundAction:) forControlEvents:(UIControlEventTouchUpInside)];
     

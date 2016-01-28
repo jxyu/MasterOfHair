@@ -137,7 +137,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
-        image.image = [UIImage imageNamed:@"03-hezuodian"];
+        image.image = [UIImage imageNamed:@"01dian_07"];
         
         [cell addSubview:image];
         

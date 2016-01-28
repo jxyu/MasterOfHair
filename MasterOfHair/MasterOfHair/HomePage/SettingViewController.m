@@ -103,13 +103,13 @@
         case 0:
         {
             cell.name.text = @"我的收货地址";
-            cell.image.image = [UIImage imageNamed:@""];
+            cell.image.image = [UIImage imageNamed:@"0000000000001"];
         }
             break;
         case 1:
         {
             cell.name.text = @"修改密码";
-            cell.image.image = [UIImage imageNamed:@""];
+            cell.image.image = [UIImage imageNamed:@"0000000000002"];
         }
             break;
         case 2:
@@ -118,31 +118,31 @@
                 case 0:
                 {
                     cell.name.text = @"会员说明";
-                    cell.image.image = [UIImage imageNamed:@""];
+                    cell.image.image = [UIImage imageNamed:@"0000000000003"];
                 }
                     break;
                 case 1:
                 {
                     cell.name.text = @"分销说明";
-                    cell.image.image = [UIImage imageNamed:@""];
+                    cell.image.image = [UIImage imageNamed:@"00000000000004"];
                 }
                     break;
                 case 2:
                 {
                     cell.name.text = @"合作开店";
-                    cell.image.image = [UIImage imageNamed:@""];
+                    cell.image.image = [UIImage imageNamed:@"03-hezuodian"];
                 }
                     break;
                 case 3:
                 {
                     cell.name.text = @"支付帮助";
-                    cell.image.image = [UIImage imageNamed:@""];
+                    cell.image.image = [UIImage imageNamed:@"000000005"];
                 }
                     break;
                 case 4:
                 {
                     cell.name.text = @"慈善基金会说明";
-                    cell.image.image = [UIImage imageNamed:@""];
+                    cell.image.image = [UIImage imageNamed:@"000000000007"];
                 }
                     break;
                 default:
@@ -153,13 +153,13 @@
         case 3:
         {
             cell.name.text = @"联系我们";
-            cell.image.image = [UIImage imageNamed:@""];
+            cell.image.image = [UIImage imageNamed:@"000000000006"];
         }
             break;
         case 4:
         {
             cell.name.text = @"发表意见";
-            cell.image.image = [UIImage imageNamed:@""];
+            cell.image.image = [UIImage imageNamed:@"0000000008"];
         }
             break;
         default:
