@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "ShoppingCarTableViewCell.h"
+
 @interface ShoppingCarViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -48,14 +49,14 @@
     _lblTitle.text = @"购物车";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
-    [self addRightbuttontitle:@"删除"];
+//    [self addRightbuttontitle:@"删除"];
 }
 
-//点击设置按钮
-- (void)clickRightButton:(UIButton *)sender
-{
-    NSLog(@"这个删除可要可不要");
-}
+////点击设置按钮
+//- (void)clickRightButton:(UIButton *)sender
+//{
+//    NSLog(@"这个删除可要可不要");
+//}
 
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
@@ -145,7 +146,7 @@
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    return 130;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,7 +199,27 @@
     NSLog(@"减");
 }
 
+#pragma mark - 左滑删除
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //做删除操作，并调接口删除后台数据
+}
 
 
 

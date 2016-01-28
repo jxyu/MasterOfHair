@@ -12,6 +12,7 @@
 #import "JCMineTableViewCell.h"
 
 #import "shouhuodizhiViewController.h"
+
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -27,6 +28,8 @@
     [self p_navi];
     
     [self p_setupView];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

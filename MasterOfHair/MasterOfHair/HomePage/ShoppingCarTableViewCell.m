@@ -39,8 +39,9 @@
     
     self.btn_select = [UIButton buttonWithType:(UIButtonTypeSystem)];
 //    self.btn_select.backgroundColor = [UIColor orangeColor];
-    [self.btn_select setImage:[UIImage imageNamed:@"iconfont-iconquanxuan"] forState:(UIControlStateNormal)];
-    [self.btn_select setImageEdgeInsets:UIEdgeInsetsMake(55, 7.5, 55, 7.5)];
+    [self.btn_select setImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+    [self.btn_select setTintColor:[UIColor grayColor]];
+    [self.btn_select setImageEdgeInsets:UIEdgeInsetsMake(55, 5, 55, 5)];
     [self.contentView addSubview:self.btn_select];
     
     //背景底
@@ -57,8 +58,8 @@
     
     
     self.title = [[UILabel alloc] init];
-    self.title.text = @"VS沙宣 修护水养洗发水/露";
-    self.title.font = [UIFont systemFontOfSize:14];
+    self.title.text = @"VS沙宣 修护水养洗发水/露护水养洗发水/露";
+    self.title.font = [UIFont systemFontOfSize:13];
     self.title.numberOfLines = 2;
 //    self.title.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.title];
@@ -68,6 +69,7 @@
     self.detail.text = @"VS沙宣 修护水养洗发水/露 VS沙宣 修护水养洗发水/露";
     self.detail.font = [UIFont systemFontOfSize:11];
     self.detail.numberOfLines = 2;
+    self.detail.textColor = [UIColor grayColor];
 //    self.detail.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.detail];
     
@@ -75,7 +77,7 @@
     self.price = [[UILabel alloc] init];
     self.price.text = @"¥2000.00";
     self.price.textAlignment = NSTextAlignmentCenter;
-    self.price.font = [UIFont systemFontOfSize:12];
+    self.price.font = [UIFont systemFontOfSize:14];
 //    self.price.backgroundColor = [UIColor cyanColor];
     self.price.textColor = [UIColor orangeColor];
     [self.contentView addSubview:self.price];
@@ -88,12 +90,9 @@
     
     
     self.btn_Subtract = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.btn_Subtract.backgroundColor = [UIColor orangeColor];
-//    [self.btn_Subtract setTitle:@"-" forState:(UIControlStateNormal)];
-//    [self.btn_Subtract setTintColor:[UIColor grayColor]];
-//    self.btn_Subtract.titleLabel.font = [UIFont systemFontOfSize:35];
-//    self.btn_Subtract.layer.borderWidth = 1;
-//    self.btn_Subtract.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.btn_Subtract.backgroundColor = [UIColor orangeColor];
+    [self.btn_Subtract setImage:[UIImage imageNamed:@"jianhao"] forState:(UIControlStateNormal)];
+    [self.btn_Subtract setTintColor:[UIColor grayColor]];
     [self.contentView addSubview:self.btn_Subtract];
     
     
@@ -106,37 +105,36 @@
     
     
     self.btn_Add = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.btn_Add.backgroundColor = [UIColor orangeColor];
+    [self.btn_Add setImage:[UIImage imageNamed:@"jiahao"] forState:(UIControlStateNormal)];
+    [self.btn_Add setTintColor:[UIColor grayColor]];
     [self.contentView addSubview:self.btn_Add];
     
 }
 
 - (void)layoutSubviews
-{
+{//130
     [super layoutSubviews];
     
     self.bg_image.frame = self.contentView.frame;
     
-    self.btn_select.frame = CGRectMake(0, 10, 35, 130);
+    self.btn_select.frame = CGRectMake(0, 0, 30, 130);
     
-//    self.white_view.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame), 10, SCREEN_WIDTH - CGRectGetMaxX(self.btn_select.frame) - 10, 130);
+    self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 5, 15, 100, 100);
     
-    self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 10, 20, 110, 110);
+    self.title.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, 15, self.contentView.frame.size.width - 15 - CGRectGetMaxX(self.image.frame), 35);
     
-    self.title.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, 20, self.contentView.frame.size.width - 20 - CGRectGetMaxX(self.image.frame), 35);
+    self.detail.frame = CGRectMake(CGRectGetMinX(self.title.frame), CGRectGetMaxY(self.title.frame) + 1, CGRectGetWidth(self.title.frame), 30);
     
-    self.detail.frame = CGRectMake(CGRectGetMinX(self.title.frame), CGRectGetMaxY(self.title.frame) + 5, CGRectGetWidth(self.title.frame), 30);
+    self.price.frame = CGRectMake(CGRectGetMinX(self.title.frame) - 10, CGRectGetMaxY(self.detail.frame) + 5, 80, 30);
     
-    self.price.frame = CGRectMake(CGRectGetMinX(self.title.frame) - 10, CGRectGetMaxY(self.detail.frame) + 8, 70, 30);
-    
-    self.label_X.frame = CGRectMake(CGRectGetMaxX(self.price.frame) + 1, CGRectGetMaxY(self.detail.frame) + 8.5, 10, 30);
+    self.label_X.frame = CGRectMake(CGRectGetMaxX(self.price.frame) + 1, CGRectGetMaxY(self.detail.frame) + 5.5, 10, 30);
     
     
-    self.btn_Subtract.frame = CGRectMake(CGRectGetMaxX(self.label_X.frame) + 1, CGRectGetMaxY(self.detail.frame) + 10, 25, 25);
+    self.btn_Subtract.frame = CGRectMake(CGRectGetMaxX(self.label_X.frame) + 5, CGRectGetMaxY(self.detail.frame) + 5, 30, 30);
     
-    self.number.frame = CGRectMake(CGRectGetMaxX(self.btn_Subtract.frame), CGRectGetMinY(self.btn_Subtract.frame), 25, 25);
+    self.number.frame = CGRectMake(CGRectGetMaxX(self.btn_Subtract.frame), CGRectGetMinY(self.btn_Subtract.frame), 25, 30);
     
-    self.btn_Add.frame = CGRectMake(CGRectGetMaxX(self.number.frame), CGRectGetMinY(self.btn_Subtract.frame), 25, 25);
+    self.btn_Add.frame = CGRectMake(CGRectGetMaxX(self.number.frame), CGRectGetMinY(self.btn_Subtract.frame), 30, 30);
     
 }
 

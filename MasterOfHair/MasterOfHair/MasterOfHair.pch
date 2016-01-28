@@ -18,7 +18,8 @@
 #import "CommonDef.h"
 #import "MJRefresh.h"
 #import "DataProvider.h"
-
-
+#import "Single_Model.h"
+#import "Store_Model.h"
+#import "Commodity_Model.h"
 
 #endif /* MasterOfHair_pch */
