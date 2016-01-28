@@ -252,42 +252,42 @@
     //6张图
     UIImageView * view1 = [[UIImageView alloc] init];
     view1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
-    view1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",6]];
+    [view1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view1];
     
     UIImageView * view2 = [[UIImageView alloc] init];
     view2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, 200);
-    view2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",1]];
+    [view2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view2];
     
     UIImageView * view3 = [[UIImageView alloc] init];
     view3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, 200);
-    view3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",2]];
+    [view3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view3];
     
     UIImageView * view4 = [[UIImageView alloc] init];
     view4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, 200);
-    view4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",3]];
+    [view4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view4];
     
     UIImageView * view5 = [[UIImageView alloc] init];
     view5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, 200);
-    view5.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",4]];
+    [view5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view5];
     
     UIImageView * view6 = [[UIImageView alloc] init];
     view6.frame = CGRectMake(SCREEN_WIDTH * 5 , 0 , SCREEN_WIDTH, 200);
-    view6.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",5]];
+    [view6 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view6];
     
     UIImageView * view7 = [[UIImageView alloc] init];
     view7.frame = CGRectMake(SCREEN_WIDTH * 6 , 0 , SCREEN_WIDTH, 200);
-    view7.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",6]];
+    [view7 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view7];
     
     UIImageView * view8 = [[UIImageView alloc] init];
     view8.frame = CGRectMake(SCREEN_WIDTH * 7 , 0 , SCREEN_WIDTH, 200);
-    view8.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpeg",1]];
+    [view8 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     [self.lunbo_scrollView addSubview:view8];
     
     //开始到第一个图

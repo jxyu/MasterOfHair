@@ -43,11 +43,11 @@
     //隐藏系统tabbar
     self.tabBar.hidden = YES;
     self.hidesBottomBarWhenPushed = YES;
- //    NSArray *arrayImages_H = [[NSArray alloc] initWithObjects:@"home_H@2x.png",@"classes_H@2x.png" ,@"cate_H@2x.png",@"user_H@2x.png", nil];
- 	NSArray *arrayImages = [[NSArray alloc] initWithObjects:@"hewuzhe@2x.png",@"helianmeng@2x.png",@"hedongli@2x.png",@"hezhuangbei@2x.png",@"more@2x.png",  nil];
+    NSArray *arrayImages_H = [[NSArray alloc] initWithObjects:@"Index_H@2x.png",@"shangxueyuan_H@2x.png" ,@"shangcheng_H@2x.png",@"shopCar_H@2x.png",@"Mine_H@2x.png", nil];
+ 	NSArray *arrayImages = [[NSArray alloc] initWithObjects:@"Index@2x.png",@"shangxueyuan@2x.png",@"shangcheng@2x.png",@"shopCar@2x.png",@"Mine@2x.png",  nil];
  
     _tabBarBG = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - TabBar_HEIGHT, SCREEN_WIDTH, TabBar_HEIGHT)];
-      _tabBarBG.backgroundColor = navi_bar_bg_color;
+      _tabBarBG.backgroundColor = [UIColor whiteColor];
     
     //_tabBarBG.backgroundColor=[UIColor clearColor];
     //_tabBarBG.alpha=0.9;
@@ -64,7 +64,7 @@
     
 		UIButton * btnTabBar = [[UIButton alloc] initWithFrame:frame];
 		 [btnTabBar setImage: [UIImage imageWithBundleName:[arrayImages objectAtIndex:i]] forState:UIControlStateNormal];
-         //[btnTabBar setImage:[UIImage imageWithBundleName:[arrayImages_H objectAtIndex:i]]forState:UIControlStateSelected] ;
+         [btnTabBar setImage:[UIImage imageWithBundleName:[arrayImages_H objectAtIndex:i]]forState:UIControlStateSelected] ;
         
 //        [btnTabBar setTitle:[NSString stringWithFormat:@"%d",i] forState:UIControlStateNormal];
 //        [btnTabBar setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -139,15 +139,12 @@
 //点击tab页时的响应
 -(void)onTabButtonPressed:(UIButton *)sender
 {
-    
-    sender.backgroundColor = YellowBlock;
     for(int i = 0;i<btnArr.count;i++)
     {
         UIButton *tempBtn;
         if(i == sender.tag-1000)
             continue;
         tempBtn = btnArr[i];
-        tempBtn.backgroundColor = navi_bar_bg_color;
     }
     
     if (_btnSelected == sender)
