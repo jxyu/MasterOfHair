@@ -470,52 +470,70 @@
             case 0:
             {
                 cell.name.text = @"商学院";
-                cell.imageView.image = [UIImage imageNamed:@""];
+                cell.imageView.image = [UIImage imageNamed:@"01_29"];
             }
                 break;
             case 1:
             {
                 cell.name.text = @"商城";
+                cell.imageView.image = [UIImage imageNamed:@"01_32"];
+
             }
                 break;
             case 2:
             {
                 cell.name.text = @"纹绣联盟";
+                cell.imageView.image = [UIImage imageNamed:@"01_35"];
+
             }
                 break;
             case 3:
             {
                 cell.name.text = @"名师名店";
+                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+
             }
                 break;
             case 4:
             {
                 cell.name.text = @"招聘";
+                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+
             }
                 break;
             case 5:
             {
                 cell.name.text = @"美业频道";
+                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+
             }
                 break;
             case 6:
             {
                 cell.name.text = @"说说";
+                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+
             }
                 break;
             case 7:
             {
                 cell.name.text = @"商盟";
+                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+
             }
                 break;
             case 8:
             {
                 cell.name.text = @"基金会";
+                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+
             }
                 break;
             case 9:
             {
                 cell.name.text = @"课程表名";
+                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+
             }
                 break;
             default:
