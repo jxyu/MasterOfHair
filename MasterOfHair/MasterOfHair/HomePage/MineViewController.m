@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 
 #import "cishanjijinhuiViewController.h"
+#import "FenxiaozhongxinViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -135,7 +136,7 @@
     [view_white addSubview:self.head_diamond];
     
     self.head_vip = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 3, CGRectGetMaxY(label_1.frame) + 8, 105, 28);
+    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 3, CGRectGetMaxY(label_1.frame) + 8, 100, 28);
     self.head_vip.backgroundColor = [UIColor whiteColor];
     self.head_vip.layer.cornerRadius = 5;
     self.head_vip.layer.borderWidth = 1;
@@ -270,6 +271,26 @@
 - (void)mid_btn3Action:(UIButton *)sender
 {
     NSLog(@"分销中心");
+    if(0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        FenxiaozhongxinViewController * fenxiaozhongxinViewController = [[FenxiaozhongxinViewController alloc] init];
+        
+        [self showViewController:fenxiaozhongxinViewController sender:nil];
+    }
 }
 
 
