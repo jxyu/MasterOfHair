@@ -1,23 +1,25 @@
 //
-//  ZhifuViewController.m
+//  ChongzhiViewController.m
 //  MasterOfHair
 //
 //  Created by 鞠超 on 16/1/29.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "ZhifuViewController.h"
+#import "ChongzhiViewController.h"
 
-@interface ZhifuViewController ()
+@interface ChongzhiViewController ()
 
-@property (nonatomic, strong) UIButton * btn_zhifu;
+@property (nonatomic, strong) UITextField * money;
 
+//btn
 @property (nonatomic, strong) UIButton * btn_zhifubo;
 @property (nonatomic, strong) UIButton * btn_weixin;
+@property (nonatomic, strong) UIButton * btn_zhifu;
 
 @end
 
-@implementation ZhifuViewController
+@implementation ChongzhiViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,7 +37,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"支付"];
+    _lblTitle.text = [NSString stringWithFormat:@"充值"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
@@ -53,37 +55,34 @@
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
-#pragma mark - 布局
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.money resignFirstResponder];
+}
 
+#pragma mark - 布局
 - (void)p_setupView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    UIView * view_1 = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 10, SCREEN_WIDTH, 50)];
+    
+    UIView * view_1 = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 5, SCREEN_WIDTH, 50)];
     view_1.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_1];
     
-    self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 30)];
-    self.name.text = @"课程名称";
-    [view_1 addSubview:self.name];
+    UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 70, 30)];
+    label1.text = @"输入金额";
+//    label1.backgroundColor = [UIColor orangeColor];
+    [view_1 addSubview:label1];
     
-
-    UIView * view_2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 2, SCREEN_WIDTH, 50)];
-    view_2.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:view_2];
-    
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 50, 30)];
-    label.text = @"总价:";
-    [view_2 addSubview:label];
-    
-    self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(label.frame) - 20, 30)];
-    self.price.text = @"5000元";
-    self.price.textColor = [UIColor orangeColor];
-    self.price.textAlignment = NSTextAlignmentRight;
-    [view_2 addSubview:self.price];
+    self.money = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label1.frame) + 15, 10, SCREEN_WIDTH - CGRectGetMaxX(label1.frame) - 30, 30)];
+    self.money.placeholder = @"请输入充值金额";
+    self.money.clearButtonMode = UITextFieldViewModeAlways;
+    self.money.keyboardType = UIKeyboardTypeDecimalPad;
+    [view_1 addSubview:self.money];
     
     
-    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_2.frame) + 10, SCREEN_WIDTH, 65)];
+    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 10, SCREEN_WIDTH, 65)];
     view_3.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_3];
     
@@ -129,7 +128,7 @@
     self.btn_zhifu = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_zhifu.frame = CGRectMake(15, SCREEN_HEIGHT - 55, SCREEN_WIDTH - 30, 45);
     self.btn_zhifu.backgroundColor = navi_bar_bg_color;
-    [self.btn_zhifu setTitle:@"确认支付" forState:(UIControlStateNormal)];
+    [self.btn_zhifu setTitle:@"立即充值" forState:(UIControlStateNormal)];
     [self.btn_zhifu setTintColor:[UIColor whiteColor]];
     self.btn_zhifu.titleLabel.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.btn_zhifu];
@@ -141,7 +140,23 @@
 #pragma mark - 支付
 - (void)btn_zhifuAction:(UIButton *)sender
 {
-    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
+    [self.money resignFirstResponder];
+    
+    if([self.money.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入充值金额" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -162,6 +177,7 @@
     
 }
 
+#pragma mark - btn点击方法
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
     if(sender.selected == 0)
@@ -195,12 +211,6 @@
         sender.selected = 0;
     }
 }
-
-
-
-
-
-
 
 
 

@@ -12,6 +12,8 @@
 #import "SettingViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+
+#import "cishanjijinhuiViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -93,9 +95,9 @@
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
     //头视图
-//    [self p_headView];
+    [self p_headView];
     
-    [self p_headView1];
+//    [self p_headView1];
     
     self.tableView.tableHeaderView = self.head_view;
 }
@@ -260,7 +262,9 @@
 //慈善基金会
 - (void)mid_btn2Action:(UIButton *)sender
 {
-    NSLog(@"慈善基金会");
+//    NSLog(@"慈善基金会");
+    cishanjijinhuiViewController * cishanjijinhui = [[cishanjijinhuiViewController alloc] init];
+    [self showViewController:cishanjijinhui sender:nil];
 }
 //分销中心
 - (void)mid_btn3Action:(UIButton *)sender

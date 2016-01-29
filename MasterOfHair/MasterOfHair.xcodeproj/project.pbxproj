@@ -83,6 +83,10 @@
 		7BAABAEB1C5A056500C14DF8 /* kechengmingchengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAABAEA1C5A056500C14DF8 /* kechengmingchengViewController.m */; };
 		7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */; };
 		7BB26FD41C5AF01E001D332E /* ZhifuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FD31C5AF01E001D332E /* ZhifuViewController.m */; };
+		7BB26FD81C5AFD8A001D332E /* cishanjijinhuiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FD71C5AFD8A001D332E /* cishanjijinhuiViewController.m */; };
+		7BB26FDB1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FDA1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m */; };
+		7BB26FDE1C5B15FB001D332E /* ChongzhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FDD1C5B15FB001D332E /* ChongzhiViewController.m */; };
+		7BB26FE11C5B3273001D332E /* ShenqingtixianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FE01C5B3273001D332E /* ShenqingtixianViewController.m */; };
 		7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */; };
 		7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */; };
 		7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */; };
@@ -309,6 +313,14 @@
 		7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStroeCollectionViewCell.m; sourceTree = "<group>"; };
 		7BB26FD21C5AF01E001D332E /* ZhifuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhifuViewController.h; sourceTree = "<group>"; };
 		7BB26FD31C5AF01E001D332E /* ZhifuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhifuViewController.m; sourceTree = "<group>"; };
+		7BB26FD61C5AFD8A001D332E /* cishanjijinhuiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cishanjijinhuiViewController.h; sourceTree = "<group>"; };
+		7BB26FD71C5AFD8A001D332E /* cishanjijinhuiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cishanjijinhuiViewController.m; sourceTree = "<group>"; };
+		7BB26FD91C5B0F14001D332E /* cishanjijinhuiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cishanjijinhuiTableViewCell.h; sourceTree = "<group>"; };
+		7BB26FDA1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cishanjijinhuiTableViewCell.m; sourceTree = "<group>"; };
+		7BB26FDC1C5B15FB001D332E /* ChongzhiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongzhiViewController.h; sourceTree = "<group>"; };
+		7BB26FDD1C5B15FB001D332E /* ChongzhiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongzhiViewController.m; sourceTree = "<group>"; };
+		7BB26FDF1C5B3273001D332E /* ShenqingtixianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShenqingtixianViewController.h; sourceTree = "<group>"; };
+		7BB26FE01C5B3273001D332E /* ShenqingtixianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShenqingtixianViewController.m; sourceTree = "<group>"; };
 		7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulianmengViewController.h; sourceTree = "<group>"; };
 		7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulianmengViewController.m; sourceTree = "<group>"; };
 		7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuFactoryTableViewCell.h; sourceTree = "<group>"; };
@@ -646,8 +658,8 @@
 		7BA596881C4E216D00DBC69D /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				7BAABAE01C59FB7D00C14DF8 /* kechengbaoming */,
 				7BA5968E1C4E231500DBC69D /* Main */,
+				7BAABAE01C59FB7D00C14DF8 /* kechengbaoming */,
 				7BCD55231C55D2E700F32F16 /* wenxiulianmeng */,
 				7BCD55241C55D37400F32F16 /* mingshimingdian */,
 				7BF67F081C51B7D2005FA5C4 /* LocationViewController.h */,
@@ -688,6 +700,7 @@
 		7BA5968D1C4E218800DBC69D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				7BB26FD51C5AFD71001D332E /* cishanjijinhui */,
 				7BA5969B1C4E24C000DBC69D /* Main */,
 				7B29EFAD1C570CAA003A020B /* shouhudizhi */,
 				7B3F1A371C4F101900783F3B /* SettingViewController.h */,
@@ -829,6 +842,21 @@
 				7BB26FD31C5AF01E001D332E /* ZhifuViewController.m */,
 			);
 			name = kechengbaoming;
+			sourceTree = "<group>";
+		};
+		7BB26FD51C5AFD71001D332E /* cishanjijinhui */ = {
+			isa = PBXGroup;
+			children = (
+				7BB26FD61C5AFD8A001D332E /* cishanjijinhuiViewController.h */,
+				7BB26FD71C5AFD8A001D332E /* cishanjijinhuiViewController.m */,
+				7BB26FD91C5B0F14001D332E /* cishanjijinhuiTableViewCell.h */,
+				7BB26FDA1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m */,
+				7BB26FDC1C5B15FB001D332E /* ChongzhiViewController.h */,
+				7BB26FDD1C5B15FB001D332E /* ChongzhiViewController.m */,
+				7BB26FDF1C5B3273001D332E /* ShenqingtixianViewController.h */,
+				7BB26FE01C5B3273001D332E /* ShenqingtixianViewController.m */,
+			);
+			name = cishanjijinhui;
 			sourceTree = "<group>";
 		};
 		7BCD55231C55D2E700F32F16 /* wenxiulianmeng */ = {
@@ -1529,8 +1557,10 @@
 				802552A71C57442B00CFF875 /* README.md in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
 				7BB26FD41C5AF01E001D332E /* ZhifuViewController.m in Sources */,
+				7BB26FDB1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m in Sources */,
 				7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */,
 				802552AB1C57442B00CFF875 /* SCContext.m in Sources */,
+				7BB26FE11C5B3273001D332E /* ShenqingtixianViewController.m in Sources */,
 				802552AD1C57442B00CFF875 /* SCFilterAnimation.m in Sources */,
 				802553051C574F7100CFF875 /* MJRefreshAutoGifFooter.m in Sources */,
 				7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */,
@@ -1541,6 +1571,7 @@
 				7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */,
 				802552FF1C574F7100CFF875 /* MBProgressHUD.m in Sources */,
 				802552B91C57442B00CFF875 /* SCRecordSession.m in Sources */,
+				7BB26FDE1C5B15FB001D332E /* ChongzhiViewController.m in Sources */,
 				802552B71C57442B00CFF875 /* SCRecorderTools.m in Sources */,
 				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
 				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
@@ -1598,6 +1629,7 @@
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				802552C01C57442B00CFF875 /* CALayer+AddUIColor.m in Sources */,
 				802552AC1C57442B00CFF875 /* SCFilter.m in Sources */,
+				7BB26FD81C5AFD8A001D332E /* cishanjijinhuiViewController.m in Sources */,
 				8043C6FB1C4E0C0900369EEF /* FirstScrollController.m in Sources */,
 				7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */,
 				7BCD552A1C55EFC200F32F16 /* chanpingxiangqingViewController.m in Sources */,

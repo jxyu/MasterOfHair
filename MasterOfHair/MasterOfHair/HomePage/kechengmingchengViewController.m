@@ -114,7 +114,7 @@
     self.image.backgroundColor = [UIColor orangeColor];
     [self.scrollView addSubview:self.image];
     
-    NSString * str = @"sdjksjdksjdkjskdjskkjskdjksjdksjdkjskdjskkdjksjdksjdkjskdjskkkdjksjdksjdkjskdjskjskdjksjdksjdksjdkjskdjsk";
+    NSString * str = @"sdjksjdksjdkjskdjskkjskdjksjdksjdkjskdjskkdjksjdksjdkjskdjskkkdjksjdksjdkjskdjskjskdjksjdksjdksjdkj+++++++++++++++++++++++++++++++++++++++++++++++++skdjsk";
     CGFloat height = [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
     
     self.detail = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.image.frame) + 15, SCREEN_WIDTH - 20, height)];

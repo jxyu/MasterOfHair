@@ -229,7 +229,6 @@
         
         [weakSelf loadNewData];
     }];
-
 }
 
 //tableView代理
