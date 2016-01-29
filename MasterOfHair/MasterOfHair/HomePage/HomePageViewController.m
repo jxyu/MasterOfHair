@@ -20,7 +20,7 @@
 #import "wenxiulianmengViewController.h"
 #import "MingshiViewController.h"
 #import "chanpingxiangqingViewController.h"
-
+#import "KechengbaomingViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -615,7 +615,8 @@
                 break;
             case 9:
             {
-                
+                KechengbaomingViewController * kechengbaomingViewController = [[KechengbaomingViewController alloc] init];
+                [self showViewController:kechengbaomingViewController sender:nil];
             }
                 break;
             default:
