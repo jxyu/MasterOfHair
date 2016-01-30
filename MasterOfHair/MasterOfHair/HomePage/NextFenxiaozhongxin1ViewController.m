@@ -9,7 +9,9 @@
 #import "NextFenxiaozhongxin1ViewController.h"
 
 #import "NextFenxiaoTableViewCell.h"
-@interface NextFenxiaozhongxin1ViewController ()
+@interface NextFenxiaozhongxin1ViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView * tableView;
 
 @end
 
@@ -54,6 +56,46 @@
 - (void)p_setupView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    //注册
+    [self.tableView registerClass:[NextFenxiaoTableViewCell class] forCellReuseIdentifier:@"cell_nextFenxiao"];
+}
+
+#pragma mark - tableView代理
+
+- (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 11;
+}
+
+- (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 110;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NextFenxiaoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_nextFenxiao" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

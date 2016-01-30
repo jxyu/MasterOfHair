@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "ShoppingCarTableViewCell.h"
+#import "querendingdanViewController.h"
 
 @interface ShoppingCarViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -180,7 +181,9 @@
 //结算
 - (void)bottom_clearingAction:(UIButton *)sender
 {
-    NSLog(@"结算所有选中的商品");
+//    NSLog(@"结算所有选中的商品");
+    querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+    [self showViewController:querendingdan sender:nil];
 }
 
 #pragma mark - cell的点击事件
