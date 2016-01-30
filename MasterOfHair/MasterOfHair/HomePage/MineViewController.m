@@ -15,6 +15,7 @@
 
 #import "cishanjijinhuiViewController.h"
 #import "FenxiaozhongxinViewController.h"
+#import "QianbaoViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -258,7 +259,9 @@
 //钱包
 - (void)mid_btn1Action:(UIButton *)sender
 {
-    NSLog(@"钱包");
+//    NSLog(@"钱包");
+    QianbaoViewController * qianbaoViewController = [[QianbaoViewController alloc] init];
+    [self showViewController:qianbaoViewController sender:nil];
 }
 //慈善基金会
 - (void)mid_btn2Action:(UIButton *)sender

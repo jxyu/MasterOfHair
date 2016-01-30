@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
 		7B0433C11C5C47150052F4AC /* NextMingshiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C01C5C47150052F4AC /* NextMingshiViewController.m */; };
+		7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */; };
+		7B0433C81C5C67AC0052F4AC /* QianbaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */; };
+		7B0433CB1C5C859B0052F4AC /* NextqianbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */; };
 		7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */; };
 		7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */; };
 		7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */; };
@@ -222,6 +225,12 @@
 		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0433BF1C5C47150052F4AC /* NextMingshiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMingshiViewController.h; sourceTree = "<group>"; };
 		7B0433C01C5C47150052F4AC /* NextMingshiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMingshiViewController.m; sourceTree = "<group>"; };
+		7B0433C31C5C5E1A0052F4AC /* QianbaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianbaoViewController.h; sourceTree = "<group>"; };
+		7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianbaoViewController.m; sourceTree = "<group>"; };
+		7B0433C61C5C67AB0052F4AC /* QianbaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianbaoTableViewCell.h; sourceTree = "<group>"; };
+		7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianbaoTableViewCell.m; sourceTree = "<group>"; };
+		7B0433C91C5C859B0052F4AC /* NextqianbaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextqianbaoViewController.h; sourceTree = "<group>"; };
+		7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextqianbaoViewController.m; sourceTree = "<group>"; };
 		7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectshouhuoViewController.h; sourceTree = "<group>"; };
 		7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectshouhuoViewController.m; sourceTree = "<group>"; };
 		7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_03.png"; sourceTree = "<group>"; };
@@ -569,6 +578,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B0433C21C5C5DC70052F4AC /* qianbao */ = {
+			isa = PBXGroup;
+			children = (
+				7B0433C31C5C5E1A0052F4AC /* QianbaoViewController.h */,
+				7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */,
+				7B0433C61C5C67AB0052F4AC /* QianbaoTableViewCell.h */,
+				7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */,
+				7B0433C91C5C859B0052F4AC /* NextqianbaoViewController.h */,
+				7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */,
+			);
+			name = qianbao;
+			sourceTree = "<group>";
+		};
 		7B142DC91C584D8900B32809 /* gouwuliucheng */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B0433C21C5C5DC70052F4AC /* qianbao */,
 				7BB26FE21C5B3723001D332E /* fenxiaozhongxin */,
 				7BB26FD51C5AFD71001D332E /* cishanjijinhui */,
 				7B29EFAD1C570CAA003A020B /* shouhudizhi */,
@@ -1583,6 +1606,7 @@
 				802553101C574F7100CFF875 /* UIScrollView+MJExtension.m in Sources */,
 				802553021C574F7100CFF875 /* MJRefreshComponent.m in Sources */,
 				802553071C574F7100CFF875 /* MJRefreshAutoStateFooter.m in Sources */,
+				7B0433C81C5C67AC0052F4AC /* QianbaoTableViewCell.m in Sources */,
 				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				802552BA1C57442B00CFF875 /* SCRecordSessionSegment.m in Sources */,
 				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
@@ -1600,6 +1624,7 @@
 				802552BE1C57442B00CFF875 /* SCVideoPlayerView.m in Sources */,
 				802553001C574F7100CFF875 /* MJRefreshAutoFooter.m in Sources */,
 				802552BD1C57442B00CFF875 /* SCVideoConfiguration.m in Sources */,
+				7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */,
 				802552A81C57442B00CFF875 /* SCAssetExportSession.m in Sources */,
 				802552A71C57442B00CFF875 /* README.md in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
@@ -1637,6 +1662,7 @@
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				7BAABADC1C59F14F00C14DF8 /* Store_Model.m in Sources */,
 				7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */,
+				7B0433CB1C5C859B0052F4AC /* NextqianbaoViewController.m in Sources */,
 				7BAABAD91C59EDD100C14DF8 /* Single_Model.m in Sources */,
 				7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */,
 				802553011C574F7100CFF875 /* MJRefreshBackFooter.m in Sources */,
