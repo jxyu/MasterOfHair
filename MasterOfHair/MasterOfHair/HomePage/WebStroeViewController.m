@@ -12,57 +12,43 @@
 #import "AppDelegate.h"
 #import "LocationViewController.h"
 #import "SearchViewController.h"
-#import "FactroySearchViewController.h"
 
 #import "chanpingxiangqingViewController.h"
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-//上面的两个btn
-@property (nonatomic, strong) UIView * top_white;
-@property (nonatomic, strong) UIButton * top_btnDelegate;
-@property (nonatomic, strong) UIButton * top_btnFactory;
-@property (nonatomic, strong) UIView * top_viewDelegate;
-@property (nonatomic, strong) UIView * top_viewFactory;
-
-
-//
+//tableView
 @property (nonatomic, strong) UITableView * tableView;
-//是哪个按钮
-@property (nonatomic, assign) BOOL isFactory;
-//几组
-@property (nonatomic, assign) NSInteger number_delegate;
-@property (nonatomic, assign) NSInteger number_factory;
 
-//代理商
+//collectionView
+@property (nonatomic, strong) UICollectionView * stroe_collectionView;
+
+//头视图
+@property (nonatomic, strong) UIView * head_view;
+//轮播图
+@property (nonatomic, strong) UIScrollView * lunbo_scrollView;
+@property (nonatomic, strong) UIPageControl * lunbo_pageControl;
+@property (nonatomic, strong) NSTimer * lunbo_timer;
+@property (nonatomic, assign) BOOL isplay;
+//搜索......
 @property (nonatomic, strong) UIView * headview_Delegate;
-
 @property (nonatomic, strong) UIButton * delegate_address;
 @property (nonatomic, strong) UIButton * delegate_class;
 @property (nonatomic, strong) UIButton * delegate_search;
 
-//厂家
-@property (nonatomic, strong) UIView * headview_Factory;
-
-@property (nonatomic, strong) UIButton * factory_class;
-@property (nonatomic, strong) UIButton * factory_search;
-
-//
-@property (nonatomic, strong) UICollectionView * stroe_collectionView;
+//测试
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
 @implementation WebStroeViewController
 
-#warning 可能后期加数据的时候要改
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self p_navi];
     
     [self p_setupView];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -84,154 +70,46 @@
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
-
-#pragma mark - 总布局
+#pragma mark - 布局
 - (void)p_setupView
 {
-    
-    self.number_delegate = 1;
-    self.number_factory = 1;
-    
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.isFactory = NO;
     
-    [self p_topView];
-    
-    [self p_tableView];
-    
-    [self example01];
-    [self example02];
-
-}
-
-#pragma mark - topView
-- (void)p_topView
-{
-    self.top_white = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 50)];
-    self.top_white.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.top_white];
-    
-    int length_x = SCREEN_WIDTH / 2;
-    
-    //代理商
-    self.top_btnDelegate = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.top_btnDelegate.frame = CGRectMake(0, 0, length_x, 50);
-    [self.top_btnDelegate setTitle:@"代理商" forState:(UIControlStateNormal)];
-    [self.top_btnDelegate setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    self.top_btnDelegate.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.top_white addSubview:self.top_btnDelegate];
-    
-    [self.top_btnDelegate addTarget:self action:@selector(top_btnDelegateAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    
-    self.top_viewDelegate = [[UIView alloc] initWithFrame:CGRectMake(length_x / 2 - 40, 48, 80, 2)];
-    self.top_viewDelegate.backgroundColor = navi_bar_bg_color;
-    [self.top_btnDelegate addSubview:self.top_viewDelegate];
-    
-    
-    //厂家
-    self.top_btnFactory = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.top_btnFactory.frame = CGRectMake(length_x, 0, length_x, 50);
-    [self.top_btnFactory setTitle:@"厂家" forState:(UIControlStateNormal)];
-    [self.top_btnFactory setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    self.top_btnFactory.titleLabel.font = [UIFont systemFontOfSize:19];
-    [self.top_white addSubview:self.top_btnFactory];
-    
-    [self.top_btnFactory addTarget:self action:@selector(top_btnFactoryAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    self.top_viewFactory = [[UIView alloc] initWithFrame:CGRectMake(length_x / 2 - 40, 48, 80, 2)];
-    self.top_viewFactory.backgroundColor = navi_bar_bg_color;
-    [self.top_btnFactory addSubview:self.top_viewFactory];
-    self.top_viewFactory.hidden = YES;
-}
-
-#pragma mark - 代理商 和 厂家的btn
-//代理商的btn
-- (void)top_btnDelegateAction:(UIButton *)sender
-{
-    //变颜色
-    [self.top_btnDelegate setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    self.top_viewDelegate.hidden = NO;
-    
-    [self.top_btnFactory setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    self.top_viewFactory.hidden = YES;
-    
-    self.isFactory = NO;
-    [self example01];
-    //变头视图
-    [self p_head_delegate];
-    self.tableView.tableHeaderView = self.headview_Delegate;
-    
-    [self.tableView reloadData];
-}
-
-//厂家的btn
-- (void)top_btnFactoryAction:(UIButton *)sender
-{
-    //变颜色
-    [self.top_btnDelegate setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    self.top_viewDelegate.hidden = YES;
-    
-    [self.top_btnFactory setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    self.top_viewFactory.hidden = NO;
-    
-    self.isFactory = YES;
-    [self example01];
-    //变头视图
-    [self p_head_factory];
-    self.tableView.tableHeaderView = self.headview_Factory;
-
-    [self.tableView reloadData];
-}
-
-#pragma mark - tableView
-- (void)p_tableView
-{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.top_white.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.top_white.frame) - 49) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) style:(UITableViewStylePlain)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:self.tableView];
     
-    self.tableView.tableFooterView = [[UIView alloc] init];
     //头视图
-    [self p_head_delegate];
-    self.tableView.tableHeaderView = self.headview_Delegate;
-
+    [self p_headView];
+    self.tableView.tableHeaderView = self.head_view;
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
     //注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_WebStroe"];
-    __weak __typeof(self) weakSelf = self;
     
+    __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        weakSelf.number_delegate = 1;
-        weakSelf.number_factory = 1;
+        self.page = 1;
         
         [weakSelf.tableView reloadData];
-        
         [weakSelf loadNewData];
-        
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
-        if(weakSelf.isFactory == YES)
-        {
-            weakSelf.number_factory ++;
-        }
-        else
-        {
-            weakSelf.number_delegate ++;
-        }
+        self.page ++;
         
         [weakSelf.tableView reloadData];
-        
         [weakSelf loadNewData];
     }];
 }
 
-//tableView代理
+#pragma mark - tableView代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -239,15 +117,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(self.isFactory == NO)
-    {
-        return self.number_delegate;
-    }
-    else
-    {
-        return self.number_factory;
-    }
-    
+    return self.page;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -265,7 +135,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-//    [self p_collection];
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 4;
@@ -285,17 +154,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-#pragma mark - collection
-- (void)p_collection
-{
-    
-}
-
+#pragma mark - collection代理
 //代理
 - (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -311,25 +170,41 @@
 {
     WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
     
-    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%ld",collectionView.tag);
+    
     NSLog(@"%ld",(long)indexPath.item);
     
-    chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
-    
-    [self showViewController:chanpingxiangqing sender:nil];
+//    chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+//    
+//    [self showViewController:chanpingxiangqing sender:nil];
 }
 
-#pragma mark - 头视图+++++++++++++++++++++++++++++++++++代理商
-- (void)p_head_delegate
+#pragma mark - 头视图
+- (void)p_headView
 {
-    self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 260)];
+    self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    [self p_lunbotu];
+    
+    [self.head_view addSubview:self.lunbo_scrollView];
+    [self.head_view addSubview:self.lunbo_pageControl];
+    
+    //搜索。。。。。。。
+    [self p_setupView2];
+}
+
+#pragma mark - 3个点击布局
+- (void)p_setupView2
+{
+    self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
+    self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.head_view addSubview:self.headview_Delegate];
     
     self.delegate_address = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.delegate_address.frame = CGRectMake(10, 10, 70, 40);
@@ -364,79 +239,192 @@
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor grayColor];
     [self.delegate_search addSubview:label];
+
 }
 
-//代理中的地址范围
+//地址范围
 - (void)delegate_addressAction:(UIButton *)sender
 {
-    NSLog(@"代理中的地址范围");
-    
+//    NSLog(@"地址范围");
     LocationViewController * locationViewController = [[LocationViewController alloc] init];
     
     [self showViewController:locationViewController sender:nil];
     
 }
-//代理中的分类
+//分类
 - (void)delegate_classAction:(UIButton *)sender
 {
-    NSLog(@"代理中的分类");
+    NSLog(@"分类");
 }
-//代理中的查找关键字
+//查找关键字
 - (void)delegate_searchAction:(UIButton *)sender
 {
-    NSLog(@"代理中的查找关键字");
-    
+    NSLog(@"查找关键字");
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
     [self showViewController:searchViewController sender:nil];
 }
 
-#pragma mark - 头视图+++++++++++++++++++++++++++++++++++厂家
-- (void)p_head_factory
-{
-    self.headview_Factory = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    self.headview_Factory.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
-    self.factory_class = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.factory_class.frame = CGRectMake(10, 10, 70, 40);
-    self.factory_class.backgroundColor = [UIColor orangeColor];
-    [self.headview_Factory addSubview:self.factory_class];
-    [self.factory_class addTarget:self action:@selector(factory_classAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    
-    self.factory_search = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.factory_search.frame = CGRectMake(CGRectGetMaxX(self.factory_class.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(self.factory_class.frame) - 20, 40);
-    self.factory_search.layer.cornerRadius = SCREEN_WIDTH * 0.055;
-    self.factory_search.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-    self.factory_search.layer.borderWidth = 1;
-    self.factory_search.backgroundColor = [UIColor whiteColor];
-    [self.headview_Factory addSubview:self.factory_search];
-    [self.factory_search addTarget:self action:@selector(factory_searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
-    image.image = [UIImage imageNamed:@"iconfont-sousuo"];
-    [self.factory_search addSubview:image];
-    
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 7.5, 120, 25)];
-    label.text = @"请输入关键字";
-    label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [UIColor grayColor];
-    [self.factory_search addSubview:label];
 
+#pragma mark - 轮播图
+- (void)p_lunbotu
+{
+    self.lunbo_scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    //        self.lunbo_scrollView.backgroundColor = [UIColor orangeColor];
+    self.lunbo_scrollView.pagingEnabled = YES;
+    self.lunbo_scrollView.showsHorizontalScrollIndicator = NO;
+    self.lunbo_scrollView.delegate = self;
+    
+    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, 0);
+    
+    //3张图
+    UIImageView * view1 = [[UIImageView alloc] init];
+    view1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
+    [view1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    [self.lunbo_scrollView addSubview:view1];
+    
+    UIImageView * view2 = [[UIImageView alloc] init];
+    view2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, 200);
+    [view2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    [self.lunbo_scrollView addSubview:view2];
+    
+    UIImageView * view3 = [[UIImageView alloc] init];
+    view3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, 200);
+    [view3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    [self.lunbo_scrollView addSubview:view3];
+    
+    UIImageView * view4 = [[UIImageView alloc] init];
+    view4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, 200);
+    [view4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    [self.lunbo_scrollView addSubview:view4];
+    
+    UIImageView * view5 = [[UIImageView alloc] init];
+    view5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, 200);
+    [view5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    [self.lunbo_scrollView addSubview:view5];
+    
+    //
+    self.lunbo_pageControl = [[UIPageControl alloc] init];
+    self.lunbo_pageControl.frame = CGRectMake(self.view.frame.size.width / 2 - 50, 180, 100, 18);
+    self.lunbo_pageControl.numberOfPages = 3;
+    self.lunbo_pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:132/255.0 green:193/255.0 blue:254/255.0 alpha:1];
+    self.lunbo_pageControl.pageIndicatorTintColor = [UIColor colorWithRed:202/255.0 green:218/255.0 blue:233/255.0 alpha:1];
+    
+    if(self.isplay == 0)
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+        //轮播秒数
+        self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        self.lunbo_pageControl.currentPage = 0;
+        
+        self.isplay = 1;
+    }
+    else
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
+    }
+    //手势
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1; //点击次数
+    tapGesture.numberOfTouchesRequired = 1; //点击手指数
+    [self.lunbo_scrollView addGestureRecognizer:tapGesture];
 }
 
-//厂家中的分类
-- (void)factory_classAction:(UIButton *)sender
+#pragma mark - 轮播图的点击事件
+-(void)tapGesture:(id)sender
 {
-    NSLog(@"厂家中的分类");
-}
-//厂家中的查找关键字
-- (void)factory_searchAction:(UIButton *)sender
-{
-    NSLog(@"厂家中的查找关键字");
+    NSLog(@"%ld",(long)self.lunbo_pageControl.currentPage);
     
-    FactroySearchViewController * factroySearchViewController = [[FactroySearchViewController alloc] init];
-    [self showViewController:factroySearchViewController sender:nil];
+    switch (self.lunbo_pageControl.currentPage){
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        default:
+            break;
+    }
 }
+
+#pragma mark - 定时器的方法!
+- (void)timerAction
+{
+    CGFloat x = self.lunbo_scrollView.contentOffset.x;
+    int count = x / SCREEN_WIDTH;
+    
+    if(count < 3)
+    {
+        count ++;
+        [UIView animateWithDuration:0.7f animations:^{
+            
+            self.lunbo_scrollView.contentOffset = CGPointMake(count * SCREEN_WIDTH, 0);
+            self.lunbo_pageControl.currentPage = count - 1;
+            
+        }];
+    }
+    else if(count == 3)
+    {
+        count ++;
+        
+        [UIView animateWithDuration:0.7f animations:^{
+            
+            self.lunbo_scrollView.contentOffset = CGPointMake(count * SCREEN_WIDTH, 0);
+            self.lunbo_pageControl.currentPage = 0;
+            
+        }];
+    }
+    else
+    {
+        count = 2;
+        self.lunbo_scrollView.contentOffset = CGPointMake(1 * SCREEN_WIDTH, 0);
+        [UIView animateWithDuration:0.7f animations:^{
+            
+            self.lunbo_scrollView.contentOffset = CGPointMake(count * SCREEN_WIDTH, 0);
+            self.lunbo_pageControl.currentPage = count - 1;
+        }];
+    }
+}
+#pragma mark - scrollView的代理方法
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGFloat x = self.lunbo_scrollView.contentOffset.x;
+    
+    int count = x / SCREEN_WIDTH;
+    
+    if(count == 4)
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+        self.lunbo_pageControl.currentPage = 0;
+    }
+    else if(count == 0)
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(3 * SCREEN_WIDTH, 0);
+        self.lunbo_pageControl.currentPage = 2;
+    }
+    else
+    {
+        self.lunbo_pageControl.currentPage = count - 1;
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if([self.lunbo_scrollView isEqual:scrollView])
+    {
+        [self.lunbo_timer invalidate];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if ([scrollView isEqual:self.lunbo_scrollView]) {
+        
+        self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        
+    }
+}
+
 
 #pragma mark - 下拉刷新
 - (void)example01
@@ -458,11 +446,6 @@
     });
     
 }
-
-
-
-
-
 
 
 

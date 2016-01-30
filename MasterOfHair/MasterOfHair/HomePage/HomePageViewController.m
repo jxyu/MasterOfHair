@@ -120,10 +120,8 @@
 //搜索框点击事件
 - (void)search_btnAction:(UIButton *)sender
 {
-    NSLog(@"搜索");
-    
-    SearchViewController * searchViewController = [[SearchViewController alloc] init];
-    [self showViewController:searchViewController sender:nil];
+//    NSLog(@"搜索");
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
 }
 
 //显示tabbar
@@ -669,7 +667,8 @@
 //所有的商品推荐
 - (void)store_detailAction:(UIButton *)sender
 {
-    NSLog(@"所有的商品推荐");
+//    NSLog(@"所有的商品推荐");
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
 }
 
 #pragma mark - 下面的视频列表

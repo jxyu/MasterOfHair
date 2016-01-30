@@ -90,6 +90,62 @@
 - (void)btn_zhifuAction:(UIButton *)sender
 {
     NSLog(@"提现申请");
+    
+    if([self.text_account.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入支付宝账号" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else if(self.btn_50.isSelected == 0 && self.btn_100.isSelected == 0 && self.btn_200.isSelected == 0 && self.btn_500.isSelected == 0 && self.btn_1000.isSelected == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择提现金额" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        if(self.btn_50.isSelected == 1)
+        {
+            NSLog(@"提现50");
+        }
+        
+        if(self.btn_100.isSelected == 1)
+        {
+            
+        }
+        
+        if(self.btn_200.isSelected == 1)
+        {
+            
+        }
+        
+        if(self.btn_500.isSelected == 1)
+        {
+            
+        }
+        
+        if(self.btn_1000.isSelected == 1)
+        {
+            
+        }
+    }
 }
 
 #pragma mark - scrollView布局
