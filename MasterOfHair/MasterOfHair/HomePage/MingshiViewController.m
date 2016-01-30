@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 #import "wenxiuPeopleTableViewCell.h"
+#import "NextMingshiViewController.h"
 @interface MingshiViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -115,6 +116,10 @@
 - (void )tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NextMingshiViewController * NextMingshi = [[NextMingshiViewController alloc] init];
+    
+    [self showViewController:NextMingshi sender:nil];
 }
 
 #pragma mark - 下拉刷新
