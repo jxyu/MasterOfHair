@@ -683,18 +683,24 @@
 - (void )p_videoList
 {
     self.video_name = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 200, 27)];
+    
     self.video_name.text = @"人气视频";
     
-    
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
+    
     layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 4 * 3);
+    
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
+    
     self.video_collectionView.delegate = self;
+    
     self.video_collectionView.dataSource = self;
+    
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self.video_collectionView registerClass:[JCVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_video"];

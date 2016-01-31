@@ -15,6 +15,8 @@
 #import "SearchViewController.h"
 #import "AppDelegate.h"
 
+#import "AdvertiseViewController.h"
+
 #import "BusinessSchoolViewController.h"
 
 #import "wenxiulianmengViewController.h"
@@ -74,7 +76,7 @@
 //    _lblLeft.backgroundColor = [UIColor orangeColor];
     
     //右边为签到
-    [self addRightButton:@"01_33"];
+    [self addRightButton:@"01_03"];
     _imgRight.frame = CGRectMake(SCREEN_WIDTH - 5 - 40, _imgRight.frame.origin.y, _imgRight.frame.size.width, _imgRight.frame.size.height);
 //    [self addRightbuttontitle:@"签到"];
     _btnRight.frame = CGRectMake(SCREEN_WIDTH - 10 - 40, _lblRight.frame.origin.y + 0, 40, _lblRight.frame.size.height - 10);
@@ -543,13 +545,15 @@
     {
         JCStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_store" forIndexPath:indexPath];
         
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long"]];
+        
         return cell;
     }
     else
     {
         JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long"]];
         return cell;
     }
 }
@@ -587,8 +591,10 @@
             }
                 break;
             case 4:
-            {
+            {//招聘
+                AdvertiseViewController * advertistVC=[[AdvertiseViewController alloc] init];
                 
+                [self.navigationController pushViewController:advertistVC animated:YES];
             }
                 break;
             case 5:
