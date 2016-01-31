@@ -23,6 +23,7 @@
 #import "MingshiViewController.h"
 #import "chanpingxiangqingViewController.h"
 #import "KechengbaomingViewController.h"
+#import "ShangmengViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -609,7 +610,9 @@
                 break;
             case 7:
             {
+                ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
                 
+                [self showViewController:shangmengViewController sender:nil];
             }
                 break;
             case 8:

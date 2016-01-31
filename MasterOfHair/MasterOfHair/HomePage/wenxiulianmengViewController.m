@@ -128,9 +128,9 @@
     
     [self.top_btnPeople addTarget:self action:@selector(top_btnPeopleAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
-    self.top_viewPeople = [[UIView alloc] initWithFrame:CGRectMake(length_x / 2 - 40, 48, 80, 2)];
+    self.top_viewPeople = [[UIView alloc] initWithFrame:CGRectMake(length_x +  length_x / 2 - 40, 48, 80, 2)];
     self.top_viewPeople.backgroundColor = navi_bar_bg_color;
-    [self.top_white addSubview:self.top_viewFactory];
+    [self.top_white addSubview:self.top_viewPeople];
     self.top_viewPeople.hidden = YES;
 }
 
