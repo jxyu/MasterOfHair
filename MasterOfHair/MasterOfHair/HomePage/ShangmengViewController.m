@@ -1,12 +1,12 @@
 //
-//  WebStroeViewController.m
+//  ShangmengViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/19.
+//  Created by 鞠超 on 16/1/31.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "WebStroeViewController.h"
+#import "ShangmengViewController.h"
 
 #import "WebStroeCollectionViewCell.h"
 #import "AppDelegate.h"
@@ -15,7 +15,7 @@
 
 #import "chanpingxiangqingViewController.h"
 #import "FenleiViewController.h"
-@interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ShangmengViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //tableView
 @property (nonatomic, strong) UITableView * tableView;
@@ -30,21 +30,22 @@
 @property (nonatomic, strong) UIPageControl * lunbo_pageControl;
 @property (nonatomic, strong) NSTimer * lunbo_timer;
 @property (nonatomic, assign) BOOL isplay;
-//搜索......
-@property (nonatomic, strong) UIView * headview_Delegate;
-@property (nonatomic, strong) UIButton * delegate_address;
-@property (nonatomic, strong) UIButton * delegate_class;
-@property (nonatomic, strong) UIButton * delegate_search;
+
+//
+@property (nonatomic, strong) UIView * headview_Factory;
+@property (nonatomic, strong) UIButton * factory_class;
+@property (nonatomic, strong) UIButton * factory_search;
 
 //测试
 @property (nonatomic, assign) NSInteger page;
 
 @end
 
-@implementation WebStroeViewController
+@implementation ShangmengViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     [self p_navi];
     
@@ -59,16 +60,24 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = @"商城";
+    _lblTitle.text = [NSString stringWithFormat:@"高级代理商俱乐部"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
+    
+    [self addLeftButton:@"iconfont-fanhui"];
 }
 
-//显示tabbar
+//返回
+- (void)clickLeftButton:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+//隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
     [self example01];
     
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
 #pragma mark - 布局
@@ -76,7 +85,8 @@
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) style:(UITableViewStylePlain)];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -108,6 +118,7 @@
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
     }];
+
 }
 
 #pragma mark - tableView代理
@@ -184,6 +195,7 @@
     [self showViewController:chanpingxiangqing sender:nil];
 }
 
+
 #pragma mark - 头视图
 - (void)p_headView
 {
@@ -202,81 +214,57 @@
 #pragma mark - 3个点击布局
 - (void)p_setupView2
 {
-    self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
-    self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.head_view addSubview:self.headview_Delegate];
+    self.headview_Factory = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
+    self.headview_Factory.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.head_view addSubview:self.headview_Factory];
     
-    self.delegate_address = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.delegate_address.frame = CGRectMake(10, 12.5, 70, 35);
-    self.delegate_address.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.delegate_address.layer.cornerRadius = 10;
-    self.delegate_address.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.delegate_address.layer.borderWidth = 1;
-    [self.delegate_address setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    [self.delegate_address setTitle:@"全国" forState:(UIControlStateNormal)];
-    [self.headview_Delegate addSubview:self.delegate_address];
-    [self.delegate_address addTarget:self action:@selector(delegate_addressAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    
-    self.delegate_class = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.delegate_class.frame = CGRectMake(CGRectGetMaxX(self.delegate_address.frame) + 10, 12.5, 70, 35);
-    self.delegate_class.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.delegate_class.layer.cornerRadius = 10;
-    self.delegate_class.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.delegate_class.layer.borderWidth = 1;
-    [self.delegate_class setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    [self.delegate_class setTitle:@"分类" forState:(UIControlStateNormal)];
-    [self.headview_Delegate addSubview:self.delegate_class];
-    [self.delegate_class addTarget:self action:@selector(delegate_classAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.factory_class = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.factory_class.frame = CGRectMake(10, 12.5, 70, 35);
+    self.factory_class.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.factory_class.layer.cornerRadius = 10;
+    self.factory_class.layer.borderColor = navi_bar_bg_color.CGColor;
+    self.factory_class.layer.borderWidth = 1;
+    [self.factory_class setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.factory_class setTitle:@"分类" forState:(UIControlStateNormal)];
+    [self.headview_Factory addSubview:self.factory_class];
+    [self.factory_class addTarget:self action:@selector(factory_classAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
-    self.delegate_search = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.delegate_search.frame = CGRectMake(CGRectGetMaxX(self.delegate_class.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(self.delegate_class.frame) - 20, 40);
-    self.delegate_search.layer.cornerRadius = SCREEN_WIDTH * 0.055;
-    self.delegate_search.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-    self.delegate_search.layer.borderWidth = 1;
-    self.delegate_search.backgroundColor = [UIColor whiteColor];
-    [self.headview_Delegate addSubview:self.delegate_search];
-    [self.delegate_search addTarget:self action:@selector(delegate_searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.factory_search = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.factory_search.frame = CGRectMake(CGRectGetMaxX(self.factory_class.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(self.factory_class.frame) - 20, 40);
+    self.factory_search.layer.cornerRadius = SCREEN_WIDTH * 0.055;
+    self.factory_search.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    self.factory_search.layer.borderWidth = 1;
+    self.factory_search.backgroundColor = [UIColor whiteColor];
+    [self.headview_Factory addSubview:self.factory_search];
+    [self.factory_search addTarget:self action:@selector(factory_searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
     image.image = [UIImage imageNamed:@"iconfont-sousuo"];
-    [self.delegate_search addSubview:image];
+    [self.factory_search addSubview:image];
     
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 7.5, 90, 25)];
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 7.5, 120, 25)];
     label.text = @"请输入关键字";
-    //    label.backgroundColor = [UIColor orangeColor];
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor grayColor];
-    [self.delegate_search addSubview:label];
-
+    [self.factory_search addSubview:label];
 }
 
-//地址范围
-- (void)delegate_addressAction:(UIButton *)sender
-{
-//    NSLog(@"地址范围");
-    LocationViewController * locationViewController = [[LocationViewController alloc] init];
-    
-    [self showViewController:locationViewController sender:nil];
-    
-}
 //分类
-- (void)delegate_classAction:(UIButton *)sender
+- (void)factory_classAction:(UIButton *)sender
 {
 //    NSLog(@"分类");
     FenleiViewController * fenleiViewController = [[FenleiViewController alloc] init];
-    
     [self showViewController:fenleiViewController sender:nil];
 }
 //查找关键字
-- (void)delegate_searchAction:(UIButton *)sender
+- (void)factory_searchAction:(UIButton *)sender
 {
-    NSLog(@"查找关键字");
+//    NSLog(@"查找关键字");
+    
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
     [self showViewController:searchViewController sender:nil];
 }
-
 
 #pragma mark - 轮播图
 - (void)p_lunbotu
@@ -459,11 +447,6 @@
     });
     
 }
-
-
-
-
-
 
 
 

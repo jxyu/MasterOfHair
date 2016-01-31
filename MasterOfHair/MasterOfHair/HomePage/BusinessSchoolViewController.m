@@ -13,6 +13,7 @@
 #import "JCVideoCollectionViewCell.h"
 #import "AppDelegate.h"
 
+#import "TuwenViewController.h"
 @interface BusinessSchoolViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -636,12 +637,20 @@
 #pragma mark - btn (图文和视频的)
 - (void)video_btnAction:(UIButton *)sender
 {
-    NSLog(@"视频页");
+//    NSLog(@"视频页");
+    TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+    tuwenViewController.isTeacher = 0;
+
+    [self showViewController:tuwenViewController sender:nil];
 }
 
 - (void)pic_btn1Action:(UIButton *)sender
 {
-    NSLog(@"图文页");
+//    NSLog(@"图文页");
+    TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+    tuwenViewController.isTeacher = 1;
+    
+    [self showViewController:tuwenViewController sender:nil];
 }
 
 #pragma mark - 商品推荐
@@ -675,7 +684,11 @@
 //所有的商品推荐
 - (void)store_detailAction:(UIButton *)sender
 {
-    NSLog(@"所有的精选图文推荐");
+//    NSLog(@"所有的精选图文推荐");
+    TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+    tuwenViewController.isTeacher = 1;
+    
+    [self showViewController:tuwenViewController sender:nil];
 }
 
 
@@ -684,7 +697,6 @@
 {
     self.video_name = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 200, 27)];
     self.video_name.text = @"人气视频";
-    
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
