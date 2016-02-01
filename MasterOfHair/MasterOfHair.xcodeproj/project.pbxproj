@@ -45,6 +45,7 @@
 		7B3305AB1C5EE9AA0014C49C /* FenleiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305A81C5EE9AA0014C49C /* FenleiViewController.m */; };
 		7B3305AE1C5EE9BF0014C49C /* VCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305AD1C5EE9BF0014C49C /* VCollectionReusableView.m */; };
 		7B3305B01C5EECE50014C49C /* 01sdjjdijsidjs_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305AF1C5EECE50014C49C /* 01sdjjdijsidjs_03.png */; };
+		7B3305B31C5F09350014C49C /* TCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305B21C5F09350014C49C /* TCollectionReusableView.m */; };
 		7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F1A381C4F101900783F3B /* SettingViewController.m */; };
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
@@ -291,6 +292,8 @@
 		7B3305AC1C5EE9BF0014C49C /* VCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCollectionReusableView.h; sourceTree = "<group>"; };
 		7B3305AD1C5EE9BF0014C49C /* VCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCollectionReusableView.m; sourceTree = "<group>"; };
 		7B3305AF1C5EECE50014C49C /* 01sdjjdijsidjs_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01sdjjdijsidjs_03.png; sourceTree = "<group>"; };
+		7B3305B11C5F09350014C49C /* TCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCollectionReusableView.h; sourceTree = "<group>"; };
+		7B3305B21C5F09350014C49C /* TCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCollectionReusableView.m; sourceTree = "<group>"; };
 		7B3F1A371C4F101900783F3B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		7B3F1A381C4F101900783F3B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
@@ -725,6 +728,8 @@
 				7B33059D1C5EE9640014C49C /* TuwenViewController.m */,
 				7B3305AC1C5EE9BF0014C49C /* VCollectionReusableView.h */,
 				7B3305AD1C5EE9BF0014C49C /* VCollectionReusableView.m */,
+				7B3305B11C5F09350014C49C /* TCollectionReusableView.h */,
+				7B3305B21C5F09350014C49C /* TCollectionReusableView.m */,
 			);
 			name = "video and text";
 			path = 1;
@@ -1783,6 +1788,7 @@
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
 				7B3305A91C5EE9AA0014C49C /* FenleiCollectionReusableView.m in Sources */,
 				7BB26FF21C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m in Sources */,
+				7B3305B31C5F09350014C49C /* TCollectionReusableView.m in Sources */,
 				7B3305AE1C5EE9BF0014C49C /* VCollectionReusableView.m in Sources */,
 				8043C70B1C4E13E500369EEF /* UploadDataToServer.m in Sources */,
 				802552AA1C57442B00CFF875 /* SCAudioTools.m in Sources */,

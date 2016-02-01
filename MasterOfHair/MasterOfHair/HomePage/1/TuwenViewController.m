@@ -15,6 +15,7 @@
 #import "FenleiViewController.h"
 #import "SearchViewController.h"
 #import "PicAndVideoCollectionViewCell.h"
+#import "TCollectionReusableView.h"
 @interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的btn
@@ -131,7 +132,7 @@
         //注册
         [self.video_collectionView registerClass:[PicAndVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_text"];
         
-        [self.video_collectionView registerClass:[VCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_videoCollectionReusableView"];
+        [self.video_collectionView registerClass:[TCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_TCollectionReusableView"];
     }
     
     __weak __typeof(self) weakSelf = self;
@@ -172,6 +173,18 @@
     }
 }
 
+- (void )collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.isTeacher == 0)
+    {
+        NSLog(@"跳视频页 %ld",(long)indexPath.item);
+    }
+    else
+    {
+        NSLog(@"跳图文页 %ld",(long)indexPath.item);
+    }
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if(self.isTeacher == 0)
@@ -198,18 +211,32 @@
 {
     UICollectionReusableView *reusableView = nil;
 
-    //定制头部视图的内容
-    VCollectionReusableView *headerV = (VCollectionReusableView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_videoCollectionReusableView" forIndexPath:indexPath];
-    
-    [headerV.type_all addTarget:self action:@selector(type_allAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [headerV.search addTarget:self action:@selector(searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [headerV.all addTarget:self action:@selector(allAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    headerV.all.tag = 10000;
-    [headerV.free addTarget:self action:@selector(freeAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    headerV.free.tag = 20000;
-    [headerV.vip addTarget:self action:@selector(vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    headerV.vip.tag = 30000;
-    reusableView = headerV;
+    if(self.isTeacher == 0)
+    {
+        //定制头部视图的内容
+        VCollectionReusableView *headerV = (VCollectionReusableView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_videoCollectionReusableView" forIndexPath:indexPath];
+        
+        [headerV.type_all addTarget:self action:@selector(type_allAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [headerV.search addTarget:self action:@selector(searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [headerV.all addTarget:self action:@selector(allAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        headerV.all.tag = 10000;
+        [headerV.free addTarget:self action:@selector(freeAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        headerV.free.tag = 20000;
+        [headerV.vip addTarget:self action:@selector(vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        headerV.vip.tag = 30000;
+        reusableView = headerV;
+    }
+    else
+    {
+        //定制头部视图的内容
+        TCollectionReusableView *headerV = (TCollectionReusableView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_TCollectionReusableView" forIndexPath:indexPath];
+        
+        [headerV.type_all addTarget:self action:@selector(type_allAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        [headerV.search addTarget:self action:@selector(searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        reusableView = headerV;
+    }
 
     return reusableView;
 }
@@ -234,6 +261,7 @@
 
 - (void)allAction:(UIButton *)sender
 {
+
     [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
     
     UIButton * btn1 = [self.view viewWithTag:20000];
@@ -424,7 +452,7 @@
     //注册
     [self.video_collectionView registerClass:[PicAndVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_text"];
     
-    [self.video_collectionView registerClass:[VCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_videoCollectionReusableView"];
+    [self.video_collectionView registerClass:[TCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_TCollectionReusableView"];
     
     __weak __typeof(self) weakSelf = self;
     
