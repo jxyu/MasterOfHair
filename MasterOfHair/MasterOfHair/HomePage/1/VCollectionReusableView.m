@@ -24,14 +24,19 @@
 
 - (void)p_setupView
 {
-    self.type_all = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.type_all.frame = CGRectMake(10, 5, 65, 30);
-    self.type_all.layer.cornerRadius = 5;
-    self.type_all.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.type_all.layer.borderWidth = 1;
-    [self.type_all setTitle:@"全部" forState:(UIControlStateNormal)];
-    [self.type_all setTintColor:navi_bar_bg_color];
+    self.type_all = [FL_Button fl_shareButton];
     
+    self.type_all.frame = CGRectMake(10, 5, 65, 30);
+    [self.type_all setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
+    [self.type_all setTitle:@"全部" forState:UIControlStateNormal];
+    [self.type_all setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
+    self.type_all.status = FLAlignmentStatusCenter;
+    self.type_all.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.type_all.layer.masksToBounds=YES;
+    self.type_all.layer.borderWidth= 1;
+    self.type_all.layer.borderColor=navi_bar_bg_color.CGColor;
+    self.type_all.layer.cornerRadius=8;
+        
     [self addSubview:self.type_all];
     
     

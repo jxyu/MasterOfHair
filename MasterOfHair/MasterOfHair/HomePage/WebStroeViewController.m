@@ -32,8 +32,8 @@
 @property (nonatomic, assign) BOOL isplay;
 //搜索......
 @property (nonatomic, strong) UIView * headview_Delegate;
-@property (nonatomic, strong) UIButton * delegate_address;
-@property (nonatomic, strong) UIButton * delegate_class;
+@property (nonatomic, strong) FL_Button * delegate_address;
+@property (nonatomic, strong) FL_Button * delegate_class;
 @property (nonatomic, strong) UIButton * delegate_search;
 
 //测试
@@ -208,26 +208,34 @@
     self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.head_view addSubview:self.headview_Delegate];
     
-    self.delegate_address = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    
+    
+    self.delegate_address = [FL_Button fl_shareButton];
     self.delegate_address.frame = CGRectMake(10, 12.5, 70, 35);
-    self.delegate_address.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.delegate_address.layer.cornerRadius = 10;
-    self.delegate_address.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.delegate_address.layer.borderWidth = 1;
-    [self.delegate_address setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    [self.delegate_address setTitle:@"全国" forState:(UIControlStateNormal)];
+    [self.delegate_address setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
+    [self.delegate_address setTitle:@"全国" forState:UIControlStateNormal];
+    [self.delegate_address setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
+    self.delegate_address.status = FLAlignmentStatusCenter;
+    self.delegate_address.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.delegate_address.layer.masksToBounds=YES;
+    self.delegate_address.layer.borderWidth= 1;
+    self.delegate_address.layer.borderColor=navi_bar_bg_color.CGColor;
+    self.delegate_address.layer.cornerRadius=8;
     [self.headview_Delegate addSubview:self.delegate_address];
     [self.delegate_address addTarget:self action:@selector(delegate_addressAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
-    self.delegate_class = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.delegate_class = [FL_Button fl_shareButton];
     self.delegate_class.frame = CGRectMake(CGRectGetMaxX(self.delegate_address.frame) + 10, 12.5, 70, 35);
-    self.delegate_class.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.delegate_class.layer.cornerRadius = 10;
-    self.delegate_class.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.delegate_class.layer.borderWidth = 1;
-    [self.delegate_class setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    [self.delegate_class setTitle:@"分类" forState:(UIControlStateNormal)];
+    [self.delegate_class setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
+    [self.delegate_class setTitle:@"分类" forState:UIControlStateNormal];
+    [self.delegate_class setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
+    self.delegate_class.status = FLAlignmentStatusCenter;
+    self.delegate_class.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.delegate_class.layer.masksToBounds=YES;
+    self.delegate_class.layer.borderWidth= 1;
+    self.delegate_class.layer.borderColor=navi_bar_bg_color.CGColor;
+    self.delegate_class.layer.cornerRadius=8;
     [self.headview_Delegate addSubview:self.delegate_class];
     [self.delegate_class addTarget:self action:@selector(delegate_classAction:) forControlEvents:(UIControlEventTouchUpInside)];
     

@@ -184,15 +184,14 @@
     
     [self.view addSubview:self.mTableView];
     
+    self.mTableView.tableFooterView = [[UIView alloc] init];
+    
     [self.mTableView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.topSpace(168);
         layout.leftSpace(0);
         layout.rightSpace(0);
         layout.bottomSpace(0);
     }];
-    
-    
-    
     
     __unsafe_unretained __typeof(self) weakSelf = self;
     
@@ -235,7 +234,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 11;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -266,26 +265,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  *  应聘
@@ -324,7 +303,6 @@
     // 马上进入刷新状态
     [self.mTableView.mj_header beginRefreshing];
 }
-
 
 /**
  *   跳转到选择城市页面

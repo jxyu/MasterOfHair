@@ -33,7 +33,7 @@
 
 //
 @property (nonatomic, strong) UIView * headview_Factory;
-@property (nonatomic, strong) UIButton * factory_class;
+@property (nonatomic, strong) FL_Button * factory_class;
 @property (nonatomic, strong) UIButton * factory_search;
 
 //测试
@@ -221,14 +221,17 @@
     self.headview_Factory.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.head_view addSubview:self.headview_Factory];
     
-    self.factory_class = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.factory_class = [FL_Button fl_shareButton];
     self.factory_class.frame = CGRectMake(10, 12.5, 70, 35);
-    self.factory_class.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.factory_class.layer.cornerRadius = 10;
-    self.factory_class.layer.borderColor = navi_bar_bg_color.CGColor;
-    self.factory_class.layer.borderWidth = 1;
-    [self.factory_class setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    [self.factory_class setTitle:@"分类" forState:(UIControlStateNormal)];
+    [self.factory_class setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
+    [self.factory_class setTitle:@"分类" forState:UIControlStateNormal];
+    [self.factory_class setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
+    self.factory_class.status = FLAlignmentStatusCenter;
+    self.factory_class.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.factory_class.layer.masksToBounds=YES;
+    self.factory_class.layer.borderWidth= 1;
+    self.factory_class.layer.borderColor=navi_bar_bg_color.CGColor;
+    self.factory_class.layer.cornerRadius=8;
     [self.headview_Factory addSubview:self.factory_class];
     [self.factory_class addTarget:self action:@selector(factory_classAction:) forControlEvents:(UIControlEventTouchUpInside)];
     

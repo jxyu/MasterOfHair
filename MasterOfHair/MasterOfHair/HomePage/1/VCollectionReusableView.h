@@ -10,7 +10,7 @@
 
 @interface VCollectionReusableView : UICollectionReusableView
 
-@property (nonatomic, strong) UIButton * type_all;
+@property (nonatomic, strong) FL_Button * type_all;
 
 @property (nonatomic, strong) UIButton * search;
 
