@@ -25,7 +25,8 @@
 - (void)p_setupView
 {
     self.image = [[UIImageView alloc] init];
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
+    self.image.layer.masksToBounds = YES;
     self.image.layer.cornerRadius = 10;
     [self.contentView addSubview:self.image];
 }

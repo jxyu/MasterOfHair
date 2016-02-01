@@ -111,7 +111,9 @@
 - (void)p_scrollView
 {
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
+    [self.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+
     [self.scrollView addSubview:self.image];
     
     NSString * str = @"sdjksjdksjdkjskdjskkjskdjksjdksjdkjskdjskkdjksjdksjdkjskdjskkkdjksjdksjdkjskdjskjskdjksjdksjdksjdkj+++++++++++++++++++++++++++++++++++++++++++++++++skdjsk";

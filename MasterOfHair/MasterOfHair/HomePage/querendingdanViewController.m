@@ -203,7 +203,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
-        image.backgroundColor = [UIColor orangeColor];
+        [image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         [cell addSubview:image];
         
         UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];

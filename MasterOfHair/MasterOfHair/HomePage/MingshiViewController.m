@@ -109,6 +109,7 @@
     wenxiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_mingshi" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     
     return cell;
 }

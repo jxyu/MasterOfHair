@@ -733,12 +733,12 @@
 		7B3305A21C5EE9860014C49C /* fenlei */ = {
 			isa = PBXGroup;
 			children = (
+				7B3305A71C5EE9AA0014C49C /* FenleiViewController.h */,
+				7B3305A81C5EE9AA0014C49C /* FenleiViewController.m */,
 				7B3305A31C5EE9AA0014C49C /* FenleiCollectionReusableView.h */,
 				7B3305A41C5EE9AA0014C49C /* FenleiCollectionReusableView.m */,
 				7B3305A51C5EE9AA0014C49C /* FenleiCollectionViewCell.h */,
 				7B3305A61C5EE9AA0014C49C /* FenleiCollectionViewCell.m */,
-				7B3305A71C5EE9AA0014C49C /* FenleiViewController.h */,
-				7B3305A81C5EE9AA0014C49C /* FenleiViewController.m */,
 			);
 			name = fenlei;
 			path = 2;

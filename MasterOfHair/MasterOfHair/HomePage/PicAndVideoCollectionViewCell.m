@@ -25,7 +25,8 @@
     self.contentView.backgroundColor = [UIColor whiteColor];
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height / 3 * 2.1)];
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
+    self.image.layer.masksToBounds = YES;
     [self.contentView addSubview:self.image];
     
     self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.image.frame) + 3, self.contentView.frame.size.width - 10, 30)];

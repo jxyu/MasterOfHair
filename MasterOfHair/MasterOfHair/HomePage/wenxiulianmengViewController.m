@@ -245,6 +245,9 @@
         
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+
+        
         return cell;
     }
     else
@@ -253,6 +256,8 @@
         
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+
         return cell;
     }
 }

@@ -77,7 +77,8 @@
     [self.scrollView addSubview:view_1];
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 5, 80, 80)];
-    self.image.backgroundColor = [UIColor orangeColor];
+    
+    [self.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [view_1 addSubview:self.image];
     
     

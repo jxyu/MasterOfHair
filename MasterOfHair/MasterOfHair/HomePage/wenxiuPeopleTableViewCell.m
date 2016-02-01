@@ -37,7 +37,8 @@
     [self.contentView addSubview:self.white_bg];
     
     self.image = [[UIImageView alloc] init];
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
+    self.image.layer.masksToBounds = YES;
     [self.white_bg addSubview:self.image];
     
     self.name = [[UILabel alloc] init];
