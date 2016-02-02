@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 
 #import "TuwenViewController.h"
+#import "TextDetailViewController.h"
 @interface BusinessSchoolViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -578,6 +579,10 @@
     else if ([collectionView isEqual:self.stroe_collectionView])
     {
         NSLog(@"%ld",(long)indexPath.item);
+        
+        TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
+        
+        [self showViewController:textDetailViewController sender:nil];
     }
     else
     {

@@ -16,6 +16,7 @@
 #import "SearchViewController.h"
 #import "PicAndVideoCollectionViewCell.h"
 #import "TCollectionReusableView.h"
+#import "TextDetailViewController.h"
 @interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的btn
@@ -181,7 +182,11 @@
     }
     else
     {
-        NSLog(@"跳图文页 %ld",(long)indexPath.item);
+//        NSLog(@"跳图文页 %ld",(long)indexPath.item);
+        
+        TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
+        
+        [self showViewController:textDetailViewController sender:nil];
     }
 }
 

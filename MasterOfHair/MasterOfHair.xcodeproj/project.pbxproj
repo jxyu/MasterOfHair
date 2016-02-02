@@ -46,6 +46,11 @@
 		7B3305AE1C5EE9BF0014C49C /* VCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305AD1C5EE9BF0014C49C /* VCollectionReusableView.m */; };
 		7B3305B01C5EECE50014C49C /* 01sdjjdijsidjs_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305AF1C5EECE50014C49C /* 01sdjjdijsidjs_03.png */; };
 		7B3305B31C5F09350014C49C /* TCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305B21C5F09350014C49C /* TCollectionReusableView.m */; };
+		7B3305B81C5F2C200014C49C /* TextDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305B71C5F2C200014C49C /* TextDetailViewController.m */; };
+		7B3305BB1C5F33B90014C49C /* share0000000000.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305BA1C5F33B90014C49C /* share0000000000.png */; };
+		7B3305BD1C5F33D90014C49C /* yanjing.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305BC1C5F33D90014C49C /* yanjing.png */; };
+		7B3305BF1C5F38790014C49C /* h_collect.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305BE1C5F38790014C49C /* h_collect.png */; };
+		7B3305C31C5F47EF0014C49C /* 01_3323232323.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3305C21C5F47EF0014C49C /* 01_3323232323.png */; };
 		7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F1A381C4F101900783F3B /* SettingViewController.m */; };
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
@@ -294,6 +299,12 @@
 		7B3305AF1C5EECE50014C49C /* 01sdjjdijsidjs_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01sdjjdijsidjs_03.png; sourceTree = "<group>"; };
 		7B3305B11C5F09350014C49C /* TCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCollectionReusableView.h; sourceTree = "<group>"; };
 		7B3305B21C5F09350014C49C /* TCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCollectionReusableView.m; sourceTree = "<group>"; };
+		7B3305B61C5F2C200014C49C /* TextDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDetailViewController.h; sourceTree = "<group>"; };
+		7B3305B71C5F2C200014C49C /* TextDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDetailViewController.m; sourceTree = "<group>"; };
+		7B3305BA1C5F33B90014C49C /* share0000000000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share0000000000.png; sourceTree = "<group>"; };
+		7B3305BC1C5F33D90014C49C /* yanjing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanjing.png; sourceTree = "<group>"; };
+		7B3305BE1C5F38790014C49C /* h_collect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = h_collect.png; sourceTree = "<group>"; };
+		7B3305C21C5F47EF0014C49C /* 01_3323232323.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_3323232323.png; sourceTree = "<group>"; };
 		7B3F1A371C4F101900783F3B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		7B3F1A381C4F101900783F3B /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-fanhuiyou.png"; sourceTree = "<group>"; };
@@ -724,6 +735,7 @@
 		7B33059B1C5EE9380014C49C /* video and text */ = {
 			isa = PBXGroup;
 			children = (
+				7B3305B51C5F2BE10014C49C /* textDetail */,
 				7B33059C1C5EE9640014C49C /* TuwenViewController.h */,
 				7B33059D1C5EE9640014C49C /* TuwenViewController.m */,
 				7B3305AC1C5EE9BF0014C49C /* VCollectionReusableView.h */,
@@ -747,6 +759,28 @@
 			);
 			name = fenlei;
 			path = 2;
+			sourceTree = "<group>";
+		};
+		7B3305B51C5F2BE10014C49C /* textDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7B3305B61C5F2C200014C49C /* TextDetailViewController.h */,
+				7B3305B71C5F2C200014C49C /* TextDetailViewController.m */,
+			);
+			name = textDetail;
+			path = 12;
+			sourceTree = "<group>";
+		};
+		7B3305B91C5F33AF0014C49C /* 2 */ = {
+			isa = PBXGroup;
+			children = (
+				7B3305C21C5F47EF0014C49C /* 01_3323232323.png */,
+				7B3305BE1C5F38790014C49C /* h_collect.png */,
+				7B3305BC1C5F33D90014C49C /* yanjing.png */,
+				7B3305BA1C5F33B90014C49C /* share0000000000.png */,
+			);
+			name = 2;
+			path = 122;
 			sourceTree = "<group>";
 		};
 		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
@@ -1409,6 +1443,7 @@
 				8078846E1C59B546006B8BB3 /* Placeholder_long.jpg */,
 				807884541C59B09A006B8BB3 /* TabBar */,
 				7B142E2F1C58708500B32809 /* 1 */,
+				7B3305B91C5F33AF0014C49C /* 2 */,
 				7B142E2A1C586DA200B32809 /* 3 */,
 				7BAABACD1C59E1D900C14DF8 /* 4 */,
 				7BAABA9F1C59A34400C14DF8 /* 5 */,
@@ -1563,6 +1598,7 @@
 				7BAABAB51C59ACF500C14DF8 /* 00003.png in Resources */,
 				7BAABAB41C59ACF500C14DF8 /* 00002.png in Resources */,
 				7BAABAA71C59A6A200C14DF8 /* 05zuanshi03.png in Resources */,
+				7B3305BF1C5F38790014C49C /* h_collect.png in Resources */,
 				7BAABAB01C59ACF500C14DF8 /* 000006.png in Resources */,
 				7B29EFB21C5712DA003A020B /* iconfont-tianjia.png in Resources */,
 				7B142E471C58B97900B32809 /* 01_65@2x.png in Resources */,
@@ -1588,6 +1624,7 @@
 				7BAABAA51C59A35700C14DF8 /* 05fenxiao_15.png in Resources */,
 				7BAABAC41C59B14200C14DF8 /* 0000000008.png in Resources */,
 				7BAABABF1C59B14200C14DF8 /* 000000000007.png in Resources */,
+				7B3305C31C5F47EF0014C49C /* 01_3323232323.png in Resources */,
 				7BAABAD01C59E21100C14DF8 /* 01_03＿_031111.png in Resources */,
 				7B142E4B1C58BB1200B32809 /* 01collect_16.png in Resources */,
 				7B142E4F1C58BD8F00B32809 /* 01share_21.png in Resources */,
@@ -1595,6 +1632,7 @@
 				807884611C59B0BD006B8BB3 /* Mine_H@2x.png in Resources */,
 				7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */,
 				7B142E351C5890D500B32809 /* 03-hezuodian.png in Resources */,
+				7B3305BB1C5F33B90014C49C /* share0000000000.png in Resources */,
 				807884661C59B0BD006B8BB3 /* shangxueyuan@2x.png in Resources */,
 				7BAABAB21C59ACF500C14DF8 /* 00004.png in Resources */,
 				8043C6C81C4DC94500369EEF /* Assets.xcassets in Resources */,
@@ -1620,6 +1658,7 @@
 				7BAABAA11C59A34B00C14DF8 /* 05pianbao_11.png in Resources */,
 				7B142E431C58B97900B32809 /* 01_38@2x.png in Resources */,
 				802552CB1C57442B00CFF875 /* WechatShortVideoController.xib in Resources */,
+				7B3305BD1C5F33D90014C49C /* yanjing.png in Resources */,
 				802552C61C57442B00CFF875 /* WechatShortVideo_scan_focus.png in Resources */,
 				8025530E1C574F7100CFF875 /* MJRefresh.bundle in Resources */,
 				7BAABAD41C59E8D300C14DF8 /* jiahao.png in Resources */,
@@ -1783,6 +1822,7 @@
 				7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */,
 				802553011C574F7100CFF875 /* MJRefreshBackFooter.m in Sources */,
 				802553091C574F7100CFF875 /* MJRefreshBackNormalFooter.m in Sources */,
+				7B3305B81C5F2C200014C49C /* TextDetailViewController.m in Sources */,
 				7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */,
 				7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
