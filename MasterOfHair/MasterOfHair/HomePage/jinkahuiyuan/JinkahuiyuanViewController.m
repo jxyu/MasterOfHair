@@ -1,30 +1,36 @@
 //
-//  ZhifuViewController.m
+//  JinkahuiyuanViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/29.
+//  Created by 鞠超 on 16/2/2.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "ZhifuViewController.h"
+#import "JinkahuiyuanViewController.h"
 
-@interface ZhifuViewController ()
+@interface JinkahuiyuanViewController ()
 
-@property (nonatomic, strong) UIButton * btn_zhifu;
+@property (nonatomic, strong) UILabel * price;
+//账号
+@property (nonatomic, strong) UILabel * accent;
 
 @property (nonatomic, strong) UIButton * btn_zhifubo;
 @property (nonatomic, strong) UIButton * btn_weixin;
 
+//开通
+@property (nonatomic, strong) UIButton * btn_zhifu;
+
 @end
 
-@implementation ZhifuViewController
+@implementation JinkahuiyuanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     [self p_navi];
     
     [self p_setupView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +41,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"支付"];
+    _lblTitle.text = [NSString stringWithFormat:@"开通金卡会员"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
@@ -54,36 +60,42 @@
 }
 
 #pragma mark - 布局
-
 - (void)p_setupView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    
     
     UIView * view_1 = [[UIView alloc] initWithFrame:CGRectMake(0, 64 + 10, SCREEN_WIDTH, 50)];
     view_1.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_1];
     
-    self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 30)];
-    self.name.text = @"课程名称";
-    [view_1 addSubview:self.name];
+    UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 100, 30)];
+    label_1.text = @"金卡会员";
+    [view_1 addSubview:label_1];
     
-
+    self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label_1.frame) - 20, 30)];
+    self.price.text = @"199元";
+    self.price.textAlignment = NSTextAlignmentRight;
+    [view_1 addSubview:self.price];
+    
+    
     UIView * view_2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 2, SCREEN_WIDTH, 50)];
     view_2.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_2];
     
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 50, 30)];
-    label.text = @"总价:";
-    [view_2 addSubview:label];
+    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 100, 30)];
+    label_3.text = @"账号:";
+    [view_2 addSubview:label_3];
     
-    self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(label.frame) - 20, 30)];
-    self.price.text = @"5000元";
-    self.price.textColor = [UIColor orangeColor];
-    self.price.textAlignment = NSTextAlignmentRight;
-    [view_2 addSubview:self.price];
+    self.accent = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_3.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label_3.frame) - 20, 30)];
+    self.accent.text = @"1888888888888";
+    self.accent.textAlignment = NSTextAlignmentRight;
+    [view_2 addSubview:self.accent];
+
     
     
-    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_2.frame) + 10, SCREEN_WIDTH, 70)];
+    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_2.frame) + 15, SCREEN_WIDTH, 70)];
     view_3.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_3];
     
@@ -118,7 +130,6 @@
     [self.btn_weixin addTarget:self action:@selector(btn_weixinAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.btn_weixin setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     
-    
     UILabel * label_zhifubo = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_weixin.frame) + 5, CGRectGetMaxY(label_2.frame) + 7.5, length_x - CGRectGetMaxX(self.btn_zhifubo.frame) , 30)];
     //    label_zhifubo.backgroundColor = [UIColor orangeColor];
     label_zhifubo.text = @"微信支付";
@@ -129,16 +140,16 @@
     self.btn_zhifu = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_zhifu.frame = CGRectMake(15, SCREEN_HEIGHT - 55, SCREEN_WIDTH - 30, 45);
     self.btn_zhifu.backgroundColor = navi_bar_bg_color;
-    [self.btn_zhifu setTitle:@"确认支付" forState:(UIControlStateNormal)];
+    [self.btn_zhifu setTitle:@"立即开通" forState:(UIControlStateNormal)];
     [self.btn_zhifu setTintColor:[UIColor whiteColor]];
     self.btn_zhifu.titleLabel.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:self.btn_zhifu];
     
     [self.btn_zhifu addTarget:self action:@selector(btn_zhifuAction:) forControlEvents:(UIControlEventTouchUpInside)];
-
+    
 }
 
-#pragma mark - 支付
+#pragma mark - 开通
 - (void)btn_zhifuAction:(UIButton *)sender
 {
     if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
@@ -157,11 +168,13 @@
     }
     else
     {
-        NSLog(@"走支付流程");
+        NSLog(@"走支付流程, 获得权限");
+        
     }
     
 }
 
+#pragma mark - 微信 和 支付宝
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
     if(sender.selected == 0)
@@ -195,16 +208,6 @@
         sender.selected = 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

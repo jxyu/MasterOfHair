@@ -24,6 +24,7 @@
 #import "chanpingxiangqingViewController.h"
 #import "KechengbaomingViewController.h"
 #import "ShangmengViewController.h"
+#import "JinkahuiyuanViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -616,12 +617,14 @@
             }
                 break;
             case 8:
-            {
+            {//金卡会员
+                JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
                 
+                [self showViewController:jinkahuiyuanViewController sender:nil];
             }
                 break;
             case 9:
-            {
+            {//报名
                 KechengbaomingViewController * kechengbaomingViewController = [[KechengbaomingViewController alloc] init];
                 [self showViewController:kechengbaomingViewController sender:nil];
             }

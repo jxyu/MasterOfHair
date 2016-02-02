@@ -16,6 +16,8 @@
 #import "cishanjijinhuiViewController.h"
 #import "FenxiaozhongxinViewController.h"
 #import "QianbaoViewController.h"
+#import "ShenqingdailishangViewController.h"
+#import "JinkahuiyuanViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -243,10 +245,14 @@
 //开通会员
 - (void)head_vipAction:(UIButton *)sender
 {
-    //成功走这个代码
-    self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
-    [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
-    self.head_vip.userInteractionEnabled = NO;
+    JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
+    
+    [self showViewController:jinkahuiyuanViewController sender:nil];
+    
+//    //成功走这个代码
+//    self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
+//    [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
+//    self.head_vip.userInteractionEnabled = NO;
 }
 
 //未登录时点分类
@@ -375,6 +381,8 @@
             cell.name.text = @"申请成为代理商";
                             cell.image.image = [UIImage imageNamed:@"00001"];
             cell.arrows_switch.hidden = YES;
+            cell.arrows.hidden = YES;
+            cell.type.hidden = NO;
         }
             break;
         default:
@@ -386,6 +394,63 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.section) {
+        case 0:
+        {
+            if(indexPath.row == 0)
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+            break;
+        case 1:
+        {
+            if(indexPath.row == 0)
+            {
+                
+            }
+            else if(indexPath.row == 1)
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+            break;
+        case 2:
+        {
+            if(0)
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限" preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alert addAction:action];
+            }
+            else
+            {
+                ShenqingdailishangViewController * shenqingdailishangViewController = [[ShenqingdailishangViewController alloc] init];
+                
+                [self showViewController:shenqingdailishangViewController sender:nil];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 //设置头标题文字

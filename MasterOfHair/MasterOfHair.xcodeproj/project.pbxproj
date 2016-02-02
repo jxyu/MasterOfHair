@@ -57,6 +57,8 @@
 		7B46EE081C603A3D00E33E0E /* 01liuyan_38.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B46EE071C603A3D00E33E0E /* 01liuyan_38.png */; };
 		7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE0A1C604FE300E33E0E /* NextTextViewController.m */; };
 		7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */; };
+		7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE111C607ECD00E33E0E /* ShenqingdailishangViewController.m */; };
+		7B46EE171C6099E900E33E0E /* JinkahuiyuanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE161C6099E900E33E0E /* JinkahuiyuanViewController.m */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
 		7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
@@ -319,6 +321,10 @@
 		7B46EE0A1C604FE300E33E0E /* NextTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextTextViewController.m; sourceTree = "<group>"; };
 		7B46EE0C1C60777100E33E0E /* NextTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextTextTableViewCell.h; sourceTree = "<group>"; };
 		7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextTextTableViewCell.m; sourceTree = "<group>"; };
+		7B46EE101C607ECD00E33E0E /* ShenqingdailishangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShenqingdailishangViewController.h; sourceTree = "<group>"; };
+		7B46EE111C607ECD00E33E0E /* ShenqingdailishangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShenqingdailishangViewController.m; sourceTree = "<group>"; };
+		7B46EE151C6099E900E33E0E /* JinkahuiyuanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinkahuiyuanViewController.h; sourceTree = "<group>"; };
+		7B46EE161C6099E900E33E0E /* JinkahuiyuanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinkahuiyuanViewController.m; sourceTree = "<group>"; };
 		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
 		7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicAndVideoCollectionViewCell.h; sourceTree = "<group>"; };
 		7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicAndVideoCollectionViewCell.m; sourceTree = "<group>"; };
@@ -801,6 +807,24 @@
 			path = 122;
 			sourceTree = "<group>";
 		};
+		7B46EE0F1C607E8900E33E0E /* shenqingdailishang */ = {
+			isa = PBXGroup;
+			children = (
+				7B46EE101C607ECD00E33E0E /* ShenqingdailishangViewController.h */,
+				7B46EE111C607ECD00E33E0E /* ShenqingdailishangViewController.m */,
+			);
+			path = shenqingdailishang;
+			sourceTree = "<group>";
+		};
+		7B46EE141C6099D700E33E0E /* jinkahuiyuan */ = {
+			isa = PBXGroup;
+			children = (
+				7B46EE151C6099E900E33E0E /* JinkahuiyuanViewController.h */,
+				7B46EE161C6099E900E33E0E /* JinkahuiyuanViewController.m */,
+			);
+			path = jinkahuiyuan;
+			sourceTree = "<group>";
+		};
 		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +860,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5968E1C4E231500DBC69D /* Main */,
+				7B46EE141C6099D700E33E0E /* jinkahuiyuan */,
 				800E8F971C5DA9FA00CB8CC5 /* Advertise */,
 				7B3305971C5EE8890014C49C /* shangmeng(dailishang) */,
 				7BAABAE01C59FB7D00C14DF8 /* kechengbaoming */,
@@ -880,6 +905,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B46EE0F1C607E8900E33E0E /* shenqingdailishang */,
 				7B0433C21C5C5DC70052F4AC /* qianbao */,
 				7BB26FE21C5B3723001D332E /* fenxiaozhongxin */,
 				7BB26FD51C5AFD71001D332E /* cishanjijinhui */,
@@ -1781,6 +1807,7 @@
 				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				802552BA1C57442B00CFF875 /* SCRecordSessionSegment.m in Sources */,
 				7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */,
+				7B46EE171C6099E900E33E0E /* JinkahuiyuanViewController.m in Sources */,
 				802552C91C57442B00CFF875 /* SCRecordSessionManager.m in Sources */,
 				802553061C574F7100CFF875 /* MJRefreshAutoNormalFooter.m in Sources */,
 				7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */,
@@ -1798,6 +1825,7 @@
 				7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */,
 				802552A81C57442B00CFF875 /* SCAssetExportSession.m in Sources */,
 				802552A71C57442B00CFF875 /* README.md in Sources */,
+				7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
 				7BB26FD41C5AF01E001D332E /* ZhifuViewController.m in Sources */,
 				7BB26FDB1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m in Sources */,

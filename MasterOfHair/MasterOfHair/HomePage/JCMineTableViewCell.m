@@ -43,6 +43,14 @@
     self.arrows_switch = [[UISwitch alloc] init];
 //    [self.contentView addSubview:self.arrows_switch];
     
+    
+    self.type = [[UILabel alloc] init];
+    self.type.hidden = YES;
+    self.type.text = @"申请中";
+    self.type.textColor = [UIColor orangeColor];
+    self.type.font = [UIFont systemFontOfSize:15];
+    [self.contentView addSubview:self.type];
+    
 }
 
 - (void)layoutSubviews
@@ -56,6 +64,8 @@
     self.arrows.frame = CGRectMake(self.contentView.frame.size.width - 33, 12.5, 25, 25);
     
     self.arrows_switch.frame = CGRectMake(self.contentView.frame.size.width - 7 - 50, 10, 50, 30);
+    
+    self.type.frame = CGRectMake(self.contentView.frame.size.width - 7 - 50, 10, 50, 30);
 }
 
 

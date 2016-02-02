@@ -82,11 +82,11 @@
     [view_1 addSubview:self.money];
     
     
-    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 10, SCREEN_WIDTH, 65)];
+    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 10, SCREEN_WIDTH, 70)];
     view_3.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_3];
     
-    UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(13, 5, SCREEN_WIDTH - 15, 15)];
+    UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(13, 10, SCREEN_WIDTH - 15, 15)];
     label_2.text = @"选择支付方式";
     label_2.textColor = [UIColor grayColor];
     label_2.font = [UIFont systemFontOfSize:13];

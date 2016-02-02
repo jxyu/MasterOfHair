@@ -18,4 +18,6 @@
 
 @property (nonatomic, strong) UISwitch * arrows_switch;
 
+@property (nonatomic, strong) UILabel * type;
+
 @end
