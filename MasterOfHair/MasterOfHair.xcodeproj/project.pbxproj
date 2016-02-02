@@ -55,6 +55,8 @@
 		7B3F1A3B1C4F1BC000783F3B /* iconfont-fanhuiyou.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F1A3A1C4F1BC000783F3B /* iconfont-fanhuiyou.png */; };
 		7B46EE061C6033D300E33E0E /* TextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE051C6033D300E33E0E /* TextTableViewCell.m */; };
 		7B46EE081C603A3D00E33E0E /* 01liuyan_38.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B46EE071C603A3D00E33E0E /* 01liuyan_38.png */; };
+		7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE0A1C604FE300E33E0E /* NextTextViewController.m */; };
+		7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
 		7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
@@ -313,6 +315,10 @@
 		7B46EE041C6033D300E33E0E /* TextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTableViewCell.h; sourceTree = "<group>"; };
 		7B46EE051C6033D300E33E0E /* TextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextTableViewCell.m; sourceTree = "<group>"; };
 		7B46EE071C603A3D00E33E0E /* 01liuyan_38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01liuyan_38.png; sourceTree = "<group>"; };
+		7B46EE091C604FE300E33E0E /* NextTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextTextViewController.h; sourceTree = "<group>"; };
+		7B46EE0A1C604FE300E33E0E /* NextTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextTextViewController.m; sourceTree = "<group>"; };
+		7B46EE0C1C60777100E33E0E /* NextTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextTextTableViewCell.h; sourceTree = "<group>"; };
+		7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextTextTableViewCell.m; sourceTree = "<group>"; };
 		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
 		7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicAndVideoCollectionViewCell.h; sourceTree = "<group>"; };
 		7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicAndVideoCollectionViewCell.m; sourceTree = "<group>"; };
@@ -773,6 +779,10 @@
 				7B3305B71C5F2C200014C49C /* TextDetailViewController.m */,
 				7B46EE041C6033D300E33E0E /* TextTableViewCell.h */,
 				7B46EE051C6033D300E33E0E /* TextTableViewCell.m */,
+				7B46EE091C604FE300E33E0E /* NextTextViewController.h */,
+				7B46EE0A1C604FE300E33E0E /* NextTextViewController.m */,
+				7B46EE0C1C60777100E33E0E /* NextTextTableViewCell.h */,
+				7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */,
 			);
 			name = textDetail;
 			path = 12;
@@ -1763,6 +1773,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */,
 				802553101C574F7100CFF875 /* UIScrollView+MJExtension.m in Sources */,
 				802553021C574F7100CFF875 /* MJRefreshComponent.m in Sources */,
 				802553071C574F7100CFF875 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -1881,6 +1892,7 @@
 				7B3305A01C5EE9640014C49C /* TuwenViewController.m in Sources */,
 				7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */,
 				7BCD552A1C55EFC200F32F16 /* chanpingxiangqingViewController.m in Sources */,
+				7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */,
 				7BAABAEB1C5A056500C14DF8 /* kechengmingchengViewController.m in Sources */,
 				7BB26FE51C5B37CB001D332E /* FenxiaozhongxinViewController.m in Sources */,
 				7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */,

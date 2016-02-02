@@ -9,6 +9,7 @@
 #import "TextDetailViewController.h"
 
 #import "TextTableViewCell.h"
+#import "NextTextViewController.h"
 @interface TextDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -32,7 +33,6 @@
 
 //底部栏
 @property (nonatomic, strong) UIView * bottom_View;
-
 @property (nonatomic, strong) UITextField * bottom_text;
 @property (nonatomic, strong) UIButton * bottom_btn;
 
@@ -113,7 +113,6 @@
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSString * str = @"手机打开手机的空间设计的款式简单款式简单款就是看的就是空间打开手机看的就是宽带接口设计的技术肯定就是空间打开数据库的技术可简单接口技术的间设计的款式简单款式简单款就是看的就是空间";
 
     return 95 + [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
@@ -132,6 +131,8 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NextTextViewController * nextTextViewController = [[NextTextViewController alloc] init];
+    [self showViewController:nextTextViewController sender:nil];
 }
 
 #pragma mark - headView
