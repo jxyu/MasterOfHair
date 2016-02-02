@@ -8,6 +8,7 @@
 
 #import "TextDetailViewController.h"
 
+#import "TextTableViewCell.h"
 @interface TextDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) UIView * bottom_View;
 
 @property (nonatomic, strong) UITextField * bottom_text;
+@property (nonatomic, strong) UIButton * bottom_btn;
 
 @end
 
@@ -85,18 +87,17 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 50) style:(UITableViewStylePlain)];
-    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-    
     
     
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.tableHeaderView = self.headView;
     
     //注册
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_textDetail"];
+    [self.tableView registerClass:[TextTableViewCell class] forCellReuseIdentifier:@"cell_textDetail"];
 }
 
 #pragma mark - tableView代理
@@ -112,12 +113,15 @@
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    
+    NSString * str = @"手机打开手机的空间设计的款式简单款式简单款就是看的就是空间打开手机看的就是宽带接口设计的技术肯定就是空间打开数据库的技术可简单接口技术的间设计的款式简单款式简单款就是看的就是空间";
+
+    return 95 + [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_textDetail" forIndexPath:indexPath];
+    TextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_textDetail" forIndexPath:indexPath];
     
     return cell;
 }
@@ -125,6 +129,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"评论详情");
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 #pragma mark - headView
@@ -265,6 +272,43 @@
     self.bottom_text.placeholder = @"我来说几句";
     self.bottom_text.delegate = self;
     [view_1 addSubview:self.bottom_text];
+    
+    
+    self.bottom_btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.bottom_btn.frame = CGRectMake(CGRectGetMaxX(view_1.frame) + 10, 5, 60, 40);
+    self.bottom_btn.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.bottom_btn setTitle:@"发布" forState:(UIControlStateNormal)];
+    self.bottom_btn.titleLabel.font = [UIFont systemFontOfSize:19];
+    [self.bottom_btn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+    [self.bottom_View addSubview:self.bottom_btn];
+    
+    [self.bottom_btn addTarget:self action:@selector(bottom_btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)bottom_btnAction:(UIButton *)sender
+{
+    if([self.bottom_text.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入文字后再发布评论" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        [self.bottom_text resignFirstResponder];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        NSLog(@"发布");
+        
+        [self.bottom_text resignFirstResponder];
+    }
 }
 
 #pragma mark - textField代理 和通知收回键盘
