@@ -59,6 +59,9 @@
 		7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE0D1C60777100E33E0E /* NextTextTableViewCell.m */; };
 		7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE111C607ECD00E33E0E /* ShenqingdailishangViewController.m */; };
 		7B46EE171C6099E900E33E0E /* JinkahuiyuanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE161C6099E900E33E0E /* JinkahuiyuanViewController.m */; };
+		7B46EE1D1C60A5F800E33E0E /* TuwenshoucangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE1C1C60A5F800E33E0E /* TuwenshoucangViewController.m */; };
+		7B46EE201C60A61400E33E0E /* ShipinshoucangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE1F1C60A61400E33E0E /* ShipinshoucangViewController.m */; };
+		7B46EE231C60A63400E33E0E /* ChanpinshoucangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B46EE221C60A63400E33E0E /* ChanpinshoucangViewController.m */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
 		7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
@@ -325,6 +328,12 @@
 		7B46EE111C607ECD00E33E0E /* ShenqingdailishangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShenqingdailishangViewController.m; sourceTree = "<group>"; };
 		7B46EE151C6099E900E33E0E /* JinkahuiyuanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JinkahuiyuanViewController.h; sourceTree = "<group>"; };
 		7B46EE161C6099E900E33E0E /* JinkahuiyuanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JinkahuiyuanViewController.m; sourceTree = "<group>"; };
+		7B46EE1B1C60A5F800E33E0E /* TuwenshoucangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuwenshoucangViewController.h; sourceTree = "<group>"; };
+		7B46EE1C1C60A5F800E33E0E /* TuwenshoucangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuwenshoucangViewController.m; sourceTree = "<group>"; };
+		7B46EE1E1C60A61400E33E0E /* ShipinshoucangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipinshoucangViewController.h; sourceTree = "<group>"; };
+		7B46EE1F1C60A61400E33E0E /* ShipinshoucangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipinshoucangViewController.m; sourceTree = "<group>"; };
+		7B46EE211C60A63400E33E0E /* ChanpinshoucangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanpinshoucangViewController.h; sourceTree = "<group>"; };
+		7B46EE221C60A63400E33E0E /* ChanpinshoucangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanpinshoucangViewController.m; sourceTree = "<group>"; };
 		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
 		7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicAndVideoCollectionViewCell.h; sourceTree = "<group>"; };
 		7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicAndVideoCollectionViewCell.m; sourceTree = "<group>"; };
@@ -825,6 +834,33 @@
 			path = jinkahuiyuan;
 			sourceTree = "<group>";
 		};
+		7B46EE181C60A57C00E33E0E /* chanpinshoucang */ = {
+			isa = PBXGroup;
+			children = (
+				7B46EE211C60A63400E33E0E /* ChanpinshoucangViewController.h */,
+				7B46EE221C60A63400E33E0E /* ChanpinshoucangViewController.m */,
+			);
+			path = chanpinshoucang;
+			sourceTree = "<group>";
+		};
+		7B46EE191C60A5A000E33E0E /* shipinshoucang */ = {
+			isa = PBXGroup;
+			children = (
+				7B46EE1E1C60A61400E33E0E /* ShipinshoucangViewController.h */,
+				7B46EE1F1C60A61400E33E0E /* ShipinshoucangViewController.m */,
+			);
+			path = shipinshoucang;
+			sourceTree = "<group>";
+		};
+		7B46EE1A1C60A5B900E33E0E /* tuwenshoucang */ = {
+			isa = PBXGroup;
+			children = (
+				7B46EE1B1C60A5F800E33E0E /* TuwenshoucangViewController.h */,
+				7B46EE1C1C60A5F800E33E0E /* TuwenshoucangViewController.m */,
+			);
+			path = tuwenshoucang;
+			sourceTree = "<group>";
+		};
 		7BA0078C1C4F316C009B3ABD /* wolaji */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +941,9 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B46EE1A1C60A5B900E33E0E /* tuwenshoucang */,
+				7B46EE191C60A5A000E33E0E /* shipinshoucang */,
+				7B46EE181C60A57C00E33E0E /* chanpinshoucang */,
 				7B46EE0F1C607E8900E33E0E /* shenqingdailishang */,
 				7B0433C21C5C5DC70052F4AC /* qianbao */,
 				7BB26FE21C5B3723001D332E /* fenxiaozhongxin */,
@@ -1817,6 +1856,7 @@
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				8025530B1C574F7100CFF875 /* MJRefreshGifHeader.m in Sources */,
+				7B46EE231C60A63400E33E0E /* ChanpinshoucangViewController.m in Sources */,
 				802552A51C57442B00CFF875 /* CIImageRendererUtils.m in Sources */,
 				802552B41C57442B00CFF875 /* SCProcessingQueue.m in Sources */,
 				802552BE1C57442B00CFF875 /* SCVideoPlayerView.m in Sources */,
@@ -1847,6 +1887,7 @@
 				7BB26FDE1C5B15FB001D332E /* ChongzhiViewController.m in Sources */,
 				802552B71C57442B00CFF875 /* SCRecorderTools.m in Sources */,
 				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
+				7B46EE1D1C60A5F800E33E0E /* TuwenshoucangViewController.m in Sources */,
 				7BA596AD1C4E267D00DBC69D /* ShoppingCarViewController.m in Sources */,
 				802552A91C57442B00CFF875 /* SCAudioConfiguration.m in Sources */,
 				7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */,
@@ -1854,6 +1895,7 @@
 				800E8FAB1C5DF36F00CB8CC5 /* AdvertiseCellTableViewCell.m in Sources */,
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,
 				7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */,
+				7B46EE201C60A61400E33E0E /* ShipinshoucangViewController.m in Sources */,
 				7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */,
 				7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */,
 				7B33059A1C5EE8AD0014C49C /* ShangmengViewController.m in Sources */,

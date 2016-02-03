@@ -52,7 +52,10 @@
     self.name.font = [UIFont systemFontOfSize:13];
     [self.contentView addSubview:self.name];
     
-    
+    self.image_iocn = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 25, self.contentView.frame.size.height - 25, 25, 25)];
+    self.image_iocn.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_iocn.hidden = YES;
+    [self.contentView addSubview:self.image_iocn];
 }
 
 

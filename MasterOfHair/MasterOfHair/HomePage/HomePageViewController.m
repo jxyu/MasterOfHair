@@ -25,6 +25,7 @@
 #import "KechengbaomingViewController.h"
 #import "ShangmengViewController.h"
 #import "JinkahuiyuanViewController.h"
+#import "TuwenViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -601,7 +602,10 @@
                 break;
             case 5:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
                 
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 6:

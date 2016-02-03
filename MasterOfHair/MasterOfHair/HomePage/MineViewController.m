@@ -18,6 +18,11 @@
 #import "QianbaoViewController.h"
 #import "ShenqingdailishangViewController.h"
 #import "JinkahuiyuanViewController.h"
+
+#import "ChanpinshoucangViewController.h"
+#import "ShipinshoucangViewController.h"
+#import "TuwenshoucangViewController.h"
+
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -412,15 +417,22 @@
         {
             if(indexPath.row == 0)
             {
+                //收藏的产品
+                ChanpinshoucangViewController * chanpinshoucangViewController = [[ChanpinshoucangViewController alloc] init];
                 
+                [self showViewController:chanpinshoucangViewController sender:nil];
             }
             else if(indexPath.row == 1)
             {
+                ShipinshoucangViewController * shipinshoucangViewController = [[ShipinshoucangViewController alloc] init];
                 
+                [self showViewController:shipinshoucangViewController sender:nil];
             }
             else
             {
+                TuwenshoucangViewController * tuwenshoucangViewController = [[TuwenshoucangViewController alloc] init];
                 
+                [self showViewController:tuwenshoucangViewController sender:nil];
             }
         }
             break;
