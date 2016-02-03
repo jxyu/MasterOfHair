@@ -123,13 +123,31 @@
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat length_h = ((SCREEN_WIDTH ) / 4 + 105) * 2.25;
+    CGFloat length_h = 0;
+    
+    if(SCREEN_WIDTH < 400)
+    {
+        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+    }
+    else
+    {
+        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+    }
     return length_h;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat length_h = ((SCREEN_WIDTH ) / 4 + 105) * 2.25;
+    CGFloat length_h = 0;
+    
+    if(SCREEN_WIDTH < 400)
+    {
+        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+    }
+    else
+    {
+        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+    }
     
     UITableViewCell * cell = [[UITableViewCell alloc] init];
     cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, length_h);
@@ -140,7 +158,7 @@
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 4;
     layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
-    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
     
     self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:cell.frame collectionViewLayout:layout];
     self.stroe_collectionView.delegate = self;

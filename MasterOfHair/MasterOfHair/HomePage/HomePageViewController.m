@@ -603,7 +603,7 @@
             case 5:
             {
                 TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
-                
+                tuwenViewController.isTeacher = 0;
                 
                 [self showViewController:tuwenViewController sender:nil];
             }

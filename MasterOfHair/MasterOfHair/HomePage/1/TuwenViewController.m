@@ -17,6 +17,7 @@
 #import "PicAndVideoCollectionViewCell.h"
 #import "TCollectionReusableView.h"
 #import "TextDetailViewController.h"
+#import "VideoDetailViewController.h"
 @interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的btn
@@ -179,6 +180,10 @@
     if(self.isTeacher == 0)
     {
         NSLog(@"跳视频页 %ld",(long)indexPath.item);
+        
+        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        [self showViewController:videoDetailViewController sender:nil];
     }
     else
     {

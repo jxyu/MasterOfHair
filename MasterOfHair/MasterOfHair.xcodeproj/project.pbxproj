@@ -133,6 +133,7 @@
 		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
 		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
 		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
+		7BFE25ED1C61D9B70038CA23 /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */; };
 		800E8F9A1C5DAA3A00CB8CC5 /* AdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800E8F991C5DAA3A00CB8CC5 /* AdvertiseViewController.m */; };
 		800E8F9E1C5DBEBF00CB8CC5 /* FL_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 800E8F9D1C5DBEBF00CB8CC5 /* FL_Button.m */; };
 		800E8FA01C5DD77300CB8CC5 /* select_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 800E8F9F1C5DD77300CB8CC5 /* select_down@2x.png */; };
@@ -443,6 +444,8 @@
 		7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		7BF67F181C522466005FA5C4 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
 		7BF67F191C522466005FA5C4 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
+		7BFE25EB1C61D9B70038CA23 /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
+		7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		800E8F981C5DAA3A00CB8CC5 /* AdvertiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseViewController.h; sourceTree = "<group>"; };
 		800E8F991C5DAA3A00CB8CC5 /* AdvertiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiseViewController.m; sourceTree = "<group>"; };
 		800E8F9C1C5DBEBF00CB8CC5 /* FL_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FL_Button.h; sourceTree = "<group>"; };
@@ -761,6 +764,7 @@
 		7B33059B1C5EE9380014C49C /* video and text */ = {
 			isa = PBXGroup;
 			children = (
+				7BFE25EA1C61D9990038CA23 /* VideoDetail */,
 				7B3305B51C5F2BE10014C49C /* textDetail */,
 				7B33059C1C5EE9640014C49C /* TuwenViewController.h */,
 				7B33059D1C5EE9640014C49C /* TuwenViewController.m */,
@@ -1159,6 +1163,15 @@
 				7BF67F191C522466005FA5C4 /* FoundViewController.m */,
 			);
 			name = "Login and regist";
+			sourceTree = "<group>";
+		};
+		7BFE25EA1C61D9990038CA23 /* VideoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7BFE25EB1C61D9B70038CA23 /* VideoDetailViewController.h */,
+				7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */,
+			);
+			path = VideoDetail;
 			sourceTree = "<group>";
 		};
 		800E8F971C5DA9FA00CB8CC5 /* Advertise */ = {
@@ -1931,6 +1944,7 @@
 				7B3305AB1C5EE9AA0014C49C /* FenleiViewController.m in Sources */,
 				8043C7101C4E1DE600369EEF /* DataProvider.m in Sources */,
 				7B46EE061C6033D300E33E0E /* TextTableViewCell.m in Sources */,
+				7BFE25ED1C61D9B70038CA23 /* VideoDetailViewController.m in Sources */,
 				7B29EFB51C5714FE003A020B /* shouhudizhiTableViewCell.m in Sources */,
 				7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */,
 				7BAABAE31C59FBC800C14DF8 /* KechengbaomingViewController.m in Sources */,
