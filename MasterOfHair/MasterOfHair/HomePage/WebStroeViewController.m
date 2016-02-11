@@ -125,7 +125,7 @@
 {
     CGFloat length_h = 0;
     
-    if(SCREEN_WIDTH < 400)
+    if(SCREEN_WIDTH < 360)
     {
         length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
     }
@@ -140,7 +140,7 @@
 {
     CGFloat length_h = 0;
     
-    if(SCREEN_WIDTH < 400)
+    if(SCREEN_WIDTH < 360)
     {
         length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
     }

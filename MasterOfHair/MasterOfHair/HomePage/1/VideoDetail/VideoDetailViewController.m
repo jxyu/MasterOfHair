@@ -8,7 +8,9 @@
 
 #import "VideoDetailViewController.h"
 
-@interface VideoDetailViewController ()
+@interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView * tableView;
 
 @end
 
@@ -50,10 +52,40 @@
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
-#pragma mmark - 布局
+#pragma mark - 布局
 - (void)p_setupView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:(UITableViewStylePlain)];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+    //去除尾视图
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    //注册
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+}
+
+#pragma mark - tableView代理
+- (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    return cell;
 }
 
 
