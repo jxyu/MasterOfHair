@@ -9,6 +9,7 @@
 #import "ShipinshoucangViewController.h"
 
 #import "JCVideoCollectionViewCell.h"
+#import "VideoDetailViewController.h"
 @interface ShipinshoucangViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView * video_collectionView;
@@ -138,7 +139,10 @@
     
     if([_lblRight.text isEqualToString:@"编辑"])
     {
-        NSLog(@"跳视频页");
+//        NSLog(@"跳视频页");
+        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        [self showViewController:videoDetailViewController sender:nil];
     }
     else
     {

@@ -279,7 +279,7 @@
     self.bottom_btn.frame = CGRectMake(CGRectGetMaxX(view_1.frame) + 10, 5, 60, 40);
     self.bottom_btn.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.bottom_btn setTitle:@"发布" forState:(UIControlStateNormal)];
-    self.bottom_btn.titleLabel.font = [UIFont systemFontOfSize:19];
+    self.bottom_btn.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.bottom_btn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     [self.bottom_View addSubview:self.bottom_btn];
     

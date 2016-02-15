@@ -26,6 +26,7 @@
 #import "ShangmengViewController.h"
 #import "JinkahuiyuanViewController.h"
 #import "TuwenViewController.h"
+#import "VideoDetailViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -648,6 +649,10 @@
     else
     {
         NSLog(@"%ld",(long)indexPath.item);
+        
+        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        [self showViewController:videoDetailViewController sender:nil];
     }
     
 }

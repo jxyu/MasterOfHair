@@ -24,7 +24,7 @@
 {
     self.image = [[UIImageView alloc] init];
     self.image.backgroundColor = [UIColor orangeColor];
-    self.image.layer.cornerRadius = 30;
+    self.image.layer.cornerRadius = 25;
     [self.contentView addSubview:self.image];
     
     
@@ -62,7 +62,7 @@
 {
     [super layoutSubviews];
     
-    self.image.frame = CGRectMake(10, 10, 60, 60);
+    self.image.frame = CGRectMake(15, 10, 50, 50);
     
     self.name.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, CGRectGetMinY(self.image.frame) + 5, SCREEN_WIDTH - 50 - CGRectGetMaxX(self.image.frame) - 10, 20);
     

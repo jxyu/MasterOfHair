@@ -28,7 +28,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
  
     //self.view.backgroundColor = [UIColor whiteColor];
     if ([Toolkit isSystemIOS7]||[Toolkit isSystemIOS8])
@@ -40,8 +40,6 @@
     // _topView.backgroundColor = [UIColor colorWithRed:0.97 green:0.96 blue:0.96 alpha:1];
     
     _topView.backgroundColor = navi_bar_bg_color;
-    
- 
     
     [self.view addSubview:_topView];
     

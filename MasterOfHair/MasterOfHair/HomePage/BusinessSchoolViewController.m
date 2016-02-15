@@ -15,6 +15,7 @@
 
 #import "TuwenViewController.h"
 #import "TextDetailViewController.h"
+#import "VideoDetailViewController.h"
 @interface BusinessSchoolViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -524,6 +525,11 @@
         switch (indexPath.row) {
             case 0:
             {
+                //    NSLog(@"视频页");
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
+                
+                [self showViewController:tuwenViewController sender:nil];
                 
             }
                 break;
@@ -587,6 +593,10 @@
     else
     {
         NSLog(@"%ld",(long)indexPath.item);
+        
+        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        [self showViewController:videoDetailViewController sender:nil];
     }
 }
 
