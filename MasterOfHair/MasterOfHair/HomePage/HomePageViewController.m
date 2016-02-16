@@ -27,6 +27,7 @@
 #import "JinkahuiyuanViewController.h"
 #import "TuwenViewController.h"
 #import "VideoDetailViewController.h"
+#import "ShuoshuoViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -610,8 +611,10 @@
             }
                 break;
             case 6:
-            {
+            {//说说
+                ShuoshuoViewController * shuoshuoViewController = [[ShuoshuoViewController alloc] init];
                 
+                [self showViewController:shuoshuoViewController sender:nil];
             }
                 break;
             case 7:
