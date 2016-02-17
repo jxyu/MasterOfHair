@@ -95,7 +95,7 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        self.page = 1;
+        self.page = 2;
         
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];

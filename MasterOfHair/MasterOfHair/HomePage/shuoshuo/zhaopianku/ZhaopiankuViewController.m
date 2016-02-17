@@ -7,24 +7,20 @@
 //
 
 #import "ZhaopiankuViewController.h"
-
+#import "ZhaopiankuCollectionViewCell.h"
 
 #import "JKImagePickerController.h"
 #import "JKAssets.h"
-@interface ZhaopiankuViewController () <UITextViewDelegate, UIScrollViewDelegate, JKImagePickerControllerDelegate>
+@interface ZhaopiankuViewController () <UITextViewDelegate, UIScrollViewDelegate, JKImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
 @property (nonatomic, strong) UITextView * text_View;
 @property (nonatomic, strong) UILabel * label_placeHold;
+//
 
-@property (nonatomic, strong) UIView * view_white;
-@property (nonatomic, strong) UIImageView * image_1;
-@property (nonatomic, strong) UIImageView * image_2;
-@property (nonatomic, strong) UIImageView * image_3;
-@property (nonatomic, strong) UIImageView * image_4;
-@property (nonatomic, strong) UIImageView * image_5;
-@property (nonatomic, strong) UIImageView * image_6;
+@property (nonatomic, strong) UICollectionView * collectionView;
+
 
 //数组
 @property (nonatomic, strong) NSMutableArray * assetsArray;
@@ -119,107 +115,47 @@
     [self.text_View addSubview:self.label_placeHold];
     
     
-    //照片库
-    CGFloat lenth_x = (SCREEN_WIDTH - 20 - 20) / 3;
+    //collectionView
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    //每个item的大小
+    CGFloat item_length = (SCREEN_WIDTH - 40) / 3;
+    layout.itemSize = CGSizeMake(item_length, item_length);
+    layout.sectionInset = UIEdgeInsetsMake(10, 5, 10, 5);
     
-    self.view_white = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.text_View.frame) + 10, SCREEN_WIDTH, lenth_x * 2 + 20)];
-    self.view_white.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:self.view_white];
+//    CGFloat length_x = (SCREEN_WIDTH - 40) / 3;
     
-    //1
-    self.image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, lenth_x, lenth_x)];
-    self.image_1.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_1.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_1];
-    //手势
-    UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture1.numberOfTapsRequired = 1; //点击次数
-    tapGesture1.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_1 addGestureRecognizer:tapGesture1];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.text_View.frame) + 10, SCREEN_WIDTH, item_length * 2 + 30) collectionViewLayout:layout];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.collectionView];
     
     
-    //2
-    self.image_2 = [[UIImageView alloc] initWithFrame:CGRectMake(10 + CGRectGetMaxX(self.image_1.frame), 5, lenth_x, lenth_x)];
-    self.image_2.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_2.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_2];
-    //手势
-    UITapGestureRecognizer *tapGesture2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture2.numberOfTapsRequired = 1; //点击次数
-    tapGesture2.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_2 addGestureRecognizer:tapGesture2];
-    
-    
-    //3
-    self.image_3 = [[UIImageView alloc] initWithFrame:CGRectMake(10 + CGRectGetMaxX(self.image_2.frame), 5, lenth_x, lenth_x)];
-    self.image_3.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_3.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_3];
-    //手势
-    UITapGestureRecognizer *tapGesture3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture3.numberOfTapsRequired = 1; //点击次数
-    tapGesture3.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_3 addGestureRecognizer:tapGesture3];
-    
-    
-    //4
-    self.image_4 = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5 + lenth_x + 10, lenth_x, lenth_x)];
-    self.image_4.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_4.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_4];
-    //手势
-    UITapGestureRecognizer *tapGesture4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture4.numberOfTapsRequired = 1; //点击次数
-    tapGesture4.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_4 addGestureRecognizer:tapGesture4];
-    
-    
-    //5
-    self.image_5 = [[UIImageView alloc] initWithFrame:CGRectMake(10 + CGRectGetMaxX(self.image_4.frame), 15 + lenth_x, lenth_x, lenth_x)];
-    self.image_5.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_5.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_5];
-    //手势
-    UITapGestureRecognizer *tapGesture5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture5.numberOfTapsRequired = 1; //点击次数
-    tapGesture5.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_5 addGestureRecognizer:tapGesture5];
-    
-    
-    //6
-    self.image_6 = [[UIImageView alloc] initWithFrame:CGRectMake(10 + CGRectGetMaxX(self.image_5.frame), 15 + lenth_x, lenth_x, lenth_x)];
-    self.image_6.image = [UIImage imageNamed:@"shuoshuo98765"];
-    self.image_6.userInteractionEnabled = YES;
-    [self.view_white addSubview:self.image_6];
-    //手势
-    UITapGestureRecognizer *tapGesture6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
-    tapGesture6.numberOfTapsRequired = 1; //点击次数
-    tapGesture6.numberOfTouchesRequired = 1; //点击手指数
-    [self.image_6 addGestureRecognizer:tapGesture6];
+    [self.collectionView registerClass:[ZhaopiankuCollectionViewCell class] forCellWithReuseIdentifier:@"cell_photo"];
+}
 
-    self.image_2.hidden = YES;
-    self.image_3.hidden = YES;
-    self.image_4.hidden = YES;
-    self.image_5.hidden = YES;
-    self.image_6.hidden = YES;
+#pragma mark - collectionView代理
 
+- (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 6;
+}
+
+- (UICollectionViewCell * )collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZhaopiankuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_photo" forIndexPath:indexPath];
+    
+    
+    return cell;
 }
 
 #pragma mark - 图片
--(void)tapGesture1:(id)sender
-{
-    if([self.image_1.image isEqual:[UIImage imageNamed:@"shuoshuo98765"]])
-    {
-        NSLog(@"调用相册");
-        
-        [self composePicAdd];
-    }
-    else
-    {
-        NSLog(@"可删除");
-    }
-}
-
 - (void)composePicAdd
 {
     JKImagePickerController *imagePickerController = [[JKImagePickerController alloc] init];
@@ -253,7 +189,7 @@
         ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
         [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
             if (asset) {
-                self.image_1.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+//                self.image_1.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
             }
         } failureBlock:^(NSError *error) {
             
