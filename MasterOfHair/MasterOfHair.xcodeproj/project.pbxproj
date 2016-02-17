@@ -91,6 +91,7 @@
 		7B586CA51C71C91800BE4295 /* shuoshuo191919.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B586CA21C71C91800BE4295 /* shuoshuo191919.png */; };
 		7B8B33B01C72ED90008C6CD4 /* ZhaoxiangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B33AF1C72ED90008C6CD4 /* ZhaoxiangViewController.m */; };
 		7B8B33B21C72FB50008C6CD4 /* 30px.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B8B33B11C72FB50008C6CD4 /* 30px.png */; };
+		7B8B33B51C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B33B41C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m */; };
 		7BA0078E1C4F31D2009B3ABD /* iconfont-sousuo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */; };
 		7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */; };
 		7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA596901C4E237300DBC69D /* HomePageViewController.m */; };
@@ -411,6 +412,8 @@
 		7B8B33AE1C72ED90008C6CD4 /* ZhaoxiangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaoxiangViewController.h; sourceTree = "<group>"; };
 		7B8B33AF1C72ED90008C6CD4 /* ZhaoxiangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhaoxiangViewController.m; sourceTree = "<group>"; };
 		7B8B33B11C72FB50008C6CD4 /* 30px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30px.png; sourceTree = "<group>"; };
+		7B8B33B31C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaopiankuCollectionViewCell.h; sourceTree = "<group>"; };
+		7B8B33B41C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhaopiankuCollectionViewCell.m; sourceTree = "<group>"; };
 		7BA0078D1C4F31D2009B3ABD /* iconfont-sousuo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-sousuo.png"; sourceTree = "<group>"; };
 		7BA007A01C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicAndVideoCollectionViewCell.h; sourceTree = "<group>"; };
 		7BA007A11C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicAndVideoCollectionViewCell.m; sourceTree = "<group>"; };
@@ -816,6 +819,8 @@
 			children = (
 				7B206A0A1C72B4DE00481F24 /* ZhaopiankuViewController.h */,
 				7B206A0B1C72B4DE00481F24 /* ZhaopiankuViewController.m */,
+				7B8B33B31C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.h */,
+				7B8B33B41C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m */,
 			);
 			path = zhaopianku;
 			sourceTree = "<group>";
@@ -2077,6 +2082,7 @@
 				802552A71C57442B00CFF875 /* README.md in Sources */,
 				7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
+				7B8B33B51C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m in Sources */,
 				7BB26FD41C5AF01E001D332E /* ZhifuViewController.m in Sources */,
 				7BB26FDB1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m in Sources */,
 				7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */,

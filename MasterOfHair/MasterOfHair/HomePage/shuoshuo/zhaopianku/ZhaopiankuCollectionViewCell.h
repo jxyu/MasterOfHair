@@ -1,0 +1,17 @@
+//
+//  ZhaopiankuCollectionViewCell.h
+//  MasterOfHair
+//
+//  Created by 鞠超 on 16/2/16.
+//  Copyright © 2016年 zykj. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ZhaopiankuCollectionViewCell : UICollectionViewCell
+
+@property (nonatomic, strong) UIImageView * image;
+
+@property (nonatomic, strong) UIButton * btn;
+
+@end

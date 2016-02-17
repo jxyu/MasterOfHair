@@ -83,9 +83,9 @@
 - (void)clickRightButton:(UIButton *)sender
 {
     //    NSLog(@"发布");
-    if([self.text_View.text length] == 0)
+    if([self.image_1.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入文字后再发布" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择一张图片再发表" preferredStyle:(UIAlertControllerStyleAlert)];
         
         [self presentViewController:alert animated:YES completion:^{
             
@@ -99,6 +99,13 @@
     }
     else
     {
+        if([self.text_View.text length] == 0)
+        {
+            self.label_placeHold.hidden = NO;
+        }
+        [self.text_View resignFirstResponder];
+        
+        
         NSLog(@"发布成功");
     }
 }
@@ -325,7 +332,7 @@
     if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
 //        NSLog(@"调用相机");
-        self.image_6.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+        self.image_6.image = [UIImage imageNamed:@"select_down@2x"];
         
         self.btn_6 = [UIButton buttonWithType:(UIButtonTypeSystem)];
         self.btn_6.frame = CGRectMake(self.length - 15, -3, 20, 20);
@@ -335,20 +342,210 @@
     }
 }
 
+
+#pragma mark - text代理 和 点击方法
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.text_View resignFirstResponder];
+    
+    if([self.text_View.text length] == 0)
+    {
+        self.label_placeHold.hidden = NO;
+    }
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    self.label_placeHold.hidden = YES;
+    
+    return YES;
+}
+
+#pragma mark - scrollView
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if([self.scrollView isEqual:scrollView])
+    {
+        [self.text_View resignFirstResponder];
+        
+        if([self.text_View.text length] == 0)
+        {
+            self.label_placeHold.hidden = NO;
+        }
+    }
+}
+
 #pragma mark - 删除
 - (void)btn_1Action:(UIButton *)sender
 {
-    
+    if([self.image_2.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+    {
+        self.image_1.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        self.btn_1.hidden = YES;
+        self.image_2.hidden = YES;
+    }
+    else
+    {
+        if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+        {
+            if([self.image_5.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+            {
+                if([self.image_4.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+                {
+                    if([self.image_3.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+                    {
+                        self.image_1.image = self.image_2.image;
+                        self.btn_2.hidden = YES;
+                        self.image_2.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                        
+                        self.image_3.hidden = YES;
+                    }
+                    else
+                    {
+                        self.image_1.image = self.image_2.image;
+                        self.image_2.image = self.image_3.image;
+                        self.btn_3.hidden = YES;
+                        self.image_3.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                        
+                        self.image_4.hidden = YES;
+                    }
+                    
+                }
+                else
+                {
+                    self.image_1.image = self.image_2.image;
+                    self.image_2.image = self.image_3.image;
+                    self.image_3.image = self.image_4.image;
+                    self.btn_4.hidden = YES;
+                    self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                    
+                    self.image_5.hidden = YES;
+                }
+            }
+            else
+            {
+                self.image_1.image = self.image_2.image;
+                self.image_2.image = self.image_3.image;
+                self.image_3.image = self.image_4.image;
+                self.image_4.image = self.image_5.image;
+                self.btn_5.hidden = YES;
+                self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                
+                self.image_6.hidden = YES;
+            }
+        }
+        else
+        {
+            self.image_1.image = self.image_2.image;
+            self.image_2.image = self.image_3.image;
+            self.image_3.image = self.image_4.image;
+            self.image_4.image = self.image_5.image;
+            self.image_5.image = self.image_6.image;
+            
+            self.btn_6.hidden = YES;
+            self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        }
+    }
 }
 
 - (void)btn_2Action:(UIButton *)sender
 {
-    
+    if([self.image_3.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+    {
+        self.image_2.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        self.btn_2.hidden = YES;
+        self.image_3.hidden = YES;
+    }
+    else
+    {
+        if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+        {
+            if([self.image_5.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+            {
+                if([self.image_4.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+                {
+                    self.image_2.image = self.image_3.image;
+                    self.btn_3.hidden = YES;
+                    self.image_3.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                    
+                    self.image_4.hidden = YES;
+                    
+                }
+                else
+                {
+                    self.image_2.image = self.image_3.image;
+                    self.image_3.image = self.image_4.image;
+                    self.btn_4.hidden = YES;
+                    self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                    
+                    self.image_5.hidden = YES;
+                }
+                
+            }
+            else
+            {
+                self.image_2.image = self.image_3.image;
+                self.image_3.image = self.image_4.image;
+                self.image_4.image = self.image_5.image;
+                self.btn_5.hidden = YES;
+                self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                
+                self.image_6.hidden = YES;
+            }
+        }
+        else
+        {
+            self.image_2.image = self.image_3.image;
+            self.image_3.image = self.image_4.image;
+            self.image_4.image = self.image_5.image;
+            self.image_5.image = self.image_6.image;
+            
+            self.btn_6.hidden = YES;
+            self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        }
+    }
 }
 
 - (void)btn_3Action:(UIButton *)sender
 {
-    
+    if([self.image_4.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+    {
+        self.image_3.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        self.btn_3.hidden = YES;
+        self.image_4.hidden = YES;
+    }
+    else
+    {
+        if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+        {
+            if([self.image_5.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
+            {
+                self.image_3.image = self.image_4.image;
+                self.btn_4.hidden = YES;
+                self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                
+                self.image_5.hidden = YES;
+            }
+            else
+            {
+                self.image_3.image = self.image_4.image;
+                self.image_4.image = self.image_5.image;
+                self.btn_5.hidden = YES;
+                self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
+                
+                self.image_6.hidden = YES;
+            }
+        }
+        else
+        {
+            self.image_3.image = self.image_4.image;
+            self.image_4.image = self.image_5.image;
+            self.image_5.image = self.image_6.image;
+            
+            self.btn_6.hidden = YES;
+            self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
+        }
+    }
 }
 
 - (void)btn_4Action:(UIButton *)sender
@@ -402,39 +599,6 @@
     self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
     self.btn_6.hidden = YES;
 }
-
-#pragma mark - text代理 和 点击方法
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.text_View resignFirstResponder];
-    
-    if([self.text_View.text length] == 0)
-    {
-        self.label_placeHold.hidden = NO;
-    }
-}
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    self.label_placeHold.hidden = YES;
-    
-    return YES;
-}
-
-#pragma mark - scrollView
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if([self.scrollView isEqual:scrollView])
-    {
-        [self.text_View resignFirstResponder];
-        
-        if([self.text_View.text length] == 0)
-        {
-            self.label_placeHold.hidden = NO;
-        }
-    }
-}
-
 
 
 
