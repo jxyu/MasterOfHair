@@ -9,8 +9,14 @@
 #ifndef BestOne_CommonDef_h
 #define BestOne_CommonDef_h
 
-//#define Url @"http://192.168.1.136:8033/"
-#define Url @"http://115.28.67.86:8033/" //外网地址
+//#define Url @"http://192.168.1.127/"
+
+#define Url @"http://www.shenglongly.com/"
+//#define Url @"http://115.28.67.86:8033/" //外网地址
+
+
+
+
 
 #define NavigationBar_HEIGHT 44
 #define StatusBar_HEIGHT 20

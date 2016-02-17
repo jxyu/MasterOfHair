@@ -104,9 +104,9 @@
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
     //头视图
-    [self p_headView];
+//    [self p_headView];
     
-//    [self p_headView1];
+    [self p_headView1];
     
     self.tableView.tableHeaderView = self.head_view;
 }

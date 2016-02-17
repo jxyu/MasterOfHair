@@ -23,5 +23,21 @@
 - (void)setDelegateObject:(id)cbobject setBackFunctionName:(NSString *)selectorName;
 
 
+#pragma mark - 注册
+- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

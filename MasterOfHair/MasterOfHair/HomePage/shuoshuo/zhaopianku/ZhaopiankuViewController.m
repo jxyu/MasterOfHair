@@ -151,8 +151,35 @@
 {
     ZhaopiankuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_photo" forIndexPath:indexPath];
     
+    cell.image.tag = (indexPath.row + 1000);
+    if(indexPath.item == 0)
+    {
+        cell.image.image = [UIImage imageNamed:@"shuoshuo98765"];
+    }
+    
+    
+    
+    cell.btn.tag = indexPath.row + 10000;
+    [cell.btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self composePicAdd];
+}
+
+
+#pragma mark - 删除图片
+- (void)btnAction:(UIButton *)sender
+{
+    [self.assetsArray removeObjectAtIndex:sender.tag - 10000];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        [self.collectionView reloadData];
+    });
 }
 
 #pragma mark - 图片
@@ -180,21 +207,32 @@
 
 - (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
 {
-    self.assetsArray = [NSMutableArray arrayWithArray:assets];
+    self.assetsArray = nil;
     
+    self.assetsArray = [NSMutableArray arrayWithArray:assets];
+
     [imagePicker dismissViewControllerAnimated:YES completion:^{
         
-        JKAssets * asset = self.assetsArray.firstObject;
-        
-        ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
-        [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
-            if (asset) {
-//                self.image_1.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
-            }
-        } failureBlock:^(NSError *error) {
+        for (int i = 0; i < self.assetsArray.count; i ++) {
+            JKAssets * asset = self.assetsArray[i];
             
-        }];
-
+            ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
+            [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
+                if (asset) {
+                    
+                    UIImageView * image = [self.view viewWithTag:i + 1000];
+                    
+                    image.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+                }
+            } failureBlock:^(NSError *error) {
+                
+            }];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新tableView(记住,要更新放在主线程中)
+            [self.collectionView reloadData];
+        });
     }];
 }
 

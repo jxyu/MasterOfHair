@@ -26,7 +26,8 @@
 {
     self.image = [[UIImageView alloc] initWithFrame:self.contentView.frame];
     self.image.layer.masksToBounds = YES;
-    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.backgroundColor = [UIColor orangeColor];
+//    self.image.image = [UIImage imageNamed:@"shuoshuo98765"];
     [self.contentView addSubview:self.image];
     
     self.btn = [UIButton buttonWithType:(UIButtonTypeSystem)];

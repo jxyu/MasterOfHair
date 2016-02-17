@@ -9,7 +9,7 @@
 #import "RegistViewController.h"
 
 #import "AppDelegate.h"
-@interface RegistViewController () <UITextFieldDelegate>
+@interface RegistViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
@@ -72,6 +72,8 @@
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     self.scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT + 30);
+    self.scrollView.delegate = self;
     
     [self.view addSubview:self.scrollView];
     
@@ -172,78 +174,6 @@
 
 }
 
-#pragma mark - textField代理
-- (BOOL )textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    
-    [UIView animateWithDuration:0.7 animations:^{
-        
-        self.scrollView.contentOffset = CGPointMake(0, 0);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    return YES;
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-
-    [self.text_tel resignFirstResponder];
-    [self.text_password resignFirstResponder];
-    [self.text_pass resignFirstResponder];
-    [self.text_extend resignFirstResponder];
-    [self.text_captcha resignFirstResponder];
-    
-    [UIView animateWithDuration:0.7 animations:^{
-        
-        self.scrollView.contentOffset = CGPointMake(0, 0);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-    if([textField isEqual:self.text_captcha])
-    {
-        [UIView animateWithDuration:0.7 animations:^{
-            
-            self.scrollView.contentOffset = CGPointMake(0, 100);
-
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    
-    if([textField isEqual:self.text_pass])
-    {
-        [UIView animateWithDuration:0.7 animations:^{
-            
-            self.scrollView.contentOffset = CGPointMake(0, 150);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    
-    if([textField isEqual:self.text_password])
-    {
-        [UIView animateWithDuration:0.7 animations:^{
-            
-            self.scrollView.contentOffset = CGPointMake(0, 180);
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-}
-
 #pragma mark - btn注册, 验证二维码
 - (void)btnbtn_captchaAction:(UIButton *)sender
 {
@@ -279,8 +209,99 @@
     } completion:^(BOOL finished) {
         
     }];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
+    [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text];
 }
 
+#pragma mark - 接口部分
+- (void)register_register:(id )dict
+{
+    NSLog(@"%@",dict);
+}
+
+#pragma mark - scrollView代理
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.text_tel resignFirstResponder];
+    [self.text_password resignFirstResponder];
+    [self.text_pass resignFirstResponder];
+    [self.text_extend resignFirstResponder];
+    [self.text_captcha resignFirstResponder];
+}
+
+#pragma mark - textField代理
+- (BOOL )textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.text_tel resignFirstResponder];
+    [self.text_password resignFirstResponder];
+    [self.text_pass resignFirstResponder];
+    [self.text_extend resignFirstResponder];
+    [self.text_captcha resignFirstResponder];
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+    if([textField isEqual:self.text_captcha])
+    {
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.scrollView.contentOffset = CGPointMake(0, 100);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+    if([textField isEqual:self.text_pass])
+    {
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.scrollView.contentOffset = CGPointMake(0, 150);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+    if([textField isEqual:self.text_password])
+    {
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.scrollView.contentOffset = CGPointMake(0, 180);
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
 
 
 

@@ -18,10 +18,18 @@
 
 @implementation DataProvider
 
+#pragma mark - 注册
+- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password
+{
+    if(member_username && member_password)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/register",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
-
-
-
+#pragma mark - 登陆
 
 
 
@@ -144,7 +152,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error:%@",error);
-        [SVProgressHUD showErrorWithStatus:@"请检查网络或防火墙" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"请检查网络" maskType:SVProgressHUDMaskTypeBlack];
         [SVProgressHUD dismiss];
     }];
 }
@@ -157,7 +165,7 @@
     AFHTTPRequestOperationManager * manage=[[AFHTTPRequestOperationManager alloc] init];
     manage.responseSerializer=[AFHTTPResponseSerializer serializer];
     manage.requestSerializer=[AFHTTPRequestSerializer serializer];
-    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/xml"];//可接收到的数据类型
+    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/plain"];//可接收到的数据类型
     manage.requestSerializer.timeoutInterval=10;//设置请求时限
     NSDictionary * prm =[[NSDictionary alloc] init];
     if (pram!=nil) {
@@ -180,7 +188,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error:%@",error);
-        [SVProgressHUD showErrorWithStatus:@"请检查网络或防火墙" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"请检查网络" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
