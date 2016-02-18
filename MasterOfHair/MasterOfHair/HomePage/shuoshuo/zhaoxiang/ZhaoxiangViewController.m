@@ -236,7 +236,7 @@
         self.image_2.hidden = NO;
         
         self.btn_1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_1.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_1.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_1 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_1 addSubview:self.btn_1];
         [self.btn_1 addTarget:self action:@selector(btn_1Action:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -256,7 +256,7 @@
         self.image_3.hidden = NO;
         
         self.btn_2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_2.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_2.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_2 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_2 addSubview:self.btn_2];
         [self.btn_2 addTarget:self action:@selector(btn_2Action:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -276,7 +276,7 @@
         self.image_4.hidden = NO;
         
         self.btn_3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_3.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_3.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_3 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_3 addSubview:self.btn_3];
         [self.btn_3 addTarget:self action:@selector(btn_3Action:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -296,7 +296,7 @@
         self.image_5.hidden = NO;
         
         self.btn_4 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_4.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_4.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_4 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_4 addSubview:self.btn_4];
         [self.btn_4 addTarget:self action:@selector(btn_4Action:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -316,7 +316,7 @@
         self.image_6.hidden = NO;
         
         self.btn_5 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_5.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_5.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_5 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_5 addSubview:self.btn_5];
         [self.btn_5 addTarget:self action:@selector(btn_5Action:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -335,7 +335,7 @@
         self.image_6.image = [UIImage imageNamed:@"select_down@2x"];
         
         self.btn_6 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_6.frame = CGRectMake(self.length - 15, -3, 20, 20);
+        self.btn_6.frame = CGRectMake(self.length - 20, 0, 20, 20);
         [self.btn_6 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
         [self.image_6 addSubview:self.btn_6];
         [self.btn_6 addTarget:self action:@selector(btn_6Action:) forControlEvents:(UIControlEventTouchUpInside)];

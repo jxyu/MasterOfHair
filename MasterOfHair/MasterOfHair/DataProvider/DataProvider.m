@@ -122,7 +122,7 @@
     AFHTTPRequestOperationManager * manage=[[AFHTTPRequestOperationManager alloc] init];
     manage.responseSerializer=[AFHTTPResponseSerializer serializer];
     manage.requestSerializer=[AFHTTPRequestSerializer serializer];
-    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/plain"];//可接收到的数据类型
+    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];//可接收到的数据类型
     manage.requestSerializer.timeoutInterval=20;//设置请求时限
     NSDictionary * prm =[[NSDictionary alloc] init];
     if (pram!=nil) {
@@ -165,7 +165,7 @@
     AFHTTPRequestOperationManager * manage=[[AFHTTPRequestOperationManager alloc] init];
     manage.responseSerializer=[AFHTTPResponseSerializer serializer];
     manage.requestSerializer=[AFHTTPRequestSerializer serializer];
-    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/plain"];//可接收到的数据类型
+    manage.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];//可接收到的数据类型
     manage.requestSerializer.timeoutInterval=10;//设置请求时限
     NSDictionary * prm =[[NSDictionary alloc] init];
     if (pram!=nil) {
@@ -215,7 +215,7 @@
         NSLog(@"上传完成");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"上传失败->%@", error);
-        [SVProgressHUD showErrorWithStatus:@"请检查网络或防火墙" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"请检查网络" maskType:SVProgressHUDMaskTypeBlack];
     }];
     
     //执行
@@ -252,7 +252,7 @@
         NSLog(@"上传完成");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"上传失败->%@", error);
-        [SVProgressHUD showErrorWithStatus:@"请检查网络或防火墙" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"请检查网络" maskType:SVProgressHUDMaskTypeBlack];
     }];
     
     //执行
@@ -303,7 +303,7 @@
         NSLog(@"上传完成");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"上传失败->%@", error);
-        [SVProgressHUD showErrorWithStatus:@"请检查网络或防火墙" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"请检查网络" maskType:SVProgressHUDMaskTypeBlack];
     }];
     
     //执行

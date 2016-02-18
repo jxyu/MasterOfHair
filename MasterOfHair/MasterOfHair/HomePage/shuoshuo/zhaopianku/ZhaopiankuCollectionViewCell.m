@@ -18,7 +18,6 @@
     {
         [self p_setupView];
     }
-    
     return self;
 }
 
@@ -31,10 +30,10 @@
     [self.contentView addSubview:self.image];
     
     self.btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.btn.frame = CGRectMake(self.contentView.frame.size.width - 15, - 3, 20, 20);
+    self.btn.frame = CGRectMake(self.contentView.frame.size.width - 20, 0, 20, 20);
     [self.btn setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+    self.btn.hidden = YES;
     [self.contentView addSubview:self.btn];
-    
 }
 
 

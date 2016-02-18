@@ -11,6 +11,7 @@
 #import "ChunwenziViewController.h"
 #import "ZhaopiankuViewController.h"
 #import "ZhaoxiangViewController.h"
+#import "LuxiangViewController.h"
 @interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -187,7 +188,9 @@
 
 - (void)btn_4Action:(UIButton *)sender
 {
+    LuxiangViewController * luxiangViewController = [[LuxiangViewController alloc] init];
     
+    [self showViewController:luxiangViewController sender:nil];
 }
 
 

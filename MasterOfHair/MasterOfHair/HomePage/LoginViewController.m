@@ -159,6 +159,21 @@
     NSLog(@"登陆");
     [self.text_account resignFirstResponder];
     [self.text_password resignFirstResponder];
+    
+    if([self.text_account.text length] == 0 || [self.text_password.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"账号或密码不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+    }
+    
+    
+    
+    
 }
 
 #pragma mark - 找回密码
