@@ -58,7 +58,7 @@
     
     [self p_navi];
     
-    [self p_setupView];
+//    [self p_setupView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +85,11 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    [self p_setupView];
+    
+    [self.tableView reloadData];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
@@ -103,11 +108,17 @@
     //注册
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
-    //头视图
-//    [self p_headView];
-    
-    [self p_headView1];
-    
+    //判断是否处于登陆状态
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"Login_Success"] isEqualToString:@"1"])
+    {//头视图
+        [self p_headView];
+    }
+    else
+    {
+        [self p_headView1];
+
+    }
     self.tableView.tableHeaderView = self.head_view;
 }
 
@@ -115,6 +126,8 @@
 //这个为登陆状态的头布局
 - (void)p_headView
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 190)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -125,8 +138,19 @@
     self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 90, 90)];
     self.head_image.layer.cornerRadius = 45;
     self.head_image.layer.masksToBounds = YES;
-    self.head_image.backgroundColor = [UIColor orangeColor];
+//    self.head_image.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_image];
+    
+//    NSLog(@"%@",[userdefault objectForKey:@"member_headpic"]);
+    if([[userdefault objectForKey:@"member_headpic"] length] == 0)
+    {
+        self.head_image.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.head_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
     
     UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_image.frame) + 10, CGRectGetMinY(self.head_image.frame) + 3, 40, 20)];
     label_1.text = @"昵称:";
@@ -138,6 +162,17 @@
     self.head_name.text = @"18888888888888";
     //    self.head_name.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_name];
+    
+    NSLog(@"%@",[userdefault objectForKey:@"member_nickname"]);
+    if([[userdefault objectForKey:@"member_nickname"] length] == 0)
+    {
+        self.head_name.text = @"";
+    }
+    else
+    {
+        self.head_name.text = [userdefault objectForKey:@"member_nickname"];
+    }
+    
     
     self.head_diamond = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(label_1.frame) + 8, 28, 28)];
     self.head_diamond.image = [UIImage imageNamed:@"05zuanshi03"];

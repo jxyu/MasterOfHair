@@ -30,7 +30,15 @@
 }
 
 #pragma mark - 登陆
-
+- (void)loginWithMember_username:(NSString *)member_username member_password:(NSString *)member_password
+{
+    if(member_username && member_password)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/login",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
 

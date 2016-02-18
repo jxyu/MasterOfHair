@@ -26,7 +26,8 @@
 #pragma mark - 注册
 - (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
 
-
+#pragma mark - 登陆
+- (void)loginWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
 
 
 

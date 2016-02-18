@@ -324,9 +324,12 @@
             
         }];
     }
+//        DataProvider * dataprovider=[[DataProvider alloc] init];
+//        [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
+//        [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text];
 }
 
-#pragma mark - 接口部分
+#pragma mark - 注册接口部分
 - (void)register_register:(id )dict
 {    
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
@@ -340,15 +343,49 @@
         }
         @finally
         {
-            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
+            [dataprovider loginWithMember_username:self.text_tel.text member_password:self.text_pass.text];
         }
     }
     else
     {
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
-
 }
+
+#pragma mark - 登陆接口部分
+- (void)login_register:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+//            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            //保存用户名和密码
+            [userdefault setObject:self.text_tel.text forKey:@"account"];
+            [userdefault setObject:self.text_pass.text forKey:@"password"];
+            //保存登陆的状态
+            [userdefault setObject:@"1" forKey:@"Login_Success"];
+        }
+        @catch (NSException *exception)
+        {
+        }
+        @finally
+        {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 #pragma mark - scrollView代理
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
