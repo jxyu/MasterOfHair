@@ -9,7 +9,9 @@
 #import "FoundViewController.h"
 
 #import "AppDelegate.h"
-@interface FoundViewController () <UITextFieldDelegate>
+#import <SMS_SDK/SMSSDK.h>
+
+@interface FoundViewController () <UITextFieldDelegate , UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
@@ -71,6 +73,8 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     self.scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    self.scrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT + 20);
+    self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
     [self p_setupView1];
@@ -84,6 +88,7 @@
     view_1.layer.cornerRadius = 5;
     view_1.layer.borderColor = navi_bar_bg_color.CGColor;
     view_1.layer.borderWidth = 1;
+    
     [self.scrollView addSubview:view_1];
     
     self.text_tel = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view_1.frame.size.width - 30, 40)];
@@ -162,11 +167,41 @@
     [self.text_pass resignFirstResponder];
     [self.text_captcha resignFirstResponder];
     
-    NSLog(@"点击验证二维码");
+    NSLog(@"点击验证码");
+    if (self.text_tel.text.length == 11)
+    {
+        [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeBlack];
+        
+        [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.text_tel.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
+            if (!error)
+            {
+                [SVProgressHUD dismiss];
+            }
+            else
+            {
+                [SVProgressHUD dismiss];
+                
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"该号码不存在" preferredStyle:(UIAlertControllerStyleAlert)];
+                [self presentViewController:alert animated:YES completion:^{
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [alert addAction:action];
+            }
+        }];
+    }
+    else
+    {
+        UIAlertView * alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入正确手机号" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)btn_changeAction:(UIButton *)sender
 {
+    //    NSLog(@"立即重置");
+
     [self.text_tel resignFirstResponder];
     [self.text_password resignFirstResponder];
     [self.text_pass resignFirstResponder];
@@ -179,9 +214,120 @@
     } completion:^(BOOL finished) {
         
     }];
+    //多次判断
+    if([self.text_tel.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入手机号" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+    }
     
-    NSLog(@"立即重置");
+    if([self.text_tel.text length] != 11)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确手机号" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if([self.text_captcha.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入验证码" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if([self.text_pass.text length] < 6 || [self.text_password.text length] < 6)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入6位以上数字或字母组合密码" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if(![self.text_pass.text isEqualToString:self.text_password.text])
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"两次输入的密码不相同" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+    }
+    
+    
+    if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0 && [self.text_pass.text isEqualToString:self.text_password.text] && [self.text_pass.text length] >= 6 && [self.text_password.text length] >= 6)
+    {
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+            
+            if(error)
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
+                [self presentViewController:alert animated:YES completion:^{
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [alert addAction:action];
+            }
+            else
+            {//验证成功
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"resetPassword:"];
+                
+                [dataprovider resetPasswordWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+            }
+        }];
+    }
+    
+//    DataProvider * dataprovider=[[DataProvider alloc] init];
+//    [dataprovider setDelegateObject:self setBackFunctionName:@"resetPassword:"];
+//    
+//    [dataprovider resetPasswordWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+    
 }
+
+#pragma mark - 找回接口
+- (void)resetPassword:(id )dict
+{
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"重置密码成功"];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 
 #pragma mark - textField代理
@@ -244,6 +390,14 @@
     }
 }
 
+#pragma mark - scrollView代理
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.text_tel resignFirstResponder];
+    [self.text_password resignFirstResponder];
+    [self.text_pass resignFirstResponder];
+    [self.text_captcha resignFirstResponder];
+}
 
 
 

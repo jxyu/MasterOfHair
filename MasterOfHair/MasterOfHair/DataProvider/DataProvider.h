@@ -24,11 +24,16 @@
 
 
 #pragma mark - 注册
-- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
+- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password spread_id:(NSString *)spread_id;
 
 #pragma mark - 登陆
 - (void)loginWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
 
+#pragma mark - 重置密码
+- (void)resetPasswordWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
+
+#pragma mark - 商城产品接口
+- (void)productWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

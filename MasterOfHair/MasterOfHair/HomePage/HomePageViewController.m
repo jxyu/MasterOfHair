@@ -732,7 +732,7 @@
 #pragma mark - 判断登陆接口
 - (void)login_register:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     

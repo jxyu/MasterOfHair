@@ -46,6 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self p_data];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -463,6 +465,42 @@
         
         self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
         
+    }
+}
+
+#pragma mark - 加载数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
+    [dataprovider productWithcity_id:@"105" pagenumber:@"1" pagesize:@"10"];
+}
+
+#pragma mark - 商城数据
+- (void)product:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"productlist"]) {
+                
+                
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+
     }
 }
 

@@ -44,8 +44,9 @@
     [self.contentView addSubview:self.detail];
     
     
-    self.image_class = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 30, 0, 30, 30)];
-    self.image_class.backgroundColor = [UIColor blackColor];
+    self.image_class = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 40, 0, 40, 40)];
+//    self.image_class.backgroundColor = [UIColor blackColor];
+    self.image_class.image = [UIImage imageNamed:@"changjiazhitongche"];
     [self.contentView addSubview:self.image_class];
     
     

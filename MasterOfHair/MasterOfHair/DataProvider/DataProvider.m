@@ -19,12 +19,12 @@
 @implementation DataProvider
 
 #pragma mark - 注册
-- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password
+- (void)registerWithMember_username:(NSString *)member_username member_password:(NSString *)member_password spread_id:(NSString *)spread_id
 {
     if(member_username && member_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/register",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\",\"spread_id\":\"%@\"}",member_username,member_password,spread_id]};
         [self GetRequest:url andpram:prm];
     }
 }
@@ -40,7 +40,28 @@
     }
 }
 
+#pragma mark - 重置密码
+- (void)resetPasswordWithMember_username:(NSString *)member_username member_password:(NSString *)member_password
+{
+    if(member_username && member_password)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/resetPassword",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
+
+#pragma mark - 商城产品接口
+- (void)productWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(city_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProducts",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\"}",city_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
 

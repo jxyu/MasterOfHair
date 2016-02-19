@@ -241,6 +241,21 @@
         
     }];
     
+    if([self.text_extend.text length] != 0)
+    {
+        if([self.text_extend.text length] != 11)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"邀请码输入格式错误" preferredStyle:(UIAlertControllerStyleAlert)];
+            [self presentViewController:alert animated:YES completion:^{
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [alert addAction:action];
+        }
+    }
+    
+    
     if([self.text_tel.text length] == 0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入手机号" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -319,16 +334,13 @@
             {//验证成功
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
-                [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+                [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
             }
             
         }];
     }
-//        DataProvider * dataprovider=[[DataProvider alloc] init];
-//        [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
-//        [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+    
 }
-
 #pragma mark - 注册接口部分
 - (void)register_register:(id )dict
 {    
