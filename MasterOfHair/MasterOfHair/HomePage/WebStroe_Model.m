@@ -10,4 +10,10 @@
 
 @implementation WebStroe_Model
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
+
 @end

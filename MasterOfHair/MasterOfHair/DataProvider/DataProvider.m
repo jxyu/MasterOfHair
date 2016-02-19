@@ -53,17 +53,15 @@
 
 
 #pragma mark - 商城产品接口
-- (void)productWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
 {
-    if(city_id && pagenumber && pagesize)
+    if(city_id && category_id && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProducts",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\"}",city_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductsList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\"}",city_id,category_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         [self GetRequest:url andpram:prm];
     }
 }
-
-
 
 
 

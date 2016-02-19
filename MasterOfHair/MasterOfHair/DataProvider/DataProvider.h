@@ -33,7 +33,7 @@
 - (void)resetPasswordWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
 
 #pragma mark - 商城产品接口
-- (void)productWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

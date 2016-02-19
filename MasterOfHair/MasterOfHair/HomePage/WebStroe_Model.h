@@ -10,6 +10,10 @@
 
 @interface WebStroe_Model : NSObject
 
+@property (nonatomic, copy) NSString * category_id;
+
+@property (nonatomic, copy) NSString * city_id;
+
 @property (nonatomic, copy) NSString * is_maker;
 
 @property (nonatomic, copy) NSString * list_img;
@@ -20,5 +24,6 @@
 
 @property (nonatomic, copy) NSString * sell_price;
 
+@property (nonatomic, copy) NSString * net_price;
 
 @end

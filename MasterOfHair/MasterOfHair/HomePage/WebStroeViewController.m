@@ -15,6 +15,9 @@
 
 #import "chanpingxiangqingViewController.h"
 #import "FenleiViewController.h"
+
+#import "WebStroe_Model.h"
+
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //tableView
@@ -39,6 +42,12 @@
 //测试
 @property (nonatomic, assign) NSInteger page;
 
+
+//保存数据的数组
+@property (nonatomic, strong) NSMutableArray * arr_data;
+//全部数据
+@property (nonatomic, strong) NSMutableArray * arr_all;
+
 @end
 
 @implementation WebStroeViewController
@@ -46,11 +55,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self p_data];
+//    [self p_data];
     
     [self p_navi];
     
     [self p_setupView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +107,7 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        self.page = 2;
+        [self p_data];
         
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
@@ -105,7 +115,7 @@
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
-        self.page ++;
+        [self p_data1];
         
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
@@ -120,20 +130,43 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.page;
+    return self.arr_all.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat length_h = 0;
     
+
     if(SCREEN_WIDTH < 360)
     {
-        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+        if([self.arr_all[indexPath.row] count] >= 7)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 6 && [self.arr_all[indexPath.row] count] >= 4)
+        {
+            length_h = (((SCREEN_WIDTH ) / 4 + 100) * 2.15) / 3 * 2;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 3 && [self.arr_all[indexPath.row] count] >= 1)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15 / 3;
+        }
     }
     else
     {
-        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+        if([self.arr_all[indexPath.row] count] >= 7)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 6 && [self.arr_all[indexPath.row] count] >= 4)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25 / 3 * 2;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 3 && [self.arr_all[indexPath.row] count] >= 1)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25 / 3;
+        }
     }
     return length_h;
 }
@@ -142,13 +175,44 @@
 {
     CGFloat length_h = 0;
     
+//    if(SCREEN_WIDTH < 360)
+//    {
+//        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+//    }
+//    else
+//    {
+//        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+//    }
+    
     if(SCREEN_WIDTH < 360)
     {
-        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+        if([self.arr_all[indexPath.row] count] >= 7)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 6 && [self.arr_all[indexPath.row] count] >= 4)
+        {
+            length_h = (((SCREEN_WIDTH ) / 4 + 100) * 2.15) / 3 * 2;
+        }
+        else
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.15 / 3;
+        }
     }
     else
     {
-        length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+        if([self.arr_all[indexPath.row] count] >= 7)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25;
+        }
+        else if([self.arr_all[indexPath.row] count] <= 6 && [self.arr_all[indexPath.row] count] >= 4)
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25 / 3 * 2;
+        }
+        else
+        {
+            length_h = ((SCREEN_WIDTH ) / 4 + 100) * 2.25 / 3;
+        }
     }
     
     UITableViewCell * cell = [[UITableViewCell alloc] init];
@@ -184,14 +248,29 @@
 
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 9;
+    return [self.arr_all[collectionView.tag] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    WebStroe_Model * model = self.arr_all[collectionView.tag][indexPath.item];
+    
+    WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
+    //价格
+    cell.price.text = [NSString stringWithFormat:@"¥%@",model.sell_price];
+    
+    cell.old_price.text = [NSString stringWithFormat:@"¥%@",model.net_price];
+    
+    cell.detail.text = model.production_name;
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    
+    if(![model.is_maker isEqualToString:@"1"])
+    {
+        cell.image_class.hidden = YES;
+    }
+    
     
     return cell;
 }
@@ -468,12 +547,26 @@
     }
 }
 
-#pragma mark - 加载数据
+#pragma mark - 加载数据 (首条)
 - (void)p_data
 {
+    self.page = 1;
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
-    [dataprovider productWithcity_id:@"105" pagenumber:@"1" pagesize:@"10"];
+    
+    [dataprovider productWithcity_id:@"105" category_id:@"0" pagenumber:@"1" pagesize:@"9"];
+}
+
+//后面的
+- (void)p_data1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"product1:"];
+    
+    [dataprovider productWithcity_id:@"105" category_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
 }
 
 #pragma mark - 商城数据
@@ -481,12 +574,24 @@
 {
     NSLog(@"%@",dict);
     
+    self.arr_data = nil;
+    self.arr_all = nil;
+    
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            for (NSDictionary * dic in dict[@"data"][@"productlist"]) {
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            {
+                WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 
+                [model setValuesForKeysWithDictionary:dic];
                 
+                [self.arr_data addObject:model];
+            }
+            
+            if(self.arr_data != nil)
+            {
+                [self.arr_all addObject:self.arr_data];
             }
         }
         @catch (NSException *exception)
@@ -495,7 +600,53 @@
         }
         @finally
         {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+- (void)product1:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            {
+                WebStroe_Model * model = [[WebStroe_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
             
+            if(self.arr_data != nil)
+            {
+                [self.arr_all addObject:self.arr_data];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
         }
     }
     else
@@ -503,7 +654,6 @@
 
     }
 }
-
 
 #pragma mark - 下拉刷新
 - (void)example01
@@ -527,9 +677,24 @@
 }
 
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
+}
 
-
-
+- (NSMutableArray *)arr_all
+{
+    if(_arr_all == nil)
+    {
+        self.arr_all = [NSMutableArray array];
+    }
+    return _arr_all;
+}
 
 
 

@@ -281,8 +281,8 @@
 }
 
 - (void)selectedTagsChanged: (VOTagList *)tagList{
-    NSLog(@"selected: %@", tagList.selectedIndexSet);
     
+    NSLog(@"selected: %@", tagList.selectedIndexSet);
 }
 
 
