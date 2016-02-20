@@ -39,12 +39,10 @@
 @property (nonatomic, strong) UIButton * btn_buy;
 
 
-//轮播图
+////轮播图
 @property (nonatomic, strong) UIImageView * image1;
 @property (nonatomic, strong) UIImageView * image2;
-@property (nonatomic, strong) UIImageView * image3;
 @property (nonatomic, strong) UIImageView * image4;
-@property (nonatomic, strong) UIImageView * image5;
 
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_pic;
@@ -64,6 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
     
     [self p_navi];
     
@@ -352,7 +352,7 @@
 
 - (void)selectedTagsChanged: (VOTagList *)tagList{
     
-    NSLog(@"selected: %@", tagList.selectedIndexSet);
+    NSLog(@"selected: %ld", tagList.selectedIndexSet.firstIndex);
 }
 
 
@@ -422,7 +422,7 @@
     }
     else
     {
-        NSLog(@"走加入购物车");
+        NSLog(@"%@",self.arr_list[self.tagList.selectedIndexSet.firstIndex]);
     }
     
 }
@@ -466,80 +466,87 @@
     self.lunbo_scrollView.showsHorizontalScrollIndicator = NO;
     self.lunbo_scrollView.delegate = self;
     
-    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, 0);
-    
-    //3张图
-    self.image1 = [[UIImageView alloc] init];
-    self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-//    [self.image1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:self.image1];
+    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * (self.arr_pic.count + 2), 0);
     
     
-    self.image2 = [[UIImageView alloc] init];
-    self.image2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-//    [self.image2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:self.image2];
-    
-    self.image3 = [[UIImageView alloc] init];
-    self.image3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-//    [self.image3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:self.image3];
-    
-    self.image4 = [[UIImageView alloc] init];
-    self.image4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-//    [self.image4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:self.image4];
-    
-    self.image5 = [[UIImageView alloc] init];
-    self.image5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-//    [self.image5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:self.image5];
-    
+    if(self.arr_pic.count == 0)
+    {
+        self.image4.hidden = NO;
+        
+        self.lunbo_scrollView.scrollEnabled = NO;
+        
+        self.image4 = [[UIImageView alloc] init];
+        self.image4.frame = CGRectMake(SCREEN_WIDTH * 1, 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+        [self.image4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image4];
+        
+        
+        self.image1 = [[UIImageView alloc] init];
+        self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image1];
+    }
+    else
+    {
+        self.lunbo_scrollView.scrollEnabled = YES;
+        
+        self.image4.hidden = YES;
+        
+        for (int i = 1; i <= self.arr_pic.count; i++)
+        {
+            UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
+            
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            [self.lunbo_scrollView addSubview:image];
+        }
+        
+        self.image1 = [[UIImageView alloc] init];
+        self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[self.arr_pic.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image1];
+        
+        self.image2 = [[UIImageView alloc] init];
+        self.image2.frame = CGRectMake(SCREEN_WIDTH * (self.arr_pic.count + 1), 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image2];
+        
+        
+        if(self.isplay == 0)
+        {
+            self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+            //轮播秒数
+            self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+            self.lunbo_pageControl.currentPage = 0;
+            
+            self.isplay = 1;
+        }
+        else
+        {
+            self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
+        }
+
+    }
     
     //
     self.lunbo_pageControl = [[UIPageControl alloc] init];
     self.lunbo_pageControl.frame = CGRectMake(self.view.frame.size.width / 2 - 50, SCREEN_WIDTH - 20, 100, 18);
-    self.lunbo_pageControl.numberOfPages = 3;
+    self.lunbo_pageControl.numberOfPages = self.arr_pic.count;
     self.lunbo_pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:132/255.0 green:193/255.0 blue:254/255.0 alpha:1];
     self.lunbo_pageControl.pageIndicatorTintColor = [UIColor colorWithRed:202/255.0 green:218/255.0 blue:233/255.0 alpha:1];
     
-    if(self.isplay == 0)
-    {
-        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
-        //轮播秒数
-        self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-        self.lunbo_pageControl.currentPage = 0;
-        
-        self.isplay = 1;
-    }
-    else
-    {
-        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
-    }
-    //手势
+   //手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     tapGesture.numberOfTapsRequired = 1; //点击次数
     tapGesture.numberOfTouchesRequired = 1; //点击手指数
     [self.lunbo_scrollView addGestureRecognizer:tapGesture];
     
-    [self p_addPic];
 }
 
 #pragma mark - 轮播图的点击事件
 -(void)tapGesture:(id)sender
 {
-    NSLog(@"%ld",(long)self.lunbo_pageControl.currentPage);
     
-    switch (self.lunbo_pageControl.currentPage){
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark - 定时器的方法!
@@ -548,7 +555,7 @@
     CGFloat x = self.lunbo_scrollView.contentOffset.x;
     int count = x / SCREEN_WIDTH;
     
-    if(count < 3)
+    if(count < self.arr_pic.count)
     {
         count ++;
         [UIView animateWithDuration:0.7f animations:^{
@@ -558,7 +565,7 @@
             
         }];
     }
-    else if(count == 3)
+    else if(count == self.arr_pic.count)
     {
         count ++;
         
@@ -588,15 +595,15 @@
     
     int count = x / SCREEN_WIDTH;
     
-    if(count == 4)
+    if(count == self.arr_pic.count + 1)
     {
         self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
         self.lunbo_pageControl.currentPage = 0;
     }
     else if(count == 0)
     {
-        self.lunbo_scrollView.contentOffset = CGPointMake(3 * SCREEN_WIDTH, 0);
-        self.lunbo_pageControl.currentPage = 2;
+        self.lunbo_scrollView.contentOffset = CGPointMake(self.arr_pic.count * SCREEN_WIDTH, 0);
+        self.lunbo_pageControl.currentPage = self.arr_pic.count - 1;
     }
     else
     {
@@ -677,69 +684,6 @@
     {
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
-}
-
-#pragma mark - 加图片
-- (void)p_addPic
-{
-    if(self.arr_pic.count < 3)
-    {
-        NSInteger x = [self.arr_pic count];
-        for (x ; x < 3; x ++)
-        {
-            [self.arr_pic addObject:@""];
-        }
-    }
-    
-    if([self.arr_pic[2] length] == 0)
-    {
-        self.image1.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-    }
-    else
-    {
-        
-        [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[2]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    }
-    
-    if([self.arr_pic[0] length] == 0)
-    {
-        self.image2.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-    }
-    else
-    {
-        [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    }
-    
-    
-    if([self.arr_pic[1] length] == 0)
-    {
-        self.image3.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-    }
-    else
-    {
-        [self.image3 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    }
-    
-    
-    if([self.arr_pic[2] length] == 0)
-    {
-        self.image4.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-    }
-    else
-    {
-        [self.image4 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[2]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    }
-    
-    
-    if([self.arr_pic[0] length] == 0)
-    {
-        self.image5.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-    }
-    else
-    {
-        [self.image5 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    }
-
 }
 
 

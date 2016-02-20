@@ -40,12 +40,13 @@
     self.moren.text = @"[默认]";
 //    self.moren.backgroundColor = [UIColor orangeColor];
     self.moren.font = [UIFont systemFontOfSize:13];
-    [self.contentView addSubview:self.moren];
+//    [self.contentView addSubview:self.moren];
     
     self.address = [[UILabel alloc] init];
     self.address.text = @"山东省临沂市山东省临沂市山东省临沂市山东省临沂市";
     self.address.font = [UIFont systemFontOfSize:14];
     self.address.numberOfLines = 2;
+//    self.address.backgroundColor = [UIColor blackColor];
     [self.contentView addSubview:self.address];
     
 }
@@ -62,7 +63,7 @@
     
     self.moren.frame = CGRectMake(20, CGRectGetMaxY(self.name.frame) + 15, 40, 17);
     
-    self.address.frame = CGRectMake(60, CGRectGetMaxY(self.name.frame) + 15, SCREEN_WIDTH - 80, 34);
+    self.address.frame = CGRectMake(20, CGRectGetMaxY(self.name.frame) + 15, SCREEN_WIDTH - 40, 34);
 
 }
 

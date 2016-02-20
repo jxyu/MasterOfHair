@@ -41,9 +41,11 @@
 #pragma mark - 商城详情页
 - (void)getProductsWithProduction_id:(NSString *)production_id;
 
+#pragma mark - 获取某会员的所有收货地址
+- (void)getAddressesWithMember_id:(NSString *)member_id;
 
-
-
+#pragma mark - 获取某会员的默认收货地址（购买的时候用）
+- (void)getAddressesWithMember_id:(NSString *)member_id is_default:(NSString *)is_default;
 
 
 

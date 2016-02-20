@@ -35,6 +35,7 @@
 		7B142E4D1C58BC4E00B32809 /* 01shoppingCar_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4C1C58BC4E00B32809 /* 01shoppingCar_03.png */; };
 		7B142E4F1C58BD8F00B32809 /* 01share_21.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4E1C58BD8F00B32809 /* 01share_21.png */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
+		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
 		7B206A0C1C72B4DE00481F24 /* ZhaopiankuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A0B1C72B4DE00481F24 /* ZhaopiankuViewController.m */; };
 		7B206A0E1C72BE3D00481F24 /* shuoshuo111111111.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B206A0D1C72BE3D00481F24 /* shuoshuo111111111.png */; };
@@ -337,6 +338,8 @@
 		7B142E4E1C58BD8F00B32809 /* 01share_21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01share_21.png; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
+		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
+		7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shouhudizhi_Model.m; sourceTree = "<group>"; };
 		7B206A061C72A6E600481F24 /* ChunwenziViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChunwenziViewController.h; sourceTree = "<group>"; };
 		7B206A071C72A6E600481F24 /* ChunwenziViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChunwenziViewController.m; sourceTree = "<group>"; };
 		7B206A0A1C72B4DE00481F24 /* ZhaopiankuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaopiankuViewController.h; sourceTree = "<group>"; };
@@ -894,6 +897,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		7B1DE4801C7849510079B606 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */,
+				7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		7B206A051C72A6D400481F24 /* chunwenzi */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +949,7 @@
 		7B29EFAD1C570CAA003A020B /* shouhudizhi */ = {
 			isa = PBXGroup;
 			children = (
+				7B1DE4801C7849510079B606 /* Models */,
 				7B29EFAE1C570CC3003A020B /* shouhuodizhiViewController.h */,
 				7B29EFAF1C570CC3003A020B /* shouhuodizhiViewController.m */,
 				7B29EFB31C5714FE003A020B /* shouhudizhiTableViewCell.h */,
@@ -2190,6 +2203,7 @@
 				802553061C574F7100CFF875 /* MJRefreshAutoNormalFooter.m in Sources */,
 				7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */,
 				7B0433C11C5C47150052F4AC /* NextMingshiViewController.m in Sources */,
+				7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				8082B4CE1C7414320024EAD3 /* UIView+JKPicker.m in Sources */,
 				7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */,

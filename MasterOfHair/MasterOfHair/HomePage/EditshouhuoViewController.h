@@ -7,7 +7,10 @@
 //
 
 #import "BaseNavigationController.h"
+#import "Shouhudizhi_Model.h"
 
 @interface EditshouhuoViewController : BaseNavigationController
+
+@property (nonatomic, strong) Shouhudizhi_Model * model;
 
 @end

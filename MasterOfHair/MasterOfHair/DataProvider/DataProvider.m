@@ -81,15 +81,29 @@
     }
 }
 
+#pragma mark - 获取某会员的所有收货地址
+- (void)getAddressesWithMember_id:(NSString *)member_id
+{
+    if(member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
+#pragma mark - 获取某会员的默认收货地址
+- (void)getAddressesWithMember_id:(NSString *)member_id is_default:(NSString *)is_default
+{
+    if(member_id && is_default)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"is_default\":\"%@\"}",member_id,is_default]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
-
-
-
-
-
-
-
+#pragma mark - 添加默认收货地址
 
 
 

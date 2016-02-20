@@ -12,12 +12,16 @@
 #import "shouhudizhiTableViewCell.h"
 #import "EditshouhuoViewController.h"
 #import "NewshouhuoViewController.h"
+#import "Shouhudizhi_Model.h"
+
 @interface shouhuodizhiViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView * view_head;
 
-
 @property (nonatomic, strong) UITableView * tableView;
+
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_data;
 
 @end
 
@@ -26,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self p_data];
     
     [self p_navi];
     
@@ -54,6 +60,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -84,27 +92,42 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.arr_data.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Shouhudizhi_Model * model = self.arr_data[indexPath.row];
+    
     shouhudizhiTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_shouhuo" forIndexPath:indexPath];
+    
+    cell.name.text = model.consignee;
+    cell.tel.text = model.mobile;
+    
+    NSString * str = [NSString stringWithFormat:@"%@%@%@%@",model.province,model.city,model.area,model.address];
+    cell.address.text = str;
+
+    if([model.is_default isEqualToString:@"1"])
+    {
+        cell.address.text = [NSString stringWithFormat:@"[默认] %@",str];
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Shouhudizhi_Model * model_data = self.arr_data[indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-#warning 跳转编辑收货地址(传不传值)
     EditshouhuoViewController * editshouhuoViewController = [[EditshouhuoViewController alloc] init];
+    editshouhuoViewController.model = model_data;
     
     [self showViewController:editshouhuoViewController sender:nil];
 }
@@ -144,6 +167,68 @@
     [self showViewController:newshouhuoViewController sender:nil];
 }
 
+#pragma mark - 接口数据
+- (void)p_data
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getAddresses:"];
+    
+    [dataprovider getAddressesWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
+
+//接口部分
+- (void)getAddresses:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr = dict[@"data"][@"addresslist"];
+            
+            for (NSDictionary * dic in arr)
+            {
+                Shouhudizhi_Model * model = [[Shouhudizhi_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
+}
 
 
 @end
