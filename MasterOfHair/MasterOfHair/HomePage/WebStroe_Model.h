@@ -26,4 +26,8 @@
 
 @property (nonatomic, copy) NSString * net_price;
 
+//
+
+
+
 @end

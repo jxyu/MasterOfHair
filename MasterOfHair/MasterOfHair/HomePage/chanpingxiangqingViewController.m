@@ -12,6 +12,7 @@
 
 #import "VOTagList.h"
 #import "querendingdanViewController.h"
+#import "Chanpingxiangqing_Models.h"
 @interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -38,6 +39,24 @@
 @property (nonatomic, strong) UIButton * btn_buy;
 
 
+//轮播图
+@property (nonatomic, strong) UIImageView * image1;
+@property (nonatomic, strong) UIImageView * image2;
+@property (nonatomic, strong) UIImageView * image3;
+@property (nonatomic, strong) UIImageView * image4;
+@property (nonatomic, strong) UIImageView * image5;
+
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_pic;
+@property (nonatomic, strong) NSMutableArray * arr_guige;
+//规格列表
+@property (nonatomic, strong) NSMutableArray * arr_list;
+
+
+@property (nonatomic, copy) NSString * shop_name;
+
+
+
 @end
 
 @implementation chanpingxiangqingViewController
@@ -46,11 +65,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self p_data];
-    
     [self p_navi];
     
     [self p_setupView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,6 +123,8 @@
     
     [self p_bottomView];
     
+    //加数据
+    [self p_data];
 }
 
 #pragma mark - tableView
@@ -130,7 +150,14 @@
     }
     else if (indexPath.row == 2)
     {
-        return 150;
+        if(self.arr_list.count < 3)
+        {
+            return 95;
+        }
+        else
+        {
+            return 150;
+        }
     }
     return SCREEN_HEIGHT / 3 * 2;
 }
@@ -171,25 +198,55 @@
         [cell addSubview:view_line];
         
         self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 35 + 5, SCREEN_WIDTH - 60, 25)];
-        self.name.text = @"店铺名称，店铺名称";
         self.name.font = [UIFont systemFontOfSize:14];
         [cell addSubview:self.name];
         
+        if([self.shop_name length] == 0)
+        {
+            self.name.text = @"店铺名称，店铺名称";
+        }
+        else
+        {
+            self.name.text = self.shop_name;
+        }
+        
+        Chanpingxiangqing_Models * model = self.arr_guige.firstObject;
+        
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(self.name.frame) + 3, 70, 25)];
         self.price.textColor = [UIColor orangeColor];
-//        self.price.backgroundColor = [UIColor orangeColor];
-        self.price.text = @"¥ 100.00";
+//        self.price.text = @"¥ 100.00";
         self.price.font = [UIFont systemFontOfSize:16];
         [cell addSubview:self.price];
+        
+        if([model.sell_price length] == 0)
+        {
+            self.price.text = @"";
+        }
+        else
+        {
+            self.price.text = [NSString stringWithFormat:@"¥ %@",model.sell_price];
+        }
+        
         
         self.old_price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.price.frame) + 5, CGRectGetMinY(self.price.frame) + 3, 70, 20)];
         self.old_price.text = @"¥ 1000.00";
         self.old_price.font = [UIFont systemFontOfSize:11];
         [cell addSubview:self.old_price];
         
-        UIView * view_line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 60, 1)];
+        UIView * view_line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 50, 1)];
         view_line1.backgroundColor = [UIColor grayColor];
         [self.old_price addSubview:view_line1];
+        
+        if([model.net_price length] == 0)
+        {
+            self.old_price.text = @"";
+            view_line1.hidden = YES;
+        }
+        else
+        {
+            view_line1.hidden = NO;
+            self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
+        }
         
         
         self.btn_share = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -224,9 +281,20 @@
         
         //使用第三方
         
-        NSArray *tags = @[@"AAA", @"BB", @"C", @"DDDD",@"EEEEEEE", @"FFFFF", @"G", @"HHHH"];
+        NSArray *tags = self.arr_list;
         self.tagList = [[VOTagList alloc] initWithTags:tags];
-        self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 5, SCREEN_WIDTH - 40, 150 - CGRectGetMaxY(view_line1.frame) - 10);
+
+        if(self.arr_list.count < 3)
+        {
+            self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 8, SCREEN_WIDTH - 40, (150 - CGRectGetMaxY(view_line1.frame) - 10) / 2 - 13);
+            
+//            self.tagList.backgroundColor = [UIColor orangeColor];
+        }
+        else
+        {
+            self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 8, SCREEN_WIDTH - 40, 150 - CGRectGetMaxY(view_line1.frame) - 10);
+
+        }
         self.tagList.multiLine = YES;
         self.tagList.multiSelect = NO;
         self.tagList.allowNoSelection = YES;
@@ -236,7 +304,7 @@
         self.tagList.tagBackgroundColor = [UIColor groupTableViewBackgroundColor];
         self.tagList.selectedTagBackgroundColor = [UIColor orangeColor];
         self.tagList.tagCornerRadius = 2;
-        self.tagList.tagEdge = UIEdgeInsetsMake(8, 8, 8, 8);
+        self.tagList.tagEdge = UIEdgeInsetsMake(6, 6, 6, 6);
         [self.tagList addTarget:self action:@selector(selectedTagsChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:self.tagList];
     }
@@ -401,30 +469,32 @@
     self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, 0);
     
     //3张图
-    UIImageView * view1 = [[UIImageView alloc] init];
-    view1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-    [view1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:view1];
+    self.image1 = [[UIImageView alloc] init];
+    self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+//    [self.image1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image1];
     
-    UIImageView * view2 = [[UIImageView alloc] init];
-    view2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-    [view2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:view2];
     
-    UIImageView * view3 = [[UIImageView alloc] init];
-    view3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-    [view3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:view3];
+    self.image2 = [[UIImageView alloc] init];
+    self.image2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+//    [self.image2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image2];
     
-    UIImageView * view4 = [[UIImageView alloc] init];
-    view4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-    [view4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:view4];
+    self.image3 = [[UIImageView alloc] init];
+    self.image3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+//    [self.image3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image3];
     
-    UIImageView * view5 = [[UIImageView alloc] init];
-    view5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-    [view5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    [self.lunbo_scrollView addSubview:view5];
+    self.image4 = [[UIImageView alloc] init];
+    self.image4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+//    [self.image4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image4];
+    
+    self.image5 = [[UIImageView alloc] init];
+    self.image5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
+//    [self.image5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image5];
+    
     
     //
     self.lunbo_pageControl = [[UIPageControl alloc] init];
@@ -451,6 +521,8 @@
     tapGesture.numberOfTapsRequired = 1; //点击次数
     tapGesture.numberOfTouchesRequired = 1; //点击手指数
     [self.lunbo_scrollView addGestureRecognizer:tapGesture];
+    
+    [self p_addPic];
 }
 
 #pragma mark - 轮播图的点击事件
@@ -562,10 +634,31 @@
 {
     NSLog(@"%@",dict);
     
+    self.arr_pic  = nil;
+    
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-
+            NSArray * arr = dict[@"data"][@"productlist"];
+            
+            for (NSDictionary * dic in arr.firstObject[@"imglist"])
+            {
+                [self.arr_pic addObject:dic[@"picture_path"]];
+            }
+            
+            self.shop_name = [NSString stringWithFormat:@"%@",arr.firstObject[@"shop_name"]];
+            
+            for (NSDictionary * dic in arr.firstObject[@"specslist"])
+            {
+                Chanpingxiangqing_Models * model = [[Chanpingxiangqing_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_list addObject:dic[@"specs_name"]];
+                
+                [self.arr_guige addObject:model];
+            }
+            
         }
         @catch (NSException *exception)
         {
@@ -582,13 +675,101 @@
     }
     else
     {
-        
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
+#pragma mark - 加图片
+- (void)p_addPic
+{
+    if(self.arr_pic.count < 3)
+    {
+        NSInteger x = [self.arr_pic count];
+        for (x ; x < 3; x ++)
+        {
+            [self.arr_pic addObject:@""];
+        }
+    }
+    
+    if([self.arr_pic[2] length] == 0)
+    {
+        self.image1.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[2]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
+    if([self.arr_pic[0] length] == 0)
+    {
+        self.image2.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
+    
+    if([self.arr_pic[1] length] == 0)
+    {
+        self.image3.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.image3 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
+    
+    if([self.arr_pic[2] length] == 0)
+    {
+        self.image4.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.image4 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[2]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
+    
+    if([self.arr_pic[0] length] == 0)
+    {
+        self.image5.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.image5 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+
+}
 
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_pic
+{
+    if(_arr_pic == nil)
+    {
+        self.arr_pic = [NSMutableArray array];
+    }
+    return _arr_pic;
+}
 
+- (NSMutableArray *)arr_guige
+{
+    if(_arr_guige == nil)
+    {
+        self.arr_guige = [NSMutableArray array];
+    }
+    return _arr_guige;
+}
+
+- (NSMutableArray *)arr_list
+{
+    if(_arr_list == nil)
+    {
+        self.arr_list = [NSMutableArray array];
+    }
+    return _arr_list;
+}
 
 
 @end
