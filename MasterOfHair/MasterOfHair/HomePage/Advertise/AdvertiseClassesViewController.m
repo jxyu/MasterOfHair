@@ -32,19 +32,27 @@
     [btn_all setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.mainScrollView addSubview:btn_all];
     
-    for (int i=0; i<8; i++) {
-        UIView * lastview=[[self.mainScrollView subviews] lastObject];
-        UIButton * btn_class=[[UIButton alloc] init];
-        [btn_class setTitle:[NSString stringWithFormat:@"分类%d",i] forState:UIControlStateNormal];
-        [btn_class setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.mainScrollView addSubview:btn_class];
-        [btn_class zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
-            layout.leftSpace(20);
-            layout.topSpaceByView(lastview,10);
-            layout.heightValue(44);
-            layout.rightSpace(20);
-        }];
-    }
+    [btn_all zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
+        layout.leftSpace(20);
+        layout.topSpace(10);
+        layout.heightValue(44);
+        layout.rightSpace(20);
+    }];
+    
+//    for (int i=0; i<8; i++) {
+//        UIView * lastview=[[self.mainScrollView subviews] lastObject];
+//        UIButton * btn_class=[[UIButton alloc] init];
+//        [btn_class setTitle:[NSString stringWithFormat:@"分类%d",i] forState:UIControlStateNormal];
+//        [btn_class setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [self.mainScrollView addSubview:btn_class];
+//        
+//        [btn_class zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
+//            layout.leftSpace(20);
+//            layout.topSpaceByView(lastview,10);
+//            layout.heightValue(44);
+//            layout.rightSpace(20);
+//        }];
+//    }
     
 }
 

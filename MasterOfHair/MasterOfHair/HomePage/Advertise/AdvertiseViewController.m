@@ -8,6 +8,7 @@
 
 #import "AdvertiseViewController.h"
 #import "AdvertiseCellTableViewCell.h"
+#import "AdvertiseClassesViewController.h"
 
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -117,7 +118,9 @@
     btn_AllClass.layer.borderWidth=0.5;
     btn_AllClass.layer.borderColor=navi_bar_bg_color.CGColor;
     btn_AllClass.layer.cornerRadius=8;
+    [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
     [HeaderBackView addSubview:btn_AllClass];
+    
     
     FL_Button *btn_between = [FL_Button fl_shareButton];
     [btn_between setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
@@ -310,6 +313,12 @@
 -(void)JumpToSecectCityVC
 {
     NSLog(@"跳转");
+}
+-(void)jumpToSelectClass
+{
+    AdvertiseClassesViewController * adveClass=[[AdvertiseClassesViewController alloc] init];
+    
+    [self.navigationController pushViewController:adveClass animated:YES];
 }
 
 //隐藏tabbar
