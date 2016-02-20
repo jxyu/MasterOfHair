@@ -7,6 +7,7 @@
 //
 
 #import "HomePageViewController.h"
+#import "CCLocationManager.h"
 
 
 #import "JCCollectionViewCell.h"
@@ -58,6 +59,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self p_location];
     
     [self p_login];
     
@@ -765,6 +768,20 @@
     }
 }
 
-
+#pragma mark - 定位
+- (void)p_location
+{
+    [[CCLocationManager shareLocation] getCity:^(NSString *addressString) {
+        
+        NSLog(@"%@",addressString);
+        
+    }];
+    
+    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        
+        NSLog(@"%lf",locationCorrrdinate.latitude);
+        NSLog(@"%lf",locationCorrrdinate.longitude);
+    }];
+}
 
 @end

@@ -148,7 +148,7 @@
     }
     else
     {
-        [self.head_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/member/%@",Url,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     }
     
     

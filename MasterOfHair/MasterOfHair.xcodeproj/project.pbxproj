@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */; };
+		7B00BF591C76F58900988119 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B00BF561C76F58900988119 /* ChineseString.m */; };
+		7B00BF5A1C76F58900988119 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B00BF581C76F58900988119 /* pinyin.m */; };
+		7B00BF5E1C77018300988119 /* CCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B00BF5D1C77018300988119 /* CCLocationManager.m */; };
 		7B0433C11C5C47150052F4AC /* NextMingshiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C01C5C47150052F4AC /* NextMingshiViewController.m */; };
 		7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */; };
 		7B0433C81C5C67AC0052F4AC /* QianbaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */; };
@@ -297,6 +300,12 @@
 
 /* Begin PBXFileReference section */
 		03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.debug.xcconfig"; sourceTree = "<group>"; };
+		7B00BF551C76F58900988119 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseString.h; sourceTree = "<group>"; };
+		7B00BF561C76F58900988119 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseString.m; sourceTree = "<group>"; };
+		7B00BF571C76F58900988119 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		7B00BF581C76F58900988119 /* pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pinyin.m; sourceTree = "<group>"; };
+		7B00BF5C1C77018300988119 /* CCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLocationManager.h; sourceTree = "<group>"; };
+		7B00BF5D1C77018300988119 /* CCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLocationManager.m; sourceTree = "<group>"; };
 		7B0433BF1C5C47150052F4AC /* NextMingshiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMingshiViewController.h; sourceTree = "<group>"; };
 		7B0433C01C5C47150052F4AC /* NextMingshiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMingshiViewController.m; sourceTree = "<group>"; };
 		7B0433C31C5C5E1A0052F4AC /* QianbaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QianbaoViewController.h; sourceTree = "<group>"; };
@@ -781,6 +790,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B00BF541C76F58900988119 /* ChineseSorting */ = {
+			isa = PBXGroup;
+			children = (
+				7B00BF551C76F58900988119 /* ChineseString.h */,
+				7B00BF561C76F58900988119 /* ChineseString.m */,
+				7B00BF571C76F58900988119 /* pinyin.h */,
+				7B00BF581C76F58900988119 /* pinyin.m */,
+			);
+			path = ChineseSorting;
+			sourceTree = "<group>";
+		};
+		7B00BF5B1C77018300988119 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				7B00BF5C1C77018300988119 /* CCLocationManager.h */,
+				7B00BF5D1C77018300988119 /* CCLocationManager.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		7B0433C21C5C5DC70052F4AC /* qianbao */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +904,8 @@
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
+				7B00BF5B1C77018300988119 /* Location */,
+				7B00BF541C76F58900988119 /* ChineseSorting */,
 				7BD86C411C745D6400D099BE /* SMS_SDK */,
 				7B29EFA91C56FD0D003A020B /* VOTagList */,
 			);
@@ -2246,11 +2277,13 @@
 				7B8B33B01C72ED90008C6CD4 /* ZhaoxiangViewController.m in Sources */,
 				8082B4CB1C7414320024EAD3 /* JKPromptView.m in Sources */,
 				7BD4619A1C75B23600741C5C /* WebStroe_Model.m in Sources */,
+				7B00BF5E1C77018300988119 /* CCLocationManager.m in Sources */,
 				7BAABAE31C59FBC800C14DF8 /* KechengbaomingViewController.m in Sources */,
 				802552BC1C57442B00CFF875 /* SCSwipeableFilterView.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */,
 				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
+				7B00BF5A1C76F58900988119 /* pinyin.m in Sources */,
 				7B206A0C1C72B4DE00481F24 /* ZhaopiankuViewController.m in Sources */,
 				7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */,
 				802552FE1C574F7100CFF875 /* Dialog.m in Sources */,
@@ -2268,6 +2301,7 @@
 				7BB26FEF1C5B54C8001D332E /* NextFenxiaozhongxinViewController.m in Sources */,
 				8025530D1C574F7100CFF875 /* MJRefreshStateHeader.m in Sources */,
 				8082B4CF1C7414320024EAD3 /* PhotoCell.m in Sources */,
+				7B00BF591C76F58900988119 /* ChineseString.m in Sources */,
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				802552C01C57442B00CFF875 /* CALayer+AddUIColor.m in Sources */,

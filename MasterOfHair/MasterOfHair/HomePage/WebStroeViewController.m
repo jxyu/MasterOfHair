@@ -277,10 +277,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
-    NSLog(@"%ld",(long)indexPath.item);
+//    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
+//    NSLog(@"%ld",(long)indexPath.item);
+    
+    WebStroe_Model * model = self.arr_all[collectionView.tag][indexPath.item];
     
     chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+    
+//    NSLog(@"%@",model.production_id);
+
+    chanpingxiangqing.production_id = model.production_id;
     
     [self showViewController:chanpingxiangqing sender:nil];
 }
@@ -572,7 +578,7 @@
 #pragma mark - 商城数据
 - (void)product:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     self.arr_all = nil;
@@ -609,13 +615,13 @@
     }
     else
     {
-        
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
 - (void)product1:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     
@@ -651,7 +657,7 @@
     }
     else
     {
-
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 

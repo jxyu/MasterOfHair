@@ -63,10 +63,23 @@
     }
 }
 
+#pragma mark - 所有区域
+- (void)area
+{
+    NSString * url = [NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
+    [self GetRequest:url andpram:nil];
+}
 
-
-
-
+#pragma mark - 商城详情页
+- (void)getProductsWithProduction_id:(NSString *)production_id
+{
+    if(production_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProducts",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\"}",production_id]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
 

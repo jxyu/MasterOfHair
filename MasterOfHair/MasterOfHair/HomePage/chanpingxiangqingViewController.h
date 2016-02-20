@@ -10,4 +10,6 @@
 
 @interface chanpingxiangqingViewController : BaseNavigationController
 
+@property (nonatomic, copy) NSString * production_id;
+
 @end

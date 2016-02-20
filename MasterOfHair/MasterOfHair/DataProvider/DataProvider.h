@@ -35,6 +35,16 @@
 #pragma mark - 商城产品接口
 - (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 所有区域
+- (void)area;
+
+#pragma mark - 商城详情页
+- (void)getProductsWithProduction_id:(NSString *)production_id;
+
+
+
+
+
 
 
 

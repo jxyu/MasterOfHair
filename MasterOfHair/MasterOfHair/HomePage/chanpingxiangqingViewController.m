@@ -46,6 +46,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self p_data];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -546,6 +548,45 @@
         
     }
 }
+
+#pragma mark - 请求数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getProducts:"];
+    [dataprovider getProductsWithProduction_id:self.production_id];
+}
+
+#pragma mark - 商城数据
+- (void)getProducts:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+
 
 
 
