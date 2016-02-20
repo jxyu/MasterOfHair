@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MasterOfHair/HomePage/Advertise/AdvertiseViewController.m"
-            timestampString = "475923537.813085"
+            timestampString = "477374370.412199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-top_btnPeopleAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MasterOfHair/HomePage/Advertise/AdvertiseViewController.m"
-            timestampString = "475922441.506487"
+            timestampString = "477374370.412199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
