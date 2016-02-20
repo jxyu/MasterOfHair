@@ -7,10 +7,13 @@
 //
 
 #import "VideoDetailViewController.h"
-
+#import "MoviePlayer.h"
 #import "TextTableViewCell.h"
 #import "NextTextViewController.h"
 @interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    MoviePlayer *moviePlayerview;
+}
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -47,7 +50,7 @@
     
     [self p_setupView];
     
-    [self p_navi];
+//    [self p_navi];
     
 }
 
@@ -78,6 +81,7 @@
 //返回
 - (void)btn_returnAction:(UIButton *)sender
 {
+    [moviePlayerview stopPlayer];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -142,12 +146,15 @@
 #pragma mark - headView
 - (void)p_headView
 {
+   
     self.head_View = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 400)];
     self.head_View.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     
     //1
-    self.view_video = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:@"http://baobab.cdn.wandoujia.com/14468618701471.mp4"]];
+    [self.view addSubview:moviePlayerview];
+    self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     self.view_video.backgroundColor = [UIColor orangeColor];
     [self.head_View addSubview:self.view_video];
     

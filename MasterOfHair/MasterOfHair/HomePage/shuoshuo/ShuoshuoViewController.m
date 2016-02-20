@@ -12,7 +12,13 @@
 #import "ZhaopiankuViewController.h"
 #import "ZhaoxiangViewController.h"
 #import "LuxiangViewController.h"
-@interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate>
+#import <ALBBQuPaiPlugin/ALBBQuPaiPlugin.h>
+#import "UploadVideoViewController.h"
+
+@interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate,QupaiSDKDelegate>
+{
+    UIViewController *recordController;
+}
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -188,12 +194,53 @@
 
 - (void)btn_4Action:(UIButton *)sender
 {
-    LuxiangViewController * luxiangViewController = [[LuxiangViewController alloc] init];
+//    LuxiangViewController * luxiangViewController = [[LuxiangViewController alloc] init];
+//    
+//    [self showViewController:luxiangViewController sender:nil];
+    QupaiSDK *sdkqupai = [QupaiSDK shared];
+    [sdkqupai setDelegte:(id<QupaiSDKDelegate>)self];
     
-    [self showViewController:luxiangViewController sender:nil];
+    /*可选设置*/
+    sdkqupai.thumbnailCompressionQuality =0.3;
+    sdkqupai.combine = YES;
+    sdkqupai.progressIndicatorEnabled = YES;
+    sdkqupai.beautySwitchEnabled = NO;
+    sdkqupai.flashSwitchEnabled = NO;
+    sdkqupai.tintColor = [UIColor orangeColor];
+    sdkqupai.localizableFileUrl = [[NSBundle mainBundle] URLForResource:@"QPLocalizable_en" withExtension:@"plist"];
+    sdkqupai.bottomPanelHeight = 120;
+    sdkqupai.recordGuideEnabled = YES;
+    
+    /*基本设置*/
+    CGSize videoSize = CGSizeMake(320, 240);
+    recordController = [sdkqupai createRecordViewControllerWithMinDuration:2
+                                                               maxDuration:20
+                                                                   bitRate:500000
+                                                                 videoSize:videoSize];
+    [self presentViewController:recordController animated:YES completion:nil];
+    
 }
 
-
+//趣拍取消
+-(void)qupaiSDKCancel:(QupaiSDK *)sdk
+{
+    [recordController dismissViewControllerAnimated:YES completion:nil];
+}
+//
+-(void)qupaiSDK:(QupaiSDK *)sdk compeleteVideoPath:(NSString *)videoPath thumbnailPath:(NSString *)thumbnailPath
+{
+    NSLog(@"%@",videoPath);
+    
+    [recordController dismissViewControllerAnimated:YES completion:nil];
+    
+    UploadVideoViewController * uploadVideoVC=[[UploadVideoViewController alloc] initWithNibName:@"UploadVideoViewController" bundle:[NSBundle mainBundle]];
+    
+    uploadVideoVC.VideoFilePath=[NSURL fileURLWithPath:videoPath];
+    
+    uploadVideoVC.uploadType=@"1";
+    
+    [self.navigationController pushViewController:uploadVideoVC animated:YES];
+}
 
 
 
