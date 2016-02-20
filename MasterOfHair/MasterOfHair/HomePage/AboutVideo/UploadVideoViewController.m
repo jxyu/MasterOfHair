@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self addLeftButton:@"left"];
+    [self addLeftButton:@"iconfont-fanhui"];
     channelID=@"";
     _lblTitle.text=@"视频信息";
     [self addRightbuttontitle:@"保存"];
