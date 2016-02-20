@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) UILabel * price;
 
+@property (nonatomic, strong) UILabel * old_price;
+
 @property (nonatomic, strong) UILabel * detail;
 
 @property (nonatomic, strong) UIImageView * image_class;

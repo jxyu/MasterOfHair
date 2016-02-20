@@ -156,9 +156,66 @@
 #pragma mark - 登陆按钮
 - (void)btn_loginAction:(UIButton *)sender
 {
-    NSLog(@"登陆");
+//    NSLog(@"登陆");
     [self.text_account resignFirstResponder];
     [self.text_password resignFirstResponder];
+    
+    if([self.text_account.text length] == 0 || [self.text_password.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"账号或密码不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+    }
+    
+    if([self.text_account.text length] != 0 && [self.text_password.text length] != 0)
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
+        [dataprovider loginWithMember_username:self.text_account.text member_password:self.text_password.text];        
+    }
+}
+
+#pragma mark - 接口部分
+- (void)login_register:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+        }
+        @catch (NSException *exception)
+        {
+        }
+        @finally
+        {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            //保存用户名和密码
+            [userdefault setObject:self.text_account.text forKey:@"account"];
+            [userdefault setObject:self.text_password.text forKey:@"password"];
+            //保存登陆的状态
+            [userdefault setObject:@"1" forKey:@"Login_Success"];
+            
+            //保存用户信息（后期可能更多）
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_headpic"]] forKey:@"member_headpic"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
+
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
 }
 
 #pragma mark - 找回密码

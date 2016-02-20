@@ -58,7 +58,7 @@
     
     [self p_navi];
     
-    [self p_setupView];
+//    [self p_setupView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +85,11 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    [self p_setupView];
+    
+    [self.tableView reloadData];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
@@ -103,11 +108,17 @@
     //注册
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
     
-    //头视图
-//    [self p_headView];
-    
-    [self p_headView1];
-    
+    //判断是否处于登陆状态
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"Login_Success"] isEqualToString:@"1"])
+    {//头视图
+        [self p_headView];
+    }
+    else
+    {
+        [self p_headView1];
+
+    }
     self.tableView.tableHeaderView = self.head_view;
 }
 
@@ -115,6 +126,8 @@
 //这个为登陆状态的头布局
 - (void)p_headView
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 190)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
@@ -125,8 +138,19 @@
     self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 90, 90)];
     self.head_image.layer.cornerRadius = 45;
     self.head_image.layer.masksToBounds = YES;
-    self.head_image.backgroundColor = [UIColor orangeColor];
+//    self.head_image.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_image];
+    
+//    NSLog(@"%@",[userdefault objectForKey:@"member_headpic"]);
+    if([[userdefault objectForKey:@"member_headpic"] length] == 0)
+    {
+        self.head_image.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+    }
+    else
+    {
+        [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/member/%@",Url,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
     
     UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_image.frame) + 10, CGRectGetMinY(self.head_image.frame) + 3, 40, 20)];
     label_1.text = @"昵称:";
@@ -138,6 +162,17 @@
     self.head_name.text = @"18888888888888";
     //    self.head_name.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_name];
+    
+//    NSLog(@"%@",[userdefault objectForKey:@"member_nickname"]);
+    if([[userdefault objectForKey:@"member_nickname"] length] == 0)
+    {
+        self.head_name.text = @"";
+    }
+    else
+    {
+        self.head_name.text = [userdefault objectForKey:@"member_nickname"];
+    }
+    
     
     self.head_diamond = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(label_1.frame) + 8, 28, 28)];
     self.head_diamond.image = [UIImage imageNamed:@"05zuanshi03"];
@@ -187,6 +222,8 @@
     [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
     [self.head_cancel setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_cancel];
+    [self.head_cancel addTarget:self action:@selector(head_cancelAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
     self.head_view_white = view_white;
     
     [self p_fenlei];
@@ -194,6 +231,43 @@
     [self.mid_btn1 addTarget:self action:@selector(mid_btn1Action:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.mid_btn2 addTarget:self action:@selector(mid_btn2Action:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.mid_btn3 addTarget:self action:@selector(mid_btn3Action:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    //判断是否是会员
+    switch ([[userdefault objectForKey:@"member_type"] integerValue]) {
+        case 1:
+        {
+            self.head_diamond.image = [UIImage imageNamed:@"05zuanshi03"];
+            [self.head_vip setTitle:@"开通金卡会员" forState:(UIControlStateNormal)];
+            
+            self.head_delegate.hidden = YES;
+        }
+            break;
+        case 2:
+        {
+            self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
+            [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
+            self.head_vip.userInteractionEnabled = NO;
+            
+            self.head_delegate.hidden = YES;
+        }
+            break;
+        case 3:
+        {
+            self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
+            [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
+            self.head_vip.userInteractionEnabled = NO;
+        }
+            break;
+        case 4:
+        {
+            self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
+            [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
+            self.head_vip.userInteractionEnabled = NO;
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 //这个为非登陆状态的头布局
@@ -253,11 +327,6 @@
     JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
     
     [self showViewController:jinkahuiyuanViewController sender:nil];
-    
-//    //成功走这个代码
-//    self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
-//    [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
-//    self.head_vip.userInteractionEnabled = NO;
 }
 
 //未登录时点分类
@@ -305,6 +374,29 @@
         
         [self showViewController:fenxiaozhongxinViewController sender:nil];
     }
+}
+
+#pragma mark - 退出登录
+- (void)head_cancelAction:(UIButton *)sender
+{
+    [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:@"0" forKey:@"Login_Success"];
+    
+    [userdefault setObject:@"" forKey:@"account"];
+    [userdefault setObject:@"" forKey:@"password"];
+    
+    [self p_headView1];
+
+    self.tableView.tableHeaderView = self.head_view;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        
+        [self.tableView reloadData];
+    });
 }
 
 

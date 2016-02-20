@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UICollectionView * collectionView;
 
+//
 
 //数组
 @property (nonatomic, strong) NSMutableArray * assetsArray;
@@ -72,9 +73,9 @@
 - (void)clickRightButton:(UIButton *)sender
 {
     //    NSLog(@"发布");
-    if([self.text_View.text length] == 0)
+    if(self.assetsArray.count == 0)
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入文字后再发布" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择一张图片再发表" preferredStyle:(UIAlertControllerStyleAlert)];
         
         [self presentViewController:alert animated:YES completion:^{
             
@@ -88,6 +89,12 @@
     }
     else
     {
+        if([self.text_View.text length] == 0)
+        {
+            self.label_placeHold.hidden = NO;
+        }
+        [self.text_View resignFirstResponder];
+    
         NSLog(@"发布成功");
     }
 }
@@ -144,23 +151,70 @@
 
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 6;
+    if(self.assetsArray.count == 6)
+    {
+        return 6;
+    }
+    else
+    {
+        return self.assetsArray.count + 1;
+    }
 }
 
 - (UICollectionViewCell * )collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ZhaopiankuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_photo" forIndexPath:indexPath];
-    
-    cell.image.tag = (indexPath.row + 1000);
-    if(indexPath.item == 0)
+
+    if(self.assetsArray.count != 6)
     {
-        cell.image.image = [UIImage imageNamed:@"shuoshuo98765"];
+//        cell.image.image = [UIImage imageNamed:@"shuoshuo98765"];
+        if(indexPath.item < self.assetsArray.count)
+        {
+            JKAssets * asset = self.assetsArray[indexPath.row];
+            
+            ALAssetsLibrary * lib = [[ALAssetsLibrary alloc] init];
+            [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
+                if (asset) {
+                    
+                    cell.image.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+                }
+                
+            }failureBlock:^(NSError *error) {
+                
+            }];
+            cell.image.tag = (indexPath.row + 100);
+            
+            cell.btn.hidden = NO;
+            cell.btn.tag = indexPath.row + 10000;
+            [cell.btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        }
+        else
+        {
+            cell.image.image = [UIImage imageNamed:@"shuoshuo98765"];
+            cell.btn.hidden = YES;
+
+        }
     }
-    
-    
-    
-    cell.btn.tag = indexPath.row + 10000;
-    [cell.btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    else
+    {
+        JKAssets * asset = self.assetsArray[indexPath.row];
+        
+        ALAssetsLibrary * lib = [[ALAssetsLibrary alloc] init];
+        [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
+            if (asset) {
+                
+                cell.image.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+            }
+            
+        }failureBlock:^(NSError *error) {
+            
+        }];
+        cell.image.tag = (indexPath.row + 100);
+        
+        cell.btn.hidden = NO;
+        cell.btn.tag = indexPath.row + 10000;
+        [cell.btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
     
     return cell;
 }
@@ -170,12 +224,19 @@
     [self composePicAdd];
 }
 
-
 #pragma mark - 删除图片
 - (void)btnAction:(UIButton *)sender
 {
-    [self.assetsArray removeObjectAtIndex:sender.tag - 10000];
-    
+    if(self.assetsArray.count == 1)
+    {
+        [self.assetsArray removeObjectAtIndex:0];
+        self.assetsArray = nil;
+    }
+    else
+    {
+        [self.assetsArray removeObjectAtIndex:sender.tag - 10000];
+    }
+
     dispatch_async(dispatch_get_main_queue(), ^{
         //刷新tableView(记住,要更新放在主线程中)
         [self.collectionView reloadData];
@@ -210,29 +271,14 @@
     self.assetsArray = nil;
     
     self.assetsArray = [NSMutableArray arrayWithArray:assets];
-
+    
     [imagePicker dismissViewControllerAnimated:YES completion:^{
-        
-        for (int i = 0; i < self.assetsArray.count; i ++) {
-            JKAssets * asset = self.assetsArray[i];
-            
-            ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
-            [lib assetForURL:asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
-                if (asset) {
-                    
-                    UIImageView * image = [self.view viewWithTag:i + 1000];
-                    
-                    image.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
-                }
-            } failureBlock:^(NSError *error) {
-                
-            }];
-        }
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             //刷新tableView(记住,要更新放在主线程中)
             [self.collectionView reloadData];
         });
+        
     }];
 }
 

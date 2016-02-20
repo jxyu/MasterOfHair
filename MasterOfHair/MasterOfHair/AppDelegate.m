@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 
+#import <SMS_SDK/SMSSDK.h>
+#import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>
+
+#define SMSapp_Key @"f7f43b8dec0c"
+#define SMSapp_Secret @"b58371f4502b0e800e461a27328e0ba8"
+
 @interface AppDelegate ()
 
 @end
@@ -16,10 +22,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
     
     [self InitTabBarUI];
+    
+/**
+ *  短信设置
+ */
+    [SMSSDK registerApp:SMSapp_Key withSecret:SMSapp_Secret];
+    //不允许访问通讯录
+    [SMSSDK enableAppContactFriends:NO];
+
     
     
     return YES;

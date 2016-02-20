@@ -9,6 +9,8 @@
 #import "RegistViewController.h"
 
 #import "AppDelegate.h"
+
+#import <SMS_SDK/SMSSDK.h>
 @interface RegistViewController () <UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
@@ -23,6 +25,9 @@
 @property (nonatomic, strong) UITextField * text_pass;
 //再次密码
 @property (nonatomic, strong) UITextField * text_password;
+
+//@property (nonatomic, assign) BOOL isOK;
+
 
 @end
 
@@ -174,7 +179,7 @@
 
 }
 
-#pragma mark - btn注册, 验证二维码
+#pragma mark - btn注册, 验证码
 - (void)btnbtn_captchaAction:(UIButton *)sender
 {
     [self.text_tel resignFirstResponder];
@@ -189,9 +194,35 @@
         
     } completion:^(BOOL finished) {
         
+        if (self.text_tel.text.length == 11)
+        {
+            [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeBlack];
+            
+            [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.text_tel.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
+                if (!error)
+                {
+                    [SVProgressHUD dismiss];
+                }
+                else
+                {
+                    [SVProgressHUD dismiss];
+                    
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"该号码不存在" preferredStyle:(UIAlertControllerStyleAlert)];
+                    [self presentViewController:alert animated:YES completion:^{
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    }];
+                    [alert addAction:action];
+                }
+            }];
+        }
+        else
+        {
+            UIAlertView * alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入正确手机号" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+            [alert show];
+        }
     }];
-    
-    NSLog(@"点击验证二维码");
 }
 
 - (void)btn_changeAction:(UIButton *)sender
@@ -210,16 +241,163 @@
         
     }];
     
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
-    [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+    if([self.text_extend.text length] != 0)
+    {
+        if([self.text_extend.text length] != 11)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"邀请码输入格式错误" preferredStyle:(UIAlertControllerStyleAlert)];
+            [self presentViewController:alert animated:YES completion:^{
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [alert addAction:action];
+        }
+    }
+    
+    
+    if([self.text_tel.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入手机号" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+    }
+    
+    if([self.text_tel.text length] != 11)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确手机号" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if([self.text_captcha.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入验证码" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if([self.text_pass.text length] < 6 || [self.text_password.text length] < 6)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入6位以上数字或字母组合密码" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    if(![self.text_pass.text isEqualToString:self.text_password.text])
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"两次输入的密码不相同" preferredStyle:(UIAlertControllerStyleAlert)];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action];
+        
+    }
+    
+    
+    if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0 && [self.text_pass.text isEqualToString:self.text_password.text] && [self.text_pass.text length] >= 6 && [self.text_password.text length] >= 6)
+    {
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+            
+            if(error)
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
+                [self presentViewController:alert animated:YES completion:^{
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [alert addAction:action];
+            }
+            else
+            {//验证成功
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
+                [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
+            }
+            
+        }];
+    }
+    
+}
+#pragma mark - 注册接口部分
+- (void)register_register:(id )dict
+{    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
+            [dataprovider loginWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
 }
 
-#pragma mark - 接口部分
-- (void)register_register:(id )dict
+#pragma mark - 登陆接口部分
+- (void)login_register:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+//            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            //保存用户名和密码
+            [userdefault setObject:self.text_tel.text forKey:@"account"];
+            [userdefault setObject:self.text_pass.text forKey:@"password"];
+            //保存登陆的状态
+            [userdefault setObject:@"1" forKey:@"Login_Success"];
+        }
+        @catch (NSException *exception)
+        {
+        }
+        @finally
+        {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
 }
+
 
 #pragma mark - scrollView代理
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

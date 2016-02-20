@@ -7,6 +7,7 @@
 //
 
 #import "HomePageViewController.h"
+#import "CCLocationManager.h"
 
 
 #import "JCCollectionViewCell.h"
@@ -58,6 +59,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self p_location];
+    
+    [self p_login];
     
     [self p_navi];
     
@@ -714,6 +719,69 @@
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self.video_collectionView registerClass:[JCVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_video"];
+}
+
+#pragma mark - 判断是否登陆
+- (void)p_login
+{
+    //判断是否处于登陆状态
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
+    [dataprovider loginWithMember_username:[userdefault objectForKey:@"account"] member_password:[userdefault objectForKey:@"password"]];
+}
+
+#pragma mark - 判断登陆接口
+- (void)login_register:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSLog(@"存在用户");
+            [userdefault setObject:@"1" forKey:@"Login_Success"];
+            
+//            NSLog(@"%@",dict[@"data"][@"member_nickname"]);
+            //保存用户信息（后期可能更多）
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_headpic"]] forKey:@"member_headpic"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+
+        }
+    }
+    else
+    {
+        NSLog(@"不存在用户");
+        [userdefault setObject:@"0" forKey:@"Login_Success"];
+    }
+}
+
+#pragma mark - 定位
+- (void)p_location
+{
+    [[CCLocationManager shareLocation] getCity:^(NSString *addressString) {
+        
+        NSLog(@"%@",addressString);
+        
+    }];
+    
+    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        
+        NSLog(@"%lf",locationCorrrdinate.latitude);
+        NSLog(@"%lf",locationCorrrdinate.longitude);
+    }];
 }
 
 @end

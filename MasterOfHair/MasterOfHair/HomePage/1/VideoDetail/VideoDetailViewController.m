@@ -61,18 +61,12 @@
 - (void)p_navi
 {
     _topView.hidden = YES;
-#warning ++++
+    
     //上面的黑边
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:view];
-}
-
-//返回
-- (void)clickLeftButton:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //隐藏tabbar
