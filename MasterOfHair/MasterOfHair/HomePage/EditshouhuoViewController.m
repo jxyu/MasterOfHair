@@ -9,6 +9,7 @@
 #import "EditshouhuoViewController.h"
 
 #import "AppDelegate.h"
+#import "Shengshiqu_Model.h"
 @interface EditshouhuoViewController () <UITextFieldDelegate, UIScrollViewDelegate, UIPickerViewDataSource,UIPickerViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
@@ -25,11 +26,14 @@
 @property (nonatomic, strong) UIButton * btn_cancel;
 
 //
-@property (nonatomic, copy) NSString * text1;
-@property (nonatomic, copy) NSString * text2;
-@property (nonatomic, copy) NSString * text3;
+@property (nonatomic, assign) NSInteger index1;
+@property (nonatomic, assign) NSInteger index2;
+@property (nonatomic, assign) NSInteger index3;
 
-
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_sheng;
+@property (nonatomic, strong) NSMutableArray * arr_shi;
+@property (nonatomic, strong) NSMutableArray * arr_qu;
 @end
 
 @implementation EditshouhuoViewController
@@ -37,6 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self p_data];
     
     [self p_navi];
     
@@ -233,6 +239,11 @@
     
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"delete:"];
+        
+        [dataprovider deleteWithAddress_id:self.model.address_id];
+        
     }];
     
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -318,6 +329,18 @@
     [self.tel resignFirstResponder];
     [self.address_detail resignFirstResponder];
     [self.address resignFirstResponder];
+    
+
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+        self.pickerView.hidden = YES;
+        self.btn_cancel.hidden = YES;
+        self.btn_ok.hidden = YES;
+    }];
 }
 
 #pragma mark - 地区选择器
@@ -361,12 +384,51 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 111;
+    switch (component)
+    {
+        case 0:
+            return self.arr_sheng.count;
+            break;
+        case 1:
+            return self.arr_shi.count;
+            break;
+        case 2:
+            return self.arr_qu.count;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return @"wolaji";
+    switch (component) {
+        case 0:
+        {
+            Shengshiqu_Model * model = self.arr_sheng[row];
+            
+            return model.area_name;
+        }
+            break;
+        case 1:
+        {
+            Shengshiqu_Model * model = self.arr_shi[row];
+            
+            return model.area_name;
+        }
+            break;
+        case 2:
+        {
+            Shengshiqu_Model * model = self.arr_qu[row];
+            
+            return model.area_name;
+        }
+            break;
+        default:
+            return nil;
+            break;
+    }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -377,16 +439,30 @@
         case 0:
         {
             NSLog(@"%ld",row);
+            self.index1 = row + 1;
+            //
+            Shengshiqu_Model * model = self.arr_sheng[row];
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"getAreas1:"];
+            [dataprovider getAreasWithParent_id:model.area_id];
+ 
         }
             break;
         case 1:
         {
+            self.index2 = row;
             
+            Shengshiqu_Model * model = self.arr_shi[row];
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"getAreas2:"];
+            [dataprovider getAreasWithParent_id:model.area_id];
         }
             break;
         case 2:
         {
-            
+            self.index3 = row;
         }
             break;
         default:
@@ -398,10 +474,14 @@
 #pragma mark - 地区选择的手势
 - (void)tapGesture1:(id)sender
 {
+    
     self.pickerView.hidden = NO;
     self.btn_cancel.hidden = NO;
     self.btn_ok.hidden = NO;
     
+    [self.name resignFirstResponder];
+    [self.tel resignFirstResponder];
+    [self.address_detail resignFirstResponder];
     [self.address resignFirstResponder];
     
     [UIView animateWithDuration:0.7 animations:^{
@@ -430,16 +510,57 @@
 - (void)btn_okAction:(UIButton *)sender
 {
 
-    [UIView animateWithDuration:0.7 animations:^{
+    if(self.index1 == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择地址详情" preferredStyle:(UIAlertControllerStyleAlert)];
         
-        self.scrollView.contentOffset = CGPointMake(0, 0);
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
         
-    } completion:^(BOOL finished) {
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
         
-        self.pickerView.hidden = YES;
-        self.btn_cancel.hidden = YES;
-        self.btn_ok.hidden = YES;
-    }];
+        [alert addAction:action];
+    }
+    else
+    {
+        NSMutableString * str = [NSMutableString string];
+        NSMutableString * str1 = [NSMutableString string];
+        NSMutableString * str2 = [NSMutableString string];
+
+        if(self.arr_sheng.count != 0)
+        {
+            Shengshiqu_Model * model = self.arr_sheng[self.index1 - 1];
+             str = model.area_name.mutableCopy;
+        }
+        
+        if(self.arr_shi.count != 0)
+        {
+            Shengshiqu_Model * model = self.arr_shi[self.index2];
+            str1 = model.area_name.mutableCopy;
+        }
+        
+        if(self.arr_qu.count != 0)
+        {
+            Shengshiqu_Model * model = self.arr_qu[self.index3];
+            str2 = model.area_name.mutableCopy;
+        }
+        
+        self.address.text = [NSString stringWithFormat:@"%@%@%@",str,str1,str2];
+        
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.scrollView.contentOffset = CGPointMake(0, 0);
+            
+        } completion:^(BOOL finished) {
+            
+            self.pickerView.hidden = YES;
+            self.btn_cancel.hidden = YES;
+            self.btn_ok.hidden = YES;
+        }];
+    }
 }
 
 #pragma mark - 设为默认收货地址
@@ -468,10 +589,176 @@
 
 }
 
+#pragma mark - 获取所有省份
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getAreas:"];
+    [dataprovider getAreasWithParent_id:@"0"];
+}
+
+//数据
+- (void)getAreas:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_sheng = nil;
+    self.arr_shi = nil;
+    self.arr_qu = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"arealist"])
+            {
+                Shengshiqu_Model * model = [[Shengshiqu_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_sheng addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.pickerView reloadAllComponents];
+        }
+    }
+    else
+    {
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
+}
+
+- (void)getAreas1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_shi = nil;
+    self.arr_qu = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"arealist"])
+            {
+                Shengshiqu_Model * model = [[Shengshiqu_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_shi addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.pickerView reloadAllComponents];
+        }
+    }
+    else
+    {
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
+}
+
+- (void)getAreas2:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_qu = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"arealist"])
+            {
+                Shengshiqu_Model * model = [[Shengshiqu_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_qu addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.pickerView reloadAllComponents];
+        }
+    }
+    else
+    {
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
+}
+
+#pragma mark - 删除收货地址接口
+- (void)delete:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
+}
 
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_sheng
+{
+    if(_arr_sheng == nil)
+    {
+        self.arr_sheng = [NSMutableArray array];
+    }
+    
+    return _arr_sheng;
+}
 
+- (NSMutableArray *)arr_shi
+{
+    if(_arr_shi == nil)
+    {
+        self.arr_shi = [NSMutableArray array];
+    }
+    
+    return _arr_shi;
+}
 
-
+- (NSMutableArray *)arr_qu
+{
+    if(_arr_qu == nil)
+    {
+        self.arr_qu = [NSMutableArray array];
+    }
+    
+    return _arr_qu;
+}
 
 @end

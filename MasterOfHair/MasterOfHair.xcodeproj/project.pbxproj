@@ -139,6 +139,7 @@
 		7BB26FEF1C5B54C8001D332E /* NextFenxiaozhongxinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FEE1C5B54C8001D332E /* NextFenxiaozhongxinViewController.m */; };
 		7BB26FF21C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FF11C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m */; };
 		7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */; };
+		7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */; };
 		7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */; };
 		7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */; };
 		7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */; };
@@ -517,6 +518,8 @@
 		7BB26FF11C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextFenxiaozhongxin1ViewController.m; sourceTree = "<group>"; };
 		7BB26FF31C5B57BE001D332E /* NextFenxiaoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextFenxiaoTableViewCell.h; sourceTree = "<group>"; };
 		7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextFenxiaoTableViewCell.m; sourceTree = "<group>"; };
+		7BB8BD421C79599100186D72 /* Shengshiqu_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shengshiqu_Model.h; sourceTree = "<group>"; };
+		7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shengshiqu_Model.m; sourceTree = "<group>"; };
 		7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulianmengViewController.h; sourceTree = "<group>"; };
 		7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulianmengViewController.m; sourceTree = "<group>"; };
 		7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuFactoryTableViewCell.h; sourceTree = "<group>"; };
@@ -961,6 +964,8 @@
 			children = (
 				7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */,
 				7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */,
+				7BB8BD421C79599100186D72 /* Shengshiqu_Model.h */,
+				7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2301,6 +2306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */,
 				7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */,
 				802553101C574F7100CFF875 /* UIScrollView+MJExtension.m in Sources */,
 				802553021C574F7100CFF875 /* MJRefreshComponent.m in Sources */,

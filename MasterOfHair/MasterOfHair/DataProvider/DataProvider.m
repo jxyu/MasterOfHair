@@ -115,9 +115,26 @@
 }
 
 #pragma mark - 获取所有省份
+- (void)getAreasWithParent_id:(NSString *)parent_id
+{
+    if(parent_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"parent_id\":\"%@\"}",parent_id]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
-
-
+#pragma mark - 删除收货地址
+- (void)deleteWithAddress_id:(NSString *)address_id
+{
+    if(address_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\"}",address_id]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
 

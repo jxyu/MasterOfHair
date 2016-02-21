@@ -50,10 +50,11 @@
 #pragma mark - 设为默认收货地址
 - (void)updateWithAddress_id:(NSString *)address_id is_default:(NSString *)is_default;
 
+#pragma mark - 获取所有省份
+- (void)getAreasWithParent_id:(NSString *)parent_id;
 
-
-
-
+#pragma mark - 删除收货地址
+- (void)deleteWithAddress_id:(NSString *)address_id;
 
 
 

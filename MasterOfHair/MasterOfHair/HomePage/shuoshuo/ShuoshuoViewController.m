@@ -225,6 +225,8 @@
 //趣拍取消
 -(void)qupaiSDKCancel:(QupaiSDK *)sdk
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [recordController dismissViewControllerAnimated:YES completion:nil];
 }
 //
@@ -242,8 +244,6 @@
     
     [self.navigationController pushViewController:uploadVideoVC animated:YES];
 }
-
-
 
 
 
