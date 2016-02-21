@@ -21,7 +21,13 @@
 //
 @property (nonatomic, strong) UIPickerView * pickerView;
 
+@property (nonatomic, strong) UIButton * btn_ok;
+@property (nonatomic, strong) UIButton * btn_cancel;
 
+//
+@property (nonatomic, copy) NSString * text1;
+@property (nonatomic, copy) NSString * text2;
+@property (nonatomic, copy) NSString * text3;
 
 
 @end
@@ -60,7 +66,24 @@
 //点击修改按钮
 - (void)clickRightButton:(UIButton *)sender
 {
-    NSLog(@"提示修改成功");
+//    NSLog(@"提示修改成功");
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否保存修改的信息" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action1];
+    [alert addAction:action];
 }
 
 //隐藏tabbar
@@ -139,7 +162,15 @@
     self.address.text = str;
     self.address.delegate = self;
     self.address.font = [UIFont systemFontOfSize:19];
+    self.address.userInteractionEnabled = NO;
     [view_white2 addSubview:self.address];
+    
+    UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture1:)];
+    //设置点击次数和点击手指数
+    tapGesture1.numberOfTapsRequired = 1; //点击次数
+    tapGesture1.numberOfTouchesRequired = 1; //点击手指数
+    [view_white2 addGestureRecognizer:tapGesture1];
+    
     
     
     UIView * view_white3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white2.frame) + 2, SCREEN_WIDTH, 50)];
@@ -192,13 +223,33 @@
 #pragma mark - 轻击手势触发方法  和设为默认地址
 -(void)tapGesture:(id)sender
 {
-    NSLog(@"走删除流程， 给提示");
+//    NSLog(@"走删除流程， 给提示");
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定删除该收货地址" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action1];
+    [alert addAction:action];
 }
 
 //设为默认地址
 - (void)btn_morenAddressAction:(UIButton *)sender
 {
-    NSLog(@"走默认地址 ， 给提示");
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+    
+    [dataprovider updateWithAddress_id:self.model.address_id is_default:@"1"];
 }
 
 #pragma mark - textfiled的代理
@@ -220,8 +271,6 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    self.pickerView.hidden = NO;
-    
     [self.name resignFirstResponder];
     [self.tel resignFirstResponder];
     [self.address_detail resignFirstResponder];
@@ -229,8 +278,7 @@
     
     [UIView animateWithDuration:0.7 animations:^{
         
-//        self.scrollView.contentOffset = CGPointMake(0, 0);
-        self.scrollView.contentOffset = CGPointMake(0, 200);
+        self.scrollView.contentOffset = CGPointMake(0, 0);
 
     } completion:^(BOOL finished) {
         
@@ -275,12 +323,33 @@
 #pragma mark - 地区选择器
 - (void)p_selectAddress
 {
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.btn_morenAddress.frame) + 10, SCREEN_WIDTH, 200)];
+    
+    self.btn_cancel = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.btn_cancel.frame = CGRectMake(0, CGRectGetMaxY(self.btn_morenAddress.frame) + 15, 80, 30);
+    [self.btn_cancel setTitle:@"取消" forState:(UIControlStateNormal)];
+    [self.btn_cancel setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    self.btn_cancel.titleLabel.font = [UIFont systemFontOfSize:19];
+    [self.scrollView addSubview:self.btn_cancel];
+    self.btn_cancel.hidden = YES;
+    
+    [self.btn_cancel addTarget:self action:@selector(btn_cancelAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    self.btn_ok = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.btn_ok.frame = CGRectMake(SCREEN_WIDTH - 80, CGRectGetMaxY(self.btn_morenAddress.frame) + 15, 80, 30);
+    [self.btn_ok setTitle:@"确定" forState:(UIControlStateNormal)];
+    [self.btn_ok setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    self.btn_ok.titleLabel.font = [UIFont systemFontOfSize:19];
+    [self.scrollView addSubview:self.btn_ok];
+    self.btn_ok.hidden = YES;
+    
+    [self.btn_ok addTarget:self action:@selector(btn_okAction:) forControlEvents:(UIControlEventTouchUpInside)];
+
+    
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.btn_cancel.frame) + 10, SCREEN_WIDTH, 200)];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.backgroundColor = [UIColor grayColor];
     [self.scrollView addSubview:self.pickerView];
-    
     self.pickerView.hidden = YES;
 }
 
@@ -292,7 +361,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 3;
+    return 111;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -300,14 +369,104 @@
     return @"wolaji";
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+//    NSLog(@"%ld  --------   %ld",row,component);
+    
+    switch (component) {
+        case 0:
+        {
+            NSLog(@"%ld",row);
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
 
+#pragma mark - 地区选择的手势
+- (void)tapGesture1:(id)sender
+{
+    self.pickerView.hidden = NO;
+    self.btn_cancel.hidden = NO;
+    self.btn_ok.hidden = NO;
+    
+    [self.address resignFirstResponder];
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 240);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
+- (void)btn_cancelAction:(UIButton *)sender
+{
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+        self.pickerView.hidden = YES;
+        self.btn_cancel.hidden = YES;
+        self.btn_ok.hidden = YES;
+    }];
+}
 
+- (void)btn_okAction:(UIButton *)sender
+{
 
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.scrollView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+        self.pickerView.hidden = YES;
+        self.btn_cancel.hidden = YES;
+        self.btn_ok.hidden = YES;
+    }];
+}
 
+#pragma mark - 设为默认收货地址
+- (void)update:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"设置成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
 
-
-
+}
 
 
 

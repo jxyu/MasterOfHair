@@ -103,9 +103,18 @@
     }
 }
 
-#pragma mark - 添加默认收货地址
+#pragma mark - 设为默认收货地址
+- (void)updateWithAddress_id:(NSString *)address_id is_default:(NSString *)is_default
+{
+    if(address_id && is_default)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"is_default\":\"%@\"}",address_id,is_default]};
+        [self GetRequest:url andpram:prm];
+    }
+}
 
-
+#pragma mark - 获取所有省份
 
 
 

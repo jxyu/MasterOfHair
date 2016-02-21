@@ -283,7 +283,8 @@
     self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 90, 90)];
     self.head_image.layer.cornerRadius = 45;
     self.head_image.layer.masksToBounds = YES;
-    self.head_image.backgroundColor = [UIColor orangeColor];
+//    self.head_image.backgroundColor = [UIColor orangeColor];
+    self.head_image.image = [UIImage imageNamed:@"sudisudiusidusidu"];
     [view_white addSubview:self.head_image];
     
     UILabel * label_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_image.frame) + 15, CGRectGetMinY(self.head_image.frame) + 15, SCREEN_WIDTH - CGRectGetMaxX(self.head_image.frame) - 25, 20)];
@@ -379,24 +380,42 @@
 #pragma mark - 退出登录
 - (void)head_cancelAction:(UIButton *)sender
 {
-    [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
     
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定退出该账号" preferredStyle:(UIAlertControllerStyleAlert)];
     
-    [userdefault setObject:@"0" forKey:@"Login_Success"];
-    
-    [userdefault setObject:@"" forKey:@"account"];
-    [userdefault setObject:@"" forKey:@"password"];
-    
-    [self p_headView1];
-
-    self.tableView.tableHeaderView = self.head_view;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //刷新tableView(记住,要更新放在主线程中)
+    [self presentViewController:alert animated:YES completion:^{
         
-        [self.tableView reloadData];
-    });
+    }];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"退出登录成功"];
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [userdefault setObject:@"0" forKey:@"Login_Success"];
+        
+        [userdefault setObject:@"" forKey:@"account"];
+        [userdefault setObject:@"" forKey:@"password"];
+        
+        [self p_headView1];
+        
+        self.tableView.tableHeaderView = self.head_view;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新tableView(记住,要更新放在主线程中)
+            
+            [self.tableView reloadData];
+        });
+        
+    }];
+    
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action1];
+    [alert addAction:action];
 }
 
 

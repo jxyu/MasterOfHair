@@ -47,7 +47,8 @@
 #pragma mark - 获取某会员的默认收货地址（购买的时候用）
 - (void)getAddressesWithMember_id:(NSString *)member_id is_default:(NSString *)is_default;
 
-
+#pragma mark - 设为默认收货地址
+- (void)updateWithAddress_id:(NSString *)address_id is_default:(NSString *)is_default;
 
 
 

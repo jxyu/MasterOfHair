@@ -156,6 +156,7 @@
 		7BD86C4F1C745DF700D099BE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C4E1C745DF700D099BE /* MessageUI.framework */; };
 		7BD86C511C745E1800D099BE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C501C745E1800D099BE /* JavaScriptCore.framework */; };
 		7BD86C531C745E2A00D099BE /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C521C745E2A00D099BE /* libstdc++.tbd */; };
+		7BDE11741C7944AD0087E607 /* sudisudiusidusidu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BDE11731C7944AD0087E607 /* sudisudiusidusidu.png */; };
 		7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */; };
 		7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */; };
 		7BEE19221C53291F002C2ADA /* white_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19211C53291F002C2ADA /* white_bg.png */; };
@@ -541,6 +542,7 @@
 		7BD86C4E1C745DF700D099BE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7BD86C501C745E1800D099BE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		7BD86C521C745E2A00D099BE /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		7BDE11731C7944AD0087E607 /* sudisudiusidusidu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sudisudiusidusidu.png; sourceTree = "<group>"; };
 		7BEE191C1C531434002C2ADA /* iconfont-iconquanxuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconfont-iconquanxuan.png"; sourceTree = "<group>"; };
 		7BEE191E1C532069002C2ADA /* ShoppingCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCarTableViewCell.h; sourceTree = "<group>"; };
 		7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarTableViewCell.m; sourceTree = "<group>"; };
@@ -1906,6 +1908,7 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7BDE11731C7944AD0087E607 /* sudisudiusidusidu.png */,
 				800E8F9F1C5DD77300CB8CC5 /* select_down@2x.png */,
 				8078846D1C59B546006B8BB3 /* placeholder_short.jpg */,
 				8078846E1C59B546006B8BB3 /* Placeholder_long.jpg */,
@@ -2123,6 +2126,7 @@
 				802492361C784E41008BA570 /* ALBBQuPaiPlugin.bundle in Resources */,
 				7B586C971C71766600BE4295 /* 00000play.png in Resources */,
 				7BAABAB51C59ACF500C14DF8 /* 00003.png in Resources */,
+				7BDE11741C7944AD0087E607 /* sudisudiusidusidu.png in Resources */,
 				7BAABAB41C59ACF500C14DF8 /* 00002.png in Resources */,
 				7BAABAA71C59A6A200C14DF8 /* 05zuanshi03.png in Resources */,
 				7B3305BF1C5F38790014C49C /* h_collect.png in Resources */,
