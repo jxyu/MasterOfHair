@@ -238,6 +238,7 @@
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100);
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [self p_videoList];
         

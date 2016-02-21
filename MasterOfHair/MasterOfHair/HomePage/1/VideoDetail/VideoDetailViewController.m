@@ -23,7 +23,7 @@
 
 //1
 @property (nonatomic, strong) UILabel * text_title;
-@property (nonatomic, strong) UIView * view_video;
+//@property (nonatomic, strong) UIView * view_video;
 
 //2
 @property (nonatomic, strong) UILabel * text_detail;
@@ -66,7 +66,9 @@
     _topView.hidden = YES;
     
     //上面的黑边
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:view];
@@ -154,21 +156,21 @@
     //1
     moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:@"http://baobab.cdn.wandoujia.com/14468618701471.mp4"]];
     [self.view addSubview:moviePlayerview];
-    self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
-    self.view_video.backgroundColor = [UIColor orangeColor];
-    [self.head_View addSubview:self.view_video];
+//    self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+//    self.view_video.backgroundColor = [UIColor orangeColor];
+//    [self.head_View addSubview:self.view_video];
     
     UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
     btn_return.frame = CGRectMake(5, 10, 30, 30);
     [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
     [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.head_View addSubview:btn_return];
+    [moviePlayerview addSubview:btn_return];
     
     self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
     self.text_title.font = [UIFont systemFontOfSize:15];
     self.text_title.textColor = [UIColor whiteColor];
     self.text_title.text = @"2016年度发型设计最新课程";
-    [self.head_View addSubview:self.text_title];
+    [moviePlayerview addSubview:self.text_title];
     
 //2
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 200 + 10, SCREEN_WIDTH, 80)];

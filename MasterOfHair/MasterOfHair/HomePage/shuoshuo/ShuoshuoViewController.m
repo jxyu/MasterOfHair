@@ -197,6 +197,7 @@
 //    LuxiangViewController * luxiangViewController = [[LuxiangViewController alloc] init];
 //    
 //    [self showViewController:luxiangViewController sender:nil];
+    
     QupaiSDK *sdkqupai = [QupaiSDK shared];
     [sdkqupai setDelegte:(id<QupaiSDKDelegate>)self];
     

@@ -35,7 +35,9 @@
     //不允许访问通讯录
     [SMSSDK enableAppContactFriends:NO];
 
-    //注册趣拍
+/**
+ *  注册趣拍
+ */
     [[QupaiSDK shared] registerAppWithKey:kQPAppKey secret:kQPAppSecret space:@"space" success:^(NSString *accessToken) {
         [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"accessToken"];
     } failure:^(NSError *error) {
