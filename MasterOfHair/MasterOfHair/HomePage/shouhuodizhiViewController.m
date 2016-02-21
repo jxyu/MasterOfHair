@@ -109,7 +109,8 @@
     cell.name.text = model.consignee;
     cell.tel.text = model.mobile;
     
-    NSString * str = [NSString stringWithFormat:@"%@%@%@%@",model.province,model.city,model.area,model.address];
+    
+    NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
     cell.address.text = str;
 
     if([model.is_default isEqualToString:@"1"])
@@ -181,7 +182,7 @@
 //接口部分
 - (void)getAddresses:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     
@@ -194,6 +195,7 @@
             {
                 Shouhudizhi_Model * model = [[Shouhudizhi_Model alloc] init];
                 
+
                 [model setValuesForKeysWithDictionary:dic];
                 
                 [self.arr_data addObject:model];

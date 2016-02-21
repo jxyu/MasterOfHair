@@ -56,8 +56,10 @@
 #pragma mark - 删除收货地址
 - (void)deleteWithAddress_id:(NSString *)address_id;
 
+#pragma mark - 修改收货地址
+- (void)updateWithAddress_id:(NSString *)address_id consignee:(NSString *)consignee mobile:(NSString *)mobile province:(NSString *)province city:(NSString *)city area:(NSString *)area address:(NSString *)address;
 
-
-
+#pragma mark - 添加收货地址
+- (void)createWithMember_id:(NSString *)member_id consignee:(NSString *)consignee mobile:(NSString *)mobile province:(NSString *)province city:(NSString *)city area:(NSString *)area address:(NSString *)address;
 
 @end

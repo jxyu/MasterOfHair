@@ -136,9 +136,29 @@
     }
 }
 
+#pragma mark - 修改收货地址
+- (void)updateWithAddress_id:(NSString *)address_id consignee:(NSString *)consignee mobile:(NSString *)mobile province:(NSString *)province city:(NSString *)city area:(NSString *)area address:(NSString *)address
+{
+    if(address_id && consignee && mobile && province && city && area && address)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",address_id,consignee,mobile,province,city,area,address]};
+        
+        [self GetRequest:url andpram:prm];
+    }
+}
 
-
-
+#pragma mark - 添加收货地址
+- (void)createWithMember_id:(NSString *)member_id consignee:(NSString *)consignee mobile:(NSString *)mobile province:(NSString *)province city:(NSString *)city area:(NSString *)area address:(NSString *)address
+{
+    if(member_id && consignee && mobile && province && city && area && address)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",member_id,consignee,mobile,province,city,area,address]};
+        
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
 

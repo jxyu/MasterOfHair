@@ -282,6 +282,7 @@
         //使用第三方
         
         NSArray *tags = self.arr_list;
+//        NSLog(@"%ld",self.arr_list.count);
         self.tagList = [[VOTagList alloc] initWithTags:tags];
 
         if(self.arr_list.count < 3)

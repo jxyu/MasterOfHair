@@ -20,4 +20,9 @@
 @property (nonatomic, copy) NSString * province;
 @property (nonatomic, copy) NSString * is_default;
 
+@property (nonatomic, copy) NSString * province_name;
+@property (nonatomic, copy) NSString * city_name;
+@property (nonatomic, copy) NSString * area_name;
+
+
 @end

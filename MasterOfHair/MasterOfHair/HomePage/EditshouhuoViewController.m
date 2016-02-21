@@ -34,6 +34,9 @@
 @property (nonatomic, strong) NSMutableArray * arr_sheng;
 @property (nonatomic, strong) NSMutableArray * arr_shi;
 @property (nonatomic, strong) NSMutableArray * arr_qu;
+
+
+
 @end
 
 @implementation EditshouhuoViewController
@@ -74,6 +77,52 @@
 {
 //    NSLog(@"提示修改成功");
     
+    if([self.name.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"收货人不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    
+    if([self.tel.text length] != 11)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"收货电话格式不正确" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+
+    if([self.address_detail.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"详细地址不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    
+    
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否保存修改的信息" preferredStyle:(UIAlertControllerStyleAlert)];
     
     [self presentViewController:alert animated:YES completion:^{
@@ -82,6 +131,73 @@
     
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         
+        NSString * str = [NSString stringWithFormat:@"%@%@%@",[self.model.province_name length]== 0 ? @"" : self.model.province_name,[self.model.city_name length]== 0 ? @"" : self.model.city_name,[self.model.area_name length]== 0 ? @"" : self.model.area_name];
+        
+
+        
+        if([self.address.text isEqualToString:str])
+        {
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update20:"];
+            
+            [dataprovider updateWithAddress_id:self.model.address_id consignee:self.name.text mobile:self.tel.text province:self.model.province city:self.model.city area:self.model.area address:self.address_detail.text];
+        }
+        else
+        {
+            
+            NSMutableString * str = [NSMutableString string];
+            NSMutableString * str1 = [NSMutableString string];
+            NSMutableString * str2 = [NSMutableString string];
+            
+            if(self.arr_sheng.count != 0)
+            {
+                Shengshiqu_Model * model = self.arr_sheng[self.index1 - 1];
+                str = model.area_id.mutableCopy;
+            }
+            else
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择省市区" preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alert addAction:action];
+            }
+            
+            if(self.arr_shi.count != 0)
+            {
+                Shengshiqu_Model * model = self.arr_shi[self.index2];
+                str1 = model.area_id.mutableCopy;
+            }
+            else
+            {
+                str1 = [NSString stringWithFormat:@""].mutableCopy;
+            }
+            
+            if(self.arr_qu.count != 0)
+            {
+                Shengshiqu_Model * model = self.arr_qu[self.index3];
+                str2 = model.area_id.mutableCopy;
+            }
+            else
+            {
+                str2 = [NSString stringWithFormat:@""].mutableCopy;
+            }
+            
+            NSLog(@"%@ ----  %@ --------  %@",str,str1,str2);
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update20:"];
+            
+            [dataprovider updateWithAddress_id:self.model.address_id consignee:self.name.text mobile:self.tel.text province:str city:str1 area:str2 address:self.address_detail.text];
+        }
+
     }];
     
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -163,7 +279,8 @@
     [view_white2 addSubview:label3];
     
     self.address = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label1.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label1.frame) - 20 , 30)];
-    NSString * str = [NSString stringWithFormat:@"%@%@%@",self.model.province,self.model.city,self.model.area];
+    
+    NSString * str = [NSString stringWithFormat:@"%@%@%@",[self.model.province_name length]== 0 ? @"" : self.model.province_name,[self.model.city_name length]== 0 ? @"" : self.model.city_name,[self.model.area_name length]== 0 ? @"" : self.model.area_name];
 
     self.address.text = str;
     self.address.delegate = self;
@@ -566,7 +683,7 @@
 #pragma mark - 设为默认收货地址
 - (void)update:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -706,7 +823,7 @@
 #pragma mark - 删除收货地址接口
 - (void)delete:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -726,9 +843,32 @@
     {
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
-    
 }
 
+#pragma mark - 修改收货地址
+- (void)update20:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"修改成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_sheng
