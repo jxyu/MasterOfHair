@@ -640,7 +640,7 @@
 #pragma mark - 商城数据
 - (void)getProducts:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_pic  = nil;
     

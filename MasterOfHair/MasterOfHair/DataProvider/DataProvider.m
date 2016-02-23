@@ -56,12 +56,12 @@
 
 
 #pragma mark - 商城产品接口
-- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id is_maker:(NSString *)is_maker pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
 {
-    if(city_id && category_id && pagenumber && pagesize && is_maker)
+    if(city_id && category_id && pagenumber && pagesize && is_maker && is_sell)
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\",\"is_maker\":\"%@\"}",city_id,category_id,is_maker],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",city_id,category_id,is_maker,is_sell],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -184,9 +184,25 @@
     }
 }
 
+#pragma mark - 获取所有产品分类
+- (void)getCategories
+{
+    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=category/getCategories",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
 
-
-
+#pragma mark - 获取某产品分类的子类
+- (void)getCategoriesWithCategory_parent_id:(NSString *)category_parent_id
+{
+    if(category_parent_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=category/getCategories",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"category_parent_id\":\"%@\"}",category_parent_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

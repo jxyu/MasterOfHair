@@ -125,7 +125,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    NSLog(@"%@",[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]);
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] forKey:@"diquweizhi"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

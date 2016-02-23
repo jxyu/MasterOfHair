@@ -10,6 +10,8 @@
 
 #import "FenleiCollectionViewCell.h"
 #import "FenleiCollectionReusableView.h"
+
+#import "Fenlei_Model.h"
 @interface FenleiViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIButton * btn_all;
@@ -19,7 +21,9 @@
 
 @property (nonatomic, strong) UICollectionView * collectionView;
 
-
+//
+@property (nonatomic, strong) NSMutableArray * arr_data1;
+@property (nonatomic, strong) NSMutableArray * arr_data2;
 
 @end
 
@@ -29,11 +33,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self p_data];
+    
     [self p_navi];
 
     [self p_allView];
     
-    [self p_setupView];
+//    [self p_setupView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,28 +100,22 @@
 //代理
 - (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 10;
+    return self.arr_data1.count;
 }
 
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if(section == 0)
-    {
-        return 7;
-    }
-    else if(section == 1)
-    {
-        return 9;
-    }
-    else
-    {
-        return 3;
-    }
+    return [self.arr_data2[section] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    Fenlei_Model * model = self.arr_data2[indexPath.section][indexPath.row];
+    
     FenleiCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_fenlei" forIndexPath:indexPath];
+    
+    cell.name.text = model.category_name;
+    
     
     cell.image.tag = indexPath.section * 10 + indexPath.item;
     cell.name.tag = (indexPath.section + 1) * 100 + indexPath.item;
@@ -126,14 +126,19 @@
 //点击
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"item");
-
+    Fenlei_Model * model = self.arr_data2[indexPath.section][indexPath.row];
+    NSLog(@"%@",model.category_name);
+    
     UIImageView * image = [self.view viewWithTag:(indexPath.section * 10 + indexPath.item)];
     image.hidden = NO;
     
     UILabel * label = [self.view viewWithTag:((indexPath.section + 1) * 100 + indexPath.item)];
     label.layer.borderColor = navi_bar_bg_color.CGColor;
 
+    //保存
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:model.category_name forKey:@"category_name"];
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -141,45 +146,15 @@
 //设置头尾部内容
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+    Fenlei_Model * model = self.arr_data1[indexPath.section];
+    
     UICollectionReusableView *reusableView = nil;
     
     //定制头部视图的内容
     FenleiCollectionReusableView *headerV = (FenleiCollectionReusableView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_HeaderView" forIndexPath:indexPath];
     
-    switch (indexPath.section) {
-        case 0:
-            headerV.name.text = @"美发产品";
-            break;
-        case 1:
-            headerV.name.text = @"美容产品";
-            break;
-        case 2:
-            headerV.name.text = @"纹绣产品";
-            break;
-        case 3:
-            headerV.name.text = @"美甲产品";
-            break;
-        case 4:
-            headerV.name.text = @"化妆产品";
-            break;
-        case 5:
-            headerV.name.text = @"足浴";
-            break;
-        case 6:
-            headerV.name.text = @"纹身产品";
-            break;
-        case 7:
-            headerV.name.text = @"美业服饰";
-            break;
-        case 8:
-            headerV.name.text = @"国际品牌";
-            break;
-        case 9:
-            headerV.name.text = @"教学资料";
-            break;
-        default:
-            break;
-    }
+    headerV.name.text = model.category_name;
+    
     reusableView = headerV;
     
     return reusableView;
@@ -217,33 +192,143 @@
 
 - (void)btn_allAction:(UIButton *)sender
 {
-    NSLog(@"点击全部");
-    
-    if(self.isselect == 0)
-    {
-        self.image_select.hidden = NO;
-        self.btn_all.layer.borderColor = navi_bar_bg_color.CGColor;
+//    NSLog(@"点击全部");
 
-        self.isselect = 1;
+    self.image_select.hidden = NO;
+    self.btn_all.layer.borderColor = navi_bar_bg_color.CGColor;
+//    self.isselect = 1;
+    
+    //保存
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:@"" forKey:@"category_name"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+#pragma mark - 数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getCategories:"];
+    
+    [dataprovider getCategories];
+}
+
+#pragma mark - 商城数据
+- (void)getCategories:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_data1 = nil;
+    self.arr_data2 = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"categorylist"])
+            {
+                Fenlei_Model * model = [[Fenlei_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data1 addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.collectionView reloadData];
+            });
+            
+            for (Fenlei_Model * model in self.arr_data1)
+            {
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"getCategories1:"];
+                
+                [dataprovider getCategoriesWithCategory_parent_id:model.category_parent_id];
+            }
+        }
     }
     else
     {
-        self.image_select.hidden = YES;
-        self.btn_all.layer.borderColor = [UIColor blackColor].CGColor;
-
-        self.isselect = 0;
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
+}
+
+#pragma mark - 2级分类
+- (void)getCategories1:(id )dict
+{
+//    NSLog(@"%@",dict);
     
+    NSMutableArray * arr = [NSMutableArray array];
     
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"categorylist"])
+            {
+                Fenlei_Model * model = [[Fenlei_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [arr addObject:model];
+            }
+            
+            [self.arr_data2 addObject:arr];
+            
+//            NSLog(@"%ld",self.arr_data2.count);
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+            if(self.arr_data2.count == self.arr_data1.count)
+            {
+                [self p_setupView];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
 }
 
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data1
+{
+    if(_arr_data1 == nil)
+    {
+        self.arr_data1 = [NSMutableArray array];
+    }
+    return _arr_data1;
+}
 
-
-
-
-
-
+- (NSMutableArray *)arr_data2
+{
+    if(_arr_data2 == nil)
+    {
+        self.arr_data2 = [NSMutableArray array];
+    }
+    return _arr_data2;
+}
 
 
 

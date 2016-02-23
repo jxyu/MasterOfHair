@@ -320,8 +320,8 @@
 
 #pragma mark - 轮播图的点击事件
 - (void)tapGesture:(id)sender
-{
-    
+{    
+    NSLog(@"%ld",self.lunbo_pageControl.currentPage);
 }
 
 #pragma mark - 定时器的方法!
@@ -726,6 +726,10 @@
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
+            
+            [userdefault setObject:@"" forKey:@"category_name"];
+            [userdefault setObject:@"" forKey:@"diquweizhi"];
+
         }
         @catch (NSException *exception)
         {

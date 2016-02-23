@@ -258,13 +258,6 @@
             self.head_vip.userInteractionEnabled = NO;
         }
             break;
-        case 4:
-        {
-            self.head_diamond.image = [UIImage imageNamed:@"05zuanshi1_03"];
-            [self.head_vip setTitle:@"金卡会员" forState:(UIControlStateNormal)];
-            self.head_vip.userInteractionEnabled = NO;
-        }
-            break;
         default:
             break;
     }

@@ -85,6 +85,25 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+    if([[userdefault objectForKey:@"category_name"] length] == 0)
+    {
+        [self.delegate_class setTitle:@" 全部分类" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.delegate_class setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"category_name"]] forState:UIControlStateNormal];
+    }
+    
+    if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
+    {
+        [self.delegate_address setTitle:@" 定位城市" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.delegate_address setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
+    }
     
     [self example01];
     
@@ -311,6 +330,8 @@
 #pragma mark - 3个点击布局
 - (void)p_setupView2
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
     self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.head_view addSubview:self.headview_Delegate];
@@ -319,10 +340,18 @@
     self.delegate_address = [FL_Button fl_shareButton];
     self.delegate_address.frame = CGRectMake(10, 12.5, 70, 35);
     [self.delegate_address setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
-    [self.delegate_address setTitle:@"全国" forState:UIControlStateNormal];
+    //定位城市
+    if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
+    {
+        [self.delegate_address setTitle:@" 定位城市" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.delegate_address setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
+    }
     [self.delegate_address setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
-    self.delegate_address.status = FLAlignmentStatusCenter;
-    self.delegate_address.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.delegate_address.status = FLAlignmentStatusLeft;
+    self.delegate_address.titleLabel.font = [UIFont systemFontOfSize:12];
     self.delegate_address.layer.masksToBounds=YES;
     self.delegate_address.layer.borderWidth= 1;
     self.delegate_address.layer.borderColor=navi_bar_bg_color.CGColor;
@@ -334,10 +363,19 @@
     self.delegate_class = [FL_Button fl_shareButton];
     self.delegate_class.frame = CGRectMake(CGRectGetMaxX(self.delegate_address.frame) + 10, 12.5, 70, 35);
     [self.delegate_class setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
-    [self.delegate_class setTitle:@"分类" forState:UIControlStateNormal];
+    
+    if([[userdefault objectForKey:@"category_name"] length] == 0)
+    {
+        [self.delegate_class setTitle:@" 全部分类" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.delegate_class setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"category_name"]] forState:UIControlStateNormal];
+    }
+    
     [self.delegate_class setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
-    self.delegate_class.status = FLAlignmentStatusCenter;
-    self.delegate_class.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.delegate_class.status = FLAlignmentStatusLeft;
+    self.delegate_class.titleLabel.font = [UIFont systemFontOfSize:12];
     self.delegate_class.layer.masksToBounds=YES;
     self.delegate_class.layer.borderWidth= 1;
     self.delegate_class.layer.borderColor=navi_bar_bg_color.CGColor;
@@ -534,7 +572,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
     
-    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" pagenumber:@"1" pagesize:@"9"];
+    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
 }
 
 //后面的
@@ -545,7 +583,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product1:"];
     
-    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
 }
 
 #pragma mark - 商城数据
