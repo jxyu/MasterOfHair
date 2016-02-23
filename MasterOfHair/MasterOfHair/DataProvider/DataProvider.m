@@ -25,7 +25,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/register",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\",\"spread_id\":\"%@\"}",member_username,member_password,spread_id]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -36,7 +37,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/login",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -47,19 +49,21 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/resetPassword",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
 
 #pragma mark - 商城产品接口
-- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id is_maker:(NSString *)is_maker pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
 {
-    if(city_id && category_id && pagenumber && pagesize)
+    if(city_id && category_id && pagenumber && pagesize && is_maker)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductsList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\"}",city_id,category_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
-        [self GetRequest:url andpram:prm];
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\",\"is_maker\":\"%@\"}",city_id,category_id,is_maker],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -67,7 +71,8 @@
 - (void)area
 {
     NSString * url = [NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
-    [self GetRequest:url andpram:nil];
+    
+    [self PostRequest:url andpram:nil];
 }
 
 #pragma mark - 商城详情页
@@ -77,7 +82,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProducts",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\"}",production_id]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -88,7 +94,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -99,7 +106,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"is_default\":\"%@\"}",member_id,is_default]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -110,7 +118,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"is_default\":\"%@\"}",address_id,is_default]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -121,7 +130,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"parent_id\":\"%@\"}",parent_id]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -132,7 +142,8 @@
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/delete",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\"}",address_id]};
-        [self GetRequest:url andpram:prm];
+        
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -144,7 +155,7 @@
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",address_id,consignee,mobile,province,city,area,address]};
         
-        [self GetRequest:url andpram:prm];
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -156,10 +167,22 @@
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",member_id,consignee,mobile,province,city,area,address]};
         
-        [self GetRequest:url andpram:prm];
+        [self PostRequest:url andpram:prm];
     }
 }
 
+
+#pragma mark - 轮播图接口
+- (void)getSlidesWithSlide_type:(NSString *)slide_type
+{
+    if(slide_type)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=slide/getSlides",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"slide_type\":\"%@\"}",slide_type]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

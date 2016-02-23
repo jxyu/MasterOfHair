@@ -53,6 +53,15 @@
 //最上面的搜索框
 @property (nonatomic, strong) UIView * search_view;
 
+////轮播图
+@property (nonatomic, strong) UIImageView * image1;
+@property (nonatomic, strong) UIImageView * image2;
+@property (nonatomic, strong) UIImageView * image4;
+
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_lunboData;
+
+
 @end
 
 @implementation HomePageViewController
@@ -139,6 +148,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self example01];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
@@ -157,6 +168,17 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    
+    __weak __typeof(self) weakSelf = self;
+    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self p_data2];
+        //        self.isplay = 0;
+        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
 }
 
 #pragma mark - tableView代理
@@ -257,72 +279,38 @@
     self.lunbo_scrollView.pagingEnabled = YES;
     self.lunbo_scrollView.showsHorizontalScrollIndicator = NO;
     self.lunbo_scrollView.delegate = self;
+    self.lunbo_scrollView.userInteractionEnabled = YES;
     
-    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 8, 0);
+    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * self.arr_lunboData.count + 2, 0);
     
-    //6张图
-    UIImageView * view1 = [[UIImageView alloc] init];
-    view1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
-    [view1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view1];
-    
-    UIImageView * view2 = [[UIImageView alloc] init];
-    view2.frame = CGRectMake(SCREEN_WIDTH * 1 , 0 , SCREEN_WIDTH, 200);
-    [view2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view2];
-    
-    UIImageView * view3 = [[UIImageView alloc] init];
-    view3.frame = CGRectMake(SCREEN_WIDTH * 2 , 0 , SCREEN_WIDTH, 200);
-    [view3 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view3];
-    
-    UIImageView * view4 = [[UIImageView alloc] init];
-    view4.frame = CGRectMake(SCREEN_WIDTH * 3 , 0 , SCREEN_WIDTH, 200);
-    [view4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view4];
-    
-    UIImageView * view5 = [[UIImageView alloc] init];
-    view5.frame = CGRectMake(SCREEN_WIDTH * 4 , 0 , SCREEN_WIDTH, 200);
-    [view5 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view5];
-    
-    UIImageView * view6 = [[UIImageView alloc] init];
-    view6.frame = CGRectMake(SCREEN_WIDTH * 5 , 0 , SCREEN_WIDTH, 200);
-    [view6 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view6];
-    
-    UIImageView * view7 = [[UIImageView alloc] init];
-    view7.frame = CGRectMake(SCREEN_WIDTH * 6 , 0 , SCREEN_WIDTH, 200);
-    [view7 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view7];
-    
-    UIImageView * view8 = [[UIImageView alloc] init];
-    view8.frame = CGRectMake(SCREEN_WIDTH * 7 , 0 , SCREEN_WIDTH, 200);
-    [view8 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.lunbo_scrollView addSubview:view8];
-    
-    //开始到第一个图
-    //    self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
-    
-    self.lunbo_pageControl = [[UIPageControl alloc] init];
-    self.lunbo_pageControl.frame = CGRectMake(self.view.frame.size.width / 2 - 50, 180, 100, 18);
-    self.lunbo_pageControl.numberOfPages = 6;
-    self.lunbo_pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:132/255.0 green:193/255.0 blue:254/255.0 alpha:1];
-    self.lunbo_pageControl.pageIndicatorTintColor = [UIColor colorWithRed:202/255.0 green:218/255.0 blue:233/255.0 alpha:1];
-    
-    if(self.isplay == 0)
+    if(self.arr_lunboData.count == 0)
     {
-        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
-        //轮播秒数
-        self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-        self.lunbo_pageControl.currentPage = 0;
+        self.image4.hidden = NO;
         
-        self.isplay = 1;
+        self.lunbo_scrollView.scrollEnabled = NO;
+        
+        self.image4 = [[UIImageView alloc] init];
+        self.image4.frame = CGRectMake(SCREEN_WIDTH * 1, 0 , SCREEN_WIDTH, 200);
+        [self.image4 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image4];
+        
+        
+        self.image1 = [[UIImageView alloc] init];
+        self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.lunbo_scrollView addSubview:self.image1];
     }
     else
     {
-        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
+        [self lunsdsd];
     }
+    //
+    self.lunbo_pageControl = [[UIPageControl alloc] init];
+    self.lunbo_pageControl.frame = CGRectMake(self.view.frame.size.width / 2 - 50, 180, 100, 18);
+    self.lunbo_pageControl.numberOfPages = self.arr_lunboData.count;
+    self.lunbo_pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:132/255.0 green:193/255.0 blue:254/255.0 alpha:1];
+    self.lunbo_pageControl.pageIndicatorTintColor = [UIColor colorWithRed:202/255.0 green:218/255.0 blue:233/255.0 alpha:1];
+    
     //手势
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     tapGesture.numberOfTapsRequired = 1; //点击次数
@@ -331,24 +319,9 @@
 }
 
 #pragma mark - 轮播图的点击事件
--(void)tapGesture:(id)sender
+- (void)tapGesture:(id)sender
 {
-    NSLog(@"%ld",(long)self.lunbo_pageControl.currentPage);
     
-    switch (self.lunbo_pageControl.currentPage){
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark - 定时器的方法!
@@ -357,7 +330,7 @@
     CGFloat x = self.lunbo_scrollView.contentOffset.x;
     int count = x / SCREEN_WIDTH;
     
-    if(count < 6)
+    if(count < self.arr_lunboData.count)
     {
         count ++;
         [UIView animateWithDuration:0.7f animations:^{
@@ -367,7 +340,7 @@
             
         }];
     }
-    else if(count == 6)
+    else if(count == self.arr_lunboData.count)
     {
         count ++;
         
@@ -397,15 +370,15 @@
     
     int count = x / SCREEN_WIDTH;
     
-    if(count == 7)
+    if(count == self.arr_lunboData.count + 1)
     {
         self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
         self.lunbo_pageControl.currentPage = 0;
     }
     else if(count == 0)
     {
-        self.lunbo_scrollView.contentOffset = CGPointMake(6 * SCREEN_WIDTH, 0);
-        self.lunbo_pageControl.currentPage = 5;
+        self.lunbo_scrollView.contentOffset = CGPointMake(self.arr_lunboData.count * SCREEN_WIDTH, 0);
+        self.lunbo_pageControl.currentPage = self.arr_lunboData.count - 1;
     }
     else
     {
@@ -429,6 +402,7 @@
         
     }
 }
+
 
 #pragma mark - 分类的10个
 - (void)p_classify
@@ -769,6 +743,94 @@
     }
 }
 
+#pragma mark - 轮播图的数据
+- (void)p_data2
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Slide_type:"];
+    
+    [dataprovider getSlidesWithSlide_type:@"1"];
+}
+
+//数据
+- (void)Slide_type:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_lunboData = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"slidelist"])
+            {
+                [self.arr_lunboData addObject:dic[@"slide_img"]];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self lunsdsd];
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+//
+- (void)lunsdsd
+{
+    self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * (self.arr_lunboData.count + 2), 0);
+    
+    self.lunbo_pageControl.numberOfPages = self.arr_lunboData.count;
+    
+    self.lunbo_scrollView.scrollEnabled = YES;
+    
+    self.image4.hidden = YES;
+    
+    for (int i = 1; i <= self.arr_lunboData.count; i++)
+    {
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, 200)];
+        
+        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/slide/%@",Url,self.arr_lunboData[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        
+        [self.lunbo_scrollView addSubview:image];
+    }
+    
+    self.image1 = [[UIImageView alloc] init];
+    self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
+    [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/slide/%@",Url,self.arr_lunboData[self.arr_lunboData.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image1];
+    
+    self.image2 = [[UIImageView alloc] init];
+    self.image2.frame = CGRectMake(SCREEN_WIDTH * (self.arr_lunboData.count + 1), 0 , SCREEN_WIDTH, 200);
+    [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/slide/%@",Url,self.arr_lunboData[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.lunbo_scrollView addSubview:self.image2];
+    
+    
+    if(self.isplay == 0)
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+        //轮播秒数
+        self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        self.lunbo_pageControl.currentPage = 0;
+        
+        self.isplay = 1;
+    }
+    else
+    {
+        self.lunbo_scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (self.lunbo_pageControl.currentPage + 1), 0);
+    }
+    
+}
+
+
+
 #pragma mark - 定位
 - (void)p_location
 {
@@ -784,5 +846,33 @@
         NSLog(@"%lf",locationCorrrdinate.longitude);
     }];
 }
+
+
+#pragma mark - 下拉刷新
+- (void)example01
+{
+    // 马上进入刷新状态
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.header endRefreshing];
+    });
+    
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_lunboData
+{
+    if(_arr_lunboData == nil)
+    {
+        self.arr_lunboData = [NSMutableArray array];
+    }
+    return _arr_lunboData;
+}
+
+
 
 @end

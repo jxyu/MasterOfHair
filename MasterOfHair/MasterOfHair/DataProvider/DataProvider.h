@@ -33,7 +33,7 @@
 - (void)resetPasswordWithMember_username:(NSString *)member_username member_password:(NSString *)member_password;
 
 #pragma mark - 商城产品接口
-- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+- (void)productWithcity_id:(NSString *)city_id category_id:(NSString *)category_id is_maker:(NSString *)is_maker pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 #pragma mark - 所有区域
 - (void)area;
@@ -61,5 +61,36 @@
 
 #pragma mark - 添加收货地址
 - (void)createWithMember_id:(NSString *)member_id consignee:(NSString *)consignee mobile:(NSString *)mobile province:(NSString *)province city:(NSString *)city area:(NSString *)area address:(NSString *)address;
+
+#pragma mark - 轮播图接口
+- (void)getSlidesWithSlide_type:(NSString *)slide_type;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
