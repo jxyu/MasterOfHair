@@ -53,8 +53,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //清空
+    [Single_Model singel].shouhudizhi_Model = nil;
     
-    [self p_data_moren];
+//    [self p_data_moren];
     
     self.arr = @[@"1",@"1"].mutableCopy;
     
@@ -85,7 +87,33 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self p_data_moren];
+    if([Single_Model singel].shouhudizhi_Model == nil)
+    {
+        [self p_data_moren];
+    }
+    else
+    {
+        self.image_1.hidden = NO;
+        self.name.hidden = NO;
+        self.tel.hidden = NO;
+        self.address.hidden = NO;
+        
+        Shouhudizhi_Model * model = [Single_Model singel].shouhudizhi_Model;
+        
+        NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
+        
+        self.name.text = model.consignee;
+        self.tel.text = model.mobile;
+        self.address.text = str;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新tableView(记住,要更新放在主线程中)
+            
+            [self.tableView reloadData];
+        });
+
+    }
+    
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }

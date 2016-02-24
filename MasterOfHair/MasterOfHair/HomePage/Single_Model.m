@@ -24,14 +24,7 @@
     return single;
 }
 
-- (NSMutableArray * )arr_data
-{
-    if(_arr_data == nil)
-    {
-        self.arr_data = [NSMutableArray array];
-    }
-    return _arr_data;
-}
+
 
 
 @end

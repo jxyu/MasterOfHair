@@ -119,15 +119,20 @@
     {
         cell.address.text = [NSString stringWithFormat:@"[默认] %@",str];
     }
-    
+        
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Shouhudizhi_Model * model = self.arr_data[indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-#warning +++++
-    NSLog(@"上个页改变状态，赋值");
+//    NSLog(@"上个页改变状态，赋值");
+    [Single_Model singel].shouhudizhi_Model = model;
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 #pragma mark - 接口数据

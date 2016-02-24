@@ -240,9 +240,29 @@
     }
 }
 
+#pragma mark - 获取某分类的图文列表并分页
+- (void)getArticleListWithChannel_id:(NSString *)channel_id status_code:(NSString *)status_code pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(channel_id && status_code && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=article/getArticleList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"channel_id\":\"%@\",\"status_code\":\"%@\"}",channel_id,status_code],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
-
-
+#pragma mark - 获取某分类的视频列表并分页
+- (void)getArticleListWithVideo_type:(NSString *)video_type is_free:(NSString *)is_free pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(video_type && is_free && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/getVideoList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_type\":\"%@\",\"is_free\":\"%@\"}",video_type,is_free],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

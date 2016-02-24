@@ -18,6 +18,7 @@
 #import "TCollectionReusableView.h"
 #import "TextDetailViewController.h"
 #import "VideoDetailViewController.h"
+#import "TuWen_Models.h"
 @interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的btn
@@ -29,8 +30,14 @@
 
 @property (nonatomic, strong) UICollectionView * video_collectionView;
 
+//
+@property (nonatomic, assign) NSInteger page;
 
-@property (nonatomic, strong) UICollectionView * stroe_collectionView;
+
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_tuwen;
+
+@property (nonatomic, strong) NSMutableArray * arr_shipin;
 
 @end
 
@@ -70,6 +77,7 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     [self example01];
 
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -142,6 +150,10 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [self p_dataTuwen];
+        
+        [self p_shipinData:@""];
+        
         [weakSelf.video_collectionView reloadData];
         
         [weakSelf loadNewData];
@@ -149,6 +161,8 @@
     }];
     
     self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_NextDataTuWen];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -167,11 +181,11 @@
 {
     if(self.isTeacher == 0)
     {
-        return 11;
+        return self.arr_shipin.count;
     }
     else
     {
-        return 15;
+        return self.arr_tuwen.count;
     }
 }
 
@@ -179,7 +193,7 @@
 {
     if(self.isTeacher == 0)
     {
-        NSLog(@"跳视频页 %ld",(long)indexPath.item);
+//        NSLog(@"跳视频页 %ld",(long)indexPath.item);
         
         VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
         
@@ -199,18 +213,33 @@
 {
     if(self.isTeacher == 0)
     {
-        JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
+        TuWen_Models * model = self.arr_shipin[indexPath.item];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
 
+        cell.name.text = model.video_title;
+        if([model.is_free isEqualToString:@"1"])
+        {
+            cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+        }
+        else
+        {
+            cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+        }
         
         return cell;
     }
     else
     {
+        
+        TuWen_Models * model = self.arr_tuwen[indexPath.item];
+        
         PicAndVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_text" forIndexPath:indexPath];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        
+        cell.detail.text = model.article_title;
         
         return cell;
     }
@@ -368,12 +397,15 @@
 #pragma mark - 下拉刷新
 - (void)example01
 {
+    [self p_dataTuwen];
+
     // 马上进入刷新状态
     [self.video_collectionView.header beginRefreshing];
 }
 
 -(void)example02
 {
+    
     [self.video_collectionView.footer beginRefreshing];
 }
 
@@ -419,6 +451,8 @@
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self p_shipinData:@""];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -469,6 +503,8 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [self p_dataTuwen];
+        
         [weakSelf.video_collectionView reloadData];
         
         [weakSelf loadNewData];
@@ -476,6 +512,8 @@
     }];
     
     self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_NextDataTuWen];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -486,8 +524,164 @@
 
 }
 
+#pragma mark - 图文数据
+- (void)p_dataTuwen
+{
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleList:"];
+    
+    [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:@"1" pagesize:@"12"];
+}
+
+- (void)p_NextDataTuWen
+{
+    self.page ++;
+    NSLog(@"%ld",self.page);
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleList1:"];
+    
+    [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+}
+
+- (void)getArticleList:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_tuwen = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"articlelist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_tuwen addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.video_collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+- (void)getArticleList1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"articlelist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_tuwen addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.video_collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+#pragma mark - 视频的数据
+- (void)p_shipinData:(NSString * )is_free
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping:"];
+    
+    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:@"1" pagesize:@"100"];
+}
+
+- (void)getArticleListshiping:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_shipin = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_shipin addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.video_collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_tuwen
+{
+    if(_arr_tuwen == nil)
+    {
+        self.arr_tuwen = [NSMutableArray array];
+    }
+    
+    return _arr_tuwen;
+}
+
+- (NSMutableArray *)arr_shipin
+{
+    if(_arr_shipin == nil)
+    {
+        self.arr_shipin = [NSMutableArray array];
+    }
+    
+    return _arr_shipin;
+}
 
 @end

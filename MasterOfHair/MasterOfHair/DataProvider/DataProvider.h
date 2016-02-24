@@ -81,7 +81,11 @@
 #pragma mark - 设为默认收货地址
 - (void)getProductListWithProduction_keyword:(NSString *)production_keyword is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell;
 
+#pragma mark - 获取某分类的图文列表并分页
+- (void)getArticleListWithChannel_id:(NSString *)channel_id status_code:(NSString *)status_code pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 获取某分类的视频列表并分页
+- (void)getArticleListWithVideo_type:(NSString *)video_type is_free:(NSString *)is_free pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

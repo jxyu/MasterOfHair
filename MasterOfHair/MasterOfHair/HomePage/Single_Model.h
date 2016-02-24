@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Shouhudizhi_Model.h"
 @interface Single_Model : NSObject
 
 + (instancetype )singel;
 
-@property (nonatomic, strong) NSMutableArray * arr_data;
-
+@property (nonatomic, strong) Shouhudizhi_Model * shouhudizhi_Model;
 
 
 @end

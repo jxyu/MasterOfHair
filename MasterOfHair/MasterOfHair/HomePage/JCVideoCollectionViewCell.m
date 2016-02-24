@@ -34,7 +34,7 @@
     [self.contentView addSubview:self.image];
     
     self.isFree = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 40, 0, 40, 30)];
-    self.isFree.backgroundColor = [UIColor orangeColor];
+//    self.isFree.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.isFree];
     
     UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(0, self.contentView.frame.size.height - 25, self.contentView.frame.size.width, 25)];
@@ -43,7 +43,8 @@
     [self.contentView addSubview:view_bg];
     
     self.play = [[UIImageView alloc] initWithFrame:CGRectMake(3, self.contentView.frame.size.height - 22.5, 20, 20)];
-    self.play.backgroundColor = [UIColor orangeColor];
+//    self.play.backgroundColor = [UIColor orangeColor];
+    self.play.image = [UIImage imageNamed:@"01shdjhsjdhsd_57"];
     [self.contentView addSubview:self.play];
     
     self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.play.frame) + 5, CGRectGetMinY(self.play.frame), self.contentView.frame.size.width - CGRectGetMaxX(self.play.frame) - 15, 20)];
