@@ -218,7 +218,7 @@
 #pragma mark - 商城数据
 - (void)getCategories:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_data1 = nil;
     self.arr_data2 = nil;

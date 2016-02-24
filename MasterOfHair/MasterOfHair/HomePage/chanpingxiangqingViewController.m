@@ -354,6 +354,11 @@
 - (void)selectedTagsChanged: (VOTagList *)tagList{
     
     NSLog(@"selected: %ld", tagList.selectedIndexSet.firstIndex);
+    
+    Chanpingxiangqing_Models * model = self.arr_guige[tagList.selectedIndexSet.firstIndex];
+    
+    self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
+    self.price.text =[NSString stringWithFormat:@"¥ %@",model.sell_price];
 }
 
 
@@ -405,7 +410,7 @@
 //购物车
 - (void)btn_addShoppingAction:(UIButton *)sender
 {
-    NSLog(@"购物车");
+//    NSLog(@"购物车");
     
     if(self.tagList.selectedIndexSet.count == 0)
     {
@@ -423,39 +428,41 @@
     }
     else
     {
-        NSLog(@"%@",self.arr_list[self.tagList.selectedIndexSet.firstIndex]);
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithProduction_id:self.production_id number:@"1" price:model.sell_price member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
     }
-    
 }
 //购买
 - (void)btn_shareAction:(UIButton *)sender
 {
-    NSLog(@"购买");
+//    NSLog(@"购买");
     
-    querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
-    [self showViewController:querendingdan sender:nil];
-    
-//    if(self.tagList.selectedIndexSet.count == 0)
-//    {
-//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再确定下单" preferredStyle:(UIAlertControllerStyleAlert)];
-//        
-//        [self presentViewController:alert animated:YES completion:^{
-//            
-//        }];
-//        
-//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//            
-//        }];
-//        
-//        [alert addAction:action];
-//    }
-//    else
-//    {
-//        NSLog(@"跳页");
-//        
-//        querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
-//        [self showViewController:querendingdan sender:nil];
-//    }
+    if(self.tagList.selectedIndexSet.count == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择规格后再确定下单" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        NSLog(@"跳页");
+        
+        querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+        [self showViewController:querendingdan sender:nil];
+    }
 }
 
 #pragma mark - 轮播图
@@ -687,6 +694,31 @@
     }
 }
 
+#pragma mark  - 加入购物车的接口
+- (void)create:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"加入购物城成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+
+}
 
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_pic

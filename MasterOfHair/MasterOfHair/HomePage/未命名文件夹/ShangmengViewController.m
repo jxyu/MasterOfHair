@@ -269,6 +269,8 @@
 //    NSLog(@"查找关键字");
     
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
+    searchViewController.is_maker = @"1";
+    
     [self showViewController:searchViewController sender:nil];
 }
 

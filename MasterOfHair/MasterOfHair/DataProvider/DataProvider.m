@@ -204,6 +204,43 @@
     }
 }
 
+#pragma mark - 加入购物车
+- (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number price:(NSString *)price member_id:(NSString *)member_id specs_id:(NSString *)specs_id
+{
+    if(production_id && number && price && member_id && specs_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"number\":\"%@\",\"price\":\"%@\",\"member_id\":\"%@\",\"specs_id\":\"%@\"}",production_id,number,price,member_id,specs_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 获取某产品分类的子类
+- (void)shopcartWithMember_id:(NSString *)member_id
+{
+    if(member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/shopcart",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 设为默认收货地址
+- (void)getProductListWithProduction_keyword:(NSString *)production_keyword is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell
+{
+    if(production_keyword && is_maker && is_sell)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_keyword\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
 
 
 

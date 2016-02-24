@@ -72,12 +72,14 @@
 #pragma mark - 获取某产品分类的子类
 - (void)getCategoriesWithCategory_parent_id:(NSString *)category_parent_id;
 
+#pragma mark - 加入购物车
+- (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number price:(NSString *)price member_id:(NSString *)member_id specs_id:(NSString *)specs_id;
 
+#pragma mark - 获取某产品分类的子类
+- (void)shopcartWithMember_id:(NSString *)member_id;
 
-
-
-
-
+#pragma mark - 设为默认收货地址
+- (void)getProductListWithProduction_keyword:(NSString *)production_keyword is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell;
 
 
 

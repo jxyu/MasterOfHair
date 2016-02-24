@@ -426,8 +426,11 @@
 //查找关键字
 - (void)delegate_searchAction:(UIButton *)sender
 {
-    NSLog(@"查找关键字");
+//    NSLog(@"查找关键字");
+
     SearchViewController * searchViewController = [[SearchViewController alloc] init];
+    searchViewController.is_maker = @"0";
+    
     [self showViewController:searchViewController sender:nil];
 }
 
@@ -589,7 +592,7 @@
 #pragma mark - 商城数据
 - (void)product:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     self.arr_all = nil;

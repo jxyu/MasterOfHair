@@ -10,5 +10,6 @@
 
 @interface SearchViewController : BaseNavigationController
 
+@property (nonatomic, copy) NSString * is_maker;
 
 @end

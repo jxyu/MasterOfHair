@@ -8,11 +8,19 @@
 
 #import "SearchViewController.h"
 
+
+#import "WebStroe_Model.h"
 #import "AppDelegate.h"
-@interface SearchViewController () <UITextFieldDelegate>
+#import "WebStroeCollectionViewCell.h"
+#import "chanpingxiangqingViewController.h"
+@interface SearchViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITextField * search_text;
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_data;
 
+//collectionView
+@property (nonatomic, strong) UICollectionView * stroe_collectionView;
 
 @end
 
@@ -87,16 +95,104 @@
 //右搜索
 - (void)clickRightButton:(UIButton *)sender
 {
-    NSLog(@"可编辑的搜索");
+//    NSLog(@"可编辑的搜索");
     
     [self.search_text resignFirstResponder];
     //进行检索
+    
+    if([self.search_text.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入搜索的关键字" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"getProductList:"];
+        
+//        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
+        
+        [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+    }
 }
 
 #pragma mark - 布局
 - (void)p_setupView
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    //每个item的大小
+    int  item_length = (SCREEN_WIDTH ) / 4;
+    layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
+    layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
+    
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    self.stroe_collectionView.delegate = self;
+    self.stroe_collectionView.dataSource = self;
+    self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    [self.view addSubview:self.stroe_collectionView];
+    
+    //
+    [self.stroe_collectionView registerClass:[WebStroeCollectionViewCell class] forCellWithReuseIdentifier:@"cell_webStroe"];
+}
+
+//代理
+- (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.arr_data.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    WebStroe_Model * model = self.arr_data[indexPath.item];
+    
+    WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
+    //价格
+    cell.price.text = [NSString stringWithFormat:@"¥%@",model.sell_price];
+    
+    cell.old_price.text = [NSString stringWithFormat:@"¥%@",model.net_price];
+    
+    cell.detail.text = model.production_name;
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+    
+    if(![model.city_id isEqualToString:@"1"])
+    {
+        cell.image_class.hidden = YES;
+    }
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
+    //    NSLog(@"%ld",(long)indexPath.item);
+    
+    WebStroe_Model * model = self.arr_data[indexPath.item];
+    
+    chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+    
+    chanpingxiangqing.production_id = model.production_id;
+    
+    [self showViewController:chanpingxiangqing sender:nil];
 }
 
 #pragma mark - textField的代理
@@ -104,9 +200,98 @@
 {
     [self.search_text resignFirstResponder];
     
+    if([self.search_text.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入搜索的关键字" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"getProductList:"];
+        
+        //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
+        
+        [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+    }
+    
     //进行检索
     return YES;
 }
+
+#pragma mark - 数据
+- (void)getProductList:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            {
+                WebStroe_Model * modle = [[WebStroe_Model alloc] init];
+                
+                [modle setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:modle];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            if([self.arr_data count] == 0)
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"抱歉，没有找到符合的产品" preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alert addAction:action];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.stroe_collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    
+    return _arr_data;
+}
+
 
 
 @end

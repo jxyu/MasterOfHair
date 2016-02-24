@@ -10,6 +10,9 @@
 
 #import "AppDelegate.h"
 #import "SelectshouhuoViewController.h"
+#import "Shouhudizhi_Model.h"
+
+
 @interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -20,6 +23,9 @@
 @property (nonatomic, strong) UILabel * name;
 @property (nonatomic, strong) UILabel * tel;
 @property (nonatomic, strong) UILabel * address;
+
+//
+@property (nonatomic, strong) UIImageView * image_1;
 
 
 //尾视图
@@ -36,7 +42,8 @@
 //测试
 @property (nonatomic, strong) NSMutableArray * arr;
 
-
+//
+@property (nonatomic, strong) NSMutableArray * arr_morenAddress;
 
 
 @end
@@ -46,6 +53,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self p_data_moren];
     
     self.arr = @[@"1",@"1"].mutableCopy;
     
@@ -76,6 +85,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data_moren];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -320,41 +331,38 @@
 #pragma mark - 头视图
 - (void)p_headView
 {
-    if(self.isMoren == NO)
-    {
-        self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
-        self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 50)];
-        view_white.backgroundColor = [UIColor whiteColor];
-        [self.head_view addSubview:view_white];
-        
-        UIImageView * head_image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 30, 30)];
-        head_image.image = [UIImage imageNamed:@"05__03"];
-        [view_white addSubview:head_image];
-        
-        UILabel * head_label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(head_image.frame) + 10, 10, 150, 30)];
-        head_label.text = @"选择收货地址";
-        [view_white addSubview:head_label];
-    }
-    else
+    if([self.arr_morenAddress count] == 0)
     {
         self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
         self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
-        image.image = [UIImage imageNamed:@"white_bg"];
-        [self.head_view addSubview:image];
+        UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 70)];
+        view_white.backgroundColor = [UIColor whiteColor];
+        [self.head_view addSubview:view_white];
+        
+        UIImageView * head_image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 15, 40, 40)];
+        head_image.image = [UIImage imageNamed:@"05__03"];
+        [view_white addSubview:head_image];
+        
+        UILabel * head_label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(head_image.frame) + 10, 20, 150, 30)];
+        head_label.text = @"选择收货地址";
+        [view_white addSubview:head_label];
+        
+        
+        self.image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
+        self.image_1.image = [UIImage imageNamed:@"white_bg"];
+        [self.head_view addSubview:self.image_1];
+        
         
         CGFloat length_x = (SCREEN_WIDTH - 50) / 2;
-
+        
         self.name = [[UILabel alloc] init];
         self.name.frame = CGRectMake(20, 10, length_x, 25);
         self.name.text = @"哈啊哈";
         self.name.font = [UIFont systemFontOfSize:18];
         [self.head_view addSubview:self.name];
         
-
+        
         self.tel = [[UILabel alloc] init];
         self.tel.frame = CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 10, length_x, 25);
         self.tel.text = @"1888888888888";
@@ -363,11 +371,26 @@
         
         
         self.address = [[UILabel alloc] init];
-        self.address.frame = CGRectMake(20, CGRectGetMaxY(self.name.frame) + 15, SCREEN_WIDTH - 40, 34);
+        self.address.frame = CGRectMake(20, CGRectGetMaxY(self.name.frame) + 13, SCREEN_WIDTH - 40, 34);
         self.address.text = @"山东省临沂市山东省临沂市山东省临沂市山东省临沂市";
         self.address.font = [UIFont systemFontOfSize:14];
         self.address.numberOfLines = 2;
         [self.head_view addSubview:self.address];
+        
+        //开启用户交互
+        self.head_view.userInteractionEnabled = YES;
+        //隐藏
+        self.image_1.hidden = YES;
+        self.name.hidden = YES;
+        self.tel.hidden = YES;
+        self.address.hidden = YES;
+    }
+    else
+    {
+        self.image_1.hidden = NO;
+        self.name.hidden = NO;
+        self.tel.hidden = NO;
+        self.address.hidden = NO;
     }
     
     //新建tap手势
@@ -548,10 +571,77 @@
 }
 
 
+#pragma mark - 获取默认地址接口
+- (void)p_data_moren
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getAddresses:"];
+    
+    [dataprovider getAddressesWithMember_id:[userdefault objectForKey:@"member_id"] is_default:@"1"];
+}
 
+- (void)getAddresses:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_morenAddress = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr = dict[@"data"][@"addresslist"];
+            
+            Shouhudizhi_Model * model = [[Shouhudizhi_Model alloc] init];
+            
+            [model setValuesForKeysWithDictionary:arr.firstObject];
+            
+            [self.arr_morenAddress addObject:model];
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            self.image_1.hidden = NO;
+            self.name.hidden = NO;
+            self.tel.hidden = NO;
+            self.address.hidden = NO;
+            
+            Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
 
+            NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
+            
+            self.name.text = model.consignee;
+            self.tel.text = model.mobile;
+            self.address.text = str;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
-
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_morenAddress
+{
+    if(_arr_morenAddress == nil)
+    {
+        self.arr_morenAddress = [NSMutableArray array];
+    }
+    
+    return _arr_morenAddress;
+}
 
 
 @end

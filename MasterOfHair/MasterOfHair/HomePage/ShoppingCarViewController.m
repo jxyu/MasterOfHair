@@ -62,6 +62,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
 }
 
@@ -226,7 +228,45 @@
     //做删除操作，并调接口删除后台数据
 }
 
+#pragma mark - 接口
+- (void)p_data
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"shopcart:"];
+    
+    [dataprovider shopcartWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
 
+#pragma mark - 商城数据
+- (void)shopcart:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
