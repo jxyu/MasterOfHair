@@ -89,20 +89,20 @@
 
     if([[userdefault objectForKey:@"category_name"] length] == 0)
     {
-        [self.delegate_class setTitle:@" 全部分类" forState:UIControlStateNormal];
+        [self.delegate_class setTitle:@"全部分类" forState:UIControlStateNormal];
     }
     else
     {
-        [self.delegate_class setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"category_name"]] forState:UIControlStateNormal];
+        [self.delegate_class setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"category_name"]] forState:UIControlStateNormal];
     }
     
     if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
     {
-        [self.delegate_address setTitle:@" 定位城市" forState:UIControlStateNormal];
+        [self.delegate_address setTitle:@"定位城市" forState:UIControlStateNormal];
     }
     else
     {
-        [self.delegate_address setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
+        [self.delegate_address setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
     }
     
     [self example01];
@@ -343,14 +343,14 @@
     //定位城市
     if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
     {
-        [self.delegate_address setTitle:@" 定位城市" forState:UIControlStateNormal];
+        [self.delegate_address setTitle:@"定位城市" forState:UIControlStateNormal];
     }
     else
     {
         [self.delegate_address setTitle:[NSString stringWithFormat:@" %@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
     }
     [self.delegate_address setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
-    self.delegate_address.status = FLAlignmentStatusLeft;
+    self.delegate_address.status = FLAlignmentStatusCenter;
     self.delegate_address.titleLabel.font = [UIFont systemFontOfSize:12];
     self.delegate_address.layer.masksToBounds=YES;
     self.delegate_address.layer.borderWidth= 1;
@@ -366,7 +366,7 @@
     
     if([[userdefault objectForKey:@"category_name"] length] == 0)
     {
-        [self.delegate_class setTitle:@" 全部分类" forState:UIControlStateNormal];
+        [self.delegate_class setTitle:@"全部分类" forState:UIControlStateNormal];
     }
     else
     {
@@ -374,7 +374,7 @@
     }
     
     [self.delegate_class setTitleColor:navi_bar_bg_color forState:UIControlStateNormal];
-    self.delegate_class.status = FLAlignmentStatusLeft;
+    self.delegate_class.status = FLAlignmentStatusCenter;
     self.delegate_class.titleLabel.font = [UIFont systemFontOfSize:12];
     self.delegate_class.layer.masksToBounds=YES;
     self.delegate_class.layer.borderWidth= 1;

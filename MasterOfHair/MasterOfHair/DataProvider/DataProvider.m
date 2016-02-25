@@ -70,7 +70,7 @@
 #pragma mark - 所有区域
 - (void)area
 {
-    NSString * url = [NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
+    NSString * url = [NSString stringWithFormat:@"%@appbackend/index.php?r=area/getCities",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -263,6 +263,16 @@
         [self PostRequest:url andpram:prm];
     }
 }
+
+
+#pragma mark - 获取所有产品分类
+- (void)getChannels
+{
+    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=channel/getChannels",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
+
 
 
 

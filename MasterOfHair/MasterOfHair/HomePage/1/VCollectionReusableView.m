@@ -44,21 +44,21 @@
     self.vip.frame = CGRectMake(SCREEN_WIDTH - 5 - 40, 5, 40, 30);
     [self.vip setTitle:@"会员" forState:(UIControlStateNormal)];
     self.vip.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.vip setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+//    [self.vip setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     [self addSubview:self.vip];
     
     self.free = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.free.frame = CGRectMake(SCREEN_WIDTH - 90, 5, 40, 30);
     [self.free setTitle:@"免费" forState:(UIControlStateNormal)];
     self.free.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.free setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+//    [self.free setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     [self addSubview:self.free];
     
     self.all = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.all.frame = CGRectMake(SCREEN_WIDTH - 135, 5, 40, 30);
     [self.all setTitle:@"全部" forState:(UIControlStateNormal)];
     self.all.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.all setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+//    [self.all setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
     [self addSubview:self.all];
     
     UIView * line_1 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.all.frame) + 2, 13, 1, 14)];

@@ -34,6 +34,8 @@
 		7B142E4B1C58BB1200B32809 /* 01collect_16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4A1C58BB1200B32809 /* 01collect_16.png */; };
 		7B142E4D1C58BC4E00B32809 /* 01shoppingCar_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4C1C58BC4E00B32809 /* 01shoppingCar_03.png */; };
 		7B142E4F1C58BD8F00B32809 /* 01share_21.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4E1C58BD8F00B32809 /* 01share_21.png */; };
+		7B18A7761C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7751C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m */; };
+		7B18A77A1C7E92A300A32AE9 /* Shipintuwen_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7791C7E92A300A32AE9 /* Shipintuwen_Models.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -361,6 +363,10 @@
 		7B142E4A1C58BB1200B32809 /* 01collect_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01collect_16.png; sourceTree = "<group>"; };
 		7B142E4C1C58BC4E00B32809 /* 01shoppingCar_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01shoppingCar_03.png; sourceTree = "<group>"; };
 		7B142E4E1C58BD8F00B32809 /* 01share_21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01share_21.png; sourceTree = "<group>"; };
+		7B18A7741C7E90E000A32AE9 /* ShipintuwenfenleiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipintuwenfenleiViewController.h; sourceTree = "<group>"; };
+		7B18A7751C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipintuwenfenleiViewController.m; sourceTree = "<group>"; };
+		7B18A7781C7E92A300A32AE9 /* Shipintuwen_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shipintuwen_Models.h; sourceTree = "<group>"; };
+		7B18A7791C7E92A300A32AE9 /* Shipintuwen_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shipintuwen_Models.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -962,6 +968,26 @@
 			name = 1;
 			sourceTree = "<group>";
 		};
+		7B18A7701C7E90A000A32AE9 /* shipintuwenfenlei */ = {
+			isa = PBXGroup;
+			children = (
+				7B18A7771C7E928300A32AE9 /* Models */,
+				7B18A7741C7E90E000A32AE9 /* ShipintuwenfenleiViewController.h */,
+				7B18A7751C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m */,
+			);
+			name = shipintuwenfenlei;
+			path = 1/12/shipintuwenfenlei;
+			sourceTree = "<group>";
+		};
+		7B18A7771C7E928300A32AE9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B18A7781C7E92A300A32AE9 /* Shipintuwen_Models.h */,
+				7B18A7791C7E92A300A32AE9 /* Shipintuwen_Models.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		7B1DE47C1C78121C0079B606 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1253,6 +1279,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA596B21C4E269800DBC69D /* Main */,
+				7B18A7701C7E90A000A32AE9 /* shipintuwenfenlei */,
 				7B33059B1C5EE9380014C49C /* video and text */,
 			);
 			name = "Business School";
@@ -2433,6 +2460,7 @@
 				7B3305AA1C5EE9AA0014C49C /* FenleiCollectionViewCell.m in Sources */,
 				7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */,
 				7B0433CB1C5C859B0052F4AC /* NextqianbaoViewController.m in Sources */,
+				7B18A7761C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m in Sources */,
 				7BAABAD91C59EDD100C14DF8 /* Single_Model.m in Sources */,
 				7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */,
 				802553011C574F7100CFF875 /* MJRefreshBackFooter.m in Sources */,
@@ -2497,6 +2525,7 @@
 				7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */,
 				802552AC1C57442B00CFF875 /* SCFilter.m in Sources */,
 				7BB26FD81C5AFD8A001D332E /* cishanjijinhuiViewController.m in Sources */,
+				7B18A77A1C7E92A300A32AE9 /* Shipintuwen_Models.m in Sources */,
 				8043C6FB1C4E0C0900369EEF /* FirstScrollController.m in Sources */,
 				7B235AA01C7C0CF200235B0F /* Fenlei_Model.m in Sources */,
 				7B3305A01C5EE9640014C49C /* TuwenViewController.m in Sources */,

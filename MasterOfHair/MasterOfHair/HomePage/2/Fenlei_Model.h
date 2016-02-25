@@ -14,7 +14,6 @@
 
 @property (nonatomic, copy) NSString * category_name;
 
-@property (nonatomic, copy) NSString * category_parent_id;
 
 
 @end

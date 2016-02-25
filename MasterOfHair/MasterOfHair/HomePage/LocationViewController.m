@@ -173,7 +173,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            for (NSDictionary * dic in dict[@"data"][@"arealist"])
+            for (NSDictionary * dic in dict[@"data"][@"citylist"])
             {
                 [self.arr_data addObject:dic[@"area_name"]];
             }

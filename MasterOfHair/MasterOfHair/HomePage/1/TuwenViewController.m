@@ -11,8 +11,7 @@
 #import "JCVideoCollectionViewCell.h"
 #import "VCollectionReusableView.h"
 
-
-#import "FenleiViewController.h"
+#import "ShipintuwenfenleiViewController.h"
 #import "SearchViewController.h"
 #import "PicAndVideoCollectionViewCell.h"
 #import "TCollectionReusableView.h"
@@ -33,11 +32,15 @@
 //
 @property (nonatomic, assign) NSInteger page;
 
+@property (nonatomic, assign) NSInteger page1;
 
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_tuwen;
 
 @property (nonatomic, strong) NSMutableArray * arr_shipin;
+
+@property (nonatomic, copy) NSString * str_type;
+
 
 @end
 
@@ -47,11 +50,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.str_type = @"";
+    
     [self p_navi];
     
     [self p_topView];
     
     [self p_setupView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +83,6 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [self example01];
 
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -152,7 +157,7 @@
         
         [self p_dataTuwen];
         
-        [self p_shipinData:@""];
+        [self p_shipinData:self.str_type];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -163,6 +168,8 @@
     self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_NextDataTuWen];
+        
+        [self p_NextshipinData:self.str_type];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -263,6 +270,38 @@
         headerV.free.tag = 20000;
         [headerV.vip addTarget:self action:@selector(vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
         headerV.vip.tag = 30000;
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        if([[userdefault objectForKey:@"channel_name"] length] == 0)
+        {
+            [headerV.type_all setTitle:@"分类" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [headerV.type_all setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"channel_name"]] forState:UIControlStateNormal];
+        }
+        
+        
+        if([self.str_type isEqualToString:@""])
+        {
+            [headerV.all setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+            [headerV.free setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [headerV.vip setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        }
+        else if([self.str_type isEqualToString:@"0"])
+        {
+            [headerV.all setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [headerV.vip setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [headerV.free setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+        }
+        else
+        {
+            [headerV.all setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [headerV.free setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [headerV.vip setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+        }
+
         reusableView = headerV;
     }
     else
@@ -273,6 +312,17 @@
         [headerV.type_all addTarget:self action:@selector(type_allAction:) forControlEvents:(UIControlEventTouchUpInside)];
         
         [headerV.search addTarget:self action:@selector(searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        if([[userdefault objectForKey:@"channel_name"] length] == 0)
+        {
+            [headerV.type_all setTitle:@"分类" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [headerV.type_all setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"channel_name"]] forState:UIControlStateNormal];
+        }
         
         reusableView = headerV;
     }
@@ -288,7 +338,7 @@
 #pragma mark - btn视频的btn
 - (void)type_allAction:(UIButton *)sender
 {
-    FenleiViewController * fenleiViewController = [[FenleiViewController alloc] init];
+    ShipintuwenfenleiViewController * fenleiViewController = [[ShipintuwenfenleiViewController alloc] init];
     [self showViewController:fenleiViewController sender:nil];
 }
 
@@ -300,37 +350,22 @@
 
 - (void)allAction:(UIButton *)sender
 {
+    self.str_type = @"";
 
-    [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    
-    UIButton * btn1 = [self.view viewWithTag:20000];
-    [btn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-    UIButton * btn2 = [self.view viewWithTag:30000];
-    [btn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     //刷新
     [self example01];
 }
 
 - (void)freeAction:(UIButton *)sender
 {
-    [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    self.str_type = @"0";
     
-    UIButton * btn1 = [self.view viewWithTag:10000];
-    [btn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-    UIButton * btn2 = [self.view viewWithTag:30000];
-    [btn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-    //刷新
     [self example01];
 }
 
 - (void)vipAction:(UIButton *)sender
 {
-    [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
-    
-    UIButton * btn1 = [self.view viewWithTag:20000];
-    [btn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-    UIButton * btn2 = [self.view viewWithTag:10000];
-    [btn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+    self.str_type = @"1";
     //刷新
     [self example01];
 }
@@ -397,8 +432,6 @@
 #pragma mark - 下拉刷新
 - (void)example01
 {
-    [self p_dataTuwen];
-
     // 马上进入刷新状态
     [self.video_collectionView.header beginRefreshing];
 }
@@ -452,7 +485,7 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [self p_shipinData:@""];
+        [self p_shipinData:self.str_type];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -461,6 +494,8 @@
     }];
     
     self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_NextshipinData:self.str_type];
         
         [weakSelf.video_collectionView reloadData];
         
@@ -538,7 +573,7 @@
 - (void)p_NextDataTuWen
 {
     self.page ++;
-    NSLog(@"%ld",self.page);
+//    NSLog(@"%ld",self.page);
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleList1:"];
     
@@ -619,15 +654,28 @@
 #pragma mark - 视频的数据
 - (void)p_shipinData:(NSString * )is_free
 {
+    self.page1 = 1;
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping:"];
     
-    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:@"1" pagesize:@"100"];
+    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:@"1" pagesize:@"10"];
+}
+
+- (void)p_NextshipinData:(NSString * )is_free
+{
+    self.page1 ++ ;
+    NSLog(@"%ld",self.page);
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping1:"];
+    
+    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
 }
 
 - (void)getArticleListshiping:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_shipin = nil;
     
@@ -661,6 +709,39 @@
     }
 }
 
+- (void)getArticleListshiping1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_shipin addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.video_collectionView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 #pragma mark - 懒加载

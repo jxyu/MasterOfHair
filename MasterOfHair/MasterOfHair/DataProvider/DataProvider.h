@@ -87,6 +87,16 @@
 #pragma mark - 获取某分类的视频列表并分页
 - (void)getArticleListWithVideo_type:(NSString *)video_type is_free:(NSString *)is_free pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 获取所有产品分类
+- (void)getChannels;
+
+
+
+
+
+
+
+
 
 
 

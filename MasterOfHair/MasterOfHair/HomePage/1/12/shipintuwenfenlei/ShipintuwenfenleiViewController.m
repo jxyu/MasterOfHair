@@ -1,18 +1,18 @@
 //
-//  FenleiViewController.m
+//  ShipintuwenfenleiViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/31.
+//  Created by 鞠超 on 16/2/25.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "FenleiViewController.h"
+#import "ShipintuwenfenleiViewController.h"
 
 #import "FenleiCollectionViewCell.h"
 #import "FenleiCollectionReusableView.h"
 
-#import "Fenlei_Model.h"
-@interface FenleiViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+#import "Shipintuwen_Models.h"
+@interface ShipintuwenfenleiViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIButton * btn_all;
 @property (nonatomic, strong) UIImageView * image_select;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation FenleiViewController
+@implementation ShipintuwenfenleiViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +36,7 @@
     [self p_data];
     
     [self p_navi];
-
+    
     [self p_allView];
     
     [self p_setupView];
@@ -81,7 +81,7 @@
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     [layout setHeaderReferenceSize:CGSizeMake(SCREEN_WIDTH, 25)];
-
+    
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 55, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 55) collectionViewLayout:layout];
     self.collectionView.delegate = self;
@@ -89,7 +89,7 @@
     self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self.view addSubview:self.collectionView];
-
+    
     //2个注册
     [self.collectionView registerClass:[FenleiCollectionViewCell class] forCellWithReuseIdentifier:@"cell_fenlei"];
     
@@ -110,11 +110,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Fenlei_Model * model = self.arr_data2[indexPath.section][indexPath.row];
+    Shipintuwen_Models * model = self.arr_data2[indexPath.section][indexPath.row];
     
     FenleiCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_fenlei" forIndexPath:indexPath];
     
-    cell.name.text = model.category_name;
+    cell.name.text = model.channel_name;
     
     cell.image.tag = indexPath.section * 10 + indexPath.item;
     cell.name.tag = (indexPath.section + 1) * 100 + indexPath.item;
@@ -125,18 +125,18 @@
 //点击
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Fenlei_Model * model = self.arr_data2[indexPath.section][indexPath.row];
-    NSLog(@"%@",model.category_name);
+    Shipintuwen_Models * model = self.arr_data2[indexPath.section][indexPath.row];
+    NSLog(@"%@",model.channel_name);
     
     UIImageView * image = [self.view viewWithTag:(indexPath.section * 10 + indexPath.item)];
     image.hidden = NO;
     
     UILabel * label = [self.view viewWithTag:((indexPath.section + 1) * 100 + indexPath.item)];
     label.layer.borderColor = navi_bar_bg_color.CGColor;
-
+    
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    [userdefault setObject:model.category_name forKey:@"category_name"];
+    [userdefault setObject:model.channel_name forKey:@"channel_name"];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -145,14 +145,14 @@
 //设置头尾部内容
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    Fenlei_Model * model = self.arr_data1[indexPath.section];
+    Shipintuwen_Models * model = self.arr_data1[indexPath.section];
     
     UICollectionReusableView *reusableView = nil;
     
     //定制头部视图的内容
     FenleiCollectionReusableView *headerV = (FenleiCollectionReusableView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell_HeaderView" forIndexPath:indexPath];
     
-    headerV.name.text = model.category_name;
+    headerV.name.text = model.channel_name;
     
     reusableView = headerV;
     
@@ -161,7 +161,7 @@
 //设置头尾的size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-   return CGSizeMake(self.view.frame.size.width, 25);
+    return CGSizeMake(self.view.frame.size.width, 25);
 }
 
 #pragma mark - 头视图中的 btn
@@ -191,46 +191,47 @@
 
 - (void)btn_allAction:(UIButton *)sender
 {
-//    NSLog(@"点击全部");
-
+    //    NSLog(@"点击全部");
+    
     self.image_select.hidden = NO;
     self.btn_all.layer.borderColor = navi_bar_bg_color.CGColor;
-//    self.isselect = 1;
+    //    self.isselect = 1;
     
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    [userdefault setObject:@"" forKey:@"category_name"];
+    [userdefault setObject:@"" forKey:@"channel_name"];
     
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 
 #pragma mark - 数据
 - (void)p_data
 {
     DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"getCategories:"];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getChannels:"];
     
-    [dataprovider getCategories];
+    [dataprovider getChannels];
 }
 
 #pragma mark - 商城数据
-- (void)getCategories:(id )dict
+- (void)getChannels:(id )dict
 {
+    NSLog(@"%@",dict);
+    
     self.arr_data1 = nil;
     self.arr_data2 = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
+//            NSLog(@"%@",dict[@"data"][@"channellist"]);
             
-//            NSLog(@"%@",dict[@"data"][@"categorylist"]);
-            
-            NSArray * arr = dict[@"data"][@"categorylist"];
+            NSArray * arr = dict[@"data"][@"channellist"];
             
             for (NSDictionary * dic in arr.firstObject)
             {
-                Fenlei_Model * model = [[Fenlei_Model alloc] init];
+                Shipintuwen_Models * model = [[Shipintuwen_Models alloc] init];
                 
                 [model setValuesForKeysWithDictionary:dic];
                 
@@ -240,7 +241,7 @@
                 
                 for (NSDictionary * dict1 in dic[@"sub"])
                 {
-                    Fenlei_Model * model = [[Fenlei_Model alloc] init];
+                    Shipintuwen_Models * model = [[Shipintuwen_Models alloc] init];
                     
                     [model setValuesForKeysWithDictionary:dict1];
                     
@@ -289,8 +290,5 @@
     }
     return _arr_data2;
 }
-
-
-
 
 @end
