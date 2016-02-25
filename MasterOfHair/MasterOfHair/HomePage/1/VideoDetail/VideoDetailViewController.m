@@ -10,6 +10,11 @@
 #import "MoviePlayer.h"
 #import "TextTableViewCell.h"
 #import "NextTextViewController.h"
+#import "TuWen_Models.h"
+#import "Pinglun_Models.h"
+
+
+
 @interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     MoviePlayer *moviePlayerview;
@@ -20,6 +25,7 @@
 //头视图
 @property (nonatomic, strong) UIView * head_View;
 
+@property (nonatomic, strong) NSString * pinglunshu;
 
 //1
 @property (nonatomic, strong) UILabel * text_title;
@@ -28,6 +34,8 @@
 //2
 @property (nonatomic, strong) UILabel * text_detail;
 @property (nonatomic, strong) UILabel * number;
+@property (nonatomic, strong) UILabel * isfree;
+
 
 @property (nonatomic, strong) UIButton * btn_collect;
 @property (nonatomic, strong) UILabel * label_collect;
@@ -40,6 +48,11 @@
 @property (nonatomic, strong) UITextField * bottom_text;
 @property (nonatomic, strong) UIButton * btn_fabiao;
 
+//
+@property (nonatomic, strong) NSMutableArray * arr_data;
+
+@property (nonatomic, strong) NSMutableArray * arr_data1;
+
 @end
 
 @implementation VideoDetailViewController
@@ -48,10 +61,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    view.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:view];
+
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+
+    [self p_data];
+    
+    [self p_data1];
+    
     [self p_setupView];
-    
-//    [self p_navi];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,18 +82,18 @@
 
 #pragma mark - navi
 
-- (void)p_navi
-{
-    _topView.hidden = YES;
-    
-    //上面的黑边
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
-    view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:view];
-}
+//- (void)p_navi
+//{
+//    _topView.hidden = YES;
+//    
+//    //上面的黑边
+//    
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+//    
+//    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+//    view.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:view];
+//}
 
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
@@ -117,7 +138,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return self.arr_data1.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,6 +151,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_textDetail" forIndexPath:indexPath];
+    
+#error +++++加数据赋值
+    
     
     return cell;
 }
@@ -149,12 +173,12 @@
 - (void)p_headView
 {
    
-    self.head_View = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 400)];
+    self.head_View = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 380)];
     self.head_View.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     
     //1
-    moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:@"http://baobab.cdn.wandoujia.com/14468618701471.mp4"]];
+    moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:@"http://baobab.cdn.wandoujia.com/14468618701471.mp4"]];
     [self.view addSubview:moviePlayerview];
 //    self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
 //    self.view_video.backgroundColor = [UIColor orangeColor];
@@ -173,7 +197,7 @@
     [moviePlayerview addSubview:self.text_title];
     
 //2
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 200 + 10, SCREEN_WIDTH, 80)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 180 + 10, SCREEN_WIDTH, 80)];
     view.backgroundColor = [UIColor whiteColor];
     [self.head_View addSubview:view];
     
@@ -196,11 +220,11 @@
     [view addSubview:self.number];
     
     //判断一下
-    UILabel * type = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.number.frame), CGRectGetMaxY(self.text_detail.frame) + 5, 60, 20)];
-    type.font = [UIFont systemFontOfSize:15];
-    type.textColor = navi_bar_bg_color;
-    type.text = @"免费";
-    [view addSubview:type];
+    self.isfree = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.number.frame), CGRectGetMaxY(self.text_detail.frame) + 5, 60, 20)];
+    self.isfree.font = [UIFont systemFontOfSize:15];
+    self.isfree.textColor = navi_bar_bg_color;
+    self.isfree.text = @"免费";
+    [view addSubview:self.isfree];
     
     //        CGFloat length_x = (SCREEN_WIDTH / 3 - 30) / 2 - 5;
     self.btn_collect = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -240,7 +264,7 @@
 
     
     //3
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 300, SCREEN_WIDTH, 100)];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 280, SCREEN_WIDTH, 100)];
     view1.backgroundColor = [UIColor whiteColor];
     [self.head_View addSubview:view1];
     
@@ -261,7 +285,17 @@
     self.pinglun_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(pinglun.frame) + 15, 50, 50)];
     self.pinglun_image.layer.cornerRadius = 25;
     self.pinglun_image.layer.masksToBounds = YES;
-    [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"member_headpic"] length] == 0)
+    {
+        self.pinglun_image.image = [UIImage imageNamed:@"touxiang"];
+    }
+    else
+    {
+        [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/member/%@",Url,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    }
+//    [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"touxiang"]];
     [self.head_View addSubview:self.pinglun_image];
     
     
@@ -273,6 +307,7 @@
     UIImageView * image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.pinglun_image.frame) + 10, CGRectGetMidY(self.pinglun_image.frame) - 10, 20, 20)];
     image_1.image = [UIImage imageNamed:@"01_3323232323"];
     [self.head_View addSubview:image_1];
+    
     
     self.bottom_text = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_1.frame) + 10, CGRectGetMidY(self.pinglun_image.frame) - 15, SCREEN_WIDTH - 10 - 70 - CGRectGetMaxX(image_1.frame) - 10, 30)];
     //    self.bottom_text.backgroundColor = [UIColor orangeColor];
@@ -376,6 +411,145 @@
 {
     [self.bottom_text resignFirstResponder];
 }
+
+#pragma mark - 视频解析数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getVideos:"];
+    
+    [dataprovider getVideosWithVideo_id:self.video_id];
+}
+
+//
+- (void)getVideos:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            TuWen_Models * model = self.arr_data.firstObject;
+            
+            self.text_title.text = model.video_title;
+            self.number.text = [NSString stringWithFormat:@"%@次",model.video_click];
+            self.text_detail.text = model.video_title;
+            if([model.is_free isEqualToString:@"0"])
+            {
+                self.isfree.textColor = navi_bar_bg_color;
+                self.isfree.text = @"免费";
+            }
+            else
+            {
+                self.isfree.textColor = [UIColor orangeColor];
+                self.isfree.text = @"付费";
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 评论解析
+- (void)p_data1
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getDiscussList:"];
+    
+    [dataprovider getDiscussListWithVideo_id:self.video_id reply_id:@"0" pagenumber:@"1" pagesize:@"100"];
+}
+
+- (void)getDiscussList:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_data1 = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSDictionary * dict1 = dict[@"data"][@"page"];
+            self.pinglunshu = dict1[@"total"];
+            
+            for (NSDictionary * dic in dict[@"data"][@"discusslist"])
+            {
+                Pinglun_Models * model = [[Pinglun_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data1 addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            self.pinglun_number.text = [NSString stringWithFormat:@"共%@条评论",self.pinglunshu];
+
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
+}
+
+- (NSMutableArray *)arr_data1
+{
+    if(_arr_data1 == nil)
+    {
+        self.arr_data1 = [NSMutableArray array];
+    }
+    
+    return _arr_data1;
+}
+
+
 
 
 

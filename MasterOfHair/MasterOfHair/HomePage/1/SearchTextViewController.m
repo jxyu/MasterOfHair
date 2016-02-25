@@ -1,30 +1,28 @@
 //
-//  SearchViewController.m
+//  SearchTextViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/22.
+//  Created by 鞠超 on 16/2/25.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "SearchViewController.h"
+#import "SearchTextViewController.h"
 
-
-#import "WebStroe_Model.h"
+#import "TuWen_Models.h"
 #import "AppDelegate.h"
-#import "WebStroeCollectionViewCell.h"
-#import "chanpingxiangqingViewController.h"
-@interface SearchViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+#import "PicAndVideoCollectionViewCell.h"
+@interface SearchTextViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITextField * search_text;
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_data;
 
 //collectionView
-@property (nonatomic, strong) UICollectionView * stroe_collectionView;
+@property (nonatomic, strong) UICollectionView * video_collectionView;
 
 @end
 
-@implementation SearchViewController
+@implementation SearchTextViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,12 +42,12 @@
 - (void)p_navi
 {
     [self addLeftButton:@"iconfont-fanhui"];
-//    _btnLeft.backgroundColor = [UIColor orangeColor];
+    //    _btnLeft.backgroundColor = [UIColor orangeColor];
     
     //右边为搜索
     [self addRightbuttontitle:@"搜索"];
     _lblRight.font = [UIFont systemFontOfSize:18];
-//    _lblRight.backgroundColor = [UIColor orangeColor];
+    //    _lblRight.backgroundColor = [UIColor orangeColor];
     _lblRight.frame = CGRectMake(SCREEN_WIDTH - 65, 20, 50, 44);
     _btnRight.frame = _lblRight.frame;
     
@@ -95,7 +93,7 @@
 //右搜索
 - (void)clickRightButton:(UIButton *)sender
 {
-//    NSLog(@"可编辑的搜索");
+    //    NSLog(@"可编辑的搜索");
     
     [self.search_text resignFirstResponder];
     //进行检索
@@ -119,32 +117,30 @@
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"getProductList:"];
         
-//        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
+        //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
-        [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+        [dataprovider getArticleListWithArticle_keyword:self.search_text.text pagenumber:@"1" pagesize:@"10000"];
+        
     }
 }
 
 #pragma mark - 布局
 - (void)p_setupView
 {
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 4;
     layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
-    layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
-    self.stroe_collectionView.delegate = self;
-    self.stroe_collectionView.dataSource = self;
-    self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    self.video_collectionView.delegate = self;
+    self.video_collectionView.dataSource = self;
+    self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self.view addSubview:self.stroe_collectionView];
-    
-    //
-    [self.stroe_collectionView registerClass:[WebStroeCollectionViewCell class] forCellWithReuseIdentifier:@"cell_webStroe"];
+    [self.view addSubview:self.video_collectionView];
+    //注册
+    [self.video_collectionView registerClass:[PicAndVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_text"];
 }
 
 //代理
@@ -161,22 +157,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    WebStroe_Model * model = self.arr_data[indexPath.item];
+    TuWen_Models * model = self.arr_data[indexPath.item];
     
-    WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
-    //价格
-    cell.price.text = [NSString stringWithFormat:@"¥%@",model.sell_price];
+    PicAndVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_text" forIndexPath:indexPath];
+    //
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     
-    cell.old_price.text = [NSString stringWithFormat:@"¥%@",model.net_price];
-    
-    cell.detail.text = model.production_name;
-    
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    
-    if(![model.city_id isEqualToString:@"1"])
-    {
-        cell.image_class.hidden = YES;
-    }
+    cell.detail.text = model.article_title;
     
     return cell;
 }
@@ -186,13 +173,10 @@
     //    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
     //    NSLog(@"%ld",(long)indexPath.item);
     
-    WebStroe_Model * model = self.arr_data[indexPath.item];
+    TuWen_Models * model = self.arr_data[indexPath.item];
     
-    chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+#warning +++跳页
     
-    chanpingxiangqing.production_id = model.production_id;
-    
-    [self showViewController:chanpingxiangqing sender:nil];
 }
 
 #pragma mark - textField的代理
@@ -221,7 +205,7 @@
         
         //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
-        [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+        [dataprovider getArticleListWithArticle_keyword:self.search_text.text pagenumber:@"1" pagesize:@"10000"];
     }
     
     //进行检索
@@ -231,16 +215,16 @@
 #pragma mark - 数据
 - (void)getProductList:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            for (NSDictionary * dic in dict[@"data"][@"articlelist"])
             {
-                WebStroe_Model * modle = [[WebStroe_Model alloc] init];
+                TuWen_Models * modle = [[TuWen_Models alloc] init];
                 
                 [modle setValuesForKeysWithDictionary:dic];
                 
@@ -253,6 +237,7 @@
         }
         @finally
         {
+            
             if([self.arr_data count] == 0)
             {
                 UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"抱歉，没有找到符合的产品" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -275,7 +260,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
-                [self.stroe_collectionView reloadData];
+                [self.video_collectionView reloadData];
             });
         }
     }
@@ -295,7 +280,5 @@
     
     return _arr_data;
 }
-
-
 
 @end

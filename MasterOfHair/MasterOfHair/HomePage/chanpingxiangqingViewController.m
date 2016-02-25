@@ -355,10 +355,10 @@
     
     NSLog(@"selected: %ld", tagList.selectedIndexSet.firstIndex);
     
-    Chanpingxiangqing_Models * model = self.arr_guige[tagList.selectedIndexSet.firstIndex];
+//    Chanpingxiangqing_Models * model = self.arr_guige[tagList.selectedIndexSet.firstIndex];
     
-    self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
-    self.price.text =[NSString stringWithFormat:@"¥ %@",model.sell_price];
+//    self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
+//    self.price.text =[NSString stringWithFormat:@"¥ %@",model.sell_price];
 }
 
 
@@ -429,6 +429,7 @@
     else
     {
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
         Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
         
         DataProvider * dataprovider=[[DataProvider alloc] init];

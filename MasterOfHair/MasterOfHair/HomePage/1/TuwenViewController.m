@@ -12,12 +12,13 @@
 #import "VCollectionReusableView.h"
 
 #import "ShipintuwenfenleiViewController.h"
-#import "SearchViewController.h"
+#import "SearchVideoTextViewController.h"
 #import "PicAndVideoCollectionViewCell.h"
 #import "TCollectionReusableView.h"
 #import "TextDetailViewController.h"
 #import "VideoDetailViewController.h"
 #import "TuWen_Models.h"
+#import "SearchTextViewController.h"
 @interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //上面的btn
@@ -83,6 +84,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [self example01];
 
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -113,7 +116,6 @@
         self.video_collectionView.dataSource = self;
         self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
-        [self.view addSubview:self.video_collectionView];
         
         [self.view addSubview:self.video_collectionView];
         [self.video_collectionView registerClass:[JCVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_video"];
@@ -200,9 +202,12 @@
 {
     if(self.isTeacher == 0)
     {
+        TuWen_Models * model = self.arr_shipin[indexPath.item];
 //        NSLog(@"跳视频页 %ld",(long)indexPath.item);
         
         VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        videoDetailViewController.video_id = model.video_id;
         
         [self showViewController:videoDetailViewController sender:nil];
     }
@@ -211,6 +216,8 @@
 //        NSLog(@"跳图文页 %ld",(long)indexPath.item);
         
         TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
+        
+        
         
         [self showViewController:textDetailViewController sender:nil];
     }
@@ -342,10 +349,20 @@
     [self showViewController:fenleiViewController sender:nil];
 }
 
+
 - (void)searchAction:(UIButton *)sender
 {
-    SearchViewController * searchViewController = [[SearchViewController alloc] init];
-    [self showViewController:searchViewController sender:nil];
+    if(self.isTeacher == 0)
+    {
+        SearchVideoTextViewController * searchViewController = [[SearchVideoTextViewController alloc] init];
+        [self showViewController:searchViewController sender:nil];
+    }
+    else
+    {
+        SearchTextViewController * searchTextViewController = [[SearchTextViewController alloc] init];
+        
+        [self showViewController:searchTextViewController sender:nil];
+    }
 }
 
 - (void)allAction:(UIButton *)sender

@@ -36,6 +36,9 @@
 		7B142E4F1C58BD8F00B32809 /* 01share_21.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E4E1C58BD8F00B32809 /* 01share_21.png */; };
 		7B18A7761C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7751C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m */; };
 		7B18A77A1C7E92A300A32AE9 /* Shipintuwen_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7791C7E92A300A32AE9 /* Shipintuwen_Models.m */; };
+		7B18A7811C7E9D4500A32AE9 /* SearchVideoTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7801C7E9D4500A32AE9 /* SearchVideoTextViewController.m */; };
+		7B18A7881C7EB06A00A32AE9 /* SearchTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */; };
+		7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -367,6 +370,12 @@
 		7B18A7751C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipintuwenfenleiViewController.m; sourceTree = "<group>"; };
 		7B18A7781C7E92A300A32AE9 /* Shipintuwen_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shipintuwen_Models.h; sourceTree = "<group>"; };
 		7B18A7791C7E92A300A32AE9 /* Shipintuwen_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shipintuwen_Models.m; sourceTree = "<group>"; };
+		7B18A77F1C7E9D4500A32AE9 /* SearchVideoTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchVideoTextViewController.h; sourceTree = "<group>"; };
+		7B18A7801C7E9D4500A32AE9 /* SearchVideoTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVideoTextViewController.m; sourceTree = "<group>"; };
+		7B18A7861C7EB06A00A32AE9 /* SearchTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTextViewController.h; sourceTree = "<group>"; };
+		7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTextViewController.m; sourceTree = "<group>"; };
+		7B18A78A1C7EEF5C00A32AE9 /* Pinglun_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pinglun_Models.h; sourceTree = "<group>"; };
+		7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pinglun_Models.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -988,6 +997,26 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		7B18A77B1C7E9D1000A32AE9 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				7B18A77F1C7E9D4500A32AE9 /* SearchVideoTextViewController.h */,
+				7B18A7801C7E9D4500A32AE9 /* SearchVideoTextViewController.m */,
+				7B18A7861C7EB06A00A32AE9 /* SearchTextViewController.h */,
+				7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		7B18A7891C7EEF3200A32AE9 /* Pinglun_Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B18A78A1C7EEF5C00A32AE9 /* Pinglun_Models.h */,
+				7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */,
+			);
+			name = Pinglun_Models;
+			sourceTree = "<group>";
+		};
 		7B1DE47C1C78121C0079B606 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1125,7 @@
 		7B33059B1C5EE9380014C49C /* video and text */ = {
 			isa = PBXGroup;
 			children = (
+				7B18A77B1C7E9D1000A32AE9 /* Search */,
 				7B299A131C7D7AEE00D57B76 /* Model */,
 				7BFE25EA1C61D9990038CA23 /* VideoDetail */,
 				7B3305B51C5F2BE10014C49C /* textDetail */,
@@ -1561,6 +1591,7 @@
 		7BFE25EA1C61D9990038CA23 /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				7B18A7891C7EEF3200A32AE9 /* Pinglun_Models */,
 				7BFE25EB1C61D9B70038CA23 /* VideoDetailViewController.h */,
 				7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */,
 			);
@@ -2453,8 +2484,10 @@
 				8082B4C31C7414320024EAD3 /* JKAssetsCollectionFooterView.m in Sources */,
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8082B4CC1C7414320024EAD3 /* JKUtil.m in Sources */,
+				7B18A7881C7EB06A00A32AE9 /* SearchTextViewController.m in Sources */,
 				8025530C1C574F7100CFF875 /* MJRefreshNormalHeader.m in Sources */,
 				802552B01C57442B00CFF875 /* SCIOPixelBuffers.m in Sources */,
+				7B18A7811C7E9D4500A32AE9 /* SearchVideoTextViewController.m in Sources */,
 				8043C7091C4E13E500369EEF /* Toolkit.m in Sources */,
 				7BAABADC1C59F14F00C14DF8 /* Store_Model.m in Sources */,
 				7B3305AA1C5EE9AA0014C49C /* FenleiCollectionViewCell.m in Sources */,
@@ -2517,6 +2550,7 @@
 				8025530A1C574F7100CFF875 /* MJRefreshBackStateFooter.m in Sources */,
 				7BB26FEF1C5B54C8001D332E /* NextFenxiaozhongxinViewController.m in Sources */,
 				8025530D1C574F7100CFF875 /* MJRefreshStateHeader.m in Sources */,
+				7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */,
 				8082B4CF1C7414320024EAD3 /* PhotoCell.m in Sources */,
 				7B00BF591C76F58900988119 /* ChineseString.m in Sources */,
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,

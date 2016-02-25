@@ -31,5 +31,10 @@
 @property (nonatomic, copy) NSString * video_url;
 
 
+@property (nonatomic, copy) NSString * create_time;
+@property (nonatomic, copy) NSString * video_brief;
+@property (nonatomic, copy) NSString * video_keyword;
+
+
 
 @end

@@ -90,13 +90,17 @@
 #pragma mark - 获取所有产品分类
 - (void)getChannels;
 
+#pragma mark - 视频关键词搜索
+- (void)getVideoListWithVideo_keyword:(NSString *)video_keyword pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 图文关键词搜索
+- (void)getArticleListWithArticle_keyword:(NSString *)article_keyword pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 获取某视频详情
+- (void)getVideosWithVideo_id:(NSString *)video_id;
 
-
-
-
-
+#pragma mark - 获取某个视频的一级评论列表并分页
+- (void)getDiscussListWithVideo_id:(NSString *)video_id reply_id:(NSString *)reply_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 
