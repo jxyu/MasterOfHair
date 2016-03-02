@@ -908,7 +908,7 @@
 //数据
 - (void)getRecommendProducts:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_chanpin = nil;
     

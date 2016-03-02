@@ -12,6 +12,8 @@
 #import "ShoppingCarTableViewCell.h"
 #import "querendingdanViewController.h"
 
+#import "ShoppingCar_Model.h"
+
 @interface ShoppingCarViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -23,6 +25,13 @@
 @property (nonatomic, strong) UILabel * bottom_price;
 
 @property (nonatomic, strong) UIButton * bottom_clearing;
+
+
+//数组
+@property (nonatomic, strong) NSMutableArray * arr_data;
+
+@property (nonatomic, strong) NSMutableArray * arr_baocun;
+
 
 @end
 
@@ -62,6 +71,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+
+    
     [self p_data];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
@@ -95,11 +106,9 @@
     
 //全选
     self.bottom_Btnselect = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.bottom_Btnselect.frame = CGRectMake(15, 15, 20, 20);
+    self.bottom_Btnselect.frame = CGRectMake(10, 12.5, 25, 25);
     [self.bottom_view addSubview:self.bottom_Btnselect];
-    [self.bottom_Btnselect setImage:[UIImage imageNamed:@"iconfont-iconquanxuan"] forState:(UIControlStateNormal)];
-    [self.bottom_Btnselect setTintColor:[UIColor grayColor]];
-    
+    [self.bottom_Btnselect setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
     [self.bottom_Btnselect addTarget:self action:@selector(bottom_BtnselectAction:) forControlEvents:(UIControlEventTouchUpInside)];
 
     //
@@ -139,12 +148,12 @@
 
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 1;
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.arr_data.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,18 +163,44 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ShoppingCar_Model * model = self.arr_data[indexPath.row];
+    
     ShoppingCarTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_shoppingCar"];
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-
+    
+    //加数据
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    cell.title.text = [NSString stringWithFormat:@"%@",model.production_name];
+    cell.detail.text = [NSString stringWithFormat:@"%@",model.production_subtitle];
+    cell.price.text = [NSString stringWithFormat:@"¥ %@",model.price];
+    cell.number.text = [NSString stringWithFormat:@"%@",model.number];
+    
     
     [cell.btn_select addTarget:self action:@selector(btn_selectAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    
+    cell.btn_select.selected = NO;
+    [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
+    [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+    cell.btn_select.tag = indexPath.row * 100;
     
     [cell.btn_Add addTarget:self action:@selector(btn_AddAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    cell.btn_Add.tag = indexPath.row + 1001;
     
-   [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    cell.btn_Subtract.tag = indexPath.row + 100001;
+    
+    
+    
+    for (ShoppingCar_Model * model1 in self.arr_baocun)
+    {
+        if([model1.shopcart_id isEqualToString:model.shopcart_id])
+        {
+            cell.btn_select.selected = YES;
+            [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
+            [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+        }
+    }
     
     return cell;
 }
@@ -179,7 +214,57 @@
 //全选
 - (void)bottom_BtnselectAction:(UIButton *)sender
 {
-    NSLog(@"全选，可能改变右边的价格");
+//    NSLog(@"全选，可能改变右边的价格");
+    if(sender.selected == 0)
+    {//全部选中
+        sender.selected = 1;
+        
+        [sender setTintColor:[UIColor whiteColor]];
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+        
+
+        //
+        NSInteger count = self.arr_data.count;
+        
+        for (int i = 0 ; i < count; i ++)
+        {
+            ShoppingCar_Model * model = self.arr_data[i];
+            
+            BOOL is_ok = NO;
+            
+            for (ShoppingCar_Model * model_baocun in self.arr_baocun)
+            {
+                if([model.shopcart_id isEqualToString:model_baocun.shopcart_id])
+                {
+                    is_ok = YES;
+                }
+            }
+            
+            if(is_ok == NO)
+            {
+                [self.arr_baocun addObject:model];
+            }
+        }
+    }
+    else
+    {
+        sender.selected = 0;
+        
+        [sender setTintColor:[UIColor whiteColor]];
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+        
+        self.arr_baocun = nil;
+    }
+    
+    [self p_price];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        
+        [self.tableView reloadData];
+    });
+    
+    NSLog(@"%ld",self.arr_baocun.count);
 }
 
 //结算
@@ -193,18 +278,136 @@
 #pragma mark - cell的点击事件
 - (void)btn_selectAction:(UIButton *)sender
 {
-    NSLog(@"点击选中");
+//    NSLog(@"点击选中");
+    NSInteger count = sender.tag / 100;
+    ShoppingCar_Model * model = self.arr_data[count];
+    
+    if(sender.selected == 0)
+    {//选中
+        sender.selected = YES;
+        
+        [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+        
+        [self.arr_baocun addObject:model];
+        
+        //可能底部全选
+        if(self.arr_baocun.count == self.arr_data.count)
+        {
+            self.bottom_Btnselect.selected = YES;
+            [self.bottom_Btnselect setTintColor:[UIColor whiteColor]];
+            [self.bottom_Btnselect setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+        }
+    }
+    else
+    {
+        sender.selected = NO;
+        
+        [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+        
+        [self.arr_baocun removeObject:model];
+        
+        //底部全选
+        if(self.bottom_Btnselect.selected == YES)
+        {
+            self.bottom_Btnselect.selected = NO;
+            [self.bottom_Btnselect setTintColor:[UIColor whiteColor]];
+            [self.bottom_Btnselect setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+        }
+    }
+    
+    [self p_price];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        
+        [self.tableView reloadData];
+    });
+    
+    NSLog(@"%ld",self.arr_baocun.count);
 }
 
+#pragma mark - 加减
 - (void)btn_AddAction:(UIButton *)sender
 {
-    NSLog(@"加");
+//    NSLog(@"加");
+    NSInteger count = sender.tag - 1001;
+    ShoppingCar_Model * model = self.arr_data[count];
+    
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    
+    [dataprovider createWithProduction_id:model.production_id number:@"1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
 }
 
 - (void)btn_SubtractAction:(UIButton *)sender
 {
-    NSLog(@"减");
+//    NSLog(@"减");
+    NSInteger count = sender.tag - 100001;
+    ShoppingCar_Model * model = self.arr_data[count];
+    
+    if([model.number integerValue] == 1)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"购物车数量不能小于1" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+    }
 }
+
+//数据
+- (void)create:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [self p_data];
+            
+            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 #pragma mark - 左滑删除
 
@@ -226,29 +429,26 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //做删除操作，并调接口删除后台数据
-}
-
-#pragma mark - 接口
-- (void)p_data
-{
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    ShoppingCar_Model * model = self.arr_data[indexPath.row];
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"shopcart:"];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"delete:"];
     
-    NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
-    [dataprovider shopcartWithMember_id:[userdefault objectForKey:@"member_id"]];
+    [dataprovider deleteWithShopcart_id:model.shopcart_id];
 }
 
-#pragma mark - 商城数据
-- (void)shopcart:(id )dict
+//掉数据
+- (void)delete:(id )dict
 {
     NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
+            [self p_data];
             
+            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
         }
         @catch (NSException *exception)
         {
@@ -270,6 +470,99 @@
 }
 
 
+#pragma mark - 接口
+- (void)p_data
+{
+    self.bottom_price.text = @"¥ 0.00";
+    
+    self.bottom_Btnselect.selected = NO;
+    [self.bottom_Btnselect setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"shopcart:"];
+    
+    NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+    [dataprovider shopcartWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
+
+#pragma mark - 商城数据
+- (void)shopcart:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_baocun = nil;
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"shopcartlist"])
+            {
+                ShoppingCar_Model * model = [[ShoppingCar_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    
+    return _arr_data;
+}
+
+- (NSMutableArray *)arr_baocun
+{
+    if(_arr_baocun == nil)
+    {
+        self.arr_baocun = [NSMutableArray array];
+    }
+    
+    return _arr_baocun;
+}
+
+#pragma mark - 计算价格
+- (void)p_price
+{
+    
+    float price_sum = 0.00;
+    
+    for (int i = 0; i < self.arr_baocun.count; i ++)
+    {
+        ShoppingCar_Model * modle = self.arr_baocun[i];
+        
+        price_sum = [modle.price floatValue] * [modle.number floatValue] + price_sum;
+    }
+    
+    self.bottom_price.text = [NSString stringWithFormat:@"¥ %.2f",price_sum];
+
+}
 
 
 

@@ -336,6 +336,42 @@
     }
 }
 
+#pragma mark - 编辑购物车(修改数量)
+- (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number  member_id:(NSString *)member_id specs_id:(NSString *)specs_id
+{
+    if(production_id && number && member_id && specs_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"number\":\"%@\",\"member_id\":\"%@\",\"specs_id\":\"%@\"}",production_id,number,member_id,specs_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 获取某视频详情
+- (void)deleteWithShopcart_id:(NSString *)shopcart_id
+{
+    if(shopcart_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"shopcart_id\":\"%@\"}",shopcart_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

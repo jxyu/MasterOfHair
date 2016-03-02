@@ -105,9 +105,11 @@
 #pragma mark - 获取产品热门列表
 - (void)getRecommendProductsWithCity_id:(NSString *)city_id is_sell:(NSString *)is_sell;
 
+#pragma mark - 编辑购物车(修改数量)
+- (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number  member_id:(NSString *)member_id specs_id:(NSString *)specs_id;
 
-
-
+#pragma mark - 获取某视频详情
+- (void)deleteWithShopcart_id:(NSString *)shopcart_id;
 
 
 

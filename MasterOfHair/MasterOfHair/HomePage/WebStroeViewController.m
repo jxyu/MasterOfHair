@@ -592,7 +592,7 @@
 #pragma mark - 商城数据
 - (void)product:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     self.arr_all = nil;
