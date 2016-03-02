@@ -236,6 +236,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"shopcart:"];
     
+    NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
     [dataprovider shopcartWithMember_id:[userdefault objectForKey:@"member_id"]];
 }
 

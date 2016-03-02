@@ -195,14 +195,14 @@
     btn_return.frame = CGRectMake(5, 10, 30, 30);
     [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
     [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:btn_return];
+    [moviePlayerview addSubview:btn_return];
     
     
     self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
     self.text_title.font = [UIFont systemFontOfSize:15];
     self.text_title.textColor = [UIColor whiteColor];
     self.text_title.text = @"2016年度发型设计最新课程";
-    [self.view addSubview:self.text_title];
+    [moviePlayerview addSubview:self.text_title];
     
 //2
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 180 + 10, SCREEN_WIDTH, 80)];
@@ -456,7 +456,32 @@
         {
             TuWen_Models * model = self.arr_data.firstObject;
             
-            [self p_headView];
+            if([model.video_url length] != 0)
+            {
+                NSString * str = [NSString stringWithFormat:@"%@appbackend/uploads/video/%@",Url,model.video_url];
+                moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
+                [self.view addSubview:moviePlayerview];
+            }
+            else
+            {
+                self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+                self.view_video.backgroundColor = [UIColor blackColor];
+                [self.view addSubview:self.view_video];
+            }
+            
+            UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
+            btn_return.frame = CGRectMake(5, 10, 30, 30);
+            [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
+            [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+            [moviePlayerview addSubview:btn_return];
+            
+            
+            self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
+            self.text_title.font = [UIFont systemFontOfSize:15];
+            self.text_title.textColor = [UIColor whiteColor];
+//            self.text_title.text = @"2016年度发型设计最新课程";
+            [moviePlayerview addSubview:self.text_title];
+            
             
             self.text_title.text = model.video_title;
             self.number.text = [NSString stringWithFormat:@"%@次",model.video_click];

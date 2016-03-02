@@ -75,7 +75,7 @@
 #pragma mark - 加入购物车
 - (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number price:(NSString *)price member_id:(NSString *)member_id specs_id:(NSString *)specs_id;
 
-#pragma mark - 获取某产品分类的子类
+#pragma mark - 获取购物车列表界面
 - (void)shopcartWithMember_id:(NSString *)member_id;
 
 #pragma mark - 设为默认收货地址
@@ -102,7 +102,8 @@
 #pragma mark - 获取某个视频的一级评论列表并分页
 - (void)getDiscussListWithVideo_id:(NSString *)video_id reply_id:(NSString *)reply_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
+#pragma mark - 获取产品热门列表
+- (void)getRecommendProductsWithCity_id:(NSString *)city_id is_sell:(NSString *)is_sell;
 
 
 

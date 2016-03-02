@@ -489,9 +489,9 @@
         {
             cell.name.text = @"申请成为代理商";
                             cell.image.image = [UIImage imageNamed:@"00001"];
-            cell.arrows_switch.hidden = YES;
-            cell.arrows.hidden = YES;
-            cell.type.hidden = NO;
+//            cell.arrows_switch.hidden = NO;
+            cell.arrows.hidden = NO;
+            cell.type.hidden = YES;
         }
             break;
         default:

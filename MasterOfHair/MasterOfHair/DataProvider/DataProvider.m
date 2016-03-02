@@ -216,7 +216,7 @@
     }
 }
 
-#pragma mark - 获取某产品分类的子类
+#pragma mark - 获取购物车列表界面
 - (void)shopcartWithMember_id:(NSString *)member_id
 {
     if(member_id)
@@ -324,7 +324,17 @@
 }
 
 
-
+#pragma mark - 获取产品热门列表
+- (void)getRecommendProductsWithCity_id:(NSString *)city_id is_sell:(NSString *)is_sell
+{
+    if(city_id && is_sell)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getRecommendProducts",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"is_sell\":\"%@\"}",city_id,is_sell]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
