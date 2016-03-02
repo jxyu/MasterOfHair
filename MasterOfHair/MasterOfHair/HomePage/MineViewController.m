@@ -164,9 +164,9 @@
     [view_white addSubview:self.head_name];
     
 //    NSLog(@"%@",[userdefault objectForKey:@"member_nickname"]);
-    if([[userdefault objectForKey:@"member_nickname"] length] == 0)
+    if([[userdefault objectForKey:@"member_nickname"] length] == 0 || [[userdefault objectForKey:@"member_nickname"] isEqualToString:@"<null>"])
     {
-        self.head_name.text = @"";
+        self.head_name.text = [userdefault objectForKey:@"account"];
     }
     else
     {
