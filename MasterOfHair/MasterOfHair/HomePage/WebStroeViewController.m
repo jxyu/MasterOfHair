@@ -287,7 +287,7 @@
     
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     
-    if(![model.city_id isEqualToString:@"1"])
+    if(![model.city_id isEqualToString:@"0"])
     {
         cell.image_class.hidden = YES;
     }

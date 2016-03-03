@@ -29,6 +29,7 @@
 #import "TuwenViewController.h"
 #import "VideoDetailViewController.h"
 #import "ShuoshuoViewController.h"
+#import "WebStroe_Model.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -61,6 +62,8 @@
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_lunboData;
 
+//获取产品热门列表
+@property (nonatomic, strong) NSMutableArray * arr_chanpin;
 
 @end
 
@@ -173,6 +176,7 @@
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self p_chanpinliebiao];
         
         [self p_data2];
         //        self.isplay = 0;
@@ -530,8 +534,25 @@
     {
         JCStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_store" forIndexPath:indexPath];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-        
+        if(self.arr_chanpin.count != 0)
+        {
+            WebStroe_Model * model = self.arr_chanpin[indexPath.item];
+            
+            NSString * str =  [NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+            
+            cell.price.text = [NSString stringWithFormat:@"￥ %@",model.sell_price];
+            cell.detail.text = [NSString stringWithFormat:@"%@",model.production_name];
+            
+            if(![model.city_id isEqualToString:@"0"])
+            {
+                cell.image_iocn.hidden = YES;
+            }
+        }
+        else
+        {
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        }
         return cell;
     }
     else
@@ -625,7 +646,13 @@
     {
         NSLog(@"111 ~~ %ld",(long)indexPath.item);
         
+        WebStroe_Model * model = self.arr_chanpin[indexPath.item];
+        
         chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+        
+        
+        chanpingxiangqing.production_id = model.production_id;
+        
         
         [self showViewController:chanpingxiangqing sender:nil];
     }
@@ -869,6 +896,53 @@
     
 }
 
+#pragma mark - 产品数据
+- (void)p_chanpinliebiao
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getRecommendProducts:"];
+    
+    [dataprovider getRecommendProductsWithCity_id:@"105" is_sell:@"1"];
+}
+
+//数据
+- (void)getRecommendProducts:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_chanpin = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            {
+                WebStroe_Model * model = [[WebStroe_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_chanpin addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_lunboData
 {
@@ -879,6 +953,14 @@
     return _arr_lunboData;
 }
 
+- (NSMutableArray *)arr_chanpin
+{
+    if(_arr_chanpin == nil)
+    {
+        self.arr_chanpin = [NSMutableArray array];
+    }
+    return _arr_chanpin;
+}
 
 
 @end

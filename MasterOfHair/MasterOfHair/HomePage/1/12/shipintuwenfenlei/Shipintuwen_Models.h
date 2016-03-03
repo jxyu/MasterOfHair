@@ -14,4 +14,7 @@
 
 @property (nonatomic, copy) NSString * channel_name;
 
+@property (nonatomic, copy) NSString * channel_image;
+
+
 @end

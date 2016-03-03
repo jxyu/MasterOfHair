@@ -216,7 +216,7 @@
     }
 }
 
-#pragma mark - 获取某产品分类的子类
+#pragma mark - 获取购物车列表界面
 - (void)shopcartWithMember_id:(NSString *)member_id
 {
     if(member_id)
@@ -322,6 +322,89 @@
         [self PostRequest:url andpram:prm];
     }
 }
+
+
+#pragma mark - 获取产品热门列表
+- (void)getRecommendProductsWithCity_id:(NSString *)city_id is_sell:(NSString *)is_sell
+{
+    if(city_id && is_sell)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getRecommendProducts",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"is_sell\":\"%@\"}",city_id,is_sell]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 编辑购物车(修改数量)
+- (void)createWithProduction_id:(NSString *)production_id number:(NSString *)number  member_id:(NSString *)member_id specs_id:(NSString *)specs_id
+{
+    if(production_id && number && member_id && specs_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"number\":\"%@\",\"member_id\":\"%@\",\"specs_id\":\"%@\"}",production_id,number,member_id,specs_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 获取某视频详情
+- (void)deleteWithShopcart_id:(NSString *)shopcart_id
+{
+    if(shopcart_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"shopcart_id\":\"%@\"}",shopcart_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 添加一个订单(POST提交)
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info
+{
+    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=order/create",Url];
+        
+        NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
+        
+         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,jsonString]};
+        
+        NSLog(@"%@",prm);
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id production_id:(NSString *)production_id
+{
+    if(member_id && production_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 判断产品是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id production_id:(NSString *)production_id
+{
+    if(member_id && production_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/isFavorite",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
 
 
 
@@ -560,6 +643,22 @@
     //                            key, @"key", nil];
     //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
     //    NSLog(@"%@",result);
+}
+
+
+// 将字典或者数组转化为JSON串
+- (NSData *)toJSONData:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        return nil;
+    }
 }
 
 @end

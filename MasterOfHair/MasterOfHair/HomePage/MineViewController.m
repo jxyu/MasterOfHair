@@ -164,9 +164,9 @@
     [view_white addSubview:self.head_name];
     
 //    NSLog(@"%@",[userdefault objectForKey:@"member_nickname"]);
-    if([[userdefault objectForKey:@"member_nickname"] length] == 0)
+    if([[userdefault objectForKey:@"member_nickname"] length] == 0 || [[userdefault objectForKey:@"member_nickname"] isEqualToString:@"<null>"])
     {
-        self.head_name.text = @"";
+        self.head_name.text = [userdefault objectForKey:@"account"];
     }
     else
     {
@@ -489,9 +489,9 @@
         {
             cell.name.text = @"申请成为代理商";
                             cell.image.image = [UIImage imageNamed:@"00001"];
-            cell.arrows_switch.hidden = YES;
-            cell.arrows.hidden = YES;
-            cell.type.hidden = NO;
+//            cell.arrows_switch.hidden = NO;
+            cell.arrows.hidden = NO;
+            cell.type.hidden = YES;
         }
             break;
         default:

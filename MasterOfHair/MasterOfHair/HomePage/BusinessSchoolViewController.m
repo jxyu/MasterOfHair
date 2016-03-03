@@ -16,6 +16,8 @@
 #import "TuwenViewController.h"
 #import "TextDetailViewController.h"
 #import "VideoDetailViewController.h"
+#import "Shipintuwen_Models.h"
+
 @interface BusinessSchoolViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -50,6 +52,9 @@
 
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_lunboData;
+
+//图片
+@property (nonatomic, strong) NSMutableArray * arr_pic;
 
 @end
 
@@ -100,6 +105,8 @@
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self p_dataPic];
         
         [self p_data2];
         //        self.isplay = 0;
@@ -432,62 +439,87 @@
 {
     if([collectionView isEqual:self.classify_collectionView])
     {
+        
         JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
         
-        switch (indexPath.row) {
-            case 0:
-            {
-                cell.name.text = @"美业";
-            }
-                break;
-            case 1:
-            {
-                cell.name.text = @"美发";
-            }
-                break;
-            case 2:
-            {
-                cell.name.text = @"美容";
-            }
-                break;
-            case 3:
-            {
-                cell.name.text = @"纹绣";
-            }
-                break;
-            case 4:
-            {
-                cell.name.text = @"纹身";
-            }
-                break;
-            case 5:
-            {
-                cell.name.text = @"足浴";
-            }
-                break;
-            case 6:
-            {
-                cell.name.text = @"化妆";
-            }
-                break;
-            case 7:
-            {
-                cell.name.text = @"美甲";
-            }
-                break;
-            case 8:
-            {
-                cell.name.text = @"扎发";
-            }
-                break;
-            case 9:
-            {
-                cell.name.text = @"更多";
-            }
-                break;
-            default:
-                break;
+        if(self.arr_pic.count != 0)
+        {
+            Shipintuwen_Models * model = self.arr_pic[indexPath.item];
+            
+            cell.name.text=[[NSString stringWithFormat:@"%@",model.channel_name] isEqual:@"<null>"]?@"":[NSString stringWithFormat:@"%@",model.channel_name];
+            
+            NSString * str =  [NSString stringWithFormat:@"%@appbackend/uploads/channel/%@",Url,model.channel_image];
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         }
+        else
+        {
+            switch (indexPath.row) {
+                case 0:
+                {
+                    cell.name.text = @"美业";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 1:
+                {
+                    cell.name.text = @"美发";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 2:
+                {
+                    cell.name.text = @"美容";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 3:
+                {
+                    cell.name.text = @"纹绣";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 4:
+                {
+                    cell.name.text = @"纹身";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 5:
+                {
+                    cell.name.text = @"足浴";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 6:
+                {
+                    cell.name.text = @"化妆";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 7:
+                {
+                    cell.name.text = @"美甲";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 8:
+                {
+                    cell.name.text = @"扎发";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                case 9:
+                {
+                    cell.name.text = @"更多";
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+                }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        
         return cell;
     }
     else if([collectionView isEqual:self.stroe_collectionView])
@@ -822,6 +854,58 @@
     
 }
 
+#pragma mark - 获取所有分类
+- (void)p_dataPic
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getChannels:"];
+    
+    [dataprovider getChannels];
+}
+
+- (void)getChannels:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_pic = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr = dict[@"data"][@"channellist"];
+            
+            for (NSDictionary * dic in arr.firstObject)
+            {
+                Shipintuwen_Models * model = [[Shipintuwen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_pic addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_lunboData
 {
@@ -832,6 +916,14 @@
     return _arr_lunboData;
 }
 
-
+- (NSMutableArray *)arr_pic
+{
+    if(_arr_pic == nil)
+    {
+        self.arr_pic = [NSMutableArray array];
+    }
+    
+    return _arr_pic;
+}
 
 @end

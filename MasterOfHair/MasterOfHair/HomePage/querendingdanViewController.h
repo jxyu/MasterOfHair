@@ -8,6 +8,15 @@
 
 #import "BaseNavigationController.h"
 
+#import "chanpinDetail_Models.h"
+#import "Chanpingxiangqing_Models.h"
+
 @interface querendingdanViewController : BaseNavigationController
+
+@property (nonatomic, strong) chanpinDetail_Models * chanpinDetail;
+
+@property (nonatomic, strong) Chanpingxiangqing_Models * Chanpingxiangqing;
+
+
 
 @end

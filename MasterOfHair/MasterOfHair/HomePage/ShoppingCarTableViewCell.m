@@ -39,9 +39,9 @@
     
     self.btn_select = [UIButton buttonWithType:(UIButtonTypeSystem)];
 //    self.btn_select.backgroundColor = [UIColor orangeColor];
-    [self.btn_select setImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
-    [self.btn_select setTintColor:[UIColor grayColor]];
-    [self.btn_select setImageEdgeInsets:UIEdgeInsetsMake(55, 5, 55, 5)];
+    [self.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+//    [self.btn_select setTintColor:[UIColor grayColor]];
+//    [self.btn_select setImageEdgeInsets:UIEdgeInsetsMake(55, 5, 55, 5)];
     [self.contentView addSubview:self.btn_select];
     
     //背景底
@@ -76,8 +76,8 @@
     
     
     self.price = [[UILabel alloc] init];
-    self.price.text = @"¥2000.00";
-    self.price.textAlignment = NSTextAlignmentCenter;
+    self.price.text = @"¥200.00";
+    self.price.textAlignment = NSTextAlignmentLeft;
     self.price.font = [UIFont systemFontOfSize:14];
 //    self.price.backgroundColor = [UIColor cyanColor];
     self.price.textColor = [UIColor orangeColor];
@@ -86,7 +86,7 @@
     
     self.label_X = [[UILabel alloc] init];
     self.label_X.text = @"X";
-    self.label_X.font = [UIFont systemFontOfSize:9];
+    self.label_X.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:self.label_X];
     
     
@@ -94,20 +94,26 @@
 //    self.btn_Subtract.backgroundColor = [UIColor orangeColor];
     [self.btn_Subtract setImage:[UIImage imageNamed:@"jianhao"] forState:(UIControlStateNormal)];
     [self.btn_Subtract setTintColor:[UIColor grayColor]];
+    self.btn_Subtract.layer.borderColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1].CGColor;
+    self.btn_Subtract.layer.borderWidth = 1;
     [self.contentView addSubview:self.btn_Subtract];
     
     
     self.number = [[UILabel alloc] init];
-    self.number.text = @"11";
+    self.number.text = @"666";
     self.number.textAlignment = NSTextAlignmentCenter;
 //    self.number.backgroundColor = [UIColor blackColor];
-    self.number.font = [UIFont systemFontOfSize:15];
+    self.number.font = [UIFont systemFontOfSize:13];
+    self.number.layer.borderColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1].CGColor;
+    self.number.layer.borderWidth = 1;
     [self.contentView addSubview:self.number];
     
     
     self.btn_Add = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [self.btn_Add setImage:[UIImage imageNamed:@"jiahao"] forState:(UIControlStateNormal)];
     [self.btn_Add setTintColor:[UIColor grayColor]];
+    self.btn_Add.layer.borderColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1].CGColor;
+    self.btn_Add.layer.borderWidth = 1;
     [self.contentView addSubview:self.btn_Add];
     
 }
@@ -118,7 +124,8 @@
     
     self.bg_image.frame = self.contentView.frame;
     
-    self.btn_select.frame = CGRectMake(0, 0, 30, 130);
+//    self.btn_select.frame = CGRectMake(0, 0, 30, 130);
+    self.btn_select.frame = CGRectMake(2.5, 52.5, 25, 25);
     
     self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 5, 15, 100, 100);
     
@@ -126,14 +133,14 @@
     
     self.detail.frame = CGRectMake(CGRectGetMinX(self.title.frame), CGRectGetMaxY(self.title.frame) + 1, CGRectGetWidth(self.title.frame), 30);
     
-    self.price.frame = CGRectMake(CGRectGetMinX(self.title.frame) - 10, CGRectGetMaxY(self.detail.frame) + 5, 80, 30);
+    self.price.frame = CGRectMake(CGRectGetMinX(self.title.frame), CGRectGetMaxY(self.detail.frame) + 5, 60, 30);
     
-    self.label_X.frame = CGRectMake(CGRectGetMaxX(self.price.frame) + 1, CGRectGetMaxY(self.detail.frame) + 5.5, 10, 30);
+    self.label_X.frame = CGRectMake(CGRectGetMaxX(self.price.frame) + 5, CGRectGetMaxY(self.detail.frame) + 5.5, 10, 30);
     
     
     self.btn_Subtract.frame = CGRectMake(CGRectGetMaxX(self.label_X.frame) + 5, CGRectGetMaxY(self.detail.frame) + 5, 30, 30);
     
-    self.number.frame = CGRectMake(CGRectGetMaxX(self.btn_Subtract.frame), CGRectGetMinY(self.btn_Subtract.frame), 25, 30);
+    self.number.frame = CGRectMake(CGRectGetMaxX(self.btn_Subtract.frame), CGRectGetMinY(self.btn_Subtract.frame), 30, 30);
     
     self.btn_Add.frame = CGRectMake(CGRectGetMaxX(self.number.frame), CGRectGetMinY(self.btn_Subtract.frame), 30, 30);
     
