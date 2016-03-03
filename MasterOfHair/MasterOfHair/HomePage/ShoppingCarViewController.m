@@ -385,7 +385,7 @@
         {
             [self p_data];
             
-            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+//            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
 
         }
         @catch (NSException *exception)
@@ -428,14 +428,32 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //做删除操作，并调接口删除后台数据
     
-    ShoppingCar_Model * model = self.arr_data[indexPath.row];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定从购物车中删除该商品" preferredStyle:(UIAlertControllerStyleAlert)];
     
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"delete:"];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
     
-    [dataprovider deleteWithShopcart_id:model.shopcart_id];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action];
+    
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        //做删除操作，并调接口删除后台数据
+        
+        ShoppingCar_Model * model = self.arr_data[indexPath.row];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"delete:"];
+        
+        [dataprovider deleteWithShopcart_id:model.shopcart_id];
+    }];
+    
+    [alert addAction:action1];
 }
 
 //掉数据

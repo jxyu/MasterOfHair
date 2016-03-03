@@ -111,6 +111,28 @@
 #pragma mark - 获取某视频详情
 - (void)deleteWithShopcart_id:(NSString *)shopcart_id;
 
+#pragma mark - 添加一个订单(POST提交)
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSString *)production_info production_id:(NSString *)production_id specs_id:(NSString *)specs_id production_count:(NSString *)production_count;
+
+
+#pragma mark - 获取产品热门列表
+- (void)createWithMember_id:(NSString *)member_id production_id:(NSString *)production_id;
+
+#pragma mark - 判断产品是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id production_id:(NSString *)production_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -13,6 +13,7 @@
 #import "VOTagList.h"
 #import "querendingdanViewController.h"
 #import "Chanpingxiangqing_Models.h"
+#import "chanpinDetail_Models.h"
 @interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -53,7 +54,9 @@
 
 @property (nonatomic, copy) NSString * shop_name;
 
-
+@property (nonatomic, strong) NSMutableArray * arr_detail;
+//换价格；
+@property (nonatomic, strong) NSMutableArray * arr_jiage;
 
 @end
 
@@ -188,8 +191,18 @@
 //        image.backgroundColor = [UIColor orangeColor];
         [cell addSubview:image];
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 6, 100, 20)];
-        label.text = @"商铺名称";
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 6, 300, 20)];
+        
+        if(self.arr_detail.count != 0)
+        {
+            chanpinDetail_Models * model = self.arr_detail.firstObject;
+            label.text = [NSString stringWithFormat:@"%@",model.shop_name];
+        }
+        else
+        {
+            label.text = @"商铺名称";
+        }
+        
         label.font = [UIFont systemFontOfSize:15];
         [cell addSubview:label];
         
@@ -201,16 +214,19 @@
         self.name.font = [UIFont systemFontOfSize:14];
         [cell addSubview:self.name];
         
-        if([self.shop_name length] == 0)
+        if(self.arr_detail.count == 0)
         {
             self.name.text = @"店铺名称，店铺名称";
         }
         else
         {
-            self.name.text = self.shop_name;
+            chanpinDetail_Models * model = self.arr_detail.firstObject;
+            self.name.text = model.production_name;
         }
         
+
         Chanpingxiangqing_Models * model = self.arr_guige.firstObject;
+
         
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(self.name.frame) + 3, 70, 25)];
         self.price.textColor = [UIColor orangeColor];
@@ -332,9 +348,21 @@
         //添加web界面
         UIWebView * webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_line1.frame) + 5, SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2 - CGRectGetMaxY(view_line1.frame) - 5)];
         
-        NSString * path = @"http://www.baidu.com";
-        NSURL * url = [NSURL URLWithString:path];
-        [webView loadRequest:[NSURLRequest requestWithURL:url]];
+        
+        if(self.arr_detail.count == 0)
+        {
+            NSString * path = @"http://www.baidu.com";
+            NSURL * url = [NSURL URLWithString:path];
+            [webView loadRequest:[NSURLRequest requestWithURL:url]];
+        }
+        else
+        {
+            chanpinDetail_Models * model = self.arr_detail.firstObject;
+
+            NSString * path = [NSString stringWithFormat:@"%@/appbackend/index.php?r=web/viewProduct&id=%@",Url,model.production_id];
+            NSURL * url = [NSURL URLWithString:path];
+            [webView loadRequest:[NSURLRequest requestWithURL:url]];
+        }
         
         [cell addSubview:webView];
         
@@ -353,12 +381,16 @@
 
 - (void)selectedTagsChanged: (VOTagList *)tagList{
     
-    NSLog(@"selected: %ld", tagList.selectedIndexSet.firstIndex);
+    NSLog(@"%ld", tagList.selectedIndexSet.firstIndex);
     
-//    Chanpingxiangqing_Models * model = self.arr_guige[tagList.selectedIndexSet.firstIndex];
     
-//    self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
-//    self.price.text =[NSString stringWithFormat:@"¥ %@",model.sell_price];
+    if(tagList.selectedIndexSet.firstIndex < 100)
+    {
+        Chanpingxiangqing_Models * model = self.arr_guige[tagList.selectedIndexSet.firstIndex];
+    
+        self.price.text = [NSString stringWithFormat:@"¥ %@",model.sell_price];
+        self.old_price.text = [NSString stringWithFormat:@"¥ %@",model.net_price];
+    }
 }
 
 
@@ -368,10 +400,24 @@
     self.btn_collect = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_collect.frame = CGRectMake(15, SCREEN_HEIGHT - 45 , 40, 40);
 //    self.btn_collect.backgroundColor = [UIColor orangeColor];
-    [self.btn_collect setImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
-    [self.btn_collect setTintColor:[UIColor grayColor]];
+//    [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+//    self.btn_collect.selected = NO;
+//    [self.btn_collect setTintColor:[UIColor grayColor]];
     [self.view addSubview:self.btn_collect];
     
+    
+    if(self.btn_collect.selected == YES)
+    {
+        [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"shoucangH"] forState:(UIControlStateNormal)];
+        [self.btn_collect setTintColor:[UIColor groupTableViewBackgroundColor]];
+        self.btn_collect.selected = YES;
+    }
+    else
+    {
+        [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+        self.btn_collect.selected = NO;
+    }
+
     [self.btn_collect addTarget:self action:@selector(btn_collectAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     CGFloat length_x = (SCREEN_WIDTH - CGRectGetMaxX(self.btn_collect.frame) - 60) / 2;
@@ -405,7 +451,15 @@
 //收藏
 - (void)btn_collectAction:(UIButton *)sender
 {
-    NSLog(@"收藏");
+//    NSLog(@"收藏");
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    chanpinDetail_Models * model = self.arr_detail.firstObject;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"createshoucang:"];
+   
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
 }
 //购物车
 - (void)btn_addShoppingAction:(UIButton *)sender
@@ -462,6 +516,12 @@
         NSLog(@"跳页");
         
         querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+        
+        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
+        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
+        
+        NSLog(@"%@",model.specs_name);
+        
         [self showViewController:querendingdan sender:nil];
     }
 }
@@ -648,13 +708,28 @@
 #pragma mark - 商城数据
 - (void)getProducts:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_pic  = nil;
+    self.arr_detail = nil;
+    self.arr_list = nil;
+    self.arr_guige = nil;
+    
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
+            
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            {
+                chanpinDetail_Models * model = [[chanpinDetail_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_detail addObject:model];
+            }
+            
+            
             NSArray * arr = dict[@"data"][@"productlist"];
             
             for (NSDictionary * dic in arr.firstObject[@"imglist"])
@@ -682,6 +757,8 @@
         }
         @finally
         {
+            [self p_collectData];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
@@ -698,7 +775,7 @@
 #pragma mark  - 加入购物车的接口
 - (void)create:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -720,6 +797,96 @@
     }
 
 }
+
+#pragma mark - 收藏接口
+- (void)createshoucang:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            if(self.btn_collect.selected == 0)
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"shoucangH"] forState:(UIControlStateNormal)];
+                [self.btn_collect setTintColor:[UIColor groupTableViewBackgroundColor]];
+                self.btn_collect.selected = YES;
+            }
+            else
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+                self.btn_collect.selected = NO;
+                
+            }
+            
+            [SVProgressHUD showSuccessWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 是否被收藏
+- (void)p_collectData
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    chanpinDetail_Models * model = self.arr_detail.firstObject;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+    
+    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
+}
+
+- (void)isFavorite:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSString * str = [NSString stringWithFormat:@"%@",dict[@"data"][@"is_favorite"]];
+            
+            if([str isEqualToString:@"1"])
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"shoucangH"] forState:(UIControlStateNormal)];
+                [self.btn_collect setTintColor:[UIColor groupTableViewBackgroundColor]];
+                self.btn_collect.selected = YES;
+            }
+            else
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+                self.btn_collect.selected = NO;
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
 
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_pic
@@ -747,6 +914,25 @@
         self.arr_list = [NSMutableArray array];
     }
     return _arr_list;
+}
+
+- (NSMutableArray *)arr_detail
+{
+    if(_arr_detail == nil)
+    {
+        self.arr_detail = [NSMutableArray array];
+    }
+    return _arr_detail;
+}
+
+- (NSMutableArray *)arr_jiage
+{
+    if(_arr_jiage == nil)
+    {
+        self.arr_jiage = [NSMutableArray array];
+    }
+    
+    return _arr_jiage;
 }
 
 

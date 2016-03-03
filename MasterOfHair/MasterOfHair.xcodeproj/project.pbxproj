@@ -151,6 +151,8 @@
 		7BB26FF21C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FF11C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m */; };
 		7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */; };
 		7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */; };
+		7BBF79F71C87C5F40059C9E0 /* chanpinDetail_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */; };
+		7BBF79F91C87DAB00059C9E0 /* shoucangH.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */; };
 		7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */; };
 		7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */; };
 		7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */; };
@@ -550,6 +552,9 @@
 		7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextFenxiaoTableViewCell.m; sourceTree = "<group>"; };
 		7BB8BD421C79599100186D72 /* Shengshiqu_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shengshiqu_Model.h; sourceTree = "<group>"; };
 		7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shengshiqu_Model.m; sourceTree = "<group>"; };
+		7BBF79F51C87C5F40059C9E0 /* chanpinDetail_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chanpinDetail_Models.h; sourceTree = "<group>"; };
+		7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chanpinDetail_Models.m; sourceTree = "<group>"; };
+		7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoucangH.png; sourceTree = "<group>"; };
 		7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulianmengViewController.h; sourceTree = "<group>"; };
 		7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulianmengViewController.m; sourceTree = "<group>"; };
 		7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuFactoryTableViewCell.h; sourceTree = "<group>"; };
@@ -938,6 +943,7 @@
 		7B142E2A1C586DA200B32809 /* 3 */ = {
 			isa = PBXGroup;
 			children = (
+				7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */,
 				7BD4619B1C75B6C900741C5C /* changjiazhitongche.png */,
 				7B3305AF1C5EECE50014C49C /* 01sdjjdijsidjs_03.png */,
 				7BAABAC71C59B28500C14DF8 /* 01dian_07.png */,
@@ -1025,6 +1031,8 @@
 			children = (
 				7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */,
 				7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */,
+				7BBF79F51C87C5F40059C9E0 /* chanpinDetail_Models.h */,
+				7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2314,6 +2322,7 @@
 				7B142E431C58B97900B32809 /* 01_38@2x.png in Resources */,
 				802552CB1C57442B00CFF875 /* WechatShortVideoController.xib in Resources */,
 				7B3305BD1C5F33D90014C49C /* yanjing.png in Resources */,
+				7BBF79F91C87DAB00059C9E0 /* shoucangH.png in Resources */,
 				802552C61C57442B00CFF875 /* WechatShortVideo_scan_focus.png in Resources */,
 				8025530E1C574F7100CFF875 /* MJRefresh.bundle in Resources */,
 				7BD86C3F1C744ACD00D099BE /* return101010.png in Resources */,
@@ -2582,6 +2591,7 @@
 				7BCD552A1C55EFC200F32F16 /* chanpingxiangqingViewController.m in Sources */,
 				8082B49C1C740ADC0024EAD3 /* AdvertiseClassesViewController.m in Sources */,
 				7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */,
+				7BBF79F71C87C5F40059C9E0 /* chanpinDetail_Models.m in Sources */,
 				7BAABAEB1C5A056500C14DF8 /* kechengmingchengViewController.m in Sources */,
 				7BB26FE51C5B37CB001D332E /* FenxiaozhongxinViewController.m in Sources */,
 				7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */,

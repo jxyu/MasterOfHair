@@ -362,11 +362,43 @@
 }
 
 
+#pragma mark - 添加一个订单(POST提交)
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSString *)production_info production_id:(NSString *)production_id specs_id:(NSString *)specs_id production_count:(NSString *)production_count
+{
+    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info && production_id && specs_id && production_count)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=order/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\"\"pay_status\":\"%@\",\"leave_word\":\"%@\"\"production_info\":\"%@\"}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,production_info],@"page":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"specs_id\":\"%@\",,\"production_count\":\"%@\"}",production_id,specs_id,production_count]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id production_id:(NSString *)production_id
+{
+    if(member_id && production_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
-
+#pragma mark - 判断产品是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id production_id:(NSString *)production_id
+{
+    if(member_id && production_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/isFavorite",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
