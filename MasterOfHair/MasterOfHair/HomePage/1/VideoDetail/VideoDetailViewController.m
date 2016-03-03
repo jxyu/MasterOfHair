@@ -152,7 +152,7 @@
 {
     TextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_textDetail" forIndexPath:indexPath];
     
-#error +++++加数据赋值
+//#error +++++加数据赋值
     
     
     return cell;
