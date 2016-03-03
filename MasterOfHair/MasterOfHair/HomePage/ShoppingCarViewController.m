@@ -10,8 +10,8 @@
 
 #import "AppDelegate.h"
 #import "ShoppingCarTableViewCell.h"
-#import "querendingdanViewController.h"
-
+//#import "querendingdanViewController.h"
+#import "GouwuchengdingdanViewController.h"
 #import "ShoppingCar_Model.h"
 
 @interface ShoppingCarViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -271,7 +271,7 @@
 - (void)bottom_clearingAction:(UIButton *)sender
 {
 //    NSLog(@"结算所有选中的商品");
-    querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+    GouwuchengdingdanViewController * querendingdan = [[GouwuchengdingdanViewController alloc] init];
     [self showViewController:querendingdan sender:nil];
 }
 
@@ -508,7 +508,7 @@
 #pragma mark - 商城数据
 - (void)shopcart:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_baocun = nil;
     self.arr_data = nil;

@@ -517,10 +517,12 @@
         
         querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
         
-        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
-        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
+        querendingdan.chanpinDetail = self.arr_detail.firstObject;
+        querendingdan.Chanpingxiangqing = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
         
-        NSLog(@"%@",model.specs_name);
+//        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
+//        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];       
+//        NSLog(@"%@",model.specs_name);
         
         [self showViewController:querendingdan sender:nil];
     }

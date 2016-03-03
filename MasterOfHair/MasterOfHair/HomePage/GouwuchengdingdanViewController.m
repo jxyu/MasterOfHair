@@ -1,19 +1,18 @@
 //
-//  querendingdanViewController.m
+//  GouwuchengdingdanViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/26.
+//  Created by 鞠超 on 16/3/3.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "querendingdanViewController.h"
+#import "GouwuchengdingdanViewController.h"
 
 #import "AppDelegate.h"
 #import "SelectshouhuoViewController.h"
 #import "Shouhudizhi_Model.h"
 
-
-@interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
 //头视图
@@ -39,15 +38,15 @@
 //确认支付
 @property (nonatomic, strong) UIButton * btn_zhifuOK;
 
+//测试
+@property (nonatomic, strong) NSMutableArray * arr;
 
 //
 @property (nonatomic, strong) NSMutableArray * arr_morenAddress;
 
-@property (nonatomic, strong) UILabel * price;
-
 @end
 
-@implementation querendingdanViewController
+@implementation GouwuchengdingdanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +54,9 @@
     //清空
     [Single_Model singel].shouhudizhi_Model = nil;
     
-//    [self p_data_moren];
+    //    [self p_data_moren];
+    
+    self.arr = @[@"1",@"1"].mutableCopy;
     
     [self p_navi];
     
@@ -108,7 +109,7 @@
             
             [self.tableView reloadData];
         });
-
+        
     }
     
     
@@ -134,7 +135,7 @@
     self.tableView.tableFooterView = self.bottom_view;
     
     //注册
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_queren"];
+    //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_queren"];
 }
 
 
@@ -146,13 +147,13 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1 + 4;
+    return self.arr.count + 4;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if(indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 3 || indexPath.row == 2)
+    if(indexPath.row == 0 || indexPath.row == self.arr.count + 3 || indexPath.row == self.arr.count + 2 || indexPath.row == self.arr.count + 1)
     {
         return 50;
     }
@@ -177,16 +178,15 @@
         
         [cell addSubview:image];
         
-        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 20, 30)];
-        
-        name.text = [NSString stringWithFormat:@"%@",self.chanpinDetail.shop_name];
-//        name.font = [UIFont systemFontOfSize:15];
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 10, 150, 30)];
+        name.text = @"商铺名称";
+        //        name.font = [UIFont systemFontOfSize:15];
         [cell addSubview:name];
     }
-    else if (indexPath.row == 2)
+    else if (indexPath.row == self.arr.count + 1)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
         label.font = [UIFont systemFontOfSize:14];
@@ -195,20 +195,20 @@
         
         UILabel * distribution = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 100, 10, 100, 30)];
         distribution.textAlignment = NSTextAlignmentRight;
-        distribution.text = @"物流配送";
+        distribution.text = @"配送方式 >";
         distribution.font = [UIFont systemFontOfSize:14];
         distribution.tag = 100 + indexPath.section;
         [cell addSubview:distribution];
         
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == self.arr.count + 2)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 80, 30)];
         label.font = [UIFont systemFontOfSize:14];
         label.text = @"买家留言:";
-//        label.backgroundColor = [UIColor orangeColor];
+        //        label.backgroundColor = [UIColor orangeColor];
         [cell addSubview:label];
         
         UITextField * text = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) , 11, SCREEN_WIDTH - CGRectGetMaxY(label.frame) - 10, 30)];
@@ -218,18 +218,16 @@
         text.placeholder = @"想对卖家说什么(选填)";
         [cell addSubview:text];
     }
-    else if(indexPath.row == 4)
+    else if(indexPath.row == self.arr.count + 3)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        self.price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
-        float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
-        self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
-        self.price_sum.text = self.price.text;
-        self.price.textColor = [UIColor orangeColor];
-        self.price.font = [UIFont systemFontOfSize:14];
-        [cell addSubview:self.price];
+        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
+        price.text = @"¥ 400.00";
+        price.textColor = [UIColor orangeColor];
+        price.font = [UIFont systemFontOfSize:14];
+        [cell addSubview:price];
         
         UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, 10, 40, 30)];
         sum.text = @"合计:";
@@ -242,42 +240,40 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
-        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,self.chanpinDetail.list_img]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         [cell addSubview:image];
         
-        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 15, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];
-//        name.text = @"VS 洗发水护发素护发素";
-        name.text = [NSString stringWithFormat:@"%@",self.chanpinDetail.production_name];
-        name.font = [UIFont systemFontOfSize:15];
-//        name.backgroundColor = [UIColor orangeColor];
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];
+        name.text = @"VS 洗发水护发素护发素";
+        name.font = [UIFont systemFontOfSize:14];
+        //        name.backgroundColor = [UIColor orangeColor];
         [cell addSubview:name];
         
         UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(name.frame) + 5, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 30)];
-//        detail.text = @"VS 洗发水护发素护发素 VS 洗发水护发素护发素";
-        detail.text = [NSString stringWithFormat:@"%@",self.Chanpingxiangqing.specs_name];
+        detail.text = @"VS 洗发水护发素护发素 VS 洗发水护发素护发素";
         detail.textColor = [UIColor grayColor];
         detail.font = [UIFont systemFontOfSize:12];
         detail.numberOfLines = 2;
-//        detail.backgroundColor = [UIColor orangeColor];
+        //        detail.backgroundColor = [UIColor orangeColor];
         [cell addSubview:detail];
         
         
-        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 70, 20)];
-        price.text = [NSString stringWithFormat:@"¥ %@",self.Chanpingxiangqing.sell_price];
-//        price.backgroundColor = [UIColor blackColor];
-//        price.textAlignment = NSTextAlignmentRight;
-        price.font = [UIFont systemFontOfSize:14];
+        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 60, 20)];
+        price.text = @"¥20.00";
+        //        price.backgroundColor = [UIColor blackColor];
+        //        price.textAlignment = NSTextAlignmentRight;
+        price.font = [UIFont systemFontOfSize:13];
         price.textColor = [UIColor orangeColor];
         [cell addSubview:price];
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(price.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 10, 20)];
-        label.font = [UIFont systemFontOfSize:14];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(price.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 10, 20)];
+        label.font = [UIFont systemFontOfSize:9];
         label.text = @"X";
         [cell addSubview:label];
         
-        UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 50, 20)];
-        number.text = @"1";
-        number.font = [UIFont systemFontOfSize:14];
+        UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 1, CGRectGetMaxY(detail.frame) + 10, 50, 20)];
+        number.text = @"11";
+        number.font = [UIFont systemFontOfSize:13];
         [cell addSubview:number];
         
     }
@@ -289,7 +285,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.row == 2)
+#warning 要保存数据+++++++++++++
+    if(indexPath.row == self.arr.count + 1)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择配送方式" preferredStyle:(UIAlertControllerStyleActionSheet)];
         [self presentViewController:alert animated:YES completion:^{
@@ -298,37 +295,21 @@
         
         UIAlertAction * action_1 = [UIAlertAction actionWithTitle:@"到店自取" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-           UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
+            UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             
             peisong.text = @"到店自取";
-            
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue];
-            self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
-            self.price_sum.text = self.price.text;
-            
-            
         }];
         
         UIAlertAction * action_2 = [UIAlertAction actionWithTitle:@"同城派送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"同城派送";
-            
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.city_freight floatValue];
-            self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
-            self.price_sum.text = self.price.text;
-            
         }];
         
         UIAlertAction * action_3 = [UIAlertAction actionWithTitle:@"物流配送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"物流配送";
-            
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
-            self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
-            self.price_sum.text = self.price.text;
-
         }];
         
         UIAlertAction * action_4 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
@@ -339,9 +320,8 @@
         [alert addAction:action_2];
         [alert addAction:action_3];
         [alert addAction:action_4];
-        
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == self.arr.count + 2)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"请输入对卖家的留言" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -369,8 +349,9 @@
         [self presentViewController:alert animated:YES completion:^{
             
         }];
-
+        
     }
+    
 }
 
 #pragma mark - 头视图
@@ -468,9 +449,10 @@
     
     
     self.price_sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, CGRectGetMaxY(view_line.frame) + 5, 90, 25)];
+    self.price_sum.text = @"¥ 4000.00";
     self.price_sum.textColor = [UIColor orangeColor];
     self.price_sum.font = [UIFont systemFontOfSize:14];
-//    self.price_sum.backgroundColor = [UIColor orangeColor];
+    //    self.price_sum.backgroundColor = [UIColor orangeColor];
     [self.bottom_view addSubview:self.price_sum];
     
     UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, CGRectGetMaxY(view_line.frame) + 5, 40, 25)];
@@ -492,14 +474,14 @@
     //我的钱包
     self.btn_myPurse = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.btn_myPurse.frame = CGRectMake(15, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
-//    self.btn_myPurse.backgroundColor = [UIColor orangeColor];
+    //    self.btn_myPurse.backgroundColor = [UIColor orangeColor];
     self.btn_myPurse.selected = 0;
     [self.bottom_view addSubview:self.btn_myPurse];
     [self.btn_myPurse addTarget:self action:@selector(btn_myPurseAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.btn_myPurse setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     
     UILabel * label_myPurse = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_myPurse.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) - 5, 30)];
-//    label_myPurse.backgroundColor = [UIColor orangeColor];
+    //    label_myPurse.backgroundColor = [UIColor orangeColor];
     label_myPurse.text = @"我的钱包";
     label_myPurse.font = [UIFont systemFontOfSize:12];
     [self.bottom_view addSubview:label_myPurse];
@@ -507,7 +489,7 @@
     //支付宝
     self.btn_zhifubo = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.btn_zhifubo.frame = CGRectMake(10 + length_x, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
-//    self.btn_zhifubo.backgroundColor = [UIColor orangeColor];
+    //    self.btn_zhifubo.backgroundColor = [UIColor orangeColor];
     self.btn_zhifubo.selected = 0;
     [self.bottom_view addSubview:self.btn_zhifubo];
     [self.btn_zhifubo addTarget:self action:@selector(btn_zhifuboAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -515,7 +497,7 @@
     
     
     UILabel * label_zhifubo = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_zhifubo.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) , 30)];
-//    label_zhifubo.backgroundColor = [UIColor orangeColor];
+    //    label_zhifubo.backgroundColor = [UIColor orangeColor];
     label_zhifubo.text = @"支付宝支付";
     label_zhifubo.font = [UIFont systemFontOfSize:12];
     [self.bottom_view addSubview:label_zhifubo];
@@ -523,14 +505,14 @@
     //微信
     self.btn_weixin = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.btn_weixin.frame = CGRectMake(15 + length_x * 2, CGRectGetMaxY(type.frame) + 7.5, 25, 25);
-//    self.btn_weixin.backgroundColor = [UIColor orangeColor];
+    //    self.btn_weixin.backgroundColor = [UIColor orangeColor];
     self.btn_weixin.selected = 0;
     [self.bottom_view addSubview:self.btn_weixin];
     [self.btn_weixin addTarget:self action:@selector(btn_weixinAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.btn_weixin setImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     
     UILabel * label_weixin = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_weixin.frame) + 5, CGRectGetMaxY(type.frame) + 5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) - 5, 30)];
-//    label_weixin.backgroundColor = [UIColor orangeColor];
+    //    label_weixin.backgroundColor = [UIColor orangeColor];
     label_weixin.text = @"微信支付";
     label_weixin.font = [UIFont systemFontOfSize:12];
     [self.bottom_view addSubview:label_weixin];
@@ -551,98 +533,9 @@
 
 - (void)btn_zhifuOKAction:(UIButton *)sender
 {//做大量判断
-//    NSLog(@"提交订单");
-    
-    Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
-
-    if([model.address length] == 0)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择收货地址" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        
-        [alert addAction:action];
-    }
-    
-    if(self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        
-        [alert addAction:action];
-    }
-    
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
-    
-    //配送
-    UILabel * label = [self.view viewWithTag:100];
-    NSString * str_peisong = [NSString stringWithFormat:@""];
-    if([label.text isEqualToString:@"同城派送"])
-    {
-        str_peisong = @"3";
-    }
-    else if([label.text isEqualToString:@"物流配送"])
-    {
-        str_peisong = @"1";
-    }
-    else
-    {
-        str_peisong = @"2";
-    }
-    
-    //留言
-    UITextField * text = [self.view viewWithTag:1000];
-    NSString * str_liuyan = [NSString stringWithFormat:@""];
-    if([text.text length] == 0)
-    {
-        str_liuyan = @"";
-    }
-    else
-    {
-        str_liuyan = text.text;
-    }
-    
-    //支付方式
-    NSString * str_zhifu = [NSString stringWithFormat:@""];
-    if(self.btn_myPurse.selected == 1)
-    {
-        str_zhifu = @"1";
-    }
-    if(self.btn_weixin.selected == 1)
-    {
-        str_zhifu = @"3";
-    }
-    if(self.btn_zhifubo.selected == 1)
-    {
-        str_zhifu = @"2";
-    }
-    
-    NSMutableArray * arr_pro = [NSMutableArray array];
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
-    NSLog(@"%@",dict);
-    [arr_pro addObject:dict];
-    
-    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
+    NSLog(@"提交订单");
 }
 
-
-//
 - (void)btn_myPurseAction:(UIButton *)sender
 {
     if(sender.selected == 0)
@@ -717,7 +610,7 @@
 
 - (void)getAddresses:(id )dict
 {
-//    NSLog(@"%@",dict);
+    //    NSLog(@"%@",dict);
     
     self.arr_morenAddress = nil;
     
@@ -730,25 +623,7 @@
             
             [model setValuesForKeysWithDictionary:arr.firstObject];
             
-            if([model.address_id length] != 0)
-            {
-                [self.arr_morenAddress addObject:model];
-                
-                
-                self.image_1.hidden = NO;
-                self.name.hidden = NO;
-                self.tel.hidden = NO;
-                self.address.hidden = NO;
-                
-                Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
-                
-                NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
-                
-                self.name.text = model.consignee;
-                self.tel.text = model.mobile;
-                self.address.text = str;
-            }
-            
+            [self.arr_morenAddress addObject:model];
             
         }
         @catch (NSException *exception)
@@ -757,6 +632,19 @@
         }
         @finally
         {
+            self.image_1.hidden = NO;
+            self.name.hidden = NO;
+            self.tel.hidden = NO;
+            self.address.hidden = NO;
+            
+            Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+            
+            NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
+            
+            self.name.text = model.consignee;
+            self.tel.text = model.mobile;
+            self.address.text = str;
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
@@ -766,36 +654,9 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
-
-#pragma mark - 创建订单
-- (void)chuangjiandangdan:(id )dict
-{
-    NSLog(@"%@",dict);
-    
-    if ([dict[@"status"][@"succeed"] intValue] == 1) {
-        @try
-        {
-            
-        }
-        @catch (NSException *exception)
-        {
-            
-        }
-        @finally
-        {
-
-        }
-    }
-    else
-    {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
-    }
-}
-
-
 
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_morenAddress
@@ -807,7 +668,5 @@
     
     return _arr_morenAddress;
 }
-
-
 
 @end

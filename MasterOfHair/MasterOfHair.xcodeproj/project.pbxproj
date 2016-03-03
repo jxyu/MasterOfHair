@@ -153,6 +153,8 @@
 		7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8BD431C79599100186D72 /* Shengshiqu_Model.m */; };
 		7BBF79F71C87C5F40059C9E0 /* chanpinDetail_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */; };
 		7BBF79F91C87DAB00059C9E0 /* shoucangH.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */; };
+		7BBF79FC1C87EA020059C9E0 /* GouwuchengdingdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79FB1C87EA020059C9E0 /* GouwuchengdingdanViewController.m */; };
+		7BBF79FF1C881FB00059C9E0 /* URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79FE1C881FB00059C9E0 /* URL.m */; };
 		7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */; };
 		7BCD551F1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD551E1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.m */; };
 		7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCD55211C55C13900F32F16 /* wenxiuPeopleTableViewCell.m */; };
@@ -555,6 +557,10 @@
 		7BBF79F51C87C5F40059C9E0 /* chanpinDetail_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chanpinDetail_Models.h; sourceTree = "<group>"; };
 		7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chanpinDetail_Models.m; sourceTree = "<group>"; };
 		7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoucangH.png; sourceTree = "<group>"; };
+		7BBF79FA1C87EA020059C9E0 /* GouwuchengdingdanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GouwuchengdingdanViewController.h; sourceTree = "<group>"; };
+		7BBF79FB1C87EA020059C9E0 /* GouwuchengdingdanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GouwuchengdingdanViewController.m; sourceTree = "<group>"; };
+		7BBF79FD1C881FB00059C9E0 /* URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URL.h; sourceTree = "<group>"; };
+		7BBF79FE1C881FB00059C9E0 /* URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URL.m; sourceTree = "<group>"; };
 		7BCD551A1C55B7E300F32F16 /* wenxiulianmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulianmengViewController.h; sourceTree = "<group>"; };
 		7BCD551B1C55B7E300F32F16 /* wenxiulianmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulianmengViewController.m; sourceTree = "<group>"; };
 		7BCD551D1C55C11A00F32F16 /* wenxiuFactoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiuFactoryTableViewCell.h; sourceTree = "<group>"; };
@@ -1407,6 +1413,8 @@
 				7BA596AC1C4E267D00DBC69D /* ShoppingCarViewController.m */,
 				7BEE191E1C532069002C2ADA /* ShoppingCarTableViewCell.h */,
 				7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */,
+				7BBF79FA1C87EA020059C9E0 /* GouwuchengdingdanViewController.h */,
+				7BBF79FB1C87EA020059C9E0 /* GouwuchengdingdanViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1493,6 +1501,8 @@
 				7BAABADB1C59F14F00C14DF8 /* Store_Model.m */,
 				7BAABADD1C59F26100C14DF8 /* Commodity_Model.h */,
 				7BAABADE1C59F26100C14DF8 /* Commodity_Model.m */,
+				7BBF79FD1C881FB00059C9E0 /* URL.h */,
+				7BBF79FE1C881FB00059C9E0 /* URL.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2448,6 +2458,7 @@
 				8082B4CE1C7414320024EAD3 /* UIView+JKPicker.m in Sources */,
 				7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
+				7BBF79FF1C881FB00059C9E0 /* URL.m in Sources */,
 				7BA5969E1C4E24D600DBC69D /* MineViewController.m in Sources */,
 				8025530B1C574F7100CFF875 /* MJRefreshGifHeader.m in Sources */,
 				7B46EE231C60A63400E33E0E /* ChanpinshoucangViewController.m in Sources */,
@@ -2534,6 +2545,7 @@
 				802552AA1C57442B00CFF875 /* SCAudioTools.m in Sources */,
 				802553041C574F7100CFF875 /* MJRefreshHeader.m in Sources */,
 				8082B4C91C7414320024EAD3 /* JKPhotoBrowser.m in Sources */,
+				7BBF79FC1C87EA020059C9E0 /* GouwuchengdingdanViewController.m in Sources */,
 				8082B4C41C7414320024EAD3 /* JKAssetsGroupCell.m in Sources */,
 				802552B21C57442B00CFF875 /* SCPhotoConfiguration.m in Sources */,
 				802553031C574F7100CFF875 /* MJRefreshFooter.m in Sources */,

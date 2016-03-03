@@ -363,12 +363,17 @@
 
 
 #pragma mark - 添加一个订单(POST提交)
-- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSString *)production_info production_id:(NSString *)production_id specs_id:(NSString *)specs_id production_count:(NSString *)production_count
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info
 {
-    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info && production_id && specs_id && production_count)
+    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info)
     {
         NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=order/create",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\"\"pay_status\":\"%@\",\"leave_word\":\"%@\"\"production_info\":\"%@\"}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,production_info],@"page":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"specs_id\":\"%@\",,\"production_count\":\"%@\"}",production_id,specs_id,production_count]};
+        
+        NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
+        
+         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,jsonString]};
+        
+        NSLog(@"%@",prm);
         
         [self PostRequest:url andpram:prm];
     }
@@ -638,6 +643,22 @@
     //                            key, @"key", nil];
     //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
     //    NSLog(@"%@",result);
+}
+
+
+// 将字典或者数组转化为JSON串
+- (NSData *)toJSONData:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        return nil;
+    }
 }
 
 @end
