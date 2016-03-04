@@ -30,6 +30,7 @@
 #import "VideoDetailViewController.h"
 #import "ShuoshuoViewController.h"
 #import "WebStroe_Model.h"
+#import "TuWen_Models.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -64,6 +65,9 @@
 
 //获取产品热门列表
 @property (nonatomic, strong) NSMutableArray * arr_chanpin;
+
+//获取视频
+@property (nonatomic, strong) NSMutableArray * arr_video;
 
 @end
 
@@ -151,6 +155,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];
@@ -177,6 +183,8 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self p_chanpinliebiao];
+        
+        [self p_videoData];
         
         [self p_data2];
         //        self.isplay = 0;
@@ -213,15 +221,17 @@
     else if(indexPath.row == 3)
     {
         //判断奇数还是偶数
-        //        if(8 % 2 == 0)
-        //        {
-        //            return 4 * (SCREEN_WIDTH / 4) + 100;
-        //        }
-        //        else
-        //        {
-        //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
-        //        }
-        return 4 * (SCREEN_WIDTH / 4) + 100;
+        
+//        NSLog(@"%ld",self.arr_video.count);
+        if(self.arr_video.count % 2 == 0)
+        {
+            return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4) + 100;
+        }
+        else
+        {
+            return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
+        }
+//        return 4 * (SCREEN_WIDTH / 4) + 100;
     }
     return 0;
 }
@@ -445,7 +455,7 @@
     }
     else
     {
-        return 7;
+        return self.arr_video.count;
     }
 }
 
@@ -557,9 +567,29 @@
     }
     else
     {
+        
         JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        
+        if(self.arr_video.count != 0)
+        {
+            TuWen_Models * model = self.arr_video[indexPath.item];
+            
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+            
+            cell.name.text = model.video_title;
+            
+            if([model.is_free isEqualToString:@"0"])
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+
+            }
+            else
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+            }
+        }
+
         return cell;
     }
 }
@@ -658,9 +688,13 @@
     }
     else
     {
-        NSLog(@"%ld",(long)indexPath.item);
+//        NSLog(@"%ld",(long)indexPath.item);
+        
+        TuWen_Models * model = self.arr_video[indexPath.item];
         
         VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        videoDetailViewController.video_id = model.video_id;
         
         [self showViewController:videoDetailViewController sender:nil];
     }
@@ -943,6 +977,52 @@
 }
 
 
+#pragma mark - 视频的数据
+- (void)p_videoData
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"GetRecommendVideoList:"];
+    
+    [dataprovider GetRecommendVideoList];
+}
+
+//数据
+- (void)GetRecommendVideoList:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_video = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_video addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_lunboData
 {
@@ -962,5 +1042,13 @@
     return _arr_chanpin;
 }
 
+- (NSMutableArray *)arr_video
+{
+    if(_arr_video == nil)
+    {
+        self.arr_video = [NSMutableArray array];
+    }
+    return _arr_video;
+}
 
 @end

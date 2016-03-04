@@ -121,7 +121,8 @@
 #pragma mark - 判断产品是否被收藏
 - (void)isFavoriteWithMember_id:(NSString *)member_id production_id:(NSString *)production_id;
 
-
+#pragma mark - 获取随机热门视频
+- (void)GetRecommendVideoList;
 
 
 

@@ -85,6 +85,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] showTabBar];

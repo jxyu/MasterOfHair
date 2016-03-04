@@ -372,9 +372,7 @@
         NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
         
          NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,jsonString]};
-        
-        NSLog(@"%@",prm);
-        
+                
         [self PostRequest:url andpram:prm];
     }
 }
@@ -405,7 +403,13 @@
     }
 }
 
-
+#pragma mark - 获取随机热门视频
+- (void)GetRecommendVideoList
+{
+    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/GetRecommendVideoList",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
 
 
 

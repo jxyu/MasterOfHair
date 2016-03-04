@@ -636,6 +636,7 @@
     NSMutableArray * arr_pro = [NSMutableArray array];
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
     NSLog(@"%@",dict);
+    
     [arr_pro addObject:dict];
     
     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
@@ -773,12 +774,12 @@
 #pragma mark - 创建订单
 - (void)chuangjiandangdan:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            
+            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
         }
         @catch (NSException *exception)
         {
