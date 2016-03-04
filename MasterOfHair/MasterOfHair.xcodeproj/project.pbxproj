@@ -15,6 +15,7 @@
 		7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */; };
 		7B0433C81C5C67AC0052F4AC /* QianbaoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */; };
 		7B0433CB1C5C859B0052F4AC /* NextqianbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */; };
+		7B06632A1C8927060037F0BC /* ShopCarData_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0663291C8927060037F0BC /* ShopCarData_Models.m */; };
 		7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */; };
 		7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */; };
 		7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */; };
@@ -350,6 +351,8 @@
 		7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QianbaoTableViewCell.m; sourceTree = "<group>"; };
 		7B0433C91C5C859B0052F4AC /* NextqianbaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextqianbaoViewController.h; sourceTree = "<group>"; };
 		7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextqianbaoViewController.m; sourceTree = "<group>"; };
+		7B0663281C8927060037F0BC /* ShopCarData_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCarData_Models.h; sourceTree = "<group>"; };
+		7B0663291C8927060037F0BC /* ShopCarData_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCarData_Models.m; sourceTree = "<group>"; };
 		7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectshouhuoViewController.h; sourceTree = "<group>"; };
 		7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectshouhuoViewController.m; sourceTree = "<group>"; };
 		7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_03.png"; sourceTree = "<group>"; };
@@ -1209,6 +1212,8 @@
 			children = (
 				7B3D27541C86B562007615A5 /* ShoppingCar_Model.h */,
 				7B3D27551C86B562007615A5 /* ShoppingCar_Model.m */,
+				7B0663281C8927060037F0BC /* ShopCarData_Models.h */,
+				7B0663291C8927060037F0BC /* ShopCarData_Models.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2430,6 +2435,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B06632A1C8927060037F0BC /* ShopCarData_Models.m in Sources */,
 				7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */,
 				7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */,
 				802553101C574F7100CFF875 /* UIScrollView+MJExtension.m in Sources */,

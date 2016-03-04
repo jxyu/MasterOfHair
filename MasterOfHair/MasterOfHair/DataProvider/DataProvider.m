@@ -413,7 +413,17 @@
 
 
 
-
+#pragma mark - 确认订单(购物车点结算)
+- (void)getConfirmOrderWithShopcart_id:(NSString *)shopcart_id
+{
+    if(shopcart_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ShopCart/getConfirmOrder",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"shopcart_id\":\"%@\"}",shopcart_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

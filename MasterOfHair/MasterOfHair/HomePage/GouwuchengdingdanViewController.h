@@ -10,4 +10,7 @@
 
 @interface GouwuchengdingdanViewController : BaseNavigationController
 
+@property (nonatomic, strong) NSMutableArray * arr_baocun;
+
+
 @end

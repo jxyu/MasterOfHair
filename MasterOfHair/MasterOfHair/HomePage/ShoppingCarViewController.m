@@ -271,8 +271,29 @@
 - (void)bottom_clearingAction:(UIButton *)sender
 {
 //    NSLog(@"结算所有选中的商品");
-    GouwuchengdingdanViewController * querendingdan = [[GouwuchengdingdanViewController alloc] init];
-    [self showViewController:querendingdan sender:nil];
+    
+    if(self.arr_baocun.count == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择一个商品后再点击结算" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else
+    {
+        GouwuchengdingdanViewController * querendingdan = [[GouwuchengdingdanViewController alloc] init];
+        
+        querendingdan.arr_baocun = self.arr_baocun;
+        
+        [self showViewController:querendingdan sender:nil];
+    }
 }
 
 #pragma mark - cell的点击事件
@@ -508,7 +529,7 @@
 #pragma mark - 商城数据
 - (void)shopcart:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_baocun = nil;
     self.arr_data = nil;

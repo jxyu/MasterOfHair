@@ -648,8 +648,8 @@
     UIImageView * video_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 11, 55, 55)];
     video_image.layer.cornerRadius = 55 / 2;
     video_image.layer.masksToBounds = YES;
-    video_image.backgroundColor = [UIColor orangeColor];
-    video_image.image = [UIImage imageNamed:@""];
+//    video_image.backgroundColor = [UIColor orangeColor];
+    [video_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/themes/default/images/11.png",Url]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.view_video addSubview:video_image];
     
 
@@ -671,8 +671,8 @@
     UIImageView * pic_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 11, 55, 55)];
     pic_image.layer.cornerRadius = 55 / 2;
     pic_image.layer.masksToBounds = YES;
-    pic_image.backgroundColor = [UIColor orangeColor];
-    pic_image.image = [UIImage imageNamed:@""];
+//    pic_image.backgroundColor = [UIColor orangeColor];
+    [pic_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/themes/default/images/12.png",Url]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.view_pic addSubview:pic_image];
     
 }

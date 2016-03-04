@@ -11,7 +11,8 @@
 #import "AppDelegate.h"
 #import "SelectshouhuoViewController.h"
 #import "Shouhudizhi_Model.h"
-
+#import "ShoppingCar_Model.h"
+#import "ShopCarData_Models.h"
 @interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -38,11 +39,18 @@
 //确认支付
 @property (nonatomic, strong) UIButton * btn_zhifuOK;
 
-//测试
-@property (nonatomic, strong) NSMutableArray * arr;
 
 //
 @property (nonatomic, strong) NSMutableArray * arr_morenAddress;
+
+//保存店铺和保存数据
+@property (nonatomic, strong) NSMutableArray * arr_dataShop;
+@property (nonatomic, strong) NSMutableArray * arr_dataList;
+
+//保存数据
+@property (nonatomic, strong) NSMutableArray * arr_datazongjia;
+@property (nonatomic, strong) NSMutableArray * arr_datapeisong;
+@property (nonatomic, strong) NSMutableArray * arr_dataliuyan;
 
 @end
 
@@ -54,9 +62,7 @@
     //清空
     [Single_Model singel].shouhudizhi_Model = nil;
     
-    //    [self p_data_moren];
-    
-    self.arr = @[@"1",@"1"].mutableCopy;
+    [self p_dataList];
     
     [self p_navi];
     
@@ -111,9 +117,32 @@
         });
         
     }
-    
-    
+    [self p_dataList];
+
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
+}
+
+#pragma mark - 数据列表
+- (void)p_dataList
+{
+    NSMutableString * str = [NSMutableString string];
+    
+    for (ShoppingCar_Model * model in self.arr_baocun)
+    {
+        NSString * s = [NSString stringWithFormat:@"%@,",model.shopcart_id];
+        
+        [str appendString:s];
+    }
+    //获取订单列表
+    NSInteger x =  [str length];
+    NSString * str_data = [str substringToIndex:x - 1];
+    
+    NSLog(@"%@",str_data);
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getConfirmOrder:"];
+    
+    [dataprovider getConfirmOrderWithShopcart_id:str_data];
 }
 
 #pragma mark - 布局
@@ -142,18 +171,18 @@
 #pragma mark - tableView
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.arr_dataShop.count;
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.arr.count + 4;
+    return [self.arr_dataList[section] count] + 4;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if(indexPath.row == 0 || indexPath.row == self.arr.count + 3 || indexPath.row == self.arr.count + 2 || indexPath.row == self.arr.count + 1)
+    if(indexPath.row == 0 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 3 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 2 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 1)
     {
         return 50;
     }
@@ -170,6 +199,8 @@
     
     if(indexPath.row == 0)
     {
+        ShopCarData_Models * model = self.arr_dataShop[indexPath.section];
+        
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -178,12 +209,12 @@
         
         [cell addSubview:image];
         
-        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 10, 150, 30)];
-        name.text = @"商铺名称";
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 20, 30)];
+        name.text = [NSString stringWithFormat:@"%@",model.shop_name];
         //        name.font = [UIFont systemFontOfSize:15];
         [cell addSubview:name];
     }
-    else if (indexPath.row == self.arr.count + 1)
+    else if (indexPath.row == [self.arr_dataList[indexPath.section] count] + 1)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -195,13 +226,33 @@
         
         UILabel * distribution = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 100, 10, 100, 30)];
         distribution.textAlignment = NSTextAlignmentRight;
-        distribution.text = @"配送方式 >";
+//        distribution.text = @"物流配送";
         distribution.font = [UIFont systemFontOfSize:14];
         distribution.tag = 100 + indexPath.section;
         [cell addSubview:distribution];
         
+        switch ([self.arr_datapeisong[indexPath.section] integerValue])
+        {
+            case 1:
+            {
+                distribution.text = @"物流配送";
+            }
+                break;
+            case 2:
+            {
+                distribution.text = @"到店自取";
+            }
+                break;
+            case 3:
+            {
+                distribution.text = @"同城配送";
+            }
+                break;
+            default:
+                break;
+        }
     }
-    else if (indexPath.row == self.arr.count + 2)
+    else if (indexPath.row == [self.arr_dataList[indexPath.section] count] + 2)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         
@@ -215,19 +266,31 @@
         text.userInteractionEnabled = NO;
         text.tag = 1000 + indexPath.section;
         text.font = [UIFont systemFontOfSize:14];
-        text.placeholder = @"想对卖家说什么(选填)";
+        
+        if([self.arr_dataliuyan[indexPath.section] length] == 0)
+        {
+            text.placeholder = @"想对卖家说什么(选填)";
+        }
+        else
+        {
+            text.text = self.arr_dataliuyan[indexPath.section];
+        }
+        
         [cell addSubview:text];
     }
-    else if(indexPath.row == self.arr.count + 3)
+    else if(indexPath.row == [self.arr_dataList[indexPath.section] count] + 3)
     {
         cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
-        price.text = @"¥ 400.00";
+        price.tag = 10000 + indexPath.section;
+//        price.text = @"¥ 400.00";
         price.textColor = [UIColor orangeColor];
         price.font = [UIFont systemFontOfSize:14];
         [cell addSubview:price];
+        
+        price.text = [NSString stringWithFormat:@"¥ %@",self.arr_datazongjia[indexPath.section]];
         
         UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, 10, 40, 30)];
         sum.text = @"合计:";
@@ -236,45 +299,52 @@
     }
     else
     {
-        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 120);
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
-        [image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-        [cell addSubview:image];
-        
-        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];
-        name.text = @"VS 洗发水护发素护发素";
-        name.font = [UIFont systemFontOfSize:14];
-        //        name.backgroundColor = [UIColor orangeColor];
-        [cell addSubview:name];
-        
-        UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(name.frame) + 5, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 30)];
-        detail.text = @"VS 洗发水护发素护发素 VS 洗发水护发素护发素";
-        detail.textColor = [UIColor grayColor];
-        detail.font = [UIFont systemFontOfSize:12];
-        detail.numberOfLines = 2;
-        //        detail.backgroundColor = [UIColor orangeColor];
-        [cell addSubview:detail];
-        
-        
-        UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 60, 20)];
-        price.text = @"¥20.00";
-        //        price.backgroundColor = [UIColor blackColor];
-        //        price.textAlignment = NSTextAlignmentRight;
-        price.font = [UIFont systemFontOfSize:13];
-        price.textColor = [UIColor orangeColor];
-        [cell addSubview:price];
-        
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(price.frame) + 5, CGRectGetMaxY(detail.frame) + 10, 10, 20)];
-        label.font = [UIFont systemFontOfSize:9];
-        label.text = @"X";
-        [cell addSubview:label];
-        
-        UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 1, CGRectGetMaxY(detail.frame) + 10, 50, 20)];
-        number.text = @"11";
-        number.font = [UIFont systemFontOfSize:13];
-        [cell addSubview:number];
+        if(self.arr_dataList.count != 0)
+        {
+            ShopCarData_Models * model = self.arr_dataList[indexPath.section][indexPath.row - 1];
+            
+            cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 120);
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [cell addSubview:image];
+            
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 15, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];
+            //        name.text = @"VS 洗发水护发素护发素";
+            name.text = [NSString stringWithFormat:@"%@",model.production_name];
+            name.font = [UIFont systemFontOfSize:15];
+            //        name.backgroundColor = [UIColor orangeColor];
+            [cell addSubview:name];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(name.frame) + 5, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 30)];
+            //        detail.text = @"VS 洗发水护发素护发素 VS 洗发水护发素护发素";
+            detail.text = [NSString stringWithFormat:@"%@",model.specs_name];
+            detail.textColor = [UIColor grayColor];
+            detail.font = [UIFont systemFontOfSize:12];
+            detail.numberOfLines = 2;
+            //        detail.backgroundColor = [UIColor orangeColor];
+            [cell addSubview:detail];
+            
+            
+            UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 70, 20)];
+            price.text = [NSString stringWithFormat:@"¥ %@",model.price];
+            //        price.backgroundColor = [UIColor blackColor];
+            //        price.textAlignment = NSTextAlignmentRight;
+            price.font = [UIFont systemFontOfSize:14];
+            price.textColor = [UIColor orangeColor];
+            [cell addSubview:price];
+            
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(price.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 10, 20)];
+            label.font = [UIFont systemFontOfSize:14];
+            label.text = @"X";
+            [cell addSubview:label];
+            
+            UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 50, 20)];
+            number.text = [NSString stringWithFormat:@"%@",model.number];
+            number.font = [UIFont systemFontOfSize:14];
+            [cell addSubview:number];
+        }
         
     }
     
@@ -285,8 +355,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-#warning 要保存数据+++++++++++++
-    if(indexPath.row == self.arr.count + 1)
+    if(indexPath.row == [self.arr_dataList[indexPath.section] count] + 1)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择配送方式" preferredStyle:(UIAlertControllerStyleActionSheet)];
         [self presentViewController:alert animated:YES completion:^{
@@ -296,20 +365,63 @@
         UIAlertAction * action_1 = [UIAlertAction actionWithTitle:@"到店自取" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
-            
             peisong.text = @"到店自取";
+            self.arr_datapeisong[indexPath.section] = @"2";
+            
+            float sum = 0.00;
+            for (ShopCarData_Models * model in self.arr_dataList[indexPath.section])
+            {
+                sum = sum + [model.number integerValue] * [model.price floatValue];
+            }
+            
+            UILabel * price = [self.view viewWithTag:10000 + indexPath.section];
+            price.text = [NSString stringWithFormat:@"¥ %.2f",sum];
+            
+            self.arr_datazongjia[indexPath.section] = [NSString stringWithFormat:@"%.2f",sum];
+            
+            [self p_jisuan];
         }];
         
         UIAlertAction * action_2 = [UIAlertAction actionWithTitle:@"同城派送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"同城派送";
+            self.arr_datapeisong[indexPath.section] = @"3";
+            
+            
+            float sum = 0.00;
+            for (ShopCarData_Models * model in self.arr_dataList[indexPath.section])
+            {
+                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.city_freight floatValue];
+            }
+            
+            UILabel * price = [self.view viewWithTag:10000 + indexPath.section];
+            price.text = [NSString stringWithFormat:@"¥ %.2f",sum];
+            
+            self.arr_datazongjia[indexPath.section] = [NSString stringWithFormat:@"%.2f",sum];
+            
+            [self p_jisuan];
         }];
         
         UIAlertAction * action_3 = [UIAlertAction actionWithTitle:@"物流配送" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"物流配送";
+            self.arr_datapeisong[indexPath.section] = @"1";
+            
+            
+            float sum = 0.00;
+            for (ShopCarData_Models * model in self.arr_dataList[indexPath.section])
+            {
+                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.logistics_freight floatValue];
+            }
+            
+            UILabel * price = [self.view viewWithTag:10000 + indexPath.section];
+            price.text = [NSString stringWithFormat:@"¥ %.2f",sum];
+            
+            self.arr_datazongjia[indexPath.section] = [NSString stringWithFormat:@"%.2f",sum];
+            
+            [self p_jisuan];
         }];
         
         UIAlertAction * action_4 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
@@ -321,7 +433,7 @@
         [alert addAction:action_3];
         [alert addAction:action_4];
     }
-    else if (indexPath.row == self.arr.count + 2)
+    else if (indexPath.row == [self.arr_dataList[indexPath.section] count] + 2)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"请输入对卖家的留言" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -333,10 +445,12 @@
         UIAlertAction * action_ok = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
             UITextField * textField = alert.textFields.firstObject;
-            NSLog(@"%@",textField.text);
+//            NSLog(@"%@",textField.text);
             
             UITextField * liuyan = [self.view viewWithTag:(1000 + indexPath.section)];
             liuyan.text = textField.text;
+            
+            self.arr_dataliuyan[indexPath.section] = textField.text;
         }];
         
         UIAlertAction * action_cancel = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -349,9 +463,13 @@
         [self presentViewController:alert animated:YES completion:^{
             
         }];
-        
     }
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark - 头视图
@@ -658,6 +776,97 @@
     }
 }
 
+#pragma mark - 获得列表
+- (void)getConfirmOrder:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_dataList = nil;
+    self.arr_dataShop = nil;
+    self.arr_datazongjia = nil;
+    self.arr_dataliuyan = nil;
+    self.arr_datapeisong = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"confirmorder"])
+            {
+                ShopCarData_Models * model_shop = [[ShopCarData_Models alloc] init];
+                
+                [model_shop setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_dataShop addObject:model_shop];
+                
+                NSMutableArray * arr_ = [NSMutableArray array];
+                
+                for (NSDictionary * dict_list in dic[@"productlist"])
+                {
+                    ShopCarData_Models * model_list = [[ShopCarData_Models alloc] init];
+                    
+                    [model_list setValuesForKeysWithDictionary:dict_list];
+                    
+                    [arr_ addObject:model_list];
+                }
+                
+                [self.arr_dataList addObject:arr_];
+                
+                [self.arr_datapeisong addObject:@"1"];
+                
+                [self.arr_dataliuyan addObject:@""];
+                
+                //算价格
+                
+                float sum = 0.00;
+                
+                for (NSDictionary * dict_list in dic[@"productlist"])
+                {
+                    ShopCarData_Models * model_list = [[ShopCarData_Models alloc] init];
+                    
+                    [model_list setValuesForKeysWithDictionary:dict_list];
+                    //
+                    sum = sum + [model_list.number integerValue] * [model_list.price floatValue] + [model_list.logistics_freight floatValue];
+                }
+                
+                [self.arr_datazongjia addObject:[NSString stringWithFormat:@"%.2f",sum]];
+                
+                NSLog(@"%@",[NSString stringWithFormat:@"%.2f",sum]);
+                
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self p_jisuan];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+#pragma mark - 算总价
+- (void)p_jisuan
+{
+    float sum_price = 0.00;
+    for (NSString * str in self.arr_datazongjia)
+    {
+        sum_price = sum_price + [str floatValue];
+    }
+    self.price_sum.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
+}
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_morenAddress
 {
@@ -667,6 +876,55 @@
     }
     
     return _arr_morenAddress;
+}
+
+- (NSMutableArray *)arr_dataList
+{
+    if(_arr_dataList == nil)
+    {
+        self.arr_dataList = [NSMutableArray array];
+    }
+    
+    return _arr_dataList;
+}
+
+- (NSMutableArray * )arr_dataShop
+{
+    if(_arr_dataShop == nil)
+    {
+        self.arr_dataShop = [NSMutableArray array];
+    }
+    
+    return _arr_dataShop;
+}
+
+- (NSMutableArray *)arr_dataliuyan
+{
+    if(_arr_dataliuyan == nil)
+    {
+        self.arr_dataliuyan = [NSMutableArray array];
+    }
+    
+    return _arr_dataliuyan;
+}
+
+- (NSMutableArray *)arr_datapeisong
+{
+    if(_arr_datapeisong == nil)
+    {
+        self.arr_datapeisong = [NSMutableArray array];
+    }
+    
+    return _arr_datapeisong;
+}
+
+- (NSMutableArray *)arr_datazongjia
+{
+    if(_arr_datazongjia == nil)
+    {
+        self.arr_datazongjia = [NSMutableArray array];
+    }
+    return  _arr_datazongjia;
 }
 
 @end

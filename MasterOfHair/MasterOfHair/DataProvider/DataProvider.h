@@ -124,7 +124,8 @@
 #pragma mark - 获取随机热门视频
 - (void)GetRecommendVideoList;
 
-
+#pragma mark - 确认订单(购物车点结算)
+- (void)getConfirmOrderWithShopcart_id:(NSString *)shopcart_id;
 
 
 
