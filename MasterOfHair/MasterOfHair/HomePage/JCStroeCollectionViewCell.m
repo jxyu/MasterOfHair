@@ -39,7 +39,7 @@
     self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.price.frame) + 3, self.contentView.frame.size.width - 10, 30)];
 //    self.detail.backgroundColor = [UIColor orangeColor];
     self.detail.text = @"VS沙宣VS沙宣VS沙宣VS沙宣VS";
-    self.detail.font = [UIFont systemFontOfSize:15];
+    self.detail.font = [UIFont systemFontOfSize:14];
     self.detail.numberOfLines = 1;
     [self.contentView addSubview:self.detail];
     

@@ -100,7 +100,7 @@
     
     UILabel * label_account = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 60, 40)];
     label_account.text = @"手机号";
-    label_account.font = [UIFont systemFontOfSize:20];
+    label_account.font = [UIFont systemFontOfSize:17];
     label_account.textColor = navi_bar_bg_color;
     [view_account addSubview:label_account];
     
@@ -122,7 +122,7 @@
     UILabel * label_password = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 60, 40)];
     label_password.text = @"密  码";
     label_password.textColor = navi_bar_bg_color;
-    label_password.font = [UIFont systemFontOfSize:20];
+    label_password.font = [UIFont systemFontOfSize:17];
     [view_password addSubview:label_password];
     
     self.text_password = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_password.frame) + 10, 5, 170, 40)];
@@ -137,14 +137,14 @@
     [btn_login setTitle:@"确认登录" forState:(UIControlStateNormal)];
     [btn_login setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     btn_login.layer.cornerRadius = 4;
-    btn_login.titleLabel.font = [UIFont systemFontOfSize:19];
+    btn_login.titleLabel.font = [UIFont systemFontOfSize:17];
     btn_login.backgroundColor = navi_bar_bg_color;
     [self.view addSubview:btn_login];
     [btn_login addTarget:self action:@selector(btn_loginAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     //找回密码
     UIButton * btn_found = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 25, 12.5, 25, 25);
+    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 25, 15, 20, 20);
 //    btn_found.backgroundColor = [UIColor orangeColor];
     [btn_found setImage:[UIImage imageNamed:@"06wenhao_03"] forState:(UIControlStateNormal)];
     [btn_found setTintColor:navi_bar_bg_color];
@@ -187,7 +187,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         }
         @catch (NSException *exception)
         {

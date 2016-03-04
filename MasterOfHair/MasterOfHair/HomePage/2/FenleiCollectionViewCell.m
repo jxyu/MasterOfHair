@@ -27,7 +27,7 @@
     self.name.text = @"品牌产品";
     self.name.font = [UIFont systemFontOfSize:13];
     self.name.layer.borderWidth = 1;
-    self.name.layer.borderColor = [UIColor blackColor].CGColor;
+    self.name.layer.borderColor = [UIColor grayColor].CGColor;
     self.name.layer.cornerRadius = 5;
     [self.contentView addSubview:self.name];
     

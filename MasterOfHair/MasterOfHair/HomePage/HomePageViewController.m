@@ -216,7 +216,7 @@
     }
     else if(indexPath.row == 2)
     {
-        return (SCREEN_WIDTH ) / 4 + 105;
+        return (SCREEN_WIDTH ) / 3.87 + 100;
     }
     else if(indexPath.row == 3)
     {
@@ -717,11 +717,11 @@
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
-    int  item_length = (SCREEN_WIDTH ) / 4;
+    int  item_length = (SCREEN_WIDTH ) / 3.87;
     layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.store_detail.frame) , SCREEN_WIDTH, (SCREEN_WIDTH ) / 4 + 105 - CGRectGetMaxY(self.store_detail.frame) - 5) collectionViewLayout:layout];
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.store_detail.frame) , SCREEN_WIDTH, (SCREEN_WIDTH ) / 3.87 + 105 - CGRectGetMaxY(self.store_detail.frame) - 5) collectionViewLayout:layout];
     self.stroe_collectionView.delegate = self;
     self.stroe_collectionView.dataSource = self;
     self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];

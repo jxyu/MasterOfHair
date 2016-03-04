@@ -152,6 +152,7 @@
     UIButton * btn_change = [UIButton buttonWithType:(UIButtonTypeSystem)];
     btn_change.frame = CGRectMake(20, CGRectGetMaxY(view_4.frame) + 20, self.view.frame.size.width - 40 , 40);
     [btn_change setTitle:@"立 即 重 置" forState:(UIControlStateNormal)];
+    btn_captcha.titleLabel.font = [UIFont systemFontOfSize:17];
     [btn_change setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     btn_change.layer.cornerRadius = 4;
     btn_change.backgroundColor = navi_bar_bg_color;

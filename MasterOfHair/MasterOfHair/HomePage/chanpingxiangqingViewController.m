@@ -88,7 +88,7 @@
     [self addLeftButton:@"iconfont-fanhui"];
     
     [self addRightButton:@"01shoppingCar_03"];
-    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 20 - 40, _imgRight.frame.origin.y, _imgRight.frame.size.width, _imgRight.frame.size.height);
+    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 47, _imgRight.frame.origin.y + 10, _imgRight.frame.size.width - 20, _imgRight.frame.size.height - 20);
     //    [self addRightbuttontitle:@"签到"];
 }
 
@@ -266,7 +266,7 @@
         
         
         self.btn_share = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_share.frame = CGRectMake(SCREEN_WIDTH - 50, 35 + 10, 40, 40);
+        self.btn_share.frame = CGRectMake(SCREEN_WIDTH - 45, 35 + 15, 30, 30);
 //        self.btn_share.backgroundColor = [UIColor orangeColor];
         [self.btn_share setImage:[UIImage imageNamed:@"01share_21"] forState:(UIControlStateNormal)];
         [self.btn_share setTintColor:[UIColor grayColor]];
@@ -320,6 +320,7 @@
 //        self.tagList.selectedTextColor = [UIColor whiteColor];
         self.tagList.tagBackgroundColor = [UIColor groupTableViewBackgroundColor];
         self.tagList.selectedTagBackgroundColor = [UIColor orangeColor];
+        self.tagList.selectedTextColor = [UIColor whiteColor];
         self.tagList.tagCornerRadius = 2;
         self.tagList.tagEdge = UIEdgeInsetsMake(6, 6, 6, 6);
         [self.tagList addTarget:self action:@selector(selectedTagsChanged:) forControlEvents:UIControlEventValueChanged];
@@ -398,7 +399,7 @@
 - (void)p_bottomView
 {
     self.btn_collect = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.btn_collect.frame = CGRectMake(15, SCREEN_HEIGHT - 45 , 40, 40);
+    self.btn_collect.frame = CGRectMake(15, SCREEN_HEIGHT - 40 , 30, 30);
 //    self.btn_collect.backgroundColor = [UIColor orangeColor];
 //    [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
 //    self.btn_collect.selected = NO;

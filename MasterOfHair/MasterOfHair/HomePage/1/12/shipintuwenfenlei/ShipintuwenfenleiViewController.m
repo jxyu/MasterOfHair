@@ -171,7 +171,7 @@
     
     self.btn_all.frame = CGRectMake(10, 64 + 10, SCREEN_WIDTH - 20, 40);
     self.btn_all.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.btn_all.layer.borderColor = [UIColor blackColor].CGColor;
+    self.btn_all.layer.borderColor = [UIColor grayColor].CGColor;
     self.btn_all.layer.borderWidth = 1;
     self.btn_all.layer.cornerRadius = 5;
     [self.btn_all setTitle:@"全部" forState:(UIControlStateNormal)];

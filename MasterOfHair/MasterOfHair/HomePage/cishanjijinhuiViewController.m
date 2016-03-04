@@ -184,7 +184,7 @@
     self.btn_chong = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_chong.frame = CGRectMake(15, CGRectGetMaxY(self.head_View.frame) + 5, length_x, 30);
     self.btn_chong.layer.cornerRadius = 5;
-    self.btn_chong.backgroundColor = [UIColor colorWithRed:50/255.0 green:177/255.0 blue:108/255.0 alpha:1];
+    self.btn_chong.backgroundColor = [UIColor colorWithRed:100/255.0 green:220/255.0 blue:155/255.0 alpha:1];
     [self.btn_chong setTitle:@"充值" forState:(UIControlStateNormal)];
     [self.btn_chong setTintColor:[UIColor whiteColor]];
     [self.view addSubview:self.btn_chong];

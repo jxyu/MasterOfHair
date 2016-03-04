@@ -33,7 +33,7 @@
     self.image.layer.cornerRadius = 8;
     [self.contentView addSubview:self.image];
     
-    self.isFree = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 40, 0, 40, 30)];
+    self.isFree = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 30, 0, 30, 30)];
 //    self.isFree.backgroundColor = [UIColor orangeColor];
     [self.contentView addSubview:self.isFree];
     

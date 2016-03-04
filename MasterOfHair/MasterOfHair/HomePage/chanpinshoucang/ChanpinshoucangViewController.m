@@ -51,7 +51,7 @@
 
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
-{
+{    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
     
     [self example01];
