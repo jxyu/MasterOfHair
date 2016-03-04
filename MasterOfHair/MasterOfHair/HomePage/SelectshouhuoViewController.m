@@ -50,6 +50,8 @@
 //返回
 - (void)clickLeftButton:(UIButton *)sender
 {
+    [Single_Model singel].shouhudizhi_Model = nil;
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

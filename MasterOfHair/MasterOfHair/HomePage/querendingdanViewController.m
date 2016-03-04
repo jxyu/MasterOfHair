@@ -90,6 +90,8 @@
     }
     else
     {
+        self.arr_morenAddress = nil;
+        
         self.image_1.hidden = NO;
         self.name.hidden = NO;
         self.tel.hidden = NO;
@@ -102,6 +104,8 @@
         self.name.text = model.consignee;
         self.tel.text = model.mobile;
         self.address.text = str;
+        
+        [self.arr_morenAddress addObject:[Single_Model singel].shouhudizhi_Model];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //刷新tableView(记住,要更新放在主线程中)
@@ -555,91 +559,97 @@
     
     Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
 
-    if([model.address length] == 0)
+    if([model.address_id length] == 0 || (self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0))
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择收货地址" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
+        if([model.address_id length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择收货地址" preferredStyle:(UIAlertControllerStyleAlert)];
             
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
             
-        }];
-        
-        [alert addAction:action];
-    }
-    
-    if(self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
             
-        }];
+            [alert addAction:action];
+        }
         
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        if(self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
             
-        }];
-        
-        [alert addAction:action];
-    }
-    
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
-    
-    //配送
-    UILabel * label = [self.view viewWithTag:100];
-    NSString * str_peisong = [NSString stringWithFormat:@""];
-    if([label.text isEqualToString:@"同城派送"])
-    {
-        str_peisong = @"3";
-    }
-    else if([label.text isEqualToString:@"物流配送"])
-    {
-        str_peisong = @"1";
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+
     }
     else
     {
-        str_peisong = @"2";
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
+        
+        //配送
+        UILabel * label = [self.view viewWithTag:100];
+        NSString * str_peisong = [NSString stringWithFormat:@""];
+        if([label.text isEqualToString:@"同城派送"])
+        {
+            str_peisong = @"3";
+        }
+        else if([label.text isEqualToString:@"物流配送"])
+        {
+            str_peisong = @"1";
+        }
+        else
+        {
+            str_peisong = @"2";
+        }
+        
+        //留言
+        UITextField * text = [self.view viewWithTag:1000];
+        NSString * str_liuyan = [NSString stringWithFormat:@""];
+        if([text.text length] == 0)
+        {
+            str_liuyan = @"";
+        }
+        else
+        {
+            str_liuyan = text.text;
+        }
+        
+        //支付方式
+        NSString * str_zhifu = [NSString stringWithFormat:@""];
+        if(self.btn_myPurse.selected == 1)
+        {
+            str_zhifu = @"1";
+        }
+        if(self.btn_weixin.selected == 1)
+        {
+            str_zhifu = @"3";
+        }
+        if(self.btn_zhifubo.selected == 1)
+        {
+            str_zhifu = @"2";
+        }
+        
+        NSMutableArray * arr_pro = [NSMutableArray array];
+        NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
+        NSLog(@"%@",dict);
+        
+        [arr_pro addObject:dict];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
     }
-    
-    //留言
-    UITextField * text = [self.view viewWithTag:1000];
-    NSString * str_liuyan = [NSString stringWithFormat:@""];
-    if([text.text length] == 0)
-    {
-        str_liuyan = @"";
-    }
-    else
-    {
-        str_liuyan = text.text;
-    }
-    
-    //支付方式
-    NSString * str_zhifu = [NSString stringWithFormat:@""];
-    if(self.btn_myPurse.selected == 1)
-    {
-        str_zhifu = @"1";
-    }
-    if(self.btn_weixin.selected == 1)
-    {
-        str_zhifu = @"3";
-    }
-    if(self.btn_zhifubo.selected == 1)
-    {
-        str_zhifu = @"2";
-    }
-    
-    NSMutableArray * arr_pro = [NSMutableArray array];
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
-    NSLog(@"%@",dict);
-    
-    [arr_pro addObject:dict];
-    
-    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
 }
 
 
@@ -749,8 +759,13 @@
                 self.tel.text = model.mobile;
                 self.address.text = str;
             }
-            
-            
+            else
+            {
+                self.image_1.hidden = YES;
+                self.name.hidden = YES;
+                self.tel.hidden = YES;
+                self.address.hidden = YES;
+            }
         }
         @catch (NSException *exception)
         {

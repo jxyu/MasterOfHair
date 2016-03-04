@@ -144,7 +144,7 @@
     }
 
     //
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否保存修改的信息" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否保存信息" preferredStyle:(UIAlertControllerStyleAlert)];
     
     [self presentViewController:alert animated:YES completion:^{
         

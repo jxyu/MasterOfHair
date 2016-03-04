@@ -97,12 +97,16 @@
     }
     else
     {
+        self.arr_morenAddress = nil;
+        
         self.image_1.hidden = NO;
         self.name.hidden = NO;
         self.tel.hidden = NO;
         self.address.hidden = NO;
         
         Shouhudizhi_Model * model = [Single_Model singel].shouhudizhi_Model;
+        
+        [self.arr_morenAddress addObject:model];
         
         NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
         
@@ -651,7 +655,43 @@
 
 - (void)btn_zhifuOKAction:(UIButton *)sender
 {//做大量判断
-    NSLog(@"提交订单");
+//    NSLog(@"提交订单");
+    Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+    
+    if([model.address_id length] == 0 || (self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0))
+    {
+        if([model.address_id length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择收货地址" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        
+        if(self.btn_myPurse.selected == 0 && self.btn_weixin.selected == 0 && self.btn_zhifubo.selected == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        
+    }
+
 }
 
 - (void)btn_myPurseAction:(UIButton *)sender
@@ -741,7 +781,31 @@
             
             [model setValuesForKeysWithDictionary:arr.firstObject];
             
-            [self.arr_morenAddress addObject:model];
+            if([model.address_id length] != 0)
+            {
+                [self.arr_morenAddress addObject:model];
+                
+                
+                self.image_1.hidden = NO;
+                self.name.hidden = NO;
+                self.tel.hidden = NO;
+                self.address.hidden = NO;
+                
+                Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+                
+                NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
+                
+                self.name.text = model.consignee;
+                self.tel.text = model.mobile;
+                self.address.text = str;
+            }
+            else
+            {
+                self.image_1.hidden = YES;
+                self.name.hidden = YES;
+                self.tel.hidden = YES;
+                self.address.hidden = YES;
+            }
             
         }
         @catch (NSException *exception)
@@ -750,19 +814,6 @@
         }
         @finally
         {
-            self.image_1.hidden = NO;
-            self.name.hidden = NO;
-            self.tel.hidden = NO;
-            self.address.hidden = NO;
-            
-            Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
-            
-            NSString * str = [NSString stringWithFormat:@"%@%@%@%@",[model.province_name length]== 0 ? @"" : model.province_name,[model.city_name length]== 0 ? @"" : model.city_name,[model.area_name length]== 0 ? @"" : model.area_name ,[model.address length]== 0 ? @"" : model.address];
-            
-            self.name.text = model.consignee;
-            self.tel.text = model.mobile;
-            self.address.text = str;
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
