@@ -182,6 +182,9 @@
 		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
 		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
 		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
+		7BFAA7791C8A85C400D86D81 /* BianjiziliaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFAA7781C8A85C400D86D81 /* BianjiziliaoViewController.m */; };
+		7BFAA77B1C8A8DEB00D86D81 /* bazhaotupian.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFAA77A1C8A8DEB00D86D81 /* bazhaotupian.png */; };
+		7BFAA77F1C8AAEC500D86D81 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFAA77E1C8AAEC500D86D81 /* VPImageCropperViewController.m */; };
 		7BFE25ED1C61D9B70038CA23 /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */; };
 		800E8F9A1C5DAA3A00CB8CC5 /* AdvertiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800E8F991C5DAA3A00CB8CC5 /* AdvertiseViewController.m */; };
 		800E8F9E1C5DBEBF00CB8CC5 /* FL_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 800E8F9D1C5DBEBF00CB8CC5 /* FL_Button.m */; };
@@ -602,6 +605,11 @@
 		7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		7BF67F181C522466005FA5C4 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
 		7BF67F191C522466005FA5C4 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
+		7BFAA7771C8A85C400D86D81 /* BianjiziliaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BianjiziliaoViewController.h; sourceTree = "<group>"; };
+		7BFAA7781C8A85C400D86D81 /* BianjiziliaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BianjiziliaoViewController.m; sourceTree = "<group>"; };
+		7BFAA77A1C8A8DEB00D86D81 /* bazhaotupian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazhaotupian.png; sourceTree = "<group>"; };
+		7BFAA77D1C8AAEC500D86D81 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		7BFAA77E1C8AAEC500D86D81 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		7BFE25EB1C61D9B70038CA23 /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
 		7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		800E8F981C5DAA3A00CB8CC5 /* AdvertiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseViewController.h; sourceTree = "<group>"; };
@@ -1096,6 +1104,7 @@
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
+				7BFAA77C1C8AAEC500D86D81 /* UpLoadImage */,
 				7B00BF5B1C77018300988119 /* Location */,
 				7B00BF541C76F58900988119 /* ChineseSorting */,
 				7BD86C411C745D6400D099BE /* SMS_SDK */,
@@ -1367,6 +1376,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7BFAA7761C8A85A600D86D81 /* bianjiziliao */,
 				7B46EE1A1C60A5B900E33E0E /* tuwenshoucang */,
 				7B46EE191C60A5A000E33E0E /* shipinshoucang */,
 				7B46EE181C60A57C00E33E0E /* chanpinshoucang */,
@@ -1447,6 +1457,7 @@
 		7BAABA9F1C59A34400C14DF8 /* 5 */ = {
 			isa = PBXGroup;
 			children = (
+				7BFAA77A1C8A8DEB00D86D81 /* bazhaotupian.png */,
 				7BB26FE91C5B5383001D332E /* woeiqwoeiowio.png */,
 				7BB26FEA1C5B5383001D332E /* 122323232323.png */,
 				7BAABAC91C59B4A100C14DF8 /* 06wenhao_03.png */,
@@ -1617,6 +1628,24 @@
 				7BF67F191C522466005FA5C4 /* FoundViewController.m */,
 			);
 			name = "Login and regist";
+			sourceTree = "<group>";
+		};
+		7BFAA7761C8A85A600D86D81 /* bianjiziliao */ = {
+			isa = PBXGroup;
+			children = (
+				7BFAA7771C8A85C400D86D81 /* BianjiziliaoViewController.h */,
+				7BFAA7781C8A85C400D86D81 /* BianjiziliaoViewController.m */,
+			);
+			path = bianjiziliao;
+			sourceTree = "<group>";
+		};
+		7BFAA77C1C8AAEC500D86D81 /* UpLoadImage */ = {
+			isa = PBXGroup;
+			children = (
+				7BFAA77D1C8AAEC500D86D81 /* VPImageCropperViewController.h */,
+				7BFAA77E1C8AAEC500D86D81 /* VPImageCropperViewController.m */,
+			);
+			path = UpLoadImage;
 			sourceTree = "<group>";
 		};
 		7BFE25EA1C61D9990038CA23 /* VideoDetail */ = {
@@ -2333,6 +2362,7 @@
 				802552CB1C57442B00CFF875 /* WechatShortVideoController.xib in Resources */,
 				7B3305BD1C5F33D90014C49C /* yanjing.png in Resources */,
 				7BBF79F91C87DAB00059C9E0 /* shoucangH.png in Resources */,
+				7BFAA77B1C8A8DEB00D86D81 /* bazhaotupian.png in Resources */,
 				802552C61C57442B00CFF875 /* WechatShortVideo_scan_focus.png in Resources */,
 				8025530E1C574F7100CFF875 /* MJRefresh.bundle in Resources */,
 				7BD86C3F1C744ACD00D099BE /* return101010.png in Resources */,
@@ -2527,6 +2557,7 @@
 				7B3305AA1C5EE9AA0014C49C /* FenleiCollectionViewCell.m in Sources */,
 				7B29EFAC1C56FD2B003A020B /* VOTagList.m in Sources */,
 				7B0433CB1C5C859B0052F4AC /* NextqianbaoViewController.m in Sources */,
+				7BFAA77F1C8AAEC500D86D81 /* VPImageCropperViewController.m in Sources */,
 				7B18A7761C7E90E000A32AE9 /* ShipintuwenfenleiViewController.m in Sources */,
 				7BAABAD91C59EDD100C14DF8 /* Single_Model.m in Sources */,
 				7BB26FF51C5B57BE001D332E /* NextFenxiaoTableViewCell.m in Sources */,
@@ -2591,6 +2622,7 @@
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				802552C01C57442B00CFF875 /* CALayer+AddUIColor.m in Sources */,
+				7BFAA7791C8A85C400D86D81 /* BianjiziliaoViewController.m in Sources */,
 				7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */,
 				802552AC1C57442B00CFF875 /* SCFilter.m in Sources */,
 				7BB26FD81C5AFD8A001D332E /* cishanjijinhuiViewController.m in Sources */,

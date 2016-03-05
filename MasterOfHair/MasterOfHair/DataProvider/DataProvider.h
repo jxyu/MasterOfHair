@@ -130,9 +130,11 @@
 #pragma mark - 获取热门随机图文
 - (void)getRecommendArticleList;
 
+#pragma mark - 会员资料修改
+- (void)updateWithMember_id:(NSString *)member_id member_nickname:(NSString *)member_nickname;
 
-
-
+#pragma mark - 会员头像修改
+- (void)UploadHeadPicWithMember_id:(NSString *)member_id member_headpic:(NSData *)member_headpic;
 
 
 

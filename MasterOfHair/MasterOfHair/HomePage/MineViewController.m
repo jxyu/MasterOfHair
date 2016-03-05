@@ -23,6 +23,8 @@
 #import "ShipinshoucangViewController.h"
 #import "TuwenshoucangViewController.h"
 
+#import "BianjiziliaoViewController.h"
+
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -212,6 +214,8 @@
     [self.head_edit setTitle:@"编辑资料" forState:(UIControlStateNormal)];
     [self.head_edit setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_edit];
+    [self.head_edit addTarget:self action:@selector(head_editAction:) forControlEvents:(UIControlEventTouchUpInside)];
+
     
     self.head_cancel = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 27 * (SCREEN_WIDTH / 320));
@@ -411,6 +415,13 @@
     [alert addAction:action];
 }
 
+#pragma mark - 编辑资料
+- (void)head_editAction:(UIButton *)sender
+{
+    BianjiziliaoViewController * bianjiziliaoViewController = [[BianjiziliaoViewController alloc] init];
+    
+    [self showViewController:bianjiziliaoViewController sender:nil];
+}
 
 #pragma mark - tableView的代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView

@@ -433,6 +433,48 @@
 }
 
 
+#pragma mark - 会员资料修改
+- (void)updateWithMember_id:(NSString *)member_id member_nickname:(NSString *)member_nickname
+{
+    if(member_id && member_nickname)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/update",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"member_nickname\":\"%@\"}",member_id,member_nickname]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 会员头像修改
+- (void)UploadHeadPicWithMember_id:(NSString *)member_id member_headpic:(NSData *)member_headpic
+{
+    if(member_id && member_headpic)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/UploadHeadPic",Url];
+        NSDictionary * prm=@{@"member_id":member_id};
+        
+        [self ShowOrderuploadImageWithImage:member_headpic andurl:url andprm:prm andkey:nil];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -679,5 +721,45 @@
         return nil;
     }
 }
+
+
+- (void)ShowOrderuploadImageWithImage:(NSData *)imagedata andurl:(NSString *)url andprm:(NSDictionary *)prm andkey:(NSString *)key
+{
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imagedata name:@"member_headpic" fileName:@"member_headpic.png" mimeType:@"image/png"];
+    }];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *str=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSData * data =[str dataUsingEncoding:NSUTF8StringEncoding];
+        id dict =[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        SEL func_selector = NSSelectorFromString(callBackFunctionName);
+        if ([CallBackObject respondsToSelector:func_selector]) {
+            NSLog(@"回调成功...");
+            [CallBackObject performSelector:func_selector withObject:dict];
+        }else{
+            NSLog(@"回调失败...");
+            [SVProgressHUD dismiss];
+        }
+        NSLog(@"上传完成");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"上传失败->%@", error);
+        [SVProgressHUD dismiss];
+    }];
+    
+    //执行
+    NSOperationQueue * queue =[[NSOperationQueue alloc] init];
+    [queue addOperation:op];
+    //    FileDetail *file = [FileDetail fileWithName:@"avatar.jpg" data:data];
+    //    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+    //                            file,@"FILES",
+    //                            @"avatar",@"name",
+    //                            key, @"key", nil];
+    //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
+    //    NSLog(@"%@",result);
+}
+
+
 
 @end
