@@ -27,7 +27,9 @@
 @property (nonatomic, copy) NSString * net_price;
 
 //
+@property (nonatomic, copy) NSString * favorite_id;
 
+@property (nonatomic, copy) NSString * favorite_time;
 
 
 @end

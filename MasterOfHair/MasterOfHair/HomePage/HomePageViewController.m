@@ -75,7 +75,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     [self p_location];
     
     [self p_login];
@@ -554,10 +554,8 @@
             cell.price.text = [NSString stringWithFormat:@"￥ %@",model.sell_price];
             cell.detail.text = [NSString stringWithFormat:@"%@",model.production_name];
             
-            if(![model.city_id isEqualToString:@"0"])
-            {
-                cell.image_iocn.hidden = YES;
-            }
+            cell.image_iocn.hidden = YES;
+
         }
         else
         {

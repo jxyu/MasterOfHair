@@ -136,6 +136,34 @@
 #pragma mark - 会员头像修改
 - (void)UploadHeadPicWithMember_id:(NSString *)member_id member_headpic:(NSData *)member_headpic;
 
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id article_id:(NSString *)article_id;
+
+#pragma mark - 判断图文是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id article_id:(NSString *)article_id;
+
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id video_id:(NSString *)video_id;
+
+#pragma mark - 判断视频是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id video_id:(NSString *)video_id;
+
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getProductionFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

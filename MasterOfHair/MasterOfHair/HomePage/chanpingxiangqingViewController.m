@@ -760,6 +760,7 @@
         }
         @finally
         {
+            
             [self p_collectData];
             
             dispatch_async(dispatch_get_main_queue(), ^{

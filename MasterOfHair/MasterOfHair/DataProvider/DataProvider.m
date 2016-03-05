@@ -459,14 +459,66 @@
 }
 
 
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id article_id:(NSString *)article_id
+{
+    if(member_id && article_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ArticleFavorite/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"article_id\":\"%@\"}",member_id,article_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 判断图文是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id article_id:(NSString *)article_id
+{
+    if(member_id && article_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ArticleFavorite/isFavorite",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"article_id\":\"%@\"}",member_id,article_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
+#pragma mark - 加入收藏/取消收藏
+- (void)createWithMember_id:(NSString *)member_id video_id:(NSString *)video_id
+{
+    if(member_id && video_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=VideoFavorite/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\"}",member_id,video_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
+#pragma mark - 判断视频是否被收藏
+- (void)isFavoriteWithMember_id:(NSString *)member_id video_id:(NSString *)video_id
+{
+    if(member_id && video_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=VideoFavorite/isFavorite",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\"}",member_id,video_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
-
-
-
-
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getProductionFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(member_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/getProductionFavoriteList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

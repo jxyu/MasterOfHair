@@ -183,7 +183,7 @@
     
     UILabel * lable_2 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_2.frame) + 3, CGRectGetMinY(image_2.frame) + 2.5, 50, 20)];
     lable_2.font = [UIFont systemFontOfSize:13];
-    lable_2.text = @"收藏";
+    lable_2.text = @"分享";
     [self.headView addSubview:lable_2];
     
     self.btn_share = [UIButton buttonWithType:(UIButtonTypeSystem)];

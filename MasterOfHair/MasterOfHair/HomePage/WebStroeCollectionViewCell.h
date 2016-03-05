@@ -20,4 +20,7 @@
 
 @property (nonatomic, strong) UIImageView * image_class;
 
+@property (nonatomic , strong) UIImageView * image_iocn;
+
+
 @end

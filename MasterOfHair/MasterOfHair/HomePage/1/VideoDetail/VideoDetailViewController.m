@@ -250,7 +250,7 @@
     self.btn_collect = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_collect.frame = CGRectMake(CGRectGetMaxX(self.text_detail.frame) + 10, CGRectGetMinY(self.text_detail.frame) - 0, 30, 30);
     //        self.btn_collect.backgroundColor = [UIColor orangeColor];
-    [self.btn_collect setImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+    [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
     [self.btn_collect setTintColor:[UIColor grayColor]];
     [view addSubview:self.btn_collect];
     
@@ -357,16 +357,15 @@
 //收藏
 - (void)btn_collectAction:(UIButton *)sender
 {
-    if([self.label_collect.textColor isEqual:[UIColor grayColor]])
-    {
-        [sender setTintColor:navi_bar_bg_color];
-        self.label_collect.textColor = navi_bar_bg_color;
-    }
-    else
-    {
-        [sender setTintColor:[UIColor grayColor]];
-        self.label_collect.textColor = [UIColor grayColor];
-    }
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    TuWen_Models * model = self.arr_data.firstObject;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"createVideo:"];
+    
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
 }
 //分享
 - (void)btn_shareAction:(UIButton *)sender
@@ -509,6 +508,7 @@
                 self.isfree.text = @"付费";
             }
             
+            [self p_collectData];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
@@ -573,6 +573,106 @@
     }
 }
 
+
+#pragma mark - 加入收藏
+- (void)createVideo:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            if(self.btn_collect.selected == 0)
+            {
+                self.label_collect.textColor = navi_bar_bg_color;
+                
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"shoucangH"] forState:(UIControlStateNormal)];
+                [self.btn_collect setTintColor:[UIColor whiteColor]];
+                self.btn_collect.selected = YES;
+            }
+            else
+            {
+                self.label_collect.textColor = [UIColor grayColor];
+                
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+                self.btn_collect.selected = NO;
+                
+            }
+            
+            [SVProgressHUD showSuccessWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 是否被收藏
+- (void)p_collectData
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    TuWen_Models * model = self.arr_data.firstObject;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+    
+    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
+}
+
+- (void)isFavorite:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSString * str = [NSString stringWithFormat:@"%@",dict[@"data"][@"is_favorite"]];
+            
+            if([str isEqualToString:@"1"])
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"shoucangH"] forState:(UIControlStateNormal)];
+                [self.btn_collect setTintColor:[UIColor whiteColor]];
+                
+                self.label_collect.textColor = navi_bar_bg_color;
+
+                self.btn_collect.selected = YES;
+            }
+            else
+            {
+                [self.btn_collect setBackgroundImage:[UIImage imageNamed:@"01collect_16"] forState:(UIControlStateNormal)];
+                
+                self.label_collect.textColor = [UIColor grayColor];
+
+                self.btn_collect.selected = NO;
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
