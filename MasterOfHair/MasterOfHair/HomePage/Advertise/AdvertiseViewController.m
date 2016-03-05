@@ -118,7 +118,7 @@
     btn_AllClass.layer.borderWidth=0.5;
     btn_AllClass.layer.borderColor=navi_bar_bg_color.CGColor;
     btn_AllClass.layer.cornerRadius=8;
-    [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
+//    [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
     [HeaderBackView addSubview:btn_AllClass];
     
     

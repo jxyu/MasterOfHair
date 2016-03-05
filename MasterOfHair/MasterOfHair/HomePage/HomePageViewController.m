@@ -791,8 +791,7 @@
             [userdefault setObject:@"" forKey:@"category_name"];
             [userdefault setObject:@"" forKey:@"diquweizhi"];
             [userdefault setObject:@"" forKey:@"channel_name"];
-
-
+            [userdefault setObject:@"" forKey:@"TuwenFeilei"];
         }
         @catch (NSException *exception)
         {

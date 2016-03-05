@@ -584,7 +584,16 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleList:"];
     
-    [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:@"1" pagesize:@"12"];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+    if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
+    {
+        [dataprovider getArticleListWithChannel_id:@"0" status_code:@"1" pagenumber:@"1" pagesize:@"12"];
+    }
+    else
+    {
+        [dataprovider getArticleListWithChannel_id:[userdefault objectForKey:@"TuwenFeilei"] status_code:@"1" pagenumber:@"1" pagesize:@"12"];
+    }
 }
 
 - (void)p_NextDataTuWen
@@ -593,6 +602,18 @@
 //    NSLog(@"%ld",self.page);
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleList1:"];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
+    {
+        [dataprovider getArticleListWithChannel_id:@"0" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+    }
+    else
+    {
+        [dataprovider getArticleListWithChannel_id:[userdefault objectForKey:@"TuwenFeilei"] status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+    }
+    
+    
     
     [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
 }
@@ -676,7 +697,15 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping:"];
     
-    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:@"1" pagesize:@"10"];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
+    {
+        [dataprovider getArticleListWithVideo_type:@"0" is_free:is_free pagenumber:@"1" pagesize:@"10"];
+    }
+    else
+    {
+        [dataprovider getArticleListWithVideo_type:[userdefault objectForKey:@"TuwenFeilei"] is_free:is_free pagenumber:@"1" pagesize:@"10"];
+    }
 }
 
 - (void)p_NextshipinData:(NSString * )is_free
@@ -687,7 +716,15 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping1:"];
     
-    [dataprovider getArticleListWithVideo_type:@"3" is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
+    {
+        [dataprovider getArticleListWithVideo_type:@"0" is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
+    }
+    else
+    {
+        [dataprovider getArticleListWithVideo_type:[userdefault objectForKey:@"TuwenFeilei"] is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
+    }
 }
 
 - (void)getArticleListshiping:(id )dict

@@ -732,7 +732,6 @@
             [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
         }
     }
-
 }
 
 - (void)btn_myPurseAction:(UIButton *)sender

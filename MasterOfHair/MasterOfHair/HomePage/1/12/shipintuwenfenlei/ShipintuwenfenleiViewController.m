@@ -137,7 +137,8 @@
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:model.channel_name forKey:@"channel_name"];
-    
+    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -200,6 +201,8 @@
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:@"" forKey:@"channel_name"];
+    
+    [userdefault setObject:@"0" forKey:@"TuwenFeilei"];
     
     [self.navigationController popViewControllerAnimated:YES];
     

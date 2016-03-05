@@ -57,9 +57,9 @@
     
     self.image.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     
-    self.name.frame = CGRectMake(50, CGRectGetMaxY(self.image.frame) + 15, SCREEN_WIDTH - 100, 30);
+    self.name.frame = CGRectMake(50, CGRectGetMaxY(self.image.frame) + 13, SCREEN_WIDTH - 100, 30);
     
-    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 10 - 30, CGRectGetMaxY(self.image.frame) + 15, 30, 30);
+    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 10 - 30, CGRectGetMaxY(self.image.frame) + 13, 30, 30);
     
     self.view_bg.frame = CGRectMake(0, 250, SCREEN_WIDTH, 10);
 }
