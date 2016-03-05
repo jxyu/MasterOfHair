@@ -164,43 +164,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ShoppingCar_Model * model = self.arr_data[indexPath.row];
     
     ShoppingCarTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_shoppingCar"];
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     
-    //加数据
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-    cell.title.text = [NSString stringWithFormat:@"%@",model.production_name];
-    cell.detail.text = [NSString stringWithFormat:@"%@",model.specs_name];
-    cell.price.text = [NSString stringWithFormat:@"¥ %@",model.price];
-    cell.number.text = [NSString stringWithFormat:@"%@",model.number];
-    
-    
-    [cell.btn_select addTarget:self action:@selector(btn_selectAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    cell.btn_select.selected = NO;
-    [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
-    [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
-    cell.btn_select.tag = indexPath.row * 100;
-    
-    [cell.btn_Add addTarget:self action:@selector(btn_AddAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    cell.btn_Add.tag = indexPath.row + 1001;
-    
-    
-    [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    cell.btn_Subtract.tag = indexPath.row + 100001;
-    
-    
-    
-    for (ShoppingCar_Model * model1 in self.arr_baocun)
+    if(self.arr_data.count != 0)
     {
-        if([model1.shopcart_id isEqualToString:model.shopcart_id])
+        ShoppingCar_Model * model = self.arr_data[indexPath.row];
+        
+        //加数据
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        cell.title.text = [NSString stringWithFormat:@"%@",model.production_name];
+        cell.detail.text = [NSString stringWithFormat:@"%@",model.specs_name];
+        cell.price.text = [NSString stringWithFormat:@"¥ %@",model.price];
+        cell.number.text = [NSString stringWithFormat:@"%@",model.number];
+        
+        
+        [cell.btn_select addTarget:self action:@selector(btn_selectAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        cell.btn_select.selected = NO;
+        [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
+        [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_031111"] forState:(UIControlStateNormal)];
+        cell.btn_select.tag = indexPath.row * 100;
+        
+        [cell.btn_Add addTarget:self action:@selector(btn_AddAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        cell.btn_Add.tag = indexPath.row + 1001;
+        
+        
+        [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        cell.btn_Subtract.tag = indexPath.row + 100001;
+        
+        
+        
+        for (ShoppingCar_Model * model1 in self.arr_baocun)
         {
-            cell.btn_select.selected = YES;
-            [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
-            [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+            if([model1.shopcart_id isEqualToString:model.shopcart_id])
+            {
+                cell.btn_select.selected = YES;
+                [cell.btn_select setTintColor:[UIColor groupTableViewBackgroundColor]];
+                [cell.btn_select setBackgroundImage:[UIImage imageNamed:@"01_03＿_061111"] forState:(UIControlStateNormal)];
+            }
         }
+
     }
     
     return cell;
@@ -529,7 +534,7 @@
 #pragma mark - 商城数据
 - (void)shopcart:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_baocun = nil;
     self.arr_data = nil;

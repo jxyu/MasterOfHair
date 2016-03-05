@@ -230,7 +230,7 @@
         TuWen_Models * model = self.arr_shipin[indexPath.item];
         
         JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
 
         cell.name.text = model.video_title;
         if([model.is_free isEqualToString:@"1"])
@@ -251,7 +251,7 @@
         
         PicAndVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_text" forIndexPath:indexPath];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         
         cell.detail.text = model.article_title;
         

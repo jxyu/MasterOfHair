@@ -23,7 +23,7 @@
 {
     if(member_username && member_password)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/register",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/register",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\",\"spread_id\":\"%@\"}",member_username,member_password,spread_id]};
         
         [self PostRequest:url andpram:prm];
@@ -35,7 +35,7 @@
 {
     if(member_username && member_password)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/login",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/login",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
         
         [self PostRequest:url andpram:prm];
@@ -47,7 +47,7 @@
 {
     if(member_username && member_password)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/resetPassword",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/resetPassword",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\"}",member_username,member_password]};
         
         [self PostRequest:url andpram:prm];
@@ -60,7 +60,7 @@
 {
     if(city_id && category_id && pagenumber && pagesize && is_maker && is_sell)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=product/getProductList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"category_id\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",city_id,category_id,is_maker,is_sell],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -70,7 +70,7 @@
 #pragma mark - 所有区域
 - (void)area
 {
-    NSString * url = [NSString stringWithFormat:@"%@appbackend/index.php?r=area/getCities",Url];
+    NSString * url = [NSString stringWithFormat:@"%@index.php?r=area/getCities",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -80,7 +80,7 @@
 {
     if(production_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProducts",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=product/getProducts",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\"}",production_id]};
         
         [self PostRequest:url andpram:prm];
@@ -92,7 +92,7 @@
 {
     if(member_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/getAddresses",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
         
         [self PostRequest:url andpram:prm];
@@ -104,7 +104,7 @@
 {
     if(member_id && is_default)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/getAddresses",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/getAddresses",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"is_default\":\"%@\"}",member_id,is_default]};
         
         [self PostRequest:url andpram:prm];
@@ -116,7 +116,7 @@
 {
     if(address_id && is_default)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/update",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"is_default\":\"%@\"}",address_id,is_default]};
         
         [self PostRequest:url andpram:prm];
@@ -128,7 +128,7 @@
 {
     if(parent_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=area/getAreas",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=area/getAreas",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"parent_id\":\"%@\"}",parent_id]};
         
         [self PostRequest:url andpram:prm];
@@ -140,7 +140,7 @@
 {
     if(address_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/delete",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/delete",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\"}",address_id]};
         
         [self PostRequest:url andpram:prm];
@@ -152,7 +152,7 @@
 {
     if(address_id && consignee && mobile && province && city && area && address)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/update",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/update",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",address_id,consignee,mobile,province,city,area,address]};
         
         [self PostRequest:url andpram:prm];
@@ -164,7 +164,7 @@
 {
     if(member_id && consignee && mobile && province && city && area && address)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=address/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=address/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"consignee\":\"%@\",\"mobile\":\"%@\",\"province\":\"%@\",\"city\":\"%@\",\"area\":\"%@\",\"address\":\"%@\"}",member_id,consignee,mobile,province,city,area,address]};
         
         [self PostRequest:url andpram:prm];
@@ -177,7 +177,7 @@
 {
     if(slide_type)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=slide/getSlides",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=slide/getSlides",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"slide_type\":\"%@\"}",slide_type]};
         
         [self PostRequest:url andpram:prm];
@@ -187,7 +187,7 @@
 #pragma mark - 获取所有产品分类
 - (void)getCategories
 {
-    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=category/getCategories",Url];
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=category/getCategories",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -197,7 +197,7 @@
 {
     if(category_parent_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=category/getCategories",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=category/getCategories",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"category_parent_id\":\"%@\"}",category_parent_id]};
         
         [self PostRequest:url andpram:prm];
@@ -209,7 +209,7 @@
 {
     if(production_id && number && price && member_id && specs_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=shopcart/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"number\":\"%@\",\"price\":\"%@\",\"member_id\":\"%@\",\"specs_id\":\"%@\"}",production_id,number,price,member_id,specs_id]};
         
         [self PostRequest:url andpram:prm];
@@ -221,7 +221,7 @@
 {
     if(member_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/shopcart",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=shopcart/shopcart",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
         
         [self PostRequest:url andpram:prm];
@@ -233,7 +233,7 @@
 {
     if(production_keyword && is_maker && is_sell)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getProductList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=product/getProductList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_keyword\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
         
         [self PostRequest:url andpram:prm];
@@ -245,7 +245,7 @@
 {
     if(channel_id && status_code && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=article/getArticleList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=article/getArticleList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"channel_id\":\"%@\",\"status_code\":\"%@\"}",channel_id,status_code],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -257,7 +257,7 @@
 {
     if(video_type && is_free && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/getVideoList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=video/getVideoList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_type\":\"%@\",\"is_free\":\"%@\"}",video_type,is_free],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -268,7 +268,7 @@
 #pragma mark - 获取所有产品分类
 - (void)getChannels
 {
-    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=channel/getChannels",Url];
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=channel/getChannels",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -279,7 +279,7 @@
 {
     if(video_keyword && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/getVideoList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=video/getVideoList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_keyword\":\"%@\"}",video_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -292,7 +292,7 @@
 {
     if(article_keyword && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=article/getArticleList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=article/getArticleList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_keyword\":\"%@\"}",article_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -304,7 +304,7 @@
 {
     if(video_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/getVideos",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=video/getVideos",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_id\":\"%@\"}",video_id]};
         
         [self PostRequest:url andpram:prm];
@@ -316,7 +316,7 @@
 {
     if(video_id && reply_id && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=discuss/getDiscussList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=discuss/getDiscussList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_id\":\"%@\",\"reply_id\":\"%@\"}",video_id,reply_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
@@ -329,7 +329,7 @@
 {
     if(city_id && is_sell)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=product/getRecommendProducts",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=product/getRecommendProducts",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"is_sell\":\"%@\"}",city_id,is_sell]};
         
         [self PostRequest:url andpram:prm];
@@ -341,7 +341,7 @@
 {
     if(production_id && number && member_id && specs_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=shopcart/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_id\":\"%@\",\"number\":\"%@\",\"member_id\":\"%@\",\"specs_id\":\"%@\"}",production_id,number,member_id,specs_id]};
         
         [self PostRequest:url andpram:prm];
@@ -354,7 +354,7 @@
 {
     if(shopcart_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=shopcart/delete",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=shopcart/delete",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"shopcart_id\":\"%@\"}",shopcart_id]};
         
         [self PostRequest:url andpram:prm];
@@ -367,7 +367,7 @@
 {
     if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=order/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=order/create",Url];
         
         NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
         
@@ -383,7 +383,7 @@
 {
     if(member_id && production_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ProductionFavorite/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
         
         [self PostRequest:url andpram:prm];
@@ -396,7 +396,7 @@
 {
     if(member_id && production_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/isFavorite",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ProductionFavorite/isFavorite",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"production_id\":\"%@\"}",member_id,production_id]};
         
         [self PostRequest:url andpram:prm];
@@ -406,7 +406,7 @@
 #pragma mark - 获取随机热门视频
 - (void)GetRecommendVideoList
 {
-    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=video/GetRecommendVideoList",Url];
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=video/GetRecommendVideoList",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -417,7 +417,7 @@
 {
     if(shopcart_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ShopCart/getConfirmOrder",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ShopCart/getConfirmOrder",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"shopcart_id\":\"%@\"}",shopcart_id]};
         
         [self PostRequest:url andpram:prm];
@@ -427,7 +427,7 @@
 #pragma mark - 获取热门随机图文
 - (void)getRecommendArticleList
 {
-    NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=article/getRecommendArticleList",Url];
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=article/getRecommendArticleList",Url];
     
     [self PostRequest:url andpram:nil];
 }
@@ -438,7 +438,7 @@
 {
     if(member_id && member_nickname)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/update",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/update",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"member_nickname\":\"%@\"}",member_id,member_nickname]};
         
         [self PostRequest:url andpram:prm];
@@ -451,7 +451,7 @@
 {
     if(member_id && member_headpic)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=site/UploadHeadPic",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/UploadHeadPic",Url];
         NSDictionary * prm=@{@"member_id":member_id};
         
         [self ShowOrderuploadImageWithImage:member_headpic andurl:url andprm:prm andkey:nil];
@@ -464,7 +464,7 @@
 {
     if(member_id && article_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ArticleFavorite/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ArticleFavorite/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"article_id\":\"%@\"}",member_id,article_id]};
         
         [self PostRequest:url andpram:prm];
@@ -476,7 +476,7 @@
 {
     if(member_id && article_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ArticleFavorite/isFavorite",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ArticleFavorite/isFavorite",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"article_id\":\"%@\"}",member_id,article_id]};
         
         [self PostRequest:url andpram:prm];
@@ -489,7 +489,7 @@
 {
     if(member_id && video_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=VideoFavorite/create",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=VideoFavorite/create",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\"}",member_id,video_id]};
         
         [self PostRequest:url andpram:prm];
@@ -501,7 +501,7 @@
 {
     if(member_id && video_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=VideoFavorite/isFavorite",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=VideoFavorite/isFavorite",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\"}",member_id,video_id]};
         
         [self PostRequest:url andpram:prm];
@@ -513,7 +513,7 @@
 {
     if(member_id && pagenumber && pagesize)
     {
-        NSString * url=[NSString stringWithFormat:@"%@appbackend/index.php?r=ProductionFavorite/getProductionFavoriteList",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ProductionFavorite/getProductionFavoriteList",Url];
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
