@@ -588,58 +588,163 @@
         NSLog(@"%ld",(long)indexPath.item);
         switch (indexPath.row) {
             case 0:
-            {
-                //    NSLog(@"视频页");
+            {//    NSLog(@"视频页");
                 TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
                 tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[0];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+
                 [self showViewController:tuwenViewController sender:nil];
-                
             }
                 break;
             case 1:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[1];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 2:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[2];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 3:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[3];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 4:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[4];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 5:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[5];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 6:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[6];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 7:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[7];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 8:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[8];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             case 9:
             {
+                TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+                tuwenViewController.isTeacher = 0;
                 
+                if(self.arr_pic.count != 0)
+                {
+                    Shipintuwen_Models * model = self.arr_pic[9];
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    [userdefault setObject:model.channel_id forKey:@"TuwenFeilei"];
+                }
+                
+                [self showViewController:tuwenViewController sender:nil];
             }
                 break;
             default:

@@ -173,7 +173,7 @@
     //加数据
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/product/%@",Url,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     cell.title.text = [NSString stringWithFormat:@"%@",model.production_name];
-    cell.detail.text = [NSString stringWithFormat:@"%@",model.production_subtitle];
+    cell.detail.text = [NSString stringWithFormat:@"%@",model.specs_name];
     cell.price.text = [NSString stringWithFormat:@"¥ %@",model.price];
     cell.number.text = [NSString stringWithFormat:@"%@",model.number];
     
@@ -480,7 +480,7 @@
 //掉数据
 - (void)delete:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -529,7 +529,7 @@
 #pragma mark - 商城数据
 - (void)shopcart:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_baocun = nil;
     self.arr_data = nil;

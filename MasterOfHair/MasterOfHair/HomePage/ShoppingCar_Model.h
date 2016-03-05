@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString * shop_id;
 @property (nonatomic, copy) NSString * shopcart_id;
 @property (nonatomic, copy) NSString * specs_id;
+@property (nonatomic, copy) NSString * specs_name;
 
 
 
