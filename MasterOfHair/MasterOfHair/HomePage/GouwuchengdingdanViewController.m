@@ -396,7 +396,7 @@
             float sum = 0.00;
             for (ShopCarData_Models * model in self.arr_dataList[indexPath.section])
             {
-                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.city_freight floatValue];
+                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.city_freight floatValue] * [model.number integerValue];
             }
             
             UILabel * price = [self.view viewWithTag:10000 + indexPath.section];
@@ -417,7 +417,7 @@
             float sum = 0.00;
             for (ShopCarData_Models * model in self.arr_dataList[indexPath.section])
             {
-                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.logistics_freight floatValue];
+                sum = sum + [model.number integerValue] * [model.price floatValue] + [model.logistics_freight floatValue] * [model.number integerValue];
             }
             
             UILabel * price = [self.view viewWithTag:10000 + indexPath.section];
@@ -691,6 +691,47 @@
         }
         
     }
+    else
+    {
+        for (int i = 0 ; i < self.arr_dataShop.count; i ++)
+        {
+            ShopCarData_Models * model_shop = self.arr_dataShop[i];
+            
+            //支付方式
+            NSString * str_zhifu = [NSString stringWithFormat:@""];
+            if(self.btn_myPurse.selected == 1)
+            {
+                str_zhifu = @"1";
+            }
+            if(self.btn_weixin.selected == 1)
+            {
+                str_zhifu = @"3";
+            }
+            if(self.btn_zhifubo.selected == 1)
+            {
+                str_zhifu = @"2";
+            }
+            
+            
+            //产品信息
+            NSMutableArray * arr_pro = [NSMutableArray array];
+            for (ShopCarData_Models * model in self.arr_dataList[i])
+            {
+                NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",model.production_id],@"production_id",[NSString stringWithFormat:@"%@",model.specs_id],@"specs_id",[NSString stringWithFormat:@"%@",model.number],@"production_count",nil];
+                NSLog(@"%@",dict);
+
+                [arr_pro addObject:dict];
+            }
+            
+            //接口
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+        }
+    }
 
 }
 
@@ -876,7 +917,7 @@
                     
                     [model_list setValuesForKeysWithDictionary:dict_list];
                     //
-                    sum = sum + [model_list.number integerValue] * [model_list.price floatValue] + [model_list.logistics_freight floatValue];
+                    sum = sum + [model_list.number integerValue] * [model_list.price floatValue] + [model_list.logistics_freight floatValue] * [model_list.number integerValue];
                 }
                 
                 [self.arr_datazongjia addObject:[NSString stringWithFormat:@"%.2f",sum]];
@@ -905,6 +946,32 @@
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
+
+#pragma mark - 创建订单
+- (void)chuangjiandangdan:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 
 #pragma mark - 算总价

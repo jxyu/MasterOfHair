@@ -71,7 +71,8 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-
+    self.arr_baocun = nil;
+    self.arr_data = nil;
     
     [self p_data];
     
@@ -271,7 +272,6 @@
 - (void)bottom_clearingAction:(UIButton *)sender
 {
 //    NSLog(@"结算所有选中的商品");
-    
     if(self.arr_baocun.count == 0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择一个商品后再点击结算" preferredStyle:(UIAlertControllerStyleAlert)];

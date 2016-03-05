@@ -127,7 +127,8 @@
 #pragma mark - 确认订单(购物车点结算)
 - (void)getConfirmOrderWithShopcart_id:(NSString *)shopcart_id;
 
-
+#pragma mark - 获取热门随机图文
+- (void)getRecommendArticleList;
 
 
 

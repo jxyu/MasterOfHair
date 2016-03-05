@@ -17,6 +17,8 @@
 #import "TextDetailViewController.h"
 #import "VideoDetailViewController.h"
 #import "Shipintuwen_Models.h"
+#import "TuWen_Models.h"
+
 
 @interface BusinessSchoolViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -56,6 +58,10 @@
 //图片
 @property (nonatomic, strong) NSMutableArray * arr_pic;
 
+@property (nonatomic, strong) NSMutableArray * arr_tuwenData;
+
+//获取视频
+@property (nonatomic, strong) NSMutableArray * arr_video;
 @end
 
 @implementation BusinessSchoolViewController
@@ -108,6 +114,10 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [self p_videoData];
+        
+        [self p_dataTuwenData];
+        
         [self p_dataPic];
         
         [self p_data2];
@@ -146,15 +156,14 @@
         case 4:
         {
             //判断奇数还是偶数
-            //        if(8 % 2 == 0)
-            //        {
-            //            return 4 * (SCREEN_WIDTH / 4) + 100;
-            //        }
-            //        else
-            //        {
-            //            return ((7 + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
-            //        }
-            return 4 * (SCREEN_WIDTH / 4) + 100;
+            if(self.arr_video.count % 2 == 0)
+            {
+                return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4) + 100;
+            }
+            else
+            {
+                return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
+            }
         }
             break;
         default:
@@ -433,7 +442,7 @@
     }
     else
     {
-        return 7;
+        return self.arr_video.count;
     }
 }
 
@@ -528,7 +537,19 @@
     {
         PicAndVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_store" forIndexPath:indexPath];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        if(self.arr_tuwenData.count == 0)
+        {
+            
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        }
+        else
+        {
+            TuWen_Models * model = self.arr_tuwenData[indexPath.item];
+            
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.detail.text = model.article_title;
+        }
         
         return cell;
     }
@@ -537,7 +558,24 @@
         JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        if(self.arr_video.count != 0)
+        {
+            TuWen_Models * model = self.arr_video[indexPath.item];
+            
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@appbackend/uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+            
+            cell.name.text = model.video_title;
+            
+            if([model.is_free isEqualToString:@"0"])
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+                
+            }
+            else
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+            }
+        }
         
         return cell;
     }
@@ -618,9 +656,13 @@
     }
     else
     {
-        NSLog(@"%ld",(long)indexPath.item);
+//        NSLog(@"%ld",(long)indexPath.item);
+        
+        TuWen_Models * model = self.arr_video[indexPath.item];
         
         VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        
+        videoDetailViewController.video_id = model.video_id;
         
         [self showViewController:videoDetailViewController sender:nil];
     }
@@ -738,7 +780,7 @@
 #pragma mark - 下面的视频列表
 - (void )p_videoList
 {
-    self.video_name = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 200, 27)];
+    self.video_name = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 27)];
     self.video_name.text = @"人气视频";
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
@@ -904,8 +946,98 @@
     }
 }
 
+#pragma mark - 获取热门随机图文
+- (void)p_dataTuwenData
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getRecommendArticleList:"];
+    
+    [dataprovider getRecommendArticleList];
+}
+
+- (void)getRecommendArticleList:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_tuwenData = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"articlelist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_tuwenData addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
+#pragma mark - 视频的数据
+- (void)p_videoData
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"GetRecommendVideoList:"];
+    
+    [dataprovider GetRecommendVideoList];
+}
+
+//数据
+- (void)GetRecommendVideoList:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    self.arr_video = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_video addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
 
 
 #pragma mark - 懒加载
@@ -926,6 +1058,25 @@
     }
     
     return _arr_pic;
+}
+
+- (NSMutableArray *)arr_tuwenData
+{
+    if(_arr_tuwenData == nil)
+    {
+        self.arr_tuwenData = [NSMutableArray array];
+    }
+    
+    return _arr_tuwenData;
+}
+
+- (NSMutableArray *)arr_video
+{
+    if(_arr_video == nil)
+    {
+        self.arr_video = [NSMutableArray array];
+    }
+    return _arr_video;
 }
 
 @end
