@@ -729,7 +729,12 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
             
-            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+            Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+            
+            
+            NSLog(@"%ld",self.arr_morenAddress.count);
         }
     }
 }

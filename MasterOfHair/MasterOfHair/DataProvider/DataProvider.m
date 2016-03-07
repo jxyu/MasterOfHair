@@ -363,15 +363,15 @@
 
 
 #pragma mark - 添加一个订单(POST提交)
-- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info
 {
-    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info)
+    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info && address_id)
     {
         NSString * url=[NSString stringWithFormat:@"%@index.php?r=order/create",Url];
         
         NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
         
-         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,jsonString]};
+         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"address_id\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,address_id,jsonString]};
                 
         [self PostRequest:url andpram:prm];
     }
@@ -519,6 +519,74 @@
         [self PostRequest:url andpram:prm];
     }
 }
+
+
+#pragma mark - 删除收藏（支持群删除）
+- (void)ProductionFavoriteWithFavorite_id:(NSString *)favorite_id
+{
+    if(favorite_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ProductionFavorite/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"favorite_id\":\"%@\"}",favorite_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getVideoFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(member_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=VideoFavorite/getVideoFavoriteList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 删除收藏（支持群删除）
+- (void)VideoFavoriteWithFavorite_id:(NSString *)favorite_id
+{
+    if(favorite_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=VideoFavorite/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"favorite_id\":\"%@\"}",favorite_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 添加视频评论
+- (void)createWithMember_id:(NSString *)member_id discuss_content:(NSString *)discuss_content video_id:(NSString *)video_id reply_id:(NSString *)reply_id
+{
+    if(member_id && discuss_content && video_id && reply_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=discuss/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"discuss_content\":\"%@\",\"video_id\":\"%@\",\"reply_id\":\"%@\"}",member_id,discuss_content,video_id,reply_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -35,6 +35,8 @@
 @property (nonatomic, copy) NSString * video_brief;
 @property (nonatomic, copy) NSString * video_keyword;
 
-
+//
+@property (nonatomic, copy) NSString * favorite_id;
+@property (nonatomic, copy) NSString * favorite_time;
 
 @end

@@ -9,10 +9,11 @@
 #ifndef BestOne_CommonDef_h
 #define BestOne_CommonDef_h
 
-//#define Url @"http://www.shenglongly.com/"
-//#define Url @"http://115.28.67.86:8033/" //外网地址
-#define Url @"http://115.28.67.86:8082/"
 
+//外网地址
+//#define Url @"http://115.28.67.86:8082/"
+#define Url @"http://192.168.1.245/titoujiang/"
+//#define Url @"http://192.168.1.198/appbackend/"
 
 
 
@@ -20,8 +21,7 @@
 #define StatusBar_HEIGHT 20
 #define TabBar_HEIGHT 49
 
-#define Web_path @"http://115.28.67.86:8033/MessageAndImageNews.aspx?id="
-#define Kimg_path @"http://115.28.67.86:8033/"
+
 
 #define Header_Height   (NavigationBar_HEIGHT + StatusBar_HEIGHT)
 

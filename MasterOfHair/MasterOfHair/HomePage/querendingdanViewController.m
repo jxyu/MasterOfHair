@@ -648,7 +648,9 @@
         
         [arr_pro addObject:dict];
         
-        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
+        Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
     }
 }
 

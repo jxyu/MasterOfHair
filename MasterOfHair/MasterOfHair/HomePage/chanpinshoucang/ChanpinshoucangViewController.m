@@ -20,7 +20,8 @@
 
 @property (nonatomic, strong) NSMutableArray * arr_data;
 
-
+//保存要删除的数组
+@property (nonatomic, strong) NSMutableArray * arr_delect;
 
 @end
 
@@ -72,13 +73,84 @@
     if([_lblRight.text isEqualToString:@"编辑"])
     {
         _lblRight.text = @"删除";
+        
+        self.arr_delect = nil;
     }
     else
     {
-        //删除全部的
-        _lblRight.text = @"编辑";
         
-        [self example01];
+        if(self.arr_delect.count != 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否删除该收藏产品" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                for (int i = 0 ; i < self.arr_data.count; i ++)
+                {
+                    UIImageView * image = [self.view viewWithTag:i + 10];
+                    image.hidden = YES;
+                    
+                    WebStroeCollectionViewCell * cell = [self.view viewWithTag:i + 10000];
+                    
+                    cell.layer.borderColor = [UIColor whiteColor].CGColor;
+                    cell.layer.borderWidth = 1;
+                }
+                
+                _lblRight.text = @"编辑";
+                
+                [self example01];
+            }];
+            
+            [alert addAction:action];
+            
+            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                for (int i = 0 ; i < self.arr_data.count; i ++)
+                {
+                    UIImageView * image = [self.view viewWithTag:i + 10];
+                    image.hidden = YES;
+                    
+                    WebStroeCollectionViewCell * cell = [self.view viewWithTag:i + 10000];
+                    
+                    cell.layer.borderColor = [UIColor whiteColor].CGColor;
+                    cell.layer.borderWidth = 1;
+                }
+                
+                NSMutableString * str = [NSMutableString string];
+                
+                for (NSString * str_id in self.arr_delect)
+                {
+                    NSString * s = [NSString stringWithFormat:@"%@,",str_id];
+                    
+                    [str appendString:s];
+                }
+                //获取订单列表
+                NSInteger x =  [str length];
+                NSString * str_data = [str substringToIndex:x - 1];
+                
+                NSLog(@"%@",str_data);
+                
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"ProductionFavorite:"];
+                
+                [dataprovider ProductionFavoriteWithFavorite_id:str_data];
+                
+            }];
+            
+            [alert addAction:action1];
+
+        }
+        else
+        {
+            _lblRight.text = @"编辑";
+            
+            [self example01];
+        }
     }
 }
 
@@ -168,7 +240,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld",(long )indexPath.item);
+//    NSLog(@"%ld",(long )indexPath.item);
     
     if([_lblRight.text isEqualToString:@"编辑"])
     {
@@ -186,6 +258,9 @@
     else
     {
         UIImageView * image = [self.view viewWithTag:indexPath.row + 10];
+        
+        WebStroe_Model * model = self.arr_data[indexPath.item];
+        
         WebStroeCollectionViewCell * cell = [self.view viewWithTag:indexPath.row + 10000];
         if(image.isHidden == 0)
         {
@@ -195,6 +270,7 @@
             cell.layer.borderWidth = 1;
             
             //移除数组中
+            [self.arr_delect removeObject:[NSString stringWithFormat:@"%@",model.favorite_id]];
         }
         else
         {
@@ -204,7 +280,10 @@
             cell.layer.borderWidth = 1;
             
             //加在数组里
+            [self.arr_delect addObject:[NSString stringWithFormat:@"%@",model.favorite_id]];
         }
+        
+        NSLog(@"%ld",self.arr_delect.count);
     }
 }
 
@@ -331,6 +410,37 @@
 }
 
 
+#pragma mark - 删除接口
+- (void)ProductionFavorite:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            _lblRight.text = @"编辑";
+            
+            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            [self example01];
+
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_data
 {
@@ -342,5 +452,14 @@
     return _arr_data;
 }
 
+- (NSMutableArray *)arr_delect
+{
+    if(_arr_delect == nil)
+    {
+        self.arr_delect = [NSMutableArray array];
+    }
+    
+    return _arr_delect;
+}
 
 @end

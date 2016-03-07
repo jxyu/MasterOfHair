@@ -112,8 +112,7 @@
 - (void)deleteWithShopcart_id:(NSString *)shopcart_id;
 
 #pragma mark - 添加一个订单(POST提交)
-- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info;
-
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info;
 
 #pragma mark - 获取产品热门列表
 - (void)createWithMember_id:(NSString *)member_id production_id:(NSString *)production_id;
@@ -151,15 +150,18 @@
 #pragma mark - 获取某会员的收藏列表并分页
 - (void)getProductionFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 删除收藏（支持群删除）
+- (void)ProductionFavoriteWithFavorite_id:(NSString *)favorite_id;
 
 
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getVideoFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 删除收藏（支持群删除）
+- (void)VideoFavoriteWithFavorite_id:(NSString *)favorite_id;
 
-
-
-
-
-
+#pragma mark - 添加视频评论
+- (void)createWithMember_id:(NSString *)member_id discuss_content:(NSString *)discuss_content video_id:(NSString *)video_id reply_id:(NSString *)reply_id;
 
 
 

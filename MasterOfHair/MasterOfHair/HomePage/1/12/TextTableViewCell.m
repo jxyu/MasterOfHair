@@ -25,6 +25,7 @@
     self.image = [[UIImageView alloc] init];
     self.image.backgroundColor = [UIColor orangeColor];
     self.image.layer.cornerRadius = 25;
+    self.image.layer.masksToBounds = YES;
     [self.contentView addSubview:self.image];
     
     
