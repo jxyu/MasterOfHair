@@ -85,6 +85,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_shifouzan];
+    
     [self p_data];
     
     [self p_dataPinglun];
@@ -191,8 +193,20 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NextTextViewController * nextTextViewController = [[NextTextViewController alloc] init];
-    [self showViewController:nextTextViewController sender:nil];
+    if(self.arr_pinglun.count != 0)
+    {
+        Pinglun_Models * model = self.arr_pinglun[indexPath.row];
+        
+        NextTextViewController * nextTextViewController = [[NextTextViewController alloc] init];
+        
+        nextTextViewController.model = model;
+        
+        nextTextViewController.article_id = model.article_id;
+        
+        nextTextViewController.length = [model.comment_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
+        
+        [self showViewController:nextTextViewController sender:nil];
+    }
 }
 
 #pragma mark - headView
@@ -287,18 +301,14 @@
 #pragma mark - btn收藏 和 分享
 - (void)btn_collectAction:(UIButton *)sender
 {
-    if([self.image_collect.image isEqual:[UIImage imageNamed:@"01collect_16"]])
-    {
-        //收藏
-        self.image_collect.image = [UIImage imageNamed:@"h_collect"];
-        self.text_collect.textColor = navi_bar_bg_color;
-    }
-    else
-    {
-        //取消收藏
-        self.image_collect.image = [UIImage imageNamed:@"01collect_16"];
-        self.text_collect.textColor = [UIColor blackColor];
-    }
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    TuwenDetail_Model * model = self.arr_detail.firstObject;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"createArticle:"];
+    
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] article_id:model.article_id];
 }
 
 - (void)btn_shareAction:(UIButton *)sender
@@ -507,7 +517,7 @@
 
 - (void)getCommentList:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_pinglun = nil;
     
@@ -579,6 +589,49 @@
     }
 }
 
+#pragma mark - 点赞
+- (void)createArticle:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            if([self.image_collect.image isEqual:[UIImage imageNamed:@"01collect_16"]])
+            {
+                //收藏
+                self.image_collect.image = [UIImage imageNamed:@"h_collect"];
+                self.text_collect.textColor = navi_bar_bg_color;
+            }
+            else
+            {
+                //取消收藏
+                self.image_collect.image = [UIImage imageNamed:@"01collect_16"];
+                self.text_collect.textColor = [UIColor blackColor];
+            }
+            
+            [SVProgressHUD showSuccessWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 #pragma mark - 发布评论接口
 - (void)createLiuyan:(id )dict
@@ -593,6 +646,54 @@
             self.bottom_text.text = nil;
             
             [self p_dataPinglun];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 是否点赞
+- (void)p_shifouzan
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+    
+    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] article_id:self.article_id];
+}
+
+- (void)isFavorite:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSString * str = [NSString stringWithFormat:@"%@",dict[@"data"][@"is_favorite"]];
+            
+            if([str isEqualToString:@"1"])
+            {//点赞状态
+                //收藏
+                self.image_collect.image = [UIImage imageNamed:@"h_collect"];
+                self.text_collect.textColor = navi_bar_bg_color;
+            }
+            else
+            {
+                //取消收藏
+                self.image_collect.image = [UIImage imageNamed:@"01collect_16"];
+                self.text_collect.textColor = [UIColor blackColor];
+            }
         }
         @catch (NSException *exception)
         {

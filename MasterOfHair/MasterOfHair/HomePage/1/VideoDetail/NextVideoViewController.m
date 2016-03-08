@@ -165,6 +165,13 @@
         
         cell.detail.text = [NSString stringWithFormat:@"%@",model.discuss_content];
     }
+    else
+    {
+        cell.image.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+        
+        cell.name.text = @"剃头匠";
+        cell.detail.text = @"剃头匠";
+    }
     
     
     return cell;

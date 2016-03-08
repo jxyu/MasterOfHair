@@ -625,6 +625,73 @@
 }
 
 
+#pragma mark - 获取某条图文评论的回复列表并分页
+- (void)getReplyListWithComment_id:(NSString *)comment_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(comment_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=comment/getReplyList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"comment_id\":\"%@\"}",comment_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 加入收藏/取消收藏
+- (void)ArticleFavoriteWithMember_id:(NSString *)member_id article_id:(NSString *)article_id
+{
+    if(article_id && member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ArticleFavorite/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"article_id\":\"%@\"}",member_id,article_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getArticleFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(member_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ArticleFavorite/getArticleFavoriteList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 删除收藏（支持群删除）
+- (void)deletetuwenWithFavorite_id:(NSString *)favorite_id
+{
+    if(favorite_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=ArticleFavorite/delete",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"favorite_id\":\"%@\"}",favorite_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

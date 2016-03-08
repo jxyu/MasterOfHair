@@ -11,6 +11,7 @@
 #import "TuWen_Models.h"
 #import "AppDelegate.h"
 #import "PicAndVideoCollectionViewCell.h"
+#import "TextDetailViewController.h"
 @interface SearchTextViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITextField * search_text;
@@ -175,8 +176,10 @@
     
     TuWen_Models * model = self.arr_data[indexPath.item];
     
-#warning +++跳页
+    TextDetailViewController * tuwenViewController = [[TextDetailViewController alloc] init];
+    tuwenViewController.article_id = model.article_id;
     
+    [self showViewController:tuwenViewController sender:nil];
 }
 
 #pragma mark - textField的代理

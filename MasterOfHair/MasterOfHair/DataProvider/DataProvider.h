@@ -175,6 +175,29 @@
 #pragma mark - 添加图文评论）
 - (void)createWithArticle_id:(NSString *)article_id reply_id:(NSString *)reply_id member_id:(NSString *)member_id comment_content:(NSString *)comment_content;
 
+#pragma mark - 获取某条图文评论的回复列表并分页
+- (void)getReplyListWithComment_id:(NSString *)comment_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+#pragma mark - 加入收藏/取消收藏
+- (void)ArticleFavoriteWithMember_id:(NSString *)member_id article_id:(NSString *)article_id;
+
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getArticleFavoriteListWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+#pragma mark - 删除收藏（支持群删除）
+- (void)deletetuwenWithFavorite_id:(NSString *)favorite_id;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

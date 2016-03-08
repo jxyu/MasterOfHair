@@ -755,9 +755,21 @@
     {
         NSLog(@"%ld",(long)indexPath.item);
         
-        TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
         
-        [self showViewController:textDetailViewController sender:nil];
+        if(self.arr_tuwenData.count == 0)
+        {
+            
+        }
+        else
+        {
+            TuWen_Models * model = self.arr_tuwenData[indexPath.item];
+            
+            TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
+            
+            textDetailViewController.article_id = model.article_id;
+            
+            [self showViewController:textDetailViewController sender:nil];
+        }
     }
     else
     {

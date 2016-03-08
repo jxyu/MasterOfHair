@@ -12,6 +12,7 @@
 #import "TuWen_Models.h"
 #import "AppDelegate.h"
 #import "JCVideoCollectionViewCell.h"
+#import "VideoDetailViewController.h"
 @interface SearchVideoTextViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITextField * search_text;
@@ -77,6 +78,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -186,8 +189,11 @@
     
     TuWen_Models * model = self.arr_data[indexPath.item];
     
-#warning +++跳页
+    VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
     
+    videoDetailViewController.video_id = model.video_id;
+    
+    [self showViewController:videoDetailViewController sender:nil];
 }
 
 #pragma mark - textField的代理

@@ -7,7 +7,13 @@
 //
 
 #import "BaseNavigationController.h"
-
+#import "Pinglun_Models.h"
 @interface NextTextViewController : BaseNavigationController
+
+@property (nonatomic, copy) NSString * article_id;
+
+@property (nonatomic, assign) float length;
+
+@property (nonatomic, strong) Pinglun_Models * model;
 
 @end

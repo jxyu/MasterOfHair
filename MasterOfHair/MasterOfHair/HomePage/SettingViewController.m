@@ -78,7 +78,7 @@
 //代理方法
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -165,6 +165,12 @@
             cell.image.image = [UIImage imageNamed:@"0000000008"];
         }
             break;
+        case 5:
+        {
+            cell.name.text = @"清除缓存";
+//            cell.image.image = [UIImage imageNamed:@"0000000008"];
+        }
+            break;
         default:
             break;
     }
@@ -175,11 +181,53 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
    
-    if(indexPath.section == 0)
+//    if(indexPath.section == 0)
+//    {
+//        shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
+//        [self showViewController:shouhuodizhi sender:nil];
+//    }
+    
+    switch (indexPath.section)
     {
-        shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
-        [self showViewController:shouhuodizhi sender:nil];
+        case 0:
+        {
+            shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
+            [self showViewController:shouhuodizhi sender:nil];
+        }
+            break;
+            
+        case 5:
+        {
+//            NSLog(@"清除缓存");
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否清除缓存" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+            
+            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                [self clearCache];
+                
+            }];
+            
+            [alert addAction:action1];
+
+        }
+            break;
+        default:
+            break;
     }
+    
+    
+    
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -200,6 +248,9 @@
         case 4:
             return @"意见反馈";
             break;
+        case 5:
+            return @"清除缓存";
+            break;
         default:
             return @"";
             break;
@@ -218,9 +269,31 @@
     }
 }
 
+#pragma mark - 清除缓存方法
+-(void)clearCache
+{
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                   , ^{
+                       
+                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+                       
+                       for (NSString *p in files) {
+                           NSError *error;
+                           NSString *path = [cachPath stringByAppendingPathComponent:p];
+                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                           }
+                       }
+                       [self performSelectorOnMainThread:@selector(clearCacheSuccess)
+                                              withObject:nil waitUntilDone:YES];});
+}
 
-
-
+- (void)clearCacheSuccess
+{
+    [SVProgressHUD showSuccessWithStatus:@"清除成功" maskType:SVProgressHUDMaskTypeBlack];
+}
 
 
 @end
