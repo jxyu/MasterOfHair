@@ -573,6 +573,17 @@
 }
 
 
+#pragma mark - 获取某条图文评论的回复列表并分页
+- (void)getReplyListWithDiscuss_id:(NSString *)discuss_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(discuss_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=discuss/getReplyList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"discuss_id\":\"%@\"}",discuss_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

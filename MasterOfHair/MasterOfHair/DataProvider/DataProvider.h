@@ -163,8 +163,8 @@
 #pragma mark - 添加视频评论
 - (void)createWithMember_id:(NSString *)member_id discuss_content:(NSString *)discuss_content video_id:(NSString *)video_id reply_id:(NSString *)reply_id;
 
-
-
+#pragma mark - 获取某条图文评论的回复列表并分页
+- (void)getReplyListWithDiscuss_id:(NSString *)discuss_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

@@ -58,6 +58,7 @@
 		7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */; };
 		7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */; };
 		7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */; };
+		7B3224C31C8D739E004042F7 /* NextVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3224C21C8D739E004042F7 /* NextVideoViewController.m */; };
 		7B33059A1C5EE8AD0014C49C /* ShangmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305991C5EE8AD0014C49C /* ShangmengViewController.m */; };
 		7B3305A01C5EE9640014C49C /* TuwenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B33059D1C5EE9640014C49C /* TuwenViewController.m */; };
 		7B3305A91C5EE9AA0014C49C /* FenleiCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305A41C5EE9AA0014C49C /* FenleiCollectionReusableView.m */; };
@@ -416,6 +417,8 @@
 		7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewshouhuoViewController.m; sourceTree = "<group>"; };
 		7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = querendingdanViewController.h; sourceTree = "<group>"; };
 		7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = querendingdanViewController.m; sourceTree = "<group>"; };
+		7B3224C11C8D739E004042F7 /* NextVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextVideoViewController.h; sourceTree = "<group>"; };
+		7B3224C21C8D739E004042F7 /* NextVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextVideoViewController.m; sourceTree = "<group>"; };
 		7B3305981C5EE8AD0014C49C /* ShangmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangmengViewController.h; sourceTree = "<group>"; };
 		7B3305991C5EE8AD0014C49C /* ShangmengViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangmengViewController.m; sourceTree = "<group>"; };
 		7B33059C1C5EE9640014C49C /* TuwenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuwenViewController.h; sourceTree = "<group>"; };
@@ -1654,6 +1657,8 @@
 				7B18A7891C7EEF3200A32AE9 /* Pinglun_Models */,
 				7BFE25EB1C61D9B70038CA23 /* VideoDetailViewController.h */,
 				7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */,
+				7B3224C11C8D739E004042F7 /* NextVideoViewController.h */,
+				7B3224C21C8D739E004042F7 /* NextVideoViewController.m */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -2539,6 +2544,7 @@
 				800E8FAB1C5DF36F00CB8CC5 /* AdvertiseCellTableViewCell.m in Sources */,
 				7BA596911C4E237300DBC69D /* HomePageViewController.m in Sources */,
 				7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */,
+				7B3224C31C8D739E004042F7 /* NextVideoViewController.m in Sources */,
 				7B46EE201C60A61400E33E0E /* ShipinshoucangViewController.m in Sources */,
 				7BA596A11C4E255200DBC69D /* JCMineTableViewCell.m in Sources */,
 				7BA596941C4E243C00DBC69D /* JCStroeCollectionViewCell.m in Sources */,

@@ -9,10 +9,9 @@
 #import "VideoDetailViewController.h"
 #import "MoviePlayer.h"
 #import "TextTableViewCell.h"
-#import "NextTextViewController.h"
 #import "TuWen_Models.h"
 #import "Pinglun_Models.h"
-
+#import "NextVideoViewController.h"
 
 
 @interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -101,6 +100,9 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -206,8 +208,20 @@
     
     [self.bottom_text resignFirstResponder];
     
-    NextTextViewController * nextTextViewController = [[NextTextViewController alloc] init];
-    [self showViewController:nextTextViewController sender:nil];
+    if(self.arr_data1.count != 0)
+    {
+        Pinglun_Models * model = self.arr_data1[indexPath.row];
+        
+        CGFloat x = [model.discuss_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
+        
+        NextVideoViewController * nextTextViewController = [[NextVideoViewController alloc] init];
+        nextTextViewController.discuss_id = [NSString stringWithFormat:@"%@",model.discuss_id];
+        nextTextViewController.length = x;
+        
+        nextTextViewController.model_pinglu = model;
+        
+        [self showViewController:nextTextViewController sender:nil];
+    }
 }
 
 #pragma mark - headView
@@ -484,12 +498,14 @@
 #pragma mark - 发布评论接口
 - (void)createLiuyan:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"评论成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            self.bottom_text.text = nil;
             
             [self p_data1];
         }
@@ -520,7 +536,7 @@
 //
 - (void)getVideos:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     
