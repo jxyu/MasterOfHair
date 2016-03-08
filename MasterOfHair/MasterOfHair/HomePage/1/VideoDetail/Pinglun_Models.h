@@ -20,4 +20,16 @@
 @property (nonatomic, copy) NSString * reply_id;
 @property (nonatomic, copy) NSString * video_id;
 
+
+
+
+@property (nonatomic, copy) NSString * article_id;
+@property (nonatomic, copy) NSString * comment_content;
+@property (nonatomic, copy) NSString * comment_id;
+@property (nonatomic, copy) NSString * comment_time;
+
+
+
+
+
 @end

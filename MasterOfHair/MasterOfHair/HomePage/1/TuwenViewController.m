@@ -214,10 +214,11 @@
     else
     {
 //        NSLog(@"跳图文页 %ld",(long)indexPath.item);
+        TuWen_Models * model = self.arr_tuwen[indexPath.item];
         
         TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
         
-        
+        textDetailViewController.article_id = model.article_id;
         
         [self showViewController:textDetailViewController sender:nil];
     }

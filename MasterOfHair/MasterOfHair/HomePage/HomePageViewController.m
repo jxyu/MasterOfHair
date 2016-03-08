@@ -530,7 +530,7 @@
                 break;
             case 9:
             {
-                cell.name.text = @"课程表名";
+                cell.name.text = @"课程报名";
                 cell.imageView.image = [UIImage imageNamed:@"01_71"];
 
             }

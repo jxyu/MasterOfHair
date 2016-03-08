@@ -586,13 +586,43 @@
 }
 
 
+#pragma mark - 获取某图文详情
+- (void)getArticlesWithArticle_id:(NSString *)article_id
+{
+    if(article_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=article/getArticles",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_id\":\"%@\"}",article_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
+#pragma mark - 获取某条图文的一级评论列表并分页
+- (void)getCommentListWithArticle_id:(NSString *)article_id reply_id:(NSString *)reply_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(article_id && reply_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=comment/getCommentList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_id\":\"%@\",\"reply_id\":\"%@\"}",article_id,reply_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
-
-
-
+#pragma mark - 添加图文评论）
+- (void)createWithArticle_id:(NSString *)article_id reply_id:(NSString *)reply_id member_id:(NSString *)member_id comment_content:(NSString *)comment_content
+{
+    if(article_id && reply_id && member_id && comment_content)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=comment/create",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_id\":\"%@\",\"reply_id\":\"%@\",\"member_id\":\"%@\",\"comment_content\":\"%@\"}",article_id,reply_id,member_id,comment_content]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

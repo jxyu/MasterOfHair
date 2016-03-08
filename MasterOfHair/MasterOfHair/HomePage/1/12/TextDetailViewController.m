@@ -10,6 +10,8 @@
 
 #import "TextTableViewCell.h"
 #import "NextTextViewController.h"
+#import "TuwenDetail_Model.h"
+#import "Pinglun_Models.h"
 @interface TextDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -36,6 +38,12 @@
 @property (nonatomic, strong) UITextField * bottom_text;
 @property (nonatomic, strong) UIButton * bottom_btn;
 
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_detail;
+
+@property (nonatomic, strong) NSMutableArray * arr_pinglun;
+
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation TextDetailViewController
@@ -77,6 +85,9 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data];
+    
+    [self p_dataPinglun];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
@@ -85,7 +96,7 @@
 
 - (void)p_setupView
 {
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 50) style:(UITableViewStylePlain)];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -93,6 +104,16 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
+    __weak __typeof(self) weakSelf = self;
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_dataPinglun1];
+        
+        [weakSelf.tableView reloadData];
+        
+        [weakSelf loadNewData];
+    }];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.tableHeaderView = self.headView;
@@ -109,12 +130,21 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return self.arr_pinglun.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString * str = @"手机打开手机的空间设计的款式简单款式简单款就是看的就是空间打开手机看的就是宽带接口设计的技术肯定就是空间打开数据库的技术可简单接口技术的间设计的款式简单款式简单款就是看的就是空间";
+    NSString * str = @"";
+    if(self.arr_pinglun.count == 0)
+    {
+        str = @"手机打开手机的空间设计的款式简单款式简单款就是看的就是空间打开手机看的就是宽带接口设计的技术肯定就是空间打开数据库的技术可简单接口技术的间设计的款式简单款式简单款就是看的就是空间";
+    }
+    else
+    {
+        Pinglun_Models * model = self.arr_pinglun[indexPath.row];
+        str = [NSString stringWithFormat:@"%@",model.comment_content];
+    }
 
     return 95 + [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
 }
@@ -122,6 +152,35 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_textDetail" forIndexPath:indexPath];
+    
+    if(self.arr_pinglun.count != 0)
+    {
+        Pinglun_Models * model = self.arr_pinglun[indexPath.row];
+        
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        //
+        if([model.member_nickname length] == 0 || [model.member_nickname isEqualToString:@"<null>"])
+        {
+            cell.name.text = [NSString stringWithFormat:@"%@",model.member_username];
+        }
+        else
+        {
+            cell.name.text = [NSString stringWithFormat:@"%@",model.member_nickname];
+        }
+        
+        cell.time.text = [NSString stringWithFormat:@"%@",model.comment_time];
+        
+        cell.detail.text = [NSString stringWithFormat:@"%@",model.comment_content];
+    }
+    else
+    {
+        cell.image.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+        
+        cell.name.text = @"剃头匠";
+        cell.detail.text = @"剃头匠";
+    }
+    
+    
     
     return cell;
 }
@@ -217,7 +276,7 @@
     self.head_comment = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_3.frame) + 10, CGRectGetMaxY(self.head_text.frame) + 40, SCREEN_WIDTH  - CGRectGetMaxX(label_3.frame) - 20, 25)];
 //    self.head_comment.backgroundColor = [UIColor orangeColor];
     self.head_comment.textColor = [UIColor grayColor];
-    self.head_comment.text = @"共60条评论";
+    self.head_comment.text = @"共0条评论";
     self.head_comment.font = [UIFont systemFontOfSize:15];
     self.head_comment.textAlignment = NSTextAlignmentRight;
     [self.headView addSubview:self.head_comment];
@@ -307,9 +366,15 @@
     }
     else
     {
-        NSLog(@"发布");
-        
+//        NSLog(@"发布");
         [self.bottom_text resignFirstResponder];
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+        
+        [dataprovider createWithArticle_id:self.article_id reply_id:@"0" member_id:[userdefault objectForKey:@"member_id"] comment_content:self.bottom_text.text];
     }
 }
 
@@ -357,8 +422,236 @@
     [self.bottom_text resignFirstResponder];
 }
 
+#pragma mark - 数据加载
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticles:"];
+    
+    [dataprovider getArticlesWithArticle_id:self.article_id];
+}
+
+- (void)getArticles:(id )dict
+{
+//    NSLog(@"%@",dict);
+
+    self.arr_detail = nil;
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"articlelist"])
+            {
+                TuwenDetail_Model * model = [[TuwenDetail_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_detail addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+            TuwenDetail_Model * model = self.arr_detail.firstObject;
+            
+            self.name.text = [NSString stringWithFormat:@"%@",model.article_title];
+            
+            if([model.article_click length] * 2 >= 5)
+            {
+                float x = [model.article_click integerValue] / 10000.0;
+                self.read_number.text = [NSString stringWithFormat:@"%.2f万",x];
+            }
+            else
+            {
+                self.read_number.text = [NSString stringWithFormat:@"%@",model.article_click];
+            }
+            
+            self.head_image.layer.masksToBounds = YES;
+            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 获取某条图文的一级评论列表并分页
+- (void)p_dataPinglun
+{
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getCommentList:"];
+    
+    [dataprovider getCommentListWithArticle_id:self.article_id reply_id:@"0" pagenumber:@"1" pagesize:@"10"];
+}
+
+- (void)p_dataPinglun1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getCommentList1:"];
+    
+    [dataprovider getCommentListWithArticle_id:self.article_id reply_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"10"];
+}
+
+- (void)getCommentList:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_pinglun = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"commentlist"])
+            {
+                Pinglun_Models * model = [[Pinglun_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_pinglun addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            self.head_comment.text = [NSString stringWithFormat:@"共%@条评论",dict[@"data"][@"page"][@"total"]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+- (void)getCommentList1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"commentlist"])
+            {
+                Pinglun_Models * model = [[Pinglun_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_pinglun addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            self.head_comment.text = [NSString stringWithFormat:@"共%@条评论",dict[@"data"][@"page"][@"total"]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
+#pragma mark - 发布评论接口
+- (void)createLiuyan:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"评论成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            self.bottom_text.text = nil;
+            
+            [self p_dataPinglun];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_detail
+{
+    if(_arr_detail == nil)
+    {
+        self.arr_detail = [NSMutableArray array];
+    }
+    
+    return _arr_detail;
+}
+
+- (NSMutableArray *)arr_pinglun
+{
+    if(_arr_pinglun == nil)
+    {
+        self.arr_pinglun = [NSMutableArray array];
+    }
+    
+    return _arr_pinglun;
+}
+
+#pragma mark - 下拉刷新
+- (void)example01
+{
+    // 马上进入刷新状态
+    [self.tableView.header beginRefreshing];
+}
+
+-(void)example02
+{
+    
+    [self.tableView.footer beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+    });
+    
+}
 
 
 @end

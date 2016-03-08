@@ -163,14 +163,17 @@
 #pragma mark - 添加视频评论
 - (void)createWithMember_id:(NSString *)member_id discuss_content:(NSString *)discuss_content video_id:(NSString *)video_id reply_id:(NSString *)reply_id;
 
-#pragma mark - 获取某条图文评论的回复列表并分页
+#pragma mark - 获取某条视频评论的回复列表并分页
 - (void)getReplyListWithDiscuss_id:(NSString *)discuss_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark - 获取某图文详情
+- (void)getArticlesWithArticle_id:(NSString *)article_id;
 
+#pragma mark - 获取某条图文的一级评论列表并分页
+- (void)getCommentListWithArticle_id:(NSString *)article_id reply_id:(NSString *)reply_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
-
-
+#pragma mark - 添加图文评论）
+- (void)createWithArticle_id:(NSString *)article_id reply_id:(NSString *)reply_id member_id:(NSString *)member_id comment_content:(NSString *)comment_content;
 
 
 

@@ -10,4 +10,6 @@
 
 @interface TextDetailViewController : BaseNavigationController
 
+@property (nonatomic, copy) NSString * article_id;
+
 @end

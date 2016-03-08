@@ -72,8 +72,6 @@
 
     [self p_data];
     
-    [self p_data1];
-    
     [self p_setupView];
 }
 
@@ -101,7 +99,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-
+    
+    [self p_data1];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }

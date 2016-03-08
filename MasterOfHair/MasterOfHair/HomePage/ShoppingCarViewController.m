@@ -376,29 +376,37 @@
     NSInteger count = sender.tag - 100001;
     ShoppingCar_Model * model = self.arr_data[count];
     
-    if([model.number integerValue] == 1)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"购物车数量不能小于1" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        
-        [alert addAction:action];
-    }
-    else
-    {
-        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
-        
-        [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
-    }
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    
+    [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+    
+//    if([model.number integerValue] == 1)
+//    {
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"购物车数量不能小于1" preferredStyle:(UIAlertControllerStyleAlert)];
+//        
+//        [self presentViewController:alert animated:YES completion:^{
+//            
+//        }];
+//        
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//            
+//        }];
+//        
+//        [alert addAction:action];
+//    }
+//    else
+//    {
+//        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+//        
+//        DataProvider * dataprovider=[[DataProvider alloc] init];
+//        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+//        
+//        [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+//    }
 }
 
 //数据

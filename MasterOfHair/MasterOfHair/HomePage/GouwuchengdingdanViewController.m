@@ -249,7 +249,7 @@
                 break;
             case 3:
             {
-                distribution.text = @"同城配送";
+                distribution.text = @"同城派送";
             }
                 break;
             default:
