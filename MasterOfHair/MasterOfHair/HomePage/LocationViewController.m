@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "ChineseString.h"
+#import "loca_Model.h"
 @interface LocationViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray * arr_letterResult;
 @property (nonatomic, strong) NSMutableArray * arr_data;
 
+@property (nonatomic, strong) NSMutableArray * arr_all;
 //
 @property (nonatomic, strong) UIView * headView;
 
@@ -48,7 +50,21 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"当前位置- %@",@""];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+//    [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] forKey:@"city_id"];
+//    [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_name"]] forKey:@"city_name"];
+    
+    if([[userdefault objectForKey:@"city_name"] length] == 0)
+    {
+        _lblTitle.text = [NSString stringWithFormat:@"当前位置"];
+    }
+    else
+    {
+        _lblTitle.text = [NSString stringWithFormat:@"当前位置- %@",[userdefault objectForKey:@"city_name"]];
+    }
+    
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
@@ -97,7 +113,26 @@
     self.headView.backgroundColor = [UIColor whiteColor];
     
     self.address = [[UILabel alloc] initWithFrame:CGRectMake(15, 35 / 2, SCREEN_WIDTH - 50, 30)];
-    self.address.text = [NSString stringWithFormat:@"%@  GPS定位",@"临沂"];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    //183
+//    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_id"];
+//    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
+    
+    if([[userdefault objectForKey:@"city_name"] length] == 0)
+    {
+        self.address.text = [NSString stringWithFormat:@"无GPS定位"];
+    }
+    else
+    {
+        self.address.text = [NSString stringWithFormat:@"%@  GPS定位",[userdefault objectForKey:@"city_name"]];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        tapGesture.numberOfTapsRequired = 1; //点击次数
+        tapGesture.numberOfTouchesRequired = 1; //点击手指数
+        [self.headView addGestureRecognizer:tapGesture];
+    }
+    
     [self.headView addSubview:self.address];
     
 }
@@ -130,7 +165,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     [userdefault setObject:[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] forKey:@"diquweizhi"];
+    
+    for (loca_Model * model in self.arr_all)
+    {
+        NSString * str = [[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+        
+        if([model.area_name isEqualToString:str])
+        {
+            [userdefault setObject:model.area_id forKey:@"diquweizhi_id"];
+        }
+    }
+    
+//    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id"]);
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -168,7 +216,7 @@
 
 - (void)area:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -176,10 +224,20 @@
             for (NSDictionary * dic in dict[@"data"][@"citylist"])
             {
                 [self.arr_data addObject:dic[@"area_name"]];
+                
+                loca_Model * model = [[loca_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_all addObject:model];
+                
             }
             
             self.arr_indexData = [ChineseString IndexArray:self.arr_data];
             self.arr_letterResult = [ChineseString LetterSortArray:self.arr_data];
+            
+            
+            
         }
         @catch (NSException *exception)
         {
@@ -229,8 +287,26 @@
     return _arr_data;
 }
 
+- (NSMutableArray *)arr_all
+{
+    if(_arr_all == nil)
+    {
+        self.arr_all = [NSMutableArray array];
+    }
+    
+    return _arr_all;
+}
 
+#pragma mark - 手势点击事件
+- (void)tapGesture:(id)sender
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 
+    [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id"];
+    [userdefault setObject:[userdefault objectForKey:@"city_name"] forKey:@"diquweizhi"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 

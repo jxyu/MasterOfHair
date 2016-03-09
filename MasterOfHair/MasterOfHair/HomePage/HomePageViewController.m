@@ -788,12 +788,15 @@
             
             [userdefault setObject:@"" forKey:@"category_name"];
             [userdefault setObject:@"" forKey:@"category_id"];
-            [userdefault setObject:@"" forKey:@"diquweizhi"];
             [userdefault setObject:@"" forKey:@"channel_name"];
             [userdefault setObject:@"" forKey:@"TuwenFeilei"];
             [userdefault setObject:@"" forKey:@"city_id"];
             [userdefault setObject:@"" forKey:@"city_name"];
-            
+            [userdefault setObject:@"" forKey:@"diquweizhi_id"];
+            [userdefault setObject:@"" forKey:@"diquweizhi"];
+
+
+            NSLog(@"%@",[userdefault objectForKey:@"diquweizhi"]);
         }
         @catch (NSException *exception)
         {
@@ -808,6 +811,9 @@
     {
         NSLog(@"不存在用户");
         [userdefault setObject:@"0" forKey:@"Login_Success"];
+        
+        [userdefault setObject:@"" forKey:@"diquweizhi_id"];
+        [userdefault setObject:@"" forKey:@"diquweizhi"];
     }
 }
 
@@ -918,16 +924,26 @@
 #pragma mark - 产品数据
 - (void)p_chanpinliebiao
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getRecommendProducts:"];
     
-    [dataprovider getRecommendProductsWithCity_id:@"105" is_sell:@"1"];
+    if([[userdefault objectForKey:@"city_id"] length] == 0)
+    {
+        [dataprovider getRecommendProductsWithCity_id:@"183" is_sell:@"1"];
+    }
+    else
+    {
+        [dataprovider getRecommendProductsWithCity_id:[userdefault objectForKey:@"city_id"] is_sell:@"1"];
+
+    }
 }
 
 //数据
 - (void)getRecommendProducts:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     self.arr_chanpin = nil;
     
@@ -1049,14 +1065,14 @@
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"getCity:"];
         
-        [dataprovider getCityWithLng:[NSString stringWithFormat:@"%f",locationCorrrdinate.latitude] lat:[NSString stringWithFormat:@"%f",locationCorrrdinate.longitude]];
+        [dataprovider getCityWithLng:[NSString stringWithFormat:@"%f",locationCorrrdinate.longitude] lat:[NSString stringWithFormat:@"%f",locationCorrrdinate.latitude]];
     }];
 }
 
 #pragma mark - 商城数据
 - (void)getCity:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

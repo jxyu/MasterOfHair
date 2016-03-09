@@ -18,6 +18,7 @@
 		7B044CBF1C8E66D9007FBDC3 /* TuwenDetail_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B044CBE1C8E66D9007FBDC3 /* TuwenDetail_Model.m */; };
 		7B06632A1C8927060037F0BC /* ShopCarData_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0663291C8927060037F0BC /* ShopCarData_Models.m */; };
 		7B11AC321C900AEB0061AADF /* qingchuhuancun.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B11AC311C900AEB0061AADF /* qingchuhuancun.png */; };
+		7B11AC351C9010BD0061AADF /* loca_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11AC341C9010BD0061AADF /* loca_Model.m */; };
 		7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */; };
 		7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */; };
 		7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */; };
@@ -362,6 +363,8 @@
 		7B0663281C8927060037F0BC /* ShopCarData_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCarData_Models.h; sourceTree = "<group>"; };
 		7B0663291C8927060037F0BC /* ShopCarData_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCarData_Models.m; sourceTree = "<group>"; };
 		7B11AC311C900AEB0061AADF /* qingchuhuancun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qingchuhuancun.png; sourceTree = "<group>"; };
+		7B11AC331C9010BD0061AADF /* loca_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loca_Model.h; sourceTree = "<group>"; };
+		7B11AC341C9010BD0061AADF /* loca_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loca_Model.m; sourceTree = "<group>"; };
 		7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectshouhuoViewController.h; sourceTree = "<group>"; };
 		7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectshouhuoViewController.m; sourceTree = "<group>"; };
 		7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_03.png"; sourceTree = "<group>"; };
@@ -1356,6 +1359,8 @@
 				7BCD55241C55D37400F32F16 /* mingshimingdian */,
 				7BF67F081C51B7D2005FA5C4 /* LocationViewController.h */,
 				7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */,
+				7B11AC331C9010BD0061AADF /* loca_Model.h */,
+				7B11AC341C9010BD0061AADF /* loca_Model.m */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -2627,6 +2632,7 @@
 				7BA596991C4E244A00DBC69D /* JCCollectionViewCell.m in Sources */,
 				802552FE1C574F7100CFF875 /* Dialog.m in Sources */,
 				8024922C1C78459B008BA570 /* DIYButton.m in Sources */,
+				7B11AC351C9010BD0061AADF /* loca_Model.m in Sources */,
 				802552B31C57442B00CFF875 /* SCPlayer.m in Sources */,
 				802552B81C57442B00CFF875 /* SCRecorderToolsView.m in Sources */,
 				802553121C574F7100CFF875 /* UIView+MJExtension.m in Sources */,

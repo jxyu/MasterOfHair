@@ -96,14 +96,39 @@
         [self.delegate_class setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"category_name"]] forState:UIControlStateNormal];
     }
     
-    if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
+    
+    if([[userdefault objectForKey:@"city_id"] length] == 0)
     {
         [self.delegate_address setTitle:@"定位城市" forState:UIControlStateNormal];
+        
+        if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
+        {
+            [self.delegate_address setTitle:@"定位城市" forState:UIControlStateNormal];
+            
+            [userdefault setObject:@"183" forKey:@"diquweizhi_id"];
+        }
+        else
+        {
+            [self.delegate_address setTitle:[userdefault objectForKey:@"diquweizhi"] forState:UIControlStateNormal];
+        }
     }
     else
     {
-        [self.delegate_address setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"diquweizhi"]] forState:UIControlStateNormal];
+        [self.delegate_address setTitle:[userdefault objectForKey:@"city_name"] forState:UIControlStateNormal];
+        
+        if([[userdefault objectForKey:@"diquweizhi"] length] == 0)
+        {
+            [self.delegate_address setTitle:[userdefault objectForKey:@"city_name"] forState:UIControlStateNormal];
+            [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id"];
+        }
+        else
+        {
+            [self.delegate_address setTitle:[userdefault objectForKey:@"diquweizhi"] forState:UIControlStateNormal];
+        }
     }
+    
+    NSLog(@"%@,%@",[userdefault objectForKey:@"diquweizhi"],[userdefault objectForKey:@"diquweizhi_id"]);
+    
     
     [self example01];
     
@@ -579,11 +604,11 @@
 
     if([[userdefault objectForKey:@"category_id"] length] == 0)
     {
-        [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
     }
     else
     {
-        [dataprovider productWithcity_id:@"105" category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
     }
 }
 
@@ -598,11 +623,11 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"category_id"] length] == 0)
     {
-        [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
     }
     else
     {
-        [dataprovider productWithcity_id:@"105" category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page]pagesize:@"9"];        
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page]pagesize:@"9"];
     }
 }
 
