@@ -94,7 +94,7 @@
 - (void)p_navi
 {
     //左边为定位
-    [self addLeftbuttontitle:@"临沂"];
+    [self addLeftbuttontitle:@"定位"];
     _btnLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
     _lblLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
     _lblLeft.font = [UIFont systemFontOfSize:15];
@@ -787,9 +787,13 @@
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
             
             [userdefault setObject:@"" forKey:@"category_name"];
+            [userdefault setObject:@"" forKey:@"category_id"];
             [userdefault setObject:@"" forKey:@"diquweizhi"];
             [userdefault setObject:@"" forKey:@"channel_name"];
             [userdefault setObject:@"" forKey:@"TuwenFeilei"];
+            [userdefault setObject:@"" forKey:@"city_id"];
+            [userdefault setObject:@"" forKey:@"city_name"];
+            
         }
         @catch (NSException *exception)
         {
@@ -894,22 +898,6 @@
 }
 
 
-
-#pragma mark - 定位
-- (void)p_location
-{
-    [[CCLocationManager shareLocation] getCity:^(NSString *addressString) {
-        
-        NSLog(@"%@",addressString);
-        
-    }];
-    
-    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
-        
-        NSLog(@"%lf",locationCorrrdinate.latitude);
-        NSLog(@"%lf",locationCorrrdinate.longitude);
-    }];
-}
 
 
 #pragma mark - 下拉刷新
@@ -1047,5 +1035,66 @@
     }
     return _arr_video;
 }
+
+
+#pragma mark - 定位
+- (void)p_location
+{
+    
+    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        
+        NSLog(@"%lf",locationCorrrdinate.latitude);
+        NSLog(@"%lf",locationCorrrdinate.longitude);
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"getCity:"];
+        
+        [dataprovider getCityWithLng:[NSString stringWithFormat:@"%f",locationCorrrdinate.latitude] lat:[NSString stringWithFormat:@"%f",locationCorrrdinate.longitude]];
+    }];
+}
+
+#pragma mark - 商城数据
+- (void)getCity:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] forKey:@"city_id"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_name"]] forKey:@"city_name"];
+            
+            [self addLeftbuttontitle:dict[@"data"][@"city_name"]];
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        //183
+        [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_id"];
+        [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
+        
+        _lblLeft.text = @"定位";
+    }
+}
+
+
 
 @end

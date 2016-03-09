@@ -575,7 +575,16 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
     
-    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+    if([[userdefault objectForKey:@"category_id"] length] == 0)
+    {
+        [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+    }
+    else
+    {
+        [dataprovider productWithcity_id:@"105" category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+    }
 }
 
 //后面的
@@ -586,7 +595,15 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product1:"];
     
-    [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"category_id"] length] == 0)
+    {
+        [dataprovider productWithcity_id:@"105" category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+    }
+    else
+    {
+        [dataprovider productWithcity_id:@"105" category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page]pagesize:@"9"];        
+    }
 }
 
 #pragma mark - 商城数据

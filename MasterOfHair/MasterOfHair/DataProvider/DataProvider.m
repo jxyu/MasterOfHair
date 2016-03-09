@@ -676,10 +676,19 @@
 }
 
 
-
-
-
-
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getCityWithLng:(NSString *)lng lat:(NSString *)lat
+{
+    if(lng && lat)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=baidu/getCity",Url];
+        NSDictionary * prm=@{@"lng":lng,@"lat":lat};
+        
+        [self GetRequest:url andpram:prm];
+        
+//        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

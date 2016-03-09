@@ -168,7 +168,7 @@
         case 5:
         {
             cell.name.text = @"清除缓存";
-//            cell.image.image = [UIImage imageNamed:@"0000000008"];
+            cell.image.image = [UIImage imageNamed:@"qingchuhuancun"];
         }
             break;
         default:

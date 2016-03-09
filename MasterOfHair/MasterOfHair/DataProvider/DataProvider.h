@@ -187,7 +187,8 @@
 #pragma mark - 删除收藏（支持群删除）
 - (void)deletetuwenWithFavorite_id:(NSString *)favorite_id;
 
-
+#pragma mark - 获取某会员的收藏列表并分页
+- (void)getCityWithLng:(NSString *)lng lat:(NSString *)lat;
 
 
 

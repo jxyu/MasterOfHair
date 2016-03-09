@@ -137,6 +137,7 @@
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:model.category_name forKey:@"category_name"];
+    [userdefault setObject:model.category_id forKey:@"category_id"];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -200,7 +201,7 @@
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:@"" forKey:@"category_name"];
-    
+    [userdefault setObject:@"" forKey:@"category_id"];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
