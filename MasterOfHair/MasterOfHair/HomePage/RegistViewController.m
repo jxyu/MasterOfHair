@@ -380,6 +380,14 @@
             //保存用户名和密码
             [userdefault setObject:self.text_tel.text forKey:@"account"];
             [userdefault setObject:self.text_pass.text forKey:@"password"];
+            
+            //保存用户信息（后期可能更多）
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_headpic"]] forKey:@"member_headpic"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
+            
+            
             //保存登陆的状态
             [userdefault setObject:@"1" forKey:@"Login_Success"];
         }

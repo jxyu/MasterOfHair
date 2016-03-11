@@ -12,7 +12,7 @@
 #import "JCMineTableViewCell.h"
 
 #import "shouhuodizhiViewController.h"
-
+#import "WebViewController.h"
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -195,6 +195,42 @@
             [self showViewController:shouhuodizhi sender:nil];
         }
             break;
+        case 2:
+        {
+            WebViewController * webViewController = [[WebViewController alloc] init];
+            
+            switch (indexPath.row)
+            {
+                case 0:
+                    webViewController.type = @"1";
+                    break;
+                case 1:
+                    webViewController.type = @"2";
+                    break;
+                case 2:
+                    webViewController.type = @"3";
+                    break;
+                case 3:
+                    webViewController.type = @"4";
+                    break;
+                case 4:
+                    webViewController.type = @"5";
+                    break;
+                default:
+                    break;
+            }
+            
+            [self showViewController:webViewController sender:nil];
+        }
+            break;
+        case 3:
+        {
+            WebViewController * webViewController = [[WebViewController alloc] init];
+            webViewController.type = @"6";
+            [self showViewController:webViewController sender:nil];
+        }
+            break;
+            
             
         case 5:
         {

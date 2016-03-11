@@ -943,14 +943,14 @@
 //数据
 - (void)getRecommendProducts:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_chanpin = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            for (NSDictionary * dic in dict[@"data"])
             {
                 WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 
@@ -1069,10 +1069,10 @@
     }];
 }
 
-#pragma mark - 商城数据
+#pragma mark - 定位数据
 - (void)getCity:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
