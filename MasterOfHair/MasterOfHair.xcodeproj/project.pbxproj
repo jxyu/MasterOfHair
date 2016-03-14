@@ -61,6 +61,9 @@
 		7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFB71C571D93003A020B /* EditshouhuoViewController.m */; };
 		7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */; };
 		7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */; };
+		7B302E8E1C92B961008CAC96 /* FabiaoyijianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B302E8D1C92B961008CAC96 /* FabiaoyijianViewController.m */; };
+		7B302E921C92C101008CAC96 /* Model_Kechengbm.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B302E911C92C101008CAC96 /* Model_Kechengbm.m */; };
+		7B302E941C92C246008CAC96 /* baomingkecheng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B302E931C92C246008CAC96 /* baomingkecheng@2x.png */; };
 		7B3224C31C8D739E004042F7 /* NextVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3224C21C8D739E004042F7 /* NextVideoViewController.m */; };
 		7B33059A1C5EE8AD0014C49C /* ShangmengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3305991C5EE8AD0014C49C /* ShangmengViewController.m */; };
 		7B3305A01C5EE9640014C49C /* TuwenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B33059D1C5EE9640014C49C /* TuwenViewController.m */; };
@@ -426,6 +429,11 @@
 		7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewshouhuoViewController.m; sourceTree = "<group>"; };
 		7B29EFBC1C5750D1003A020B /* querendingdanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = querendingdanViewController.h; sourceTree = "<group>"; };
 		7B29EFBD1C5750D1003A020B /* querendingdanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = querendingdanViewController.m; sourceTree = "<group>"; };
+		7B302E8C1C92B961008CAC96 /* FabiaoyijianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FabiaoyijianViewController.h; sourceTree = "<group>"; };
+		7B302E8D1C92B961008CAC96 /* FabiaoyijianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FabiaoyijianViewController.m; sourceTree = "<group>"; };
+		7B302E901C92C101008CAC96 /* Model_Kechengbm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model_Kechengbm.h; sourceTree = "<group>"; };
+		7B302E911C92C101008CAC96 /* Model_Kechengbm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model_Kechengbm.m; sourceTree = "<group>"; };
+		7B302E931C92C246008CAC96 /* baomingkecheng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baomingkecheng@2x.png"; sourceTree = "<group>"; };
 		7B3224C11C8D739E004042F7 /* NextVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextVideoViewController.h; sourceTree = "<group>"; };
 		7B3224C21C8D739E004042F7 /* NextVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextVideoViewController.m; sourceTree = "<group>"; };
 		7B3305981C5EE8AD0014C49C /* ShangmengViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangmengViewController.h; sourceTree = "<group>"; };
@@ -997,6 +1005,7 @@
 		7B142E2F1C58708500B32809 /* 1 */ = {
 			isa = PBXGroup;
 			children = (
+				7B302E931C92C246008CAC96 /* baomingkecheng@2x.png */,
 				7BD86C3E1C744ACD00D099BE /* return101010.png */,
 				7B8B33B11C72FB50008C6CD4 /* 30px.png */,
 				7B206A0F1C72C0B400481F24 /* shuoshuo98765.png */,
@@ -1159,6 +1168,24 @@
 				7B29EFBA1C5725F9003A020B /* NewshouhuoViewController.m */,
 			);
 			name = shouhudizhi;
+			sourceTree = "<group>";
+		};
+		7B302E8B1C92B93C008CAC96 /* fabiaoyijian */ = {
+			isa = PBXGroup;
+			children = (
+				7B302E8C1C92B961008CAC96 /* FabiaoyijianViewController.h */,
+				7B302E8D1C92B961008CAC96 /* FabiaoyijianViewController.m */,
+			);
+			name = fabiaoyijian;
+			sourceTree = "<group>";
+		};
+		7B302E8F1C92C0DB008CAC96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B302E901C92C101008CAC96 /* Model_Kechengbm.h */,
+				7B302E911C92C101008CAC96 /* Model_Kechengbm.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7B3305971C5EE8890014C49C /* shangmeng(dailishang) */ = {
@@ -1402,6 +1429,7 @@
 			isa = PBXGroup;
 			children = (
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B302E8B1C92B93C008CAC96 /* fabiaoyijian */,
 				7BD5E3261C9175B300357A3C /* Web */,
 				7BFAA7761C8A85A600D86D81 /* bianjiziliao */,
 				7B46EE1A1C60A5B900E33E0E /* tuwenshoucang */,
@@ -1549,6 +1577,7 @@
 		7BAABAE01C59FB7D00C14DF8 /* kechengbaoming */ = {
 			isa = PBXGroup;
 			children = (
+				7B302E8F1C92C0DB008CAC96 /* Model */,
 				7BAABAE11C59FBC800C14DF8 /* KechengbaomingViewController.h */,
 				7BAABAE21C59FBC800C14DF8 /* KechengbaomingViewController.m */,
 				7BAABAE41C5A005100C14DF8 /* KechengbaomingTableViewCell.h */,
@@ -2418,6 +2447,7 @@
 				7B299A1C1C7D8D2400D57B76 /* 01shdjhsjdhsd_57.png in Resources */,
 				8078845F1C59B0BD006B8BB3 /* Index_H@2x.png in Resources */,
 				7B142E451C58B97900B32809 /* 01_59@2x.png in Resources */,
+				7B302E941C92C246008CAC96 /* baomingkecheng@2x.png in Resources */,
 				7BAABAC31C59B14200C14DF8 /* 0000000000002.png in Resources */,
 				7B142E4D1C58BC4E00B32809 /* 01shoppingCar_03.png in Resources */,
 				7BEE191D1C531434002C2ADA /* iconfont-iconquanxuan.png in Resources */,
@@ -2538,6 +2568,7 @@
 				802552BE1C57442B00CFF875 /* SCVideoPlayerView.m in Sources */,
 				802553001C574F7100CFF875 /* MJRefreshAutoFooter.m in Sources */,
 				802552BD1C57442B00CFF875 /* SCVideoConfiguration.m in Sources */,
+				7B302E8E1C92B961008CAC96 /* FabiaoyijianViewController.m in Sources */,
 				7B0433C51C5C5E1A0052F4AC /* QianbaoViewController.m in Sources */,
 				802552A81C57442B00CFF875 /* SCAssetExportSession.m in Sources */,
 				802552A71C57442B00CFF875 /* README.md in Sources */,
@@ -2648,6 +2679,7 @@
 				7B11AC351C9010BD0061AADF /* loca_Model.m in Sources */,
 				802552B31C57442B00CFF875 /* SCPlayer.m in Sources */,
 				802552B81C57442B00CFF875 /* SCRecorderToolsView.m in Sources */,
+				7B302E921C92C101008CAC96 /* Model_Kechengbm.m in Sources */,
 				802553121C574F7100CFF875 /* UIView+MJExtension.m in Sources */,
 				802553171C57529700CFF875 /* UploadVideoViewController.m in Sources */,
 				802552B11C57442B00CFF875 /* SCMediaTypeConfiguration.m in Sources */,

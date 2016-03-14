@@ -22,7 +22,6 @@
 #import "ChanpinshoucangViewController.h"
 #import "ShipinshoucangViewController.h"
 #import "TuwenshoucangViewController.h"
-
 #import "BianjiziliaoViewController.h"
 
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>

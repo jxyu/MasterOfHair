@@ -42,7 +42,7 @@
     [self.contentView addSubview:self.name];
     
     self.image_icon = [[UIImageView alloc] init];
-    self.image_icon.image = [UIImage imageNamed:@"01fanhui_07"];
+    self.image_icon.image = [UIImage imageNamed:@"baomingkecheng"];
     [self.contentView addSubview:self.image_icon];
     
     
@@ -59,7 +59,8 @@
     
     self.name.frame = CGRectMake(50, CGRectGetMaxY(self.image.frame) + 13, SCREEN_WIDTH - 100, 30);
     
-    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 10 - 30, CGRectGetMaxY(self.image.frame) + 13, 30, 30);
+    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 10 - 30, CGRectGetMaxY(self.image.frame) + 18, 20, 20);
+//    self.image_icon.backgroundColor = [UIColor orangeColor];
     
     self.view_bg.frame = CGRectMake(0, 250, SCREEN_WIDTH, 10);
 }

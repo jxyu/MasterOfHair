@@ -135,7 +135,10 @@
     [self.view addSubview:self.btn_zhifu];
     
     [self.btn_zhifu addTarget:self action:@selector(btn_zhifuAction:) forControlEvents:(UIControlEventTouchUpInside)];
-
+    
+    //赋值
+    self.name.text = self.name_course;
+    self.price.text = self.money;
 }
 
 #pragma mark - 支付

@@ -190,6 +190,23 @@
 #pragma mark - 获取某会员的收藏列表并分页
 - (void)getCityWithLng:(NSString *)lng lat:(NSString *)lat;
 
+#pragma mark - 获取课程列表
+- (void)CourseWithPagenumber:(NSString *)pagenumber;
+
+#pragma mark -  获取单个课程详情
+- (void)CourseWithCourse_id:(NSString *)course_id;
+
+
+#pragma mark -  获取单个课程详情的web页
+- (void)CourseIntroWithCourse_id:(NSString *)course_id;
+
+
+
+
+
+
+
+
 
 
 

@@ -691,10 +691,37 @@
 }
 
 
+#pragma mark - 获取课程列表
+- (void)CourseWithPagenumber:(NSString *)pagenumber
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
+    
+   NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\"}",pagenumber]};
+    
+    [self GetRequest:url andpram:prm];
+}
 
 
+#pragma mark -  获取单个课程详情
+- (void)CourseWithCourse_id:(NSString *)course_id
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
+    
+    NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
+    
+    [self GetRequest:url andpram:prm];
+}
 
 
+#pragma mark -  获取单个课程详情的web页
+- (void)CourseIntroWithCourse_id:(NSString *)course_id
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/CourseIntro",Url];
+    
+    NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
+    
+    [self GetRequest:url andpram:prm];
+}
 
 
 

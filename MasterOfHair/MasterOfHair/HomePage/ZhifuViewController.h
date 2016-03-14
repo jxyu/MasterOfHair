@@ -14,4 +14,10 @@
 
 @property (nonatomic, strong) UILabel * price;
 
+
+@property (nonatomic, copy) NSString * name_course;
+@property (nonatomic, copy) NSString * money;
+
+
+
 @end

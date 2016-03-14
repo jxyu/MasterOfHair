@@ -13,7 +13,7 @@
 //外网地址
 //#define Url @"http://115.28.67.86:8082/"
 #define Url @"http://192.168.1.245/titoujiang/"
-//#define Url @"http://192.168.1.198/appbackend/"
+//#define Url @"http://192.168.1.197/appbackend/"
 
 
 

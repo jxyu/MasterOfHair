@@ -13,6 +13,8 @@
 
 #import "shouhuodizhiViewController.h"
 #import "WebViewController.h"
+#import "FabiaoyijianViewController.h"
+
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -230,7 +232,13 @@
             [self showViewController:webViewController sender:nil];
         }
             break;
+        case 4:
+        {
+            FabiaoyijianViewController * fabiaoyijianViewController = [[FabiaoyijianViewController alloc] init];
             
+            [self showViewController:fabiaoyijianViewController sender:nil];
+        }
+            break;
             
         case 5:
         {

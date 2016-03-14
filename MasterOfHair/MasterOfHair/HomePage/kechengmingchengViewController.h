@@ -10,4 +10,8 @@
 
 @interface kechengmingchengViewController : BaseNavigationController
 
+@property (nonatomic, copy) NSString * course_id;
+
+@property (nonatomic, copy) NSString * image_url;
+
 @end
