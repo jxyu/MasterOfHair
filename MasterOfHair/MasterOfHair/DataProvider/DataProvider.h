@@ -200,9 +200,11 @@
 #pragma mark -  获取单个课程详情的web页
 - (void)CourseIntroWithCourse_id:(NSString *)course_id;
 
+#pragma mark -  获取某用户的所有订单
+- (void)getOrdersWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
-
+#pragma mark -  获取某用户的所有“未付款”订单并分页
+- (void)getOrdersWithMember_id:(NSString *)member_id order_status:(NSString *)order_status pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

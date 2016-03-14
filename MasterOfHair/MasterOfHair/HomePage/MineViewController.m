@@ -23,7 +23,7 @@
 #import "ShipinshoucangViewController.h"
 #import "TuwenshoucangViewController.h"
 #import "BianjiziliaoViewController.h"
-
+#import "ShangchengdingdanViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -98,6 +98,8 @@
 - (void)p_setupView
 {
     self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) style:(UITableViewStyleGrouped)];
     self.tableView.delegate = self;
@@ -523,7 +525,9 @@
             }
             else
             {
+                ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
                 
+                [self showViewController:shangchengdingdanViewController sender:nil];
             }
         }
             break;
