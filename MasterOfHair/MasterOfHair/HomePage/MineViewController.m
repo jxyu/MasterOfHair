@@ -49,6 +49,7 @@
 @property (nonatomic, strong) UIButton * mid_btn2;
 @property (nonatomic, strong) UIButton * mid_btn3;
 
+@property (nonatomic, copy) NSString * delegate_type;
 @end
 
 @implementation MineViewController
@@ -86,6 +87,7 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data_delegate];
     
     [self p_setupView];
     
@@ -500,10 +502,19 @@
         case 2:
         {
             cell.name.text = @"申请成为代理商";
-                            cell.image.image = [UIImage imageNamed:@"00001"];
-//            cell.arrows_switch.hidden = NO;
-            cell.arrows.hidden = NO;
-            cell.type.hidden = YES;
+            cell.image.image = [UIImage imageNamed:@"00001"];
+            cell.arrows_switch.hidden = YES;
+            
+            if([self.delegate_type isEqualToString:@"1"])
+            {
+                cell.arrows.hidden = YES;
+                cell.type.hidden = NO;
+            }
+            else
+            {
+                cell.arrows.hidden = NO;
+                cell.type.hidden = YES;
+            }
         }
             break;
         default:
@@ -685,6 +696,59 @@
     [view_mid addSubview:self.mid_btn3];
 
 }
+
+#pragma mark - 判断成为代理商
+- (void)p_data_delegate
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Applyagent:"];
+    
+    [dataprovider ApplyagentWithMember_id:@"3"];
+    
+//    [dataprovider ApplyagentWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
+
+#pragma mark - 数据加载
+- (void)Applyagent:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSDictionary * dic = dict[@"data"][@"applyagentlist"];
+            
+            if([[NSString stringWithFormat:@"%@",dic[@"applyAgent_status"]] isEqualToString:@"1"])
+            {
+                self.delegate_type = @"1";
+            }
+            else
+            {
+                self.delegate_type = @"0";
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 
 @end

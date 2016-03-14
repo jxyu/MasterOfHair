@@ -1453,8 +1453,8 @@
 		7BA5968D1C4E218800DBC69D /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				7B67B1881C9659C900564EDF /* shangchengdingdan */,
 				7BA5969B1C4E24C000DBC69D /* Main */,
+				7B67B1881C9659C900564EDF /* shangchengdingdan */,
 				7B302E8B1C92B93C008CAC96 /* fabiaoyijian */,
 				7BD5E3261C9175B300357A3C /* Web */,
 				7BFAA7761C8A85A600D86D81 /* bianjiziliao */,

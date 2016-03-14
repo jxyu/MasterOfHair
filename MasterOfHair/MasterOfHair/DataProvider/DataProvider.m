@@ -694,33 +694,42 @@
 #pragma mark - 获取课程列表
 - (void)CourseWithPagenumber:(NSString *)pagenumber
 {
-    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
-    
-   NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\"}",pagenumber]};
-    
-    [self GetRequest:url andpram:prm];
+    if(pagenumber)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
+        
+        NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\"}",pagenumber]};
+        
+        [self GetRequest:url andpram:prm];
+    }
 }
 
 
 #pragma mark -  获取单个课程详情
 - (void)CourseWithCourse_id:(NSString *)course_id
 {
-    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
-    
-    NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
-    
-    [self GetRequest:url andpram:prm];
+    if(course_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
+        
+        [self GetRequest:url andpram:prm];
+    }
 }
 
 
 #pragma mark -  获取单个课程详情的web页
 - (void)CourseIntroWithCourse_id:(NSString *)course_id
 {
-    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/CourseIntro",Url];
-    
-    NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
-    
-    [self GetRequest:url andpram:prm];
+    if(course_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Course/Course",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"course_id\":\"%@\"}",course_id]};
+        
+        [self GetRequest:url andpram:prm];
+    }
 }
 
 #pragma mark -  获取某用户的所有订单
@@ -748,12 +757,46 @@
 }
 
 
+#pragma mark -  发表意见接口
+- (void)createWithMember_id:(NSString *)member_id suggest_content:(NSString *)suggest_content
+{
+    if(member_id && suggest_content)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=suggest/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"suggest_content\":\"%@\"}",member_id,suggest_content]};
+        
+        [self GetRequest:url andpram:prm];
+    }
+}
+
+#pragma mark -  获取个人是否申请成功
+- (void)ApplyagentWithMember_id:(NSString *)member_id
+{
+    if(member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Applyagent/Applyagent",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
+        
+        [self GetRequest:url andpram:prm];
+    }
+}
 
 
-
-
-
-
+//#pragma mark -  申请代理商(post)
+//- (void)createWithMember_id:(NSString *)member_id suggest_content:(NSString *)suggest_content
+//{
+//    if(member_id && suggest_content)
+//    {
+//        NSString * url=[NSString stringWithFormat:@"%@index.php?r=suggest/create",Url];
+//        
+//        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"suggest_content\":\"%@\"}",member_id,suggest_content]};
+//        
+//        [self PostRequest:url andpram:prm];
+//    }
+//}
+//
 
 
 

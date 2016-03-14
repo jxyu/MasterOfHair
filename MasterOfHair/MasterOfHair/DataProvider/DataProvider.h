@@ -206,9 +206,11 @@
 #pragma mark -  获取某用户的所有“未付款”订单并分页
 - (void)getOrdersWithMember_id:(NSString *)member_id order_status:(NSString *)order_status pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark -  发表意见接口
+- (void)createWithMember_id:(NSString *)member_id suggest_content:(NSString *)suggest_content;
 
-
-
+#pragma mark -  获取个人是否申请成功
+- (void)ApplyagentWithMember_id:(NSString *)member_id;
 
 
 

@@ -74,6 +74,12 @@
     else
     {
         //调接口，
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] suggest_content:self.text.text];
     }
 }
 
@@ -95,6 +101,30 @@
 }
 
 
+#pragma mark - 数据加载
+- (void)create:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"保存成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
