@@ -298,7 +298,6 @@
         [dataprovider setDelegateObject:self setBackFunctionName:@"UploadHeadPic:"];
         
         [dataprovider UploadHeadPicWithMember_id:[userdefault objectForKey:@"member_id"] member_headpic:imageData];
-        
     }];
 }
 

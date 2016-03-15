@@ -14,7 +14,7 @@
 #import "shouhuodizhiViewController.h"
 #import "WebViewController.h"
 #import "FabiaoyijianViewController.h"
-
+#import "ZhaohuimimaViewController.h"
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -195,6 +195,13 @@
         {
             shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
             [self showViewController:shouhuodizhi sender:nil];
+        }
+            break;
+        case 1:
+        {
+            ZhaohuimimaViewController * zhaohuimimaViewController = [[ZhaohuimimaViewController alloc] init];
+            
+            [self showViewController:zhaohuimimaViewController sender:nil];
         }
             break;
         case 2:

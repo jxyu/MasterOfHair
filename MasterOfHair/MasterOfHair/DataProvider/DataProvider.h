@@ -212,6 +212,31 @@
 #pragma mark -  获取个人是否申请成功
 - (void)ApplyagentWithMember_id:(NSString *)member_id;
 
+#pragma mark -  申请代理商(post)
+- (void)createWithMember_id:(NSString *)member_id applyAgent_name:(NSString *)applyAgent_name applyAgent_phone:(NSString *)applyAgent_phone idcard_frond:(NSData *)idcard_frond idcard_side:(NSData *)idcard_side framework_image:(NSData *)framework_image business_image:(NSData *)business_image;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

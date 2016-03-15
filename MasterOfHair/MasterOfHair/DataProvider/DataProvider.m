@@ -784,19 +784,20 @@
 }
 
 
-//#pragma mark -  申请代理商(post)
-//- (void)createWithMember_id:(NSString *)member_id suggest_content:(NSString *)suggest_content
-//{
-//    if(member_id && suggest_content)
-//    {
-//        NSString * url=[NSString stringWithFormat:@"%@index.php?r=suggest/create",Url];
-//        
-//        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"suggest_content\":\"%@\"}",member_id,suggest_content]};
-//        
-//        [self PostRequest:url andpram:prm];
-//    }
-//}
-//
+#pragma mark -  申请代理商(post)
+- (void)createWithMember_id:(NSString *)member_id applyAgent_name:(NSString *)applyAgent_name applyAgent_phone:(NSString *)applyAgent_phone idcard_frond:(NSData *)idcard_frond idcard_side:(NSData *)idcard_side framework_image:(NSData *)framework_image business_image:(NSData *)business_image
+{
+    if(member_id && applyAgent_name && applyAgent_phone && idcard_frond && idcard_side && framework_image && business_image)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Applyagent/create",Url];
+        
+        
+        NSDictionary * prm = @{@"member_id":member_id,@"applyAgent_name":applyAgent_name,@"applyAgent_phone":applyAgent_phone};
+        
+        [self ShowOrderuploadImageWithImage1:idcard_frond Image2:idcard_side Image3:framework_image Image4:business_image andurl:url andprm:prm andkey:nil];
+    }
+}
+
 
 
 
@@ -1052,7 +1053,9 @@
 
 - (void)ShowOrderuploadImageWithImage:(NSData *)imagedata andurl:(NSString *)url andprm:(NSDictionary *)prm andkey:(NSString *)key
 {
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
+        
         [formData appendPartWithFileData:imagedata name:@"member_headpic" fileName:@"member_headpic.png" mimeType:@"image/png"];
     }];
     
@@ -1086,6 +1089,54 @@
     //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
     //    NSLog(@"%@",result);
 }
+
+
+//
+- (void)ShowOrderuploadImageWithImage1:(NSData *)idcard_frond Image2:(NSData *)idcard_side Image3:(NSData *)framework_image Image4:(NSData *)business_image andurl:(NSString *)url andprm:(NSDictionary *)prm andkey:(NSString *)key
+{
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //1
+        [formData appendPartWithFileData:idcard_frond name:@"idcard_frond" fileName:@"idcard_frond.png" mimeType:@"image/png"];
+        //2
+        [formData appendPartWithFileData:idcard_side name:@"idcard_side" fileName:@"idcard_side.png" mimeType:@"image/png"];
+        
+        [formData appendPartWithFileData:framework_image name:@"framework_image" fileName:@"framework_image.png" mimeType:@"image/png"];
+        
+        [formData appendPartWithFileData:business_image name:@"business_image" fileName:@"business_image.png" mimeType:@"image/png"];
+    }];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *str=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSData * data =[str dataUsingEncoding:NSUTF8StringEncoding];
+        id dict =[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        SEL func_selector = NSSelectorFromString(callBackFunctionName);
+        if ([CallBackObject respondsToSelector:func_selector]) {
+            NSLog(@"回调成功...");
+            [CallBackObject performSelector:func_selector withObject:dict];
+        }else{
+            NSLog(@"回调失败...");
+            [SVProgressHUD dismiss];
+        }
+        NSLog(@"上传完成");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"上传失败->%@", error);
+        [SVProgressHUD dismiss];
+    }];
+    
+    //执行
+    NSOperationQueue * queue =[[NSOperationQueue alloc] init];
+    [queue addOperation:op];
+    //    FileDetail *file = [FileDetail fileWithName:@"avatar.jpg" data:data];
+    //    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+    //                            file,@"FILES",
+    //                            @"avatar",@"name",
+    //                            key, @"key", nil];
+    //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
+    //    NSLog(@"%@",result);
+}
+
+
 
 
 
