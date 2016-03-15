@@ -892,9 +892,31 @@
     }
 }
 
+#pragma mark -  取消订单
+- (void)updateWithOrders_id:(NSString *)orders_id order_status:(NSString *)order_status
+{
+    if(orders_id && order_status)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=order/update",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"orders_id\":\"%@\",\"order_status\":\"%@\"}",orders_id,order_status]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
-
-
+#pragma mark -  删除订单
+- (void)deleteWithOrders_id:(NSString *)orders_id
+{
+    if(orders_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=order/delete",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"orders_id\":\"%@\"}",orders_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

@@ -73,6 +73,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.index = @"0";
+    
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -99,21 +101,23 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
-        if([self.index length] == 0 && [self.index isEqualToString:@"0"])
-        {
-            [self p_data1];
-        }
-        else
-        {
-            [self p_data_state1];
-        }
+//        if([self.index length] == 0 && [self.index isEqualToString:@"0"])
+//        {
+//            [self p_data1];
+//        }
+//        else
+//        {
+//            [self p_data_state1];
+//        }
+        
+        [self p_data_state1];
+        
         
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
@@ -239,6 +243,8 @@
         btn_first.layer.borderColor = [UIColor orangeColor].CGColor;
         btn_first.layer.borderWidth = 1;
         [cell addSubview:btn_first];
+        btn_first.tag = 100 + indexPath.section;
+        [btn_first addTarget:self action:@selector(btn_first:) forControlEvents:(UIControlEventTouchUpInside)];
         
         
         UIButton * btn_second = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -250,7 +256,10 @@
         btn_second.layer.borderWidth = 1;
         [cell addSubview:btn_second];
         
+        btn_second.tag = 1000 + indexPath.section;
         btn_second.hidden = YES;
+        [btn_second addTarget:self action:@selector(btn_second:) forControlEvents:(UIControlEventTouchUpInside)];
+
         
         switch ([model.order_status integerValue])
         {
@@ -356,6 +365,156 @@
     
     return cell;
 }
+
+#pragma mark - 点击取消
+- (void)btn_first:(UIButton *)sender
+{
+    NSInteger index_x = sender.tag - 100;
+    
+    DINGDAN_Model * model = self.arr_dataAll[index_x];
+    
+    NSLog(@"%@",model.order_status);
+    
+    switch ([model.order_status integerValue])
+    {
+        case 1:
+        {//付款
+            
+        }
+            break;
+        case 2:
+        {//取消订单
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+            
+            [dataprovider updateWithOrders_id:model.orders_id order_status:@"5"];
+        }
+            break;
+        case 3:
+        {//收货
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+            
+            [dataprovider updateWithOrders_id:model.orders_id order_status:@"4"];
+            
+        }
+            break;
+        case 4:
+        {//删除订单
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+            
+            [dataprovider deleteWithOrders_id:model.orders_id];
+        }
+            break;
+        case 5:
+        {
+
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+- (void)btn_second:(UIButton *)sender
+{
+    NSInteger index_x = sender.tag - 1000;
+
+    DINGDAN_Model * model = self.arr_dataAll[index_x];
+    
+    NSLog(@"%@",model.order_status);
+    
+    switch ([model.order_status integerValue])
+    {
+        case 1:
+        {//取消订单
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+            
+            [dataprovider updateWithOrders_id:model.orders_id order_status:@"5"];
+        }
+            break;
+        case 2:
+        {
+
+        }
+            break;
+        case 3:
+        {
+            
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+        case 5:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
+#pragma mark - 取消，收货数据
+- (void)update:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self p_data_state];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - 数据
 //所有的
@@ -471,14 +630,16 @@
 #pragma mark - 下拉刷新
 - (void)example01
 {
-    if([self.index length] == 0 || [self.index isEqualToString:@"0"])
-    {
-        [self p_data];
-    }
-    else
-    {
-        [self p_data_state];
-    }
+//    if([self.index length] == 0 || [self.index isEqualToString:@"0"])
+//    {
+//        [self p_data];
+//    }
+//    else
+//    {
+//        [self p_data_state];
+//    }
+    
+    [self p_data_state];
     
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
@@ -625,6 +786,10 @@
 //点击方法
 - (void)btn_1Action:(UIButton *)sender
 {
+    self.index = @"0";
+    
+    [self example01];
+    
     //变颜色
     [self.btn_1 setTitleColor:[UIColor orangeColor] forState:(UIControlStateNormal)];
     self.view_1.hidden = NO;
@@ -638,13 +803,15 @@
     [self.btn_5 setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.view_5.hidden = YES;
     
-    self.index = @"0";
-    
-    [self example01];
+
 }
 
 - (void)btn_2Action:(UIButton *)sender
 {
+    self.index = @"1";
+    
+    [self example01];
+    
     //变颜色
     [self.btn_2 setTitleColor:[UIColor orangeColor] forState:(UIControlStateNormal)];
     self.view_2.hidden = NO;
@@ -658,13 +825,15 @@
     [self.btn_5 setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.view_5.hidden = YES;
     
-    self.index = @"1";
-    
-    [self example01];
+
 }
 
 - (void)btn_3Action:(UIButton *)sender
 {
+    self.index = @"2";
+    
+    [self example01];
+    
     //变颜色
     [self.btn_3 setTitleColor:[UIColor orangeColor] forState:(UIControlStateNormal)];
     self.view_3.hidden = NO;
@@ -677,14 +846,15 @@
     self.view_4.hidden = YES;
     [self.btn_5 setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.view_5.hidden = YES;
-    
-    self.index = @"2";
-    
-    [self example01];
 }
 
 - (void)btn_4Action:(UIButton *)sender
 {
+    
+    self.index = @"3";
+    
+    [self example01];
+    
     //变颜色
     [self.btn_4 setTitleColor:[UIColor orangeColor] forState:(UIControlStateNormal)];
     self.view_4.hidden = NO;
@@ -697,14 +867,14 @@
     self.view_1.hidden = YES;
     [self.btn_5 setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.view_5.hidden = YES;
-    
-    self.index = @"3";
-    
-    [self example01];
 }
 
 - (void)btn_5Action:(UIButton *)sender
 {
+    self.index = @"4";
+    
+    [self example01];
+    
     //变颜色
     [self.btn_5 setTitleColor:[UIColor orangeColor] forState:(UIControlStateNormal)];
     self.view_5.hidden = NO;
@@ -718,9 +888,7 @@
     [self.btn_1 setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.view_1.hidden = YES;
     
-    self.index = @"4";
-    
-    [self example01];
+
 }
 
 #pragma mark - 懒加载

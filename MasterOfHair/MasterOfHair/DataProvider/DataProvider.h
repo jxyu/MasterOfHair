@@ -237,9 +237,11 @@
 - (void)GetSecondLevelMembersWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
+#pragma mark -  取消订单
+- (void)updateWithOrders_id:(NSString *)orders_id order_status:(NSString *)order_status;
 
-
-
+#pragma mark -  删除订单
+- (void)deleteWithOrders_id:(NSString *)orders_id;
 
 
 
