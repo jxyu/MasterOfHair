@@ -227,11 +227,14 @@
 #pragma mark - 申请提现
 - (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type  change_type:(NSString *)change_type alipay_account:(NSString *)alipay_account change_amount:(NSString *)change_amount;
 
+#pragma mark -  获取统计数据
+- (void)StatisticalDataWithMember_id:(NSString *)member_id;
 
+#pragma mark -  获取一级会员列表并分页
+- (void)GetFirstLevelMembersWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
-
-
+#pragma mark -  获取二级会员列表并分页
+- (void)GetSecondLevelMembersWithMember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

@@ -151,7 +151,7 @@
         if([model.change_type integerValue] == 1)
         {
             cell.price.text = [NSString stringWithFormat:@"+ %@",str];
-            cell.price.textColor = [UIColor greenColor];
+            cell.price.textColor = [UIColor colorWithRed:100/255.0 green:220/255.0 blue:155/255.0 alpha:1];
         }
         else
         {

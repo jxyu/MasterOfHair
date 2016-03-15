@@ -65,7 +65,7 @@
     
     self.number.frame = CGRectMake(SCREEN_WIDTH - 20 - 5 - 70, 10, 70, 30);
     
-    self.price.frame = CGRectMake(SCREEN_WIDTH - 13 - 75, 10, 75, 30);
+    self.price.frame = CGRectMake(SCREEN_WIDTH - 13 - 130, 10, 130, 30);
 }
 
 

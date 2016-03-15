@@ -24,6 +24,13 @@
 @property (nonatomic, strong) UILabel * num_sell;
 @property (nonatomic, strong) UILabel * num_commission;
 
+@property (nonatomic, copy) NSString * level1;
+@property (nonatomic, copy) NSString * level2;
+@property (nonatomic, copy) NSString * no_pay_order_brokerage;
+@property (nonatomic, copy) NSString * pay_order_brokerage;
+@property (nonatomic, copy) NSString * receive_order_brokerage;
+
+@property (nonatomic, copy) NSString * wallet_balance;
 
 @end
 
@@ -60,6 +67,10 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_dataALL1];
+    
+    [self p_dataALL];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -113,14 +124,32 @@
         if(indexPath.row == 0)
         {
             cell.name.text = @"一级会员";
-            cell.number.text = @"110人";
+//            cell.number.text = @"110人";
             cell.price.hidden = YES;
+            
+            if([self.level1 length] == 0)
+            {
+                cell.number.text = @"0人";
+            }
+            else
+            {
+                cell.number.text = [NSString stringWithFormat:@"%@人",self.level1];
+            }
         }
         else
         {
             cell.name.text = @"二级会员";
-            cell.number.text = @"11人";
+//            cell.number.text = @"11人";
             cell.price.hidden = YES;
+            
+            if([self.level2 length] == 0)
+            {
+                cell.number.text = @"0人";
+            }
+            else
+            {
+                cell.number.text = [NSString stringWithFormat:@"%@人",self.level2];
+            }
         }
     }
     else
@@ -134,6 +163,15 @@
                 cell.price.text = @"¥ 1112";
                 cell.image_icon.hidden = YES;
                 cell.number.hidden = YES;
+                
+                if([self.no_pay_order_brokerage length] == 0)
+                {
+                    cell.price.text = @"¥ 0";
+                }
+                else
+                {
+                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.no_pay_order_brokerage];
+                }
             }
                 break;
             case 1:
@@ -142,6 +180,15 @@
                 cell.price.text = @"¥ 112";
                 cell.image_icon.hidden = YES;
                 cell.number.hidden = YES;
+                
+                if([self.pay_order_brokerage length] == 0)
+                {
+                    cell.price.text = @"¥ 0";
+                }
+                else
+                {
+                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.pay_order_brokerage];
+                }
             }
                 break;
             case 2:
@@ -150,6 +197,15 @@
                 cell.price.text = @"¥ 1312";
                 cell.image_icon.hidden = YES;
                 cell.number.hidden = YES;
+                
+                if([self.receive_order_brokerage length] == 0)
+                {
+                    cell.price.text = @"¥ 0";
+                }
+                else
+                {
+                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.receive_order_brokerage];
+                }
             }
                 break;
             case 3:
@@ -158,6 +214,15 @@
                 cell.price.text = @"¥ 5112";
                 cell.image_icon.hidden = YES;
                 cell.number.hidden = YES;
+                
+                if([self.wallet_balance length] == 0)
+                {
+                    cell.price.text = @"¥ 0";
+                }
+                else
+                {
+                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.wallet_balance];
+                }
             }
                 break;
             default:
@@ -228,6 +293,7 @@
     self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 70, 70)];
     self.head_image.backgroundColor = [UIColor orangeColor];
     self.head_image.layer.cornerRadius = 35;
+    self.head_image.layer.masksToBounds = YES;
     [view_white addSubview:self.head_image];
     
     UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_image.frame) + 10, CGRectGetMinY(self.head_image.frame), 60, 25)];
@@ -237,7 +303,7 @@
     [view_white addSubview:label1];
     
     self.head_ID = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label1.frame) + 5, CGRectGetMinY(self.head_image.frame), SCREEN_WIDTH - CGRectGetMaxX(label1.frame) - 15, 25)];
-    self.head_ID.text = @"1234567890";
+    self.head_ID.text = @"未设置";
 //    self.head_ID.backgroundColor = [UIColor orangeColor];
     self.head_ID.font = [UIFont systemFontOfSize:15];
     [view_white addSubview:self.head_ID];
@@ -299,9 +365,120 @@
     self.num_commission.textColor = [UIColor orangeColor];
     self.num_commission.font = [UIFont systemFontOfSize:13];
     [view_white1 addSubview:self.num_commission];
-    
-    
 }
+
+#pragma mark - 数据数据
+- (void)p_dataALL
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"StatisticalData:"];
+    
+    [dataprovider StatisticalDataWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
+
+// 数据
+- (void)StatisticalData:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSDictionary * dic = dict[@"data"][@"accumulative_info"];
+            
+            self.num_sell.text = [NSString stringWithFormat:@"￥ %@",dic[@"total_consume"]];
+            self.num_commission.text = [NSString stringWithFormat:@"￥ %@",dic[@"total_brokerage"]];
+            
+            self.level1 = [NSString stringWithFormat:@"%@",dic[@"level1"]];
+            self.level2 = [NSString stringWithFormat:@"%@",dic[@"level2"]];
+
+            
+            NSDictionary * dic1 = dict[@"data"][@"my_brokerage"];
+            self.no_pay_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"no_pay_order_brokerage"]];
+            self.pay_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"pay_order_brokerage"]];
+            self.receive_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"receive_order_brokerage"]];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 数据数据
+- (void)p_dataALL1
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"GetMembers:"];
+    
+    [dataprovider GetMembersWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
+
+// 数据
+- (void)GetMembers:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr_ = dict[@"data"][@"memberlist"];
+            
+            NSDictionary * dic = arr_.firstObject;
+            
+            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,dic[@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+
+            if([dic[@"spread_id"] length] == 0 || [dic[@"spread_id"] isEqual:[NSNull null]])
+            {
+                self.head_ID.text = @"未设置";
+            }
+            else
+            {
+                self.head_ID.text = [NSString stringWithFormat:@"%@",dic[@"spread_id"]];
+            }
+            
+            self.wallet_balance = [NSString stringWithFormat:@"%@",dic[@"wallet_balance"]];
+            
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 
 

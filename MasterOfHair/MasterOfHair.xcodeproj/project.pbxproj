@@ -44,6 +44,7 @@
 		7B18A7881C7EB06A00A32AE9 /* SearchTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */; };
 		7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */; };
 		7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */; };
+		7B19D3C01C97F4560097C7C7 /* Fenxiaozhongxin_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -405,6 +406,8 @@
 		7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pinglun_Models.m; sourceTree = "<group>"; };
 		7B19D3BA1C97AFD00097C7C7 /* Qianbao_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Qianbao_Model.h; sourceTree = "<group>"; };
 		7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Qianbao_Model.m; sourceTree = "<group>"; };
+		7B19D3BE1C97F4560097C7C7 /* Fenxiaozhongxin_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fenxiaozhongxin_Model.h; sourceTree = "<group>"; };
+		7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fenxiaozhongxin_Model.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -1094,6 +1097,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7B19D3BD1C97F43F0097C7C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B19D3BE1C97F4560097C7C7 /* Fenxiaozhongxin_Model.h */,
+				7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		7B1DE47C1C78121C0079B606 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1660,6 +1672,7 @@
 		7BB26FE21C5B3723001D332E /* fenxiaozhongxin */ = {
 			isa = PBXGroup;
 			children = (
+				7B19D3BD1C97F43F0097C7C7 /* Model */,
 				7BB26FE31C5B37CB001D332E /* FenxiaozhongxinViewController.h */,
 				7BB26FE41C5B37CB001D332E /* FenxiaozhongxinViewController.m */,
 				7BB26FE61C5B4AAB001D332E /* FenxiaozhongxinTableViewCell.h */,
@@ -2724,6 +2737,7 @@
 				7B00BF5E1C77018300988119 /* CCLocationManager.m in Sources */,
 				7BAABAE31C59FBC800C14DF8 /* KechengbaomingViewController.m in Sources */,
 				802552BC1C57442B00CFF875 /* SCSwipeableFilterView.m in Sources */,
+				7B19D3C01C97F4560097C7C7 /* Fenxiaozhongxin_Model.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */,
 				8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */,
