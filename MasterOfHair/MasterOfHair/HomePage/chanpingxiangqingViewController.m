@@ -153,13 +153,14 @@
     }
     else if (indexPath.row == 2)
     {
-        if(self.arr_list.count < 3)
+        
+        if(self.arr_list.count < 2)
         {
             return 95;
         }
         else
         {
-            return 150;
+            return 95 + 50 * (self.arr_list.count - 1);
         }
     }
     return SCREEN_HEIGHT / 3 * 2;
@@ -301,7 +302,7 @@
 //        NSLog(@"%ld",self.arr_list.count);
         self.tagList = [[VOTagList alloc] initWithTags:tags];
 
-        if(self.arr_list.count < 3)
+        if(self.arr_list.count < 2)
         {
             self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 8, SCREEN_WIDTH - 40, (150 - CGRectGetMaxY(view_line1.frame) - 10) / 2 - 13);
             
@@ -309,8 +310,7 @@
         }
         else
         {
-            self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 8, SCREEN_WIDTH - 40, 150 - CGRectGetMaxY(view_line1.frame) - 10);
-
+            self.tagList.frame = CGRectMake(20, CGRectGetMaxY(view_line1.frame) + 8, SCREEN_WIDTH - 40, 95 + (self.arr_list.count - 1) * 50 - CGRectGetMaxY(view_line1.frame) - 10);
         }
         self.tagList.multiLine = YES;
         self.tagList.multiSelect = NO;
