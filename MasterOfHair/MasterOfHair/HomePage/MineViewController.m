@@ -718,7 +718,9 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSDictionary * dic = dict[@"data"][@"applyagentlist"];
+            NSArray * arr = dict[@"data"][@"applyagentlist"];
+            
+            NSDictionary * dic = arr.firstObject;
             
             if([[NSString stringWithFormat:@"%@",dic[@"applyAgent_status"]] isEqualToString:@"1"])
             {
