@@ -705,9 +705,9 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"Applyagent:"];
     
-    [dataprovider ApplyagentWithMember_id:@"3"];
+//    [dataprovider ApplyagentWithMember_id:@"3"];
     
-//    [dataprovider ApplyagentWithMember_id:[userdefault objectForKey:@"member_id"]];
+    [dataprovider ApplyagentWithMember_id:[userdefault objectForKey:@"member_id"]];
 }
 
 #pragma mark - 数据加载

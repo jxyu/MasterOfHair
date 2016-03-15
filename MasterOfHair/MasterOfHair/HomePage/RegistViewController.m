@@ -386,7 +386,8 @@
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
-            
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_username"]] forKey:@"member_username"];
+
             
             //保存登陆的状态
             [userdefault setObject:@"1" forKey:@"Login_Success"];

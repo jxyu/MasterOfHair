@@ -84,6 +84,22 @@
         
         [dataprovider updateWithMember_id:[userdefault objectForKey:@"member_id"] member_nickname:self.nicheng.text];
     }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"昵称不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+
+    }
 }
 
 #pragma mark - 布局

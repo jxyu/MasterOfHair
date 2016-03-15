@@ -182,7 +182,7 @@
 #pragma mark - 接口部分
 - (void)login_register:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -207,6 +207,8 @@
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_type"]] forKey:@"member_type"];
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_username"]] forKey:@"member_username"];
+
 
             [self.navigationController popViewControllerAnimated:YES];
         }

@@ -20,6 +20,13 @@
 @property (nonatomic, strong) UIButton * btn_500;
 @property (nonatomic, strong) UIButton * btn_1000;
 
+@property (nonatomic, strong) UIImageView * image_1;
+@property (nonatomic, strong) UIImageView * image_2;
+@property (nonatomic, strong) UIImageView * image_3;
+@property (nonatomic, strong) UIImageView * image_4;
+@property (nonatomic, strong) UIImageView * image_5;
+
+
 //
 @property (nonatomic, strong) UIButton * btn_zhifu;
 
@@ -123,30 +130,87 @@
     {
         if(self.btn_50.isSelected == 1)
         {
-            NSLog(@"提现50");
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"50"];
         }
         
         if(self.btn_100.isSelected == 1)
         {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"100"];
         }
         
         if(self.btn_200.isSelected == 1)
         {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"200"];
         }
         
         if(self.btn_500.isSelected == 1)
         {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"500"];
         }
         
         if(self.btn_1000.isSelected == 1)
         {
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"1000"];
         }
     }
 }
+
+// 数据
+- (void)create:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"提现操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 #pragma mark - scrollView布局
 - (void)p_scrollView
@@ -185,10 +249,15 @@
     self.btn_50.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.btn_50.layer.cornerRadius = 5;
     [self.btn_50 setTitle:@"50元" forState:(UIControlStateNormal)];
-    [self.btn_50 setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.btn_50 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     [view_white1 addSubview:self.btn_50];
     [self.btn_50 addTarget:self action:@selector(btn_50Action:) forControlEvents:(UIControlEventTouchUpInside)];
     self.btn_50.selected = 0;
+    
+    self.image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(self.btn_50.frame.size.width - 15, 40 - 15, 15, 15)];
+    self.image_1.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_1.hidden = YES;
+    [self.btn_50 addSubview:self.image_1];
     
     
     self.btn_100 = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -196,44 +265,66 @@
     self.btn_100.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.btn_100.layer.cornerRadius = 5;
     [self.btn_100 setTitle:@"100元" forState:(UIControlStateNormal)];
-    [self.btn_100 setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.btn_100 setTitleColor:[UIColor grayColor]  forState:(UIControlStateNormal)];
     [view_white1 addSubview:self.btn_100];
     [self.btn_100 addTarget:self action:@selector(btn_100Action:) forControlEvents:(UIControlEventTouchUpInside)];
     self.btn_100.selected = 0;
 
+    self.image_2 = [[UIImageView alloc] initWithFrame:CGRectMake(self.btn_100.frame.size.width - 15, 40 - 15, 15, 15)];
+    self.image_2.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_2.hidden = YES;
+    [self.btn_100 addSubview:self.image_2];
+    
+    
     
     self.btn_200 = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_200.frame = CGRectMake(15, CGRectGetMaxY(self.btn_100.frame) + 5, SCREEN_WIDTH - 30, 40);
     self.btn_200.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.btn_200.layer.cornerRadius = 5;
     [self.btn_200 setTitle:@"200元" forState:(UIControlStateNormal)];
-    [self.btn_200 setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.btn_200 setTitleColor:[UIColor grayColor]  forState:(UIControlStateNormal)];
     [view_white1 addSubview:self.btn_200];
     [self.btn_200 addTarget:self action:@selector(btn_200Action:) forControlEvents:(UIControlEventTouchUpInside)];
     self.btn_200.selected = 0;
 
+    self.image_3 = [[UIImageView alloc] initWithFrame:CGRectMake(self.btn_200.frame.size.width - 15, 40 - 15, 15, 15)];
+    self.image_3.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_3.hidden = YES;
+    [self.btn_200 addSubview:self.image_3];
+    
     
     self.btn_500 = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_500.frame = CGRectMake(15, CGRectGetMaxY(self.btn_200.frame) + 5, SCREEN_WIDTH - 30, 40);
     self.btn_500.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.btn_500.layer.cornerRadius = 5;
     [self.btn_500 setTitle:@"500元" forState:(UIControlStateNormal)];
-    [self.btn_500 setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.btn_500 setTitleColor:[UIColor grayColor]  forState:(UIControlStateNormal)];
     [view_white1 addSubview:self.btn_500];
     [self.btn_500 addTarget:self action:@selector(btn_500Action:) forControlEvents:(UIControlEventTouchUpInside)];
     self.btn_500.selected = 0;
 
+    
+    self.image_4 = [[UIImageView alloc] initWithFrame:CGRectMake(self.btn_500.frame.size.width - 15, 40 - 15, 15, 15)];
+    self.image_4.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_4.hidden = YES;
+    [self.btn_500 addSubview:self.image_4];
+    
     
     self.btn_1000 = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_1000.frame = CGRectMake(15, CGRectGetMaxY(self.btn_500.frame) + 5, SCREEN_WIDTH - 30, 40);
     self.btn_1000.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.btn_1000.layer.cornerRadius = 5;
     [self.btn_1000 setTitle:@"1000元" forState:(UIControlStateNormal)];
-    [self.btn_1000 setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
+    [self.btn_1000 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     [view_white1 addSubview:self.btn_1000];
     [self.btn_1000 addTarget:self action:@selector(btn_1000Action:) forControlEvents:(UIControlEventTouchUpInside)];
     self.btn_1000.selected = 0;
 
+    self.image_5 = [[UIImageView alloc] initWithFrame:CGRectMake(self.btn_1000.frame.size.width - 15, 40 - 15, 15, 15)];
+    self.image_5.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
+    self.image_5.hidden = YES;
+    [self.btn_1000 addSubview:self.image_5];
+    
     
     UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(view_white1.frame) + 10, 100, 15)];
     label_3.text = @"申请提现说明";
@@ -253,6 +344,8 @@
 #pragma mark - 5中金额
 - (void)btn_50Action:(UIButton *)sender
 {
+    [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+    
     if(sender.isSelected == 0)
     {
         sender.selected = 1;
@@ -261,15 +354,44 @@
         self.btn_200.selected = 0;
         self.btn_500.selected = 0;
         self.btn_1000.selected = 0;
+        
+        
+        self.image_1.hidden = NO;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = navi_bar_bg_color.CGColor;
+        sender.layer.borderWidth = 1;
+        [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateSelected)];
+        
+//        self.btn_50.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_100.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_200.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_500.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_1000.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+
     }
     else
     {
         sender.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        sender.layer.borderWidth = 1;
     }
 }
 
 - (void)btn_100Action:(UIButton *)sender
 {
+    [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+    
     if(sender.isSelected == 0)
     {
         sender.selected = 1;
@@ -278,15 +400,44 @@
         self.btn_200.selected = 0;
         self.btn_500.selected = 0;
         self.btn_1000.selected = 0;
+        
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = NO;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = navi_bar_bg_color.CGColor;
+        sender.layer.borderWidth = 1;
+        [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateSelected)];
+        
+        self.btn_50.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//        self.btn_100.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_200.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_500.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_1000.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     }
     else
     {
         sender.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        sender.layer.borderWidth = 1;
     }
 }
 
 - (void)btn_200Action:(UIButton *)sender
 {
+    
+    [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+
     if(sender.isSelected == 0)
     {
         sender.selected = 1;
@@ -295,15 +446,43 @@
         self.btn_50.selected = 0;
         self.btn_500.selected = 0;
         self.btn_1000.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = NO;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = navi_bar_bg_color.CGColor;
+        sender.layer.borderWidth = 1;
+        [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateSelected)];
+        
+        self.btn_50.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_100.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//        self.btn_200.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_500.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_1000.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     }
     else
     {
         sender.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        sender.layer.borderWidth = 1;
     }
 }
 
 - (void)btn_500Action:(UIButton *)sender
 {
+    
+    [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+
     if(sender.isSelected == 0)
     {
         sender.selected = 1;
@@ -312,15 +491,43 @@
         self.btn_200.selected = 0;
         self.btn_50.selected = 0;
         self.btn_1000.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = NO;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = navi_bar_bg_color.CGColor;
+        sender.layer.borderWidth = 1;
+        [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateSelected)];
+        
+        self.btn_50.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_100.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_200.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//        self.btn_500.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_1000.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     }
     else
     {
         sender.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        sender.layer.borderWidth = 1;
     }
 }
 
 - (void)btn_1000Action:(UIButton *)sender
 {
+    
+    [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
+
     if(sender.isSelected == 0)
     {
         sender.selected = 1;
@@ -329,10 +536,36 @@
         self.btn_200.selected = 0;
         self.btn_500.selected = 0;
         self.btn_50.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = NO;
+        
+        sender.layer.borderColor = navi_bar_bg_color.CGColor;
+        sender.layer.borderWidth = 1;
+        [sender setTitleColor:navi_bar_bg_color forState:(UIControlStateSelected)];
+        
+        
+        self.btn_50.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_100.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_200.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.btn_500.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//        self.btn_1000.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     }
     else
     {
         sender.selected = 0;
+        
+        self.image_1.hidden = YES;
+        self.image_2.hidden = YES;
+        self.image_3.hidden = YES;
+        self.image_4.hidden = YES;
+        self.image_5.hidden = YES;
+        
+        sender.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        sender.layer.borderWidth = 1;
     }
 }
 

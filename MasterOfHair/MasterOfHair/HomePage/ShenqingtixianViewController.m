@@ -145,9 +145,41 @@
     }
     else
     {
-        NSLog(@"走提现流程");
+//        NSLog(@"走提现流程");
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"2" change_type:@"2" alipay_account:self.text_account.text change_amount:self.text_money.text];
     }
+}
+
+// 数据
+- (void)create:(id )dict
+{
+    //    NSLog(@"%@",dict);
     
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"提现操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
 }
 
 

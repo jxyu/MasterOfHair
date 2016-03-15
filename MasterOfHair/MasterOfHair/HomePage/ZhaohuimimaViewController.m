@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
-@property (nonatomic, strong) UITextField * tel;
+@property (nonatomic, strong) UILabel * tel;
 
 @property (nonatomic, strong) UITextField * old_passWord;
 
@@ -88,9 +88,11 @@
     view_5.layer.borderWidth = 1;
     [self.scrollView addSubview:view_5];
     
-    self.tel = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view_5.frame.size.width - 30, 40)];
-    self.tel.placeholder = @"请输入要修改的账号(手机号)";
-    self.tel.delegate = self;
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+    self.tel = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, view_5.frame.size.width - 30, 40)];
+    self.tel.text = [NSString stringWithFormat:@"账号: %@",[userdefault objectForKey:@"member_username"]];
     [view_5 addSubview:self.tel];
     
     
@@ -104,6 +106,7 @@
     
     self.old_passWord = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view_4.frame.size.width - 30, 40)];
     self.old_passWord.placeholder = @"请输入旧密码";
+    self.old_passWord.secureTextEntry = YES;
     self.old_passWord.delegate = self;
     [view_4 addSubview:self.old_passWord];
     
@@ -118,6 +121,7 @@
     
     self.newpassWord = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view3.frame.size.width - 30, 40)];
     self.newpassWord.placeholder = @"请输入新密码";
+    self.newpassWord.secureTextEntry = YES;
     self.newpassWord.delegate = self;
     [view3 addSubview:self.newpassWord];
     
@@ -133,6 +137,7 @@
     self.next_passWord = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, view_2.frame.size.width - 30, 40)];
     self.next_passWord.placeholder = @"请再次输入新密码";
     self.next_passWord.delegate = self;
+    self.next_passWord.secureTextEntry = YES;
     [view_2 addSubview:self.next_passWord];
     
     
@@ -171,16 +176,16 @@
         
     }];
     
-    if([self.tel.text length] != 11)
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确账号(手机号)" preferredStyle:(UIAlertControllerStyleAlert)];
-        [self presentViewController:alert animated:YES completion:^{
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [alert addAction:action];
-    }
+//    if([self.tel.text length] != 11)
+//    {
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请输入正确账号(手机号)" preferredStyle:(UIAlertControllerStyleAlert)];
+//        [self presentViewController:alert animated:YES completion:^{
+//        }];
+//        
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//        }];
+//        [alert addAction:action];
+//    }
     
     if([self.old_passWord.text length] < 6 || [self.old_passWord.text length] < 6)
     {
@@ -219,11 +224,48 @@
     }
     
     
-    if([self.tel.text length] == 11 && [self.old_passWord.text length] != 0 && [self.newpassWord.text isEqualToString:self.next_passWord.text] && [self.newpassWord.text length] >= 6 && [self.newpassWord.text length] >= 6)
+    if([self.tel.text length] != 0 && [self.old_passWord.text length] != 0 && [self.newpassWord.text isEqualToString:self.next_passWord.text] && [self.newpassWord.text length] >= 6 && [self.newpassWord.text length] >= 6)
     {
-        NSLog(@"掉接口");
+//        NSLog(@"掉接口");
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+        
+        [dataprovider createWithMember_username:[userdefault objectForKey:@"member_username"] member_password:self.old_passWord.text member_new_password:self.newpassWord.text];
     }
 }
+
+#pragma mark - 修改
+- (void)update:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"修改成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            [userdefault setObject:self.newpassWord.text forKey:@"password"];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 #pragma mark - text
 - (BOOL )textFieldShouldReturn:(UITextField *)textField

@@ -766,7 +766,7 @@
         
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"suggest_content\":\"%@\"}",member_id,suggest_content]};
         
-        [self GetRequest:url andpram:prm];
+        [self PostRequest:url andpram:prm];
     }
 }
 
@@ -797,6 +797,73 @@
         [self ShowOrderuploadImageWithImage1:idcard_frond Image2:idcard_side Image3:framework_image Image4:business_image andurl:url andprm:prm andkey:nil];
     }
 }
+
+#pragma mark - 会员密码修改
+- (void)createWithMember_username:(NSString *)member_username member_password:(NSString *)member_password member_new_password:(NSString *)member_new_password
+{
+    if(member_username && member_password && member_new_password)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/updatePassword",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\",\"member_password\":\"%@\",\"member_new_password\":\"%@\"}",member_username,member_password,member_new_password]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark -  获取某会员"钱包"流水记录
+- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(member_id && record_type && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=cashRecord/getCashRecords",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"record_type\":\"%@\"}",member_id,record_type],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark -  获取会员详细信息
+- (void)GetMembersWithMember_id:(NSString *)member_id
+{
+    if(member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=site/GetMembers",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 申请提现
+- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type  change_type:(NSString *)change_type alipay_account:(NSString *)alipay_account change_amount:(NSString *)change_amount
+{
+    if(member_id && record_type && change_type && alipay_account && change_amount)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=cashRecord/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"record_type\":\"%@\",\"change_type\":\"%@\",\"alipay_account\":\"%@\",\"change_amount\":\"%@\"}",member_id,record_type,change_type,alipay_account,change_amount]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

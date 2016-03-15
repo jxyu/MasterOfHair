@@ -215,13 +215,17 @@
 #pragma mark -  申请代理商(post)
 - (void)createWithMember_id:(NSString *)member_id applyAgent_name:(NSString *)applyAgent_name applyAgent_phone:(NSString *)applyAgent_phone idcard_frond:(NSData *)idcard_frond idcard_side:(NSData *)idcard_side framework_image:(NSData *)framework_image business_image:(NSData *)business_image;
 
+#pragma mark - 会员密码修改
+- (void)createWithMember_username:(NSString *)member_username member_password:(NSString *)member_password member_new_password:(NSString *)member_new_password;
 
+#pragma mark -  获取某会员"钱包"流水记录
+- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
+#pragma mark -  获取会员详细信息
+- (void)GetMembersWithMember_id:(NSString *)member_id;
 
-
-
-
-
+#pragma mark - 申请提现
+- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type  change_type:(NSString *)change_type alipay_account:(NSString *)alipay_account change_amount:(NSString *)change_amount;
 
 
 

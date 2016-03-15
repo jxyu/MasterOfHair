@@ -43,6 +43,7 @@
 		7B18A7811C7E9D4500A32AE9 /* SearchVideoTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7801C7E9D4500A32AE9 /* SearchVideoTextViewController.m */; };
 		7B18A7881C7EB06A00A32AE9 /* SearchTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */; };
 		7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */; };
+		7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -402,6 +403,8 @@
 		7B18A7871C7EB06A00A32AE9 /* SearchTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTextViewController.m; sourceTree = "<group>"; };
 		7B18A78A1C7EEF5C00A32AE9 /* Pinglun_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pinglun_Models.h; sourceTree = "<group>"; };
 		7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pinglun_Models.m; sourceTree = "<group>"; };
+		7B19D3BA1C97AFD00097C7C7 /* Qianbao_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Qianbao_Model.h; sourceTree = "<group>"; };
+		7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Qianbao_Model.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -961,6 +964,7 @@
 		7B0433C21C5C5DC70052F4AC /* qianbao */ = {
 			isa = PBXGroup;
 			children = (
+				7B19D3B91C97AFB60097C7C7 /* Model */,
 				7B0433C31C5C5E1A0052F4AC /* QianbaoViewController.h */,
 				7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */,
 				7B0433C61C5C67AB0052F4AC /* QianbaoTableViewCell.h */,
@@ -1079,6 +1083,15 @@
 				7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */,
 			);
 			name = Pinglun_Models;
+			sourceTree = "<group>";
+		};
+		7B19D3B91C97AFB60097C7C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B19D3BA1C97AFD00097C7C7 /* Qianbao_Model.h */,
+				7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7B1DE47C1C78121C0079B606 /* Models */ = {
@@ -2643,6 +2656,7 @@
 				8082B4C51C7414320024EAD3 /* JKAssetsGroupsView.m in Sources */,
 				802552B71C57442B00CFF875 /* SCRecorderTools.m in Sources */,
 				7B299A161C7D7B0C00D57B76 /* TuWen_Models.m in Sources */,
+				7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */,
 				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
 				8082B4C71C7414320024EAD3 /* JKAssetsViewCell.m in Sources */,
 				7B46EE1D1C60A5F800E33E0E /* TuwenshoucangViewController.m in Sources */,

@@ -10,6 +10,7 @@
 
 #import "QianbaoTableViewCell.h"
 #import "NextqianbaoViewController.h"
+#import "Qianbao_Model.h"
 @interface QianbaoViewController () <UITableViewDataSource, UITableViewDelegate>
 
 //头视图
@@ -19,6 +20,10 @@
 //
 @property (nonatomic, strong) UITableView * tableView;
 
+@property (nonatomic, strong) NSMutableArray * arr_data;
+
+@property (nonatomic, assign) NSInteger page;
+
 @end
 
 @implementation QianbaoViewController
@@ -26,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     [self p_navi];
     
@@ -57,6 +63,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_dataALL];
+    
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -71,6 +79,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
     [self.view addSubview:self.tableView];
     
     self.tableView.tableHeaderView = [[UIView alloc] init];
@@ -82,6 +92,8 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [self p_data];
+        
         [weakSelf.tableView reloadData];
         
         [weakSelf loadNewData];
@@ -89,6 +101,8 @@
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_data1];
         
         [weakSelf.tableView reloadData];
         
@@ -103,7 +117,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return self.arr_data.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,16 +130,41 @@
     QianbaoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_qianbao" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if(1)
+    if(self.arr_data.count != 0)
     {
-        cell.type.text = @"处理中";
-        cell.type.textColor = [UIColor orangeColor];
+        Qianbao_Model * model = self.arr_data[indexPath.row];
+        
+        cell.money.text = [NSString stringWithFormat:@"￥ %@",model.change_amount];
+        
+        switch ([model.treatment_status integerValue])
+        {
+            case 0:
+            {
+                cell.type.text = @"处理中";
+                cell.type.textColor = [UIColor orangeColor];
+            }
+                break;
+            case 1:
+            {
+                cell.type.text = @"已完成";
+                cell.type.textColor = [UIColor blackColor];
+
+            }
+                break;
+            default:
+                break;
+        }
+        
+        NSString * str = [model.change_time substringFromIndex:11];
+        cell.time.text = str;
+        
+        NSString * str1 = [model.change_time substringToIndex:10];
+//        NSLog(@"%@",str1);
+        
+        NSString * str2 = [str1 substringFromIndex:5];
+        cell.month.text = str2;
     }
-    else
-    {
-        cell.type.text = @"已完成";
-    }
-    
+
     return cell;
 }
 
@@ -194,14 +233,134 @@
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
     });
+}
+
+#pragma mark - 数据
+- (void)p_data
+{
+    self.page = 1;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+    
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" pagenumber:@"1" pagesize:@"15"];
+}
+
+- (void)p_data1
+{
+    self.page ++ ;
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+    
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 
+#pragma mark - 数据
+- (void)update:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"cashRecordlist"])
+            {
+                Qianbao_Model * modle = [[Qianbao_Model alloc] init];
+                
+                [modle setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:modle];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
+#pragma mark - 数据数据
+- (void)p_dataALL
+{    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"GetMembers:"];
+    
+    [dataprovider GetMembersWithMember_id:[userdefault objectForKey:@"member_id"]];
+}
 
+// 数据
+- (void)GetMembers:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr_ = dict[@"data"][@"memberlist"];
+            
+            NSDictionary * dic = arr_.firstObject;
+            
+            self.money.text = [NSString stringWithFormat:@"￥ %@",dic[@"wallet_balance"]];
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
+#pragma mark - 懒加载
 
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    
+    return _arr_data;
+}
 
 
 @end
