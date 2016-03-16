@@ -636,6 +636,9 @@
                 TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
                 tuwenViewController.isTeacher = 0;
                 
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                [userdefault setObject:@"1" forKey:@"TuwenFeilei"];
+                
                 [self showViewController:tuwenViewController sender:nil];
             }
                 break;
@@ -952,7 +955,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            for (NSDictionary * dic in dict[@"data"])
+            for (NSDictionary * dic in dict[@"data"][@"productlist"])
             {
                 WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 

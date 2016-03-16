@@ -8,6 +8,7 @@
 //
 
 #import "NextMingshiViewController.h"
+#import "Mingshimingdian_Model.h"
 
 @interface NextMingshiViewController ()
 
@@ -22,6 +23,13 @@
 @property (nonatomic, strong) UILabel * detail;
 
 @property (nonatomic, strong) UIWebView * webView;
+
+@property (nonatomic, strong) Mingshimingdian_Model * model;
+
+@property (nonatomic, strong) UIView * view_bg5;
+@property (nonatomic, strong) UIView * view_5;
+@property (nonatomic, strong) UIView * view_4;
+
 
 @end
 
@@ -58,6 +66,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -139,87 +149,195 @@
     [view_3 addSubview:self.time];
 
     
-    UIView * view_4 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_3.frame) + 2, SCREEN_WIDTH, 60)];
-    view_4.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:view_4];
+    self.view_4 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_3.frame) + 2, SCREEN_WIDTH, 60)];
+    self.view_4.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.view_4];
     
     UILabel * label_4_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 110, 15)];
     label_4_1.text = @"技术工种";
     label_4_1.textAlignment = NSTextAlignmentCenter;
     label_4_1.font = [UIFont systemFontOfSize:15];
     label_4_1.textColor = [UIColor grayColor];
-    [view_4 addSubview:label_4_1];
+    [self.view_4 addSubview:label_4_1];
     
     UILabel * label_4_2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 31, 110, 15)];
     label_4_2.text = @"(主要业务)";
     label_4_2.textAlignment = NSTextAlignmentCenter;
     label_4_2.font = [UIFont systemFontOfSize:15];
     label_4_2.textColor = [UIColor grayColor];
-    [view_4 addSubview:label_4_2];
+    [self.view_4 addSubview:label_4_2];
     
     UIView * view_line4 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_4_1.frame), 5, 1, 50)];
     view_line4.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [view_4 addSubview:view_line4];
+    [self.view_4 addSubview:view_line4];
     
     
     self.yewu = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line4.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line4.frame) - 20, 40)];
     self.yewu.text = @"hahah刘深刻的接口设计的开始就看到是打开数据库的时间看到";
     self.yewu.numberOfLines = 2;
     self.yewu.font = [UIFont systemFontOfSize:14];
-    [view_4 addSubview:self.yewu];
+    [self.view_4 addSubview:self.yewu];
     
     
-    UIView * view_5 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_4.frame) + 10, SCREEN_WIDTH, 110)];
-    view_5.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:view_5];
-    
-    UILabel * label_5_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 110, 15)];
-    label_5_1.text = @"技师简介";
-    label_5_1.textAlignment = NSTextAlignmentCenter;
-    label_5_1.font = [UIFont systemFontOfSize:15];
-    label_5_1.textColor = [UIColor grayColor];
-    [view_5 addSubview:label_5_1];
-    
-    UILabel * label_5_2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 56, 110, 15)];
-    label_5_2.text = @"(店铺详情)";
-    label_5_2.textAlignment = NSTextAlignmentCenter;
-    label_5_2.font = [UIFont systemFontOfSize:15];
-    label_5_2.textColor = [UIColor grayColor];
-    [view_5 addSubview:label_5_2];
-    
-    UIView * view_line5 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_5_1.frame), 5, 1, 100)];
-    view_line5.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [view_5 addSubview:view_line5];
+//    self.view_5 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_4.frame) + 10, SCREEN_WIDTH, 210)];
+//    self.view_5.backgroundColor = [UIColor whiteColor];
+//    [self.scrollView addSubview:self.view_5];
+//    
+//    UILabel * label_5_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 110, 15)];
+//    label_5_1.text = @"技师简介";
+//    label_5_1.textAlignment = NSTextAlignmentCenter;
+//    label_5_1.font = [UIFont systemFontOfSize:15];
+//    label_5_1.textColor = [UIColor grayColor];
+//    [self.view_5 addSubview:label_5_1];
+//    
+//    UILabel * label_5_2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 56, 110, 15)];
+//    label_5_2.text = @"(店铺详情)";
+//    label_5_2.textAlignment = NSTextAlignmentCenter;
+//    label_5_2.font = [UIFont systemFontOfSize:15];
+//    label_5_2.textColor = [UIColor grayColor];
+//    [self.view_5 addSubview:label_5_2];
+//    
+//    self.view_bg5 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_5_1.frame), 5, 1, 100)];
+//    self.view_bg5.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    [self.view_5 addSubview:self.view_bg5];
 
-    self.detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line5.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line5.frame) - 20, 90)];
-    self.detail.text = @"hahah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻";
-    self.detail.numberOfLines = 5;
-    self.detail.font = [UIFont systemFontOfSize:13];
-    [view_5 addSubview:self.detail];
-    
-    
-    UIView * view_6 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_5.frame) + 10, SCREEN_WIDTH, 40)];
-    view_6.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:view_6];
-    
-    UILabel * label_6_1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 110, 20)];
-    label_6_1.text = @"作品详情";
-    label_6_1.font = [UIFont systemFontOfSize:15];
-    [view_6 addSubview:label_6_1];
-    
-#pragma mark - 下面为H5网页
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_6.frame), SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2)];
-    NSString * path = @"http://www.baidu.com";
-    NSURL * url = [NSURL URLWithString:path];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
-    [self.scrollView addSubview:self.webView];
-    
-    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.webView.frame));
-
-    
+//    self.detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line5.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line5.frame) - 20, 90)];
+//    self.detail.text = @"hahah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻";
+//    self.detail.numberOfLines = 0;
+//    self.detail.font = [UIFont systemFontOfSize:13];
+//    [view_5 addSubview:self.detail];
+//    
+//    
+//    UIView * view_6 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_5.frame) + 10, SCREEN_WIDTH, 40)];
+//    view_6.backgroundColor = [UIColor whiteColor];
+//    [self.scrollView addSubview:view_6];
+//    
+//    UILabel * label_6_1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 110, 20)];
+//    label_6_1.text = @"作品详情";
+//    label_6_1.font = [UIFont systemFontOfSize:15];
+//    [view_6 addSubview:label_6_1];
+//    
+//#pragma mark - 下面为H5网页
+//    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_6.frame), SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2)];
+//    
+//    NSString * path = [NSString stringWithFormat:@"%@index.php?r=FamousTeacher/TeacherIntro&teacher_id=%@",Url,self.teacher_id];
+//    NSURL * url = [NSURL URLWithString:path];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+//    
+//    [self.scrollView addSubview:self.webView];
+//    
+//    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.webView.frame));
 }
 
+#pragma mark - 数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"FamousTeacher:"];
+    
+    [dataprovider FamousTeacherWithTeacher_id:self.teacher_id];
+}
+
+//数据
+- (void)FamousTeacher:(id )dict
+{
+    NSLog(@"%@",dict);
+        
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSArray * arr_detail = dict[@"data"][@"teacherlist"];
+            
+            NSDictionary * dic_detail = arr_detail.firstObject;
+            
+            self.model = [[Mingshimingdian_Model alloc] init];
+            
+            if([dic_detail[@"teacher_id"] length] != 0)
+            {
+                [self.model setValuesForKeysWithDictionary:dic_detail];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url,self.model.image];
+            [self.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            self.name.text = self.model.teacher_name;
+            
+            self.time.text = [NSString stringWithFormat:@"%@岁(年)",self.model.age];
+            
+            self.yewu.text = self.model.good_skill;
+            
+          CGFloat x_length = [self.model.describe boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - CGRectGetMaxX(self.view_bg5.frame) - 20, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} context:nil].size.height;
+            
+            //防止数据为空
+            if(x_length < 40)
+            {
+                x_length = 40;
+            }
+            
+            self.view_5 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view_4.frame) + 10, SCREEN_WIDTH, x_length + 30)];
+            self.view_5.backgroundColor = [UIColor whiteColor];
+            [self.scrollView addSubview:self.view_5];
+            
+            UILabel * label_5_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 110, 15)];
+            label_5_1.text = @"技师简介";
+            label_5_1.textAlignment = NSTextAlignmentCenter;
+            label_5_1.font = [UIFont systemFontOfSize:15];
+            label_5_1.textColor = [UIColor grayColor];
+            [self.view_5 addSubview:label_5_1];
+            
+            UILabel * label_5_2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 26, 110, 15)];
+            label_5_2.text = @"(店铺详情)";
+            label_5_2.textAlignment = NSTextAlignmentCenter;
+            label_5_2.font = [UIFont systemFontOfSize:15];
+            label_5_2.textColor = [UIColor grayColor];
+            [self.view_5 addSubview:label_5_2];
+            
+            self.view_bg5 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_5_1.frame), 5, 1, x_length + 10)];
+            self.view_bg5.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            [self.view_5 addSubview:self.view_bg5];
+
+            
+            self.detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view_bg5.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(self.view_bg5.frame) - 20, x_length)];
+//            self.detail.text = @"hahah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻hah刘深刻";
+            self.detail.text = self.model.describe;
+            self.detail.numberOfLines = 0;
+            self.detail.font = [UIFont systemFontOfSize:13];
+            [self.view_5 addSubview:self.detail];
+            
+            
+            UIView * view_6 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view_5.frame) + 10, SCREEN_WIDTH, 40)];
+            view_6.backgroundColor = [UIColor whiteColor];
+            [self.scrollView addSubview:view_6];
+            
+            UILabel * label_6_1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 110, 20)];
+            label_6_1.text = @"作品详情";
+            label_6_1.font = [UIFont systemFontOfSize:15];
+            [view_6 addSubview:label_6_1];
+            
+#pragma mark - 下面为H5网页
+            self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_6.frame), SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2)];
+            
+            NSString * path = [NSString stringWithFormat:@"%@index.php?r=FamousTeacher/TeacherIntro&teacher_id=%@",Url,self.teacher_id];
+            NSURL * url = [NSURL URLWithString:path];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+            
+            [self.scrollView addSubview:self.webView];
+            
+            self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.webView.frame));
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 

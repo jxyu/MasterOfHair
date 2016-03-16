@@ -190,6 +190,7 @@
 		7BEE19201C532069002C2ADA /* ShoppingCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */; };
 		7BEE19221C53291F002C2ADA /* white_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19211C53291F002C2ADA /* white_bg.png */; };
 		7BEE19241C53544E002C2ADA /* gary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE19231C53544E002C2ADA /* gary_bg.png */; };
+		7BF5D35E1C98E7B000F4F9C0 /* Mingshimingdian_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF5D35D1C98E7B000F4F9C0 /* Mingshimingdian_Model.m */; };
 		7BF67F0A1C51B7D2005FA5C4 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */; };
 		7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F0C1C51BC29005FA5C4 /* SearchViewController.m */; };
 		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
@@ -632,6 +633,8 @@
 		7BEE191F1C532069002C2ADA /* ShoppingCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarTableViewCell.m; sourceTree = "<group>"; };
 		7BEE19211C53291F002C2ADA /* white_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_bg.png; sourceTree = "<group>"; };
 		7BEE19231C53544E002C2ADA /* gary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gary_bg.png; sourceTree = "<group>"; };
+		7BF5D35C1C98E7B000F4F9C0 /* Mingshimingdian_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mingshimingdian_Model.h; sourceTree = "<group>"; };
+		7BF5D35D1C98E7B000F4F9C0 /* Mingshimingdian_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mingshimingdian_Model.m; sourceTree = "<group>"; };
 		7BF67F081C51B7D2005FA5C4 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
 		7BF67F091C51B7D2005FA5C4 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		7BF67F0B1C51BC29005FA5C4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -1703,6 +1706,7 @@
 		7BCD55241C55D37400F32F16 /* mingshimingdian */ = {
 			isa = PBXGroup;
 			children = (
+				7BF5D35B1C98E79A00F4F9C0 /* Model */,
 				7BCD55251C55D39500F32F16 /* MingshiViewController.h */,
 				7BCD55261C55D39500F32F16 /* MingshiViewController.m */,
 				7B0433BF1C5C47150052F4AC /* NextMingshiViewController.h */,
@@ -1746,6 +1750,15 @@
 				7BD86C451C745D6400D099BE /* SMS_SDK.framework */,
 			);
 			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
+		7BF5D35B1C98E79A00F4F9C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BF5D35C1C98E7B000F4F9C0 /* Mingshimingdian_Model.h */,
+				7BF5D35D1C98E7B000F4F9C0 /* Mingshimingdian_Model.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7BF67F111C51D987005FA5C4 /* Login and regist */ = {
@@ -2708,6 +2721,7 @@
 				7B3305B81C5F2C200014C49C /* TextDetailViewController.m in Sources */,
 				7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */,
 				7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */,
+				7BF5D35E1C98E7B000F4F9C0 /* Mingshimingdian_Model.m in Sources */,
 				8082B4C21C7414320024EAD3 /* JKAssets.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
 				7B3305A91C5EE9AA0014C49C /* FenleiCollectionReusableView.m in Sources */,

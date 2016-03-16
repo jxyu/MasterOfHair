@@ -244,9 +244,11 @@
 - (void)deleteWithOrders_id:(NSString *)orders_id;
 
 
+#pragma mark - 获取名师名店列表（不进行分页）：
+- (void)FamousTeacher;
 
-
-
+#pragma mark - 获取名师详细信息（不进行分页）：
+- (void)FamousTeacherWithTeacher_id:(NSString *)teacher_id;
 
 
 

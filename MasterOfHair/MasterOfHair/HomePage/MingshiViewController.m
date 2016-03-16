@@ -11,9 +11,12 @@
 
 #import "wenxiuPeopleTableViewCell.h"
 #import "NextMingshiViewController.h"
+#import "Mingshimingdian_Model.h"
 @interface MingshiViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
+
+@property (nonatomic, strong) NSMutableArray * arr_data;
 
 @end
 
@@ -51,6 +54,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self example01];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -74,6 +79,8 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        [self p_data];
+        
         [weakSelf.tableView reloadData];
         
         [weakSelf loadNewData];
@@ -96,7 +103,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return self.arr_data.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,6 +118,18 @@
     
     [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     
+    if(self.arr_data.count != 0)
+    {
+        Mingshimingdian_Model * model = self.arr_data[indexPath.row];
+        
+        cell.name.text = model.teacher_name;
+        
+        cell.detail.text = model.describe;
+        
+        NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url,model.image];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    }
+    
     return cell;
 }
 
@@ -119,6 +138,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NextMingshiViewController * NextMingshi = [[NextMingshiViewController alloc] init];
+    
+    Mingshimingdian_Model * model = self.arr_data[indexPath.row];
+    
+    NextMingshi.teacher_id = model.teacher_id;
     
     [self showViewController:NextMingshi sender:nil];
 }
@@ -142,6 +165,63 @@
         [self.tableView.footer endRefreshing];
     });
     
+}
+
+#pragma mark - 数据
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"FamousTeacher:"];
+    
+    [dataprovider FamousTeacher];
+}
+
+//数据
+- (void)FamousTeacher:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    self.arr_data = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"teacherlist"])
+            {
+                Mingshimingdian_Model * model = [[Mingshimingdian_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
 }
 
 

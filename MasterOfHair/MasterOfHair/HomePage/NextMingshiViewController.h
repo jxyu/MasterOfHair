@@ -10,4 +10,6 @@
 
 @interface NextMingshiViewController : BaseNavigationController
 
+@property (nonatomic, copy) NSString * teacher_id;
+
 @end

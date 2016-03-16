@@ -918,10 +918,26 @@
     }
 }
 
+#pragma mark - 获取名师名店列表（不进行分页）：
+- (void)FamousTeacher
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=FamousTeacher/Teacher",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
 
-
-
-
+#pragma mark - 获取名师详细信息（不进行分页）：
+- (void)FamousTeacherWithTeacher_id:(NSString *)teacher_id
+{
+    if(teacher_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=FamousTeacher/Teacher",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"teacher_id\":\"%@\"}",teacher_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
