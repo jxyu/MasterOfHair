@@ -10,13 +10,17 @@
 
 #import "JCCollectionViewCell.h"
 #import "Wenxiulianmeng_Model.h"
+#import "WebStroeCollectionViewCell.h"
 @interface HezuomingdianViewController () <UITableViewDataSource, UITableViewDelegate ,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
 
 @property (nonatomic, strong) UICollectionView * classify_collectionView;
+@property (nonatomic, strong) UICollectionView * stroe_collectionView;
 
 @property (nonatomic, strong) NSMutableArray * arr_teacher;
+
+@property (nonatomic, strong) UIButton * btn_zhifu;
 @end
 
 @implementation HezuomingdianViewController
@@ -62,9 +66,9 @@
 #pragma mark - 布局
 - (void)p_setupView
 {
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 50) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 55) style:(UITableViewStylePlain)];
     
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.delegate = self;
@@ -74,6 +78,23 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     [self.view addSubview:self.tableView];
+    
+    
+    self.btn_zhifu = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.btn_zhifu.frame = CGRectMake(15, SCREEN_HEIGHT - 50, SCREEN_WIDTH - 30, 45);
+    self.btn_zhifu.backgroundColor = navi_bar_bg_color;
+    [self.btn_zhifu setTitle:@"下一步" forState:(UIControlStateNormal)];
+    [self.btn_zhifu setTintColor:[UIColor whiteColor]];
+    self.btn_zhifu.titleLabel.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:self.btn_zhifu];
+    
+    [self.btn_zhifu addTarget:self action:@selector(btn_zhifuAction:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+#pragma mark - 下一步
+- (void)btn_zhifuAction:(UIButton *)sender
+{
+    NSLog(@"下一步");
 }
 
 #pragma mark - 代理
@@ -95,7 +116,7 @@
     }
     else
     {
-        return 300;
+        return 700;
     }
 }
 
@@ -120,7 +141,18 @@
     }
     else
     {
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
         
+        UILabel * introduce = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 25)];
+        introduce.text = @"产品列表";
+        
+        [self p_stroe];
+        
+        [cell addSubview:self.stroe_collectionView];
+        
+        [cell addSubview:introduce];
     }
     
     return cell;
@@ -147,6 +179,23 @@
     [self.classify_collectionView registerClass:[JCCollectionViewCell class] forCellWithReuseIdentifier:@"cell_classify"];
 }
 
+- (void)p_stroe
+{
+    //
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+    //每个item的大小
+    int  item_length = (SCREEN_WIDTH ) / 4;
+    layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
+    layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
+    
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 600) collectionViewLayout:layout];
+    self.stroe_collectionView.delegate = self;
+    self.stroe_collectionView.dataSource = self;
+    self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    [self.stroe_collectionView registerClass:[WebStroeCollectionViewCell class] forCellWithReuseIdentifier:@"cell_webStroe"];
+}
+
 #pragma mark - classify_collectionView的代理
 //有几个分区
 - (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -156,30 +205,47 @@
 //每个分区有多少个
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.arr_teacher.count;
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        return self.arr_teacher.count;
+    }
+    else
+    {
+        return 11;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
-    cell.name.font = [UIFont systemFontOfSize:11];
-    cell.imageView.layer.masksToBounds = YES;
-
-//    cell.layer.borderColor = navi_bar_bg_color.CGColor;
-//    cell.layer.borderWidth = 1;
-//    cell.image_iocn.hidden = NO;
-    
-    if(self.arr_teacher.count != 0)
+    if([collectionView isEqual:self.classify_collectionView])
     {
-        Wenxiulianmeng_Model * model = self.arr_teacher[indexPath.item];
+        JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
+        cell.name.font = [UIFont systemFontOfSize:11];
+        cell.imageView.layer.masksToBounds = YES;
         
-        NSString * str1 =  [NSString stringWithFormat:@"%@uploads/technician/%@",Url,model.technician_image];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        //    cell.layer.borderColor = navi_bar_bg_color.CGColor;
+        //    cell.layer.borderWidth = 1;
+        //    cell.image_iocn.hidden = NO;
         
-        cell.name.text = model.technician_name;
+        if(self.arr_teacher.count != 0)
+        {
+            Wenxiulianmeng_Model * model = self.arr_teacher[indexPath.item];
+            
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/technician/%@",Url,model.technician_image];
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.name.text = model.technician_name;
+        }
+        
+        return cell;
     }
-    
-    return cell;
+    else
+    {
+        WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
+
+        
+        return cell;
+    }
 }
 
 #pragma mark - 列表1数据

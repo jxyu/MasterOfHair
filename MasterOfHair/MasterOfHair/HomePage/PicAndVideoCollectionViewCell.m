@@ -32,8 +32,8 @@
     self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.image.frame) + 3, self.contentView.frame.size.width - 10, 30)];
     //    self.detail.backgroundColor = [UIColor orangeColor];
     self.detail.text = @"VS沙宣VS沙宣VS沙宣VS沙宣VS";
-    self.detail.font = [UIFont systemFontOfSize:10];
-    self.detail.numberOfLines = 0;
+    self.detail.font = [UIFont systemFontOfSize:14];
+    self.detail.numberOfLines = 1;
     [self.contentView addSubview:self.detail];
     
     self.image_iocn = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 15, self.contentView.frame.size.height - 15, 15, 15)];

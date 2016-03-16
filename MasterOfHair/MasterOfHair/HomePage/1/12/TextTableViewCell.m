@@ -46,7 +46,7 @@
     
     
     self.btn_icon = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    [self.btn_icon setImage:[UIImage imageNamed:@"01liuyan_38"] forState:(UIControlStateNormal)];
+    [self.btn_icon setBackgroundImage:[UIImage imageNamed:@"01liuyan_38"] forState:(UIControlStateNormal)];
     [self.btn_icon setTintColor:[UIColor grayColor]];
     self.btn_icon.userInteractionEnabled = NO;
     [self.contentView addSubview:self.btn_icon];

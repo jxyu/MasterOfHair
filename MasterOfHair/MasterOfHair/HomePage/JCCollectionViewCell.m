@@ -24,7 +24,7 @@
 {//同样也有contentView
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, self.contentView.frame.size.width - 10, self.contentView.frame.size.width - 10)];
     self.imageView.layer.cornerRadius = (self.contentView.frame.size.width - 10) / 2;
-    self.imageView.backgroundColor = [UIColor orangeColor];
+//    self.imageView.backgroundColor = [UIColor orangeColor];
 //    self.imageView.layer.masksToBounds = YES;
     [self.contentView addSubview:self.imageView];
     
