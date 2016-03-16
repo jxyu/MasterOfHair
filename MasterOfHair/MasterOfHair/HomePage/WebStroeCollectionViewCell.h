@@ -22,5 +22,6 @@
 
 @property (nonatomic , strong) UIImageView * image_iocn;
 
+@property (nonatomic, strong) UIView * line;
 
 @end

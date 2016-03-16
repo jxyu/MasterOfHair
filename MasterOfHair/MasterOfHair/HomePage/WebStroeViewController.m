@@ -303,6 +303,8 @@
     WebStroe_Model * model = self.arr_all[collectionView.tag][indexPath.item];
     
     WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+    
     //价格
     cell.price.text = [NSString stringWithFormat:@"¥%@",model.sell_price];
     

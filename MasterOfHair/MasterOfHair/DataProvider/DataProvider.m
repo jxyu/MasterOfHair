@@ -983,6 +983,19 @@
 }
 
 
+#pragma mark - 获取合作店下产品列表
+- (void)GetStoreProductsWithStore_id:(NSString *)store_id
+{
+    if(store_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=StoreProduct/GetStoreProducts",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\"}",store_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
 
 
 

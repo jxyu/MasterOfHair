@@ -22,7 +22,7 @@
 
 - (void)p_setupView
 {
-    self.contentView.backgroundColor = [UIColor whiteColor];
+//    self.contentView.backgroundColor = [UIColor grayColor];
     
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height / 7 * 4)];
 //    self.image.backgroundColor = [UIColor orangeColor];
@@ -43,10 +43,10 @@
     self.old_price.font = [UIFont systemFontOfSize:9];
     [self.contentView addSubview:self.old_price];
     
-    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.old_price.frame), CGRectGetMidY(self.price.frame) , (self.contentView.frame.size.width - 10) / 2 - 15, 1)];
-    line.backgroundColor = [UIColor grayColor];
-    [self.contentView addSubview:line];
     
+    self.line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.old_price.frame), CGRectGetMidY(self.price.frame) , (self.contentView.frame.size.width - 10) / 2 - 15, 1)];
+    self.line.backgroundColor = [UIColor grayColor];
+    [self.contentView addSubview:self.line];
     
     
     self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.price.frame) + 3, self.contentView.frame.size.width - 10, 30)];

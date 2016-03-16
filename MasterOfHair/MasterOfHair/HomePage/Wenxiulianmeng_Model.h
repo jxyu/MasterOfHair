@@ -29,5 +29,10 @@
 @property (nonatomic, copy) NSString * work_limit;
 
 
+@property (nonatomic, copy) NSString * product_id;
+@property (nonatomic, copy) NSString * product_image;
+@property (nonatomic, copy) NSString * product_name;
+@property (nonatomic, copy) NSString * product_price;
+
 
 @end

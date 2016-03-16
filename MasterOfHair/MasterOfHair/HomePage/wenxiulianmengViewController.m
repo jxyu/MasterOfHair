@@ -324,6 +324,8 @@
     {
         HezuomingdianViewController * hezuomingdianViewController = [[HezuomingdianViewController alloc] init];
         
+        hezuomingdianViewController.store_id = model.store_id;
+        
         [self showViewController:hezuomingdianViewController sender:nil];
     }
     else

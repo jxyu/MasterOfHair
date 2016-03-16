@@ -261,5 +261,24 @@
 #pragma mark - 获取高级技师详情
 - (void)SeniorTechnicianWithTechnician_id:(NSString *)technician_id;
 
+#pragma mark - 获取合作店下产品列表
+- (void)GetStoreProductsWithStore_id:(NSString *)store_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

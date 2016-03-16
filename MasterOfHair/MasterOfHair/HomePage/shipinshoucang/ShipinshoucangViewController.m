@@ -206,7 +206,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JCVideoCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_video" forIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
     cell.tag = indexPath.row + 10000;
     [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     cell.image_iocn.tag = indexPath.row + 10;

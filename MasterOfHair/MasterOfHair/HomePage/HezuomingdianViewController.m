@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) NSMutableArray * arr_teacher;
 
+@property (nonatomic, strong) NSMutableArray * arr_introduce;
+
 @property (nonatomic, strong) UIButton * btn_zhifu;
 @end
 
@@ -58,6 +60,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self p_data_teacher];
+    
+    [self p_data_introduce];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
@@ -116,7 +120,11 @@
     }
     else
     {
-        return 700;
+        int x = (int )self.arr_introduce.count / 3 + 1;
+        
+        int  item_length = (SCREEN_WIDTH ) / 4;
+        
+        return 50 + x * (item_length + 55);
     }
 }
 
@@ -141,7 +149,7 @@
     }
     else
     {
-        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
+//        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
         
@@ -181,6 +189,8 @@
 
 - (void)p_stroe
 {
+    int x = (int )self.arr_introduce.count / 3 + 1;
+    
     //
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
@@ -188,10 +198,10 @@
     layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
     
-    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 600) collectionViewLayout:layout];
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 50 + x * (item_length + 55)) collectionViewLayout:layout];
     self.stroe_collectionView.delegate = self;
     self.stroe_collectionView.dataSource = self;
-    self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.stroe_collectionView.backgroundColor = [UIColor whiteColor];
     
     [self.stroe_collectionView registerClass:[WebStroeCollectionViewCell class] forCellWithReuseIdentifier:@"cell_webStroe"];
 }
@@ -211,7 +221,7 @@
     }
     else
     {
-        return 11;
+        return self.arr_introduce.count;
     }
 }
 
@@ -242,7 +252,23 @@
     else
     {
         WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
-
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        cell.old_price.hidden = YES;
+        cell.line.hidden = YES;
+        cell.image_class.hidden = YES;
+        
+        if(self.arr_introduce.count != 0)
+        {
+            Wenxiulianmeng_Model * model = self.arr_introduce[indexPath.item];
+            
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/store/product/%@",Url,model.product_image];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:str1] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.price.text = model.product_price;
+            
+            cell.detail.text = model.product_name;
+        }
         
         return cell;
     }
@@ -251,18 +277,17 @@
 #pragma mark - 列表1数据
 - (void)p_data_teacher
 {
-    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
     
-    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"100"];
 }
 
 //数据
 - (void)SeniorTechnician:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_teacher = nil;
     
@@ -284,6 +309,7 @@
         }
         @finally
         {
+           
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 [self.tableView reloadData];
@@ -296,6 +322,55 @@
     }
 }
 
+#pragma mark - 列表2数据
+- (void)p_data_introduce
+{
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"introduce:"];
+    
+    [dataprovider GetStoreProductsWithStore_id:self.store_id];
+}
+
+//数据
+- (void)introduce:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_introduce = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"storeproductlist"])
+            {
+                Wenxiulianmeng_Model * model = [[Wenxiulianmeng_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_introduce addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+
 #pragma mark - 懒加载
 - (NSMutableArray *)arr_teacher
 {
@@ -304,6 +379,15 @@
         self.arr_teacher = [NSMutableArray array];
     }
     return _arr_teacher;
+}
+
+- (NSMutableArray *)arr_introduce
+{
+    if(_arr_introduce == nil)
+    {
+        self.arr_introduce = [NSMutableArray array];
+    }
+    return _arr_introduce;
 }
 
 

@@ -209,6 +209,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_store" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+
     cell.tag = indexPath.row + 10000;
     cell.image_iocn.tag = indexPath.row + 10;
     
