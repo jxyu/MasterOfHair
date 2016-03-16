@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) UILabel * name;
 
+@property (nonatomic, strong) UIImageView * image_iocn;
+
+
 @end

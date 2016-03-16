@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSMutableArray * arr_data;
 
+@property (nonatomic, assign) NSInteger page;
+
 @end
 
 @implementation MingshiViewController
@@ -88,6 +90,8 @@
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_data1];
         
         [weakSelf.tableView reloadData];
         
@@ -170,19 +174,35 @@
 #pragma mark - 数据
 - (void)p_data
 {
+    self.page = 1;
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"FamousTeacher:"];
     
-    [dataprovider FamousTeacher];
+    [dataprovider FamousTeacherpagenumber:@"1" pagesize:@"15"];
+}
+
+- (void)p_data1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"FamousTeacher:"];
+    
+    [dataprovider FamousTeacherpagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 //数据
 - (void)FamousTeacher:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
-    self.arr_data = nil;
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

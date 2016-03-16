@@ -918,12 +918,14 @@
     }
 }
 
-#pragma mark - 获取名师名店列表（不进行分页）：
-- (void)FamousTeacher
+#pragma mark - 获取名师名店列表（进行分页）：
+- (void)FamousTeacherpagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
 {
     NSString * url=[NSString stringWithFormat:@"%@index.php?r=FamousTeacher/Teacher",Url];
     
-    [self PostRequest:url andpram:nil];
+    NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+
+    [self PostRequest:url andpram:prm];
 }
 
 #pragma mark - 获取名师详细信息（不进行分页）：
@@ -938,6 +940,52 @@
         [self PostRequest:url andpram:prm];
     }
 }
+
+
+#pragma mark - 获取合作店列表（根据城市）
+- (void)CooperateStoreWithTeacher_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(city_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=CooperateStore/CooperateStore",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\"}",city_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - 获取高级技师列表
+- (void)SeniorTechnicianWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(city_id && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=SeniorTechnician/SeniorTechnician",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\"}",city_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark - 获取高级技师详情
+- (void)SeniorTechnicianWithTechnician_id:(NSString *)technician_id
+{
+    if(technician_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=SeniorTechnician/SeniorTechnician",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"technician_id\":\"%@\"}",technician_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
 
 
 

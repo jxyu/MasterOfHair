@@ -245,18 +245,21 @@
 
 
 #pragma mark - 获取名师名店列表（不进行分页）：
-- (void)FamousTeacher;
+- (void)FamousTeacherpagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
 
 #pragma mark - 获取名师详细信息（不进行分页）：
 - (void)FamousTeacherWithTeacher_id:(NSString *)teacher_id;
 
+#pragma mark - 获取合作店列表（根据城市）
+- (void)CooperateStoreWithTeacher_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+#pragma mark - 获取高级技师列表
+- (void)SeniorTechnicianWithcity_id:(NSString *)city_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
-
-
-
-
-
+#pragma mark - 获取高级技师详情
+- (void)SeniorTechnicianWithTechnician_id:(NSString *)technician_id;
 
 
 @end

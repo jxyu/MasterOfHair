@@ -1061,7 +1061,6 @@
 #pragma mark - 定位
 - (void)p_location
 {
-    
     [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
         
         NSLog(@"%lf",locationCorrrdinate.latitude);

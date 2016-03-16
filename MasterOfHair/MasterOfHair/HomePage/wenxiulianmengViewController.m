@@ -13,6 +13,9 @@
 
 #import "wenxiuFactoryTableViewCell.h"
 #import "wenxiuPeopleTableViewCell.h"
+#import "Wenxiulianmeng_Model.h"
+#import "GaojijishiViewController.h"
+#import "HezuomingdianViewController.h"
 @interface wenxiulianmengViewController () <UITableViewDataSource, UITableViewDelegate>
 
 //上面的btn
@@ -27,7 +30,9 @@
 //tableView
 @property (nonatomic, strong) UITableView * tableView;
 
+@property (nonatomic, strong) NSMutableArray * arr_data;
 
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -72,9 +77,9 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
-    
     [self example01];
+    
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
 - (void)clickRightButton:(UIButton *)sender
@@ -148,6 +153,8 @@
     self.top_viewPeople.hidden = YES;
     
     [self example01];
+    
+    [self p_data];
     //通知主线程刷新
     dispatch_async(dispatch_get_main_queue(), ^{
         //回调或者说是通知主线程刷新，
@@ -169,6 +176,8 @@
     
     
     [self example01];
+    [self p_data_teacher];
+
     
     //通知主线程刷新
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -197,6 +206,16 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
+        if(self.isTeacher == 0)
+        {
+            [self p_data];
+        }
+        else
+        {
+            [self p_data_teacher];
+        }
+        
+        
         [weakSelf.tableView reloadData];
         
         [weakSelf loadNewData];
@@ -204,6 +223,16 @@
     }];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        if(self.isTeacher == 0)
+        {
+            [self p_data1];
+        }
+        else
+        {
+//            NSLog(@"1");
+            [self p_data_teacher1];
+        }
         
         [weakSelf.tableView reloadData];
         
@@ -219,12 +248,12 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.isTeacher == 0)
-    {
-        return 15;
-    }
+//    if (self.isTeacher == 0)
+//    {
+//        return self.arr_data.count;
+//    }
     
-    return 5;
+    return self.arr_data.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -248,6 +277,16 @@
         [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
 
         
+        if(self.arr_data.count != 0)
+        {
+            Wenxiulianmeng_Model * model = self.arr_data[indexPath.row];
+            
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/store/%@",Url,model.store_image];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+            
+            cell.name.text = model.store_name;
+        }
+        
         return cell;
     }
     else
@@ -258,6 +297,19 @@
         
         [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
 
+        
+        if(self.arr_data.count != 0)
+        {
+            Wenxiulianmeng_Model * model = self.arr_data[indexPath.row];
+
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/technician/%@",Url,model.technician_image];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.name.text = model.technician_name;
+            
+            cell.detail.text = model.technician_describe;
+        }
+        
         return cell;
     }
 }
@@ -265,6 +317,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Wenxiulianmeng_Model * model = self.arr_data[indexPath.row];
+    
+    if(self.isTeacher == 0)
+    {
+        HezuomingdianViewController * hezuomingdianViewController = [[HezuomingdianViewController alloc] init];
+        
+        [self showViewController:hezuomingdianViewController sender:nil];
+    }
+    else
+    {
+        GaojijishiViewController * gaojijishiViewController = [[GaojijishiViewController alloc] init];
+        
+        gaojijishiViewController.technician_id = model.technician_id;
+        
+        [self showViewController:gaojijishiViewController sender:nil];
+    }
 }
 
 #pragma mark - 下拉刷新
@@ -287,6 +356,145 @@
     });
     
 }
+
+#pragma mark - 数据
+- (void)p_data
+{
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
+    
+    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:@"1" pagesize:@"15"];
+}
+
+- (void)p_data1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
+    
+    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
+}
+
+//数据
+- (void)CooperateStore:(id )dict
+{
+//    NSLog(@"%@",dict);
+
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"cooperatestorelist"])
+            {
+                Wenxiulianmeng_Model * model = [[Wenxiulianmeng_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+#pragma mark - 数据
+- (void)p_data_teacher
+{
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
+    
+    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"15"];
+}
+
+- (void)p_data_teacher1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
+    
+    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+}
+
+
+//数据
+- (void)SeniorTechnician:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"seniortechnicianlist"])
+            {
+                Wenxiulianmeng_Model * model = [[Wenxiulianmeng_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_data addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        
+    }
+}
+
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
+}
+
 
 
 
