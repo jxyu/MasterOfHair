@@ -271,7 +271,8 @@
 #pragma mark - (2)获取某用户的所有订单并分页
 - (void)GetOrdersWithmember_id:(NSString *)member_id union_order_status:(NSString *)union_order_status pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
+#pragma mark - 删除多个或一个订单
+- (void)deleteWithStore_id:(NSString *)order_id;
 
 
 

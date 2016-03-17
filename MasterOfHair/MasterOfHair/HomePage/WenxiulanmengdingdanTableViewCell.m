@@ -37,7 +37,7 @@
 - (void )p_setupView
 {
     self.view_bg = [[UIView alloc] init];
-    self.view_bg.backgroundColor = [UIColor colorWithRed:230 green:233 blue:237 alpha:1];
+    self.view_bg.backgroundColor = [UIColor colorWithRed:250 green:250 blue:250 alpha:1];
     [self.contentView addSubview:self.view_bg];
     
     self.number = [[UILabel alloc] init];

@@ -1025,7 +1025,18 @@
 }
 
 
-
+#pragma mark - 删除多个或一个订单
+- (void)deleteWithStore_id:(NSString *)order_id
+{
+    if(order_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=UnionOrder/delete",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"order_id\":\"%@\"}",order_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

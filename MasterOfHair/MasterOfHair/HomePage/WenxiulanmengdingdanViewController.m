@@ -167,7 +167,62 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //做删除操作，并调接口删除后台数据
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否删除该订单" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+        
+    }];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action];
+    
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+       
+        Wenxiulanmengdingdan_Model * model = self.arr_data[indexPath.row];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"delete:"];
+        
+        [dataprovider deleteWithStore_id:model.order_id];
+        
+    }];
+    
+    [alert addAction:action1];
+    
 }
+
+- (void)delete:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            [self p_data_state];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 #pragma mark - 下拉刷新
 - (void)example01
