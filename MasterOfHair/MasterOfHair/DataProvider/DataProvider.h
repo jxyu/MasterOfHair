@@ -274,7 +274,8 @@
 #pragma mark - 删除多个或一个订单
 - (void)deleteWithStore_id:(NSString *)order_id;
 
-
+#pragma mark - 商盟产品接口
+- (void)productWithcategory_id:(NSString *)category_id is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

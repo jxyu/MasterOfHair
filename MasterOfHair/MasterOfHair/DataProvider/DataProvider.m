@@ -1038,7 +1038,17 @@
     }
 }
 
-
+#pragma mark - 商盟产品接口
+- (void)productWithcategory_id:(NSString *)category_id is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(category_id && pagenumber && pagesize && is_maker && is_sell)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=product/getProductList",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"category_id\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",category_id,is_maker,is_sell],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

@@ -164,6 +164,8 @@
     WebStroe_Model * model = self.arr_data[indexPath.item];
     
     WebStroeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_webStroe" forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor whiteColor];
     //价格
     cell.price.text = [NSString stringWithFormat:@"¥%@",model.sell_price];
     
@@ -173,7 +175,7 @@
     
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,model.list_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
     
-    if(![model.city_id isEqualToString:@"1"])
+    if(![model.city_id isEqualToString:@"0"])
     {
         cell.image_class.hidden = YES;
     }
