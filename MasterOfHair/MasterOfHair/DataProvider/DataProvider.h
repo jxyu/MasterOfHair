@@ -278,11 +278,16 @@
 - (void)productWithcategory_id:(NSString *)category_id is_maker:(NSString *)is_maker is_sell:(NSString *)is_sell pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
+//#pragma mark - 添加一个订单(POST提交)(new)
+//- (void)createWithMember_id:(NSString *)member_id pay_method:(NSString *)pay_method  pay_status:(NSString *)pay_status orderlist:(NSMutableArray *)orderlist;
 
+#pragma mark -  说说
+- (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content;
 
+#pragma mark -  说说1(图片)
+- (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content file_type:(NSString *)file_type file_path1:(NSData *)file_path1 file_path2:(NSData *)file_path2 file_path3:(NSData *)file_path3 file_path4:(NSData *)file_path4 file_path5:(NSData *)file_path5 file_path6:(NSData *)file_path6;
 
-
-
-
+#pragma mark -  说说1(图片)
+- (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content file_type:(NSString *)file_type arr:(NSMutableArray *)arr;
 
 @end

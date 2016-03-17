@@ -10,7 +10,6 @@
 #import "ZhaoxiangViewController.h"
 
 
-
 @interface ZhaoxiangViewController () <UITextViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;

@@ -22,8 +22,6 @@
 
 @property (nonatomic, strong) UITableView * tableView;
 
-
-
 @end
 
 @implementation ShuoshuoViewController
@@ -187,9 +185,13 @@
 }
 
 - (void)btn_3Action:(UIButton *)sender
-{
-    ZhaoxiangViewController * zhaoxiangViewController = [[ZhaoxiangViewController alloc] init];
-    [self showViewController:zhaoxiangViewController sender:nil];
+{//只拍照
+//    ZhaoxiangViewController * zhaoxiangViewController = [[ZhaoxiangViewController alloc] init];
+//    [self showViewController:zhaoxiangViewController sender:nil];
+    
+    //都有
+    ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
+    [self showViewController:zhaopiankuViewController sender:nil];
 }
 
 - (void)btn_4Action:(UIButton *)sender

@@ -26,6 +26,10 @@
 //数组
 @property (nonatomic, strong) NSMutableArray * assetsArray;
 
+@property (nonatomic, strong) NSMutableArray * arr_picData;
+
+@property (nonatomic, strong) NSMutableArray * arr_dataList;
+
 @end
 
 @implementation ZhaopiankuViewController
@@ -89,15 +93,62 @@
     }
     else
     {
+        [self.text_View resignFirstResponder];
+
+        self.arr_dataList = nil;
+        
         if([self.text_View.text length] == 0)
         {
             self.label_placeHold.hidden = NO;
         }
-        [self.text_View resignFirstResponder];
-    
-        NSLog(@"发布成功");
+        
+        for (int i = 0; i < self.arr_picData.count; i++)
+        {
+            UIImage *tempImg = self.arr_picData[i];
+            NSData *imgData = UIImagePNGRepresentation(tempImg);
+            
+            [self.arr_dataList addObject:imgData];
+        }
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"1" arr:self.arr_dataList];
+        
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     }
 }
+
+#pragma mark - 说说
+- (void)create:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 #pragma mark - 布局
 - (void)p_setupView
@@ -236,6 +287,27 @@
     {
         [self.assetsArray removeObjectAtIndex:sender.tag - 10000];
     }
+    
+    self.arr_picData = nil;
+    
+    for (int i = 0; i < self.assetsArray.count; i++) {
+        
+        JKAssets *_asset = self.assetsArray[i];
+        ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
+        [lib assetForURL:_asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
+            NSUserDefaults * userdef=[NSUserDefaults standardUserDefaults];
+            if (asset) {
+                [self.arr_picData addObject:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]];
+                [userdef setObject:UIImageJPEGRepresentation
+                 ([UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]], 1.0) forKey:[NSString stringWithFormat:@"%ld",(long)i]];
+            }
+            NSLog(@"%ld",(long)i);
+        } failureBlock:^(NSError *error) {
+            
+        }];
+        
+    }
+    
 
     dispatch_async(dispatch_get_main_queue(), ^{
         //刷新tableView(记住,要更新放在主线程中)
@@ -246,6 +318,8 @@
 #pragma mark - 图片
 - (void)composePicAdd
 {
+    self.arr_picData = nil;
+    
     JKImagePickerController *imagePickerController = [[JKImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.showsCancelButton = YES;
@@ -266,21 +340,6 @@
     }];
 }
 
-- (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
-{
-    self.assetsArray = nil;
-    
-    self.assetsArray = [NSMutableArray arrayWithArray:assets];
-    
-    [imagePicker dismissViewControllerAnimated:YES completion:^{
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //刷新tableView(记住,要更新放在主线程中)
-            [self.collectionView reloadData];
-        });
-        
-    }];
-}
 
 - (void)imagePickerControllerDidCancel:(JKImagePickerController *)imagePicker
 {
@@ -322,6 +381,61 @@
 }
 
 
+- (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
+{
+    self.assetsArray = nil;
+    self.arr_picData = nil;
 
+    self.assetsArray = [NSMutableArray arrayWithArray:assets];
+    
+    for (int i = 0; i < self.assetsArray.count; i++) {
+        
+        JKAssets *_asset = self.assetsArray[i];
+        ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
+        [lib assetForURL:_asset.assetPropertyURL resultBlock:^(ALAsset *asset) {
+            NSUserDefaults * userdef=[NSUserDefaults standardUserDefaults];
+            if (asset) {
+                [self.arr_picData addObject:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]];
+                [userdef setObject:UIImageJPEGRepresentation
+                 ([UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]], 1.0) forKey:[NSString stringWithFormat:@"%ld",(long)i]];
+            }
+            NSLog(@"%ld",(long)i);
+        } failureBlock:^(NSError *error) {
+            
+        }];
+        
+    }
+    
+    [imagePicker dismissViewControllerAnimated:YES completion:^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新tableView(记住,要更新放在主线程中)
+            [self.collectionView reloadData];
+        });
+        
+    }];
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)arr_picData
+{
+    if(_arr_picData == nil)
+    {
+        self.arr_picData = [NSMutableArray array];
+    }
+    
+    return _arr_picData;
+}
+
+- (NSMutableArray *)arr_dataList
+{
+    if(_arr_dataList == nil)
+    {
+        self.arr_dataList = [NSMutableArray array];
+    }
+    
+    return _arr_dataList;
+}
 
 @end
