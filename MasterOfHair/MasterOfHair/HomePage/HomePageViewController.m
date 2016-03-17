@@ -797,8 +797,13 @@
             [userdefault setObject:@"" forKey:@"TuwenFeilei"];
             [userdefault setObject:@"" forKey:@"city_id"];
             [userdefault setObject:@"" forKey:@"city_name"];
+            
             [userdefault setObject:@"" forKey:@"diquweizhi_id"];
             [userdefault setObject:@"" forKey:@"diquweizhi"];
+            
+//            /纹绣联盟
+            [userdefault setObject:@"" forKey:@"diquweizhi_id1"];
+            [userdefault setObject:@"" forKey:@"diquweizhi1"];
 
 
             NSLog(@"%@",[userdefault objectForKey:@"diquweizhi"]);
@@ -819,6 +824,10 @@
         
         [userdefault setObject:@"" forKey:@"diquweizhi_id"];
         [userdefault setObject:@"" forKey:@"diquweizhi"];
+        
+        //纹绣联盟
+        [userdefault setObject:@"" forKey:@"diquweizhi_id1"];
+        [userdefault setObject:@"" forKey:@"diquweizhi1"];
     }
 }
 

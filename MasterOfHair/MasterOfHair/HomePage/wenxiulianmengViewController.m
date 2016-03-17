@@ -61,7 +61,7 @@
     [self addLeftButton:@"iconfont-fanhui"];
     
     //右边为定位
-    [self addRightbuttontitle:@"临沂"];
+//    [self addRightbuttontitle:@"临沂"];
     _lblRight.font = [UIFont systemFontOfSize:18];
     //    _lblRight.backgroundColor = [UIColor orangeColor];
     _lblRight.frame = CGRectMake(SCREEN_WIDTH - 65, 19, 50, 44);
@@ -77,6 +77,41 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"city_id"] length] == 0)
+    {
+        [self addRightbuttontitle:@"定位"];
+        
+        if([[userdefault objectForKey:@"diquweizhi1"] length] == 0)
+        {
+            [self addRightbuttontitle:@"定位"];
+            
+            [userdefault setObject:@"183" forKey:@"diquweizhi_id1"];
+        }
+        else
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi1"]];
+        }
+    }
+    else
+    {
+        [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+        
+        if([[userdefault objectForKey:@"diquweizhi1"] length] == 0)
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+
+            [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id1"];
+        }
+        else
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi1"]];
+        }
+    }
+
+    
+    
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
@@ -364,9 +399,16 @@
 {
     self.page = 1;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
+//    [userdefault objectForKey:@"diquweizhi_id1"]
+    
+//    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
+//
+//    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id1"]);
     
     [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:@"1" pagesize:@"15"];
 }
@@ -375,10 +417,14 @@
 {
     self.page ++;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
     
+//    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
+
     [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
@@ -427,9 +473,14 @@
 {
     self.page = 1;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
+    
+//    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
+//    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id1"]);
     
     [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"15"];
 }
@@ -438,9 +489,13 @@
 {
     self.page ++;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
+    
+//    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
     
     [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }

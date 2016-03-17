@@ -204,6 +204,7 @@
 		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
 		7BF878031C9A3868008F23A7 /* WenxiulianmengDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */; };
 		7BF878071C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878061C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m */; };
+		7BF8780A1C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878091C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m */; };
 		7BFAA7791C8A85C400D86D81 /* BianjiziliaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFAA7781C8A85C400D86D81 /* BianjiziliaoViewController.m */; };
 		7BFAA77B1C8A8DEB00D86D81 /* bazhaotupian.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFAA77A1C8A8DEB00D86D81 /* bazhaotupian.png */; };
 		7BFAA77F1C8AAEC500D86D81 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFAA77E1C8AAEC500D86D81 /* VPImageCropperViewController.m */; };
@@ -668,6 +669,8 @@
 		7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WenxiulianmengDetailViewController.m; sourceTree = "<group>"; };
 		7BF878051C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wenxiulanmengdingdan_Model.h; sourceTree = "<group>"; };
 		7BF878061C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wenxiulanmengdingdan_Model.m; sourceTree = "<group>"; };
+		7BF878081C9A55A9008F23A7 /* WenxiulianmengLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WenxiulianmengLocationViewController.h; sourceTree = "<group>"; };
+		7BF878091C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WenxiulianmengLocationViewController.m; sourceTree = "<group>"; };
 		7BFAA7771C8A85C400D86D81 /* BianjiziliaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BianjiziliaoViewController.h; sourceTree = "<group>"; };
 		7BFAA7781C8A85C400D86D81 /* BianjiziliaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BianjiziliaoViewController.m; sourceTree = "<group>"; };
 		7BFAA77A1C8A8DEB00D86D81 /* bazhaotupian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazhaotupian.png; sourceTree = "<group>"; };
@@ -1743,6 +1746,8 @@
 				7BF5D3691C992D3700F4F9C0 /* HezuomingdianViewController.m */,
 				7BF878011C9A3868008F23A7 /* WenxiulianmengDetailViewController.h */,
 				7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */,
+				7BF878081C9A55A9008F23A7 /* WenxiulianmengLocationViewController.h */,
+				7BF878091C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m */,
 			);
 			name = wenxiulianmeng;
 			sourceTree = "<group>";
@@ -2722,6 +2727,7 @@
 				7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
 				7B8B33B51C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m in Sources */,
+				7BF8780A1C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m in Sources */,
 				7BB26FD41C5AF01E001D332E /* ZhifuViewController.m in Sources */,
 				7BB26FDB1C5B0F14001D332E /* cishanjijinhuiTableViewCell.m in Sources */,
 				7BF5D3671C99281B00F4F9C0 /* GaojijishiViewController.m in Sources */,
