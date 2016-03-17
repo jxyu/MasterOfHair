@@ -24,6 +24,7 @@
 #import "TuwenshoucangViewController.h"
 #import "BianjiziliaoViewController.h"
 #import "ShangchengdingdanViewController.h"
+#import "WenxiulanmengdingdanViewController.h"
 @interface MineViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -532,7 +533,9 @@
         {
             if(indexPath.row == 0)
             {
+                WenxiulanmengdingdanViewController * wenxiulanmengdingdanViewController = [[WenxiulanmengdingdanViewController alloc] init];
                 
+                [self showViewController:wenxiulanmengdingdanViewController sender:nil];
             }
             else
             {

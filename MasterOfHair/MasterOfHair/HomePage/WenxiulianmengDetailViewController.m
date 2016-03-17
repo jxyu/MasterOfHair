@@ -1,25 +1,31 @@
 //
-//  ZhifuViewController.m
+//  WenxiulianmengDetailViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/29.
+//  Created by 鞠超 on 16/3/17.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "ZhifuViewController.h"
+#import "WenxiulianmengDetailViewController.h"
 
-@interface ZhifuViewController ()
+@interface WenxiulianmengDetailViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
 
 @property (nonatomic, strong) UIButton * btn_zhifubo;
 @property (nonatomic, strong) UIButton * btn_weixin;
 
+@property (nonatomic, strong) UILabel * name;
 
+@property (nonatomic, strong) UILabel * price;
+
+@property (nonatomic, strong) UILabel * old_price;
+
+@property (nonatomic, strong) UITextField * text_money;
 
 @end
 
-@implementation ZhifuViewController
+@implementation WenxiulianmengDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,29 +71,49 @@
     view_1.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_1];
     
-    self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 30)];
+    self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, (SCREEN_WIDTH - 30) / 3 * 2, 30)];
     self.name.text = @"课程名称";
     [view_1 addSubview:self.name];
     
-
+    self.old_price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 5, 10, (SCREEN_WIDTH - 30) / 3, 30)];
+    self.old_price.textAlignment = NSTextAlignmentRight;
+    self.old_price.text = @"100元";
+    [view_1 addSubview:self.old_price];
+    
+    
+    
     UIView * view_2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_1.frame) + 2, SCREEN_WIDTH, 50)];
     view_2.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_2];
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 50, 30)];
-    label.text = @"总价:";
+    label.text = @"技师:";
     [view_2 addSubview:label];
     
-    self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(label.frame) - 20, 30)];
+    self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label.frame) - 20, 30)];
     self.price.text = @"5000元";
-    self.price.textColor = [UIColor orangeColor];
-    self.price.textAlignment = NSTextAlignmentRight;
+//    self.price.textColor = [UIColor orangeColor];
+    self.price.textAlignment = NSTextAlignmentLeft;
     [view_2 addSubview:self.price];
     
+    UIView * view_4 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_2.frame) + 5, SCREEN_WIDTH, 50)];
+    view_4.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view_4];
     
-    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_2.frame) + 10, SCREEN_WIDTH, 70)];
+    UILabel * label3 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 70, 30)];
+    label3.text = @"实际支付";
+    [view_4 addSubview:label3];
+    
+    self.text_money = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label3.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(label3.frame) - 20, 30)];
+    self.text_money.placeholder = @"请输入实际支付金额";
+    self.text_money.delegate = self;
+    [view_4 addSubview:self.text_money];
+    
+    
+    UIView * view_3 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_4.frame) + 10, SCREEN_WIDTH, 70)];
     view_3.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view_3];
+
     
     UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(13, 10, SCREEN_WIDTH - 15, 15)];
     label_2.text = @"选择支付方式";
@@ -138,15 +164,32 @@
     
     [self.btn_zhifu addTarget:self action:@selector(btn_zhifuAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
+    
     //赋值
-    self.name.text = self.name_course;
-    self.price.text = self.money;
+    self.name.text = self.model_baocun2.product_name;
+    self.old_price.text = [NSString stringWithFormat:@"%@元",self.model_baocun2.product_price];
+    
+    self.price.text = self.model_baocun1.technician_name;
 }
 
 #pragma mark - 支付
 - (void)btn_zhifuAction:(UIButton *)sender
 {
-    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
+    if([self.text_money.text length] == 0)
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实际支付金额不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
+    else if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -163,6 +206,16 @@
     else
     {
         NSLog(@"走支付流程");
+        
+#warning 先支付，后生成订单
+        
+        //调接口，
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1"];
     }
     
 }
@@ -201,18 +254,45 @@
     }
 }
 
+#pragma mark - 数据
+//数据
+- (void)create:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"生成订单" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
+#pragma mark - 点击
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.text_money resignFirstResponder];
+}
 
-
-
-
-
-
-
-
-
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 @end

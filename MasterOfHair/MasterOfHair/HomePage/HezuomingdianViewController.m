@@ -11,6 +11,8 @@
 #import "JCCollectionViewCell.h"
 #import "Wenxiulianmeng_Model.h"
 #import "WebStroeCollectionViewCell.h"
+#import "WenxiulianmengDetailViewController.h"
+
 @interface HezuomingdianViewController () <UITableViewDataSource, UITableViewDelegate ,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -23,6 +25,13 @@
 @property (nonatomic, strong) NSMutableArray * arr_introduce;
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
+
+//@property (nonatomic, strong) NSMutableArray * arr_baocun1;
+//@property (nonatomic, strong) NSMutableArray * arr_baocun2;
+
+@property (nonatomic, strong) Wenxiulianmeng_Model * model_baocun1;
+@property (nonatomic, strong) Wenxiulianmeng_Model * model_baocun2;
+
 @end
 
 @implementation HezuomingdianViewController
@@ -59,6 +68,9 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.model_baocun1 = nil;
+    self.model_baocun2 = nil;
+
     [self p_data_teacher];
     
     [self p_data_introduce];
@@ -98,7 +110,31 @@
 #pragma mark - 下一步
 - (void)btn_zhifuAction:(UIButton *)sender
 {
-    NSLog(@"下一步");
+//    NSLog(@"下一步");
+    
+    if([self.model_baocun1.technician_id length] != 0 && [self.model_baocun2.product_id length] != 0)
+    {
+        WenxiulianmengDetailViewController * wenxiulianmengDetailViewController = [[WenxiulianmengDetailViewController alloc] init];
+        
+        wenxiulianmengDetailViewController.model_baocun1 = self.model_baocun1;
+        wenxiulianmengDetailViewController.model_baocun2 = self.model_baocun2;
+        
+        [self showViewController:wenxiulianmengDetailViewController sender:nil];
+    }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择技师或产品" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+    }
 }
 
 #pragma mark - 代理
@@ -245,8 +281,15 @@
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             cell.name.text = model.technician_name;
+            
+            
+            if([self.model_baocun1.technician_id isEqualToString:model.technician_id])
+            {
+                cell.layer.borderColor = navi_bar_bg_color.CGColor;
+                cell.layer.borderWidth = 1;
+                cell.image_iocn.hidden = NO;
+            }
         }
-        
         return cell;
     }
     else
@@ -268,11 +311,55 @@
             cell.price.text = model.product_price;
             
             cell.detail.text = model.product_name;
+            
+            if([self.model_baocun2.product_id isEqualToString:model.product_id])
+            {
+                cell.layer.borderColor = navi_bar_bg_color.CGColor;
+                cell.layer.borderWidth = 1;
+                cell.image_iocn.hidden = NO;
+            }
         }
         
         return cell;
     }
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        Wenxiulianmeng_Model * model = self.arr_teacher[indexPath.item];
+        
+        if([self.model_baocun1.technician_id isEqualToString:model.technician_id])
+        {
+            self.model_baocun1 = nil;
+        }
+        else
+        {
+            self.model_baocun1 = model;
+        }
+    }
+    else
+    {
+        Wenxiulianmeng_Model * model = self.arr_introduce[indexPath.item];
+        
+        if([self.model_baocun2.product_id isEqualToString:model.product_id])
+        {
+            self.model_baocun2 = nil;
+        }
+        else
+        {
+            self.model_baocun2 = model;
+        }
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        [self.tableView reloadData];
+    });
+}
+
+
 
 #pragma mark - 列表1数据
 - (void)p_data_teacher
@@ -336,7 +423,7 @@
 //数据
 - (void)introduce:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_introduce = nil;
     
@@ -390,6 +477,22 @@
     return _arr_introduce;
 }
 
-
+//- (NSMutableArray *)arr_baocun1
+//{
+//    if(_arr_baocun1 == nil)
+//    {
+//        self.arr_baocun1 = [NSMutableArray array];
+//    }
+//    return _arr_baocun1;
+//}
+//
+//- (NSMutableArray *)arr_baocun2
+//{
+//    if(_arr_baocun2 == nil)
+//    {
+//        self.arr_baocun2 = [NSMutableArray array];
+//    }
+//    return _arr_baocun2;
+//}
 
 @end

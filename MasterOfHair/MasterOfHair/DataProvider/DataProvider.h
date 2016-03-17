@@ -264,10 +264,12 @@
 #pragma mark - 获取合作店下产品列表
 - (void)GetStoreProductsWithStore_id:(NSString *)store_id;
 
+#pragma mark - (3)添加一个订单
+- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status;
 
 
-
-
+#pragma mark - (2)获取某用户的所有订单并分页
+- (void)GetOrdersWithmember_id:(NSString *)member_id union_order_status:(NSString *)union_order_status pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

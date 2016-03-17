@@ -997,6 +997,40 @@
 }
 
 
+#pragma mark - (3)添加一个订单
+- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status
+{
+    if(store_id && member_id && product_id && technician_id && order_payable && order_realpay && union_order_status)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=UnionOrder/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\",\"member_id\":\"%@\",\"product_id\":\"%@\",\"technician_id\":\"%@\",\"order_payable\":\"%@\",\"order_realpay\":\"%@\",\"union_order_status\":\"%@\"}",store_id,member_id,product_id,technician_id,order_payable,order_realpay,union_order_status]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+#pragma mark - (2)获取某用户的所有订单并分页
+- (void)GetOrdersWithmember_id:(NSString *)member_id union_order_status:(NSString *)union_order_status pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(member_id && union_order_status && pagenumber && pagesize)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=UnionOrder/GetOrders",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"union_order_status\":\"%@\"}",member_id,union_order_status],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
