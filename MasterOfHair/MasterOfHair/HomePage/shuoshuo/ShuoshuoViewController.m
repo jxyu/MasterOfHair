@@ -244,7 +244,8 @@
     
     uploadVideoVC.uploadType=@"1";
     
-    [self.navigationController pushViewController:uploadVideoVC animated:YES];
+    [self showViewController:uploadVideoVC sender:nil];
+    
 }
 
 

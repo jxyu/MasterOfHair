@@ -290,4 +290,8 @@
 #pragma mark -  说说1(图片)
 - (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content file_type:(NSString *)file_type arr:(NSMutableArray *)arr;
 
+#pragma mark -  说说1(视频)
+- (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content file_type:(NSString *)file_type Path:(NSURL *)videoPath;
+
+
 @end
