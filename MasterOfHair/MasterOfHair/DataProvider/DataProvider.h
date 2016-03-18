@@ -295,8 +295,7 @@
 
 
 #pragma mark -  说说分页列表
-- (void)talkAllWithpagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
-
+- (void)talkAllWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 

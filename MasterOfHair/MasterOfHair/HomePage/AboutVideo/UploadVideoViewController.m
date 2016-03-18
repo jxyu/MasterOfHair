@@ -34,7 +34,7 @@
     [self addLeftButton:@"iconfont-fanhui"];
     channelID=@"";
     _lblTitle.text=@"视频信息";
-    [self addRightbuttontitle:@"保存"];
+    [self addRightbuttontitle:@"发布"];
     self.view.backgroundColor = BACKGROUND_COLOR;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SelectChannelCallBack:) name:@"select_channel_finish" object:nil];

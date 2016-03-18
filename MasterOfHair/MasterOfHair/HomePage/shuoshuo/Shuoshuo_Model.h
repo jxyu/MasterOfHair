@@ -25,10 +25,19 @@
 
 //
 
-//@property (nonatomic, copy) NSString * file_id;
-//@property (nonatomic, copy) NSString * file_name;
-//@property (nonatomic, copy) NSString * file_path;
-//@property (nonatomic, copy) NSString * file_type;
+@property (nonatomic, copy) NSString * reply_good;
+
+
+
+@property (nonatomic, copy) NSString * file_id;
+@property (nonatomic, copy) NSString * file_name;
+@property (nonatomic, copy) NSString * file_path;
+@property (nonatomic, copy) NSString * file_type;
+
+
+
+
+
 
 
 @end

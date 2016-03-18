@@ -15,6 +15,7 @@
 #import <ALBBQuPaiPlugin/ALBBQuPaiPlugin.h>
 #import "UploadVideoViewController.h"
 #import "Shuoshuo_Model.h"
+
 @interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate,QupaiSDKDelegate>
 {
     UIViewController *recordController;
@@ -37,11 +38,11 @@
 //2
 @property (nonatomic, strong) UILabel * talk_content;
 
-
+@property (nonatomic,assign) NSInteger page;
 
 
 @property (nonatomic, strong) NSMutableArray * arr_all;
-
+@property (nonatomic, strong) NSMutableArray * arr_filelist;
 @end
 
 @implementation ShuoshuoViewController
@@ -87,7 +88,7 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self p_data];
+    [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
@@ -102,6 +103,24 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    
+    __weak __typeof(self) weakSelf = self;
+    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self p_data];
+        
+        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_data1];
+        
+        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
     
     //
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -133,12 +152,39 @@
     {
         if(self.arr_all.count != 0)
         {
+            CGFloat sum = 0;
+            
             Shuoshuo_Model * model = self.arr_all[indexPath.section];
             
             CGFloat x_length = [model.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
             
+            //图片
+            CGFloat length_x = (SCREEN_WIDTH - 80 - 10) / 3;
             
-            return x_length + 10;
+            
+            
+            if([self.arr_filelist[indexPath.section] count] <= 3)
+            {
+                NSArray * arr = self.arr_filelist[indexPath.section];
+                
+                Shuoshuo_Model * model = arr.firstObject;
+                
+                if([model.file_id length] == 0)
+                {
+                    sum = x_length + 10;
+                }
+                else
+                {
+                    sum = x_length + 10 + (length_x + 20);
+                }
+            }
+            else if([self.arr_filelist[indexPath.section] count] > 3)
+            {
+                sum = x_length + 10 + (length_x + 20) * 2 + 5;
+            }
+
+            
+            return sum;
         }
         else
         {
@@ -188,7 +234,9 @@
 
             self.name.text = model.member_username;
             
-            self.time.text = model.talk_time;
+            NSString * str = [model.talk_time substringFromIndex:10];
+            
+            self.time.text = str;
         }
         
     }
@@ -229,6 +277,12 @@
             self.zannum.text = model.talk_good;
             
             self.pingjianum.text = model.talk_reply;
+            
+            if([model.reply_good isEqualToString:@"1"])
+            {
+                self.zannum.textColor = navi_bar_bg_color;
+                self.image_zan.image = [UIImage imageNamed:@"qwasderf"];
+            }
         }
     }
     else
@@ -244,21 +298,71 @@
             self.talk_content.text = @"剃头匠";
             self.talk_content.numberOfLines = 0;
             self.talk_content.font = [UIFont systemFontOfSize:15];
-            self.talk_content.backgroundColor = [UIColor orangeColor];
+//            self.talk_content.backgroundColor = [UIColor orangeColor];
             
             [cell addSubview:self.talk_content];
             
             self.talk_content.text = model.talk_content;
             
-            
-            
+                
+            if([model.talk_content length] == 0)
+            {
+                self.talk_content.hidden = YES;
+                
+                for (int i = 0; i < [self.arr_filelist[indexPath.section] count]; i ++)
+                {
+                    int x = (int )i / 3;
+                    int y = i % 3;
+//                        NSLog(@"%d  %d",x,y);
+                    
+                    CGFloat length = (SCREEN_WIDTH - 90) / 3;
+                
+                    Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
+                    
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
+                    //tag
+                    image.tag = indexPath.section * 1000 + indexPath.row;
+                    
+//                    image.backgroundColor = [UIColor orangeColor];
+                    if([modle_list.file_type isEqualToString:@"1"])
+                    {
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                    }
+                    [cell addSubview:image];
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i < [self.arr_filelist[indexPath.section] count]; i ++)
+                {
+                    int x = (int )i / 3;
+                    int y = i % 3;
+//                        NSLog(@"%d  %d",x,y);
+                    
+                    CGFloat length = (SCREEN_WIDTH - 90) / 3;
+                
+                    Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
+                    
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20)];
+                    //tag
+                    image.tag = indexPath.section * 1000 + indexPath.row;
+                    
+//                    image.backgroundColor = [UIColor orangeColor];
+
+                    if([modle_list.file_type isEqualToString:@"1"])
+                    {
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                        
+//                        image.image = [UIImage imageNamed:@"sudisudiusidusidu"];
+                        
+                    }
+                    [cell addSubview:image];
+                }
+            }
         }
+        
     }
-    
-    
-    
-    
-    
     
     return cell;
 }
@@ -267,10 +371,22 @@
 
 - (void)p_data
 {
+    self.page = 1;
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkAllWithpagenumber:@"1" pagesize:@"15"];
+    [dataprovider talkAllWithmember_id:@"1" pagenumber:@"1" pagesize:@"15"];
+}
+
+- (void)p_data1
+{
+    self.page ++ ;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    
+    [dataprovider talkAllWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 
@@ -279,7 +395,12 @@
 {
     NSLog(@"%@",dict);
     
-    self.arr_all = nil;
+    if(self.page == 1)
+    {
+        self.arr_all = nil;
+        self.arr_filelist = nil;
+    }
+    
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -293,6 +414,21 @@
 //                NSLog(@"%@",model.member_username);
                 
                 [self.arr_all addObject:model];
+                
+                NSMutableArray * arr_list = [NSMutableArray array];
+                
+                for (NSDictionary * dic_list in dic[@"filelist"])
+                {
+                    Shuoshuo_Model * model_list = [[Shuoshuo_Model alloc] init];
+                    
+                    [model_list setValuesForKeysWithDictionary:dic_list];
+                    
+                    [arr_list addObject:model_list];
+                    
+//                    NSLog(@"%@",model_list.file_path);
+                }
+                
+                [self.arr_filelist addObject:arr_list];
             }
         }
         @catch (NSException *exception)
@@ -507,6 +643,38 @@
     
     return _arr_all;
 }
+
+- (NSMutableArray *)arr_filelist
+{
+    if(_arr_filelist == nil)
+    {
+        self.arr_filelist = [NSMutableArray array];
+    }
+    
+    return _arr_filelist;
+}
+
+#pragma mark - 下拉刷新
+- (void)example01
+{
+    // 马上进入刷新状态
+    [self.tableView.header beginRefreshing];
+}
+
+-(void)example02
+{
+    [self.tableView.footer beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+    });
+    
+}
+
 
 
 @end

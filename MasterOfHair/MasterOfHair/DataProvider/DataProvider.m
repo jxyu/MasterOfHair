@@ -1129,13 +1129,13 @@
 
 
 #pragma mark -  说说分页列表
-- (void)talkAllWithpagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+- (void)talkAllWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
 {
-    if(pagenumber && pagesize)
+    if(pagenumber && pagesize && member_id)
     {
         NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/talkAll",Url];
         
-        NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
     }
