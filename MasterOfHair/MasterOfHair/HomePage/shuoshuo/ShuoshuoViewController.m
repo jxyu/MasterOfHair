@@ -14,13 +14,33 @@
 #import "LuxiangViewController.h"
 #import <ALBBQuPaiPlugin/ALBBQuPaiPlugin.h>
 #import "UploadVideoViewController.h"
-
+#import "Shuoshuo_Model.h"
 @interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate,QupaiSDKDelegate>
 {
     UIViewController *recordController;
 }
 
 @property (nonatomic, strong) UITableView * tableView;
+
+//1
+@property (nonatomic, strong) UIImageView * image_iocn;
+@property (nonatomic, strong) UILabel * name;
+@property (nonatomic, strong) UILabel * time;
+
+//3
+@property (nonatomic, strong) UIImageView * image_zan;
+@property (nonatomic, strong) UIImageView * image_pingjia;
+
+@property (nonatomic, strong) UILabel * zannum;
+@property (nonatomic, strong) UILabel * pingjianum;
+
+//2
+@property (nonatomic, strong) UILabel * talk_content;
+
+
+
+
+@property (nonatomic, strong) NSMutableArray * arr_all;
 
 @end
 
@@ -67,6 +87,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self p_data];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -77,31 +99,257 @@
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     //
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_"];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_"];
 }
 
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.arr_all.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return 3;
+}
+
+- (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+    {
+        return 60;
+    }
+    else if(indexPath.row == 2)
+    {
+        return 40;
+    }
+    else
+    {
+        if(self.arr_all.count != 0)
+        {
+            Shuoshuo_Model * model = self.arr_all[indexPath.section];
+            
+            CGFloat x_length = [model.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
+            
+            
+            return x_length + 10;
+        }
+        else
+        {
+            return 200;
+        }
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_" forIndexPath:indexPath];
+//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_" forIndexPath:indexPath];
+    
+    UITableViewCell * cell = [[UITableViewCell alloc] init];
+    cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if(indexPath.row == 0)
+    {
+        self.image_iocn = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
+        self.image_iocn.backgroundColor = [UIColor orangeColor];
+        self.image_iocn.layer.cornerRadius = 25;
+        self.image_iocn.layer.masksToBounds = YES;
+        
+        [cell addSubview:self.image_iocn];
+        
+        
+        self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.image_iocn.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(self.image_iocn.frame) - 30 - 100, 25)];
+        self.name.text = @"wolajiwolaji";
+//        self.name.backgroundColor = [UIColor orangeColor];
+        self.name.textColor = [UIColor grayColor];
+        
+        [cell addSubview:self.name];
+        
+        
+        self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 15, 100, 25)];
+        self.time.text = @"wolajiwolaji";
+        self.time.textColor = [UIColor grayColor];
+        self.time.textAlignment = NSTextAlignmentRight;
+        
+        [cell addSubview:self.time];
+        
+        if(self.arr_all.count != 0)
+        {
+            Shuoshuo_Model * model = self.arr_all[indexPath.section];
+            
+            [self.image_iocn sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+
+            self.name.text = model.member_username;
+            
+            self.time.text = model.talk_time;
+        }
+        
+    }
+    else if(indexPath.row == 2)
+    {
+        self.pingjianum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 7.5, 35, 25)];
+//        self.pingjianum.backgroundColor = [UIColor orangeColor];
+        self.pingjianum.text = @"11111";
+        self.pingjianum.font = [UIFont systemFontOfSize:15];
+        self.pingjianum.textColor = [UIColor grayColor];
+        
+        [cell addSubview:self.pingjianum];
+        
+        self.image_pingjia = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 72, 7.5, 25, 25)];
+        self.image_pingjia.image = [UIImage imageNamed:@"qwertyuiop"];
+        
+        [cell addSubview:self.image_pingjia];
+        
+        
+        self.zannum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 117, 7.5, 35, 25)];
+//        self.zannum.backgroundColor = [UIColor orangeColor];
+        self.zannum.text = @"11111";
+        self.zannum.font = [UIFont systemFontOfSize:15];
+        self.zannum.textColor = [UIColor grayColor];
+        
+        [cell addSubview:self.zannum];
+        
+        self.image_zan = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 145, 7.5, 25, 25)];
+        self.image_zan.image = [UIImage imageNamed:@"qazwsxedcrfvt"];
+        
+        [cell addSubview:self.image_zan];
+        
+        
+        if(self.arr_all.count != 0)
+        {
+            Shuoshuo_Model * model = self.arr_all[indexPath.section];
+            
+            self.zannum.text = model.talk_good;
+            
+            self.pingjianum.text = model.talk_reply;
+        }
+    }
+    else
+    {
+        if(self.arr_all != 0)
+        {
+            Shuoshuo_Model * model = self.arr_all[indexPath.section];
+            
+            CGFloat x_length = [model.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
+//            NSLog(@"%f",x_length);
+            
+            self.talk_content = [[UILabel alloc] initWithFrame:CGRectMake(70, 0, SCREEN_WIDTH - 80, x_length)];
+            self.talk_content.text = @"剃头匠";
+            self.talk_content.numberOfLines = 0;
+            self.talk_content.font = [UIFont systemFontOfSize:15];
+            self.talk_content.backgroundColor = [UIColor orangeColor];
+            
+            [cell addSubview:self.talk_content];
+            
+            self.talk_content.text = model.talk_content;
+            
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
     
     return cell;
 }
+
+#pragma mark - 数据列表
+
+- (void)p_data
+{
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    
+    [dataprovider talkAllWithpagenumber:@"1" pagesize:@"15"];
+}
+
+
+#pragma mark - 接口
+- (void)create:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    self.arr_all = nil;
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            for (NSDictionary * dic in dict[@"data"][@"talklist"])
+            {
+                Shuoshuo_Model * model = [[Shuoshuo_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+//                NSLog(@"%@",model.member_username);
+                
+                [self.arr_all addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - 底部栏
 - (void)p_setupBottomView
@@ -248,6 +496,17 @@
     
 }
 
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_all
+{
+    if(_arr_all == nil)
+    {
+        self.arr_all = [NSMutableArray array];
+    }
+    
+    return _arr_all;
+}
 
 
 @end

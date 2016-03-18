@@ -677,15 +677,27 @@
     {
         NSLog(@"111 ~~ %ld",(long)indexPath.item);
         
-        WebStroe_Model * model = self.arr_chanpin[indexPath.item];
-        
-        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
-        
-        
-        chanpingxiangqing.production_id = model.production_id;
-        
-        
-        [self showViewController:chanpingxiangqing sender:nil];
+        if(self.arr_chanpin.count != 0)
+        {
+            WebStroe_Model * model = self.arr_chanpin[indexPath.item];
+            
+            chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+            
+            
+            chanpingxiangqing.production_id = model.production_id;
+            
+            
+            [self showViewController:chanpingxiangqing sender:nil];
+        }
+//        WebStroe_Model * model = self.arr_chanpin[indexPath.item];
+//        
+//        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+//        
+//        
+//        chanpingxiangqing.production_id = model.production_id;
+//        
+//        
+//        [self showViewController:chanpingxiangqing sender:nil];
     }
     else
     {
@@ -964,7 +976,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {//[@"productlist"]
-            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            for (NSDictionary * dic in dict[@"data"])
             {
                 WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 

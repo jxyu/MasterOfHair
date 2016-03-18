@@ -791,7 +791,7 @@
 #pragma mark - 创建订单
 - (void)chuangjiandangdan:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

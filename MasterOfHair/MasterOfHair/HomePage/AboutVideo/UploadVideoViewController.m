@@ -169,6 +169,8 @@
         {
             [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
             
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }
         @catch (NSException *exception)
         {

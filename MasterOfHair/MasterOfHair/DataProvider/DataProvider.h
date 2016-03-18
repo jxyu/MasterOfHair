@@ -294,4 +294,28 @@
 - (void)createWithMember_id:(NSString *)member_id talk_content:(NSString *)talk_content file_type:(NSString *)file_type Path:(NSURL *)videoPath;
 
 
+#pragma mark -  说说分页列表
+- (void)talkAllWithpagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end

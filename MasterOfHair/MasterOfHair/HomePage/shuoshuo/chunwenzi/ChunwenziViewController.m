@@ -85,9 +85,9 @@
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
         
-//        [dataprovider createWithMember_id:@"2" talk_content:self.text_View.text];
+        [dataprovider createWithMember_id:@"2" talk_content:self.text_View.text];
         
-        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text];
+//        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text];
     }
 }
 
@@ -156,6 +156,8 @@
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            [self.navigationController popViewControllerAnimated:YES];
             
         }
         @catch (NSException *exception)
