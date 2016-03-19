@@ -1141,6 +1141,35 @@
     }
 }
 
+#pragma mark -  说说点赞
+- (void)TakeGoodWithMember_id:(NSString *)member_id talk_id:(NSString *)talk_id
+{
+    if(member_id && talk_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Reply/TakeGood",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"talk_id\":\"%@\"}",member_id,talk_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

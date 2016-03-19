@@ -29,8 +29,8 @@
 @property (nonatomic, strong) UILabel * time;
 
 //3
-@property (nonatomic, strong) UIImageView * image_zan;
-@property (nonatomic, strong) UIImageView * image_pingjia;
+@property (nonatomic, strong) UIButton * image_zan;
+@property (nonatomic, strong) UIButton * image_pingjia;
 
 @property (nonatomic, strong) UILabel * zannum;
 @property (nonatomic, strong) UILabel * pingjianum;
@@ -43,6 +43,10 @@
 
 @property (nonatomic, strong) NSMutableArray * arr_all;
 @property (nonatomic, strong) NSMutableArray * arr_filelist;
+
+//第几个
+@property (nonatomic, assign) NSInteger zan_index;
+
 @end
 
 @implementation ShuoshuoViewController
@@ -183,6 +187,10 @@
                 sum = x_length + 10 + (length_x + 20) * 2 + 5;
             }
 
+            if([model.talk_content length] == 0)
+            {
+                sum = sum - x_length;
+            }
             
             return sum;
         }
@@ -250,9 +258,10 @@
         
         [cell addSubview:self.pingjianum];
         
-        self.image_pingjia = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 72, 7.5, 25, 25)];
-        self.image_pingjia.image = [UIImage imageNamed:@"qwertyuiop"];
-        
+        self.image_pingjia = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        self.image_pingjia.frame = CGRectMake(SCREEN_WIDTH - 72, 7.5, 25, 25);
+        [self.image_pingjia setBackgroundImage:[UIImage imageNamed:@"qwertyuiop"] forState:(UIControlStateNormal)];
+        self.image_pingjia.userInteractionEnabled = NO;
         [cell addSubview:self.image_pingjia];
         
         
@@ -264,10 +273,17 @@
         
         [cell addSubview:self.zannum];
         
-        self.image_zan = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 145, 7.5, 25, 25)];
-        self.image_zan.image = [UIImage imageNamed:@"qazwsxedcrfvt"];
+        self.image_zan = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        self.image_zan.frame = CGRectMake(SCREEN_WIDTH - 145, 7.5, 25, 25);
+        [self.image_zan setBackgroundImage:[UIImage imageNamed:@"qazwsxedcrfvt"] forState:(UIControlStateNormal)];
+        
+        [self.image_zan addTarget:self action:@selector(image_zanAction:) forControlEvents:(UIControlEventTouchUpInside)];
         
         [cell addSubview:self.image_zan];
+        
+        
+        self.zannum.tag = 100 + indexPath.section;
+        self.image_zan.tag = 400 + indexPath.section;
         
         
         if(self.arr_all.count != 0)
@@ -281,7 +297,14 @@
             if([model.reply_good isEqualToString:@"1"])
             {
                 self.zannum.textColor = navi_bar_bg_color;
-                self.image_zan.image = [UIImage imageNamed:@"qwasderf"];
+                
+                [self.image_zan setBackgroundImage:[UIImage imageNamed:@"qwasderf"] forState:(UIControlStateNormal)];
+            }
+            else
+            {
+                self.zannum.textColor = [UIColor grayColor];
+                
+                [self.image_zan setBackgroundImage:[UIImage imageNamed:@"qazwsxedcrfvt"] forState:(UIControlStateNormal)];
             }
         }
     }
@@ -367,6 +390,95 @@
     return cell;
 }
 
+
+#pragma mark - 点赞
+- (void)image_zanAction:(UIButton *)sender
+{
+    
+    NSInteger index = sender.tag - 400;
+    self.zan_index = index;
+    
+    Shuoshuo_Model * model = self.arr_all[index];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"TakeGood:"];
+    
+    [dataprovider TakeGoodWithMember_id:@"1" talk_id:model.talk_id];
+}
+
+// 接口
+- (void)TakeGood:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+//            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            UIButton * btn = [self.view viewWithTag:self.zan_index + 400];
+            UILabel * label = [self.view viewWithTag:self.zan_index + 100];
+            
+            NSString * str = label.text;
+            
+            if([label.textColor isEqual:navi_bar_bg_color])
+            {
+                label.textColor = [UIColor grayColor];
+                label.text = [NSString stringWithFormat:@"%ld",[str integerValue] - 1];
+                
+                [btn setBackgroundImage:[UIImage imageNamed:@"qazwsxedcrfvt"] forState:(UIControlStateNormal)];
+                
+                Shuoshuo_Model * model = self.arr_all[self.zan_index];
+                
+                model.reply_good = @"0";
+                model.talk_good = label.text;
+                
+                
+                [self.arr_all replaceObjectAtIndex:self.zan_index withObject:model];
+                
+            }
+            else
+            {
+                label.textColor = navi_bar_bg_color;
+                label.text = [NSString stringWithFormat:@"%ld",[str integerValue] + 1];
+                
+                [btn setBackgroundImage:[UIImage imageNamed:@"qwasderf"] forState:(UIControlStateNormal)];
+                
+                
+                Shuoshuo_Model * model = self.arr_all[self.zan_index];
+                
+                model.reply_good = @"1";
+                model.talk_good = label.text;
+                
+                
+                [self.arr_all replaceObjectAtIndex:self.zan_index withObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+
+
+
 #pragma mark - 数据列表
 
 - (void)p_data
@@ -389,8 +501,7 @@
     [dataprovider talkAllWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
-
-#pragma mark - 接口
+//接口
 - (void)create:(id )dict
 {
     NSLog(@"%@",dict);

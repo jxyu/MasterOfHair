@@ -297,7 +297,8 @@
 #pragma mark -  说说分页列表
 - (void)talkAllWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
+#pragma mark -  说说点赞
+- (void)TakeGoodWithMember_id:(NSString *)member_id talk_id:(NSString *)talk_id;
 
 
 
