@@ -307,11 +307,13 @@
 #pragma mark -  说说留言
 - (void)TakeGoodWithTalk_id:(NSString *)talk_id member_id:(NSString *)member_id reply_content:(NSString *)reply_content reply_status:(NSString *)reply_status;
 
+#pragma mark -  说说分页列表（某一用户）
+- (void)talkWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
 
-
-
+#pragma mark -  说说删除
+- (void)talkWithtalk_id:(NSString *)talk_id;
 
 
 

@@ -1183,9 +1183,32 @@
 }
 
 
+#pragma mark -  说说分页列表（某一用户）
+- (void)talkWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(pagenumber && pagesize && member_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/talk",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
-
+#pragma mark -  说说删除
+- (void)talkWithtalk_id:(NSString *)talk_id
+{
+    if(talk_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/delete",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"talk_id\":\"%@\"}",talk_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
