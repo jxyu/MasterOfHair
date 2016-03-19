@@ -1155,6 +1155,18 @@
 }
 
 
+#pragma mark -  获取单条说说详情
+- (void)TakeGoodWithTalk_id:(NSString *)talk_id
+{
+    if(talk_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/talk",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"talk_id\":\"%@\"}",talk_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

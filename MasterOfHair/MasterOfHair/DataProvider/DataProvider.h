@@ -301,6 +301,8 @@
 - (void)TakeGoodWithMember_id:(NSString *)member_id talk_id:(NSString *)talk_id;
 
 
+#pragma mark -  获取单条说说详情
+- (void)TakeGoodWithTalk_id:(NSString *)talk_id;
 
 
 

@@ -15,6 +15,8 @@
 #import <ALBBQuPaiPlugin/ALBBQuPaiPlugin.h>
 #import "UploadVideoViewController.h"
 #import "Shuoshuo_Model.h"
+#import "PinglunViewController.h"
+#import "WodeshuoshuoViewController.h"
 
 @interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate,QupaiSDKDelegate>
 {
@@ -87,6 +89,13 @@
 - (void)clickLeftButton:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)clickRightButton:(UIButton *)sender
+{
+    WodeshuoshuoViewController * wodeshuoshuoViewController = [[WodeshuoshuoViewController alloc] init];
+    
+    [self showViewController:wodeshuoshuoViewController sender:nil];
 }
 
 //隐藏tabbar
@@ -261,7 +270,9 @@
         self.image_pingjia = [UIButton buttonWithType:(UIButtonTypeSystem)];
         self.image_pingjia.frame = CGRectMake(SCREEN_WIDTH - 72, 7.5, 25, 25);
         [self.image_pingjia setBackgroundImage:[UIImage imageNamed:@"qwertyuiop"] forState:(UIControlStateNormal)];
-        self.image_pingjia.userInteractionEnabled = NO;
+        self.image_pingjia.tag = 700 + indexPath.section;
+        
+        [self.image_pingjia addTarget:self action:@selector(image_pingjiaAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [cell addSubview:self.image_pingjia];
         
         
@@ -346,7 +357,8 @@
                     //tag
                     image.tag = indexPath.section * 1000 + indexPath.row;
                     
-//                    image.backgroundColor = [UIColor orangeColor];
+                    image.backgroundColor = [UIColor orangeColor];
+                    
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
@@ -371,7 +383,7 @@
                     //tag
                     image.tag = indexPath.section * 1000 + indexPath.row;
                     
-//                    image.backgroundColor = [UIColor orangeColor];
+                    image.backgroundColor = [UIColor orangeColor];
 
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
@@ -390,6 +402,57 @@
     return cell;
 }
 
+#pragma mark - 评论
+- (void)image_pingjiaAction:(UIButton *)sender
+{
+    
+    NSInteger count = sender.tag - 700;
+    Shuoshuo_Model * model1 = self.arr_all[count];
+    
+    
+    CGFloat sum = 0;
+    
+    Shuoshuo_Model * model = self.arr_all[count];
+    
+    CGFloat x_length = [model.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
+    
+    //图片
+    CGFloat length_x = (SCREEN_WIDTH - 80 - 10) / 3;
+    
+    
+    
+    if([self.arr_filelist[count] count] <= 3)
+    {
+        NSArray * arr = self.arr_filelist[count];
+        
+        Shuoshuo_Model * model = arr.firstObject;
+        
+        if([model.file_id length] == 0)
+        {
+            sum = x_length + 10;
+        }
+        else
+        {
+            sum = x_length + 10 + (length_x + 20);
+        }
+    }
+    else if([self.arr_filelist[count] count] > 3)
+    {
+        sum = x_length + 10 + (length_x + 20) * 2 + 5;
+    }
+    
+    if([model.talk_content length] == 0)
+    {
+        sum = sum - x_length;
+    }
+    
+    PinglunViewController * pinglunViewController = [[PinglunViewController alloc] init];
+    pinglunViewController.talk_id = model1.talk_id;
+    
+    pinglunViewController.height = sum + 70;
+    
+    [self showViewController:pinglunViewController sender:nil];
+}
 
 #pragma mark - 点赞
 - (void)image_zanAction:(UIButton *)sender
@@ -504,7 +567,7 @@
 //接口
 - (void)create:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if(self.page == 1)
     {
