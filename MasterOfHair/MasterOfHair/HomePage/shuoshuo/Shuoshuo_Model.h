@@ -26,9 +26,6 @@
 //
 
 @property (nonatomic, copy) NSString * reply_good;
-
-
-
 @property (nonatomic, copy) NSString * file_id;
 @property (nonatomic, copy) NSString * file_name;
 @property (nonatomic, copy) NSString * file_path;
@@ -36,6 +33,13 @@
 
 
 
+
+
+@property (nonatomic, copy) NSString * reply_content;
+@property (nonatomic, copy) NSString * reply_id;
+@property (nonatomic, copy) NSString * reply_status;
+@property (nonatomic, copy) NSString * reply_time;
+@property (nonatomic, copy) NSString * talk_reply_id;
 
 
 

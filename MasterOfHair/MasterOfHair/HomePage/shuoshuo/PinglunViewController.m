@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UITableView * tableView;
 
-@property (nonatomic, strong) NSMutableArray * arr_piclist;
+@property (nonatomic, strong) NSMutableArray * arr_replylist;
 
 @property (nonatomic, strong) NSMutableArray * arr_filelist;
 
@@ -32,6 +32,10 @@
 @property (nonatomic, strong) UIView * bottom_View;
 @property (nonatomic, strong) UITextField * bottom_text;
 @property (nonatomic, strong) UIButton * bottom_btn;
+
+
+@property (nonatomic, strong) NSString * index;
+
 @end
 
 @implementation PinglunViewController
@@ -102,16 +106,111 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return self.arr_replylist.count;
+}
+
+- (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.arr_replylist.count != 0)
+    {
+        Shuoshuo_Model * model = self.arr_replylist[indexPath.row];
+
+        CGFloat x_length = [model.reply_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 120 - 10, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
+
+        return 60 + x_length + 10;
+        
+    }
+    else
+    {
+        return 60;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [[UITableViewCell alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    UIImageView * image1 = [[UIImageView alloc] initWithFrame:CGRectMake(70, 5, 50, 50)];
+    image1.layer.cornerRadius = 25;
+    image1.layer.masksToBounds = YES;
+//    image1.backgroundColor = [UIColor orangeColor];
+    [cell addSubview:image1];
     
-    cell.textLabel.text = @"111";
+    
+    UILabel * label_name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image1.frame) + 5, 15, (SCREEN_WIDTH - CGRectGetMaxX(image1.frame)) / 2, 25)];
+    label_name.text = @"剃头匠";
+//    label_name.backgroundColor = [UIColor orangeColor];
+    label_name.textColor = [UIColor grayColor];
+    
+    [cell addSubview:label_name];
+    
+    
+    UILabel * date = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_name.frame) , 15, (SCREEN_WIDTH - CGRectGetMaxX(image1.frame)) / 2 - 10, 25)];
+    date.text = @"11:11";
+    date.textColor = [UIColor grayColor];
+    date.textAlignment = NSTextAlignmentRight;
+    
+    [cell addSubview:date];
+    
+    
+    if(self.arr_replylist.count != 0)
+    {
+        Shuoshuo_Model * model = self.arr_replylist[indexPath.row];
+        
+        //赋值
+        [image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        label_name.text = model.member_username;
+        NSString * str = [model.reply_time substringFromIndex:10];
+        date.text = str;
+        
+        
+        
+        CGFloat x_length = [model.reply_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - CGRectGetMaxX(image1.frame) - 10, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
+        //            NSLog(@"%f",x_length);
+        
+        UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image1.frame), CGRectGetMaxY(image1.frame) + 5, SCREEN_WIDTH - CGRectGetMaxX(image1.frame) - 10, x_length)];
+        detail.text = @"剃头匠";
+        detail.numberOfLines = 0;
+        detail.font = [UIFont systemFontOfSize:15];
+//        detail.backgroundColor = [UIColor orangeColor];
+        
+        [cell addSubview:detail];
+        //赋值
+        detail.text = model.reply_content;
+        
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image1.frame), CGRectGetMaxY(detail.frame) + 10, SCREEN_WIDTH - CGRectGetMaxX(image1.frame), 1)];
+        line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [cell addSubview:line];
+        
+        
+    }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     [self.bottom_text becomeFirstResponder];
+    
+    if(self.arr_replylist.count != 0)
+    {
+        Shuoshuo_Model * model = self.arr_replylist[indexPath.row];
+    
+        self.index = [NSString stringWithFormat:@"%ld",indexPath.row];
+        //回复
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+#warning 和自己的昵称对比，
+        if([[userdefault objectForKey:@""] isEqualToString:model.member_username])
+        {
+ 
+        }
+        else
+        {
+            self.bottom_text.placeholder = [NSString stringWithFormat:@"对%@进行回复",model.member_username];
+
+        }
+    }
+    
 }
 
 
@@ -127,7 +226,10 @@
 //接口
 - (void)create:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    self.arr_replylist = nil;
+    self.arr_filelist = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -150,6 +252,19 @@
                     [self.arr_filelist addObject:model];
                 }
             }
+            
+            for (NSDictionary * dict_reply in dic_fileList[@"replylist"])
+            {
+                Shuoshuo_Model * model = [[Shuoshuo_Model alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dict_reply];
+                
+                if([model.member_id length] != 0)
+                {
+                    [self.arr_replylist addObject:model];
+                }
+            }
+            
         }
         @catch (NSException *exception)
         {
@@ -295,7 +410,7 @@
     self.bottom_text = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_1.frame) + 10, 5, SCREEN_WIDTH - 90 - CGRectGetMaxX(image_1.frame) - 18, 30)];
     [self registerForKeyboardNotifications];
     //    self.bottom_text.backgroundColor = [UIColor orangeColor];
-    self.bottom_text.placeholder = @"我来说几句";
+//    self.bottom_text.placeholder = @"我来说几句";
     self.bottom_text.delegate = self;
     [view_1 addSubview:self.bottom_text];
     
@@ -321,7 +436,7 @@
             
         }];
         
-        [self.bottom_text resignFirstResponder];
+//        [self.bottom_text resignFirstResponder];
         
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
@@ -334,6 +449,67 @@
 //        NSLog(@"发布");
         [self.bottom_text resignFirstResponder];
         
+        if([self.index length] == 0)
+        {//直接就给内容留言
+//            NSLog(@"0");
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+            
+            [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:self.bottom_text.text reply_status:@"0"];
+        }
+        else
+        {//回复留言
+//            NSLog(@"1");
+            
+            Shuoshuo_Model * model = self.arr_replylist[[self.index integerValue]];
+            
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+#warning 和自己的昵称对比，
+            if([[userdefault objectForKey:@""] isEqualToString:model.member_username])
+            {
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+                
+                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:self.bottom_text.text reply_status:@"0"];
+            }
+            else
+            {
+                NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",@"本身名",model.member_username,self.bottom_text.text];
+                
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+                
+                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:str reply_status:@"0"];
+            }
+        }
+    }
+}
+
+#pragma mark - 留言数据
+- (void)talkReply:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            self.bottom_text.text = nil;
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            [self p_data];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
@@ -341,6 +517,13 @@
 - (BOOL )textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    if([self.bottom_text.text length] == 0)
+    {
+        self.bottom_text.placeholder = @"";
+        
+        self.index = @"";
+    }
     
     return YES;
 }
@@ -379,6 +562,13 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.bottom_text resignFirstResponder];
+    
+    if([self.bottom_text.text length] == 0)
+    {
+        self.bottom_text.placeholder = @"";
+        
+        self.index = @"";
+    }
 }
 
 
@@ -391,6 +581,16 @@
     }
     
     return _arr_filelist;
+}
+
+- (NSMutableArray *)arr_replylist
+{
+    if(_arr_replylist == nil)
+    {
+        self.arr_replylist = [NSMutableArray array];
+    }
+    
+    return _arr_replylist;
 }
 
 

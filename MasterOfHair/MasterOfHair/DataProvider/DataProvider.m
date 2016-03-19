@@ -1169,6 +1169,18 @@
 }
 
 
+#pragma mark -  说说留言
+- (void)TakeGoodWithTalk_id:(NSString *)talk_id member_id:(NSString *)member_id reply_content:(NSString *)reply_content reply_status:(NSString *)reply_status
+{
+    if(talk_id && member_id && reply_content && reply_status)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Reply/talkReply",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"talk_id\":\"%@\",\"member_id\":\"%@\",\"reply_content\":\"%@\",\"reply_status\":\"%@\"}",talk_id,member_id,reply_content,reply_status]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

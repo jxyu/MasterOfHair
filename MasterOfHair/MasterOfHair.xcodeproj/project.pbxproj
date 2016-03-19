@@ -1432,8 +1432,8 @@
 		7B586C9A1C71C1C800BE4295 /* shuoshuo */ = {
 			isa = PBXGroup;
 			children = (
-				7B2114C71C9CE6C20073C8C9 /* Wodeshuoshuo */,
 				7BDA3D031C9BB2360099D6B2 /* Model */,
+				7B2114C71C9CE6C20073C8C9 /* Wodeshuoshuo */,
 				7B2114C31C9CE2A70073C8C9 /* Pinglun */,
 				7BD86C3A1C7446F100D099BE /* luxiang */,
 				7B8B33AD1C72ED60008C6CD4 /* zhaoxiang */,
