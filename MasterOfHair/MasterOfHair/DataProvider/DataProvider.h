@@ -302,7 +302,7 @@
 
 
 #pragma mark -  获取单条说说详情
-- (void)TakeGoodWithTalk_id:(NSString *)talk_id;
+- (void)TakeGoodWithTalk_id:(NSString *)talk_id member_id:(NSString *)member_id;
 
 #pragma mark -  说说留言
 - (void)TakeGoodWithTalk_id:(NSString *)talk_id member_id:(NSString *)member_id reply_content:(NSString *)reply_content reply_status:(NSString *)reply_status;

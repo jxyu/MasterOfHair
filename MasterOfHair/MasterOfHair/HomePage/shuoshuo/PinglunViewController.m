@@ -220,7 +220,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider TakeGoodWithTalk_id:self.talk_id];
+    [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1"];
 }
 
 //接口

@@ -535,7 +535,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider talkWithmember_id:@"1" pagenumber:@"1" pagesize:@"25"];
 }
 
 - (void)p_data1
@@ -545,7 +545,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider talkWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"25"];
 }
 
 //接口
@@ -694,7 +694,6 @@
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
-            
             [self.arr_all removeObjectAtIndex:self.delete_index];
             
         }
@@ -704,11 +703,8 @@
         }
         @finally
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //刷新tableView(记住,要更新放在主线程中)
-                
-                [self.tableView reloadData];
-            });
+            [self example01];
+
         }
     }
     else

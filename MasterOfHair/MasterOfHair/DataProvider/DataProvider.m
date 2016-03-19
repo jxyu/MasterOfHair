@@ -1156,13 +1156,13 @@
 
 
 #pragma mark -  获取单条说说详情
-- (void)TakeGoodWithTalk_id:(NSString *)talk_id
+- (void)TakeGoodWithTalk_id:(NSString *)talk_id member_id:(NSString *)member_id
 {
-    if(talk_id)
+    if(talk_id && member_id)
     {
-        NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/talk",Url];
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=talk/talkGood",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"talk_id\":\"%@\"}",talk_id]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"talk_id\":\"%@\",\"member_id\":\"%@\"}",talk_id,member_id]};
         
         [self PostRequest:url andpram:prm];
     }

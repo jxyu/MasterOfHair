@@ -85,7 +85,7 @@
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
         
-        [dataprovider createWithMember_id:@"2" talk_content:self.text_View.text];
+        [dataprovider createWithMember_id:@"1" talk_content:self.text_View.text];
         
 //        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text];
     }
