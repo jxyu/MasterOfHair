@@ -818,6 +818,9 @@
             [userdefault setObject:@"" forKey:@"diquweizhi1"];
 
 
+            [userdefault setObject:@"" forKey:@"diquweizhi_id2"];
+            [userdefault setObject:@"" forKey:@"diquweizhi2"];
+            
             NSLog(@"%@",[userdefault objectForKey:@"diquweizhi"]);
         }
         @catch (NSException *exception)
@@ -840,6 +843,9 @@
         //纹绣联盟
         [userdefault setObject:@"" forKey:@"diquweizhi_id1"];
         [userdefault setObject:@"" forKey:@"diquweizhi1"];
+        
+        [userdefault setObject:@"" forKey:@"diquweizhi_id2"];
+        [userdefault setObject:@"" forKey:@"diquweizhi2"];
     }
 }
 

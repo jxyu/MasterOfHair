@@ -535,7 +535,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:@"1" pagesize:@"25"];
+    [dataprovider talkWithmember_id:@"1" pagenumber:@"1" pagesize:@"35"];
 }
 
 - (void)p_data1
@@ -545,7 +545,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"25"];
+    [dataprovider talkWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"35"];
 }
 
 //接口

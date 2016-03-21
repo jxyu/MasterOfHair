@@ -310,10 +310,20 @@
 #pragma mark -  说说分页列表（某一用户）
 - (void)talkWithmember_id:(NSString *)member_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
-
-
 #pragma mark -  说说删除
 - (void)talkWithtalk_id:(NSString *)talk_id;
+
+#pragma mark -  获取某城市的招聘信息列表
+- (void)talkWithArea_id:(NSString *)area_id salary_id:(NSString *)salary_id type_id:(NSString *)type_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+#pragma mark -  获取某城市的应聘信息列表：
+- (void)VitaeWithArea_id:(NSString *)area_id salary_id:(NSString *)salary_id type_id:(NSString *)type_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
+
+
+
+
+
+
 
 
 

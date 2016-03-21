@@ -10,6 +10,9 @@
 #import "AdvertiseCellTableViewCell.h"
 #import "AdvertiseClassesViewController.h"
 
+#import "ZhaopingdingweiViewController.h"
+#import "Advertise_Model.h"
+
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -24,6 +27,10 @@
 
 @property (nonatomic,strong) UITableView * mTableView;
 
+//数据
+@property (nonatomic, strong) NSMutableArray * arr_data;
+
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation AdvertiseViewController
@@ -42,13 +49,16 @@
 
 -(void)InitTopView
 {
+    _btnRight.hidden = YES;
+    _lblRight.hidden = YES;
+    
     [self addLeftButton:@"iconfont-fanhui"];
     FL_Button *btn_top_location_select = [FL_Button fl_shareButton];
     [btn_top_location_select setImage:[UIImage imageNamed:@"select_baise"] forState:UIControlStateNormal];
-    [btn_top_location_select setTitle:@"全部分类" forState:UIControlStateNormal];
+    [btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];
     [btn_top_location_select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn_top_location_select.status = FLAlignmentStatusCenter;
-    btn_top_location_select.titleLabel.font = [UIFont systemFontOfSize:14];
+    btn_top_location_select.titleLabel.font = [UIFont systemFontOfSize:18];
     [_topView addSubview:btn_top_location_select];
     
     [btn_top_location_select zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
@@ -57,10 +67,77 @@
     
     [btn_top_location_select addTarget:self action:@selector(JumpToSecectCityVC) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+/**
+ *   跳转到选择城市页面
+ */
+-(void)JumpToSecectCityVC
+{
+//    NSLog(@"跳转");
+    ZhaopingdingweiViewController * zhaopingdingweiViewController = [[ZhaopingdingweiViewController alloc] init];
     
+    [self showViewController:zhaopingdingweiViewController sender:nil];
+}
+
+//隐藏tabbar
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"city_id"] length] == 0)
+    {
+        [self addRightbuttontitle:@"定位"];
+        
+        if([[userdefault objectForKey:@"diquweizhi2"] length] == 0)
+        {
+            [self addRightbuttontitle:@"定位"];
+            
+            [userdefault setObject:@"183" forKey:@"diquweizhi_id2"];
+        }
+        else
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi2"]];
+        }
+    }
+    else
+    {
+        [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+        
+        if([[userdefault objectForKey:@"diquweizhi2"] length] == 0)
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+            
+            [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id2"];
+        }
+        else
+        {
+            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi2"]];
+        }
+    }
+
+    [self example01];
+    
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)jumpToSelectClass
+{
     
 }
 
+- (void)btn_betweenToSelectClass
+{
+    
+}
+
+#pragma mark - 布局
 -(void)BuildSegmentView
 {
     self.top_white = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 50)];
@@ -118,7 +195,7 @@
     btn_AllClass.layer.borderWidth=0.5;
     btn_AllClass.layer.borderColor=navi_bar_bg_color.CGColor;
     btn_AllClass.layer.cornerRadius=8;
-//    [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
+    [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
     [HeaderBackView addSubview:btn_AllClass];
     
     
@@ -132,6 +209,8 @@
     btn_between.layer.borderWidth=0.5;
     btn_between.layer.borderColor=navi_bar_bg_color.CGColor;
     btn_between.layer.cornerRadius=8;
+    [btn_between addTarget:self action:@selector(btn_betweenToSelectClass) forControlEvents:UIControlEventTouchUpInside];
+
     [HeaderBackView addSubview:btn_between];
     
     FL_Button *btn_new  = [FL_Button fl_shareButton];
@@ -196,53 +275,46 @@
         layout.bottomSpace(0);
     }];
     
-    __unsafe_unretained __typeof(self) weakSelf = self;
-    
+    __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.mTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.mTableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    
+        [weakSelf.mTableView reloadData];
         [weakSelf loadNewData];
     }];
     
-    // 马上进入刷新状态
-    [self.mTableView.mj_header beginRefreshing];
-    
-    
-    
-    
-    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadMoreData方法）
-    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    
-    // 禁止自动加载
-    footer.automaticallyRefresh = NO;
-    
-    // 设置footer
-    self.mTableView.mj_footer = footer;
+    self.mTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        if(self.isTeacher == 1)
+        {
+            [self p_data1];
+        }
+        else
+        {
+            [self p_data4];
+        }
+        
+        [weakSelf.mTableView reloadData];
+        [weakSelf loadNewData];
+    }];
+
 }
 
 
--(void)loadNewData
-{
-    [self.mTableView.mj_header endRefreshing];
-}
--(void)loadMoreData
-{
-    [self.mTableView.mj_footer endRefreshing];
-}
-
-
-
+#pragma mark - 代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return self.arr_data.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"zhaoPinCellid";
@@ -253,22 +325,50 @@
     
     cell.layer.masksToBounds=YES;
     
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short"]];
+    if(self.arr_data.count != 0)
+    {
+        Advertise_Model * model = self.arr_data[indexPath.row];
+        
+        if(self.isTeacher == 1)
+        {
+            NSString * str = [NSString stringWithFormat:@"%@uploads/recruit/%@",Url,model.image];
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.lbl_Title.text = model.company_name;
+            cell.lbl_Detial.text = model.job_description;
+            cell.lbl_betweenPrice.text = model.status_name;
+        }
+        else
+        {
+            NSString * str = [NSString stringWithFormat:@"%@uploads/vitae/%@",Url,model.image];
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            
+            cell.lbl_Title.text = model.name;
+            cell.lbl_Detial.text = model.intention_position;
+            cell.lbl_betweenPrice.text = model.status_name;
+        }
+    }
+    else
+    {
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"placeholder_short"]];
+        
+        cell.lbl_Title.text=@"招收发型师";
+        
+        cell.lbl_Detial.text=@"擅长各种发型设计以及各种理发技术";
+        
+        cell.lbl_betweenPrice.text = @"8K~10K/月";
+    }
     
-    cell.lbl_Title.text=@"招收发型师";
-    
-    cell.lbl_Detial.text=@"擅长各种发型设计以及各种理发技术";
-    
-    cell.lbl_betweenPrice.text=@"8K~10K/月";
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - 点击方法；
 /**
  *  应聘
  *
@@ -285,8 +385,8 @@
     [self.top_btnPeople setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.top_viewPeople.hidden = YES;
     // 马上进入刷新状态
-    [self.mTableView.mj_header beginRefreshing];
-    
+//    [self.mTableView.mj_header beginRefreshing];
+    [self example01];
 }
 /**
  *  招聘
@@ -303,35 +403,156 @@
     
     [self.top_btnPeople setTitleColor:navi_bar_bg_color forState:(UIControlStateNormal)];
     self.top_viewPeople.hidden = NO;
-    // 马上进入刷新状态
-    [self.mTableView.mj_header beginRefreshing];
-}
-
-/**
- *   跳转到选择城市页面
- */
--(void)JumpToSecectCityVC
-{
-    NSLog(@"跳转");
-}
--(void)jumpToSelectClass
-{
-    AdvertiseClassesViewController * adveClass=[[AdvertiseClassesViewController alloc] init];
     
-    [self.navigationController pushViewController:adveClass animated:YES];
+    // 马上进入刷新状态
+    [self example01];
 }
 
-//隐藏tabbar
--(void)viewWillAppear:(BOOL)animated
+
+#pragma mark - 数据_1
+- (void)p_data
 {
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
+    //
+    [dataprovider talkWithArea_id:@"89" salary_id:@"0" type_id:@"0" pagenumber:@"1" pagesize:@"15"];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)p_data1
+{
+    self.page ++ ;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
+    //
+    [dataprovider talkWithArea_id:@"89" salary_id:@"0" type_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
+#pragma mark - 数据_2
+- (void)p_data3
+{
+    self.page = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
+    //
+    [dataprovider VitaeWithArea_id:@"37" salary_id:@"0" type_id:@"0" pagenumber:@"1" pagesize:@"15"];
+    
+}
+
+
+- (void)p_data4
+{
+    self.page ++ ;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
+    //
+    [dataprovider VitaeWithArea_id:@"37" salary_id:@"0" type_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+}
+
+//数据
+- (void)Recruit:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            if(self.isTeacher == 1)
+            {
+                for (NSDictionary * dic in dict[@"data"][@"recruitlist"])
+                {
+                    Advertise_Model * model = [[Advertise_Model alloc] init];
+                    
+                    [model setValuesForKeysWithDictionary:dic];
+                    
+                    [self.arr_data addObject:model];
+                }
+            }
+            else
+            {
+                for (NSDictionary * dic in dict[@"data"][@"vitaelist"])
+                {
+                    Advertise_Model * model = [[Advertise_Model alloc] init];
+                    
+                    [model setValuesForKeysWithDictionary:dic];
+                    
+                    [self.arr_data addObject:model];
+                }
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                
+                [self.mTableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 下拉刷新
+- (void)example01
+{
+    if(self.isTeacher == 1)
+    {
+        [self p_data];
+    }
+    else
+    {
+        [self p_data3];
+    }
+    
+    // 马上进入刷新状态
+    [self.mTableView.header beginRefreshing];
+}
+
+-(void)example02
+{
+    [self.mTableView.footer beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.mTableView.header endRefreshing];
+        [self.mTableView.footer endRefreshing];
+    });
+    
+}
+
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    
+    return _arr_data;
+}
 
 @end

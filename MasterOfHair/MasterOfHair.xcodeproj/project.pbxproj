@@ -53,6 +53,7 @@
 		7B206A101C72C0B400481F24 /* shuoshuo98765.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B206A0F1C72C0B400481F24 /* shuoshuo98765.png */; };
 		7B2114C61C9CE2BE0073C8C9 /* PinglunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2114C51C9CE2BE0073C8C9 /* PinglunViewController.m */; };
 		7B2114CA1C9CE6DC0073C8C9 /* WodeshuoshuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2114C91C9CE6DC0073C8C9 /* WodeshuoshuoViewController.m */; };
+		7B2114CE1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2114CD1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m */; };
 		7B235AA01C7C0CF200235B0F /* Fenlei_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B235A9F1C7C0CF200235B0F /* Fenlei_Model.m */; };
 		7B299A161C7D7B0C00D57B76 /* TuWen_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B299A151C7D7B0C00D57B76 /* TuWen_Models.m */; };
 		7B299A1A1C7D8D2400D57B76 /* 01weuiwueiwu_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B299A171C7D8D2400D57B76 /* 01weuiwueiwu_48.png */; };
@@ -210,6 +211,7 @@
 		7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F131C51D9C0005FA5C4 /* LoginViewController.m */; };
 		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
 		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
+		7BF7FF441C9F808D007E2133 /* Advertise_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7FF431C9F808D007E2133 /* Advertise_Model.m */; };
 		7BF878031C9A3868008F23A7 /* WenxiulianmengDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */; };
 		7BF878071C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878061C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m */; };
 		7BF8780A1C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878091C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m */; };
@@ -440,6 +442,8 @@
 		7B2114C51C9CE2BE0073C8C9 /* PinglunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinglunViewController.m; sourceTree = "<group>"; };
 		7B2114C81C9CE6DC0073C8C9 /* WodeshuoshuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WodeshuoshuoViewController.h; sourceTree = "<group>"; };
 		7B2114C91C9CE6DC0073C8C9 /* WodeshuoshuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WodeshuoshuoViewController.m; sourceTree = "<group>"; };
+		7B2114CC1C9D4B050073C8C9 /* ZhaopingdingweiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaopingdingweiViewController.h; sourceTree = "<group>"; };
+		7B2114CD1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhaopingdingweiViewController.m; sourceTree = "<group>"; };
 		7B235A9E1C7C0CF200235B0F /* Fenlei_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fenlei_Model.h; sourceTree = "<group>"; };
 		7B235A9F1C7C0CF200235B0F /* Fenlei_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fenlei_Model.m; sourceTree = "<group>"; };
 		7B299A141C7D7B0C00D57B76 /* TuWen_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuWen_Models.h; sourceTree = "<group>"; };
@@ -684,6 +688,8 @@
 		7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		7BF67F181C522466005FA5C4 /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
 		7BF67F191C522466005FA5C4 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
+		7BF7FF421C9F808D007E2133 /* Advertise_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Advertise_Model.h; sourceTree = "<group>"; };
+		7BF7FF431C9F808D007E2133 /* Advertise_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Advertise_Model.m; sourceTree = "<group>"; };
 		7BF878011C9A3868008F23A7 /* WenxiulianmengDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WenxiulianmengDetailViewController.h; sourceTree = "<group>"; };
 		7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WenxiulianmengDetailViewController.m; sourceTree = "<group>"; };
 		7BF878051C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wenxiulanmengdingdan_Model.h; sourceTree = "<group>"; };
@@ -1218,6 +1224,15 @@
 				7B2114C91C9CE6DC0073C8C9 /* WodeshuoshuoViewController.m */,
 			);
 			name = Wodeshuoshuo;
+			sourceTree = "<group>";
+		};
+		7B2114CB1C9D4ADE0073C8C9 /* dingwei */ = {
+			isa = PBXGroup;
+			children = (
+				7B2114CC1C9D4B050073C8C9 /* ZhaopingdingweiViewController.h */,
+				7B2114CD1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m */,
+			);
+			name = dingwei;
 			sourceTree = "<group>";
 		};
 		7B235A9D1C7C0CCC00235B0F /* Models */ = {
@@ -1886,6 +1901,15 @@
 			name = "Login and regist";
 			sourceTree = "<group>";
 		};
+		7BF7FF411C9F806D007E2133 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BF7FF421C9F808D007E2133 /* Advertise_Model.h */,
+				7BF7FF431C9F808D007E2133 /* Advertise_Model.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		7BF878041C9A49CE008F23A7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1928,6 +1952,8 @@
 		800E8F971C5DA9FA00CB8CC5 /* Advertise */ = {
 			isa = PBXGroup;
 			children = (
+				7BF7FF411C9F806D007E2133 /* Model */,
+				7B2114CB1C9D4ADE0073C8C9 /* dingwei */,
 				800E8F981C5DAA3A00CB8CC5 /* AdvertiseViewController.h */,
 				800E8F991C5DAA3A00CB8CC5 /* AdvertiseViewController.m */,
 				800E8FA81C5DF36F00CB8CC5 /* AdvertiseCellTableViewCell.h */,
@@ -2814,6 +2840,7 @@
 				7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */,
 				8082B4C51C7414320024EAD3 /* JKAssetsGroupsView.m in Sources */,
 				802552B71C57442B00CFF875 /* SCRecorderTools.m in Sources */,
+				7BF7FF441C9F808D007E2133 /* Advertise_Model.m in Sources */,
 				7B299A161C7D7B0C00D57B76 /* TuWen_Models.m in Sources */,
 				7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */,
 				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
@@ -2910,6 +2937,7 @@
 				802552CA1C57442B00CFF875 /* WechatShortVideoController.m in Sources */,
 				802553111C574F7100CFF875 /* UIScrollView+MJRefresh.m in Sources */,
 				8025530A1C574F7100CFF875 /* MJRefreshBackStateFooter.m in Sources */,
+				7B2114CE1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m in Sources */,
 				7BB26FEF1C5B54C8001D332E /* NextFenxiaozhongxinViewController.m in Sources */,
 				8025530D1C574F7100CFF875 /* MJRefreshStateHeader.m in Sources */,
 				7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */,

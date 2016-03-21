@@ -1,20 +1,20 @@
 //
-//  LocationViewController.m
+//  ZhaopingdingweiViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/1/22.
+//  Created by 鞠超 on 16/3/19.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "LocationViewController.h"
+#import "ZhaopingdingweiViewController.h"
 
 #import "AppDelegate.h"
 #import "ChineseString.h"
 #import "loca_Model.h"
-@interface LocationViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@interface ZhaopingdingweiViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
-
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_indexData;
 @property (nonatomic, strong) NSMutableArray * arr_letterResult;
@@ -26,9 +26,10 @@
 
 @property (nonatomic, strong) UILabel * address;
 
+
 @end
 
-@implementation LocationViewController
+@implementation ZhaopingdingweiViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +40,7 @@
     [self p_navi];
     
     [self p_setupView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,9 +53,6 @@
 {
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-//    [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] forKey:@"city_id"];
-//    [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_name"]] forKey:@"city_name"];
     
     if([[userdefault objectForKey:@"city_name"] length] == 0)
     {
@@ -115,8 +114,8 @@
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     //183
-//    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_id"];
-//    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
+    //    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_id"];
+    //    [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
     
     if([[userdefault objectForKey:@"city_name"] length] == 0)
     {
@@ -159,13 +158,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%@",[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]);
+    //    NSLog(@"%@",[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row]);
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    [userdefault setObject:[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] forKey:@"diquweizhi"];
+    [userdefault setObject:[[self.arr_letterResult objectAtIndex:indexPath.section]objectAtIndex:indexPath.row] forKey:@"diquweizhi2"];
     
     for (loca_Model * model in self.arr_all)
     {
@@ -173,11 +172,11 @@
         
         if([model.area_name isEqualToString:str])
         {
-            [userdefault setObject:model.area_id forKey:@"diquweizhi_id"];
+            [userdefault setObject:model.area_id forKey:@"diquweizhi_id2"];
         }
     }
     
-//    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id"]);
+    //    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id"]);
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -215,7 +214,7 @@
 
 - (void)area:(id )dict
 {
-//    NSLog(@"%@",dict);
+    //    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -254,7 +253,7 @@
     else
     {
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
-    } 
+    }
 }
 
 
@@ -300,14 +299,12 @@
 - (void)tapGesture:(id)sender
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-
-    [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id"];
-    [userdefault setObject:[userdefault objectForKey:@"city_name"] forKey:@"diquweizhi"];
+    
+    [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id2"];
+    [userdefault setObject:[userdefault objectForKey:@"city_name"] forKey:@"diquweizhi2"];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 
 

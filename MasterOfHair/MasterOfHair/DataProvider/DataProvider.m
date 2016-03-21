@@ -1211,6 +1211,31 @@
 }
 
 
+#pragma mark -  获取某城市的招聘信息列表
+- (void)talkWithArea_id:(NSString *)area_id salary_id:(NSString *)salary_id type_id:(NSString *)type_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(pagenumber && pagesize && area_id && salary_id && type_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/Recruit",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"area_id\":\"%@\",\"salary_id\":\"%@\",\"type_id\":\"%@\"}",area_id,salary_id,type_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+#pragma mark -  获取某城市的应聘信息列表：
+- (void)VitaeWithArea_id:(NSString *)area_id salary_id:(NSString *)salary_id type_id:(NSString *)type_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize
+{
+    if(pagenumber && pagesize && area_id && salary_id && type_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Vitae/Vitae",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"area_id\":\"%@\",\"salary_id\":\"%@\",\"type_id\":\"%@\"}",area_id,salary_id,type_id],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
