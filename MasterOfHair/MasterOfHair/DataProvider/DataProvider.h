@@ -327,6 +327,39 @@
 #pragma mark -  7）招聘薪资区间
 - (void)RecruitSalary;
 
+#pragma mark - 获取单个应聘详情
+- (void)talkWithvitae_id:(NSString *)vitae_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

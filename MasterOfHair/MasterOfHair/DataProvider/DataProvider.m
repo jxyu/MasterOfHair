@@ -1255,6 +1255,56 @@
 }
 
 
+#pragma mark - 获取单个应聘详情
+- (void)talkWithvitae_id:(NSString *)vitae_id
+{
+    if(vitae_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Vitae/Vitae",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"vitae_id\":\"%@\"}",vitae_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

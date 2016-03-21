@@ -14,6 +14,7 @@
 #import "Advertise_Model.h"
 #import "ZhaopinfenleiViewController.h"
 #import "ZhaopinxinziViewController.h"
+#import "YingpinDetailViewController.h"
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -352,8 +353,9 @@
     AdvertiseCellTableViewCell *cell = (AdvertiseCellTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     cell  = [[[NSBundle mainBundle] loadNibNamed:@"AdvertiseCellTableViewCell" owner:self options:nil] lastObject];
+    cell.imageView.layer.masksToBounds = YES;
+//    cell.layer.masksToBounds = YES;
     
-//    cell.layer.masksToBounds=YES;
     
     if(self.arr_data.count != 0)
     {
@@ -396,6 +398,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(self.isTeacher == 0)
+    {//应聘
+        Advertise_Model * model = self.arr_data[indexPath.row];
+        
+        YingpinDetailViewController * yingpinDetailViewController = [[YingpinDetailViewController alloc] init];
+        
+        yingpinDetailViewController.vitae_id = model.vitae_id;
+        
+        [self showViewController:yingpinDetailViewController sender:nil];
+    }
+    else
+    {//招聘
+        
+    }
+    
 }
 
 #pragma mark - 点击方法；
