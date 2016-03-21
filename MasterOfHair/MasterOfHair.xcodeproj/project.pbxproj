@@ -212,6 +212,9 @@
 		7BF67F171C51D9D6005FA5C4 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F161C51D9D6005FA5C4 /* RegistViewController.m */; };
 		7BF67F1A1C522466005FA5C4 /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF67F191C522466005FA5C4 /* FoundViewController.m */; };
 		7BF7FF441C9F808D007E2133 /* Advertise_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7FF431C9F808D007E2133 /* Advertise_Model.m */; };
+		7BF7FF471C9F9503007E2133 /* ZhaopinfenleiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7FF461C9F9503007E2133 /* ZhaopinfenleiViewController.m */; };
+		7BF7FF4B1C9F9F1B007E2133 /* Zhaopingfeilei_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7FF4A1C9F9F1B007E2133 /* Zhaopingfeilei_Model.m */; };
+		7BF7FF4E1C9FBE32007E2133 /* ZhaopinxinziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7FF4D1C9FBE32007E2133 /* ZhaopinxinziViewController.m */; };
 		7BF878031C9A3868008F23A7 /* WenxiulianmengDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */; };
 		7BF878071C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878061C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m */; };
 		7BF8780A1C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF878091C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m */; };
@@ -690,6 +693,12 @@
 		7BF67F191C522466005FA5C4 /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
 		7BF7FF421C9F808D007E2133 /* Advertise_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Advertise_Model.h; sourceTree = "<group>"; };
 		7BF7FF431C9F808D007E2133 /* Advertise_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Advertise_Model.m; sourceTree = "<group>"; };
+		7BF7FF451C9F9503007E2133 /* ZhaopinfenleiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaopinfenleiViewController.h; sourceTree = "<group>"; };
+		7BF7FF461C9F9503007E2133 /* ZhaopinfenleiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhaopinfenleiViewController.m; sourceTree = "<group>"; };
+		7BF7FF491C9F9F1B007E2133 /* Zhaopingfeilei_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zhaopingfeilei_Model.h; sourceTree = "<group>"; };
+		7BF7FF4A1C9F9F1B007E2133 /* Zhaopingfeilei_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zhaopingfeilei_Model.m; sourceTree = "<group>"; };
+		7BF7FF4C1C9FBE32007E2133 /* ZhaopinxinziViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhaopinxinziViewController.h; sourceTree = "<group>"; };
+		7BF7FF4D1C9FBE32007E2133 /* ZhaopinxinziViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhaopinxinziViewController.m; sourceTree = "<group>"; };
 		7BF878011C9A3868008F23A7 /* WenxiulianmengDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WenxiulianmengDetailViewController.h; sourceTree = "<group>"; };
 		7BF878021C9A3868008F23A7 /* WenxiulianmengDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WenxiulianmengDetailViewController.m; sourceTree = "<group>"; };
 		7BF878051C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wenxiulanmengdingdan_Model.h; sourceTree = "<group>"; };
@@ -1229,8 +1238,13 @@
 		7B2114CB1C9D4ADE0073C8C9 /* dingwei */ = {
 			isa = PBXGroup;
 			children = (
+				7BF7FF481C9F9EDD007E2133 /* Model */,
 				7B2114CC1C9D4B050073C8C9 /* ZhaopingdingweiViewController.h */,
 				7B2114CD1C9D4B050073C8C9 /* ZhaopingdingweiViewController.m */,
+				7BF7FF451C9F9503007E2133 /* ZhaopinfenleiViewController.h */,
+				7BF7FF461C9F9503007E2133 /* ZhaopinfenleiViewController.m */,
+				7BF7FF4C1C9FBE32007E2133 /* ZhaopinxinziViewController.h */,
+				7BF7FF4D1C9FBE32007E2133 /* ZhaopinxinziViewController.m */,
 			);
 			name = dingwei;
 			sourceTree = "<group>";
@@ -1906,6 +1920,15 @@
 			children = (
 				7BF7FF421C9F808D007E2133 /* Advertise_Model.h */,
 				7BF7FF431C9F808D007E2133 /* Advertise_Model.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7BF7FF481C9F9EDD007E2133 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BF7FF491C9F9F1B007E2133 /* Zhaopingfeilei_Model.h */,
+				7BF7FF4A1C9F9F1B007E2133 /* Zhaopingfeilei_Model.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2769,6 +2792,7 @@
 				7B2114CA1C9CE6DC0073C8C9 /* WodeshuoshuoViewController.m in Sources */,
 				7B06632A1C8927060037F0BC /* ShopCarData_Models.m in Sources */,
 				7B67B18F1C966A1A00564EDF /* DINGDAN_Model.m in Sources */,
+				7BF7FF471C9F9503007E2133 /* ZhaopinfenleiViewController.m in Sources */,
 				7BB8BD441C79599100186D72 /* Shengshiqu_Model.m in Sources */,
 				7B46EE0B1C604FE300E33E0E /* NextTextViewController.m in Sources */,
 				802553101C574F7100CFF875 /* UIScrollView+MJExtension.m in Sources */,
@@ -2910,6 +2934,7 @@
 				7BA596B11C4E269200DBC69D /* WebStroeViewController.m in Sources */,
 				7B8B33B01C72ED90008C6CD4 /* ZhaoxiangViewController.m in Sources */,
 				8082B4CB1C7414320024EAD3 /* JKPromptView.m in Sources */,
+				7BF7FF4E1C9FBE32007E2133 /* ZhaopinxinziViewController.m in Sources */,
 				7BD4619A1C75B23600741C5C /* WebStroe_Model.m in Sources */,
 				7B00BF5E1C77018300988119 /* CCLocationManager.m in Sources */,
 				7BAABAE31C59FBC800C14DF8 /* KechengbaomingViewController.m in Sources */,
@@ -2963,6 +2988,7 @@
 				7B46EE0E1C60777100E33E0E /* NextTextTableViewCell.m in Sources */,
 				7BBF79F71C87C5F40059C9E0 /* chanpinDetail_Models.m in Sources */,
 				7BAABAEB1C5A056500C14DF8 /* kechengmingchengViewController.m in Sources */,
+				7BF7FF4B1C9F9F1B007E2133 /* Zhaopingfeilei_Model.m in Sources */,
 				7BB26FE51C5B37CB001D332E /* FenxiaozhongxinViewController.m in Sources */,
 				7BF67F0D1C51BC29005FA5C4 /* SearchViewController.m in Sources */,
 			);

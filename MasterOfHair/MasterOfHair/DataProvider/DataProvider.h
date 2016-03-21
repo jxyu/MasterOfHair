@@ -320,10 +320,12 @@
 - (void)VitaeWithArea_id:(NSString *)area_id salary_id:(NSString *)salary_id type_id:(NSString *)type_id pagenumber:(NSString *)pagenumber pagesize:(NSString *)pagesize;
 
 
+#pragma mark -  6）招聘类别
+- (void)RecruitType;
 
 
-
-
+#pragma mark -  7）招聘薪资区间
+- (void)RecruitSalary;
 
 
 

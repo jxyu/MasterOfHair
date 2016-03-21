@@ -820,6 +820,14 @@
 
             [userdefault setObject:@"" forKey:@"diquweizhi_id2"];
             [userdefault setObject:@"" forKey:@"diquweizhi2"];
+            //招聘
+            [userdefault setObject:@"" forKey:@"zhaopingfei_name"];
+            [userdefault setObject:@"" forKey:@"zhaopingfei_id"];
+            
+            //招聘
+            [userdefault setObject:@"" forKey:@"zhaopingxinzi_name"];
+            [userdefault setObject:@"" forKey:@"zhaopingxinzi_id"];
+            
             
             NSLog(@"%@",[userdefault objectForKey:@"diquweizhi"]);
         }
@@ -846,6 +854,13 @@
         
         [userdefault setObject:@"" forKey:@"diquweizhi_id2"];
         [userdefault setObject:@"" forKey:@"diquweizhi2"];
+        
+        [userdefault setObject:@"" forKey:@"zhaopingfei_name"];
+        [userdefault setObject:@"" forKey:@"zhaopingfei_id"];
+        
+        //招聘
+        [userdefault setObject:@"" forKey:@"zhaopingxinzi_name"];
+        [userdefault setObject:@"" forKey:@"zhaopingxinzi_id"];
     }
 }
 

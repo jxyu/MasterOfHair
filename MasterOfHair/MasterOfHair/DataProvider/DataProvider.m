@@ -1238,10 +1238,21 @@
 }
 
 
+#pragma mark -  6）招聘类别
+- (void)RecruitType
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/Type",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
 
-
-
-
+#pragma mark -  7）招聘薪资区间
+- (void)RecruitSalary
+{
+    NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/Salary",Url];
+    
+    [self PostRequest:url andpram:nil];
+}
 
 
 

@@ -12,7 +12,8 @@
 
 #import "ZhaopingdingweiViewController.h"
 #import "Advertise_Model.h"
-
+#import "ZhaopinfenleiViewController.h"
+#import "ZhaopinxinziViewController.h"
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -31,6 +32,13 @@
 @property (nonatomic, strong) NSMutableArray * arr_data;
 
 @property (nonatomic, assign) NSInteger page;
+
+//
+@property (nonatomic, strong) FL_Button * btn_1;
+@property (nonatomic, strong) FL_Button * btn_2;
+
+
+
 @end
 
 @implementation AdvertiseViewController
@@ -85,6 +93,24 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
+    if([[userdefault objectForKey:@"zhaopingfei_name"] length] == 0)
+    {
+        [self.btn_1 setTitle:@"全部分类" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.btn_1 setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"zhaopingfei_name"]] forState:UIControlStateNormal];
+    }
+    
+    if([[userdefault objectForKey:@"zhaopingxinzi_name"] length] == 0)
+    {
+        [self.btn_2 setTitle:@"薪资区间" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.btn_2 setTitle:[NSString stringWithFormat:@"%@",[userdefault objectForKey:@"zhaopingxinzi_name"]] forState:UIControlStateNormal];
+    }
+    
     if([[userdefault objectForKey:@"city_id"] length] == 0)
     {
         [self addRightbuttontitle:@"定位"];
@@ -129,12 +155,16 @@
 
 -(void)jumpToSelectClass
 {
+    ZhaopinfenleiViewController * zhaopinfenleiViewController = [[ZhaopinfenleiViewController alloc] init];
     
+    [self showViewController:zhaopinfenleiViewController sender:nil];
 }
 
 - (void)btn_betweenToSelectClass
 {
+    ZhaopinxinziViewController * zhaopinxinziViewController = [[ZhaopinxinziViewController alloc] init];
     
+    [self showViewController:zhaopinxinziViewController sender:nil];
 }
 
 #pragma mark - 布局
@@ -197,7 +227,7 @@
     btn_AllClass.layer.cornerRadius=8;
     [btn_AllClass addTarget:self action:@selector(jumpToSelectClass) forControlEvents:UIControlEventTouchUpInside];
     [HeaderBackView addSubview:btn_AllClass];
-    
+    self.btn_1 = btn_AllClass;
     
     FL_Button *btn_between = [FL_Button fl_shareButton];
     [btn_between setImage:[UIImage imageNamed:@"select_down"] forState:UIControlStateNormal];
@@ -210,7 +240,7 @@
     btn_between.layer.borderColor=navi_bar_bg_color.CGColor;
     btn_between.layer.cornerRadius=8;
     [btn_between addTarget:self action:@selector(btn_betweenToSelectClass) forControlEvents:UIControlEventTouchUpInside];
-
+    self.btn_2 = btn_between;
     [HeaderBackView addSubview:btn_between];
     
     FL_Button *btn_new  = [FL_Button fl_shareButton];
@@ -323,7 +353,7 @@
     
     cell  = [[[NSBundle mainBundle] loadNibNamed:@"AdvertiseCellTableViewCell" owner:self options:nil] lastObject];
     
-    cell.layer.masksToBounds=YES;
+//    cell.layer.masksToBounds=YES;
     
     if(self.arr_data.count != 0)
     {
