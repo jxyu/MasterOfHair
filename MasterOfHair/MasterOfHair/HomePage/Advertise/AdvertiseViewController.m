@@ -15,6 +15,7 @@
 #import "ZhaopinfenleiViewController.h"
 #import "ZhaopinxinziViewController.h"
 #import "YingpinDetailViewController.h"
+#import "ZhaopingDetailViewController.h"
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -411,7 +412,13 @@
     }
     else
     {//招聘
+        Advertise_Model * model = self.arr_data[indexPath.row];
+
+        ZhaopingDetailViewController * zhaopingDetailViewController = [[ZhaopingDetailViewController alloc] init];
         
+        zhaopingDetailViewController.recruit_id = model.recruit_id;
+        
+        [self showViewController:zhaopingDetailViewController sender:nil];
     }
     
 }

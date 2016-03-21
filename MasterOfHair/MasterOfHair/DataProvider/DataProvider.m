@@ -1269,6 +1269,18 @@
 }
 
 
+#pragma mark -  获取单个招聘详情
+- (void)talkWithrecruit_id:(NSString *)recruit_id
+{
+    if(recruit_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/Recruit",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"recruit_id\":\"%@\"}",recruit_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

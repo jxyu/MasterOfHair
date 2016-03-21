@@ -330,7 +330,8 @@
 #pragma mark - 获取单个应聘详情
 - (void)talkWithvitae_id:(NSString *)vitae_id;
 
-
+#pragma mark -  获取单个招聘详情
+- (void)talkWithrecruit_id:(NSString *)recruit_id;
 
 
 

@@ -1,15 +1,16 @@
 //
-//  YingpinDetailViewController.m
+//  ZhaopingDetailViewController.m
 //  MasterOfHair
 //
 //  Created by 鞠超 on 16/3/21.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "YingpinDetailViewController.h"
+#import "ZhaopingDetailViewController.h"
+
 #import "Advertise_Model.h"
 
-@interface YingpinDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ZhaopingDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -17,7 +18,7 @@
 
 @end
 
-@implementation YingpinDetailViewController
+@implementation ZhaopingDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,7 +76,6 @@
 }
 
 #pragma mark - tableView代理
-
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -83,34 +83,46 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return 16;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 4 || indexPath.row == 10 || indexPath.row == 12)
+//    return 50;
+    if(indexPath.row == 6)
     {
-        return 10;
-    }
-    else if(indexPath.row == 9)
-    {
-        if ([self.model_detail.work_experience length] == 0)
+        if ([self.model_detail.job_description length] == 0)
         {
             return 50;
         }
         else
         {
-          CGFloat x_length = [self.model_detail.work_experience boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
+            CGFloat x_length = [self.model_detail.job_description boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
             
             return x_length + 30;
         }
+    }
+    else if(indexPath.row == 13)
+    {
+        if ([self.model_detail.company_brief length] == 0)
+        {
+            return 50;
+        }
+        else
+        {
+            CGFloat x_length = [self.model_detail.company_brief boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
+            
+            return x_length + 30;
+        }
+    }
+    else if(indexPath.row == 7 || indexPath.row == 14)
+    {
+        return 10;
     }
     else
     {
         return 50;
     }
-    
-    
 }
 
 
@@ -118,14 +130,14 @@
 {
     UITableViewCell * cell = [[UITableViewCell alloc] init];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+
     switch (indexPath.row)
     {
         case 0:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
-            name.text = @"应聘职位";
+            name.text = @"招聘职位";
             [cell addSubview:name];
             
             UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
@@ -133,7 +145,7 @@
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.intention_position;
+            detail.text = self.model_detail.workname;
             
             [cell addSubview:detail];
         }
@@ -142,7 +154,24 @@
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
-            name.text = @"期望薪资";
+            name.text = @"招聘人数";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = [NSString stringWithFormat:@"%@人",self.model_detail.number];
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 2:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"预计薪资";
             [cell addSubview:name];
             
             UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
@@ -155,11 +184,11 @@
             [cell addSubview:detail];
         }
             break;
-        case 2:
+        case 3:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
-            name.text = @"职位分类";
+            name.text = @"职业分类";
             [cell addSubview:name];
             
             UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
@@ -172,7 +201,24 @@
             [cell addSubview:detail];
         }
             break;
-        case 3:
+        case 4:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"选择城市";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.area_name;
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 5:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
@@ -184,35 +230,7 @@
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.locationid;
-            
-            [cell addSubview:detail];
-        }
-            break;
-         case 4:
-        {
-            UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(- 5, 0, SCREEN_WIDTH + 10, 10)];
-            view_bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//            view_bg.layer.borderColor = [UIColor grayColor].CGColor;
-//            view_bg.layer.borderWidth = 1;
-            
-            [cell addSubview:view_bg];
-        }
-            break;
-        case 5:
-        {
-            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
-            name.text = @"姓名";
-            name.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:name];
-            
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
-            [cell addSubview:view_line];
-            
-            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.name;
+            detail.text = self.model_detail.location;
             
             [cell addSubview:detail];
         }
@@ -221,65 +239,11 @@
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
-            name.text = @"年龄";
+            name.text = @"职位描述";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
-            [cell addSubview:view_line];
-            
-            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.age;
-            
-            [cell addSubview:detail];
-        }
-            break;
-        case 7:
-        {
-            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
-            name.text = @"性别";
-            name.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:name];
-            
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
-            [cell addSubview:view_line];
-            
-            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.sex;
-            
-            [cell addSubview:detail];
-        }
-            break;
-        case 8:
-        {
-            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
-            name.text = @"居住地址";
-            name.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:name];
-            
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
-            [cell addSubview:view_line];
-            
-            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = self.model_detail.domicile;
-            
-            [cell addSubview:detail];
-        }
-            break;
-        case 9:
-        {
-            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
-            name.text = @"工作经历";
-            name.textAlignment = NSTextAlignmentRight;
-            [cell addSubview:name];
-            
-            CGFloat x_length = [self.model_detail.work_experience boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
+            CGFloat x_length = [self.model_detail.job_description boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
             
             UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, x_length + 15)];
             view_line.backgroundColor = [UIColor grayColor];
@@ -287,12 +251,12 @@
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 5, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, x_length + 20)];
             detail.numberOfLines = 0;
-            detail.text = self.model_detail.work_experience;
+            detail.text = self.model_detail.job_description;
             
             [cell addSubview:detail];
         }
             break;
-        case 10:
+        case 7:
         {
             UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(- 5, 0, SCREEN_WIDTH + 10, 10)];
             view_bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -302,7 +266,125 @@
             [cell addSubview:view_bg];
         }
             break;
+        case 8:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"公司名称";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.company_name;
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 9:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"公司规模";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.company_scale;
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 10:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"公司性质";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.company_natrue;
+            
+            [cell addSubview:detail];
+        }
+            break;
         case 11:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"所属行业";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.company_industry;
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 12:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"公司地址";
+            [cell addSubview:name];
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+            detail.text = self.model_detail.company_locat;
+            
+            [cell addSubview:detail];
+        }
+            break;
+            
+        case 13:
+        {
+            UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+            name.textColor = [UIColor grayColor];
+            name.text = @"公司简介";
+            name.textAlignment = NSTextAlignmentRight;
+            [cell addSubview:name];
+            
+            CGFloat x_length = [self.model_detail.company_brief boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
+            
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, x_length + 15)];
+            view_line.backgroundColor = [UIColor grayColor];
+            [cell addSubview:view_line];
+            
+            UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 5, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, x_length + 20)];
+            detail.numberOfLines = 0;
+            detail.text = self.model_detail.company_brief;
+            
+            [cell addSubview:detail];
+        }
+            break;
+        case 14:
+        {
+            UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(- 5, 0, SCREEN_WIDTH + 10, 10)];
+            view_bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            //            view_bg.layer.borderColor = [UIColor grayColor].CGColor;
+            //            view_bg.layer.borderWidth = 1;
+            
+            [cell addSubview:view_bg];
+        }
+            break;
+           
+        case 15:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
             name.textColor = [UIColor grayColor];
@@ -316,12 +398,12 @@
             
             
             UIView * view_call = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 0, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 10, 50)];
-//            view_call.backgroundColor = [UIColor orangeColor];
+            //            view_call.backgroundColor = [UIColor orangeColor];
             [cell addSubview:view_call];
             
             UIImageView * image_ = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 15, 10, 30, 30)];
             image_.image = [UIImage imageNamed:@"yijianbohao"];
-//            image_.backgroundColor = [UIColor orangeColor];
+            //            image_.backgroundColor = [UIColor orangeColor];
             [cell addSubview:image_];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_.frame) , 10, 70, 30)];
@@ -338,26 +420,14 @@
             [view_call addGestureRecognizer:tapGesture];
         }
             break;
-//        case 12:
-//        {
-//            UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(- 5, 0, SCREEN_WIDTH + 10, 10)];
-//            view_bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//            //            view_bg.layer.borderColor = [UIColor grayColor].CGColor;
-//            //            view_bg.layer.borderWidth = 1;
-//            
-//            [cell addSubview:view_bg];
-//        }
-//            break;
 
         default:
-            
             break;
     }
     
-
+    
     return cell;
 }
-
 
 
 
@@ -368,18 +438,18 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider talkWithvitae_id:self.vitae_id];
+    [dataprovider talkWithrecruit_id:self.recruit_id];
 }
 
 //数据
 - (void)Recruit:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSArray * arr_list = dict[@"data"][@"vitaelist"];
+            NSArray * arr_list = dict[@"data"][@"recruitlist"];
             
             self.model_detail = [[Advertise_Model alloc] init];
             
@@ -404,6 +474,7 @@
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
+
 
 #pragma mark - 点击事件
 - (void)tapGesture:(id)sender
@@ -433,7 +504,6 @@
         [alert addAction:action1];
     }
 }
-
 
 
 
