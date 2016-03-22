@@ -190,7 +190,7 @@
         //保存
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         [userdefault setObject:model.status_name forKey:@"zhaopingxinzi_name"];
-        [userdefault setObject:model.status_id forKey:@"zhaopingxinzi_id"];
+        [userdefault setObject:model.status_code forKey:@"zhaopingxinzi_id"];
         
     }
     

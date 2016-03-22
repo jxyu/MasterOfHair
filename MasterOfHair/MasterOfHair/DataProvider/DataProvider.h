@@ -333,7 +333,8 @@
 #pragma mark -  获取单个招聘详情
 - (void)talkWithrecruit_id:(NSString *)recruit_id;
 
-
+#pragma mark - 发布简历（post提交）
+- (void)createWithimage:(NSData *)image member_id:(NSString *)member_id name:(NSString *)name age:(NSString *)age sex:(NSString *)sex domicile:(NSString *)domicile work_experience:(NSString *)work_experience telephone:(NSString *)telephone intention_position:(NSString *)intention_position salary_id:(NSString *)salary_id type_id:(NSString *)type_id locationid:(NSString *)locationid area_id:(NSString *)area_id;
 
 
 

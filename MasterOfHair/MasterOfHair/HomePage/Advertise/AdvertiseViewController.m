@@ -97,6 +97,18 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
+    //
+    [userdefault setObject:@"" forKey:@"zhaopingxinzi_name_1"];
+    [userdefault setObject:@"" forKey:@"zhaopingxinzi_id_1"];
+    
+    [userdefault setObject:@"" forKey:@"zhaopingfei_name_2"];
+    [userdefault setObject:@"" forKey:@"zhaopingfei_id_2"];
+    
+    [userdefault setObject:@"" forKey:@"diquweizhi_id3_"];
+    [userdefault setObject:@"" forKey:@"diquweizhi3_"];
+    //
+    
+    
     if([[userdefault objectForKey:@"zhaopingfei_name"] length] == 0)
     {
         [self.btn_1 setTitle:@"全部分类" forState:UIControlStateNormal];

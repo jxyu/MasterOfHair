@@ -27,12 +27,18 @@
 
 @property (nonatomic, strong) UIImageView * portraitImageView;
 @property (nonatomic, strong) NSData * imageData;
+
+//
+@property (nonatomic, strong) NSMutableArray * arr_data;
+
 @end
 
 @implementation YingpinfabuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.arr_data = @[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""].mutableCopy;
     
     [self p_navi];
     
@@ -70,6 +76,15 @@
     {
         text_1.text =  [userdefault objectForKey:@"zhaopingxinzi_name_1"];
         image_1.hidden = YES;
+        
+        [self.arr_data replaceObjectAtIndex:1 withObject:[userdefault objectForKey:@"zhaopingxinzi_name_1"]];
+    }
+    else
+    {
+        text_1.placeholder = @"请选择薪资区间";
+        image_1.hidden = NO;
+        [self.arr_data replaceObjectAtIndex:1 withObject:@""];
+        
     }
     
     
@@ -79,6 +94,14 @@
     {
         text_2.text =  [userdefault objectForKey:@"zhaopingfei_name_2"];
         image_2.hidden = YES;
+        
+        [self.arr_data replaceObjectAtIndex:2 withObject:[userdefault objectForKey:@"zhaopingfei_name_2"]];
+    }
+    else
+    {
+        text_2.placeholder = @"请选择分类";
+        image_2.hidden = NO;
+        [self.arr_data replaceObjectAtIndex:2 withObject:@""];
     }
     
     UITextField * text_3 = [self.view viewWithTag:300];
@@ -87,7 +110,21 @@
     {
         text_3.text =  [userdefault objectForKey:@"diquweizhi3_"];
         image_3.hidden = YES;
+        
+        [self.arr_data replaceObjectAtIndex:3 withObject:[userdefault objectForKey:@"diquweizhi3_"]];
     }
+    else
+    {
+        text_3.placeholder = @"请选择城市";
+        image_3.hidden = NO;
+        [self.arr_data replaceObjectAtIndex:3 withObject:@""];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //刷新tableView(记住,要更新放在主线程中)
+        
+        [self.tableView reloadData];
+    });
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
@@ -188,7 +225,17 @@
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.placeholder = @"请输入应聘职位";
+            
+            if([self.arr_data[0] length] == 0)
+            {
+                detail.placeholder = @"请输入应聘职位";
+            }
+            else
+            {
+                detail.text = self.arr_data[0];
+            }
+        
+            
             detail.delegate = self;
             detail.tag = 10001;
             detail.clearButtonMode = UITextFieldViewModeAlways;
@@ -208,7 +255,14 @@
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
             detail.enabled = NO;
-            detail.placeholder = @"请选择薪资区间";
+            if ([self.arr_data[1] length] == 0)
+            {
+                detail.placeholder = @"请选择薪资区间";
+            }
+            else
+            {
+                detail.text = self.arr_data[1];
+            }
             [cell addSubview:detail];
             
             UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(detail.frame) + 5, 12.5, 25, 25)];
@@ -233,7 +287,16 @@
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
             detail.enabled = NO;
-            detail.placeholder = @"请选择分类";
+            
+            if ([self.arr_data[2] length] == 0)
+            {
+                detail.placeholder = @"请选择分类";
+            }
+            else
+            {
+                detail.text = self.arr_data[2];
+            }
+            
             [cell addSubview:detail];
             
             UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(detail.frame) + 5, 12.5, 25, 25)];
@@ -258,7 +321,17 @@
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
             detail.enabled = NO;
-            detail.placeholder = @"请选择城市";
+            
+            
+            if ([self.arr_data[3] length] == 0)
+            {
+                detail.placeholder = @"请选择城市";
+            }
+            else
+            {
+                detail.text = self.arr_data[3];
+            }
+            
             [cell addSubview:detail];
             
             UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(detail.frame) + 5, 12.5, 25, 25)];
@@ -284,7 +357,16 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10002;
-            detail.placeholder = @"请输入期望工作地点";
+            
+            if ([self.arr_data[4] length] == 0)
+            {
+                detail.placeholder = @"请输入期望工作地点";
+            }
+            else
+            {
+                detail.text = self.arr_data[4];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -315,7 +397,17 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10003;
-            detail.placeholder = @"请输入姓名";
+            
+            
+            if ([self.arr_data[5] length] == 0)
+            {
+                detail.placeholder = @"请输入姓名";
+            }
+            else
+            {
+                detail.text = self.arr_data[5];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -335,7 +427,16 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10004;
-            detail.placeholder = @"请输入年龄";
+            
+            if ([self.arr_data[6] length] == 0)
+            {
+                detail.placeholder = @"请输入年龄";
+            }
+            else
+            {
+                detail.text = self.arr_data[6];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -355,7 +456,16 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10005;
-            detail.placeholder = @"请输入性别";
+            
+            if ([self.arr_data[7] length] == 0)
+            {
+                detail.placeholder = @"请输入性别";
+            }
+            else
+            {
+                detail.text = self.arr_data[7];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -375,7 +485,16 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10006;
-            detail.placeholder = @"请输入居住地址";
+            
+            if ([self.arr_data[8] length] == 0)
+            {
+                detail.placeholder = @"请输入居住地址";
+            }
+            else
+            {
+                detail.text = self.arr_data[8];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -397,11 +516,26 @@
             detail.tag = 10007;
             [cell addSubview:detail];
             
-            self.text_jingli = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            self.text_jingli.delegate = self;
-            self.text_jingli.placeholder = @"请输入工作经历";
-            self.text_jingli.clearButtonMode = UITextFieldViewModeAlways;
-            self.text_jingli.enabled = NO;
+            
+            if ([self.arr_data[9] length] == 0)
+            {
+                self.text_jingli = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+                self.text_jingli.delegate = self;
+                self.text_jingli.placeholder = @"请输入工作经历";
+                self.text_jingli.clearButtonMode = UITextFieldViewModeAlways;
+                self.text_jingli.enabled = NO;
+            }
+            else
+            {
+                self.text_jingli.hidden = YES;
+                detail.text = self.arr_data[9];
+            }
+//            
+//            self.text_jingli = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
+//            self.text_jingli.delegate = self;
+//            self.text_jingli.placeholder = @"请输入工作经历";
+//            self.text_jingli.clearButtonMode = UITextFieldViewModeAlways;
+//            self.text_jingli.enabled = NO;
             [cell addSubview:self.text_jingli];
         }
             break;
@@ -431,7 +565,16 @@
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
             detail.delegate = self;
             detail.tag = 10008;
-            detail.placeholder = @"请输入联系方式";
+            
+            if ([self.arr_data[10] length] == 0)
+            {
+                detail.placeholder = @"请输入联系方式";
+            }
+            else
+            {
+                detail.text = self.arr_data[10];
+            }
+            
             detail.clearButtonMode = UITextFieldViewModeAlways;
             [cell addSubview:detail];
         }
@@ -446,9 +589,9 @@
             [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
             
             btn.backgroundColor = navi_bar_bg_color;
-            
             [cell addSubview:btn];
             
+            [btn addTarget:self action:@selector(btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
         }
             break;
         default:
@@ -487,6 +630,261 @@
             break;
     }
 }
+
+#pragma mark - 懒加载
+- (NSMutableArray *)arr_data
+{
+    if(_arr_data == nil)
+    {
+        self.arr_data = [NSMutableArray array];
+    }
+    return _arr_data;
+}
+
+#pragma mark - 点击
+- (void)btnAction:(UIButton *)sender
+{
+    
+    for (int i = 1; i < 9; i ++)
+    {
+        UITextField * text1 = [self.view viewWithTag:10000 + i];
+        [text1 resignFirstResponder];
+    }
+    
+    UITextView * text = [self.view viewWithTag:10007];
+    if([text.text length] == 0)
+    {
+        self.text_jingli.hidden = NO;
+    }
+
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.tableView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        //
+        UITextField * text_tel = [self.view viewWithTag:10008];
+        
+        if(self.imageData == nil)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"图片不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[0] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[1] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所选择的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+            [self presentViewController:alert animated:YES completion:^{
+    
+            }];
+    
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+    
+            }];
+    
+            [alert addAction:action];
+        }
+        else if([self.arr_data[2] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所选择的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+//        else if([self.arr_data[3] length] == 0)
+//        {
+//            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所选择的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+//            
+//            [self presentViewController:alert animated:YES completion:^{
+//                
+//            }];
+//            
+//            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//                
+//            }];
+//            
+//            [alert addAction:action];
+//        }
+        else if([self.arr_data[4] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[5] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[6] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[7] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[8] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[9] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else if([self.arr_data[10] length] == 0 || [text_tel.text length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
+        else
+        {
+            if([self.arr_data[10] length] == 0)
+            {
+                UITextField * text = [self.view viewWithTag:10008];
+                
+                [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:text.text intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
+
+                
+            }
+            else
+            {
+                [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:self.arr_data[10] intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
+            }
+        }
+
+        
+    }];
+}
+
+- (void)Recruit:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 
 #pragma mark - 代理
@@ -564,9 +962,89 @@
     }];
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    NSInteger x = textField.tag - 10000;
+    
+    switch (x)
+    {
+        case 1:
+        {
+            [self.arr_data replaceObjectAtIndex:0 withObject:textField.text];
+        }
+            break;
+        case 2:
+        {
+            [self.arr_data replaceObjectAtIndex:4 withObject:textField.text];
+        }
+            break;
+        case 3:
+        {
+            [self.arr_data replaceObjectAtIndex:5 withObject:textField.text];
+        }
+            break;
+        case 4:
+        {
+            [self.arr_data replaceObjectAtIndex:6 withObject:textField.text];
+        }
+            break;
+        case 5:
+        {
+            [self.arr_data replaceObjectAtIndex:7 withObject:textField.text];
+        }
+            break;
+        case 6:
+        {
+            [self.arr_data replaceObjectAtIndex:8 withObject:textField.text];
+        }
+            break;
+        case 8:
+        {
+            [self.arr_data replaceObjectAtIndex:10 withObject:textField.text];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextField *)textField
+{
+    if(textField.tag == 10007)
+    {
+        [self.arr_data replaceObjectAtIndex:9 withObject:textField.text];
+
+    }
+    
+    return YES;
+}
+
 #pragma mark - 照相
 -(void)tapGesture4:(id)sender
 {
+    for (int i = 1; i < 9; i ++)
+    {
+        UITextField * text1 = [self.view viewWithTag:10000 + i];
+        [text1 resignFirstResponder];
+    }
+    
+    UITextView * text = [self.view viewWithTag:10007];
+    if([text.text length] == 0)
+    {
+        self.text_jingli.hidden = NO;
+    }
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        
+        self.tableView.contentOffset = CGPointMake(0, 0);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
     [self p_pick];
 }
 
