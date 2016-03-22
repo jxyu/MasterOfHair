@@ -16,6 +16,8 @@
 #import "ZhaopinxinziViewController.h"
 #import "YingpinDetailViewController.h"
 #import "ZhaopingDetailViewController.h"
+#import "YingpinfabuViewController.h"
+#import "ZhaopingfabuViewController.h"
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -256,6 +258,9 @@
     btn_new.layer.cornerRadius=8;
     [HeaderBackView addSubview:btn_new];
     
+    [btn_new addTarget:self action:@selector(btn_newAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    
     [HeaderBackView zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.leftSpace(0);
         layout.topSpaceByView(self.top_white,0);
@@ -461,6 +466,22 @@
     
     // 马上进入刷新状态
     [self example01];
+}
+
+- (void )btn_newAction:(UIButton *)sender
+{
+    if(self.isTeacher == 0)
+    {
+        YingpinfabuViewController * yingpinfabuViewController = [[YingpinfabuViewController alloc] init];
+        
+        [self showViewController:yingpinfabuViewController sender:nil];
+    }
+    else
+    {
+        ZhaopingfabuViewController * zhaopingfabuViewController = [[ZhaopingfabuViewController alloc] init];
+        
+        [self showViewController:zhaopingfabuViewController sender:nil];
+    }
 }
 
 
