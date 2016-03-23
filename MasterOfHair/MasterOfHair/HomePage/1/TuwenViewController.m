@@ -10,6 +10,7 @@
 
 #import "JCVideoCollectionViewCell.h"
 #import "VCollectionReusableView.h"
+#import "UMSocial.h"
 
 #import "ShipintuwenfenleiViewController.h"
 #import "SearchVideoTextViewController.h"
@@ -19,7 +20,7 @@
 #import "VideoDetailViewController.h"
 #import "TuWen_Models.h"
 #import "SearchTextViewController.h"
-@interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface TuwenViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 //上面的btn
 @property (nonatomic, strong) UIView * top_white;

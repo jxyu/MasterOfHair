@@ -13,8 +13,10 @@
 #import "Pinglun_Models.h"
 #import "NextVideoViewController.h"
 
+#import "UMSocial.h"
 
-@interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
+@interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate ,UMSocialUIDelegate>
 {
     MoviePlayer *moviePlayerview;
 }
@@ -427,6 +429,13 @@
 - (void)btn_shareAction:(UIButton *)sender
 {
     //分享
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56e8cf6867e58ea9710004b8"
+                                      shareText:@"快来下载剃头匠"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
+                                       delegate:self];
+    
 }
 
 //发布

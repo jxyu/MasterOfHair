@@ -12,7 +12,10 @@
 #import "NextTextViewController.h"
 #import "TuwenDetail_Model.h"
 #import "Pinglun_Models.h"
-@interface TextDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+#import "UMSocial.h"
+
+
+@interface TextDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate ,UMSocialUIDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -315,6 +318,12 @@
 {
     NSLog(@"分享");
     //使用第三方
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56e8cf6867e58ea9710004b8"
+                                      shareText:@"快来下载剃头匠"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
+                                       delegate:self];
 }
 
 #pragma mark - 底部栏

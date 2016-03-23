@@ -12,10 +12,19 @@
 #import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>
 #import <ALBBQuPaiPlugin/ALBBQuPaiPlugin.h>
 
+
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+
+
 #define SMSapp_Key @"f7f43b8dec0c"
 #define SMSapp_Secret @"b58371f4502b0e800e461a27328e0ba8"
 #define kQPAppKey @"205425099e62995"
 #define kQPAppSecret @"fcac9d83d3b94d6c8287bef7993768e6"
+
+#define APIKey @"56e8cf6867e58ea9710004b8"
+
 
 @interface AppDelegate ()
 
@@ -43,6 +52,22 @@
     } failure:^(NSError *error) {
         
     }];
+/**
+ *  友盟
+ */
+    [UMSocialData setAppKey:APIKey];
+    
+    //wx
+    [UMSocialWechatHandler setWXAppId:@"wxbbedabd1c20c8942" appSecret:@"4a8c42aeeca6c86bd84de31e4076903a" url:@"http://www.umeng.com/social"];
+    
+    //qq
+    [UMSocialQQHandler setQQWithAppId:@"1105204231" appKey:@"qWWW6hLM0JDnxvN6" url:@"http://www.umeng.com/social"];
+    
+    //设置支持没有客户端情况下使用SSO授权
+    [UMSocialQQHandler setSupportWebView:YES];
+    
+    //如果你要支持不同的屏幕方向，需要这样设置，否则在iPhone只支持一个竖屏方向
+    [UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskAll];
     
     return YES;
 }
@@ -97,6 +122,15 @@
 }
 
 
+#pragma mark - 友盟回调
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
+}
 
 
 #pragma mark - 隐藏tabBar

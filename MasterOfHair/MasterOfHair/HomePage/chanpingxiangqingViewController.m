@@ -8,13 +8,13 @@
 
 #import "chanpingxiangqingViewController.h"
 #import "AppDelegate.h"
-
+#import "UMSocial.h"
 
 #import "VOTagList.h"
 #import "querendingdanViewController.h"
 #import "Chanpingxiangqing_Models.h"
 #import "chanpinDetail_Models.h"
-@interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface chanpingxiangqingViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate , UMSocialUIDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -377,7 +377,15 @@
 #pragma mark - 点击分享 和规格
 - (void)shareAction:(UIButton *)sender
 {
-    NSLog(@"分享");
+//    NSLog(@"分享");
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56e8cf6867e58ea9710004b8"
+                                      shareText:@"快来下载剃头匠"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
+                                       delegate:self];
+    
 }
 
 - (void)selectedTagsChanged: (VOTagList *)tagList{
