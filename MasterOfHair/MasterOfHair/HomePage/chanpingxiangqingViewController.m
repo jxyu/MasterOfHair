@@ -360,7 +360,7 @@
         {
             chanpinDetail_Models * model = self.arr_detail.firstObject;
 
-            NSString * path = [NSString stringWithFormat:@"%@/index.php?r=web/viewProduct&id=%@",Url,model.production_id];
+            NSString * path = [NSString stringWithFormat:@"%@web/viewProduct&id=%@",Url,model.production_id];
             NSURL * url = [NSURL URLWithString:path];
             [webView loadRequest:[NSURLRequest requestWithURL:url]];
         }
@@ -568,19 +568,19 @@
         {
             UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
             
-            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,self.arr_pic[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url_pic,self.arr_pic[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             [self.lunbo_scrollView addSubview:image];
         }
         
         self.image1 = [[UIImageView alloc] init];
         self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-        [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,self.arr_pic[self.arr_pic.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url_pic,self.arr_pic[self.arr_pic.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         [self.lunbo_scrollView addSubview:self.image1];
         
         self.image2 = [[UIImageView alloc] init];
         self.image2.frame = CGRectMake(SCREEN_WIDTH * (self.arr_pic.count + 1), 0 , SCREEN_WIDTH, SCREEN_WIDTH);
-        [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url_pic,self.arr_pic[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         [self.lunbo_scrollView addSubview:self.image2];
         
         

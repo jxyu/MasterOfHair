@@ -387,7 +387,7 @@
         
         if(self.isTeacher == 1)
         {
-            NSString * str = [NSString stringWithFormat:@"%@uploads/recruit/%@",Url,model.image];
+            NSString * str = [NSString stringWithFormat:@"%@uploads/recruit/%@",Url_pic,model.image];
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             cell.lbl_Title.text = model.company_name;
@@ -396,7 +396,7 @@
         }
         else
         {
-            NSString * str = [NSString stringWithFormat:@"%@uploads/vitae/%@",Url,model.image];
+            NSString * str = [NSString stringWithFormat:@"%@uploads/vitae/%@",Url_pic,model.image];
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             cell.lbl_Title.text = model.name;

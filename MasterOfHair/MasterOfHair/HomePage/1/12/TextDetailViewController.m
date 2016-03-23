@@ -159,7 +159,7 @@
     {
         Pinglun_Models * model = self.arr_pinglun[indexPath.row];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         //
         if([model.member_nickname length] == 0 || [model.member_nickname isEqualToString:@"<null>"])
         {
@@ -480,7 +480,7 @@
             }
             
             self.head_image.layer.masksToBounds = YES;
-            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url_pic,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)

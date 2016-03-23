@@ -174,7 +174,7 @@
         ShoppingCar_Model * model = self.arr_data[indexPath.row];
         
         //加数据
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url_pic,model.image]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         cell.title.text = [NSString stringWithFormat:@"%@",model.production_name];
         cell.detail.text = [NSString stringWithFormat:@"%@",model.specs_name];
         cell.price.text = [NSString stringWithFormat:@"¥ %@",model.price];

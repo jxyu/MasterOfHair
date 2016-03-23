@@ -215,7 +215,7 @@
     {
         TuWen_Models * model = self.arr_data[indexPath.item];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
         
         cell.name.text = model.video_title;
         if([model.is_free isEqualToString:@"1"])

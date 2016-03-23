@@ -291,7 +291,7 @@
     
     
     self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 70, 70)];
-    self.head_image.backgroundColor = [UIColor orangeColor];
+//    self.head_image.backgroundColor = [UIColor orangeColor];
     self.head_image.layer.cornerRadius = 35;
     self.head_image.layer.masksToBounds = YES;
     [view_white addSubview:self.head_image];
@@ -444,7 +444,7 @@
             
             NSDictionary * dic = arr_.firstObject;
             
-            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,dic[@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,dic[@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
 
             if([dic[@"spread_id"] length] == 0 || [dic[@"spread_id"] isEqual:[NSNull null]])
             {

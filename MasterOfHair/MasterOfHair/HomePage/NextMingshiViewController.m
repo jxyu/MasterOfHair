@@ -264,7 +264,7 @@
         }
         @finally
         {
-            NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url,self.model.image];
+            NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url_pic,self.model.image];
             [self.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             self.name.text = self.model.teacher_name;
@@ -324,7 +324,7 @@
 #pragma mark - 下面为H5网页
             self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_6.frame), SCREEN_WIDTH, SCREEN_HEIGHT / 3 * 2)];
             
-            NSString * path = [NSString stringWithFormat:@"%@index.php?r=FamousTeacher/TeacherIntro&teacher_id=%@",Url,self.teacher_id];
+            NSString * path = [NSString stringWithFormat:@"%@FamousTeacher/TeacherIntro&teacher_id=%@",Url,self.teacher_id];
             NSURL * url = [NSURL URLWithString:path];
             [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
             

@@ -182,7 +182,7 @@
     {
         Pinglun_Models * model = self.arr_data1[indexPath.row];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         //
         if([model.member_nickname length] == 0 || [model.member_nickname isEqualToString:@"<null>"])
         {
@@ -236,7 +236,7 @@
     //1
     if([model.video_url length] != 0)
     {
-        NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url,model.video_url];
+        NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_url];
         moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
         [self.view addSubview:moviePlayerview];
         
@@ -369,7 +369,7 @@
     }
     else
     {
-        [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+        [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
     }
 //    [self.pinglun_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"touxiang"]];
     [self.head_View addSubview:self.pinglun_image];
@@ -561,7 +561,7 @@
             
             if([model.video_url length] != 0)
             {
-                NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url,model.video_url];
+                NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_url];
                 moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
                 [self.view addSubview:moviePlayerview];
             }

@@ -246,7 +246,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 100, 100)];
-        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url,self.chanpinDetail.list_img]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/product/%@",Url_pic,self.chanpinDetail.list_img]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         [cell addSubview:image];
         
         UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 15, SCREEN_WIDTH - CGRectGetMaxX(image.frame) - 15, 20)];

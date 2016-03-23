@@ -158,7 +158,7 @@
         Shuoshuo_Model * model = self.arr_replylist[indexPath.row];
         
         //赋值
-        [image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         label_name.text = model.member_username;
         NSString * str = [model.reply_time substringFromIndex:10];
         date.text = str;
@@ -296,7 +296,7 @@
             [self.view_bg addSubview:self.time];
             
             //赋值
-            [self.image_touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,self.model_all.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [self.image_touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,self.model_all.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             self.name.text = self.model_all.member_username;
             NSString * str = [self.model_all.talk_time substringFromIndex:10];
             self.time.text = str;
@@ -338,8 +338,13 @@
                     
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
-                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
+                    else
+                    {
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                    }
+                    
                     [self.view_bg addSubview:image];
                 }
                 
@@ -364,10 +369,14 @@
                     
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
-                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                         
 //                        image.image = [UIImage imageNamed:@"sudisudiusidusidu"];
                         
+                    }
+                    else
+                    {
+                        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
                     [self.view_bg addSubview:image];
                 }
@@ -489,7 +498,7 @@
 #pragma mark - 留言数据
 - (void)talkReply:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

@@ -144,7 +144,7 @@
     {
         Pinglun_Models * model = self.arr_data[indexPath.row];
         
-        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+        [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
         //
         if([model.member_nickname length] == 0 || [model.member_nickname isEqualToString:@"<null>"])
         {
@@ -183,7 +183,7 @@
     self.head_image.layer.cornerRadius = 30;
     [self.head_view addSubview:self.head_image];
     
-    [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,self.model.member_headpic]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+    [self.head_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,self.model.member_headpic]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
 
     
     

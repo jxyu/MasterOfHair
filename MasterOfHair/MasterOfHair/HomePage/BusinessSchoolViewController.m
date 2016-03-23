@@ -459,7 +459,7 @@
             
             cell.name.text=[[NSString stringWithFormat:@"%@",model.channel_name] isEqual:@"<null>"]?@"":[NSString stringWithFormat:@"%@",model.channel_name];
             
-            NSString * str =  [NSString stringWithFormat:@"%@uploads/channel/%@",Url,model.channel_image];
+            NSString * str =  [NSString stringWithFormat:@"%@uploads/channel/%@",Url_pic,model.channel_image];
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         }
         else
@@ -546,7 +546,7 @@
         {
             TuWen_Models * model = self.arr_tuwenData[indexPath.item];
             
-            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/article/%@",Url_pic,model.article_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             cell.detail.text = model.article_title;
         }
@@ -562,7 +562,7 @@
         {
             TuWen_Models * model = self.arr_video[indexPath.item];
             
-            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
+            [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
             
             cell.name.text = model.video_title;
             
@@ -808,7 +808,7 @@
     video_image.layer.cornerRadius = 55 / 2;
     video_image.layer.masksToBounds = YES;
 //    video_image.backgroundColor = [UIColor orangeColor];
-    [video_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/11.png",Url]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [video_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/11.png",Url_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.view_video addSubview:video_image];
     
 
@@ -831,7 +831,7 @@
     pic_image.layer.cornerRadius = 55 / 2;
     pic_image.layer.masksToBounds = YES;
 //    pic_image.backgroundColor = [UIColor orangeColor];
-    [pic_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/12.png",Url]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [pic_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/12.png",Url_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.view_pic addSubview:pic_image];
     
 }
@@ -968,19 +968,19 @@
     {
         UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, 200)];
         
-        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url,self.arr_lunboData[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+        [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url_pic,self.arr_lunboData[i - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         
         [self.lunbo_scrollView addSubview:image];
     }
     
     self.image1 = [[UIImageView alloc] init];
     self.image1.frame = CGRectMake(SCREEN_WIDTH * 0 , 0 , SCREEN_WIDTH, 200);
-    [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url,self.arr_lunboData[self.arr_lunboData.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url_pic,self.arr_lunboData[self.arr_lunboData.count - 1]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.lunbo_scrollView addSubview:self.image1];
     
     self.image2 = [[UIImageView alloc] init];
     self.image2.frame = CGRectMake(SCREEN_WIDTH * (self.arr_lunboData.count + 1), 0 , SCREEN_WIDTH, 200);
-    [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url,self.arr_lunboData[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+    [self.image2 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/slide/%@",Url_pic,self.arr_lunboData[0]]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.lunbo_scrollView addSubview:self.image2];
     
     

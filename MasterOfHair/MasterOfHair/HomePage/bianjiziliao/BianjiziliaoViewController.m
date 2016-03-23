@@ -138,7 +138,7 @@
     }
     else
     {
-        [self.touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+        [self.touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,[userdefault objectForKey:@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
     }
     
     //手势
@@ -272,7 +272,7 @@
         
         [userdefault setObject:dict[@"data"][@"member_headpic"] forKey:@"member_headpic"];
         
-        [self.touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url,dict[@"data"][@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
+        [self.touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,dict[@"data"][@"member_headpic"]]] placeholderImage:[UIImage imageNamed:@"touxiang"]];
     }
     else
     {

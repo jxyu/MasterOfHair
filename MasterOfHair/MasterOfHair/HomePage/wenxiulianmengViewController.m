@@ -320,7 +320,7 @@
         {
             Wenxiulianmeng_Model * model = self.arr_data[indexPath.row];
             
-            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/store/%@",Url,model.store_image];
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/store/%@",Url_pic,model.store_image];
             [cell.image sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
             
             cell.name.text = model.store_name;
@@ -341,7 +341,7 @@
         {
             Wenxiulianmeng_Model * model = self.arr_data[indexPath.row];
 
-            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/technician/%@",Url,model.technician_image];
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/technician/%@",Url_pic,model.technician_image];
             [cell.image sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             
             cell.name.text = model.technician_name;

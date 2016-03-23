@@ -107,7 +107,7 @@
         
         cell.name.text = [NSString stringWithFormat:@"%@",model.course_name];
         
-        NSString * str =  [NSString stringWithFormat:@"%@uploads/course/%@",Url,model.image];
+        NSString * str =  [NSString stringWithFormat:@"%@uploads/course/%@",Url_pic,model.image];
         [cell.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
         
     }

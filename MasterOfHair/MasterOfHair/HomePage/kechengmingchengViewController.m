@@ -134,7 +134,7 @@
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.image.frame) + 5, SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.image.frame) - 55)];
     
-    NSString * path = [NSString stringWithFormat:@"%@index.php?r=Course/CourseIntro&course_id=%@",Url,self.course_id];
+    NSString * path = [NSString stringWithFormat:@"%@Course/CourseIntro&course_id=%@",Url,self.course_id];
     NSURL * url = [NSURL URLWithString:path];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
@@ -166,7 +166,7 @@
             
             NSDictionary * dic = arr_.firstObject;
             
-            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/course/%@",Url,dic[@"image"]];
+            NSString * str1 =  [NSString stringWithFormat:@"%@uploads/course/%@",Url_pic,dic[@"image"]];
             [self.image sd_setImageWithURL:[NSURL URLWithString:str1]placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
             
             self.money = [NSString stringWithFormat:@"%@",dic[@"money"]];

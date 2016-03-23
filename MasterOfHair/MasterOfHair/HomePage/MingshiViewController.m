@@ -130,7 +130,7 @@
         
         cell.detail.text = model.describe;
         
-        NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url,model.image];
+        NSString * str = [NSString stringWithFormat:@"%@uploads/teacher/%@",Url_pic,model.image];
         [cell.image sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     }
     

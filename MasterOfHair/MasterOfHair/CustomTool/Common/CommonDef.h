@@ -12,9 +12,13 @@
 
 //外网地址
 //#define Url @"http://115.28.67.86:8082/"
-#define Url @"http://192.168.1.245/titoujiang/"
+//#define Url @"http://192.168.1.245/titoujiang/"
 //#define Url @"http://192.168.1.197/appbackend/"
 
+//#define Url @"http://115.28.67.86:8082//index.php?r=api/"
+
+#define Url @"http://192.168.1.245/titoujiang/index.php?r=api/"
+#define Url_pic @"http://192.168.1.245/titoujiang/"
 
 
 #define NavigationBar_HEIGHT 44

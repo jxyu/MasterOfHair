@@ -95,7 +95,7 @@
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     
-    NSString * path = [NSString stringWithFormat:@"%@index.php?r=web/viewmenu&id=%@",Url,self.type];
+    NSString * path = [NSString stringWithFormat:@"%@web/viewmenu&id=%@",Url,self.type];
     NSURL * url = [NSURL URLWithString:path];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
