@@ -716,16 +716,14 @@
 #pragma mark - 数据加载
 - (void)Applyagent:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSArray * arr = dict[@"data"][@"applyagentlist"];
+            NSDictionary * arr = dict[@"data"][@"applyagentlist"];
             
-            NSDictionary * dic = arr.firstObject;
-            
-            if([[NSString stringWithFormat:@"%@",dic[@"applyAgent_status"]] isEqualToString:@"1"])
+            if([[NSString stringWithFormat:@"%@",arr[@"applyAgent_status"]] isEqualToString:@"1"])
             {
                 self.delegate_type = @"1";
             }

@@ -56,6 +56,8 @@
     _lblTitle.text = [NSString stringWithFormat:@"详情页"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
+    _btnRight.hidden = YES;
+
     [self addLeftButton:@"iconfont-fanhui"];
 }
 
@@ -216,7 +218,7 @@
         case 0:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"应聘职位";
             [cell addSubview:name];
             
@@ -245,7 +247,7 @@
         case 1:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"期望薪资";
             [cell addSubview:name];
             
@@ -277,7 +279,7 @@
         case 2:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"职位分类";
             [cell addSubview:name];
             
@@ -311,7 +313,7 @@
         case 3:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"选择城市";
             [cell addSubview:name];
             
@@ -346,7 +348,7 @@
         case 4:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"工作地点";
             [cell addSubview:name];
             
@@ -385,7 +387,7 @@
         case 6:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"姓名";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -415,7 +417,7 @@
         case 7:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"年龄";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -444,7 +446,7 @@
         case 8:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"性别";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -473,7 +475,7 @@
         case 9:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"居住地址";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -502,7 +504,7 @@
         case 10:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"工作经历";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -513,6 +515,7 @@
             
             UITextView * detail = [[UITextView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 80)];
             detail.delegate = self;
+            detail.font = [UIFont systemFontOfSize:17];
             detail.tag = 10007;
             [cell addSubview:detail];
             
@@ -530,12 +533,7 @@
                 self.text_jingli.hidden = YES;
                 detail.text = self.arr_data[9];
             }
-//            
-//            self.text_jingli = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-//            self.text_jingli.delegate = self;
-//            self.text_jingli.placeholder = @"请输入工作经历";
-//            self.text_jingli.clearButtonMode = UITextFieldViewModeAlways;
-//            self.text_jingli.enabled = NO;
+
             [cell addSubview:self.text_jingli];
         }
             break;
@@ -553,7 +551,7 @@
         case 12:
         {
             UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
-            name.textColor = [UIColor grayColor];
+//            name.textColor = [UIColor grayColor];
             name.text = @"联系方式";
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
@@ -846,17 +844,17 @@
             {
                 UITextField * text = [self.view viewWithTag:10008];
                 
-                [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:text.text intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
-
+                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
                 
+                [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:text.text intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
             }
             else
             {
+                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                
                 [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:self.arr_data[10] intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
             }
         }
-
-        
     }];
 }
 
@@ -864,6 +862,8 @@
 {
 //    NSLog(@"%@",dict);
     
+    [SVProgressHUD dismiss];
+
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
@@ -1072,8 +1072,6 @@
         self.imageData = imageData;
 
         //        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-        
-#warning 拿数据imageData
         //        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         //
         //        DataProvider * dataprovider=[[DataProvider alloc] init];

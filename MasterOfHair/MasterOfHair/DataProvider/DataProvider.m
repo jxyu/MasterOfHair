@@ -1296,6 +1296,18 @@
 }
 
 
+#pragma mark -  发布招聘（post提交）
+- (void)createWithimage:(NSData *)image number:(NSString *)number workname:(NSString *)workname salary_id:(NSString *)salary_id type_id:(NSString *)type_id area_id:(NSString *)area_id location:(NSString *)location job_description:(NSString *)job_description company_name:(NSString *)company_name company_locat:(NSString *)company_locat company_scale:(NSString *)company_scale company_brief:(NSString *)company_brief company_natrue:(NSString *)company_natrue company_industry:(NSString *)company_industry telephone:(NSString *)telephone
+{
+    if(image && number && workname && salary_id &&type_id &&area_id &&location &&job_description &&company_name &&company_locat &&company_scale &&company_brief &&company_natrue && company_industry && telephone)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/create",Url];
+        
+        NSDictionary * prm = @{@"number":number,@"workname":workname,@"salary_id":salary_id,@"type_id":type_id,@"area_id":area_id,@"location":location,@"job_description":job_description,@"company_name":company_name,@"company_locat":company_locat,@"company_scale":company_scale,@"company_brief":company_brief,@"company_natrue":company_natrue,@"company_industry":company_industry,@"telephone":telephone};
+        
+        [self ShowOrderuploadImageWithImage1_pic:image andurl:url andprm:prm andkey:nil];
+    }
+}
 
 
 

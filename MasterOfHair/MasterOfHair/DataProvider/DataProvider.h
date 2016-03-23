@@ -336,8 +336,8 @@
 #pragma mark - 发布简历（post提交）
 - (void)createWithimage:(NSData *)image member_id:(NSString *)member_id name:(NSString *)name age:(NSString *)age sex:(NSString *)sex domicile:(NSString *)domicile work_experience:(NSString *)work_experience telephone:(NSString *)telephone intention_position:(NSString *)intention_position salary_id:(NSString *)salary_id type_id:(NSString *)type_id locationid:(NSString *)locationid area_id:(NSString *)area_id;
 
-
-
+#pragma mark -  发布招聘（post提交）
+- (void)createWithimage:(NSData *)image number:(NSString *)number workname:(NSString *)workname salary_id:(NSString *)salary_id type_id:(NSString *)type_id area_id:(NSString *)area_id location:(NSString *)location job_description:(NSString *)job_description company_name:(NSString *)company_name company_locat:(NSString *)company_locat company_scale:(NSString *)company_scale company_brief:(NSString *)company_brief company_natrue:(NSString *)company_natrue company_industry:(NSString *)company_industry telephone:(NSString *)telephone;
 
 
 

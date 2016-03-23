@@ -997,7 +997,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {//[@"productlist"]
-            for (NSDictionary * dic in dict[@"data"][@"productlist"])
+            for (NSDictionary * dic in dict[@"data"])
             {
                 WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 
