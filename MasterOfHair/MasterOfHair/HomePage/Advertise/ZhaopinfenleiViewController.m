@@ -179,10 +179,16 @@
 {
     NSInteger count = sender.tag - 800;
     
+    sender.enabled = NO;
 //    UIView * view_bg = [self.view viewWithTag:count + 100];
     UIImageView * image = [self.view viewWithTag:count + 400];
     
-    Zhaopingfeilei_Model * model = self.arr_data[count - 1];
+    Zhaopingfeilei_Model * model = [[Zhaopingfeilei_Model alloc] init];
+    
+    if(count != 0)
+    {
+        model = self.arr_data[count - 1];
+    }
     
     if(image.hidden == 0)
     {
@@ -195,6 +201,9 @@
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         [userdefault setObject:@"全部分类" forKey:@"zhaopingfei_name"];
         [userdefault setObject:@"0" forKey:@"zhaopingfei_id"];
+        
+        sender.enabled = YES;
+
     }
     else
     {
@@ -208,6 +217,8 @@
         [userdefault setObject:model.type_name forKey:@"zhaopingfei_name"];
         [userdefault setObject:model.type_id forKey:@"zhaopingfei_id"];
         
+        sender.enabled = YES;
+
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{

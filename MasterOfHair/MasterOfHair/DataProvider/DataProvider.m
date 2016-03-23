@@ -1282,9 +1282,32 @@
     }
 }
 
+#pragma mark -  发布简历（post提交）
+- (void)createWithimage:(NSData *)image member_id:(NSString *)member_id name:(NSString *)name age:(NSString *)age sex:(NSString *)sex domicile:(NSString *)domicile work_experience:(NSString *)work_experience telephone:(NSString *)telephone intention_position:(NSString *)intention_position salary_id:(NSString *)salary_id type_id:(NSString *)type_id locationid:(NSString *)locationid area_id:(NSString *)area_id
+{
+    if(image && member_id && name && age &&sex &&domicile &&work_experience &&telephone &&intention_position &&salary_id &&type_id &&locationid &&area_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Vitae/create",Url];
+        
+        NSDictionary * prm = @{@"member_id":member_id,@"name":name,@"age":age,@"sex":sex,@"domicile":domicile,@"work_experience":work_experience,@"telephone":telephone,@"intention_position":intention_position,@"salary_id":salary_id,@"type_id":type_id,@"locationid":locationid,@"area_id":area_id};
+        
+        [self ShowOrderuploadImageWithImage1_pic:image andurl:url andprm:prm andkey:nil];
+    }
+}
 
 
-
+#pragma mark -  发布招聘（post提交）
+- (void)createWithimage:(NSData *)image number:(NSString *)number workname:(NSString *)workname salary_id:(NSString *)salary_id type_id:(NSString *)type_id area_id:(NSString *)area_id location:(NSString *)location job_description:(NSString *)job_description company_name:(NSString *)company_name company_locat:(NSString *)company_locat company_scale:(NSString *)company_scale company_brief:(NSString *)company_brief company_natrue:(NSString *)company_natrue company_industry:(NSString *)company_industry telephone:(NSString *)telephone
+{
+    if(image && number && workname && salary_id &&type_id &&area_id &&location &&job_description &&company_name &&company_locat &&company_scale &&company_brief &&company_natrue && company_industry && telephone)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@index.php?r=Recruit/create",Url];
+        
+        NSDictionary * prm = @{@"number":number,@"workname":workname,@"salary_id":salary_id,@"type_id":type_id,@"area_id":area_id,@"location":location,@"job_description":job_description,@"company_name":company_name,@"company_locat":company_locat,@"company_scale":company_scale,@"company_brief":company_brief,@"company_natrue":company_natrue,@"company_industry":company_industry,@"telephone":telephone};
+        
+        [self ShowOrderuploadImageWithImage1_pic:image andurl:url andprm:prm andkey:nil];
+    }
+}
 
 
 
@@ -1795,6 +1818,44 @@
     //    NSLog(@"%@",result);
 }
 
+
+- (void)ShowOrderuploadImageWithImage1_pic:(NSData *)image1 andurl:(NSString *)url andprm:(NSDictionary *)prm andkey:(NSString *)key
+{
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //1
+        [formData appendPartWithFileData:image1 name:@"image" fileName:@"image.png" mimeType:@"image/png"];
+    }];
+    
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *str=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSData * data =[str dataUsingEncoding:NSUTF8StringEncoding];
+        id dict =[NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        SEL func_selector = NSSelectorFromString(callBackFunctionName);
+        if ([CallBackObject respondsToSelector:func_selector]) {
+            NSLog(@"回调成功...");
+            [CallBackObject performSelector:func_selector withObject:dict];
+        }else{
+            NSLog(@"回调失败...");
+            [SVProgressHUD dismiss];
+        }
+        NSLog(@"上传完成");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"上传失败->%@", error);
+        [SVProgressHUD dismiss];
+    }];
+    
+    //执行
+    NSOperationQueue * queue =[[NSOperationQueue alloc] init];
+    [queue addOperation:op];
+    //    FileDetail *file = [FileDetail fileWithName:@"avatar.jpg" data:data];
+    //    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+    //                            file,@"FILES",
+    //                            @"avatar",@"name",
+    //                            key, @"key", nil];
+    //    NSDictionary *result = [HttpRequest upload:[NSString stringWithFormat:@"%@index.php?act=member_index&op=avatar_upload",Url] widthParams:params];
+    //    NSLog(@"%@",result);
+}
 
 
 @end

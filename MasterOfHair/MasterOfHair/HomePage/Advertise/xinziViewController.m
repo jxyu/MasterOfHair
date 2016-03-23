@@ -1,15 +1,15 @@
 //
-//  ZhaopinxinziViewController.m
+//  xinziViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/3/21.
+//  Created by 鞠超 on 16/3/22.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "ZhaopinxinziViewController.h"
+#import "xinziViewController.h"
 #import "Zhaopingfeilei_Model.h"
 
-@interface ZhaopinxinziViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface xinziViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ZhaopinxinziViewController
+@implementation xinziViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,8 +58,8 @@
     
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
-    [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
+    [userdefault setObject:@"" forKey:@"zhaopingxinzi_name_1"];
+    [userdefault setObject:@"" forKey:@"zhaopingxinzi_id_1"];
     
     [self p_data];
     
@@ -175,10 +175,10 @@
         
         self.page = self.arr_data.count + 10;
         
-        //保存
-        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
-        [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
+//        //保存
+//        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+//        [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
+//        [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
     }
     else
     {
@@ -189,8 +189,10 @@
         
         //保存
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:model.status_name forKey:@"zhaopingxinzi_name"];
-        [userdefault setObject:model.status_code forKey:@"zhaopingxinzi_id"];
+        [userdefault setObject:model.status_name forKey:@"zhaopingxinzi_name_1"];
+        [userdefault setObject:model.status_code forKey:@"zhaopingxinzi_id_1"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
     

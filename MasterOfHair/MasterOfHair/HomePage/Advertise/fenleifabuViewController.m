@@ -1,15 +1,15 @@
 //
-//  ZhaopinxinziViewController.m
+//  fenleifabuViewController.m
 //  MasterOfHair
 //
-//  Created by 鞠超 on 16/3/21.
+//  Created by 鞠超 on 16/3/22.
 //  Copyright © 2016年 zykj. All rights reserved.
 //
 
-#import "ZhaopinxinziViewController.h"
+#import "fenleifabuViewController.h"
 #import "Zhaopingfeilei_Model.h"
 
-@interface ZhaopinxinziViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface fenleifabuViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ZhaopinxinziViewController
+@implementation fenleifabuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +38,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"薪资区间"];
+    _lblTitle.text = [NSString stringWithFormat:@"选择分类"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     //    [self addLeftButton:@"iconfont-fanhui"];
@@ -54,12 +54,11 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.page = 100000000;
-    
+    self.page = 10000000;
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
-    [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
+    [userdefault setObject:@"" forKey:@"zhaopingfei_name_2"];
+    [userdefault setObject:@"" forKey:@"zhaopingfei_id_2"];
     
     [self p_data];
     
@@ -134,19 +133,37 @@
     
     if(self.arr_data != 0)
     {
-        Zhaopingfeilei_Model * model = self.arr_data[indexPath.row];
-        name.text = model.status_name;
-        
-        if(indexPath.row == self.page)
-        {
-            btn.layer.borderColor = navi_bar_bg_color.CGColor;
-            image.hidden = NO;
-        }
-        else
-        {
-            btn.layer.borderColor = [UIColor grayColor].CGColor;
-            image.hidden = YES;
-        }
+//        if(indexPath.row == 0)
+//        {
+//            name.text = @"全部";
+//            
+//            if(self.page == 0)
+//            {
+//                btn.layer.borderColor = navi_bar_bg_color.CGColor;
+//                image.hidden = NO;
+//            }
+//            else
+//            {
+//                btn.layer.borderColor = [UIColor grayColor].CGColor;
+//                image.hidden = YES;
+//            }
+//        }
+//        else
+//        {
+            Zhaopingfeilei_Model * model = self.arr_data[indexPath.row];
+            name.text = model.type_name;
+            
+            if(indexPath.row == self.page)
+            {
+                btn.layer.borderColor = navi_bar_bg_color.CGColor;
+                image.hidden = NO;
+            }
+            else
+            {
+                btn.layer.borderColor = [UIColor grayColor].CGColor;
+                image.hidden = YES;
+            }
+//        }
     }
     
     
@@ -167,32 +184,20 @@
     UIImageView * image = [self.view viewWithTag:count + 400];
     
     Zhaopingfeilei_Model * model = self.arr_data[count];
+
+    image.hidden = 0;
+    sender.layer.borderColor = navi_bar_bg_color.CGColor;
     
-    if(image.hidden == 0)
-    {
-        image.hidden = 1;
-        sender.layer.borderColor = [UIColor grayColor].CGColor;
+    self.page = count;
+    
+    //保存
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:model.type_name forKey:@"zhaopingfei_name_2"];
+    [userdefault setObject:model.type_id forKey:@"zhaopingfei_id_2"];
+    
+    [self.navigationController popViewControllerAnimated:YES];
         
-        self.page = self.arr_data.count + 10;
-        
-        //保存
-        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
-        [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
-    }
-    else
-    {
-        image.hidden = 0;
-        sender.layer.borderColor = navi_bar_bg_color.CGColor;
-        
-        self.page = count;
-        
-        //保存
-        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:model.status_name forKey:@"zhaopingxinzi_name"];
-        [userdefault setObject:model.status_code forKey:@"zhaopingxinzi_id"];
-        
-    }
+//    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         //刷新tableView(记住,要更新放在主线程中)
@@ -208,7 +213,7 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider RecruitSalary];
+    [dataprovider RecruitType];
 }
 
 //数据
@@ -258,6 +263,8 @@
     }
     return _arr_data;
 }
+
+
 
 
 @end

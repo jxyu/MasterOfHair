@@ -17,6 +17,6 @@
 @property (nonatomic, copy) NSString * status_id;
 @property (nonatomic, copy) NSString * status_name;
 @property (nonatomic, copy) NSString * status_type;
-
+@property (nonatomic, copy) NSString * status_code;
 
 @end
