@@ -210,6 +210,16 @@
 		7BBC0D2B1CA2697F0014A5B0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0D2A1CA2697F0014A5B0 /* SystemConfiguration.framework */; };
 		7BBC0D2D1CA269910014A5B0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0D2C1CA269910014A5B0 /* libsqlite3.tbd */; };
 		7BBC0D2F1CA2699A0014A5B0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0D2E1CA2699A0014A5B0 /* CoreTelephony.framework */; };
+		7BBC0DE41CA287F20014A5B0 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BBC0DD91CA287F20014A5B0 /* AlipaySDK.bundle */; };
+		7BBC0DE51CA287F20014A5B0 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DDA1CA287F20014A5B0 /* AlipaySDK.framework */; };
+		7BBC0DE61CA287F20014A5B0 /* libpingpp+alipay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DDB1CA287F20014A5B0 /* libpingpp+alipay.a */; };
+		7BBC0DE71CA287F20014A5B0 /* libpingpp+wx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DDD1CA287F20014A5B0 /* libpingpp+wx.a */; };
+		7BBC0DE81CA287F20014A5B0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DDE1CA287F20014A5B0 /* libWeChatSDK.a */; };
+		7BBC0DE91CA287F20014A5B0 /* libpingpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DE11CA287F20014A5B0 /* libpingpp.a */; };
+		7BBC0DEA1CA287F20014A5B0 /* Pingpp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BBC0DE21CA287F20014A5B0 /* Pingpp.bundle */; };
+		7BBC0DEC1CA288100014A5B0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DEB1CA288100014A5B0 /* CFNetwork.framework */; };
+		7BBC0DEE1CA2882F0014A5B0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DED1CA2882F0014A5B0 /* libc++.tbd */; };
+		7BBC0DF01CA2883F0014A5B0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBC0DEF1CA2883F0014A5B0 /* libsqlite3.0.tbd */; };
 		7BBF79F71C87C5F40059C9E0 /* chanpinDetail_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */; };
 		7BBF79F91C87DAB00059C9E0 /* shoucangH.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */; };
 		7BBF79FC1C87EA020059C9E0 /* GouwuchengdingdanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBF79FB1C87EA020059C9E0 /* GouwuchengdingdanViewController.m */; };
@@ -745,6 +755,19 @@
 		7BBC0D2A1CA2697F0014A5B0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7BBC0D2C1CA269910014A5B0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7BBC0D2E1CA2699A0014A5B0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		7BBC0DD91CA287F20014A5B0 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		7BBC0DDA1CA287F20014A5B0 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		7BBC0DDB1CA287F20014A5B0 /* libpingpp+alipay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpingpp+alipay.a"; sourceTree = "<group>"; };
+		7BBC0DDD1CA287F20014A5B0 /* libpingpp+wx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpingpp+wx.a"; sourceTree = "<group>"; };
+		7BBC0DDE1CA287F20014A5B0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		7BBC0DDF1CA287F20014A5B0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		7BBC0DE01CA287F20014A5B0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		7BBC0DE11CA287F20014A5B0 /* libpingpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpingpp.a; sourceTree = "<group>"; };
+		7BBC0DE21CA287F20014A5B0 /* Pingpp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Pingpp.bundle; sourceTree = "<group>"; };
+		7BBC0DE31CA287F20014A5B0 /* Pingpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pingpp.h; sourceTree = "<group>"; };
+		7BBC0DEB1CA288100014A5B0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7BBC0DED1CA2882F0014A5B0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		7BBC0DEF1CA2883F0014A5B0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		7BBF79F51C87C5F40059C9E0 /* chanpinDetail_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chanpinDetail_Models.h; sourceTree = "<group>"; };
 		7BBF79F61C87C5F40059C9E0 /* chanpinDetail_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chanpinDetail_Models.m; sourceTree = "<group>"; };
 		7BBF79F81C87DAAF0059C9E0 /* shoucangH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoucangH.png; sourceTree = "<group>"; };
@@ -1072,17 +1095,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBC0DF01CA2883F0014A5B0 /* libsqlite3.0.tbd in Frameworks */,
 				7BD86C4B1C745DBC00D099BE /* libz.tbd in Frameworks */,
+				7BBC0DEE1CA2882F0014A5B0 /* libc++.tbd in Frameworks */,
+				7BBC0D271CA2695A0014A5B0 /* Security.framework in Frameworks */,
+				7BBC0D2B1CA2697F0014A5B0 /* SystemConfiguration.framework in Frameworks */,
+				7BBC0DEC1CA288100014A5B0 /* CFNetwork.framework in Frameworks */,
 				7BD86C531C745E2A00D099BE /* libstdc++.tbd in Frameworks */,
 				7BBC0D2F1CA2699A0014A5B0 /* CoreTelephony.framework in Frameworks */,
 				7BBC0D2D1CA269910014A5B0 /* libsqlite3.tbd in Frameworks */,
 				802492451C785370008BA570 /* CoreGraphics.framework in Frameworks */,
-				7BBC0D2B1CA2697F0014A5B0 /* SystemConfiguration.framework in Frameworks */,
+				7BBC0DE81CA287F20014A5B0 /* libWeChatSDK.a in Frameworks */,
 				7BBC0D291CA269660014A5B0 /* libiconv.tbd in Frameworks */,
-				7BBC0D271CA2695A0014A5B0 /* Security.framework in Frameworks */,
 				802492471C785379008BA570 /* CoreMotion.framework in Frameworks */,
 				7BBC0D0C1CA265030014A5B0 /* libWeChatSDK.a in Frameworks */,
 				802492431C785367008BA570 /* Foundation.framework in Frameworks */,
+				7BBC0DE51CA287F20014A5B0 /* AlipaySDK.framework in Frameworks */,
 				802492411C785355008BA570 /* AVFoundation.framework in Frameworks */,
 				7BBC0CDF1CA264690014A5B0 /* libUMSocial_Sdk_5.0.1.a in Frameworks */,
 				8024923F1C785349008BA570 /* CoreMedia.framework in Frameworks */,
@@ -1095,9 +1123,12 @@
 				7BBC0D081CA265030014A5B0 /* libSocialQQ.a in Frameworks */,
 				7BD86C4F1C745DF700D099BE /* MessageUI.framework in Frameworks */,
 				7BBC0D051CA265030014A5B0 /* libSocialSinaSSO.a in Frameworks */,
+				7BBC0DE61CA287F20014A5B0 /* libpingpp+alipay.a in Frameworks */,
 				7BD86C4D1C745DE800D099BE /* libicucore.tbd in Frameworks */,
 				7BBC0D061CA265030014A5B0 /* libWeiboSDK.a in Frameworks */,
 				7BD86C491C745D6400D099BE /* SMS_SDK.framework in Frameworks */,
+				7BBC0DE91CA287F20014A5B0 /* libpingpp.a in Frameworks */,
+				7BBC0DE71CA287F20014A5B0 /* libpingpp+wx.a in Frameworks */,
 				7BBC0D091CA265030014A5B0 /* TencentOpenAPI.framework in Frameworks */,
 				7BD86C481C745D6400D099BE /* MOBFoundation.framework in Frameworks */,
 				747503F57BF2A3CE486BEC30 /* Pods_MasterOfHair.framework in Frameworks */,
@@ -1124,6 +1155,9 @@
 		5C25656B33009E933F65CD5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BBC0DEF1CA2883F0014A5B0 /* libsqlite3.0.tbd */,
+				7BBC0DED1CA2882F0014A5B0 /* libc++.tbd */,
+				7BBC0DEB1CA288100014A5B0 /* CFNetwork.framework */,
 				7BBC0D2E1CA2699A0014A5B0 /* CoreTelephony.framework */,
 				7BBC0D2C1CA269910014A5B0 /* libsqlite3.tbd */,
 				7BBC0D2A1CA2697F0014A5B0 /* SystemConfiguration.framework */,
@@ -1425,6 +1459,7 @@
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
+				7BBC0DD61CA287E50014A5B0 /* ping++ */,
 				7BBC0D0D1CA265210014A5B0 /* UMSocial_Sdk_Instructions */,
 				7BBC0CE91CA265030014A5B0 /* UMSocial_Sdk_Extra_Frameworks */,
 				7BBC0CC31CA264690014A5B0 /* UMSocial_Sdk_5.0.1 */,
@@ -2078,6 +2113,47 @@
 				7BBC0D191CA265210014A5B0 /* markdown.css */,
 			);
 			path = UMSocial_Sdk_Instructions;
+			sourceTree = "<group>";
+		};
+		7BBC0DD61CA287E50014A5B0 /* ping++ */ = {
+			isa = PBXGroup;
+			children = (
+				7BBC0DD71CA287F20014A5B0 /* Channels */,
+				7BBC0DE11CA287F20014A5B0 /* libpingpp.a */,
+				7BBC0DE21CA287F20014A5B0 /* Pingpp.bundle */,
+				7BBC0DE31CA287F20014A5B0 /* Pingpp.h */,
+			);
+			path = "ping++";
+			sourceTree = "<group>";
+		};
+		7BBC0DD71CA287F20014A5B0 /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				7BBC0DD81CA287F20014A5B0 /* Alipay */,
+				7BBC0DDC1CA287F20014A5B0 /* Wx */,
+			);
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		7BBC0DD81CA287F20014A5B0 /* Alipay */ = {
+			isa = PBXGroup;
+			children = (
+				7BBC0DD91CA287F20014A5B0 /* AlipaySDK.bundle */,
+				7BBC0DDA1CA287F20014A5B0 /* AlipaySDK.framework */,
+				7BBC0DDB1CA287F20014A5B0 /* libpingpp+alipay.a */,
+			);
+			path = Alipay;
+			sourceTree = "<group>";
+		};
+		7BBC0DDC1CA287F20014A5B0 /* Wx */ = {
+			isa = PBXGroup;
+			children = (
+				7BBC0DDD1CA287F20014A5B0 /* libpingpp+wx.a */,
+				7BBC0DDE1CA287F20014A5B0 /* libWeChatSDK.a */,
+				7BBC0DDF1CA287F20014A5B0 /* WXApi.h */,
+				7BBC0DE01CA287F20014A5B0 /* WXApiObject.h */,
+			);
+			path = Wx;
 			sourceTree = "<group>";
 		};
 		7BCD55231C55D2E700F32F16 /* wenxiulianmeng */ = {
@@ -2877,6 +2953,7 @@
 				7BBC0D1A1CA265210014A5B0 /* iOS-social-analytics-releasenote.html in Resources */,
 				7BB26FEB1C5B5383001D332E /* woeiqwoeiowio.png in Resources */,
 				8043C6CB1C4DC94500369EEF /* LaunchScreen.storyboard in Resources */,
+				7BBC0DEA1CA287F20014A5B0 /* Pingpp.bundle in Resources */,
 				7BBC0D241CA265210014A5B0 /* ios-social-sdk-socialbar.html in Resources */,
 				7BAABACA1C59B4A100C14DF8 /* 06wenhao_03.png in Resources */,
 				7B3305B01C5EECE50014C49C /* 01sdjjdijsidjs_03.png in Resources */,
@@ -2906,6 +2983,7 @@
 				7B142E401C58B97900B32809 /* 01_29@2x.png in Resources */,
 				8024922F1C78459B008BA570 /* yinliangxiao.png in Resources */,
 				7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */,
+				7BBC0DE41CA287F20014A5B0 /* AlipaySDK.bundle in Resources */,
 				807884651C59B0BD006B8BB3 /* shangxueyuan_H@2x.png in Resources */,
 				7B142E311C5870D000B32809 /* 01_33@2x.png in Resources */,
 				807884631C59B0BD006B8BB3 /* shangcheng_H@2x.png in Resources */,
@@ -3481,6 +3559,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/SMS_SDK",
 					"$(PROJECT_DIR)/MasterOfHair/CustomTool/QuPai_SDK",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Alipay",
 				);
 				GCC_PREFIX_HEADER = MasterOfHair/MasterOfHair.pch;
 				INFOPLIST_FILE = MasterOfHair/Info.plist;
@@ -3492,6 +3571,11 @@
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Alipay",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Wx",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Dependencies/Network",
+					"$(PROJECT_DIR)/MasterOfHair/ping++",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.mymasterofhair;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3510,6 +3594,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/SMS_SDK",
 					"$(PROJECT_DIR)/MasterOfHair/CustomTool/QuPai_SDK",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Alipay",
 				);
 				GCC_PREFIX_HEADER = MasterOfHair/MasterOfHair.pch;
 				INFOPLIST_FILE = MasterOfHair/Info.plist;
@@ -3521,6 +3606,11 @@
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/MasterOfHair/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Alipay",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Channels/Wx",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/Dependencies/Network",
+					"$(PROJECT_DIR)/MasterOfHair/ping++",
+					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.mymasterofhair;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,6 +8,7 @@
 
 #import "ChongzhiViewController.h"
 
+#import "Pingpp.h"
 @interface ChongzhiViewController ()
 
 @property (nonatomic, strong) UITextField * money;
@@ -172,10 +173,74 @@
     }
     else
     {
-        NSLog(@"走支付流程");
+//        NSLog(@"走支付流程");
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
+        
+        NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+        
+        if(self.btn_weixin.selected == 1)
+        {
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] pay_total:self.money.text pay_method:@"2"];
+        }
+        else
+        {
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] pay_total:self.money.text pay_method:@"1"];
+        }
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        
     }
     
 }
+
+#pragma mark - 数据
+- (void)update:(id )dict
+{
+    NSLog(@"%@",dict);
+
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"LikeAttentionbuy.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 #pragma mark - btn点击方法
 - (void)btn_zhifuboAction:(UIButton *)sender

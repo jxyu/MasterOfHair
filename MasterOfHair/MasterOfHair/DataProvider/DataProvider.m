@@ -1311,6 +1311,18 @@
     }
 }
 
+#pragma mark -  充值
+- (void)createWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString *)pay_method
+{
+    if(member_id && pay_total && pay_method)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@rechargeRecord/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\"}",member_id,pay_total,pay_method]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
