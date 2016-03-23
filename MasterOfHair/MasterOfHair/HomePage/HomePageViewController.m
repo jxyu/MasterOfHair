@@ -1118,7 +1118,7 @@
 #pragma mark - 定位数据
 - (void)getCity:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

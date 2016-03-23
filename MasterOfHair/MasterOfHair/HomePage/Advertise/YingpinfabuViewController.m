@@ -726,20 +726,20 @@
             
             [alert addAction:action];
         }
-//        else if([self.arr_data[3] length] == 0)
-//        {
-//            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所选择的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
-//            
-//            [self presentViewController:alert animated:YES completion:^{
-//                
-//            }];
-//            
-//            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//                
-//            }];
-//            
-//            [alert addAction:action];
-//        }
+        else if([self.arr_data[3] length] == 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所选择的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
         else if([self.arr_data[4] length] == 0)
         {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"所填写的内容不能为空" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -941,7 +941,7 @@
     {
         [UIView animateWithDuration:0.7 animations:^{
             
-            self.tableView.contentOffset = CGPointMake(0, 650);
+            self.tableView.contentOffset = CGPointMake(0, 550);
             
         } completion:^(BOOL finished) {
             

@@ -721,9 +721,13 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSDictionary * arr = dict[@"data"][@"applyagentlist"];
+            NSArray * arr_ = dict[@"data"][@"applyagentlist"];
             
-            if([[NSString stringWithFormat:@"%@",arr[@"applyAgent_status"]] isEqualToString:@"1"])
+            NSDictionary * dic_list = arr_[0];
+            
+            NSString * str = dic_list[@"applyAgent_status"];
+            
+            if([str isEqualToString:@"1"])
             {
                 self.delegate_type = @"1";
             }

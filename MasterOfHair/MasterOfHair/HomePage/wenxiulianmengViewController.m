@@ -8,7 +8,6 @@
 
 #import "wenxiulianmengViewController.h"
 #import "AppDelegate.h"
-#import "LocationViewController.h"
 
 
 #import "wenxiuFactoryTableViewCell.h"
@@ -16,6 +15,7 @@
 #import "Wenxiulianmeng_Model.h"
 #import "GaojijishiViewController.h"
 #import "HezuomingdianViewController.h"
+#import "WenxiulianmengLocationViewController.h"
 @interface wenxiulianmengViewController () <UITableViewDataSource, UITableViewDelegate>
 
 //上面的btn
@@ -62,10 +62,14 @@
     
     //右边为定位
 //    [self addRightbuttontitle:@"临沂"];
-    _lblRight.font = [UIFont systemFontOfSize:18];
+//    _lblRight.font = [UIFont systemFontOfSize:18];
     //    _lblRight.backgroundColor = [UIColor orangeColor];
-    _lblRight.frame = CGRectMake(SCREEN_WIDTH - 65, 19, 50, 44);
+    _lblRight.frame = CGRectMake(SCREEN_WIDTH - 105, 19, 90, 44);
     _btnRight.frame = _lblRight.frame;
+    _lblRight.font = [UIFont systemFontOfSize:15];
+    _lblRight.numberOfLines = 1;
+    _lblRight.textAlignment = NSTextAlignmentRight;
+
 }
 
 //返回
@@ -119,7 +123,7 @@
 
 - (void)clickRightButton:(UIButton *)sender
 {
-    LocationViewController * locationViewController = [[LocationViewController alloc] init];
+    WenxiulianmengLocationViewController * locationViewController = [[WenxiulianmengLocationViewController alloc] init];
     [self showViewController:locationViewController sender:nil];
 }
 
@@ -404,13 +408,10 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
-//    [userdefault objectForKey:@"diquweizhi_id1"]
     
-//    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
-//
-//    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id1"]);
+    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
     
-    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:@"1" pagesize:@"15"];
+//    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:@"1" pagesize:@"15"];
 }
 
 - (void)p_data1
@@ -423,9 +424,9 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"CooperateStore:"];
     
-//    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
+    [dataprovider CooperateStoreWithTeacher_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 
-    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
+//    [dataprovider CooperateStoreWithTeacher_id:@"37" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 //数据
@@ -479,10 +480,10 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
     
-//    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
+    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"15"];
 //    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id1"]);
     
-    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"15"];
+//    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"15"];
 }
 
 - (void)p_data_teacher1
@@ -495,9 +496,9 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
     
-//    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
     
-    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+//    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 

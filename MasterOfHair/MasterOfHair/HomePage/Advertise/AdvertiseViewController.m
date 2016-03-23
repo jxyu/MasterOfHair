@@ -41,6 +41,7 @@
 @property (nonatomic, strong) FL_Button * btn_1;
 @property (nonatomic, strong) FL_Button * btn_2;
 
+@property (nonatomic, strong) FL_Button *btn_top_location_select;
 
 
 @end
@@ -65,19 +66,19 @@
     _lblRight.hidden = YES;
     
     [self addLeftButton:@"iconfont-fanhui"];
-    FL_Button *btn_top_location_select = [FL_Button fl_shareButton];
-    [btn_top_location_select setImage:[UIImage imageNamed:@"select_baise"] forState:UIControlStateNormal];
-    [btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];
-    [btn_top_location_select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btn_top_location_select.status = FLAlignmentStatusCenter;
-    btn_top_location_select.titleLabel.font = [UIFont systemFontOfSize:18];
-    [_topView addSubview:btn_top_location_select];
+    self.btn_top_location_select = [FL_Button fl_shareButton];
+    [self.btn_top_location_select setImage:[UIImage imageNamed:@"select_baise"] forState:UIControlStateNormal];
+    [self.btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];
+    [self.btn_top_location_select setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.btn_top_location_select.status = FLAlignmentStatusCenter;
+    self.btn_top_location_select.titleLabel.font = [UIFont systemFontOfSize:18];
+    [_topView addSubview:self.btn_top_location_select];
     
-    [btn_top_location_select zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
+    [self.btn_top_location_select zxp_addConstraints:^(ZXPAutoLayoutMaker *layout) {
         layout.edgeInsets(UIEdgeInsetsMake(20, 80, 0, 80));
     }];
     
-    [btn_top_location_select addTarget:self action:@selector(JumpToSecectCityVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn_top_location_select addTarget:self action:@selector(JumpToSecectCityVC) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -112,6 +113,8 @@
     if([[userdefault objectForKey:@"zhaopingfei_name"] length] == 0)
     {
         [self.btn_1 setTitle:@"全部分类" forState:UIControlStateNormal];
+        
+        [userdefault setObject:@"0" forKey:@"zhaopingfei_id"];
     }
     else
     {
@@ -121,6 +124,8 @@
     if([[userdefault objectForKey:@"zhaopingxinzi_name"] length] == 0)
     {
         [self.btn_2 setTitle:@"薪资区间" forState:UIControlStateNormal];
+        [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
+
     }
     else
     {
@@ -129,32 +134,33 @@
     
     if([[userdefault objectForKey:@"city_id"] length] == 0)
     {
-        [self addRightbuttontitle:@"定位"];
+        [self.btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];
         
         if([[userdefault objectForKey:@"diquweizhi2"] length] == 0)
         {
-            [self addRightbuttontitle:@"定位"];
+            [self.btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];
             
             [userdefault setObject:@"183" forKey:@"diquweizhi_id2"];
         }
         else
         {
-            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi2"]];
+            [self.btn_top_location_select setTitle:[userdefault objectForKey:@"diquweizhi2"] forState:UIControlStateNormal];
         }
     }
     else
     {
-        [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+        [self.btn_top_location_select setTitle:[userdefault objectForKey:@"city_name"] forState:UIControlStateNormal];
+
         
         if([[userdefault objectForKey:@"diquweizhi2"] length] == 0)
         {
-            [self addRightbuttontitle:[userdefault objectForKey:@"city_name"]];
+            [self.btn_top_location_select setTitle:[userdefault objectForKey:@"city_name"] forState:UIControlStateNormal];
             
             [userdefault setObject:[userdefault objectForKey:@"city_id"] forKey:@"diquweizhi_id2"];
         }
         else
         {
-            [self addRightbuttontitle:[userdefault objectForKey:@"diquweizhi2"]];
+            [self.btn_top_location_select setTitle:[userdefault objectForKey:@"diquweizhi2"] forState:UIControlStateNormal];
         }
     }
 
@@ -500,56 +506,68 @@
 #pragma mark - 数据_1
 - (void)p_data
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     self.page = 1;
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider talkWithArea_id:@"89" salary_id:@"0" type_id:@"0" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider talkWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:@"1" pagesize:@"15"];
 }
 
 
 - (void)p_data1
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     self.page ++ ;
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider talkWithArea_id:@"89" salary_id:@"0" type_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider talkWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 #pragma mark - 数据_2
 - (void)p_data3
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+
+//    NSLog(@"%@",[userdefault objectForKey:@"zhaopingfei_id"]);
+//    NSLog(@"%@",[userdefault objectForKey:@"zhaopingxinzi_id"]);
+
     self.page = 1;
-    
+    NSLog(@"%@",[userdefault objectForKey:@"diquweizhi_id2"]);
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider VitaeWithArea_id:@"37" salary_id:@"0" type_id:@"0" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider VitaeWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:@"1" pagesize:@"15"];
     
 }
 
 
 - (void)p_data4
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     self.page ++ ;
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider VitaeWithArea_id:@"37" salary_id:@"0" type_id:@"0" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider VitaeWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 //数据
 - (void)Recruit:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if(self.page == 1)
     {
