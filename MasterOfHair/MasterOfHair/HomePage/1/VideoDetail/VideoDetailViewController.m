@@ -417,13 +417,22 @@
 {
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    TuWen_Models * model = self.arr_data.firstObject;
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"createVideo:"];
-    
-    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
+        
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        TuWen_Models * model = self.arr_data.firstObject;
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"createVideo:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
+    }
 }
 //分享
 - (void)btn_shareAction:(UIButton *)sender
@@ -465,11 +474,20 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
-        
-        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] discuss_content:self.bottom_text.text video_id:self.video_id reply_id:@"0"];
-        
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] discuss_content:self.bottom_text.text video_id:self.video_id reply_id:@"0"];
+            
+        }
         [self.bottom_text resignFirstResponder];
     }
 
@@ -779,12 +797,15 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    TuWen_Models * model = self.arr_data.firstObject;
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
-    
-    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        TuWen_Models * model = self.arr_data.firstObject;
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+        
+        [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] video_id:model.video_id];
+    }
 }
 
 - (void)isFavorite:(id )dict

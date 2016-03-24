@@ -300,12 +300,20 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] discuss_content:self.bottom_text.text video_id:[NSString stringWithFormat:@"%@",self.model_pinglu.video_id] reply_id:self.model_pinglu.discuss_id];
+        }
         
-        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] discuss_content:self.bottom_text.text video_id:[NSString stringWithFormat:@"%@",self.model_pinglu.video_id] reply_id:self.model_pinglu.discuss_id];
-        
-        [self.bottom_text resignFirstResponder];
     }
 }
 

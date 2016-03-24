@@ -887,9 +887,11 @@
 - (void)store_detailAction:(UIButton *)sender
 {
 //    NSLog(@"所有的精选图文推荐");
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
     tuwenViewController.isTeacher = 1;
-    
+    [userdefault setObject:@"0" forKey:@"TuwenFeilei"];
     [self showViewController:tuwenViewController sender:nil];
 }
 

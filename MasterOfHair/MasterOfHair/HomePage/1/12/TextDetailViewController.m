@@ -306,12 +306,21 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    TuwenDetail_Model * model = self.arr_detail.firstObject;
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"createArticle:"];
-    
-    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] article_id:model.article_id];
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        TuwenDetail_Model * model = self.arr_detail.firstObject;
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"createArticle:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] article_id:model.article_id];
+    }
 }
 
 - (void)btn_shareAction:(UIButton *)sender
@@ -390,10 +399,19 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
-        
-        [dataprovider createWithArticle_id:self.article_id reply_id:@"0" member_id:[userdefault objectForKey:@"member_id"] comment_content:self.bottom_text.text];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+            
+            [dataprovider createWithArticle_id:self.article_id reply_id:@"0" member_id:[userdefault objectForKey:@"member_id"] comment_content:self.bottom_text.text];
+        }
     }
 }
 
@@ -676,10 +694,13 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
-    
-    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] article_id:self.article_id];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+        
+        [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] article_id:self.article_id];
+    }
 }
 
 - (void)isFavorite:(id )dict

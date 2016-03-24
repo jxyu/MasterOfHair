@@ -713,7 +713,7 @@
 - (void)p_NextshipinData:(NSString * )is_free
 {
     self.page1 ++ ;
-    NSLog(@"%ld",self.page);
+//    NSLog(@"%ld",self.page);
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping1:"];

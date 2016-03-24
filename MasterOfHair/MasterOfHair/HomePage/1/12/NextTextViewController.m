@@ -289,10 +289,19 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
-        
-        [dataprovider createWithArticle_id:self.article_id reply_id:self.model.comment_id member_id:[userdefault objectForKey:@"member_id"] comment_content:self.bottom_text.text];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"createLiuyan:"];
+            
+            [dataprovider createWithArticle_id:self.article_id reply_id:self.model.comment_id member_id:[userdefault objectForKey:@"member_id"] comment_content:self.bottom_text.text];
+        }
     }
 }
 

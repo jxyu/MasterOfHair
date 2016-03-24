@@ -68,6 +68,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
