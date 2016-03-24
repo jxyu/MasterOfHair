@@ -12,7 +12,8 @@
 #import "SelectshouhuoViewController.h"
 #import "Shouhudizhi_Model.h"
 
-
+#import "Pingpp.h"
+#import "ShangchengdingdanViewController.h"
 @interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -45,6 +46,8 @@
 
 @property (nonatomic, strong) UILabel * price;
 
+@property (nonatomic, copy) NSString * str_zhifutype;
+@property (nonatomic, copy) NSString * str_zhifusum;
 @end
 
 @implementation querendingdanViewController
@@ -229,6 +232,9 @@
         
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
         float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
+        
+        self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
+        
         self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
         self.price_sum.text = self.price.text;
         self.price.textColor = [UIColor orangeColor];
@@ -307,6 +313,9 @@
             peisong.text = @"到店自取";
             
             float sum_price = [self.Chanpingxiangqing.sell_price floatValue];
+            
+            
+            self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
             self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
             self.price_sum.text = self.price.text;
             
@@ -319,6 +328,9 @@
             peisong.text = @"同城派送";
             
             float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.city_freight floatValue];
+            
+            self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
+
             self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
             self.price_sum.text = self.price.text;
             
@@ -330,6 +342,9 @@
             peisong.text = @"物流配送";
             
             float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
+            
+            self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
+
             self.price.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
             self.price_sum.text = self.price.text;
 
@@ -650,6 +665,8 @@
         
         Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
         
+        self.str_zhifutype = str_zhifu;
+        
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
     }
 }
@@ -791,12 +808,39 @@
 #pragma mark - 创建订单
 - (void)chuangjiandangdan:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            if([self.str_zhifutype isEqualToString:@"1"])
+            {
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
+                
+                NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                
+                [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:[NSString stringWithFormat:@"%@",dict[@"data"][@"order_id"]] pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                
+//                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+            }
+            else
+            {
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
+                
+                NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                
+                [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:[NSString stringWithFormat:@"%@",dict[@"data"][@"order_id"]] pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                
+                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+            }
         }
         @catch (NSException *exception)
         {
@@ -813,6 +857,80 @@
     }
 }
 
+#pragma mark - 支付
+- (void)dingdanzhifu:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"MasterOfHair.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+- (void)dingdanzhifu1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+//    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            
+            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
+            
+            [self showViewController:shangchengdingdanViewController sender:nil];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 #pragma mark - 懒加载

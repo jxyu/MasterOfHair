@@ -212,7 +212,7 @@
             
             [Pingpp createPayment:str_data
                    viewController:self
-                     appURLScheme:@"LikeAttentionbuy.zykj"
+                     appURLScheme:@"MasterOfHair.zykj"
                    withCompletion:^(NSString *result, PingppError *error) {
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功

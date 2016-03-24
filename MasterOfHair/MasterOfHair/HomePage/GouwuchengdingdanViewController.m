@@ -13,6 +13,8 @@
 #import "Shouhudizhi_Model.h"
 #import "ShoppingCar_Model.h"
 #import "ShopCarData_Models.h"
+#import "Pingpp.h"
+#import "ShangchengdingdanViewController.h"
 @interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -24,6 +26,7 @@
 @property (nonatomic, strong) UILabel * tel;
 @property (nonatomic, strong) UILabel * address;
 
+@property (nonatomic, strong) NSMutableArray * arr_zhifu;
 //
 @property (nonatomic, strong) UIImageView * image_1;
 
@@ -52,6 +55,9 @@
 @property (nonatomic, strong) NSMutableArray * arr_datapeisong;
 @property (nonatomic, strong) NSMutableArray * arr_dataliuyan;
 
+
+@property (nonatomic, copy) NSString * str_zhifutype;
+@property (nonatomic, copy) NSString * str_zhifusum;
 @end
 
 @implementation GouwuchengdingdanViewController
@@ -731,10 +737,12 @@
             
             Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
             
+            self.str_zhifutype = str_zhifu;
+            
             [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
             
             
-            NSLog(@"%ld",self.arr_morenAddress.count);
+            NSLog(@"%ld",(unsigned long)self.arr_morenAddress.count);
         }
     }
 }
@@ -954,12 +962,97 @@
 #pragma mark - 创建订单
 - (void)chuangjiandangdan:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            [self.arr_zhifu addObject:dict[@"data"][@"order_id"]];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+            if(self.arr_zhifu.count == self.arr_dataShop.count)
+            {
+                
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+                DataProvider * dataprovider=[[DataProvider alloc] init];
+                
+                NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                
+                
+                
+                NSMutableString * str = [NSMutableString string];
+                
+                for (ShoppingCar_Model * model in self.arr_baocun)
+                {
+                    NSString * s = [NSString stringWithFormat:@"%@,",model.shopcart_id];
+                    
+                    [str appendString:s];
+                }
+                //获取订单列表
+                NSInteger x =  [str length];
+                NSString * str_order = [str substringToIndex:x - 1];
+                
+                NSLog(@"%@",str_order);
+                
+                
+                
+                if([self.str_zhifutype isEqualToString:@"1"])
+                {
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                }
+                else
+                {
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
+                }
+            }
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+#pragma mark - 支付
+- (void)dingdanzhifu:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"MasterOfHair.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
         }
         @catch (NSException *exception)
         {
@@ -976,6 +1069,38 @@
     }
 }
 
+- (void)dingdanzhifu1:(id )dict
+{
+    NSLog(@"%@",dict);
+    
+    //    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            
+            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
+            
+            [self showViewController:shangchengdingdanViewController sender:nil];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 
 #pragma mark - 算总价
@@ -986,6 +1111,9 @@
     {
         sum_price = sum_price + [str floatValue];
     }
+    
+    self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
+    
     self.price_sum.text = [NSString stringWithFormat:@"¥ %.2f",sum_price];
 }
 
@@ -1047,6 +1175,16 @@
         self.arr_datazongjia = [NSMutableArray array];
     }
     return  _arr_datazongjia;
+}
+
+- (NSMutableArray *)arr_zhifu
+{
+    if(_arr_zhifu == nil)
+    {
+        self.arr_zhifu = [NSMutableArray array];
+    }
+    
+    return _arr_zhifu;
 }
 
 @end

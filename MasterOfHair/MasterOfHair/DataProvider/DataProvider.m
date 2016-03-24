@@ -1325,7 +1325,18 @@
 }
 
 
-
+#pragma mark -  订单支付接口
+- (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total
+{
+    if(member_id && orders_id && pay_method && orders_total)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@order/payOrder",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"orders_id\":\"%@\",\"pay_method\":\"%@\",\"orders_total\":\"%@\"}",member_id,orders_id,pay_method,orders_total]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

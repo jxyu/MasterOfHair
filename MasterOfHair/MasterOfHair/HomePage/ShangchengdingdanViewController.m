@@ -8,7 +8,8 @@
 
 #import "ShangchengdingdanViewController.h"
 #import "DINGDAN_Model.h"
-
+#import "Pingpp.h"
+#import "MineViewController.h"
 @interface ShangchengdingdanViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView * top_white;
@@ -67,7 +68,9 @@
 //返回
 - (void)clickLeftButton:(UIButton *)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+        
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //隐藏tabbar
@@ -78,6 +81,7 @@
     [self example01];
     
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
+
 }
 
 #pragma mark - 布局
@@ -380,6 +384,55 @@
         case 1:
         {//付款
             
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否直接付款该商品" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+
+            }];
+            
+            [alert addAction:action];
+            
+            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                if([model.pay_method isEqualToString:@"1"])
+                {
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    
+                    DataProvider * dataprovider=[[DataProvider alloc] init];
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
+                    
+                    //            NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                    
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total];
+                    
+//                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                }
+                else
+                {
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    
+                    DataProvider * dataprovider=[[DataProvider alloc] init];
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
+                    
+                    //            NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                    
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total];
+                    
+                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                }
+                
+                
+            }];
+            
+            [alert addAction:action1];
+            
+            
+
         }
             break;
         case 2:
@@ -500,6 +553,80 @@
     }
 }
 
+
+#pragma mark - 支付
+- (void)dingdanzhifu:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"MasterOfHair.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+- (void)dingdanzhifu1:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    //    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            
+            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
+            
+            [self showViewController:shangchengdingdanViewController sender:nil];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
 
 
 
