@@ -188,20 +188,40 @@
 //        shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
 //        [self showViewController:shouhuodizhi sender:nil];
 //    }
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
     switch (indexPath.section)
     {
         case 0:
         {
-            shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
-            [self showViewController:shouhuodizhi sender:nil];
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
+            {
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                
+                [self showViewController:loginViewController sender:nil];
+            }
+            else
+            {
+                shouhuodizhiViewController * shouhuodizhi = [[shouhuodizhiViewController alloc] init];
+                [self showViewController:shouhuodizhi sender:nil];
+            }
         }
             break;
         case 1:
         {
-            ZhaohuimimaViewController * zhaohuimimaViewController = [[ZhaohuimimaViewController alloc] init];
             
-            [self showViewController:zhaohuimimaViewController sender:nil];
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
+            {
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                
+                [self showViewController:loginViewController sender:nil];
+            }
+            else
+            {
+                ZhaohuimimaViewController * zhaohuimimaViewController = [[ZhaohuimimaViewController alloc] init];
+                
+                [self showViewController:zhaohuimimaViewController sender:nil];
+            }
         }
             break;
         case 2:
@@ -241,9 +261,19 @@
             break;
         case 4:
         {
-            FabiaoyijianViewController * fabiaoyijianViewController = [[FabiaoyijianViewController alloc] init];
             
-            [self showViewController:fabiaoyijianViewController sender:nil];
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
+            {
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                
+                [self showViewController:loginViewController sender:nil];
+            }
+            else
+            {
+                FabiaoyijianViewController * fabiaoyijianViewController = [[FabiaoyijianViewController alloc] init];
+                
+                [self showViewController:fabiaoyijianViewController sender:nil];
+            }
         }
             break;
             

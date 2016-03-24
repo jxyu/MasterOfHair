@@ -23,4 +23,5 @@
 #import "Commodity_Model.h"
 #import "AppDelegate.h"
 #import "FL_Button.h"
+#import "LoginViewController.h"
 #endif /* MasterOfHair_pch */

@@ -355,10 +355,12 @@
 //分销中心
 - (void)mid_btn3Action:(UIButton *)sender
 {
-    NSLog(@"分销中心");
-    if(0)
+//    NSLog(@"分销中心");
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限,请开通金卡会员" preferredStyle:(UIAlertControllerStyleAlert)];
         
         [self presentViewController:alert animated:YES completion:^{
             
@@ -398,6 +400,7 @@
         
         [userdefault setObject:@"" forKey:@"account"];
         [userdefault setObject:@"" forKey:@"password"];
+        [userdefault setObject:@"" forKey:@"member_id"];
         
         [self p_headView1];
         
@@ -506,16 +509,27 @@
             cell.image.image = [UIImage imageNamed:@"00001"];
             cell.arrows_switch.hidden = YES;
             
-            if([self.delegate_type isEqualToString:@"1"])
-            {
-                cell.arrows.hidden = YES;
-                cell.type.hidden = NO;
-            }
-            else
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
             {
                 cell.arrows.hidden = NO;
                 cell.type.hidden = YES;
             }
+            else
+            {
+                if([self.delegate_type isEqualToString:@"1"])
+                {
+                    cell.arrows.hidden = YES;
+                    cell.type.hidden = NO;
+                }
+                else
+                {
+                    cell.arrows.hidden = NO;
+                    cell.type.hidden = YES;
+                }
+            }
+
         }
             break;
         default:
@@ -527,21 +541,41 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
     switch (indexPath.section) {
         case 0:
         {
             if(indexPath.row == 0)
             {
-                WenxiulanmengdingdanViewController * wenxiulanmengdingdanViewController = [[WenxiulanmengdingdanViewController alloc] init];
-                
-                [self showViewController:wenxiulanmengdingdanViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    WenxiulanmengdingdanViewController * wenxiulanmengdingdanViewController = [[WenxiulanmengdingdanViewController alloc] init];
+                    
+                    [self showViewController:wenxiulanmengdingdanViewController sender:nil];
+                }
             }
             else
             {
-                ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
                 
-                [self showViewController:shangchengdingdanViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
+                    
+                    [self showViewController:shangchengdingdanViewController sender:nil];
+                }
             }
         }
             break;
@@ -549,48 +583,121 @@
         {
             if(indexPath.row == 0)
             {
-                //收藏的产品
-                ChanpinshoucangViewController * chanpinshoucangViewController = [[ChanpinshoucangViewController alloc] init];
-                
-                [self showViewController:chanpinshoucangViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    //收藏的产品
+                    ChanpinshoucangViewController * chanpinshoucangViewController = [[ChanpinshoucangViewController alloc] init];
+                    
+                    [self showViewController:chanpinshoucangViewController sender:nil];
+                }
             }
             else if(indexPath.row == 1)
             {
-                ShipinshoucangViewController * shipinshoucangViewController = [[ShipinshoucangViewController alloc] init];
-                
-                [self showViewController:shipinshoucangViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    ShipinshoucangViewController * shipinshoucangViewController = [[ShipinshoucangViewController alloc] init];
+                    
+                    [self showViewController:shipinshoucangViewController sender:nil];
+                }
             }
             else
             {
-                TuwenshoucangViewController * tuwenshoucangViewController = [[TuwenshoucangViewController alloc] init];
-                
-                [self showViewController:tuwenshoucangViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    TuwenshoucangViewController * tuwenshoucangViewController = [[TuwenshoucangViewController alloc] init];
+                    
+                    [self showViewController:tuwenshoucangViewController sender:nil];
+                }
             }
         }
             break;
         case 2:
         {
-            if(0)
+
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限" preferredStyle:(UIAlertControllerStyleAlert)];
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
                 
-                [self presentViewController:alert animated:YES completion:^{
-                    
-                }];
-                
-                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                
-                [alert addAction:action];
+                [self showViewController:loginViewController sender:nil];
             }
             else
             {
-                ShenqingdailishangViewController * shenqingdailishangViewController = [[ShenqingdailishangViewController alloc] init];
                 
-                [self showViewController:shenqingdailishangViewController sender:nil];
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+//                [userdefault setObject:@"2" forKey:@"member_type"];
+                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
+                {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限,请开通金卡会员" preferredStyle:(UIAlertControllerStyleAlert)];
+                    
+                    [self presentViewController:alert animated:YES completion:^{
+                        
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    
+                    [alert addAction:action];
+                }
+                else
+                {
+                    if([self.delegate_type isEqualToString:@"0"])
+                    {
+                        ShenqingdailishangViewController * shenqingdailishangViewController = [[ShenqingdailishangViewController alloc] init];
+                        
+                        [self showViewController:shenqingdailishangViewController sender:nil];
+                    }
+                    else if([self.delegate_type isEqualToString:@"1"])
+                    {
+                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"正在审核申请中,请等待" preferredStyle:(UIAlertControllerStyleAlert)];
+                        
+                        [self presentViewController:alert animated:YES completion:^{
+                            
+                        }];
+                        
+                        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                            
+                        }];
+                        
+                        [alert addAction:action];
+                    }
+                    else if([self.delegate_type isEqualToString:@"2"])
+                    {
+                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已经是代理商了" preferredStyle:(UIAlertControllerStyleAlert)];
+                        
+                        [self presentViewController:alert animated:YES completion:^{
+                            
+                        }];
+                        
+                        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                            
+                        }];
+                        
+                        [alert addAction:action];
+                    }
+                }
             }
         }
+        
             break;
         default:
             break;
@@ -704,13 +811,17 @@
 - (void)p_data_delegate
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"Applyagent:"];
-    
 //    [dataprovider ApplyagentWithMember_id:@"3"];
     
-    [dataprovider ApplyagentWithMember_id:[userdefault objectForKey:@"member_id"]];
+    NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+    
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"Applyagent:"];
+        
+        [dataprovider ApplyagentWithMember_id:[userdefault objectForKey:@"member_id"]];
+    }
 }
 
 #pragma mark - 数据加载
@@ -721,11 +832,11 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSArray * arr_ = dict[@"data"][@"applyagentlist"];
+            NSDictionary * arr_ = dict[@"data"][@"applyagentlist"];
             
-            NSDictionary * dic_list = arr_[0];
+//            NSDictionary * dic_list = arr_[0];
             
-            NSString * str = dic_list[@"applyAgent_status"];
+            NSString * str = [NSString stringWithFormat:@"%@",arr_[@"applyAgent_status"]];
             
             if([str isEqualToString:@"1"])
             {
@@ -733,7 +844,7 @@
             }
             else
             {
-                self.delegate_type = @"0";
+                self.delegate_type = str;
             }
         }
         @catch (NSException *exception)

@@ -463,12 +463,22 @@
 //    NSLog(@"收藏");
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    chanpinDetail_Models * model = self.arr_detail.firstObject;
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"createshoucang:"];
-   
-    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        chanpinDetail_Models * model = self.arr_detail.firstObject;
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"createshoucang:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
+    }
+    else
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+
 }
 //购物车
 - (void)btn_addShoppingAction:(UIButton *)sender
@@ -492,13 +502,23 @@
     else
     {
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
-        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
-        
-        [dataprovider createWithProduction_id:self.production_id number:@"1" price:model.sell_price member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+        if([[userdefault objectForKey:@"member_id"] length] != 0)
+        {
+            Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
+//        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
+
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithProduction_id:self.production_id number:@"1" price:model.sell_price member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+        }
+        else
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
     }
 }
 //购买
@@ -522,18 +542,24 @@
     }
     else
     {
-        NSLog(@"跳页");
+//        NSLog(@"跳页");
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
-        
-        querendingdan.chanpinDetail = self.arr_detail.firstObject;
-        querendingdan.Chanpingxiangqing = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
-        
-//        NSLog(@"%ld",self.tagList.selectedIndexSet.firstIndex);
-//        Chanpingxiangqing_Models * model = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];       
-//        NSLog(@"%@",model.specs_name);
-        
-        [self showViewController:querendingdan sender:nil];
+        if([[userdefault objectForKey:@"member_id"] length] != 0)
+        {
+            querendingdanViewController * querendingdan = [[querendingdanViewController alloc] init];
+            
+            querendingdan.chanpinDetail = self.arr_detail.firstObject;
+            querendingdan.Chanpingxiangqing = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
+            
+            [self showViewController:querendingdan sender:nil];
+        }
+        else
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
     }
 }
 
@@ -853,12 +879,15 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    chanpinDetail_Models * model = self.arr_detail.firstObject;
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
-    
-    [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        chanpinDetail_Models * model = self.arr_detail.firstObject;
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"isFavorite:"];
+        
+        [dataprovider isFavoriteWithMember_id:[userdefault objectForKey:@"member_id"] production_id:model.production_id];
+    }
 }
 
 - (void)isFavorite:(id )dict
