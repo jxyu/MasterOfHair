@@ -415,7 +415,6 @@
 //收藏
 - (void)btn_collectAction:(UIButton *)sender
 {
-    
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
     if([[userdefault objectForKey:@"member_id"] length] == 0)

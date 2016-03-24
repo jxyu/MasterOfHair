@@ -32,6 +32,7 @@
 #import "WebStroe_Model.h"
 #import "TuWen_Models.h"
 #import "LoginViewController.h"
+
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -645,9 +646,20 @@
                 break;
             case 6:
             {//说说
-                ShuoshuoViewController * shuoshuoViewController = [[ShuoshuoViewController alloc] init];
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                 
-                [self showViewController:shuoshuoViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {//都有
+                    ShuoshuoViewController * shuoshuoViewController = [[ShuoshuoViewController alloc] init];
+                    
+                    [self showViewController:shuoshuoViewController sender:nil];
+                }
             }
                 break;
             case 7:

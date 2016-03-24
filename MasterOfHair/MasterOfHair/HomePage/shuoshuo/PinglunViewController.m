@@ -199,10 +199,10 @@
         self.index = [NSString stringWithFormat:@"%ld",indexPath.row];
         //回复
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-#warning 和自己的昵称对比，
-        if([[userdefault objectForKey:@""] isEqualToString:model.member_username])
+        
+        if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_username])
         {
- 
+            
         }
         else
         {
@@ -217,10 +217,12 @@
 #pragma mark - 数据
 - (void)p_data
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1"];
+    [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"]];
 }
 
 //接口
@@ -461,11 +463,12 @@
         if([self.index length] == 0)
         {//直接就给内容留言
 //            NSLog(@"0");
-            
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
             
-            [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:self.bottom_text.text reply_status:@"0"];
+            [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
         }
         else
         {//回复留言
@@ -474,22 +477,22 @@
             Shuoshuo_Model * model = self.arr_replylist[[self.index integerValue]];
             
             NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-#warning 和自己的昵称对比，
-            if([[userdefault objectForKey:@""] isEqualToString:model.member_username])
+            
+            if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_username])
             {
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
                 
-                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:self.bottom_text.text reply_status:@"0"];
+                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
             }
             else
             {
-                NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",@"本身名",model.member_username,self.bottom_text.text];
+                NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",[userdefault objectForKey:@"member_username"],model.member_username,self.bottom_text.text];
                 
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
                 
-                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:@"1" reply_content:str reply_status:@"0"];
+                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
             }
         }
     }

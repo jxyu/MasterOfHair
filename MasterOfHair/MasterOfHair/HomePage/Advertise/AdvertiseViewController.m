@@ -488,17 +488,29 @@
 
 - (void )btn_newAction:(UIButton *)sender
 {
-    if(self.isTeacher == 0)
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
     {
-        YingpinfabuViewController * yingpinfabuViewController = [[YingpinfabuViewController alloc] init];
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
         
-        [self showViewController:yingpinfabuViewController sender:nil];
+        [self showViewController:loginViewController sender:nil];
     }
     else
     {
-        ZhaopingfabuViewController * zhaopingfabuViewController = [[ZhaopingfabuViewController alloc] init];
-        
-        [self showViewController:zhaopingfabuViewController sender:nil];
+        if(self.isTeacher == 0)
+        {
+            YingpinfabuViewController * yingpinfabuViewController = [[YingpinfabuViewController alloc] init];
+            
+            [self showViewController:yingpinfabuViewController sender:nil];
+        }
+        else
+        {
+            ZhaopingfabuViewController * zhaopingfabuViewController = [[ZhaopingfabuViewController alloc] init];
+            
+            [self showViewController:zhaopingfabuViewController sender:nil];
+        }
     }
 }
 

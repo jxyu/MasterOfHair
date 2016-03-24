@@ -197,7 +197,7 @@
 //数据
 - (void)FamousTeacher:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if(self.page == 1)
     {

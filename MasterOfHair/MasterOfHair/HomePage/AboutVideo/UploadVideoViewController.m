@@ -151,7 +151,7 @@
     
 //    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"1" Path:self.VideoFilePath];
         
-    [dataprovider createWithMember_id:@"3" talk_content:self.text_View.text file_type:@"2" Path:self.VideoFilePath];
+    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"2" Path:self.VideoFilePath];
 
     
     [SVProgressHUD showWithStatus:@"正在上传视频..." maskType:SVProgressHUDMaskTypeBlack];

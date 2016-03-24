@@ -114,12 +114,24 @@
     
     if([self.model_baocun1.technician_id length] != 0 && [self.model_baocun2.product_id length] != 0)
     {
-        WenxiulianmengDetailViewController * wenxiulianmengDetailViewController = [[WenxiulianmengDetailViewController alloc] init];
         
-        wenxiulianmengDetailViewController.model_baocun1 = self.model_baocun1;
-        wenxiulianmengDetailViewController.model_baocun2 = self.model_baocun2;
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        [self showViewController:wenxiulianmengDetailViewController sender:nil];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            WenxiulianmengDetailViewController * wenxiulianmengDetailViewController = [[WenxiulianmengDetailViewController alloc] init];
+            
+            wenxiulianmengDetailViewController.model_baocun1 = self.model_baocun1;
+            wenxiulianmengDetailViewController.model_baocun2 = self.model_baocun2;
+            
+            [self showViewController:wenxiulianmengDetailViewController sender:nil];
+        }
     }
     else
     {
@@ -364,11 +376,13 @@
 #pragma mark - 列表1数据
 - (void)p_data_teacher
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
     
-    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:@"1" pagesize:@"100"];
+    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:@"1" pagesize:@"1000"];
 }
 
 //数据

@@ -93,9 +93,19 @@
 
 - (void)clickRightButton:(UIButton *)sender
 {
-    WodeshuoshuoViewController * wodeshuoshuoViewController = [[WodeshuoshuoViewController alloc] init];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    [self showViewController:wodeshuoshuoViewController sender:nil];
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {//都有
+        WodeshuoshuoViewController * wodeshuoshuoViewController = [[WodeshuoshuoViewController alloc] init];
+        [self showViewController:wodeshuoshuoViewController sender:nil];
+    }
 }
 
 //隐藏tabbar
@@ -466,16 +476,26 @@
 #pragma mark - 点赞
 - (void)image_zanAction:(UIButton *)sender
 {
-    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     NSInteger index = sender.tag - 400;
     self.zan_index = index;
     
     Shuoshuo_Model * model = self.arr_all[index];
     
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"TakeGood:"];
-    
-    [dataprovider TakeGoodWithMember_id:@"1" talk_id:model.talk_id];
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"TakeGood:"];
+        
+        [dataprovider TakeGoodWithMember_id:[userdefault objectForKey:@"member_id"] talk_id:model.talk_id];
+    }
 }
 
 // 接口
@@ -557,20 +577,23 @@
 {
     self.page = 1;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkAllWithmember_id:@"1" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider talkAllWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:@"1" pagesize:@"15"];
 }
 
 - (void)p_data1
 {
     self.page ++ ;
-    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkAllWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider talkAllWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 //接口
@@ -583,7 +606,6 @@
         self.arr_all = nil;
         self.arr_filelist = nil;
     }
-    
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -741,14 +763,37 @@
 #pragma mark - 4个单击事件
 - (void)btn_1Action:(UIButton *)sender
 {//纯文字
-    ChunwenziViewController * chunwenziViewController = [[ChunwenziViewController alloc] init];
-    [self showViewController:chunwenziViewController sender:nil];
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        ChunwenziViewController * chunwenziViewController = [[ChunwenziViewController alloc] init];
+        [self showViewController:chunwenziViewController sender:nil];
+    }
 }
 
 - (void)btn_2Action:(UIButton *)sender
 {
-    ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
-    [self showViewController:zhaopiankuViewController sender:nil];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
+        [self showViewController:zhaopiankuViewController sender:nil];
+    }
 }
 
 - (void)btn_3Action:(UIButton *)sender
@@ -756,9 +801,19 @@
 //    ZhaoxiangViewController * zhaoxiangViewController = [[ZhaoxiangViewController alloc] init];
 //    [self showViewController:zhaoxiangViewController sender:nil];
     
-    //都有
-    ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
-    [self showViewController:zhaopiankuViewController sender:nil];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {//都有
+        ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
+        [self showViewController:zhaopiankuViewController sender:nil];
+    }
 }
 
 - (void)btn_4Action:(UIButton *)sender
@@ -766,29 +821,38 @@
 //    LuxiangViewController * luxiangViewController = [[LuxiangViewController alloc] init];
 //    
 //    [self showViewController:luxiangViewController sender:nil];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    QupaiSDK *sdkqupai = [QupaiSDK shared];
-    [sdkqupai setDelegte:(id<QupaiSDKDelegate>)self];
-    
-    /*可选设置*/
-    sdkqupai.thumbnailCompressionQuality =0.3;
-    sdkqupai.combine = YES;
-    sdkqupai.progressIndicatorEnabled = YES;
-    sdkqupai.beautySwitchEnabled = NO;
-    sdkqupai.flashSwitchEnabled = NO;
-    sdkqupai.tintColor = [UIColor orangeColor];
-    sdkqupai.localizableFileUrl = [[NSBundle mainBundle] URLForResource:@"QPLocalizable_en" withExtension:@"plist"];
-    sdkqupai.bottomPanelHeight = 120;
-    sdkqupai.recordGuideEnabled = YES;
-    
-    /*基本设置*/
-    CGSize videoSize = CGSizeMake(320, 240);
-    recordController = [sdkqupai createRecordViewControllerWithMinDuration:2
-                                                               maxDuration:20
-                                                                   bitRate:500000
-                                                                 videoSize:videoSize];
-    [self presentViewController:recordController animated:YES completion:nil];
-    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        QupaiSDK *sdkqupai = [QupaiSDK shared];
+        [sdkqupai setDelegte:(id<QupaiSDKDelegate>)self];
+        
+        /*可选设置*/
+        sdkqupai.thumbnailCompressionQuality =0.3;
+        sdkqupai.combine = YES;
+        sdkqupai.progressIndicatorEnabled = YES;
+        sdkqupai.beautySwitchEnabled = NO;
+        sdkqupai.flashSwitchEnabled = NO;
+        sdkqupai.tintColor = [UIColor orangeColor];
+        sdkqupai.localizableFileUrl = [[NSBundle mainBundle] URLForResource:@"QPLocalizable_en" withExtension:@"plist"];
+        sdkqupai.bottomPanelHeight = 120;
+        sdkqupai.recordGuideEnabled = YES;
+        
+        /*基本设置*/
+        CGSize videoSize = CGSizeMake(320, 240);
+        recordController = [sdkqupai createRecordViewControllerWithMinDuration:2
+                                                                   maxDuration:20
+                                                                       bitRate:500000
+                                                                     videoSize:videoSize];
+        [self presentViewController:recordController animated:YES completion:nil];
+    }
 }
 
 //趣拍取消

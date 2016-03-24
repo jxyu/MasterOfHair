@@ -540,21 +540,23 @@
 - (void)p_data
 {
     self.page = 1;
-    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:@"1" pagesize:@"35"];
+    [dataprovider talkWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:@"1" pagesize:@"35"];
 }
 
 - (void)p_data1
 {
     self.page ++ ;
-    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkWithmember_id:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"35"];
+    [dataprovider talkWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"35"];
 }
 
 //接口

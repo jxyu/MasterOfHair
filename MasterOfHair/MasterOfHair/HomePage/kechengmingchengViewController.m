@@ -111,13 +111,23 @@
 
 - (void)btn_baomingAction:(UIButton *)sender
 {
-    ZhifuViewController * zhifuViewController = [[ZhifuViewController alloc] init];
     
-    zhifuViewController.name_course = self.course_name;
-    zhifuViewController.money = self.money;
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    
-    [self showViewController:zhifuViewController sender:nil];
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {
+        ZhifuViewController * zhifuViewController = [[ZhifuViewController alloc] init];
+        
+        zhifuViewController.name_course = self.course_name;
+        zhifuViewController.money = self.money;
+        [self showViewController:zhifuViewController sender:nil];
+    }
 }
 
 #pragma mark - scrollView中的布局
