@@ -348,7 +348,8 @@
 - (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total;
 
 
-
+#pragma mark -  升级金卡会员支付接口
+- (void)upgradeRecordWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString * )pay_method;
 
 
 

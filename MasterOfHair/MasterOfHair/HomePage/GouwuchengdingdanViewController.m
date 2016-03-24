@@ -985,15 +985,15 @@
                 
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 
-                NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+//                NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
                 
                 
                 
                 NSMutableString * str = [NSMutableString string];
                 
-                for (ShoppingCar_Model * model in self.arr_baocun)
+                for (NSString * str1 in self.arr_zhifu)
                 {
-                    NSString * s = [NSString stringWithFormat:@"%@,",model.shopcart_id];
+                    NSString * s = [NSString stringWithFormat:@"%@,",str1];
                     
                     [str appendString:s];
                 }

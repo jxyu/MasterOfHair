@@ -672,7 +672,7 @@
 #pragma mark - 数据加载
 - (void)getOrders:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if(self.page == 1)
     {

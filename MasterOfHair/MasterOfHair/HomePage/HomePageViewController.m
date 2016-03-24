@@ -31,6 +31,7 @@
 #import "ShuoshuoViewController.h"
 #import "WebStroe_Model.h"
 #import "TuWen_Models.h"
+#import "LoginViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -658,9 +659,37 @@
                 break;
             case 8:
             {//金卡会员
-                JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                 
-                [self showViewController:jinkahuiyuanViewController sender:nil];
+                
+                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
+                {
+                    JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
+                    
+                    [self showViewController:jinkahuiyuanViewController sender:nil];
+                }
+                else if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已经是金卡会员了" preferredStyle:(UIAlertControllerStyleAlert)];
+                    
+                    [self presentViewController:alert animated:YES completion:^{
+                        
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    
+                    [alert addAction:action];
+                    
+                }
+
             }
                 break;
             case 9:
