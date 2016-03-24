@@ -7,7 +7,7 @@
 //
 
 #import "WenxiulianmengDetailViewController.h"
-
+#import "Pingpp.h"
 @interface WenxiulianmengDetailViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
@@ -206,19 +206,75 @@
     else
     {
 //        NSLog(@"走支付流程");
-        
-#warning 先支付，后生成订单
-        
+                
         //调接口，
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        DataProvider * dataprovider=[[DataProvider alloc] init];
-        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
-        
-        [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1"];
+        if(self.btn_weixin.selected == 0)
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1" pay_method:@"2"];
+            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
+        }
+        else
+        {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1" pay_method:@"3"];
+            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
+        }
     }
-    
 }
+
+#pragma mark - 支付
+- (void)create:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"MasterOfHair.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
 
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
@@ -251,32 +307,6 @@
     {
         [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
         sender.selected = 0;
-    }
-}
-
-#pragma mark - 数据
-//数据
-- (void)create:(id )dict
-{
-    NSLog(@"%@",dict);
-    
-    if ([dict[@"status"][@"succeed"] intValue] == 1) {
-        @try
-        {
-            [SVProgressHUD showSuccessWithStatus:@"生成订单" maskType:(SVProgressHUDMaskTypeBlack)];
-        }
-        @catch (NSException *exception)
-        {
-            
-        }
-        @finally
-        {
-            
-        }
-    }
-    else
-    {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 

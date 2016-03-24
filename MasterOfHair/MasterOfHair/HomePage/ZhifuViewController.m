@@ -7,7 +7,7 @@
 //
 
 #import "ZhifuViewController.h"
-
+#import "Pingpp.h"
 @interface ZhifuViewController ()
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
@@ -162,10 +162,96 @@
     }
     else
     {
-        NSLog(@"走支付流程");
+//        NSLog(@"走支付流程");
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        if(self.btn_weixin.selected == 0)
+        {
+            //        NSLog(@"发布成功");            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"2"];
+            
+            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        }
+        else
+        {
+            //        NSLog(@"发布成功");
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+            
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"3"];
+            
+            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+            
+        }
     }
     
 }
+
+#pragma mark - 支付
+- (void)create:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            [Pingpp createPayment:str_data
+                   viewController:self
+                     appURLScheme:@"MasterOfHair.zykj"
+                   withCompletion:^(NSString *result, PingppError *error) {
+                       if ([result isEqualToString:@"success"]) {
+                           // 支付成功
+                           [self.navigationController popViewControllerAnimated:YES];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                       } else {
+                           // 支付失败或取消
+                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                       }
+                   }];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)btn_zhifuboAction:(UIButton *)sender
 {

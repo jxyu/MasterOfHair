@@ -123,7 +123,7 @@
     else
     {
         ZhifuViewController * zhifuViewController = [[ZhifuViewController alloc] init];
-        
+        zhifuViewController.course_id = self.course_id;
         zhifuViewController.name_course = self.course_name;
         zhifuViewController.money = self.money;
         [self showViewController:zhifuViewController sender:nil];

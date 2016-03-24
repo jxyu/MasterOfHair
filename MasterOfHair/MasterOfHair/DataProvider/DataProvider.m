@@ -1000,13 +1000,13 @@
 
 
 #pragma mark - (3)添加一个订单
-- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status
+- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status pay_method:(NSString *)pay_method
 {
-    if(store_id && member_id && product_id && technician_id && order_payable && order_realpay && union_order_status)
+    if(store_id && member_id && product_id && technician_id && order_payable && order_realpay && union_order_status && pay_method)
     {
         NSString * url=[NSString stringWithFormat:@"%@UnionOrder/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\",\"member_id\":\"%@\",\"product_id\":\"%@\",\"technician_id\":\"%@\",\"order_payable\":\"%@\",\"order_realpay\":\"%@\",\"union_order_status\":\"%@\"}",store_id,member_id,product_id,technician_id,order_payable,order_realpay,union_order_status]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\",\"member_id\":\"%@\",\"product_id\":\"%@\",\"technician_id\":\"%@\",\"order_payable\":\"%@\",\"order_realpay\":\"%@\",\"union_order_status\":\"%@\",\"pay_method\":\"%@\"}",store_id,member_id,product_id,technician_id,order_payable,order_realpay,union_order_status,pay_method]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1352,6 +1352,18 @@
     }
 }
 
+#pragma mark -  	（3）会员报名
+- (void)SignupWithMember_id:(NSString *)member_id course_id:(NSString *)course_id pay_method:(NSString * )pay_method
+{
+    if(member_id && course_id && pay_method)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@Signup/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"course_id\":\"%@\",\"pay_method\":\"%@\"}",member_id,course_id,pay_method]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
