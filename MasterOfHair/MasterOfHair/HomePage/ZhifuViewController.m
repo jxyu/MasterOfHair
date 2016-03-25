@@ -191,18 +191,17 @@
     }
     
 }
-
 #pragma mark - 支付
 - (void)create:(id )dict
 {
-    //    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
             NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
             [Pingpp createPayment:str_data
@@ -231,7 +230,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 

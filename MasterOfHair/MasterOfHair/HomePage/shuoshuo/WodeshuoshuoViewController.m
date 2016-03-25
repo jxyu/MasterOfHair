@@ -354,6 +354,14 @@
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
                     [cell addSubview:image];
+                    
+                    if([modle_list.file_type isEqualToString:@"2"])
+                    {
+                        UIImageView * image_pic = [[UIImageView alloc] init];
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
+                        [cell addSubview:image_pic];
+                    }
                 }
                 
             }
@@ -388,6 +396,14 @@
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
                     [cell addSubview:image];
+                    
+                    if([modle_list.file_type isEqualToString:@"2"])
+                    {
+                        UIImageView * image_pic = [[UIImageView alloc] init];
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
+                        [cell addSubview:image_pic];
+                    }
                 }
             }
         }

@@ -217,8 +217,8 @@
                        }
                    }];
             
-//            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-//            [userdefault setObject:@"2" forKey:@"member_type"];
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            [userdefault setObject:@"2" forKey:@"member_type"];
 
         }
         @catch (NSException *exception)
