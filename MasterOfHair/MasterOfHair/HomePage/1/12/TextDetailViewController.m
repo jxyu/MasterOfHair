@@ -47,6 +47,8 @@
 @property (nonatomic, strong) NSMutableArray * arr_pinglun;
 
 @property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) UIWebView * webView;
 @end
 
 @implementation TextDetailViewController
@@ -269,24 +271,17 @@
     [self.btn_share addTarget:self action:@selector(btn_shareAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
-    self.head_image = [[UIImageView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.btn_share.frame) + 10, SCREEN_WIDTH - 20, 200)];
-    self.head_image.layer.masksToBounds = YES;
-    [self.head_image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
-    [self.headView addSubview:self.head_image];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.btn_share.frame) + 10, SCREEN_WIDTH , 0)];
+    NSString * path = [NSString stringWithFormat:@"%@web/viewarticle&id=%@",Url,self.article_id];
+    NSURL * url = [NSURL URLWithString:path];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+    [self webViewDidFinishLoad:self.webView];
+    self.webView.backgroundColor = [UIColor whiteColor];
     
-    
-    NSString * str = @"jksjdksjkdsjkdjskjdksjkdskdksjdkskdjskjdksjdkjskdjksjdksjdksjkdjskdjksjdksjdks时间快速打开手机打开手机的就是看就看大家时间的快速健康的就是空间打开手机的空间";
-    CGFloat length_x = [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
-    
-    self.head_text = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.head_image.frame) + 10, SCREEN_WIDTH - 20, length_x)];
-    self.head_text.text = str;
-    self.head_text.numberOfLines = 0;
-    self.head_text.font = [UIFont systemFontOfSize:14];
-    self.head_text.textColor = [UIColor grayColor];
-    [self.headView addSubview:self.head_text];
+    [self.headView addSubview:self.webView];
     
     //
-    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.head_text.frame) + 40, 70, 25)];
+    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.webView.frame) + 40, 70, 25)];
     label_3.text = @"评论";
     [self.headView addSubview:label_3];
     
@@ -783,6 +778,21 @@
     });
     
 }
+
+#pragma mark - web
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+
+    CGFloat webViewHeight= [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"]floatValue];
+//    CGFloat webViewHeight= [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
+    
+    CGRect newFrame = webView.frame;
+    
+    newFrame.size.height = webViewHeight;
+    
+    webView.frame = newFrame;
+}
+
 
 
 @end
