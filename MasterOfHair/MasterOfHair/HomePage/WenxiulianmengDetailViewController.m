@@ -238,10 +238,11 @@
     
     [SVProgressHUD dismiss];
     
-    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+    if (dict[@"charge"] != nil)
+    {
         @try
         {
-            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
             NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
             [Pingpp createPayment:str_data

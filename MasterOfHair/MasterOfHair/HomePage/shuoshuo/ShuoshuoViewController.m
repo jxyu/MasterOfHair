@@ -366,8 +366,14 @@
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
                     //tag
-                    image.tag = indexPath.section * 1000 + indexPath.row;
+//                    image.tag = indexPath.section * 1000 + indexPath.row;
                     
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+//                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = indexPath.section * 1000 + i;
+
 //                    image.backgroundColor = [UIColor orangeColor];
                     
                     if([modle_list.file_type isEqualToString:@"1"])
@@ -381,7 +387,7 @@
 
                     }
                     [cell addSubview:image];
-                    
+                    [cell addSubview:btn];
                     //加视频覆盖
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
@@ -406,10 +412,15 @@
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20)];
                     //tag
-                    image.tag = indexPath.section * 1000 + indexPath.row;
                     
 //                    image.backgroundColor = [UIColor orangeColor];
 
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20);
+//                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = indexPath.section * 1000 + i;
+                    
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
@@ -422,7 +433,7 @@
                     }
                     
                     [cell addSubview:image];
-                    
+                    [cell addSubview:btn];
                     //加视频覆盖
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
@@ -438,6 +449,21 @@
     }
     return cell;
 }
+
+
+#pragma mark - 说说点击事件
+- (void)btnshuoshuoAction:(UIButton *)sender
+{
+    NSInteger section = sender.tag / 1000;
+    NSInteger count = sender.tag % 1000;
+    NSLog(@"%ld  %ld",section, count);
+    
+    
+    
+    
+    
+}
+
 
 #pragma mark - 评论
 - (void)image_pingjiaAction:(UIButton *)sender
