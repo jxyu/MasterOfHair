@@ -20,6 +20,9 @@
 #define Url_pic @"http://192.168.1.245/titoujiang/"
 
 
+
+
+
 #define NavigationBar_HEIGHT 44
 #define StatusBar_HEIGHT 20
 #define TabBar_HEIGHT 49

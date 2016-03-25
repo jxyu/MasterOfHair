@@ -231,7 +231,7 @@
     if(indexPath.row == 0)
     {
         self.image_iocn = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
-        self.image_iocn.backgroundColor = [UIColor orangeColor];
+//        self.image_iocn.backgroundColor = [UIColor orangeColor];
         self.image_iocn.layer.cornerRadius = 25;
         self.image_iocn.layer.masksToBounds = YES;
         
@@ -262,8 +262,9 @@
             self.name.text = model.member_username;
             
             NSString * str = [model.talk_time substringFromIndex:10];
-            
-            self.time.text = str;
+            NSString * str1 = [str substringToIndex:6];
+#warning 差一个今天
+            self.time.text = str1;
         }
         
     }
@@ -271,7 +272,7 @@
     {
         self.pingjianum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 7.5, 35, 25)];
 //        self.pingjianum.backgroundColor = [UIColor orangeColor];
-        self.pingjianum.text = @"11111";
+//        self.pingjianum.text = @"11111";
         self.pingjianum.font = [UIFont systemFontOfSize:15];
         self.pingjianum.textColor = [UIColor grayColor];
         
@@ -288,7 +289,7 @@
         
         self.zannum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 117, 7.5, 35, 25)];
 //        self.zannum.backgroundColor = [UIColor orangeColor];
-        self.zannum.text = @"11111";
+//        self.zannum.text = @"11111";
         self.zannum.font = [UIFont systemFontOfSize:15];
         self.zannum.textColor = [UIColor grayColor];
         
@@ -381,6 +382,7 @@
                     }
                     [cell addSubview:image];
                     
+                    //加视频覆盖
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
@@ -389,7 +391,6 @@
                         [cell addSubview:image_pic];
                     }
                 }
-
             }
             else
             {
@@ -418,13 +419,11 @@
                     else
                     {
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-                        
-
-                        
                     }
                     
                     [cell addSubview:image];
                     
+                    //加视频覆盖
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
@@ -437,7 +436,6 @@
         }
         
     }
-    
     return cell;
 }
 
@@ -457,8 +455,6 @@
     
     //图片
     CGFloat length_x = (SCREEN_WIDTH - 80 - 10) / 3;
-    
-    
     
     if([self.arr_filelist[count] count] <= 3)
     {

@@ -118,7 +118,6 @@
         CGFloat x_length = [model.reply_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 120 - 10, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
 
         return 60 + x_length + 10;
-        
     }
     else
     {
@@ -161,9 +160,9 @@
         [image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         label_name.text = model.member_username;
         NSString * str = [model.reply_time substringFromIndex:10];
-        date.text = str;
-        
-        
+        NSString * str1 = [str substringToIndex:6];
+#warning 差一个今天
+        date.text = str1;
         
         CGFloat x_length = [model.reply_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - CGRectGetMaxX(image1.frame) - 10, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
         //            NSLog(@"%f",x_length);
@@ -200,7 +199,7 @@
         //回复
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_username])
+        if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_id])
         {
             
         }
@@ -275,7 +274,7 @@
         @finally
         {
             self.image_touxiang = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
-            self.image_touxiang.backgroundColor = [UIColor orangeColor];
+//            self.image_touxiang.backgroundColor = [UIColor orangeColor];
             self.image_touxiang.layer.cornerRadius = 25;
             self.image_touxiang.layer.masksToBounds = YES;
             
@@ -300,8 +299,11 @@
             //赋值
             [self.image_touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,self.model_all.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             self.name.text = self.model_all.member_username;
-            NSString * str = [self.model_all.talk_time substringFromIndex:10];
-            self.time.text = str;
+            
+            NSString * str =  [self.model_all.talk_time substringFromIndex:10];
+            NSString * str1 = [str substringToIndex:6];
+#warning 差一个今天
+            self.time.text = str1;
             
             
             CGFloat x_length = [self.model_all.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
@@ -478,7 +480,7 @@
             
             NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
-            if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_username])
+            if([[userdefault objectForKey:@"member_id"] isEqualToString:model.member_id])
             {
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
