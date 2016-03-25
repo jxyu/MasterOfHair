@@ -507,9 +507,26 @@
         }
         else
         {
-            ZhaopingfabuViewController * zhaopingfabuViewController = [[ZhaopingfabuViewController alloc] init];
-            
-            [self showViewController:zhaopingfabuViewController sender:nil];
+            if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您没有此权限发布招聘" preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alert addAction:action];
+            }
+            else
+            {
+                ZhaopingfabuViewController * zhaopingfabuViewController = [[ZhaopingfabuViewController alloc] init];
+                
+                [self showViewController:zhaopingfabuViewController sender:nil];
+            }
         }
     }
 }

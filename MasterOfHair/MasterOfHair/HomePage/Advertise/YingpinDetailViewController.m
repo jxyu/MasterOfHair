@@ -408,29 +408,48 @@
 #pragma mark - 点击事件
 - (void)tapGesture:(id)sender
 {
-    if([self.model_detail.telephone length] != 0)
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"拨打号码:%@",self.model_detail.telephone]preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您没有一键拨号功能" preferredStyle:(UIAlertControllerStyleAlert)];
         
         [self presentViewController:alert animated:YES completion:^{
             
         }];
         
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
         }];
         
         [alert addAction:action];
-        
-        
-        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+    }
+    else
+    {
+        if([self.model_detail.telephone length] != 0)
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"拨打号码:%@",self.model_detail.telephone]preferredStyle:(UIAlertControllerStyleAlert)];
             
-            NSURL * url1 = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.model_detail.telephone]];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
             
-            [[UIApplication sharedApplication] openURL:url1];
-        }];
-        
-        [alert addAction:action1];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+            
+            
+            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                NSURL * url1 = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.model_detail.telephone]];
+                
+                [[UIApplication sharedApplication] openURL:url1];
+            }];
+            
+            [alert addAction:action1];
+        }
     }
 }
 

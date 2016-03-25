@@ -66,7 +66,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self p_navi];
     
@@ -745,7 +745,9 @@
 #pragma mark - 商城数据
 - (void)getProducts:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     self.arr_pic  = nil;
     self.arr_detail = nil;
