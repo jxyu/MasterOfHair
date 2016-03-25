@@ -460,7 +460,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 18.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 20 + length / 2 - 18.5, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [self.view_bg addSubview:image_pic];
                     }

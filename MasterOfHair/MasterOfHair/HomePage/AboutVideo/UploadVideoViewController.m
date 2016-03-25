@@ -143,6 +143,8 @@
 -(void)clickRightButton:(UIButton *)sender
 {
 //掉接口
+    [self.text_View resignFirstResponder];
+    
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 
     DataProvider * dataprovider=[[DataProvider alloc] init];

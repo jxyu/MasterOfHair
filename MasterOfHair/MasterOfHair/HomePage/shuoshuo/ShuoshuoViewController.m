@@ -17,10 +17,12 @@
 #import "Shuoshuo_Model.h"
 #import "PinglunViewController.h"
 #import "WodeshuoshuoViewController.h"
+#import "MoviePlayer.h"
 
 @interface ShuoshuoViewController () <UITableViewDataSource, UITableViewDelegate,QupaiSDKDelegate>
 {
     UIViewController *recordController;
+    MoviePlayer *moviePlayerview;
 }
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -58,6 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
     
     [self p_navi];
     
@@ -436,7 +441,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 20 + length / 2 - 12.5, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -454,7 +459,7 @@
 {
     NSInteger section = sender.tag / 1000;
     NSInteger count = sender.tag % 1000;
-    NSLog(@"%ld  %ld",section, count);
+//    NSLog(@"%ld  %ld",section, count);
     
     if(self.view_viewbg.hidden == 1)
     {
@@ -481,41 +486,22 @@
             
             [self.view_viewbg addSubview:image];
         }
-//        else if([modle_list.file_type isEqualToString:@"2"])
-//        {//视频
-////            NSLog(@"视频");
-//            
-//            //视频URL
-//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]];
-//            //视频播放对象
-//            
-//            MPMoviePlayerController * movie = [[MPMoviePlayerController alloc] initWithContentURL:url];
-//            
-//            movie.controlStyle = MPMovieControlStyleFullscreen;
-//            [movie.view setFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3)];
-//            movie.initialPlaybackTime = -1;
-//            // 注册一个播放结束的通知
-//            [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                     selector:@selector(myMovieFinishedCallback:)
-//                                                         name:MPMoviePlayerPlaybackDidFinishNotification
-//                                                       object:movie];
-//            [self.view_viewbg addSubview:movie.view];
-//
-//            [movie play];
-//        }
+        else if([modle_list.file_type isEqualToString:@"2"])
+        {//视频
+            
+            self.view_viewbg.hidden = NO;
+            //视频URL
+            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]];
+//            NSURL * url=[NSURL URLWithString:@"http://192.168.1.245/titoujiang/uploads/video/16-03-24/video_145880497031844.mp4"];
+
+            moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3) URL:url];
+            moviePlayerview.tag = 10000000001;
+            [self.view_viewbg addSubview:moviePlayerview];
+            
+        }
     }
 }
 
--(void)myMovieFinishedCallback:(NSNotification*)notify
-{
-    //视频播放对象
-    MPMoviePlayerController* theMovie = [notify object];
-    //销毁播放通知
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:MPMoviePlayerPlaybackDidFinishNotification
-                                                  object:theMovie];
-    [theMovie.view removeFromSuperview];
-}
 
 #pragma mark - 回到说说
 - (void)tapGesture:(id)sender
@@ -526,6 +512,10 @@
         
         UIImageView * image = [self.view viewWithTag:1000000];
         [image removeFromSuperview];
+        
+        [moviePlayerview stopPlayer];
+        MoviePlayer * movie = [self.view viewWithTag:10000000001];
+        [movie removeFromSuperview];
     }
 }
 
@@ -708,6 +698,8 @@
 - (void)create:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if(self.page == 1)
     {

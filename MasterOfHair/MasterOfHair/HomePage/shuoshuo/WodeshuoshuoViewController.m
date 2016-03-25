@@ -57,6 +57,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -425,7 +427,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 20 + length / 2 - 12.5, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -646,12 +648,13 @@
 {
 //    NSLog(@"%@",dict);
     
+    [SVProgressHUD dismiss];
+    
     if(self.page == 1)
     {
         self.arr_all = nil;
         self.arr_filelist = nil;
     }
-    
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
