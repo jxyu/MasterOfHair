@@ -40,7 +40,8 @@
 {
     _lblTitle.text = [NSString stringWithFormat:@"选择分类"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
-    
+    _btnLeft.hidden = YES;
+
     //    [self addLeftButton:@"iconfont-fanhui"];
     [self addRightbuttontitle:@"关闭"];
 }

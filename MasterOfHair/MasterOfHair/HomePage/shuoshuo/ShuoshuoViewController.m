@@ -49,6 +49,8 @@
 //第几个
 @property (nonatomic, assign) NSInteger zan_index;
 
+@property (nonatomic, strong) UIView * view_viewbg;
+
 @end
 
 @implementation ShuoshuoViewController
@@ -148,7 +150,6 @@
     //
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell_"];
 }
 
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
@@ -365,16 +366,13 @@
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
-                    //tag
-//                    image.tag = indexPath.section * 1000 + indexPath.row;
-                    
+
+                    //
                     UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
                     btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
 //                    btn.backgroundColor = [UIColor orangeColor];
                     [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
                     btn.tag = indexPath.section * 1000 + i;
-
-//                    image.backgroundColor = [UIColor orangeColor];
                     
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
@@ -458,11 +456,79 @@
     NSInteger count = sender.tag % 1000;
     NSLog(@"%ld  %ld",section, count);
     
-    
-    
-    
-    
+    if(self.view_viewbg.hidden == 1)
+    {
+
+        Shuoshuo_Model * modle_list = self.arr_filelist[section][count];
+#warning 轮播效果
+        if([modle_list.file_type isEqualToString:@"1"])
+        {//图片
+            self.view_viewbg.hidden = NO;
+
+            CGFloat length = (SCREEN_WIDTH - 90) / 3;
+
+            UIImageView * image = [[UIImageView alloc] init];
+            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 20) / 2, length, length + 20);
+            image.tag = 1000000;
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [UIView animateWithDuration:0.7 animations:^{
+                
+                image.frame = CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [self.view_viewbg addSubview:image];
+        }
+//        else if([modle_list.file_type isEqualToString:@"2"])
+//        {//视频
+////            NSLog(@"视频");
+//            
+//            //视频URL
+//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url,modle_list.file_path]];
+//            //视频播放对象
+//            
+//            MPMoviePlayerController * movie = [[MPMoviePlayerController alloc] initWithContentURL:url];
+//            
+//            movie.controlStyle = MPMovieControlStyleFullscreen;
+//            [movie.view setFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3)];
+//            movie.initialPlaybackTime = -1;
+//            // 注册一个播放结束的通知
+//            [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                     selector:@selector(myMovieFinishedCallback:)
+//                                                         name:MPMoviePlayerPlaybackDidFinishNotification
+//                                                       object:movie];
+//            [self.view_viewbg addSubview:movie.view];
+//
+//            [movie play];
+//        }
+    }
 }
+
+-(void)myMovieFinishedCallback:(NSNotification*)notify
+{
+    //视频播放对象
+    MPMoviePlayerController* theMovie = [notify object];
+    //销毁播放通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:theMovie];
+    [theMovie.view removeFromSuperview];
+}
+
+#pragma mark - 回到说说
+- (void)tapGesture:(id)sender
+{
+    if(self.view_viewbg.hidden == 0)
+    {
+        self.view_viewbg.hidden = YES;
+        
+        UIImageView * image = [self.view viewWithTag:1000000];
+        [image removeFromSuperview];
+    }
+}
+
 
 
 #pragma mark - 评论
@@ -800,6 +866,17 @@
     [btn_4 addTarget:self action:@selector(btn_4Action:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
+    self.view_viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.view_viewbg.backgroundColor = [UIColor blackColor];
+    self.view_viewbg.hidden = YES;
+    [self.view addSubview:self.view_viewbg];
+    
+    
+    //手势
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1; //点击次数
+    tapGesture.numberOfTouchesRequired = 1; //点击手指数
+    [self.view_viewbg addGestureRecognizer:tapGesture];
 }
 
 #pragma mark - 4个单击事件

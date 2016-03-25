@@ -35,6 +35,7 @@
 
 
 @property (nonatomic, strong) NSString * index;
+@property (nonatomic, strong) UIView * view_viewbg;
 
 @end
 
@@ -94,8 +95,10 @@
     self.view_bg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.height)];
     self.tableView.tableHeaderView = self.view_bg;
     
-    
     [self.view addSubview:self.tableView];
+    
+
+    
 }
 
 #pragma mark - 代理
@@ -211,6 +214,54 @@
     }
     
 }
+
+#pragma mark - 说说点击事件
+- (void)btnshuoshuoAction:(UIButton *)sender
+{
+    self.bottom_View.hidden = YES;
+    [self.bottom_text resignFirstResponder];
+    
+    if(self.view_viewbg.hidden == 1)
+    {
+        Shuoshuo_Model * modle_list = self.arr_filelist[sender.tag];
+#warning 轮播效果
+        if([modle_list.file_type isEqualToString:@"1"])
+        {//图片
+            self.view_viewbg.hidden = NO;
+            
+            CGFloat length = (SCREEN_WIDTH - 90) / 3;
+            
+            UIImageView * image = [[UIImageView alloc] init];
+            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 20) / 2, length, length + 20);
+            image.tag = 1000000;
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [UIView animateWithDuration:0.7 animations:^{
+                
+                image.frame = CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [self.view_viewbg addSubview:image];
+        }
+    }
+}
+
+#pragma mark - 回到说说
+- (void)tapGesture:(id)sender
+{
+    if(self.view_viewbg.hidden == 0)
+    {
+        self.view_viewbg.hidden = YES;
+        self.bottom_View.hidden = NO;
+
+        UIImageView * image = [self.view viewWithTag:1000000];
+        [image removeFromSuperview];
+    }
+}
+
+
 
 
 #pragma mark - 数据
@@ -336,7 +387,12 @@
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.image_touxiang.frame) + 5 + (length + 20 + 5) * x, length, length + 20)];
                     //tag
-                    image.tag = i;
+//                    image.tag = i;
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.image_touxiang.frame) + 5 + (length + 20 + 5) * x, length, length + 20);
+                    //                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = i;
                     
                     image.backgroundColor = [UIColor orangeColor];
                     
@@ -350,6 +406,16 @@
                     }
                     
                     [self.view_bg addSubview:image];
+                    
+                    [self.view_bg addSubview:btn];
+                    //加视频覆盖
+                    if([modle_list.file_type isEqualToString:@"2"])
+                    {
+                        UIImageView * image_pic = [[UIImageView alloc] init];
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 18.5, 25, 25);
+                        image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
+                        [self.view_bg addSubview:image_pic];
+                    }
                 }
                 
             }
@@ -369,6 +435,12 @@
                     //tag
                     image.tag = i;
                     
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 5 + (length + 20 + 5) * x, length, length + 20);
+                    //                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = i;
+                    
                     image.backgroundColor = [UIColor orangeColor];
                     
                     if([modle_list.file_type isEqualToString:@"1"])
@@ -383,6 +455,15 @@
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
                     [self.view_bg addSubview:image];
+                    [self.view_bg addSubview:btn];
+                    //加视频覆盖
+                    if([modle_list.file_type isEqualToString:@"2"])
+                    {
+                        UIImageView * image_pic = [[UIImageView alloc] init];
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 18.5, 25, 25);
+                        image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
+                        [self.view_bg addSubview:image_pic];
+                    }
                 }
             }
         
@@ -437,6 +518,18 @@
     [self.bottom_View addSubview:self.bottom_btn];
     
     [self.bottom_btn addTarget:self action:@selector(bottom_btnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    self.view_viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.view_viewbg.backgroundColor = [UIColor blackColor];
+    self.view_viewbg.hidden = YES;
+    [self.view addSubview:self.view_viewbg];
+    [self.view bringSubviewToFront:self.view_viewbg];
+
+    //手势
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1; //点击次数
+    tapGesture.numberOfTouchesRequired = 1; //点击手指数
+    [self.view_viewbg addGestureRecognizer:tapGesture];
 }
 
 - (void)bottom_btnAction:(UIButton *)sender

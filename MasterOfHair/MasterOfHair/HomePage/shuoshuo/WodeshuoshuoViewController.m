@@ -45,6 +45,10 @@
 //第几个
 @property (nonatomic, assign) NSInteger zan_index;
 @property (nonatomic, assign) NSInteger delete_index;
+
+
+@property (nonatomic, strong) UIView * view_viewbg;
+
 @end
 
 @implementation WodeshuoshuoViewController
@@ -117,6 +121,18 @@
     
     //
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    self.view_viewbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.view_viewbg.backgroundColor = [UIColor blackColor];
+    self.view_viewbg.hidden = YES;
+    [self.view addSubview:self.view_viewbg];
+    
+    
+    //手势
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1; //点击次数
+    tapGesture.numberOfTouchesRequired = 1; //点击手指数
+    [self.view_viewbg addGestureRecognizer:tapGesture];
     
 }
 
@@ -341,10 +357,14 @@
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
-                    //tag
-                    image.tag = indexPath.section * 1000 + indexPath.row;
                     
-                    image.backgroundColor = [UIColor orangeColor];
+                    //
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+                    //                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = indexPath.section * 1000 + i;
+
                     
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
@@ -355,7 +375,8 @@
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
                     [cell addSubview:image];
-                    
+                    [cell addSubview:btn];
+
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
@@ -379,10 +400,13 @@
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
                     UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20)];
-                    //tag
-                    image.tag = indexPath.section * 1000 + indexPath.row;
                     
-                    image.backgroundColor = [UIColor orangeColor];
+                    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+                    //                    btn.backgroundColor = [UIColor orangeColor];
+                    [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+                    btn.tag = indexPath.section * 1000 + i;
+                    
                     
                     if([modle_list.file_type isEqualToString:@"1"])
                     {
@@ -394,8 +418,10 @@
                     {
                         [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_name]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
                     }
-                    [cell addSubview:image];
                     
+                    [cell addSubview:image];
+                    [cell addSubview:btn];
+
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
@@ -542,10 +568,53 @@
     }
 }
 
+#pragma mark - 说说点击事件
+- (void)btnshuoshuoAction:(UIButton *)sender
+{
+    NSInteger section = sender.tag / 1000;
+    NSInteger count = sender.tag % 1000;
+    NSLog(@"%ld  %ld",section, count);
+    
+    if(self.view_viewbg.hidden == 1)
+    {
+        
+        Shuoshuo_Model * modle_list = self.arr_filelist[section][count];
+#warning 轮播效果
+        if([modle_list.file_type isEqualToString:@"1"])
+        {//图片
+            self.view_viewbg.hidden = NO;
+            
+            CGFloat length = (SCREEN_WIDTH - 90) / 3;
+            
+            UIImageView * image = [[UIImageView alloc] init];
+            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 20) / 2, length, length + 20);
+            image.tag = 1000000;
+            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+            [UIView animateWithDuration:0.7 animations:^{
+                
+                image.frame = CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [self.view_viewbg addSubview:image];
+        }
 
+    }
+}
 
-
-
+#pragma mark - 回到说说
+- (void)tapGesture:(id)sender
+{
+    if(self.view_viewbg.hidden == 0)
+    {
+        self.view_viewbg.hidden = YES;
+        
+        UIImageView * image = [self.view viewWithTag:1000000];
+        [image removeFromSuperview];
+    }
+}
 
 
 #pragma mark - 数据列表
