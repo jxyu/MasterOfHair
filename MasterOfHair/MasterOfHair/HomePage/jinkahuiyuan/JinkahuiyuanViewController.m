@@ -88,8 +88,11 @@
     label_3.text = @"账号:";
     [view_2 addSubview:label_3];
     
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     self.accent = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_3.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label_3.frame) - 20, 30)];
-    self.accent.text = @"1888888888888";
+    self.accent.text = [userdefault objectForKey:@"member_username"];
     self.accent.textAlignment = NSTextAlignmentRight;
     [view_2 addSubview:self.accent];
 

@@ -47,6 +47,11 @@
 		7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */; };
 		7B19D3C01C97F4560097C7C7 /* Fenxiaozhongxin_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */; };
 		7B1D03DA1CA8D02000259989 /* shipinzhifuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03D91CA8D02000259989 /* shipinzhifuViewController.m */; };
+		7B1D03DE1CA918C300259989 /* CreditAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03DD1CA918C300259989 /* CreditAppDelegate.m */; };
+		7B1D03E61CA918CE00259989 /* CreditNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03E11CA918CE00259989 /* CreditNavigationController.m */; };
+		7B1D03E71CA918CE00259989 /* CreditWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03E31CA918CE00259989 /* CreditWebView.m */; };
+		7B1D03E81CA918CE00259989 /* CreditWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03E51CA918CE00259989 /* CreditWebViewController.m */; };
+		7B1D03EB1CA9192200259989 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03EA1CA9192200259989 /* CreditViewController.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -490,6 +495,17 @@
 		7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fenxiaozhongxin_Model.m; sourceTree = "<group>"; };
 		7B1D03D81CA8D02000259989 /* shipinzhifuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shipinzhifuViewController.h; sourceTree = "<group>"; };
 		7B1D03D91CA8D02000259989 /* shipinzhifuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shipinzhifuViewController.m; sourceTree = "<group>"; };
+		7B1D03DC1CA918C300259989 /* CreditAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditAppDelegate.h; sourceTree = "<group>"; };
+		7B1D03DD1CA918C300259989 /* CreditAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditAppDelegate.m; sourceTree = "<group>"; };
+		7B1D03DF1CA918CE00259989 /* CreditConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditConstant.h; sourceTree = "<group>"; };
+		7B1D03E01CA918CE00259989 /* CreditNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditNavigationController.h; sourceTree = "<group>"; };
+		7B1D03E11CA918CE00259989 /* CreditNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditNavigationController.m; sourceTree = "<group>"; };
+		7B1D03E21CA918CE00259989 /* CreditWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditWebView.h; sourceTree = "<group>"; };
+		7B1D03E31CA918CE00259989 /* CreditWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditWebView.m; sourceTree = "<group>"; };
+		7B1D03E41CA918CE00259989 /* CreditWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditWebViewController.h; sourceTree = "<group>"; };
+		7B1D03E51CA918CE00259989 /* CreditWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditWebViewController.m; sourceTree = "<group>"; };
+		7B1D03E91CA9192200259989 /* CreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditViewController.h; sourceTree = "<group>"; };
+		7B1D03EA1CA9192200259989 /* CreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditViewController.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -1356,6 +1372,24 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7B1D03DB1CA918A900259989 /* duiba */ = {
+			isa = PBXGroup;
+			children = (
+				7B1D03DF1CA918CE00259989 /* CreditConstant.h */,
+				7B1D03E01CA918CE00259989 /* CreditNavigationController.h */,
+				7B1D03E11CA918CE00259989 /* CreditNavigationController.m */,
+				7B1D03E21CA918CE00259989 /* CreditWebView.h */,
+				7B1D03E31CA918CE00259989 /* CreditWebView.m */,
+				7B1D03E41CA918CE00259989 /* CreditWebViewController.h */,
+				7B1D03E51CA918CE00259989 /* CreditWebViewController.m */,
+				7B1D03DC1CA918C300259989 /* CreditAppDelegate.h */,
+				7B1D03DD1CA918C300259989 /* CreditAppDelegate.m */,
+				7B1D03E91CA9192200259989 /* CreditViewController.h */,
+				7B1D03EA1CA9192200259989 /* CreditViewController.m */,
+			);
+			path = duiba;
+			sourceTree = "<group>";
+		};
 		7B1DE47C1C78121C0079B606 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1465,6 +1499,7 @@
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
+				7B1D03DB1CA918A900259989 /* duiba */,
 				7BBC0DD61CA287E50014A5B0 /* ping++ */,
 				7BBC0D0D1CA265210014A5B0 /* UMSocial_Sdk_Instructions */,
 				7BBC0CE91CA265030014A5B0 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -3285,6 +3320,7 @@
 				7B33059A1C5EE8AD0014C49C /* ShangmengViewController.m in Sources */,
 				802492321C78459B008BA570 /* Slider.m in Sources */,
 				802552B61C57442B00CFF875 /* SCRecorderFocusTargetView.m in Sources */,
+				7B1D03E71CA918CE00259989 /* CreditWebView.m in Sources */,
 				8082B4C31C7414320024EAD3 /* JKAssetsCollectionFooterView.m in Sources */,
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8082B4CC1C7414320024EAD3 /* JKUtil.m in Sources */,
@@ -3308,6 +3344,7 @@
 				7B29EFBE1C5750D1003A020B /* querendingdanViewController.m in Sources */,
 				7B29EFBB1C5725F9003A020B /* NewshouhuoViewController.m in Sources */,
 				7B7F10571C9987D400EFF08C /* WenxiulanmengdingdanTableViewCell.m in Sources */,
+				7B1D03E61CA918CE00259989 /* CreditNavigationController.m in Sources */,
 				7BF5D35E1C98E7B000F4F9C0 /* Mingshimingdian_Model.m in Sources */,
 				8082B4C21C7414320024EAD3 /* JKAssets.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
@@ -3372,7 +3409,9 @@
 				8025530D1C574F7100CFF875 /* MJRefreshStateHeader.m in Sources */,
 				7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */,
 				8082B4CF1C7414320024EAD3 /* PhotoCell.m in Sources */,
+				7B1D03E81CA918CE00259989 /* CreditWebViewController.m in Sources */,
 				7B00BF591C76F58900988119 /* ChineseString.m in Sources */,
+				7B1D03EB1CA9192200259989 /* CreditViewController.m in Sources */,
 				8043C6BD1C4DC94500369EEF /* main.m in Sources */,
 				7B7F10541C99823B00EFF08C /* WenxiulanmengdingdanViewController.m in Sources */,
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
@@ -3387,6 +3426,7 @@
 				7B235AA01C7C0CF200235B0F /* Fenlei_Model.m in Sources */,
 				7B3305A01C5EE9640014C49C /* TuwenViewController.m in Sources */,
 				7B29EFB01C570CC3003A020B /* shouhuodizhiViewController.m in Sources */,
+				7B1D03DE1CA918C300259989 /* CreditAppDelegate.m in Sources */,
 				7B586C9D1C71C1F600BE4295 /* ShuoshuoViewController.m in Sources */,
 				7BCD552A1C55EFC200F32F16 /* chanpingxiangqingViewController.m in Sources */,
 				8082B49C1C740ADC0024EAD3 /* AdvertiseClassesViewController.m in Sources */,

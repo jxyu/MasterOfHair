@@ -33,6 +33,8 @@
 #import "TuWen_Models.h"
 #import "LoginViewController.h"
 
+#import "CreditViewController.h"
+#import "CreditWebViewController.h"
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -138,13 +140,19 @@
 - (void)clickLeftButton:(UIButton *)sender
 {
     //这个调定位，不跳页，返回一个当前的位置就可
-    NSLog(@"定位");
+//    NSLog(@"定位");
 }
 
 //签到
 - (void)clickRightButton:(UIButton *)sender
 {
-    NSLog(@"签到");
+//    NSLog(@"签到");
+    
+    CreditWebViewController *web=[[CreditWebViewController alloc]initWithUrl:@"http://www.duiba.com.cn/test/demoRedirectSAdfjosfdjdsa"];//实际中需要改为开发者服务器的地址，开发者服务器再重定向到一个带签名的自动登录地址
+    [self.navigationController pushViewController:web animated:YES];
+//    CreditViewController * creditViewController = [[CreditViewController alloc] init];
+//    
+//    [self showViewController:creditViewController sender:nil];
 }
 
 //搜索框点击事件
