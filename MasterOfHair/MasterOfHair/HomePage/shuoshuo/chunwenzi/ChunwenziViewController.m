@@ -87,6 +87,8 @@
         
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text];
         
+        [SVProgressHUD showWithStatus:@"正在发布,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        
 //        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text];
     }
 }
@@ -151,6 +153,7 @@
 - (void)create:(id )dict
 {
 //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

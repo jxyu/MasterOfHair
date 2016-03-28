@@ -22,9 +22,15 @@ typedef NS_ENUM(NSInteger, PanDirection){
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, strong) NSTimer *timer; // 定时器
+
+@property (nonatomic, strong) UIButton *changeFrame;//缩放播放屏幕
+
 // 初始化方法
 - (instancetype)initWithFrame:(CGRect)frame URL:(NSURL *)url;
 //关闭播放
 -(void)stopPlayer;
+
+#pragma mark -
+- (void)btnframebtn:(UIButton *)button;
 
 @end

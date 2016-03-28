@@ -122,8 +122,17 @@
 //返回
 - (void)btn_returnAction:(UIButton *)sender
 {
-    [moviePlayerview stopPlayer];
-    [self.navigationController popViewControllerAnimated:YES];
+    if(moviePlayerview.frame.size.height == 200)
+    {
+        [moviePlayerview stopPlayer];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        moviePlayerview.changeFrame.selected = 1;
+        [moviePlayerview btnframebtn:moviePlayerview.changeFrame];
+    }
 }
 
 

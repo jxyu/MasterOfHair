@@ -34,7 +34,6 @@
 
 @property (nonatomic, strong) UILabel *horizontalLabel; // 水平滑动时显示进度
 
-@property (nonatomic, strong) UIButton *changeFrame;//缩放播放屏幕
 
 @end
 
@@ -512,6 +511,52 @@
     self.play.center=CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     
 }
+
+
+#pragma mark - 
+- (void)btnframebtn:(UIButton *)button
+{
+    button.selected = !button.selected;
+    if (button.selected) {
+        // 放大
+        
+        self.transform=CGAffineTransformMakeRotation((90.0f * M_PI) / 180.0f); // M_PI_2是90度，M_PI * 1.5是180度
+        self.frame=CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT);
+        self.moviePlayer.view.frame=CGRectMake(2, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+        //        self.moviePlayer.view.frame = self.bounds;
+        //        self.moviePlayer.view.frame=CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+        //        self.moviePlayer.view.center=CGPointMake(SCREEN_HEIGHT/2, SCREEN_WIDTH/2);
+        
+        _back.hidden=YES;
+        self.sliderView.frame=CGRectMake(0, SCREEN_WIDTH-45, SCREEN_HEIGHT, 45);
+        
+        self.changeFrame.frame=CGRectMake(self.sliderView.frame.size.width-45, 5, 30, 30);
+        
+        self.end.frame=CGRectMake(_changeFrame.frame.origin.x-self.end.frame.size.width-15, self.end.frame.origin.y, self.end.frame.size.width, self.end.frame.size.height);
+        
+        self.begin.frame=CGRectMake(self.begin.frame.origin.x+20, self.begin.frame.origin.y, self.begin.frame.size.width, self.begin.frame.size.height);
+        
+        self.progress.frame=CGRectMake(self.begin.frame.origin.x+self.begin.frame.size.width+5, 0, self.end.frame.origin.x-self.begin.frame.size.width-self.begin.frame.origin.x-10, self.progress.bounds.size.height);
+    }else{
+        //缩小
+        
+        self.transform=CGAffineTransformIdentity;
+        self.frame=newFrame;
+        self.moviePlayer.view.frame=CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+        self.sliderView.frame=CGRectMake(0, newFrame.size.height - 45, newFrame.size.width, 45);
+        
+        self.changeFrame.frame=CGRectMake(self.sliderView.frame.size.width-35, 5, 30, 30);
+        
+        self.end.frame=CGRectMake(_changeFrame.frame.origin.x-self.end.frame.size.width-5, self.end.frame.origin.y, self.end.frame.size.width, self.end.frame.size.height);
+        
+        self.begin.frame=CGRectMake(self.begin.frame.origin.x-20, self.begin.frame.origin.y, self.begin.frame.size.width, self.begin.frame.size.height);
+        
+        self.progress.frame=CGRectMake(self.begin.frame.origin.x+self.begin.frame.size.width, 0, self.progress.bounds.size.width-SCREEN_HEIGHT+SCREEN_WIDTH, self.progress.bounds.size.height);
+    }
+    self.play.center=CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    
+}
+
 
 #pragma mark - tap手势方法
 - (void)tapAction

@@ -496,12 +496,14 @@
     NSInteger index = sender.tag - 400;
     self.zan_index = index;
     
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+
     Shuoshuo_Model * model = self.arr_all[index];
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"TakeGood:"];
     
-    [dataprovider TakeGoodWithMember_id:@"1" talk_id:model.talk_id];
+    [dataprovider TakeGoodWithMember_id:[userdefault objectForKey:@"member_id"] talk_id:model.talk_id];
 }
 
 // 接口
