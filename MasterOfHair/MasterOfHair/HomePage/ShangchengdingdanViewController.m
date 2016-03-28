@@ -45,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self p_navi];
     
@@ -673,6 +674,8 @@
 - (void)getOrders:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if(self.page == 1)
     {

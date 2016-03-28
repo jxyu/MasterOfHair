@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self p_navi];
     
@@ -323,6 +324,8 @@
 - (void)getVideoFavoriteList:(id )dict
 {
 //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
+    
     self.arr_data = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {

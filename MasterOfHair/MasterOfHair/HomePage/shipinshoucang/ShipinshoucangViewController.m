@@ -29,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -333,6 +335,8 @@
 - (void)getVideoFavoriteList:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     self.arr_data = nil;
     
