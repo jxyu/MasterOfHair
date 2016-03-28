@@ -335,6 +335,9 @@
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
                 [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
+                
+                [SVProgressHUD showWithStatus:@"正在注册,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
             }
             
         }];
@@ -347,11 +350,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showWithStatus:@"注册成功,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-
 //            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-            
-            
         }
         @catch (NSException *exception)
         {
@@ -366,6 +365,8 @@
     }
     else
     {
+        [SVProgressHUD dismiss];
+        
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
     }
 }

@@ -112,7 +112,7 @@
 
     //中间为搜索框
     _lblTitle.hidden = YES;
-    self.search_view = [[UIView alloc] initWithFrame:CGRectMake(80 , 25, SCREEN_WIDTH - 140, 34)];
+    self.search_view = [[UIView alloc] initWithFrame:CGRectMake(65 , 25, SCREEN_WIDTH - 120, 34)];
     self.search_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.search_view.layer.cornerRadius = 0.05 * SCREEN_WIDTH;
     [self.view addSubview:self.search_view];
