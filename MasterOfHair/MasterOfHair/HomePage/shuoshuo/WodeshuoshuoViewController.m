@@ -297,6 +297,9 @@
         
         [cell addSubview:self.image_zan];
         
+        UIView * view_line1 = [[UIView alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(self.image_zan.frame) + 8, SCREEN_WIDTH - 70, 2)];
+        view_line1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [cell addSubview:view_line1];
         
         self.zannum.tag = 100 + indexPath.section;
         self.image_zan.tag = 400 + indexPath.section;
