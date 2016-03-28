@@ -105,7 +105,7 @@
     
     //右边为签到
     [self addRightButton:@"01_03"];
-    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 5 - 40, _imgRight.frame.origin.y, _imgRight.frame.size.width, _imgRight.frame.size.height);
+    _imgRight.frame = CGRectMake(SCREEN_WIDTH - 5 - 40 + 2.5, _imgRight.frame.origin.y + 2.5, _imgRight.frame.size.width - 5, _imgRight.frame.size.height - 5);
 //    [self addRightbuttontitle:@"签到"];
     _btnRight.frame = CGRectMake(SCREEN_WIDTH - 10 - 40, _lblRight.frame.origin.y + 0, 40, _lblRight.frame.size.height - 10);
 //    _btnRight.backgroundColor = [UIColor orangeColor];
@@ -664,9 +664,37 @@
                 break;
             case 7:
             {
-                ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                 
-                [self showViewController:shangmengViewController sender:nil];
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
+                {
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                    
+                    [self showViewController:loginViewController sender:nil];
+                }
+                else
+                {
+                    if([[userdefault objectForKey:@"member_type"] isEqualToString:@"3"])
+                    {
+                        ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
+                        
+                        [self showViewController:shangmengViewController sender:nil];
+                    }
+                    else
+                    {
+                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"只有代理商才有权限进入" preferredStyle:(UIAlertControllerStyleAlert)];
+                        
+                        [self presentViewController:alert animated:YES completion:^{
+                            
+                        }];
+                        
+                        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                            
+                        }];
+                        
+                        [alert addAction:action];
+                    }
+                }    
             }
                 break;
             case 8:
@@ -744,13 +772,25 @@
     {
 //        NSLog(@"%ld",(long)indexPath.item);
         
-        TuWen_Models * model = self.arr_video[indexPath.item];
         
-        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        videoDetailViewController.video_id = model.video_id;
-        
-        [self showViewController:videoDetailViewController sender:nil];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            TuWen_Models * model = self.arr_video[indexPath.item];
+            
+            VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+            
+            videoDetailViewController.video_id = model.video_id;
+            
+            [self showViewController:videoDetailViewController sender:nil];
+        }
     }
     
 }

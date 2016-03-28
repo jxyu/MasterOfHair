@@ -775,13 +775,24 @@
     {
 //        NSLog(@"%ld",(long)indexPath.item);
         
-        TuWen_Models * model = self.arr_video[indexPath.item];
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
-        
-        videoDetailViewController.video_id = model.video_id;
-        
-        [self showViewController:videoDetailViewController sender:nil];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            TuWen_Models * model = self.arr_video[indexPath.item];
+            
+            VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+            
+            videoDetailViewController.video_id = model.video_id;
+            
+            [self showViewController:videoDetailViewController sender:nil];
+        }
     }
 }
 
@@ -1068,6 +1079,9 @@
 #pragma mark - 获取热门随机图文
 - (void)p_dataTuwenData
 {
+    
+    
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getRecommendArticleList:"];
     

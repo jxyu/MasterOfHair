@@ -39,6 +39,7 @@
     
     UIView * view_bg = [[UIView alloc] initWithFrame:CGRectMake(0, self.contentView.frame.size.height - 25, self.contentView.frame.size.width, 25)];
     view_bg.backgroundColor = [UIColor blackColor];
+    view_bg.layer.cornerRadius = 8;
     view_bg.alpha = 0.2;
     [self.contentView addSubview:view_bg];
     

@@ -203,20 +203,33 @@
 
 - (void )collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
     if(self.isTeacher == 0)
     {
-        TuWen_Models * model = self.arr_shipin[indexPath.item];
-//        NSLog(@"跳视频页 %ld",(long)indexPath.item);
         
-        VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
-        
-        videoDetailViewController.video_id = model.video_id;
-        
-        [self showViewController:videoDetailViewController sender:nil];
+        if([[userdefault objectForKey:@"member_id"] length] == 0)
+        {
+            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            
+            [self showViewController:loginViewController sender:nil];
+        }
+        else
+        {
+            TuWen_Models * model = self.arr_shipin[indexPath.item];
+            //        NSLog(@"跳视频页 %ld",(long)indexPath.item);
+            
+            VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
+            
+            videoDetailViewController.video_id = model.video_id;
+            
+            [self showViewController:videoDetailViewController sender:nil];
+        }
     }
     else
     {
-//        NSLog(@"跳图文页 %ld",(long)indexPath.item);
+        //        NSLog(@"跳图文页 %ld",(long)indexPath.item);
         TuWen_Models * model = self.arr_tuwen[indexPath.item];
         
         TextDetailViewController * textDetailViewController = [[TextDetailViewController alloc] init];
@@ -225,6 +238,8 @@
         
         [self showViewController:textDetailViewController sender:nil];
     }
+
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

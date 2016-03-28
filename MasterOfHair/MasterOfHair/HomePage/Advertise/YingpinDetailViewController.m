@@ -412,7 +412,7 @@
     
     if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
     {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您没有一键拨号功能" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"金卡会员才可查看号码" preferredStyle:(UIAlertControllerStyleAlert)];
         
         [self presentViewController:alert animated:YES completion:^{
             

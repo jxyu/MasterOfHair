@@ -347,7 +347,11 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [SVProgressHUD showWithStatus:@"注册成功,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
+//            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            
+            
         }
         @catch (NSException *exception)
         {
@@ -397,6 +401,7 @@
         }
         @finally
         {
+            [SVProgressHUD dismiss];
             
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
