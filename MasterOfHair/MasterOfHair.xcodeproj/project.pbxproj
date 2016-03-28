@@ -46,6 +46,7 @@
 		7B18A78C1C7EEF5C00A32AE9 /* Pinglun_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B18A78B1C7EEF5C00A32AE9 /* Pinglun_Models.m */; };
 		7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */; };
 		7B19D3C01C97F4560097C7C7 /* Fenxiaozhongxin_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */; };
+		7B1D03DA1CA8D02000259989 /* shipinzhifuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D03D91CA8D02000259989 /* shipinzhifuViewController.m */; };
 		7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */; };
 		7B1DE4831C78496B0079B606 /* Shouhudizhi_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DE4821C78496B0079B606 /* Shouhudizhi_Model.m */; };
 		7B206A081C72A6E600481F24 /* ChunwenziViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B206A071C72A6E600481F24 /* ChunwenziViewController.m */; };
@@ -487,6 +488,8 @@
 		7B19D3BB1C97AFD00097C7C7 /* Qianbao_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Qianbao_Model.m; sourceTree = "<group>"; };
 		7B19D3BE1C97F4560097C7C7 /* Fenxiaozhongxin_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fenxiaozhongxin_Model.h; sourceTree = "<group>"; };
 		7B19D3BF1C97F4560097C7C7 /* Fenxiaozhongxin_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fenxiaozhongxin_Model.m; sourceTree = "<group>"; };
+		7B1D03D81CA8D02000259989 /* shipinzhifuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shipinzhifuViewController.h; sourceTree = "<group>"; };
+		7B1D03D91CA8D02000259989 /* shipinzhifuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shipinzhifuViewController.m; sourceTree = "<group>"; };
 		7B1DE47D1C78124F0079B606 /* Chanpingxiangqing_Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chanpingxiangqing_Models.h; sourceTree = "<group>"; };
 		7B1DE47E1C78124F0079B606 /* Chanpingxiangqing_Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chanpingxiangqing_Models.m; sourceTree = "<group>"; };
 		7B1DE4811C78496B0079B606 /* Shouhudizhi_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shouhudizhi_Model.h; sourceTree = "<group>"; };
@@ -2323,6 +2326,8 @@
 				7BFE25EC1C61D9B70038CA23 /* VideoDetailViewController.m */,
 				7B3224C11C8D739E004042F7 /* NextVideoViewController.h */,
 				7B3224C21C8D739E004042F7 /* NextVideoViewController.m */,
+				7B1D03D81CA8D02000259989 /* shipinzhifuViewController.h */,
+				7B1D03D91CA8D02000259989 /* shipinzhifuViewController.m */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -3247,6 +3252,7 @@
 				8025530F1C574F7100CFF875 /* MJRefreshConst.m in Sources */,
 				7BF67F141C51D9C0005FA5C4 /* LoginViewController.m in Sources */,
 				8043C6F91C4E0C0900369EEF /* BaseNavigationController.m in Sources */,
+				7B1D03DA1CA8D02000259989 /* shipinzhifuViewController.m in Sources */,
 				802552BF1C57442B00CFF875 /* SCWeakSelectorTarget.m in Sources */,
 				7BCD551C1C55B7E300F32F16 /* wenxiulianmengViewController.m in Sources */,
 				8082B4C81C7414320024EAD3 /* JKImagePickerController.m in Sources */,

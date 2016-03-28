@@ -258,7 +258,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getOrders:"];
     
-    [dataprovider GetOrdersWithmember_id:[userdefault objectForKey:@"member_id"] union_order_status:@"1" pagenumber:@"1" pagesize:@"15"];
+    [dataprovider GetOrdersWithmember_id:[userdefault objectForKey:@"member_id"] union_order_status:@"2" pagenumber:@"1" pagesize:@"15"];
 }
 
 //所有的
@@ -271,7 +271,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getOrders:"];
     
-    [dataprovider GetOrdersWithmember_id:[userdefault objectForKey:@"member_id"] union_order_status:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider GetOrdersWithmember_id:[userdefault objectForKey:@"member_id"] union_order_status:@"2" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }
 
 - (void)getOrders:(id )dict
