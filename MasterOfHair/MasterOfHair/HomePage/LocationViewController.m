@@ -34,6 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_data];
     
     [self p_navi];
@@ -216,6 +218,8 @@
 - (void)area:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

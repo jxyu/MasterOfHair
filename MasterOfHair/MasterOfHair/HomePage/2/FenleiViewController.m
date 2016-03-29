@@ -33,6 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_data];
     
     [self p_navi];
@@ -218,6 +220,8 @@
 #pragma mark - 商城数据
 - (void)getCategories:(id )dict
 {
+    [SVProgressHUD dismiss];
+    
     self.arr_data1 = nil;
     self.arr_data2 = nil;
     

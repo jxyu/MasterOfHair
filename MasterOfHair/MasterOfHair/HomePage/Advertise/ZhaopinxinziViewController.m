@@ -25,6 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -215,7 +217,8 @@
 //数据
 - (void)Recruit:(id )dict
 {
-    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     
