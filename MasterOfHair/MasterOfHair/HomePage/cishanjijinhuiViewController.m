@@ -222,7 +222,7 @@
     [self.head_View addSubview:label2];
     
     self.money = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label2.frame) + 5, CGRectGetMinY(label2.frame), self.head_View.frame.size.width - CGRectGetMaxX(label2.frame) - 15, 30)];
-    self.money.text = @"¥ 2000.00";
+    self.money.text = @"¥ 0.00";
     self.money.font = [UIFont systemFontOfSize:15];
     self.money.textColor = [UIColor orangeColor];
 //    self.money.backgroundColor = [UIColor orangeColor];

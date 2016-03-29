@@ -186,7 +186,7 @@
     [view_white addSubview:image_1];
     
     self.money = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(label_1.frame) - 40, 30)];
-    self.money.text = @"¥ 1000.00";
+    self.money.text = @"¥ 0.00";
     self.money.font = [UIFont systemFontOfSize:15];
     self.money.textAlignment = NSTextAlignmentRight;
     self.money.textColor = [UIColor orangeColor];

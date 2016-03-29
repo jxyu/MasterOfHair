@@ -604,7 +604,7 @@
     [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-
+    
     if([[userdefault objectForKey:@"category_id"] length] == 0)
     {
         [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];

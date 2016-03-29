@@ -10,10 +10,8 @@
 
 @interface shipinzhifuViewController : BaseNavigationController
 
-@property (nonatomic, strong) UILabel * name;
 
-@property (nonatomic, strong) UILabel * price;
-
+@property (nonatomic, copy) NSString * video_id;
 
 @property (nonatomic, copy) NSString * money;
 

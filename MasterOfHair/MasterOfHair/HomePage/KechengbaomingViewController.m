@@ -19,7 +19,7 @@
 
 //数据
 @property (nonatomic, strong) NSMutableArray * arr_data;
-
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation KechengbaomingViewController
@@ -28,7 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self p_data];
     
     [self p_navi];
     
@@ -58,6 +57,8 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self example01];
+    
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] hiddenTabBar];
 }
 
@@ -74,6 +75,24 @@
     [self.view addSubview:self.tableView];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    __weak __typeof(self) weakSelf = self;
+    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self p_data];
+        
+        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [self p_data1];
+        
+        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
     
     //注册
     [self.tableView registerClass:[KechengbaomingTableViewCell class] forCellReuseIdentifier:@"cell_kecheng"];
@@ -138,19 +157,35 @@
 #pragma mark - 数据
 - (void)p_data
 {
+    self.page = 1;
+    
     DataProvider * dataprovider=[[DataProvider alloc] init];
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Course:"];
     
-    [dataprovider CourseWithPagenumber:@"1"];
+    [dataprovider CourseWithPagenumber:@"1" status:@"2"];
+}
+
+- (void)p_data1
+{
+    self.page ++;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"Course:"];
+    
+    [dataprovider CourseWithPagenumber:[NSString stringWithFormat:@"%ld",self.page] status:@"2"];
 }
 
 //数据
 - (void)Course:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
-    self.arr_data = nil;
+    if(self.page == 1)
+    {
+        self.arr_data = nil;
+    }
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -194,6 +229,26 @@
 }
 
 
+#pragma mark - 下拉刷新
+- (void)example01
+{
+    // 马上进入刷新状态
+    [self.tableView.header beginRefreshing];
+}
+
+-(void)example02
+{
+    [self.tableView.footer beginRefreshing];
+}
+
+- (void)loadNewData
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+    });
+    
+}
 
 
 

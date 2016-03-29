@@ -190,8 +190,7 @@
 #pragma mark - 获取某会员的收藏列表并分页
 - (void)getCityWithLng:(NSString *)lng lat:(NSString *)lat;
 
-#pragma mark - 获取课程列表
-- (void)CourseWithPagenumber:(NSString *)pagenumber;
+
 
 #pragma mark -  获取单个课程详情
 - (void)CourseWithCourse_id:(NSString *)course_id;
@@ -354,9 +353,12 @@
 #pragma mark -  	（3）会员报名
 - (void)SignupWithMember_id:(NSString *)member_id course_id:(NSString *)course_id pay_method:(NSString * )pay_method;
 
+#pragma mark - 获取课程列表
+- (void)CourseWithPagenumber:(NSString *)pagenumber status:(NSString *)status;
 
 
-
+#pragma mark -  视频支付接口
+- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method;
 
 
 

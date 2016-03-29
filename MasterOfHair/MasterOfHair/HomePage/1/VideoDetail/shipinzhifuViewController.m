@@ -10,6 +10,9 @@
 
 #import "Pingpp.h"
 @interface shipinzhifuViewController ()
+@property (nonatomic, strong) UILabel * name;
+
+@property (nonatomic, strong) UILabel * price;
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
 
@@ -26,8 +29,6 @@
     // Do any additional setup after loading the view.
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    [userdefault setObject:@"1" forKey:@"videozhifu_ok"];
     
     [self p_navi];
     
@@ -178,7 +179,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-//            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"2"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"1"];
             
             [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
         }
@@ -189,7 +190,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-//            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"3"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"2"];
             
             [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
             
@@ -204,11 +205,11 @@
     
     [SVProgressHUD dismiss];
     
-    if (dict[@"charge"] != nil)
+    if (dict[@"data"][@"charge"] != nil)
     {
         @try
         {
-            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
             NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
             [Pingpp createPayment:str_data

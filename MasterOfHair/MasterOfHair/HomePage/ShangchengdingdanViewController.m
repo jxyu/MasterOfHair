@@ -10,6 +10,7 @@
 #import "DINGDAN_Model.h"
 #import "Pingpp.h"
 #import "MineViewController.h"
+#import "chanpingxiangqingViewController.h"
 @interface ShangchengdingdanViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView * top_white;
@@ -155,6 +156,30 @@
         return 120;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%ld",indexPath.row);
+    
+    if(indexPath.row == 0 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 1 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 2)
+    {
+        NSLog(@"1");
+    }
+    else
+    {        
+        if(self.arr_dataList.count != 0)
+        {
+            DINGDAN_Model * model = self.arr_dataList[indexPath.section][indexPath.row - 1];
+            
+            chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+            
+            chanpingxiangqing.production_id = model.production_id;
+            
+            [self showViewController:chanpingxiangqing sender:nil];
+        }
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -526,7 +551,7 @@
 #pragma mark - 取消，收货数据
 - (void)update:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

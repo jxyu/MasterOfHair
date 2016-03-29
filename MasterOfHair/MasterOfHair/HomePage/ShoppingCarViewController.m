@@ -13,6 +13,8 @@
 //#import "querendingdanViewController.h"
 #import "GouwuchengdingdanViewController.h"
 #import "ShoppingCar_Model.h"
+#import "chanpingxiangqingViewController.h"
+
 
 @interface ShoppingCarViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,7 +43,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    }
     
     [self p_navi];
     
@@ -164,6 +170,22 @@
     return 130;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(self.arr_data.count != 0)
+    {
+        ShoppingCar_Model * model = self.arr_data[indexPath.row];
+        
+        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+        
+        chanpingxiangqing.production_id = model.production_id;
+        
+        [self showViewController:chanpingxiangqing sender:nil];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -211,11 +233,6 @@
     }
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - 结算栏的点击事件
@@ -539,6 +556,8 @@
     
     NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
     [dataprovider shopcartWithMember_id:[userdefault objectForKey:@"member_id"]];
+    
+
 }
 
 #pragma mark - 商城数据

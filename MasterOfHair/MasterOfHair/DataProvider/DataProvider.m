@@ -694,13 +694,13 @@
 
 
 #pragma mark - 获取课程列表
-- (void)CourseWithPagenumber:(NSString *)pagenumber
+- (void)CourseWithPagenumber:(NSString *)pagenumber status:(NSString *)status
 {
-    if(pagenumber)
+    if(pagenumber && status)
     {
         NSString * url=[NSString stringWithFormat:@"%@Course/Course",Url];
         
-        NSDictionary * prm=@{@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\"}",pagenumber]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"status\":\"%@\"}",status],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\"}",pagenumber]};
         
         [self GetRequest:url andpram:prm];
     }
@@ -1366,7 +1366,18 @@
 }
 
 
-
+#pragma mark -  视频支付接口
+- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method
+{
+    if(member_id && video_id && pay_total && pay_method)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@VideoRecord/create",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\"}",member_id,video_id,pay_total,pay_method]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
