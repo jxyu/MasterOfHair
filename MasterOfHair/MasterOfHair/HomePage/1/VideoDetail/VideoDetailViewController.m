@@ -15,6 +15,7 @@
 
 #import "UMSocial.h"
 #import "shipinzhifuViewController.h"
+#import "AppDelegate.h"
 @interface VideoDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate ,UMSocialUIDelegate>
 {
     MoviePlayer *moviePlayerview;
@@ -61,6 +62,8 @@
 @property (nonatomic, strong) UIView * view_bgbg;
 @property (nonatomic, strong) UILabel * viwe_bgtilet;
 @property (nonatomic, strong) UIButton * btn_bgzhifu;
+
+@property (nonatomic, strong) UIButton * btn_share_video;
 
 @end
 
@@ -444,22 +447,32 @@
 {
     TuWen_Models * model = self.arr_data.firstObject;
 
-        NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_url];
-        moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
-        [self.view addSubview:moviePlayerview];
+    NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_url];
+    moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
+    [self.view addSubview:moviePlayerview];
 
-        UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        btn_return.frame = CGRectMake(5, 10, 30, 30);
-        [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
-        [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        [moviePlayerview addSubview:btn_return];
+//    self.btn_share_video = [UIButton buttonWithType:(UIButtonTypeSystem)];
+//    self.btn_share_video.frame = CGRectMake(SCREEN_HEIGHT - 10 - 30, 10 + 5, 30, 30);
+//    
+//    [self.btn_share_video setImage:[UIImage imageNamed:@"01share_21"] forState:(UIControlStateNormal)];
+//    [self.btn_share_video setTintColor:[UIColor whiteColor]];
+//    [self.btn_share_video addTarget:self action:@selector(btn_share_videoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [moviePlayerview addSubview:self.btn_share_video];
+        
+    UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    btn_return.frame = CGRectMake(5, 10, 30, 30);
+    [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
+    [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [moviePlayerview addSubview:btn_return];
 
 
-        self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
-        self.text_title.font = [UIFont systemFontOfSize:15];
-        self.text_title.textColor = [UIColor whiteColor];
-        self.text_title.text = model.video_title;
-        [moviePlayerview addSubview:self.text_title];
+    self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
+    self.text_title.font = [UIFont systemFontOfSize:15];
+    self.text_title.textColor = [UIColor whiteColor];
+    self.text_title.text = model.video_title;
+    [moviePlayerview addSubview:self.text_title];
+    
+    
 }
 
 - (void)btn_bgzhifuAction:(UIButton *)sender
@@ -473,6 +486,7 @@
     
     [self showViewController:shipinzhifu sender:nil];
 }
+
 
 
 #pragma mark - 分享和收藏 and 发布
@@ -499,6 +513,22 @@
 }
 //分享
 - (void)btn_shareAction:(UIButton *)sender
+{
+//    （获取当前电池条动画改变的时间）
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:-M_PI];
+    
+    //分享
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56e8cf6867e58ea9710004b8"
+                                      shareText:@"快来下载剃头匠"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
+                                       delegate:self];
+}
+
+
+- (void)btn_share_videoAction:(UIButton *)sender
 {
     //分享
     [UMSocialSnsService presentSnsIconSheetView:self
@@ -651,73 +681,6 @@
         {
             TuWen_Models * model = self.arr_data.firstObject;
             
-//            moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
-//            [self.view addSubview:moviePlayerview];
-            
-            
-//            UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//            btn_return.frame = CGRectMake(5, 10, 30, 30);
-//            [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
-//            [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-//            [moviePlayerview addSubview:btn_return];
-//
-//
-//            self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
-//            self.text_title.font = [UIFont systemFontOfSize:15];
-//            self.text_title.textColor = [UIColor whiteColor];
-////            self.text_title.text = @"2016年度发型设计最新课程";
-//            [moviePlayerview addSubview:self.text_title];
-
-
-            
-            
-            
-            
-            
-            
-            
-//            if([model.video_url length] == 0)
-//            {
-//                NSString * str = [NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_url];
-//                moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200) URL:[NSURL URLWithString:str]];
-//                [self.view addSubview:moviePlayerview];
-//            }
-//            else
-//            {
-//                self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
-//                self.view_video.backgroundColor = [UIColor blackColor];
-//                [self.view addSubview:self.view_video];
-//            }
-//            
-//            UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//            btn_return.frame = CGRectMake(5, 10, 30, 30);
-//            [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
-//            [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-//            [moviePlayerview addSubview:btn_return];
-//            
-//            
-//            self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
-//            self.text_title.font = [UIFont systemFontOfSize:15];
-//            self.text_title.textColor = [UIColor whiteColor];
-////            self.text_title.text = @"2016年度发型设计最新课程";
-//            [moviePlayerview addSubview:self.text_title];
-//            
-//            
-//            self.text_title.text = model.video_title;
-//            self.number.text = [NSString stringWithFormat:@"%@次",model.video_click];
-//            self.text_detail.text = model.video_title;
-//            if([model.is_free isEqualToString:@"0"])
-//            {
-//                self.isfree.textColor = navi_bar_bg_color;
-//                self.isfree.text = @"免费";
-//            }
-//            else
-//            {
-//                self.isfree.textColor = [UIColor orangeColor];
-//                self.isfree.text = @"付费";
-//            }
-            
-            
             self.text_title.text = model.video_title;
             self.number.text = [NSString stringWithFormat:@"%@次",model.video_click];
             self.text_detail.text = model.video_title;
@@ -814,59 +777,6 @@
 
                 }
             }
-                
-//                if([[userdefault objectForKey:@"videozhifu_ok"] length] == 0)
-//                {
-//                    self.isfree.textColor = [UIColor orangeColor];
-//                    self.isfree.text = @"付费";
-//                    
-//                    self.btn_play.hidden = YES;
-//                    
-//                    self.viwe_bgtilet = [[UILabel alloc] initWithFrame:CGRectMake(40, 50, SCREEN_WIDTH - 80, 60)];
-//                    self.viwe_bgtilet.textColor = [UIColor whiteColor];
-//                    self.viwe_bgtilet.font = [UIFont systemFontOfSize:15];
-//                    NSString * str_price = [NSString stringWithFormat:@"本片为付费内容,价格为￥%@ 元,请付费后观看;也可以到个人中心页面申请开通金卡会员享免费观看",model.video_price];
-//                    self.viwe_bgtilet.text = str_price;
-//                    self.viwe_bgtilet.numberOfLines = 0;
-//                    [self.view addSubview:self.viwe_bgtilet];
-//                    
-//                    
-//                    self.btn_bgzhifu = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//                    self.btn_bgzhifu.frame = CGRectMake(SCREEN_WIDTH / 2 - 50, CGRectGetMaxY(self.viwe_bgtilet.frame) + 5, 100, 20);
-//                    self.btn_bgzhifu.backgroundColor = [UIColor orangeColor];
-//                    [self.btn_bgzhifu setTitle:@"立即支付" forState:(UIControlStateNormal)];
-//                    [self.btn_bgzhifu setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-//                    self.btn_bgzhifu.titleLabel.font = [UIFont systemFontOfSize:13];
-//                    
-//                    [self.view addSubview:self.btn_bgzhifu];
-//                    [self.btn_bgzhifu addTarget:self action:@selector(btn_bgzhifuAction:) forControlEvents:(UIControlEventTouchUpInside)];
-//                }
-//                else
-//                {
-//                    self.view_video =[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
-//                    self.view_video.backgroundColor = [UIColor blackColor];
-//                    [self.view addSubview:self.view_video];
-//                    
-//                    UIButton * btn_return = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//                    btn_return.frame = CGRectMake(5, 10, 30, 30);
-//                    [btn_return setBackgroundImage:[UIImage imageNamed:@"01return_03"] forState:(UIControlStateNormal)];
-//                    [btn_return addTarget:self action:@selector(btn_returnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-//                    [self.view addSubview:btn_return];
-//                    
-//                    
-//                    self.text_title = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn_return.frame) , 15, SCREEN_WIDTH - 10 - CGRectGetMaxX(btn_return.frame), 20)];
-//                    self.text_title.font = [UIFont systemFontOfSize:15];
-//                    self.text_title.textColor = [UIColor whiteColor];
-//                    self.text_title.text = @"剃头匠";
-//                    [self.view addSubview:self.text_title];
-//                    self.text_title.text = model.video_title;
-//                    
-//                    self.btn_play = [UIButton buttonWithType:(UIButtonTypeSystem)];
-//                    self.btn_play.frame = CGRectMake(SCREEN_WIDTH / 2 - 15, 100 - 15, 30, 30);
-//                    [self.btn_play setBackgroundImage:[UIImage imageNamed:@"qwertkjkdjfkd"] forState:(UIControlStateNormal)];
-//                    [self.btn_play addTarget:self action:@selector(btn_playAction:) forControlEvents:(UIControlEventTouchUpInside)];
-//                    [self.view addSubview:self.btn_play];
-//                }
             
             
             [self p_collectData];
