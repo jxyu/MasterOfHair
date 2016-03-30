@@ -43,6 +43,7 @@
     //隐藏系统tabbar
     self.tabBar.hidden = YES;
     self.hidesBottomBarWhenPushed = YES;
+    
     NSArray *arrayImages_H = [[NSArray alloc] initWithObjects:@"Index_H@2x.png",@"shangxueyuan_H@2x.png" ,@"shangcheng_H@2x.png",@"shopCar_H@2x.png",@"Mine_H@2x.png", nil];
  	NSArray *arrayImages = [[NSArray alloc] initWithObjects:@"Index@2x.png",@"shangxueyuan@2x.png",@"shangcheng@2x.png",@"shopCar@2x.png",@"Mine@2x.png",  nil];
  
