@@ -17,7 +17,15 @@
 #import "Shuoshuo_Model.h"
 #import "PinglunViewController.h"
 #import "WodeshuoshuoViewController.h"
+
+#import "MoviePlayer.h"
+
 @interface WodeshuoshuoViewController ()  <UITableViewDataSource, UITableViewDelegate>
+
+{
+    UIViewController *recordController;
+    MoviePlayer *moviePlayerview;
+}
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -223,7 +231,7 @@
         [cell addSubview:self.image_iocn];
         
         
-        self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.image_iocn.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(self.image_iocn.frame) - 30 - 100, 25)];
+        self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.image_iocn.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(self.image_iocn.frame) - 30 - 110, 25)];
         self.name.text = @"wolajiwolaji";
         //        self.name.backgroundColor = [UIColor orangeColor];
         self.name.textColor = [UIColor grayColor];
@@ -231,9 +239,10 @@
         [cell addSubview:self.name];
         
         
-        self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 15, 100, 25)];
+        self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 15, 110, 25)];
         self.time.text = @"wolajiwolaji";
         self.time.textColor = [UIColor grayColor];
+        self.time.font = [UIFont systemFontOfSize:15];
         self.time.textAlignment = NSTextAlignmentRight;
         
         [cell addSubview:self.time];
@@ -248,8 +257,29 @@
             
             NSString * str = [model.talk_time substringFromIndex:10];
             NSString * str1 = [str substringToIndex:6];
-#warning 差一个今天
-            self.time.text = str1;
+            
+            NSString* string = model.talk_time;
+            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+            [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate * tiem = [format dateFromString:string];
+            NSDate * x = [tiem dateByAddingTimeInterval:8 * 60 * 60];
+            
+            
+            NSString * str2 = [self compareDate:x];
+            
+            if([str2 isEqualToString:@"今天"] || [str2 isEqualToString:@"昨天"])
+            {
+                self.time.text = [NSString stringWithFormat:@"%@ %@",[self compareDate:x],str1];
+                
+            }
+            else
+            {
+                NSString * str_yy = [str2 substringToIndex:10];
+                
+                NSString * str_mm_dd = [str_yy substringFromIndex:5];
+                
+                self.time.text = [NSString stringWithFormat:@"%@ %@",str_mm_dd,str1];
+            }
         }
         
     }
@@ -580,7 +610,7 @@
 {
     NSInteger section = sender.tag / 1000;
     NSInteger count = sender.tag % 1000;
-    NSLog(@"%ld  %ld",section, count);
+    NSLog(@"%ld  %ld",(long)section, (long)count);
     
     if(self.view_viewbg.hidden == 1)
     {
@@ -607,7 +637,19 @@
             
             [self.view_viewbg addSubview:image];
         }
-
+        else if([modle_list.file_type isEqualToString:@"2"])
+        {//视频
+            
+            self.view_viewbg.hidden = NO;
+            //视频URL
+            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]];
+            //            NSURL * url=[NSURL URLWithString:@"http://192.168.1.245/titoujiang/uploads/video/16-03-24/video_145880497031844.mp4"];
+            
+            moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3) URL:url];
+            moviePlayerview.tag = 10000000001;
+            [self.view_viewbg addSubview:moviePlayerview];
+            
+        }
     }
 }
 
@@ -620,6 +662,10 @@
         
         UIImageView * image = [self.view viewWithTag:1000000];
         [image removeFromSuperview];
+        
+        [moviePlayerview stopPlayer];
+        MoviePlayer * movie = [self.view viewWithTag:10000000001];
+        [movie removeFromSuperview];
     }
 }
 
@@ -815,6 +861,39 @@
 }
 
 
+#pragma mark - 判断今天
+-(NSString *)compareDate:(NSDate *)date{
+    
+    NSDate * today = [NSDate date];
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
+    NSDate * refDate = date;
+    
+    // 10 first characters of description is the calendar date:
+    NSString * todayString = [[today description] substringToIndex:10];
+    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+    NSString * refDateString = [[refDate description] substringToIndex:10];
+    
+    if ([refDateString isEqualToString:todayString])
+    {
+        return @"今天";
+    } else if ([refDateString isEqualToString:yesterdayString])
+    {
+        return @"昨天";
+    }
+    else
+    {
+        return [self formatDate:date];
+    }
+}
+
+-(NSString *)formatDate:(NSDate *)date{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //[formatter setDateFormat:@"MM-dd    HH:mm"];
+    NSString* str = [formatter stringFromDate:date];
+    return str;
+    
+}
 
 
 

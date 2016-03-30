@@ -8,8 +8,13 @@
 
 #import "PinglunViewController.h"
 #import "Shuoshuo_Model.h"
-@interface PinglunViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+#import "MoviePlayer.h"
 
+@interface PinglunViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    UIViewController *recordController;
+    MoviePlayer *moviePlayerview;
+}
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -150,6 +155,7 @@
     UILabel * date = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_name.frame) , 15, (SCREEN_WIDTH - CGRectGetMaxX(image1.frame)) / 2 - 10, 25)];
     date.text = @"11:11";
     date.textColor = [UIColor grayColor];
+    date.font = [UIFont systemFontOfSize:13];
     date.textAlignment = NSTextAlignmentRight;
     
     [cell addSubview:date];
@@ -162,10 +168,35 @@
         //赋值
         [image1 sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,model.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
         label_name.text = model.member_username;
+        
+        
+        //时间
         NSString * str = [model.reply_time substringFromIndex:10];
         NSString * str1 = [str substringToIndex:6];
-#warning 差一个今天
-        date.text = str1;
+        
+        NSString* string = model.reply_time;
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate * tiem = [format dateFromString:string];
+        NSDate * x = [tiem dateByAddingTimeInterval:8 * 60 * 60];
+        
+        
+        NSString * str2 = [self compareDate:x];
+        
+        if([str2 isEqualToString:@"今天"] || [str2 isEqualToString:@"昨天"])
+        {
+            date.text = [NSString stringWithFormat:@"%@ %@",[self compareDate:x],str1];
+            
+        }
+        else
+        {
+            NSString * str_yy = [str2 substringToIndex:10];
+            
+            NSString * str_mm_dd = [str_yy substringFromIndex:5];
+            
+            date.text = [NSString stringWithFormat:@"%@ %@",str_mm_dd,str1];
+        }
+        
         
         CGFloat x_length = [model.reply_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - CGRectGetMaxX(image1.frame) - 10, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
         //            NSLog(@"%f",x_length);
@@ -245,6 +276,19 @@
             
             [self.view_viewbg addSubview:image];
         }
+        else if([modle_list.file_type isEqualToString:@"2"])
+        {//视频
+            
+            self.view_viewbg.hidden = NO;
+            //视频URL
+            NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]];
+            //            NSURL * url=[NSURL URLWithString:@"http://192.168.1.245/titoujiang/uploads/video/16-03-24/video_145880497031844.mp4"];
+            
+            moviePlayerview = [[MoviePlayer alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3) URL:url];
+            moviePlayerview.tag = 10000000001;
+            [self.view_viewbg addSubview:moviePlayerview];
+            
+        }
     }
 }
 
@@ -254,10 +298,13 @@
     if(self.view_viewbg.hidden == 0)
     {
         self.view_viewbg.hidden = YES;
-        self.bottom_View.hidden = NO;
-
+        
         UIImageView * image = [self.view viewWithTag:1000000];
         [image removeFromSuperview];
+        
+        [moviePlayerview stopPlayer];
+        MoviePlayer * movie = [self.view viewWithTag:10000000001];
+        [movie removeFromSuperview];
     }
 }
 
@@ -332,7 +379,7 @@
             [self.view_bg addSubview:self.image_touxiang];
             
             
-            self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.image_touxiang.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(self.image_touxiang.frame) - 30 - 100, 25)];
+            self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.image_touxiang.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(self.image_touxiang.frame) - 30 - 110, 25)];
             self.name.text = @"wolajiwolaji";
             //        self.name.backgroundColor = [UIColor orangeColor];
             self.name.textColor = [UIColor grayColor];
@@ -340,8 +387,9 @@
             [self.view_bg addSubview:self.name];
             
             
-            self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 15, 100, 25)];
+            self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 15, 110, 25)];
             self.time.text = @"wolajiwolaji";
+            self.time.font = [UIFont systemFontOfSize:15];
             self.time.textColor = [UIColor grayColor];
             self.time.textAlignment = NSTextAlignmentRight;
             
@@ -351,10 +399,33 @@
             [self.image_touxiang sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/member/%@",Url_pic,self.model_all.member_headpic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             self.name.text = self.model_all.member_username;
             
-            NSString * str =  [self.model_all.talk_time substringFromIndex:10];
+            //时间
+            NSString * str = [self.model_all.talk_time substringFromIndex:10];
             NSString * str1 = [str substringToIndex:6];
-#warning 差一个今天
-            self.time.text = str1;
+            
+            NSString* string = self.model_all.talk_time;
+            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+            [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate * tiem = [format dateFromString:string];
+            NSDate * x = [tiem dateByAddingTimeInterval:8 * 60 * 60];
+            
+            
+            NSString * str2 = [self compareDate:x];
+            
+            if([str2 isEqualToString:@"今天"] || [str2 isEqualToString:@"昨天"])
+            {
+                self.time.text = [NSString stringWithFormat:@"%@ %@",[self compareDate:x],str1];
+                
+            }
+            else
+            {
+                NSString * str_yy = [str2 substringToIndex:10];
+                
+                NSString * str_mm_dd = [str_yy substringFromIndex:5];
+                
+                self.time.text = [NSString stringWithFormat:@"%@ %@",str_mm_dd,str1];
+            }
+
             
             
             CGFloat x_length = [self.model_all.talk_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 90, 10000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil].size.height;
@@ -700,6 +771,40 @@
     return _arr_replylist;
 }
 
+
+#pragma mark - 判断今天
+-(NSString *)compareDate:(NSDate *)date{
+    
+    NSDate * today = [NSDate date];
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
+    NSDate * refDate = date;
+    
+    // 10 first characters of description is the calendar date:
+    NSString * todayString = [[today description] substringToIndex:10];
+    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+    NSString * refDateString = [[refDate description] substringToIndex:10];
+    
+    if ([refDateString isEqualToString:todayString])
+    {
+        return @"今天";
+    } else if ([refDateString isEqualToString:yesterdayString])
+    {
+        return @"昨天";
+    }
+    else
+    {
+        return [self formatDate:date];
+    }
+}
+
+-(NSString *)formatDate:(NSDate *)date{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //[formatter setDateFormat:@"MM-dd    HH:mm"];
+    NSString* str = [formatter stringFromDate:date];
+    return str;
+    
+}
 
 
 @end

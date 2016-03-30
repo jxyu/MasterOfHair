@@ -33,7 +33,7 @@
 
 @property (nonatomic, copy) NSString * course_name;
 
-
+@property (nonatomic, copy) NSString * succeed;
 @end
 
 @implementation kechengmingchengViewController
@@ -41,6 +41,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
+    [self p_panduan];
     
     [self p_data];
     
@@ -101,12 +105,15 @@
     self.btn_baoming = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.btn_baoming.frame = CGRectMake(15, 10, SCREEN_WIDTH - 30, 50);
     self.btn_baoming.backgroundColor = navi_bar_bg_color;
-    [self.btn_baoming setTitle:@"立即报名" forState:(UIControlStateNormal)];
+//    [self.btn_baoming setTitle:@"立即报名" forState:(UIControlStateNormal)];
     [self.btn_baoming setTintColor:[UIColor whiteColor]];
     self.btn_baoming.titleLabel.font = [UIFont systemFontOfSize:20];
     [view_bg addSubview:self.btn_baoming];
     
     [self.btn_baoming addTarget:self action:@selector(btn_baomingAction:) forControlEvents:(UIControlEventTouchUpInside)];
+
+    
+    
 }
 
 - (void)btn_baomingAction:(UIButton *)sender
@@ -122,11 +129,28 @@
     }
     else
     {
-        ZhifuViewController * zhifuViewController = [[ZhifuViewController alloc] init];
-        zhifuViewController.course_id = self.course_id;
-        zhifuViewController.name_course = self.course_name;
-        zhifuViewController.money = self.money;
-        [self showViewController:zhifuViewController sender:nil];
+        if([sender.titleLabel.text isEqualToString:@"立即报名"])
+        {
+            ZhifuViewController * zhifuViewController = [[ZhifuViewController alloc] init];
+            zhifuViewController.course_id = self.course_id;
+            zhifuViewController.name_course = self.course_name;
+            zhifuViewController.money = self.money;
+            [self showViewController:zhifuViewController sender:nil];
+        }
+        else
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已报名" preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alert addAction:action];
+        }
     }
 }
 
@@ -166,7 +190,9 @@
 //数据
 - (void)Course:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
 
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -199,9 +225,32 @@
 }
 
 
+#pragma mark - 判断
+- (void)p_panduan
+{
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"ifsignup:"];
+    
+    [dataprovider ifsignupWithCourse_id:self.course_id member_id:[userdefault objectForKey:@"member_id"]];
+}
 
-
-
+//数据
+- (void)ifsignup:(id )dict
+{
+//    NSLog(@"%@",dict);
+    if([dict[@"status"][@"succeed"] integerValue] == 0)
+    {
+        [self.btn_baoming setTitle:@"立即报名" forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [self.btn_baoming setTitle:@"已报名" forState:(UIControlStateNormal)];
+//        self.btn_baoming.userInteractionEnabled = NO;
+    }
+}
 
 
 

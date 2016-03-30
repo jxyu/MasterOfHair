@@ -155,14 +155,27 @@
                 break;
         }
         
+        
+        
+        NSString* string = model.change_time;
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSDate * tiem = [format dateFromString:string];
+        NSDate * x = [tiem dateByAddingTimeInterval:8 * 60 * 60];
+//        NSLog(@"%@",[self compareDate:x]);
+        
+        
+
+        
+        
         NSString * str = [model.change_time substringFromIndex:11];
         cell.time.text = str;
         
-        NSString * str1 = [model.change_time substringToIndex:10];
+//        NSString * str1 = [model.change_time substringToIndex:10];
 //        NSLog(@"%@",str1);
         
-        NSString * str2 = [str1 substringFromIndex:5];
-        cell.month.text = str2;
+//        NSString * str2 = [str1 substringFromIndex:5];
+        cell.month.text = [self compareDate:x];
     }
 
     return cell;
@@ -319,7 +332,7 @@
 // 数据
 - (void)GetMembers:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -362,5 +375,38 @@
     return _arr_data;
 }
 
+
+-(NSString *)compareDate:(NSDate *)date{
+    
+    NSDate * today = [NSDate date];
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400];
+    NSDate * refDate = date;
+    
+    // 10 first characters of description is the calendar date:
+    NSString * todayString = [[today description] substringToIndex:10];
+    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+    NSString * refDateString = [[refDate description] substringToIndex:10];
+    
+    if ([refDateString isEqualToString:todayString])
+    {
+        return @"今天";
+    } else if ([refDateString isEqualToString:yesterdayString])
+    {
+        return @"昨天";
+    }
+    else
+    {
+        return [self formatDate:date];
+    }
+}
+
+-(NSString *)formatDate:(NSDate *)date{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //[formatter setDateFormat:@"MM-dd    HH:mm"];
+    NSString* str = [formatter stringFromDate:date];
+    return str;
+    
+}
 
 @end

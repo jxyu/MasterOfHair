@@ -1379,8 +1379,32 @@
     }
 }
 
+#pragma mark -  首页签到接口
+- (void)CreateAutoLoginUrlWithMember_id:(NSString *)member_username
+{
+    if(member_username)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@Duiba/CreateAutoLoginUrl",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_username\":\"%@\"}",member_username]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
+#pragma mark -  判断课程是否报名
+- (void)ifsignupWithCourse_id:(NSString *)course_id member_id:(NSString *)member_id
+{
+    if(member_id && course_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@signup/ifsignup",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"course_id\":\"%@\"}",member_id,course_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 

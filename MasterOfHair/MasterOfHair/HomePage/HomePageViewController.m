@@ -148,11 +148,21 @@
 {
 //    NSLog(@"签到");
     
-    CreditWebViewController *web=[[CreditWebViewController alloc]initWithUrl:@"http://www.duiba.com.cn/test/demoRedirectSAdfjosfdjdsa"];//实际中需要改为开发者服务器的地址，开发者服务器再重定向到一个带签名的自动登录地址
-    [self.navigationController pushViewController:web animated:YES];
-//    CreditViewController * creditViewController = [[CreditViewController alloc] init];
-//    
-//    [self showViewController:creditViewController sender:nil];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if([[userdefault objectForKey:@"member_id"] length] == 0)
+    {
+        LoginViewController * loginViewController = [[LoginViewController alloc] init];
+        
+        [self showViewController:loginViewController sender:nil];
+    }
+    else
+    {//都有
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"CreateAutoLoginUrl:"];
+        
+        [dataprovider CreateAutoLoginUrlWithMember_id:[userdefault objectForKey:@"member_username"]];
+    }
 }
 
 //搜索框点击事件
@@ -1243,6 +1253,33 @@
         [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
         
         _lblLeft.text = @"定位";
+    }
+}
+
+
+#pragma mark - 签到
+- (void)CreateAutoLoginUrl:(id )dict
+{
+//    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            CreditWebViewController *web=[[CreditWebViewController alloc]initWithUrl:[NSString stringWithFormat:@"%@",dict[@"data"][@"loginUrl"]]];//实际中需要改为开发者服务器的地址，开发者服务器再重定向到一个带签名的自动登录地址
+            [self.navigationController pushViewController:web animated:YES];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+
+        }
+    }
+    else
+    {
+        
     }
 }
 

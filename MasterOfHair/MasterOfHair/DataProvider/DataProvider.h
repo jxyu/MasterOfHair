@@ -360,11 +360,11 @@
 #pragma mark -  视频支付接口
 - (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method;
 
+#pragma mark -  首页签到接口
+- (void)CreateAutoLoginUrlWithMember_id:(NSString *)member_username;
 
-
-
-
-
+#pragma mark -  判断课程是否报名
+- (void)ifsignupWithCourse_id:(NSString *)course_id member_id:(NSString *)member_id;
 
 
 
