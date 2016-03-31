@@ -543,7 +543,7 @@
                 break;
             case 8:
             {
-                cell.name.text = @"基金会";
+                cell.name.text = @"开通会员";
                 cell.imageView.image = [UIImage imageNamed:@"01_68"];
 
             }

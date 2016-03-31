@@ -826,7 +826,7 @@
                 
                 [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:[NSString stringWithFormat:@"%@",dict[@"data"][@"order_id"]] pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
                 
-//                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
             }
             else
             {
@@ -905,7 +905,7 @@
 {
 //    NSLog(@"%@",dict);
     
-//    [SVProgressHUD dismiss];
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

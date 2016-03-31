@@ -35,7 +35,7 @@ static NSString *originUserAgent;
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"个人中心"];
+    _lblTitle.text = [NSString stringWithFormat:@"抽奖"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];

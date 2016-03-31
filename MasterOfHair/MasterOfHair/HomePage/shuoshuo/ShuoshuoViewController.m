@@ -935,8 +935,6 @@
 
 - (void)btn_3Action:(UIButton *)sender
 {//只拍照
-//    ZhaoxiangViewController * zhaoxiangViewController = [[ZhaoxiangViewController alloc] init];
-//    [self showViewController:zhaoxiangViewController sender:nil];
     
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
@@ -948,8 +946,12 @@
     }
     else
     {//都有
-        ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
-        [self showViewController:zhaopiankuViewController sender:nil];
+//        ZhaopiankuViewController * zhaopiankuViewController = [[ZhaopiankuViewController alloc] init];
+//        [self showViewController:zhaopiankuViewController sender:nil];
+        
+        ZhaoxiangViewController * zhaoxiangViewController = [[ZhaoxiangViewController alloc] init];
+        [self showViewController:zhaoxiangViewController sender:nil];
+
     }
 }
 

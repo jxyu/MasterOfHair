@@ -165,7 +165,7 @@
     //纹绣师
     self.top_btnPeople = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.top_btnPeople.frame = CGRectMake(length_x, 0, length_x, 50);
-    [self.top_btnPeople setTitle:@"纹绣师" forState:(UIControlStateNormal)];
+    [self.top_btnPeople setTitle:@"高级技师" forState:(UIControlStateNormal)];
     [self.top_btnPeople setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.top_btnPeople.titleLabel.font = [UIFont systemFontOfSize:19];
     [self.top_white addSubview:self.top_btnPeople];

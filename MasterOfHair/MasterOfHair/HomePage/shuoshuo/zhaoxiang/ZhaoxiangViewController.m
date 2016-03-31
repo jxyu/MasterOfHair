@@ -8,9 +8,11 @@
 //
 
 #import "ZhaoxiangViewController.h"
+#import "VPImageCropperViewController.h"
 
+#define ORIGINAL_MAX_WIDTH 640.0f
 
-@interface ZhaoxiangViewController () <UITextViewDelegate, UIScrollViewDelegate>
+@interface ZhaoxiangViewController () <UITextViewDelegate, UIScrollViewDelegate ,UIImagePickerControllerDelegate, UINavigationControllerDelegate ,VPImageCropperDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 
@@ -34,13 +36,30 @@
 @property (nonatomic, strong) UIButton * btn_5;
 @property (nonatomic, strong) UIButton * btn_6;
 
+//存放
+@property (nonatomic, strong) UIImageView * portraitImageView;
 
+@property (nonatomic, strong) NSData * data1;
+@property (nonatomic, strong) NSData * data2;
+@property (nonatomic, strong) NSData * data3;
+@property (nonatomic, strong) NSData * data4;
+@property (nonatomic, strong) NSData * data5;
+@property (nonatomic, strong) NSData * data6;
+
+@property (nonatomic, assign) NSInteger index;
 @end
 
 @implementation ZhaoxiangViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.data1 = nil;
+    self.data2 = nil;
+    self.data3 = nil;
+    self.data4 = nil;
+    self.data5 = nil;
+    self.data6 = nil;
     
     [self p_navi];
     
@@ -104,10 +123,82 @@
         }
         [self.text_View resignFirstResponder];
         
+        NSMutableArray * arr_data = [NSMutableArray array];
         
-        NSLog(@"发布成功");
+        if(self.data1 != nil)
+        {
+            [arr_data addObject:self.data1];
+        }
+        
+        if(self.data2 != nil)
+        {
+            [arr_data addObject:self.data2];
+        }
+        
+        if(self.data3 != nil)
+        {
+            [arr_data addObject:self.data3];
+        }
+        
+        if(self.data4 != nil)
+        {
+            [arr_data addObject:self.data4];
+        }
+        
+        if(self.data5 != nil)
+        {
+            [arr_data addObject:self.data5];
+        }
+        
+        if(self.data6 != nil)
+        {
+            [arr_data addObject:self.data6];
+        }
+        
+//        NSLog(@"%ld",arr_data.count);
+        
+//        NSLog(@"发布成功");
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"1" arr:arr_data];
+        
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     }
 }
+
+#pragma mark - 说说
+- (void)create:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
 
 #pragma mark - 布局
 - (void)p_setupView
@@ -228,17 +319,16 @@
 #pragma mark - 图片
 -(void)tapGesture1:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_1.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
-//        NSLog(@"调用相机");
-        self.image_1.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-        self.image_2.hidden = NO;
         
-        self.btn_1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_1.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_1 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_1 addSubview:self.btn_1];
-        [self.btn_1 addTarget:self action:@selector(btn_1Action:) forControlEvents:(UIControlEventTouchUpInside)];
+//        NSLog(@"调用相机");
+//        self.image_1.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+
+        self.index = 1;
+        [self p_pick];
     }
     else
     {
@@ -248,17 +338,15 @@
 
 -(void)tapGesture2:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_2.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
 //        NSLog(@"调用相机");
-        self.image_2.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-        self.image_3.hidden = NO;
+//        self.image_2.image = [UIImage imageNamed:@"placeholder_short.jpg"];
         
-        self.btn_2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_2.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_2 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_2 addSubview:self.btn_2];
-        [self.btn_2 addTarget:self action:@selector(btn_2Action:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.index = 2;
+        [self p_pick];
     }
     else
     {
@@ -268,17 +356,15 @@
 
 -(void)tapGesture3:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_3.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
 //        NSLog(@"调用相机");
-        self.image_3.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-        self.image_4.hidden = NO;
+//        self.image_3.image = [UIImage imageNamed:@"placeholder_short.jpg"];
         
-        self.btn_3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_3.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_3 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_3 addSubview:self.btn_3];
-        [self.btn_3 addTarget:self action:@selector(btn_3Action:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.index = 3;
+        [self p_pick];
     }
     else
     {
@@ -288,17 +374,16 @@
 
 -(void)tapGesture4:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_4.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
-//        NSLog(@"调用相机");
-        self.image_4.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-        self.image_5.hidden = NO;
         
-        self.btn_4 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_4.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_4 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_4 addSubview:self.btn_4];
-        [self.btn_4 addTarget:self action:@selector(btn_4Action:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.index = 4;
+        [self p_pick];
+//        NSLog(@"调用相机");
+//        self.image_4.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+
     }
     else
     {
@@ -308,17 +393,16 @@
 
 -(void)tapGesture5:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_5.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
-//        NSLog(@"调用相机");
-        self.image_5.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-        self.image_6.hidden = NO;
         
-        self.btn_5 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_5.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_5 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_5 addSubview:self.btn_5];
-        [self.btn_5 addTarget:self action:@selector(btn_5Action:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.index = 5;
+        [self p_pick];
+//        NSLog(@"调用相机");
+//        self.image_5.image = [UIImage imageNamed:@"placeholder_short.jpg"];
+
     }
     else
     {
@@ -328,16 +412,14 @@
 
 -(void)tapGesture6:(id)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
-//        NSLog(@"调用相机");
-        self.image_6.image = [UIImage imageNamed:@"select_down@2x"];
+        self.index = 6;
+        [self p_pick];
         
-        self.btn_6 = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        self.btn_6.frame = CGRectMake(self.length - 20, 0, 20, 20);
-        [self.btn_6 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
-        [self.image_6 addSubview:self.btn_6];
-        [self.btn_6 addTarget:self action:@selector(btn_6Action:) forControlEvents:(UIControlEventTouchUpInside)];
+//        NSLog(@"调用相机");
     }
 }
 
@@ -377,11 +459,15 @@
 #pragma mark - 删除
 - (void)btn_1Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_2.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
         self.image_1.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_1.hidden = YES;
         self.image_2.hidden = YES;
+        
+        self.data1 = nil;
     }
     else
     {
@@ -398,6 +484,10 @@
                         self.image_2.image = [UIImage imageNamed:@"shuoshuo111111111"];
                         
                         self.image_3.hidden = YES;
+                        
+                        self.data1 = self.data2;
+                        self.data2 = nil;
+                        
                     }
                     else
                     {
@@ -407,6 +497,10 @@
                         self.image_3.image = [UIImage imageNamed:@"shuoshuo111111111"];
                         
                         self.image_4.hidden = YES;
+                        
+                        self.data1 = self.data2;
+                        self.data2 = self.data3;
+                        self.data3 = nil;
                     }
                     
                 }
@@ -419,6 +513,11 @@
                     self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
                     
                     self.image_5.hidden = YES;
+                    
+                    self.data1 = self.data2;
+                    self.data2 = self.data3;
+                    self.data3 = self.data4;
+                    self.data4 = nil;
                 }
             }
             else
@@ -431,6 +530,12 @@
                 self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
                 
                 self.image_6.hidden = YES;
+                
+                self.data1 = self.data2;
+                self.data2 = self.data3;
+                self.data3 = self.data4;
+                self.data4 = self.data5;
+                self.data5 = nil;
             }
         }
         else
@@ -443,17 +548,28 @@
             
             self.btn_6.hidden = YES;
             self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
+            
+            self.data1 = self.data2;
+            self.data2 = self.data3;
+            self.data3 = self.data4;
+            self.data4 = self.data5;
+            self.data5 = self.data6;
+            self.data6 = nil;
         }
     }
 }
 
 - (void)btn_2Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_3.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
         self.image_2.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_2.hidden = YES;
         self.image_3.hidden = YES;
+        
+        self.data2 = nil;
     }
     else
     {
@@ -469,6 +585,8 @@
                     
                     self.image_4.hidden = YES;
                     
+                    self.data2 = self.data3;
+                    self.data3 = nil;
                 }
                 else
                 {
@@ -478,6 +596,10 @@
                     self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
                     
                     self.image_5.hidden = YES;
+                    
+                    self.data2 = self.data3;
+                    self.data3 = self.data4;
+                    self.data4 = nil;
                 }
                 
             }
@@ -490,6 +612,11 @@
                 self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
                 
                 self.image_6.hidden = YES;
+                
+                self.data2 = self.data3;
+                self.data3 = self.data4;
+                self.data4 = self.data5;
+                self.data5 = nil;
             }
         }
         else
@@ -501,17 +628,27 @@
             
             self.btn_6.hidden = YES;
             self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
+            
+            self.data2 = self.data3;
+            self.data3 = self.data4;
+            self.data4 = self.data5;
+            self.data5 = self.data6;
+            self.data6 = nil;
         }
     }
 }
 
 - (void)btn_3Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_4.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
         self.image_3.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_3.hidden = YES;
         self.image_4.hidden = YES;
+        
+        self.data3 = nil;
     }
     else
     {
@@ -524,6 +661,9 @@
                 self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
                 
                 self.image_5.hidden = YES;
+                
+                self.data3 = self.data4;
+                self.data4 = nil;
             }
             else
             {
@@ -533,6 +673,10 @@
                 self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
                 
                 self.image_6.hidden = YES;
+                
+                self.data3 = self.data4;
+                self.data4 =self.data5;
+                self.data5 = nil;
             }
         }
         else
@@ -540,6 +684,11 @@
             self.image_3.image = self.image_4.image;
             self.image_4.image = self.image_5.image;
             self.image_5.image = self.image_6.image;
+            
+            self.data3 = self.data4;
+            self.data4 = self.data5;
+            self.data5 = self.data6;
+            self.data6 = nil;
             
             self.btn_6.hidden = YES;
             self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
@@ -549,11 +698,15 @@
 
 - (void)btn_4Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_5.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
         self.image_4.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_4.hidden = YES;
         self.image_5.hidden = YES;
+        
+        self.data4 = nil;
     }
     else
     {
@@ -564,11 +717,19 @@
             self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
             
             self.image_6.hidden = YES;
+            
+            self.data4 = self.data5;
+            self.data5 = nil;
+            
         }
         else
         {
             self.image_4.image = self.image_5.image;
             self.image_5.image = self.image_6.image;
+            
+            self.data4 = self.data5;
+            self.data5 = self.data6;
+            self.data6 = nil;
             
             self.btn_6.hidden = YES;
             self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
@@ -578,11 +739,15 @@
 
 - (void)btn_5Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     if([self.image_6.image isEqual:[UIImage imageNamed:@"shuoshuo111111111"]])
     {
         self.image_5.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_5.hidden = YES;
         self.image_6.hidden = YES;
+        
+        self.data5 = nil;
     }
     else
     {
@@ -590,14 +755,377 @@
         
         self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
         self.btn_6.hidden = YES;
+        
+        self.data5 = self.data6;
+        self.data6 = nil;
     }
 }
 
 - (void)btn_6Action:(UIButton *)sender
 {
+    [self.text_View resignFirstResponder];
+
     self.image_6.image = [UIImage imageNamed:@"shuoshuo111111111"];
     self.btn_6.hidden = YES;
+    self.data6 = nil;
 }
+
+- (void)p_pick
+{
+    [self.text_View resignFirstResponder];
+    
+    
+//        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+//        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+//        [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+//        controller.mediaTypes = mediaTypes;
+//        controller.delegate = self;
+//        [self presentViewController:controller
+//                           animated:YES
+//                         completion:^(void){
+//                             NSLog(@"Picker View Controller is presented");
+//                         }];
+    
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([self isFrontCameraAvailable]) {
+        controller.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }
+    NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+    [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+    controller.mediaTypes = mediaTypes;
+    controller.delegate = self;
+    [self presentViewController:controller
+                       animated:YES
+                     completion:^(void){
+                         NSLog(@"Picker View Controller is presented");
+                     }];
+    
+    
+//    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"取消"
+//                                               destructiveButtonTitle:nil
+//                                                    otherButtonTitles:@"拍照", nil];
+//    [choiceSheet showInView:self.view];
+}
+
+
+#pragma mark VPImageCropperDelegate
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
+    self.portraitImageView.image = editedImage;
+    
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+        // TO DO
+        [self saveImage:editedImage withName:@"avatar.jpg"];
+        
+        NSData *imageData = UIImagePNGRepresentation(editedImage);
+        
+        
+        switch (self.index)
+        {
+            case 1:
+            {
+                self.image_1.image = editedImage;
+                
+                self.data1 = imageData;
+                
+                
+                self.image_2.hidden = NO;
+                
+                self.btn_1 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_1.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_1 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_1 addSubview:self.btn_1];
+                [self.btn_1 addTarget:self action:@selector(btn_1Action:) forControlEvents:(UIControlEventTouchUpInside)];
+            }
+                break;
+            case 2:
+            {
+                self.image_2.image = editedImage;
+                
+                self.data2 = imageData;
+                
+                self.image_3.hidden = NO;
+                
+                self.btn_2 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_2.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_2 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_2 addSubview:self.btn_2];
+                [self.btn_2 addTarget:self action:@selector(btn_2Action:) forControlEvents:(UIControlEventTouchUpInside)];
+            }
+                break;
+            case 3:
+            {
+                self.image_3.image = editedImage;
+                
+                self.data3 = imageData;
+                
+                self.image_4.hidden = NO;
+                
+                self.btn_3 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_3.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_3 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_3 addSubview:self.btn_3];
+                [self.btn_3 addTarget:self action:@selector(btn_3Action:) forControlEvents:(UIControlEventTouchUpInside)];
+                
+            }
+                break;
+            case 4:
+            {
+                self.image_4.image = editedImage;
+                
+                self.data4 = imageData;
+                
+                self.image_5.hidden = NO;
+                
+                self.btn_4 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_4.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_4 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_4 addSubview:self.btn_4];
+                [self.btn_4 addTarget:self action:@selector(btn_4Action:) forControlEvents:(UIControlEventTouchUpInside)];
+            }
+                break;
+            case 5:
+            {
+                self.image_5.image = editedImage;
+                
+                self.data5 = imageData;
+                
+                self.image_6.hidden = NO;
+                
+                self.btn_5 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_5.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_5 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_5 addSubview:self.btn_5];
+                [self.btn_5 addTarget:self action:@selector(btn_5Action:) forControlEvents:(UIControlEventTouchUpInside)];
+            }
+                break;
+            case 6:
+            {
+                self.image_6.image = editedImage;
+                
+                self.data6 = imageData;
+                
+                self.image_6.image = [UIImage imageNamed:@"select_down@2x"];
+                
+                self.btn_6 = [UIButton buttonWithType:(UIButtonTypeSystem)];
+                self.btn_6.frame = CGRectMake(self.length - 20, 0, 20, 20);
+                [self.btn_6 setBackgroundImage:[UIImage imageNamed:@"30px"] forState:(UIControlStateNormal)];
+                [self.image_6 addSubview:self.btn_6];
+                [self.btn_6 addTarget:self action:@selector(btn_6Action:) forControlEvents:(UIControlEventTouchUpInside)];
+            }
+                break;
+            default:
+                break;
+        }
+        
+        
+        //        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        
+#warning 拿数据imageData
+        //        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        //
+        //        DataProvider * dataprovider=[[DataProvider alloc] init];
+        //        [dataprovider setDelegateObject:self setBackFunctionName:@"UploadHeadPic:"];
+        //
+        //        [dataprovider UploadHeadPicWithMember_id:[userdefault objectForKey:@"member_id"] member_headpic:imageData];
+        
+    }];
+}
+
+#pragma mark - 保存图片至沙盒
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController {
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    if (buttonIndex == 0) {
+        // 拍照
+        if ([self isCameraAvailable] && [self doesCameraSupportTakingPhotos]) {
+            UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+            controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+            if ([self isFrontCameraAvailable]) {
+                controller.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            }
+            NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+            [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+            controller.mediaTypes = mediaTypes;
+            controller.delegate = self;
+            [self presentViewController:controller
+                               animated:YES
+                             completion:^(void){
+                                 NSLog(@"Picker View Controller is presented");
+                             }];
+        }
+        
+//    } else if (buttonIndex == 1) {
+//        // 从相册中选取
+//        if ([self isPhotoLibraryAvailable]) {
+//            UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+//            controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//            NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+//            [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+//            controller.mediaTypes = mediaTypes;
+//            controller.delegate = self;
+//            [self presentViewController:controller
+//                               animated:YES
+//                             completion:^(void){
+//                                 NSLog(@"Picker View Controller is presented");
+//                             }];
+//        }
+//    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:^() {
+        UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        portraitImg = [self imageByScalingToMaxSize:portraitImg];
+        // 裁剪
+        VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.view.frame.size.width, self.view.frame.size.width) limitScaleRatio:3.0];
+        imgEditorVC.delegate = self;
+        [self presentViewController:imgEditorVC animated:YES completion:^{
+            // TO DO
+        }];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^(){
+    }];
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+}
+
+#pragma mark camera utility
+- (BOOL) isCameraAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) isRearCameraAvailable{
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+}
+
+- (BOOL) isFrontCameraAvailable {
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
+}
+
+- (BOOL) doesCameraSupportTakingPhotos {
+    return [self cameraSupportsMedia:(__bridge NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) isPhotoLibraryAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:
+            UIImagePickerControllerSourceTypePhotoLibrary];
+}
+- (BOOL) canUserPickVideosFromPhotoLibrary{
+    return [self
+            cameraSupportsMedia:(__bridge NSString *)kUTTypeMovie sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+- (BOOL) canUserPickPhotosFromPhotoLibrary{
+    return [self
+            cameraSupportsMedia:(__bridge NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (BOOL) cameraSupportsMedia:(NSString *)paramMediaType sourceType:(UIImagePickerControllerSourceType)paramSourceType{
+    __block BOOL result = NO;
+    if ([paramMediaType length] == 0) {
+        return NO;
+    }
+    NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:paramSourceType];
+    [availableMediaTypes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *mediaType = (NSString *)obj;
+        if ([mediaType isEqualToString:paramMediaType]){
+            result = YES;
+            *stop= YES;
+        }
+    }];
+    return result;
+}
+#pragma mark image scale utility
+- (UIImage *)imageByScalingToMaxSize:(UIImage *)sourceImage {
+    if (sourceImage.size.width < ORIGINAL_MAX_WIDTH) return sourceImage;
+    CGFloat btWidth = 0.0f;
+    CGFloat btHeight = 0.0f;
+    if (sourceImage.size.width > sourceImage.size.height) {
+        btHeight = ORIGINAL_MAX_WIDTH;
+        btWidth = sourceImage.size.width * (ORIGINAL_MAX_WIDTH / sourceImage.size.height);
+    } else {
+        btWidth = ORIGINAL_MAX_WIDTH;
+        btHeight = sourceImage.size.height * (ORIGINAL_MAX_WIDTH / sourceImage.size.width);
+    }
+    CGSize targetSize = CGSizeMake(btWidth, btHeight);
+    return [self imageByScalingAndCroppingForSourceImage:sourceImage targetSize:targetSize];
+}
+- (UIImage *)imageByScalingAndCroppingForSourceImage:(UIImage *)sourceImage targetSize:(CGSize)targetSize {
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor; // scale to fit height
+        else
+            scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+            }
+    }
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil) NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 
 

@@ -185,7 +185,7 @@
     [view_white addSubview:self.head_diamond];
     
     self.head_vip = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 3, CGRectGetMaxY(label_1.frame) + 8, 100, 28);
+    self.head_vip.frame = CGRectMake(CGRectGetMaxX(self.head_diamond.frame) + 3, CGRectGetMaxY(label_1.frame) + 8, 100, 24);
     self.head_vip.backgroundColor = [UIColor whiteColor];
     self.head_vip.layer.cornerRadius = 5;
     self.head_vip.layer.borderWidth = 1;
@@ -210,25 +210,29 @@
     CGFloat length_x = (SCREEN_WIDTH - CGRectGetMinX(label_1.frame) - 45) / 2;
     
     self.head_edit = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_edit.frame = CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(self.head_vip.frame) + 8, length_x, 27 * (SCREEN_WIDTH / 320));
+    self.head_edit.frame = CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(self.head_vip.frame) + 13, length_x + 0, 24 * (SCREEN_WIDTH / 320));
     self.head_edit.backgroundColor = [UIColor whiteColor];
     self.head_edit.layer.cornerRadius = 5;
-    self.head_edit.layer.borderWidth = 1;
-    self.head_edit.layer.borderColor = navi_bar_bg_color.CGColor;
-    [self.head_edit setTitle:@"编辑资料" forState:(UIControlStateNormal)];
+//    self.head_edit.layer.borderWidth = 1;
+//    self.head_edit.layer.borderColor = navi_bar_bg_color.CGColor;
+//    [self.head_edit setTitle:@"编辑资料" forState:(UIControlStateNormal)];
+//    [self.head_edit setTintColor:navi_bar_bg_color];
+    [self.head_edit setImage:[UIImage imageNamed:@"12qwqwqwq"] forState:(UIControlStateNormal)];
     [self.head_edit setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_edit];
     [self.head_edit addTarget:self action:@selector(head_editAction:) forControlEvents:(UIControlEventTouchUpInside)];
 
     
     self.head_cancel = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 27 * (SCREEN_WIDTH / 320));
+    self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 24 * (SCREEN_WIDTH / 320));
     self.head_cancel.backgroundColor = [UIColor whiteColor];
     self.head_cancel.layer.cornerRadius = 5;
-    self.head_cancel.layer.borderWidth = 1;
-    self.head_cancel.layer.borderColor = navi_bar_bg_color.CGColor;
-    [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
+//    self.head_cancel.layer.borderWidth = 1;
+//    self.head_cancel.layer.borderColor = navi_bar_bg_color.CGColor;
+//    [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
     [self.head_cancel setTintColor:navi_bar_bg_color];
+    [self.head_cancel setImage:[UIImage imageNamed:@"qwqasaszx"] forState:(UIControlStateNormal)];
+
     [view_white addSubview:self.head_cancel];
     [self.head_cancel addTarget:self action:@selector(head_cancelAction:) forControlEvents:(UIControlEventTouchUpInside)];
     

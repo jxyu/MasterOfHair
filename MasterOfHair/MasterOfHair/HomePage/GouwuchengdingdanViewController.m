@@ -67,7 +67,8 @@
     // Do any additional setup after loading the view.
     //清空
     [Single_Model singel].shouhudizhi_Model = nil;
-    
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
     [self p_dataList];
     
     [self p_navi];
@@ -823,6 +824,8 @@
 {
     //    NSLog(@"%@",dict);
     
+    [SVProgressHUD dismiss];
+    
     self.arr_morenAddress = nil;
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
@@ -1009,6 +1012,9 @@
                 {
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
                     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                    
+                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
                 }
                 else
                 {
@@ -1073,7 +1079,7 @@
 {
     NSLog(@"%@",dict);
     
-    //    [SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

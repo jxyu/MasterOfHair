@@ -171,11 +171,22 @@
         NSString * str = [model.change_time substringFromIndex:11];
         cell.time.text = str;
         
-//        NSString * str1 = [model.change_time substringToIndex:10];
-//        NSLog(@"%@",str1);
+
+        NSString * str2 = [self compareDate:x];
         
-//        NSString * str2 = [str1 substringFromIndex:5];
-        cell.month.text = [self compareDate:x];
+        if([str2 isEqualToString:@"今天"] || [str2 isEqualToString:@"昨天"])
+        {
+            cell.month.text = [NSString stringWithFormat:@"%@",[self compareDate:x]];
+            
+        }
+        else
+        {
+            NSString * str_yy = [str2 substringToIndex:10];
+            
+            NSString * str_mm_dd = [str_yy substringFromIndex:5];
+            
+            cell.month.text = [NSString stringWithFormat:@"%@",str_mm_dd];
+        }
     }
 
     return cell;
