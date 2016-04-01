@@ -257,7 +257,7 @@
             
             if([self.arr_data count] == 0)
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"抱歉，没有找到符合的产品" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"抱歉，没有找到符合的视频" preferredStyle:(UIAlertControllerStyleAlert)];
                 
                 [self presentViewController:alert animated:YES completion:^{
                     

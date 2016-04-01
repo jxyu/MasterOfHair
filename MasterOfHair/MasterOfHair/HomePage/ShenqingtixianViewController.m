@@ -154,6 +154,9 @@
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
         
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"2" change_type:@"2" alipay_account:self.text_account.text change_amount:self.text_money.text];
+        
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
     }
 }
 
@@ -161,6 +164,7 @@
 - (void)create:(id )dict
 {
     //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

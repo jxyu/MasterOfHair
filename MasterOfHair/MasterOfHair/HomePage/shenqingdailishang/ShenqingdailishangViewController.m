@@ -233,7 +233,7 @@
         [self.tel resignFirstResponder];
         [self.name resignFirstResponder];
         
-        NSLog(@"提交申请");
+//        NSLog(@"提交申请");
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 

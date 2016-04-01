@@ -188,13 +188,13 @@
         [weakSelf loadNewData];
     }];
     
-    self.stroe_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        
-        [self p_dataCollect1];
-        
-        [weakSelf.stroe_collectionView reloadData];
-        [weakSelf loadNewData];
-    }];
+//    self.stroe_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        
+//        [self p_dataCollect1];
+//        
+//        [weakSelf.stroe_collectionView reloadData];
+//        [weakSelf loadNewData];
+//    }];
 }
 
 #pragma mark - 代理
@@ -364,6 +364,19 @@
         }
         @finally
         {
+            if(self.arr_data.count >= 14)
+            {
+                __weak __typeof(self) weakSelf = self;
+                
+                self.stroe_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    
+                    [self p_dataCollect1];
+                    
+                    [weakSelf.stroe_collectionView reloadData];
+                    [weakSelf loadNewData];
+                }];
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 

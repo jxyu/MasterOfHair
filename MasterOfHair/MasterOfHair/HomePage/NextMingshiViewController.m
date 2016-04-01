@@ -115,7 +115,7 @@
     [view_2 addSubview:view_line2];
     
     self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line2.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(view_line2.frame) - 20, 20)];
-    self.name.text = @"hahah刘";
+    self.name.text = @"剃头匠";
     self.name.font = [UIFont systemFontOfSize:15];
     [view_2 addSubview:self.name];
     
@@ -144,7 +144,7 @@
     [view_3 addSubview:view_line3];
     
     self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line3.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(view_line3.frame) - 20, 20)];
-    self.time.text = @"hahah刘";
+    self.time.text = @"剃头匠";
     self.time.font = [UIFont systemFontOfSize:15];
     [view_3 addSubview:self.time];
 
@@ -173,7 +173,7 @@
     
     
     self.yewu = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line4.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line4.frame) - 20, 40)];
-    self.yewu.text = @"hahah刘深刻的接口设计的开始就看到是打开数据库的时间看到";
+    self.yewu.text = @"剃头匠";
     self.yewu.numberOfLines = 2;
     self.yewu.font = [UIFont systemFontOfSize:14];
     [self.view_4 addSubview:self.yewu];

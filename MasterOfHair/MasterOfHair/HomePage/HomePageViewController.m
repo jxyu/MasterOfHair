@@ -158,6 +158,9 @@
     }
     else
     {//都有
+        
+        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"CreateAutoLoginUrl:"];
         
@@ -1261,6 +1264,8 @@
 - (void)CreateAutoLoginUrl:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

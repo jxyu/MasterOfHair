@@ -182,6 +182,9 @@
             
             [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:@"1000"];
         }
+        
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
     }
 }
 
@@ -189,6 +192,7 @@
 - (void)create:(id )dict
 {
 //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

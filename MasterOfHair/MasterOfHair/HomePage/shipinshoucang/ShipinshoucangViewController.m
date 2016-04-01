@@ -185,13 +185,7 @@
         [weakSelf loadNewData];
     }];
     
-    self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        
-        [self p_dataCollect1];
-        
-        [weakSelf.video_collectionView reloadData];
-        [weakSelf loadNewData];
-    }];
+
 }
 
 #pragma mark - 代理
@@ -358,6 +352,19 @@
         }
         @finally
         {
+            __weak __typeof(self) weakSelf = self;
+
+            if(self.arr_data.count >= 10)
+            {
+                self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    
+                    [self p_dataCollect1];
+                    
+                    [weakSelf.video_collectionView reloadData];
+                    [weakSelf loadNewData];
+                }];
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
