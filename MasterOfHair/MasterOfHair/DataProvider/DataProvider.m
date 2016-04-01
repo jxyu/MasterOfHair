@@ -228,6 +228,7 @@
         
         [self PostRequest:url andpram:prm];
     }
+    
 }
 
 #pragma mark - 设为默认收货地址
@@ -236,7 +237,7 @@
     if(production_keyword && is_maker && is_sell)
     {
         NSString * url=[NSString stringWithFormat:@"%@product/getProductList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_keyword\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_name \":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -282,7 +283,7 @@
     if(video_keyword && pagenumber && pagesize)
     {
         NSString * url=[NSString stringWithFormat:@"%@video/getVideoList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_keyword\":\"%@\"}",video_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"video_title\":\"%@\"}",video_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -295,7 +296,7 @@
     if(article_keyword && pagenumber && pagesize)
     {
         NSString * url=[NSString stringWithFormat:@"%@article/getArticleList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_keyword\":\"%@\"}",article_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"article_title\":\"%@\"}",article_keyword],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
     }
