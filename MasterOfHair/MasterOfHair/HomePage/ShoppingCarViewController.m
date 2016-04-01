@@ -43,11 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    if([[userdefault objectForKey:@"member_id"] length] != 0)
-    {
-        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-    }
+
     
     [self p_navi];
     
@@ -79,6 +75,12 @@
 //显示tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    if([[userdefault objectForKey:@"member_id"] length] != 0)
+    {
+        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    }
+    
     self.arr_baocun = nil;
     self.arr_data = nil;
     
@@ -378,15 +380,19 @@
 {
 //    NSLog(@"加");
     NSInteger count = sender.tag - 1001;
-    ShoppingCar_Model * model = self.arr_data[count];
     
-    
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
-    
-    [dataprovider createWithProduction_id:model.production_id number:@"1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+    if(self.arr_data[count] != nil)
+    {
+        ShoppingCar_Model * model = self.arr_data[count];
+        
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithProduction_id:model.production_id number:@"1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+    }
 }
 
 - (void)btn_SubtractAction:(UIButton *)sender

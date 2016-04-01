@@ -191,12 +191,12 @@
                 }
                 else
                 {
-                    sum = x_length + 10 + (length_x + 20);
+                    sum = x_length + 10 + (length_x);
                 }
             }
             else if([self.arr_filelist[indexPath.section] count] > 3)
             {
-                sum = x_length + 10 + (length_x + 20) * 2 + 5;
+                sum = x_length + 10 + (length_x + 0) * 2 + 5;
             }
             
             if([model.talk_content length] == 0)
@@ -391,11 +391,11 @@
                     
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
-                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 0 + 5) * x, length, length + 0)];
                     
                     //
                     UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 0 + 5) * x, length, length + 0);
                     //                    btn.backgroundColor = [UIColor orangeColor];
                     [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
                     btn.tag = indexPath.section * 1000 + i;
@@ -415,7 +415,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 22, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -434,10 +434,10 @@
                     
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
-                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20)];
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 0 + 5) * x, length, length + 0)];
                     
                     UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 0 + 5) * x, length, length + 0);
                     //                    btn.backgroundColor = [UIColor orangeColor];
                     [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
                     btn.tag = indexPath.section * 1000 + i;
@@ -460,7 +460,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 20 + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 10 + length / 2 - 12.5, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -624,7 +624,7 @@
             CGFloat length = (SCREEN_WIDTH - 90) / 3;
             
             UIImageView * image = [[UIImageView alloc] init];
-            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 20) / 2, length, length + 20);
+            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 0) / 2, length, length + 0);
             image.tag = 1000000;
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             [UIView animateWithDuration:0.7 animations:^{

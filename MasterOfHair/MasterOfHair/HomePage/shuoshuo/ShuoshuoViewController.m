@@ -204,12 +204,12 @@
                 }
                 else
                 {
-                    sum = x_length + 10 + (length_x + 20);
+                    sum = x_length + 10 + (length_x);
                 }
             }
             else if([self.arr_filelist[indexPath.section] count] > 3)
             {
-                sum = x_length + 10 + (length_x + 20) * 2 + 5;
+                sum = x_length + 10 + (length_x) * 2 + 5;
             }
 
             if([model.talk_content length] == 0)
@@ -396,11 +396,11 @@
                 
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
-                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20)];
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, 5 + (length + 5) * x, length, length)];
 
                     //
                     UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 20 + 5) * x, length, length + 20);
+                    btn.frame = CGRectMake(70 + (length + 5) * y, 5 + (length + 5) * x, length, length);
 //                    btn.backgroundColor = [UIColor orangeColor];
                     [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
                     btn.tag = indexPath.section * 1000 + i;
@@ -421,7 +421,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + length / 2 - 22, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -439,13 +439,13 @@
                 
                     Shuoshuo_Model * modle_list = self.arr_filelist[indexPath.section][i];
                     
-                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20)];
+                    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 5) * x, length, length + 0)];
                     //tag
                     
 //                    image.backgroundColor = [UIColor orangeColor];
 
                     UIButton * btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
-                    btn.frame = CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 20 + 5) * x, length, length + 20);
+                    btn.frame = CGRectMake(70 + (length + 5) * y, CGRectGetMaxY(self.talk_content.frame) + 10 + (length + 0 + 5) * x, length, length + 0);
 //                    btn.backgroundColor = [UIColor orangeColor];
                     [btn addTarget:self action:@selector(btnshuoshuoAction:) forControlEvents:(UIControlEventTouchUpInside)];
                     btn.tag = indexPath.section * 1000 + i;
@@ -467,7 +467,7 @@
                     if([modle_list.file_type isEqualToString:@"2"])
                     {
                         UIImageView * image_pic = [[UIImageView alloc] init];
-                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 20 + length / 2 - 12.5, 25, 25);
+                        image_pic.frame = CGRectMake(70 + length/ 2 - 12.5, CGRectGetMaxY(self.talk_content.frame) + 10 + length / 2 - 12.5, 25, 25);
                         image_pic.image = [UIImage imageNamed:@"qwertkjkdjfkd"];
                         [cell addSubview:image_pic];
                     }
@@ -499,7 +499,7 @@
             CGFloat length = (SCREEN_WIDTH - 90) / 3;
 
             UIImageView * image = [[UIImageView alloc] init];
-            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 20) / 2, length, length + 20);
+            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length) / 2, length, length);
             image.tag = 1000000;
             [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
             [UIView animateWithDuration:0.7 animations:^{
@@ -576,12 +576,12 @@
         }
         else
         {
-            sum = x_length + 10 + (length_x + 20);
+            sum = x_length + 10 + (length_x + 0);
         }
     }
     else if([self.arr_filelist[count] count] > 3)
     {
-        sum = x_length + 10 + (length_x + 20) * 2 + 5;
+        sum = x_length + 10 + (length_x + 0) * 2 + 5;
     }
     
     if([model.talk_content length] == 0)
@@ -592,7 +592,7 @@
     PinglunViewController * pinglunViewController = [[PinglunViewController alloc] init];
     pinglunViewController.talk_id = model1.talk_id;
     
-    pinglunViewController.height = sum + 70;
+    pinglunViewController.height = sum + 75;
     
     [self showViewController:pinglunViewController sender:nil];
 }
@@ -1093,5 +1093,35 @@
     return str;
     
 }
+
+#pragma mark - 保存图片
+- (void)tapSaveImageToIphone{
+    
+    /**
+     *  将图片保存到iPhone本地相册
+     *  UIImage *image            图片对象
+     *  id completionTarget       响应方法对象
+     *  SEL completionSelector    方法
+     *  void *contextInfo
+     */
+    UIImageWriteToSavedPhotosAlbum(self.image_iocn.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    
+    if (error == nil) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已存入手机相册" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+        
+    }else{
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"保存失败" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+    
+}
+
 
 @end

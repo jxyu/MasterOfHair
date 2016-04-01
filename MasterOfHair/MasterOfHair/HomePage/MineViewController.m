@@ -180,7 +180,7 @@
     }
     
     
-    self.head_diamond = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(label_1.frame) + 8, 28, 28)];
+    self.head_diamond = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label_1.frame), CGRectGetMaxY(label_1.frame) + 11, 20, 20)];
     self.head_diamond.image = [UIImage imageNamed:@"05zuanshi03"];
     [view_white addSubview:self.head_diamond];
     
@@ -196,11 +196,12 @@
     [self.head_vip addTarget:self action:@selector(head_vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
-    self.head_delegate = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_vip.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 60, 28)];
+    self.head_delegate = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_vip.frame) + 5, CGRectGetMaxY(label_1.frame) + 8, 60, 24)];
 //    self.head_delegate.backgroundColor = [UIColor orangeColor];
     self.head_delegate.layer.borderColor = [UIColor redColor].CGColor;
     self.head_delegate.layer.borderWidth = 1;
     self.head_delegate.layer.cornerRadius = 5;
+    self.head_delegate.font = [UIFont systemFontOfSize:15];
     self.head_delegate.text = @"代理商";
     self.head_delegate.textAlignment = NSTextAlignmentCenter;
     self.head_delegate.textColor = [UIColor redColor];
@@ -647,6 +648,8 @@
                 
                 NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                 
+//                NSLog(@"%@",[userdefault objectForKey:@"member_type"]);
+                
 //                [userdefault setObject:@"2" forKey:@"member_type"];
                 if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
                 {
@@ -753,7 +756,7 @@
     [view_mid addSubview:view_white1];
     
     UIImageView * image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(5, 17.5, 25, 25)];
-    image_1.image = [UIImage imageNamed:@"000000005"];
+    image_1.image = [UIImage imageNamed:@"jdksjdkjsdkjskd"];
     [view_white1 addSubview:image_1];
     
     UILabel * lbl_1 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_1.frame) + 5, 17.5, length_x1 * 4.6 - CGRectGetMaxX(image_1.frame) - 5 , 25)];
