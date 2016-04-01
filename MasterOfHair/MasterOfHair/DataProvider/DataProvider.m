@@ -237,7 +237,7 @@
     if(production_keyword && is_maker && is_sell)
     {
         NSString * url=[NSString stringWithFormat:@"%@product/getProductList",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_name \":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"production_name\":\"%@\",\"is_maker\":\"%@\",\"is_sell\":\"%@\"}",production_keyword,is_maker,is_sell]};
         
         [self PostRequest:url andpram:prm];
     }

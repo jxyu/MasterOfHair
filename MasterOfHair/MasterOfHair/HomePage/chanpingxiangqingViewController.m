@@ -382,7 +382,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"56e8cf6867e58ea9710004b8"
                                       shareText:@"快来下载剃头匠"
-                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                     shareImage:[UIImage imageNamed:@"sudisudiusidusidu"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
                                        delegate:self];
     

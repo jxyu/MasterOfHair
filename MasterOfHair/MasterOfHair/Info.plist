@@ -59,6 +59,17 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>mqqbrowser</string>
+		<string>mqqwpa</string>
+		<string>mqqapiwallet</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>mqqapi</string>
+		<string>mqq</string>
+		<string>urlscheme</string>
+		<string>urlscheme2</string>
+		<string>urlscheme3</string>
+		<string>urlscheme4</string>
 		<string>weixin</string>
 		<string>wechat</string>
 		<string>alipay</string>
