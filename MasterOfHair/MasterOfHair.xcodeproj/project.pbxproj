@@ -20,6 +20,7 @@
 		7B06632A1C8927060037F0BC /* ShopCarData_Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0663291C8927060037F0BC /* ShopCarData_Models.m */; };
 		7B11AC321C900AEB0061AADF /* qingchuhuancun.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B11AC311C900AEB0061AADF /* qingchuhuancun.png */; };
 		7B11AC351C9010BD0061AADF /* loca_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11AC341C9010BD0061AADF /* loca_Model.m */; };
+		7B1388231CAF586900199958 /* wenxiulanmengdingdandetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1388221CAF586900199958 /* wenxiulanmengdingdandetailViewController.m */; };
 		7B142DC81C584A6900B32809 /* SelectshouhuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */; };
 		7B142E2D1C586DAC00B32809 /* 01_03＿_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */; };
 		7B142E2E1C586DAC00B32809 /* 01_03＿_06.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B142E2C1C586DAC00B32809 /* 01_03＿_06.png */; };
@@ -462,6 +463,8 @@
 		7B11AC311C900AEB0061AADF /* qingchuhuancun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qingchuhuancun.png; sourceTree = "<group>"; };
 		7B11AC331C9010BD0061AADF /* loca_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loca_Model.h; sourceTree = "<group>"; };
 		7B11AC341C9010BD0061AADF /* loca_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loca_Model.m; sourceTree = "<group>"; };
+		7B1388211CAF586900199958 /* wenxiulanmengdingdandetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wenxiulanmengdingdandetailViewController.h; sourceTree = "<group>"; };
+		7B1388221CAF586900199958 /* wenxiulanmengdingdandetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wenxiulanmengdingdandetailViewController.m; sourceTree = "<group>"; };
 		7B142DC61C584A6900B32809 /* SelectshouhuoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectshouhuoViewController.h; sourceTree = "<group>"; };
 		7B142DC71C584A6900B32809 /* SelectshouhuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectshouhuoViewController.m; sourceTree = "<group>"; };
 		7B142E2B1C586DAC00B32809 /* 01_03＿_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03＿_03.png"; sourceTree = "<group>"; };
@@ -1749,6 +1752,8 @@
 				7B7F10531C99823B00EFF08C /* WenxiulanmengdingdanViewController.m */,
 				7B7F10551C9987D400EFF08C /* WenxiulanmengdingdanTableViewCell.h */,
 				7B7F10561C9987D400EFF08C /* WenxiulanmengdingdanTableViewCell.m */,
+				7B1388211CAF586900199958 /* wenxiulanmengdingdandetailViewController.h */,
+				7B1388221CAF586900199958 /* wenxiulanmengdingdandetailViewController.m */,
 			);
 			name = wenxiulanmengdingdan;
 			sourceTree = "<group>";
@@ -3391,6 +3396,7 @@
 				7B00BF5E1C77018300988119 /* CCLocationManager.m in Sources */,
 				7BAABAE31C59FBC800C14DF8 /* KechengbaomingViewController.m in Sources */,
 				802552BC1C57442B00CFF875 /* SCSwipeableFilterView.m in Sources */,
+				7B1388231CAF586900199958 /* wenxiulanmengdingdandetailViewController.m in Sources */,
 				7B19D3C01C97F4560097C7C7 /* Fenxiaozhongxin_Model.m in Sources */,
 				8043C6FD1C4E0C0900369EEF /* UIImage+NSBundle.m in Sources */,
 				7BA596B51C4E26A600DBC69D /* BusinessSchoolViewController.m in Sources */,

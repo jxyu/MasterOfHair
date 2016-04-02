@@ -9,6 +9,7 @@
 #import "WenxiulanmengdingdanViewController.h"
 #import "WenxiulanmengdingdanTableViewCell.h"
 #import "Wenxiulanmengdingdan_Model.h"
+#import "wenxiulanmengdingdandetailViewController.h"
 @interface WenxiulanmengdingdanViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -147,6 +148,13 @@
 - (void )tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(self.arr_data[indexPath.row] != nil)
+    {
+        wenxiulanmengdingdandetailViewController * wenxiulanmengdingdandetail = [[wenxiulanmengdingdandetailViewController alloc] init];
+        
+        [self showViewController:wenxiulanmengdingdandetail sender:nil];
+    }
 }
 
 #pragma mark - 删除
@@ -201,7 +209,7 @@
 
 - (void)delete:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
@@ -276,7 +284,7 @@
 
 - (void)getOrders:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     [SVProgressHUD dismiss];
     

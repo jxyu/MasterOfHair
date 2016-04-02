@@ -275,6 +275,8 @@
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.btn_share.frame) + 10, SCREEN_WIDTH , 0)];
     NSString * path = [NSString stringWithFormat:@"%@web/viewarticle&id=%@",Url,self.article_id];
+//    NSLog(@"%@",path);
+    
     NSURL * url = [NSURL URLWithString:path];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     [self webViewDidFinishLoad:self.webView];
@@ -283,11 +285,11 @@
     [self.headView addSubview:self.webView];
     
     //
-    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.webView.frame) + 40, 70, 25)];
+    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.webView.frame) + 10, 70, 25)];
     label_3.text = @"评论";
     [self.headView addSubview:label_3];
     
-    self.head_comment = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_3.frame) + 10, CGRectGetMaxY(self.head_text.frame) + 40, SCREEN_WIDTH  - CGRectGetMaxX(label_3.frame) - 20, 25)];
+    self.head_comment = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_3.frame) + 10, CGRectGetMaxY(self.webView.frame) + 10, SCREEN_WIDTH  - CGRectGetMaxX(label_3.frame) - 20, 25)];
 //    self.head_comment.backgroundColor = [UIColor orangeColor];
     self.head_comment.textColor = [UIColor grayColor];
     self.head_comment.text = @"共0条评论";
