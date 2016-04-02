@@ -886,7 +886,7 @@
 #pragma mark - 获得列表
 - (void)getConfirmOrder:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_dataList = nil;
     self.arr_dataShop = nil;
@@ -1077,7 +1077,7 @@
 
 - (void)dingdanzhifu1:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
         [SVProgressHUD dismiss];
     
@@ -1085,11 +1085,6 @@
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
-            
-            
-            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
-            
-            [self showViewController:shangchengdingdanViewController sender:nil];
         }
         @catch (NSException *exception)
         {
@@ -1097,7 +1092,9 @@
         }
         @finally
         {
+            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
             
+            [self showViewController:shangchengdingdanViewController sender:nil];
         }
     }
     else

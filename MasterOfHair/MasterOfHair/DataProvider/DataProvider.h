@@ -366,7 +366,8 @@
 #pragma mark -  判断课程是否报名
 - (void)ifsignupWithCourse_id:(NSString *)course_id member_id:(NSString *)member_id;
 
-
+#pragma mark - 获取某会员的收货地址
+- (void)getAddressesWithaddress_id:(NSString *)address_id;
 
 
 

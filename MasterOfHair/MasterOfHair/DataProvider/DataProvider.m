@@ -1408,7 +1408,18 @@
 }
 
 
-
+#pragma mark - 获取某会员的收货地址
+- (void)getAddressesWithaddress_id:(NSString *)address_id
+{
+    if(address_id)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@address/getAddresses",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"address_id\":\"%@\"}",address_id]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+    
+}
 
 
 

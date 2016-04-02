@@ -151,7 +151,7 @@
 //接口部分
 - (void)getAddresses:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     self.arr_data = nil;
     

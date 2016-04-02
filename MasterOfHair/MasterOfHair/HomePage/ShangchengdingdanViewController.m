@@ -11,6 +11,9 @@
 #import "Pingpp.h"
 #import "MineViewController.h"
 #import "chanpingxiangqingViewController.h"
+
+#import "shangchengdingdanDetailViewController.h"
+
 @interface ShangchengdingdanViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIView * top_white;
@@ -169,13 +172,24 @@
     {        
         if(self.arr_dataList.count != 0)
         {
-            DINGDAN_Model * model = self.arr_dataList[indexPath.section][indexPath.row - 1];
             
-            chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
             
-            chanpingxiangqing.production_id = model.production_id;
+//            DINGDAN_Model * model = self.arr_dataList[indexPath.section][indexPath.row - 1];
             
-            [self showViewController:chanpingxiangqing sender:nil];
+            DINGDAN_Model * model_all = self.arr_dataAll[indexPath.section];
+//            chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+//            
+//            chanpingxiangqing.production_id = model.production_id;
+//            
+//            [self showViewController:chanpingxiangqing sender:nil];
+            
+            shangchengdingdanDetailViewController * shangchengdingdanDetail = [[shangchengdingdanDetailViewController alloc] init];
+            
+            shangchengdingdanDetail.model_all = model_all;
+            shangchengdingdanDetail.arr_list = self.arr_dataList[indexPath.section];
+            
+            
+            [self showViewController:shangchengdingdanDetail sender:nil];
         }
     }
 }
@@ -248,11 +262,11 @@
         
         UILabel * price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
         price.tag = 10000 + indexPath.section;
-        price.textColor = [UIColor blackColor];
+        price.textColor = [UIColor orangeColor];
         price.font = [UIFont systemFontOfSize:14];
         [cell addSubview:price];
         
-        price.text = [NSString stringWithFormat:@"¥ %@",model.production_total];
+        price.text = [NSString stringWithFormat:@"¥ %@",model.orders_total];
         
         UILabel * sum = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90 - 5 - 40, 10, 40, 30)];
         sum.text = @"合计:";

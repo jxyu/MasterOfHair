@@ -149,12 +149,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(self.arr_data[indexPath.row] != nil)
-    {
-        wenxiulanmengdingdandetailViewController * wenxiulanmengdingdandetail = [[wenxiulanmengdingdandetailViewController alloc] init];
-        
-        [self showViewController:wenxiulanmengdingdandetail sender:nil];
-    }
+//    if(self.arr_data[indexPath.row] != nil)
+//    {
+//        wenxiulanmengdingdandetailViewController * wenxiulanmengdingdandetail = [[wenxiulanmengdingdandetailViewController alloc] init];
+//        
+//        [self showViewController:wenxiulanmengdingdandetail sender:nil];
+//    }
 }
 
 #pragma mark - 删除

@@ -911,11 +911,6 @@
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
-            
-            
-            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
-            
-            [self showViewController:shangchengdingdanViewController sender:nil];
         }
         @catch (NSException *exception)
         {
@@ -923,7 +918,9 @@
         }
         @finally
         {
+            ShangchengdingdanViewController * shangchengdingdanViewController = [[ShangchengdingdanViewController alloc] init];
             
+            [self showViewController:shangchengdingdanViewController sender:nil];
         }
     }
     else

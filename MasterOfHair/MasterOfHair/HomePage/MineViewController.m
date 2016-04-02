@@ -852,6 +852,14 @@
             else
             {
                 self.delegate_type = str;
+                
+                if([self.delegate_type isEqualToString:@"2"])
+                {
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    
+                    [userdefault setObject:@"3" forKey:@"member_type"];
+                }
+ 
             }
         }
         @catch (NSException *exception)
