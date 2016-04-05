@@ -24,6 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -162,7 +164,11 @@
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
-            detail.text = [NSString stringWithFormat:@"%@人",self.model_detail.number];
+            
+            if([self.model_detail.number length] != 0)
+            {
+                detail.text = [NSString stringWithFormat:@"%@人",self.model_detail.number];
+            }
             
             [cell addSubview:detail];
         }
@@ -444,7 +450,9 @@
 //数据
 - (void)Recruit:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

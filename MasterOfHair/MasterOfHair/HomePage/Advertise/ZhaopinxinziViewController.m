@@ -182,6 +182,8 @@
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         [userdefault setObject:@"薪资区间" forKey:@"zhaopingxinzi_name"];
         [userdefault setObject:@"0" forKey:@"zhaopingxinzi_id"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
@@ -195,6 +197,7 @@
         [userdefault setObject:model.status_name forKey:@"zhaopingxinzi_name"];
         [userdefault setObject:model.status_code forKey:@"zhaopingxinzi_id"];
         
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{

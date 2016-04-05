@@ -205,6 +205,8 @@
         [userdefault setObject:@"0" forKey:@"zhaopingfei_id"];
         
         sender.enabled = YES;
+        
+        [self.navigationController popViewControllerAnimated:YES];
 
     }
     else
@@ -220,7 +222,8 @@
         [userdefault setObject:model.type_id forKey:@"zhaopingfei_id"];
         
         sender.enabled = YES;
-
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{

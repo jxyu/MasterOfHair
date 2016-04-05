@@ -432,7 +432,7 @@
             //            NSLog(@"%f",x_length);
             
             self.talk_content = [[UILabel alloc] initWithFrame:CGRectMake(70, CGRectGetMaxY(self.image_touxiang.frame) + 5, SCREEN_WIDTH - 80, x_length)];
-            self.talk_content.text = @"剃头匠";
+            self.talk_content.text = @"";
             self.talk_content.numberOfLines = 0;
             self.talk_content.font = [UIFont systemFontOfSize:15];
 //            self.talk_content.backgroundColor = [UIColor orangeColor];
@@ -635,6 +635,9 @@
             [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
             
             [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
+            
+            [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+
         }
         else
         {//回复留言
@@ -650,15 +653,40 @@
                 [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
                 
                 [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
+                
+                [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+
             }
             else
             {
-                NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",[userdefault objectForKey:@"member_username"],model.member_username,self.bottom_text.text];
                 
-                DataProvider * dataprovider=[[DataProvider alloc] init];
-                [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+                if([[userdefault objectForKey:@"member_nickname"] length] != 0)
+                {
+                    NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",[userdefault objectForKey:@"member_nickname"],model.member_username,self.bottom_text.text];
+                    
+                    DataProvider * dataprovider=[[DataProvider alloc] init];
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+                    
+                    [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
+                    
+                    [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+                }
+                else
+                {
+                    NSString * str = [NSString stringWithFormat:@"%@对%@回复:%@",[userdefault objectForKey:@"member_username"],model.member_username,self.bottom_text.text];
+                    
+                    DataProvider * dataprovider=[[DataProvider alloc] init];
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"talkReply:"];
+                    
+                    [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
+                    
+                    [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+                }
                 
-                [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
+                
+                
+
+
             }
         }
     }
@@ -668,6 +696,8 @@
 - (void)talkReply:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
