@@ -122,6 +122,8 @@
 //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
         [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+        
+        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
     }
 }
 
@@ -224,6 +226,8 @@
         //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
         [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
+        
+        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
     }
     
     //进行检索
@@ -234,6 +238,8 @@
 - (void)getProductList:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     self.arr_data = nil;
     

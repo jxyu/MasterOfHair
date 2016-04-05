@@ -8,6 +8,9 @@
 
 #import "shangchengdingdanDetailViewController.h"
 #import "Shouhudizhi_Model.h"
+
+#import "chanpingxiangqingViewController.h"
+
 @interface shangchengdingdanDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -30,6 +33,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [SVProgressHUD showWithStatus:@"加载订单中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [self p_data];
     
     [self p_navi];
@@ -92,7 +98,7 @@
     self.name = [[UILabel alloc] init];
     self.name.frame = CGRectMake(20,  10, length_x, 25);
     //        self.name.text = @"哈啊哈";
-    self.name.font = [UIFont systemFontOfSize:16];
+    self.name.font = [UIFont systemFontOfSize:15];
     self.name.textColor = [UIColor grayColor];
     [self.view_bg addSubview:self.name];
     
@@ -263,10 +269,12 @@
         //        label.backgroundColor = [UIColor orangeColor];
         [cell addSubview:label];
         
-        UILabel * text = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) , 11, SCREEN_WIDTH - CGRectGetMaxY(label.frame) - 10, 30)];
+        UILabel * text = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) , 11, SCREEN_WIDTH - 100 - 10, 30)];
         text.textAlignment = NSTextAlignmentRight;
         text.text = self.model_all.leave_word;
         text.font = [UIFont systemFontOfSize:15];
+        
+        [cell addSubview:text];
     }
     else if(indexPath.row == self.arr_list.count + 5)
     {
@@ -280,11 +288,6 @@
         label.font = [UIFont systemFontOfSize:15];
         label.text = @"收货信息";
         [cell addSubview:label];
-        
-
-        
-
-        
     }
     else
     {
@@ -337,7 +340,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if(indexPath.row == 0 || indexPath.row == 1 || indexPath.row == self.arr_list.count + 2 || indexPath.row == self.arr_list.count + 3 || indexPath.row == self.arr_list.count + 4 || indexPath.row == self.arr_list.count + 5)
+    {
+        
+    }
+    else
+    {
+        if(self.arr_list.count != 0)
+        {
+            
+            DINGDAN_Model * model = self.arr_list[indexPath.row - 2];
+            
+            chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+
+            chanpingxiangqing.production_id = model.production_id;
+
+            [self showViewController:chanpingxiangqing sender:nil];
+        }
+    }
+    
+    
 }
 
 #pragma mark - 数据
@@ -354,6 +379,7 @@
 - (void)update:(id )dict
 {
 //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

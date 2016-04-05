@@ -79,7 +79,7 @@
     {
         if(self.arr_delect.count != 0)
         {
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否删除该收藏视频" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否删除该收藏的图文" preferredStyle:(UIAlertControllerStyleAlert)];
             
             [self presentViewController:alert animated:YES completion:^{
                 

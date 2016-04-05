@@ -200,7 +200,7 @@
 #pragma mark - 数据
 - (void)update:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
 
     [SVProgressHUD dismiss];
     
@@ -245,6 +245,8 @@
 #pragma mark - btn点击方法
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
+    [self.money resignFirstResponder];
+    
     if(sender.selected == 0)
     {
         [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
@@ -262,6 +264,8 @@
 
 - (void)btn_weixinAction:(UIButton *)sender
 {
+    [self.money resignFirstResponder];
+    
     if(sender.selected == 0)
     {
         [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];

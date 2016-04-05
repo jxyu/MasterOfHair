@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -198,6 +200,8 @@
 - (void)FamousTeacher:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if(self.page == 1)
     {

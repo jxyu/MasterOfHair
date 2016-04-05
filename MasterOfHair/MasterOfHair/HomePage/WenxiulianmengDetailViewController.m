@@ -279,6 +279,8 @@
 
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
+    [self.text_money resignFirstResponder];
+
     if(sender.selected == 0)
     {
         [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
@@ -296,6 +298,8 @@
 
 - (void)btn_weixinAction:(UIButton *)sender
 {
+    [self.text_money resignFirstResponder];
+
     if(sender.selected == 0)
     {
         [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];

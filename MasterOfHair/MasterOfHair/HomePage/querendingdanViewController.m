@@ -911,6 +911,7 @@
         @try
         {
             [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            
         }
         @catch (NSException *exception)
         {
@@ -925,6 +926,7 @@
     }
     else
     {
+        NSLog(@"%@",dict[@"status"][@"message"]);
         [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
     }
 }

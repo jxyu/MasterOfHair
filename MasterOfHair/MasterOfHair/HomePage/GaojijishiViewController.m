@@ -35,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [SVProgressHUD showWithStatus:@"正在加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -112,7 +114,7 @@
     [view_2 addSubview:view_line2];
     
     self.name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line2.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(view_line2.frame) - 20, 20)];
-    self.name.text = @"剃头匠";
+    self.name.text = @"";
     self.name.font = [UIFont systemFontOfSize:15];
     [view_2 addSubview:self.name];
     
@@ -141,7 +143,7 @@
     [view_3 addSubview:view_line3];
     
     self.time = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line3.frame) + 10, 15, SCREEN_WIDTH - CGRectGetMaxX(view_line3.frame) - 20, 20)];
-    self.time.text = @"剃头匠";
+    self.time.text = @"";
     self.time.font = [UIFont systemFontOfSize:15];
     [view_3 addSubview:self.time];
     
@@ -190,7 +192,9 @@
 //数据
 - (void)SeniorTechnician:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

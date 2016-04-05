@@ -903,6 +903,8 @@
     TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
     tuwenViewController.isTeacher = 1;
     [userdefault setObject:@"0" forKey:@"TuwenFeilei"];
+    [userdefault setObject:@"" forKey:@"channel_name"];
+    
     [self showViewController:tuwenViewController sender:nil];
 }
 

@@ -124,7 +124,8 @@
         //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
         [dataprovider getVideoListWithVideo_keyword:self.search_text.text pagenumber:@"1" pagesize:@"1000"];
-
+        
+        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
     }
 }
 
@@ -223,6 +224,9 @@
         //        NSLog(@"%@  -------   %@",self.search_text.text,self.is_maker);
         
         [dataprovider getVideoListWithVideo_keyword:self.search_text.text pagenumber:@"1" pagesize:@"1000"];
+        
+        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
+
     }
     
     //进行检索
@@ -235,6 +239,8 @@
 //    NSLog(@"%@",dict);
     
     self.arr_data = nil;
+    
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

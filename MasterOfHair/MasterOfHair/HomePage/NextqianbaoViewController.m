@@ -205,7 +205,7 @@
         }
         @finally
         {
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
     else
@@ -348,6 +348,8 @@
 #pragma mark - 5中金额
 - (void)btn_50Action:(UIButton *)sender
 {
+    [self.text_account resignFirstResponder];
+
     [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
     
     if(sender.isSelected == 0)
@@ -394,6 +396,8 @@
 
 - (void)btn_100Action:(UIButton *)sender
 {
+    [self.text_account resignFirstResponder];
+
     [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
     
     if(sender.isSelected == 0)
@@ -439,6 +443,7 @@
 
 - (void)btn_200Action:(UIButton *)sender
 {
+    [self.text_account resignFirstResponder];
     
     [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
 
@@ -484,6 +489,7 @@
 
 - (void)btn_500Action:(UIButton *)sender
 {
+    [self.text_account resignFirstResponder];
     
     [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
 
@@ -529,7 +535,8 @@
 
 - (void)btn_1000Action:(UIButton *)sender
 {
-    
+    [self.text_account resignFirstResponder];
+
     [sender setTintColor:[UIColor groupTableViewBackgroundColor]];
 
     if(sender.isSelected == 0)

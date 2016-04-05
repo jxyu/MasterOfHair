@@ -80,6 +80,9 @@
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
         
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] suggest_content:self.text.text];
+        
+        [SVProgressHUD showWithStatus:@"正在保存" maskType:(SVProgressHUDMaskTypeBlack)];
+
     }
 }
 
@@ -106,10 +109,12 @@
 {
 //    NSLog(@"%@",dict);
     
+    [SVProgressHUD dismiss];
+    
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"保存成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发表成功" maskType:(SVProgressHUDMaskTypeBlack)];
         }
         @catch (NSException *exception)
         {
@@ -117,7 +122,7 @@
         }
         @finally
         {
-
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
     else

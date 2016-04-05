@@ -39,6 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [SVProgressHUD showWithStatus:@"正在加载数据..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     [self p_navi];
     
     [self p_setupView];
@@ -384,6 +386,8 @@
 {
 //    NSLog(@"%@",dict);
     
+    [SVProgressHUD dismiss];
+    
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
@@ -435,7 +439,7 @@
 // 数据
 - (void)GetMembers:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try

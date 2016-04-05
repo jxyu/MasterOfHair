@@ -182,6 +182,8 @@
 //合作店的btn
 - (void)top_btnFactoryAction:(UIButton *)sender
 {
+    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     self.isTeacher = NO;
     
     //变颜色
@@ -206,6 +208,8 @@
 {
     self.isTeacher = YES;
 
+    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    
     //变颜色
     [self.top_btnFactory setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     self.top_viewFactory.hidden = YES;
@@ -434,6 +438,8 @@
 {
 //    NSLog(@"%@",dict);
 
+    [SVProgressHUD dismiss];
+    
     if(self.page == 1)
     {
         self.arr_data = nil;
@@ -505,7 +511,9 @@
 //数据
 - (void)SeniorTechnician:(id )dict
 {
-    NSLog(@"%@",dict);
+//    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     if(self.page == 1)
     {
