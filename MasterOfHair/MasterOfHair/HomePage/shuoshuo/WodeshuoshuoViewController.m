@@ -54,8 +54,10 @@
 @property (nonatomic, assign) NSInteger zan_index;
 @property (nonatomic, assign) NSInteger delete_index;
 
-
 @property (nonatomic, strong) UIView * view_viewbg;
+
+
+@property (nonatomic, strong) UIScrollView * scrollView;
 
 @end
 
@@ -612,30 +614,71 @@
     NSInteger count = sender.tag % 1000;
     NSLog(@"%ld  %ld",(long)section, (long)count);
     
+//    if(self.view_viewbg.hidden == 1)
+//    {
+//        
+//        Shuoshuo_Model * modle_list = self.arr_filelist[section][count];
+//#warning 轮播效果
+//        if([modle_list.file_type isEqualToString:@"1"])
+//        {//图片
+//            self.view_viewbg.hidden = NO;
+//            
+//            CGFloat length = (SCREEN_WIDTH - 90) / 3;
+//            
+//            UIImageView * image = [[UIImageView alloc] init];
+//            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 0) / 2, length, length + 0);
+//            image.tag = 1000000;
+//            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+//            [UIView animateWithDuration:0.7 animations:^{
+//                
+//                image.frame = CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
+//                
+//            } completion:^(BOOL finished) {
+//                
+//            }];
+//            
+//            [self.view_viewbg addSubview:image];
+//        }
     if(self.view_viewbg.hidden == 1)
     {
-        
         Shuoshuo_Model * modle_list = self.arr_filelist[section][count];
-#warning 轮播效果
+        
         if([modle_list.file_type isEqualToString:@"1"])
-        {//图片
+        {
             self.view_viewbg.hidden = NO;
             
-            CGFloat length = (SCREEN_WIDTH - 90) / 3;
+            self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3)];
+            self.scrollView .backgroundColor = [UIColor blackColor];
+            self.scrollView.showsHorizontalScrollIndicator = NO;
             
-            UIImageView * image = [[UIImageView alloc] init];
-            image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2, SCREEN_HEIGHT  / 2 - (length + 0) / 2, length, length + 0);
-            image.tag = 1000000;
-            [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,modle_list.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-            [UIView animateWithDuration:0.7 animations:^{
-                
-                image.frame = CGRectMake(0, SCREEN_HEIGHT / 5, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
-                
-            } completion:^(BOOL finished) {
-                
-            }];
+            self.scrollView .contentSize = CGSizeMake(SCREEN_WIDTH * [self.arr_filelist[section] count], 0);
+            self.scrollView .pagingEnabled = YES;
+            self.scrollView.tag = 5000000;
             
-            [self.view_viewbg addSubview:image];
+            for (int i = 0 ; i < [self.arr_filelist[section] count]; i ++)
+            {
+                Shuoshuo_Model * model_pic = self.arr_filelist[section][i];
+                
+                CGFloat length = (SCREEN_WIDTH - 90) / 3;
+                UIImageView * image = [[UIImageView alloc] init];
+                image.frame = CGRectMake(SCREEN_WIDTH  / 2 - length / 2 + SCREEN_WIDTH * i, SCREEN_HEIGHT / 5 + (length) / 2, length, length);
+                
+                [UIView animateWithDuration:0.7 animations:^{
+                    
+                    image.frame = CGRectMake(0 + SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT / 5 * 3);
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
+                [image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/talk/%@",Url_pic,model_pic.file_path]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                
+                [self.scrollView  addSubview:image];
+            }
+            
+            self.scrollView.contentOffset = CGPointMake(SCREEN_WIDTH * (count), 0);
+            
+            [self.view addSubview:self.scrollView];
+            
         }
         else if([modle_list.file_type isEqualToString:@"2"])
         {//视频
@@ -666,6 +709,9 @@
         [moviePlayerview stopPlayer];
         MoviePlayer * movie = [self.view viewWithTag:10000000001];
         [movie removeFromSuperview];
+        
+        UIScrollView * scrollView = [self.view viewWithTag:5000000];
+        [scrollView removeFromSuperview];
     }
 }
 

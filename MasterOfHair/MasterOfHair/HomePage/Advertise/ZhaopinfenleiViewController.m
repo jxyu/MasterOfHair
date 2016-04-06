@@ -54,7 +54,7 @@
 //隐藏tabbar
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.page = 0;
+    self.page = 100000;
     
     //保存
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];

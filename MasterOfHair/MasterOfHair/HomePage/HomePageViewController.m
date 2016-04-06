@@ -99,8 +99,9 @@
 {
     //左边为定位
     [self addLeftbuttontitle:@"定位"];
-    _btnLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
-    _lblLeft.frame = CGRectMake(10, _lblLeft.frame.origin.y + 5, 60, _lblLeft.frame.size.height - 10);
+    
+    _btnLeft.frame = CGRectMake(5, _lblLeft.frame.origin.y + 5, 55, _lblLeft.frame.size.height - 10);
+    _lblLeft.frame = CGRectMake(5, _lblLeft.frame.origin.y + 5, 55, _lblLeft.frame.size.height - 10);
     _lblLeft.font = [UIFont systemFontOfSize:15];
     _lblLeft.textAlignment = NSTextAlignmentCenter;
 //    _lblLeft.backgroundColor = [UIColor orangeColor];
@@ -358,7 +359,7 @@
 #pragma mark - 轮播图的点击事件
 - (void)tapGesture:(id)sender
 {    
-    NSLog(@"%ld",self.lunbo_pageControl.currentPage);
+//    NSLog(@"%ld",self.lunbo_pageControl.currentPage);
 }
 
 #pragma mark - 定时器的方法!
