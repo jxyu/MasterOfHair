@@ -504,7 +504,7 @@
         [alert addAction:action];
     }
     else
-    {
+    {        
         if([self.model_detail.telephone length] != 0)
         {
             UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"拨打号码:%@",self.model_detail.telephone]preferredStyle:(UIAlertControllerStyleAlert)];
@@ -521,6 +521,7 @@
             
             
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
                 
                 NSURL * url1 = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.model_detail.telephone]];
                 
