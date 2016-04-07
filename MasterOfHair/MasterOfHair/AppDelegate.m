@@ -21,6 +21,7 @@
 
 #define SMSapp_Key @"f7f43b8dec0c"
 #define SMSapp_Secret @"b58371f4502b0e800e461a27328e0ba8"
+
 #define kQPAppKey @"205425099e62995"
 #define kQPAppSecret @"fcac9d83d3b94d6c8287bef7993768e6"
 

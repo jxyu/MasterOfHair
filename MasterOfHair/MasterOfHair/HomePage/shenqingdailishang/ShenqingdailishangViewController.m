@@ -243,7 +243,7 @@
 //        NSLog(@"%@",self.data1);
         [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
 
-        [dataprovider createWithMember_id:@"3" applyAgent_name:self.name.text applyAgent_phone:self.tel.text idcard_frond:self.data1 idcard_side:self.data2 framework_image:self.data3 business_image:self.data4];
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] applyAgent_name:self.name.text applyAgent_phone:self.tel.text idcard_frond:self.data1 idcard_side:self.data2 framework_image:self.data3 business_image:self.data4];
 
 //        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] applyAgent_name:self.name.text applyAgent_phone:self.tel.text idcard_frond:self.data1 idcard_side:self.data2 framework_image:self.data3 business_image:self.data4];
     }
@@ -385,8 +385,6 @@
         
         
 //        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-        
-#warning 拿数据imageData
 //        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 //        
 //        DataProvider * dataprovider=[[DataProvider alloc] init];

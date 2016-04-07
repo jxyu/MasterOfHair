@@ -100,5 +100,7 @@ extern NSString * const QPVideoInfoSize;      // 分辨率 (pixel*pixel)
  * @param packName 待合成的packName
  */
 - (void)qupaiSDK:(QupaiSDK *)sdk packName:(NSString *)packName;
+
+//    BOOL isCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
 @end
 

@@ -51,6 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self p_navi];
     
@@ -369,6 +370,8 @@
 - (void)create:(id )dict
 {
 //    NSLog(@"%@",dict);
+    
+    [SVProgressHUD dismiss];
     
     self.arr_replylist = nil;
     self.arr_filelist = nil;

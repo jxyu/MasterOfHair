@@ -79,8 +79,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    [self p_location];
     
     [self p_login];
     
@@ -180,6 +178,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
+    [self p_location];
     
     [self example01];
     

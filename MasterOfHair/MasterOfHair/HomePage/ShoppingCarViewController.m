@@ -392,6 +392,8 @@
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
         
         [dataprovider createWithProduction_id:model.production_id number:@"1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+        
+        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
@@ -408,6 +410,9 @@
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
     [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+    
+    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+
     
 //    if([model.number integerValue] == 1)
 //    {
@@ -438,13 +443,14 @@
 - (void)create:(id )dict
 {
 //    NSLog(@"%@",dict);
+    [SVProgressHUD dismiss];
     
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
             [self p_data];
             
-//            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
 
         }
         @catch (NSException *exception)

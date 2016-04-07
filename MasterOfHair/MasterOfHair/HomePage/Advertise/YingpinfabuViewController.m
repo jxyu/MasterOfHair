@@ -222,8 +222,8 @@
             name.text = @"应聘职位";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -251,8 +251,8 @@
             name.text = @"期望薪资";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
@@ -283,8 +283,8 @@
             name.text = @"职位分类";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
@@ -317,8 +317,8 @@
             name.text = @"选择城市";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15 - 30, 30)];
@@ -352,8 +352,8 @@
             name.text = @"工作地点";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -392,8 +392,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -422,8 +422,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -451,8 +451,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -480,8 +480,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -509,8 +509,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 90)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 80)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextView * detail = [[UITextView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 80)];
@@ -556,8 +556,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UITextField * detail = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];

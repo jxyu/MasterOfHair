@@ -954,11 +954,13 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 //    if (buttonIndex == 0) {
         // 拍照
+//        BOOL isCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+    
         if ([self isCameraAvailable] && [self doesCameraSupportTakingPhotos]) {
             UIImagePickerController *controller = [[UIImagePickerController alloc] init];
             controller.sourceType = UIImagePickerControllerSourceTypeCamera;
             if ([self isFrontCameraAvailable]) {
-                controller.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+                controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
             }
             NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
             [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];

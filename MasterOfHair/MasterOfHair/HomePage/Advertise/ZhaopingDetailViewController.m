@@ -142,8 +142,8 @@
             name.text = @"招聘职位";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -159,8 +159,8 @@
             name.text = @"招聘人数";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -180,8 +180,8 @@
             name.text = @"预计薪资";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -197,8 +197,8 @@
             name.text = @"职业分类";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -214,8 +214,8 @@
             name.text = @"选择城市";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -231,8 +231,8 @@
             name.text = @"工作地点";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -251,8 +251,8 @@
             
             CGFloat x_length = [self.model_detail.job_description boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, x_length + 15)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, x_length + 5)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 5, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, x_length + 20)];
@@ -279,8 +279,8 @@
             name.text = @"公司名称";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -296,8 +296,8 @@
             name.text = @"公司规模";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -313,8 +313,8 @@
             name.text = @"公司性质";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -330,8 +330,8 @@
             name.text = @"所属行业";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -347,8 +347,8 @@
             name.text = @"公司地址";
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, 30)];
@@ -368,8 +368,8 @@
             
             CGFloat x_length = [self.model_detail.company_brief boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 100, 10000)    options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil].size.height;
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, x_length + 15)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, x_length + 55)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 5, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 15, x_length + 20)];
@@ -398,8 +398,8 @@
             name.textAlignment = NSTextAlignmentRight;
             [cell addSubview:name];
             
-            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 5, 1, 40)];
-            view_line.backgroundColor = [UIColor grayColor];
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
             [cell addSubview:view_line];
             
             

@@ -57,9 +57,9 @@
     
     self.image.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
     
-    self.name.frame = CGRectMake(50, CGRectGetMaxY(self.image.frame) + 13, SCREEN_WIDTH - 100, 30);
+    self.name.frame = CGRectMake(50, CGRectGetMaxY(self.image.frame) + 15, SCREEN_WIDTH - 100, 20);
     
-    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 10 - 30, CGRectGetMaxY(self.image.frame) + 18, 20, 20);
+    self.image_icon.frame = CGRectMake(SCREEN_WIDTH - 5 - 30, CGRectGetMaxY(self.image.frame) + 15, 20, 20);
 //    self.image_icon.backgroundColor = [UIColor orangeColor];
     
     self.view_bg.frame = CGRectMake(0, 250, SCREEN_WIDTH, 10);
