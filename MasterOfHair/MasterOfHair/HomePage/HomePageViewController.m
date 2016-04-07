@@ -401,7 +401,6 @@
     }
 }
 #pragma mark - scrollView的代理方法
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat x = self.lunbo_scrollView.contentOffset.x;
@@ -437,7 +436,6 @@
     if ([scrollView isEqual:self.lunbo_scrollView]) {
         
         self.lunbo_timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-        
     }
 }
 
