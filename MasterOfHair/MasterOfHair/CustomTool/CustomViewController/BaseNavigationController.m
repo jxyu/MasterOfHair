@@ -23,6 +23,21 @@
     return self;
 }
 
+-(void)showViewController:(UIViewController *)vc sender:(id)sender
+{
+    if (self.navigationController != nil)
+    {
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        [self presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
