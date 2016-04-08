@@ -789,9 +789,12 @@
     
     UIImagePickerController *controller = [[UIImagePickerController alloc] init];
     controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-    if ([self isFrontCameraAvailable]) {
-        controller.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    }
+    
+    controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+
+//    if ([self isFrontCameraAvailable]) {
+//        controller.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+//    }
     NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
     [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
     controller.mediaTypes = mediaTypes;
@@ -959,9 +962,10 @@
         if ([self isCameraAvailable] && [self doesCameraSupportTakingPhotos]) {
             UIImagePickerController *controller = [[UIImagePickerController alloc] init];
             controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-            if ([self isFrontCameraAvailable]) {
-                controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-            }
+            controller.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+
+//            if ([self isFrontCameraAvailable]) {
+//            }
             NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
             [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
             controller.mediaTypes = mediaTypes;
