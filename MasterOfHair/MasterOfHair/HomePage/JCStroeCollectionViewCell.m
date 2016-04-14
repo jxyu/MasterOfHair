@@ -24,22 +24,22 @@
 {
     self.contentView.backgroundColor = [UIColor whiteColor];
     
-    self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height / 7 * 4)];
+    self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height / 7 * 5)];
 //    self.image.backgroundColor = [UIColor orangeColor];
     self.image.layer.masksToBounds = YES;
     [self.contentView addSubview:self.image];
     
-    self.price = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.image.frame) + 3, self.contentView.frame.size.width - 10, 17)];
+    self.price = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.image.frame) + 3, self.contentView.frame.size.width - 10, 13)];
 //    self.price.backgroundColor = [UIColor blackColor];
     self.price.text = @"￥ 1111.11";
     self.price.textColor = [UIColor orangeColor];
     self.price.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:self.price];
     
-    self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.price.frame) + 3, self.contentView.frame.size.width - 10, 30)];
+    self.detail = [[UILabel alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.price.frame) + 3, self.contentView.frame.size.width - 10, 14)];
 //    self.detail.backgroundColor = [UIColor orangeColor];
     self.detail.text = @"VS沙宣VS沙宣VS沙宣VS沙宣VS";
-    self.detail.font = [UIFont systemFontOfSize:14];
+    self.detail.font = [UIFont systemFontOfSize:13];
     self.detail.numberOfLines = 1;
     [self.contentView addSubview:self.detail];
     

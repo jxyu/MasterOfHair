@@ -75,14 +75,14 @@
     _lblTitle.text = @"个人中心";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
-    [self addRightbuttontitle:@"设置"];
+//    [self addRightbuttontitle:@"设置"];
 }
 //点击设置按钮
 - (void)clickRightButton:(UIButton *)sender
 {
-    SettingViewController * settingViewController = [[SettingViewController alloc] init];
-    
-    [self showViewController:settingViewController sender:nil];
+//    SettingViewController * settingViewController = [[SettingViewController alloc] init];
+//    
+//    [self showViewController:settingViewController sender:nil];
 }
 
 //显示tabbar
@@ -110,6 +110,9 @@
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self.view addSubview:self.tableView];
+    
+    
+    
     
     //注册
     [self.tableView registerClass:[JCMineTableViewCell class] forCellReuseIdentifier:@"cell_mine"];
@@ -224,18 +227,23 @@
     [self.head_edit addTarget:self action:@selector(head_editAction:) forControlEvents:(UIControlEventTouchUpInside)];
 
     
+    UIView * footerview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    
+    
+    
     self.head_cancel = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    self.head_cancel.frame = CGRectMake(CGRectGetMaxX(self.head_edit.frame) + 20, CGRectGetMinY(self.head_edit.frame), length_x, 24 * (SCREEN_WIDTH / 320));
-    self.head_cancel.backgroundColor = [UIColor whiteColor];
+    self.head_cancel.frame = CGRectMake(20, -5, 280*(SCREEN_WIDTH/320) , 40);
+    self.head_cancel.backgroundColor = navi_bar_bg_color;
     self.head_cancel.layer.cornerRadius = 5;
 //    self.head_cancel.layer.borderWidth = 1;
 //    self.head_cancel.layer.borderColor = navi_bar_bg_color.CGColor;
-//    [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
-    [self.head_cancel setTintColor:navi_bar_bg_color];
-    [self.head_cancel setImage:[UIImage imageNamed:@"qwqasaszx"] forState:(UIControlStateNormal)];
-
-    [view_white addSubview:self.head_cancel];
-    [self.head_cancel addTarget:self action:@selector(head_cancelAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.head_cancel setTitle:@"退出登录" forState:(UIControlStateNormal)];
+    [self.head_cancel setTintColor:[UIColor whiteColor]];
+//    [self.head_cancel setImage:[UIImage imageNamed:@"qwqasaszx"] forState:(UIControlStateNormal)];
+    [footerview addSubview:self.head_cancel];
+    self.tableView.tableFooterView=footerview;
+//    [view_white addSubview:self.head_cancel];
+    [self.head_cancel addTarget:self action:@selector(head_cancelAction) forControlEvents:(UIControlEventTouchUpInside)];
     
     self.head_view_white = view_white;
     
@@ -386,7 +394,7 @@
 }
 
 #pragma mark - 退出登录
-- (void)head_cancelAction:(UIButton *)sender
+- (void)head_cancelAction
 {
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定退出该账号" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -451,7 +459,7 @@
             return 3;
             break;
         case 2:
-            return 1;
+            return 2;
             break;
         default:
             return 0;
@@ -510,30 +518,39 @@
             break;
         case 2:
         {
-            cell.name.text = @"申请成为代理商";
-            cell.image.image = [UIImage imageNamed:@"00001"];
-            cell.arrows_switch.hidden = YES;
-            
-            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-
-            if([[userdefault objectForKey:@"member_id"] length] == 0)
-            {
-                cell.arrows.hidden = NO;
-                cell.type.hidden = YES;
+            if (indexPath.row==0) {//设置
+                cell.name.text = @"设置";
+                cell.image.image = [UIImage imageNamed:@"00001"];
+                cell.arrows_switch.hidden = YES;
             }
             else
             {
-                if([self.delegate_type isEqualToString:@"1"])
-                {
-                    cell.arrows.hidden = YES;
-                    cell.type.hidden = NO;
-                }
-                else
+                cell.name.text = @"申请成为代理商";
+                cell.image.image = [UIImage imageNamed:@"00001"];
+                cell.arrows_switch.hidden = YES;
+                
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
                 {
                     cell.arrows.hidden = NO;
                     cell.type.hidden = YES;
                 }
+                else
+                {
+                    if([self.delegate_type isEqualToString:@"1"])
+                    {
+                        cell.arrows.hidden = YES;
+                        cell.type.hidden = NO;
+                    }
+                    else
+                    {
+                        cell.arrows.hidden = NO;
+                        cell.type.hidden = YES;
+                    }
+                }
             }
+            
 
         }
             break;
@@ -637,45 +654,30 @@
         case 2:
         {
 
-            if([[userdefault objectForKey:@"member_id"] length] == 0)
-            {
-                LoginViewController * loginViewController = [[LoginViewController alloc] init];
+            if (indexPath.row==0) {
+                SettingViewController * settingViewController = [[SettingViewController alloc] init];
                 
-                [self showViewController:loginViewController sender:nil];
+                [self showViewController:settingViewController sender:nil];
             }
             else
             {
-                
-                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-                
-//                NSLog(@"%@",[userdefault objectForKey:@"member_type"]);
-                
-//                [userdefault setObject:@"2" forKey:@"member_type"];
-                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
+                if([[userdefault objectForKey:@"member_id"] length] == 0)
                 {
-                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限,请开通金卡会员" preferredStyle:(UIAlertControllerStyleAlert)];
+                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
                     
-                    [self presentViewController:alert animated:YES completion:^{
-                        
-                    }];
-                    
-                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                        
-                    }];
-                    
-                    [alert addAction:action];
+                    [self showViewController:loginViewController sender:nil];
                 }
                 else
                 {
-                    if([self.delegate_type isEqualToString:@"0"])
+                    
+                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                    
+                    //                NSLog(@"%@",[userdefault objectForKey:@"member_type"]);
+                    
+                    //                [userdefault setObject:@"2" forKey:@"member_type"];
+                    if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
                     {
-                        ShenqingdailishangViewController * shenqingdailishangViewController = [[ShenqingdailishangViewController alloc] init];
-                        
-                        [self showViewController:shenqingdailishangViewController sender:nil];
-                    }
-                    else if([self.delegate_type isEqualToString:@"1"])
-                    {
-                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"正在审核申请中,请等待" preferredStyle:(UIAlertControllerStyleAlert)];
+                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您暂无此权限,请开通金卡会员" preferredStyle:(UIAlertControllerStyleAlert)];
                         
                         [self presentViewController:alert animated:YES completion:^{
                             
@@ -687,19 +689,42 @@
                         
                         [alert addAction:action];
                     }
-                    else if([self.delegate_type isEqualToString:@"2"])
+                    else
                     {
-                        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已经是代理商了" preferredStyle:(UIAlertControllerStyleAlert)];
-                        
-                        [self presentViewController:alert animated:YES completion:^{
+                        if([self.delegate_type isEqualToString:@"0"])
+                        {
+                            ShenqingdailishangViewController * shenqingdailishangViewController = [[ShenqingdailishangViewController alloc] init];
                             
-                        }];
-                        
-                        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                            [self showViewController:shenqingdailishangViewController sender:nil];
+                        }
+                        else if([self.delegate_type isEqualToString:@"1"])
+                        {
+                            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"正在审核申请中,请等待" preferredStyle:(UIAlertControllerStyleAlert)];
                             
-                        }];
-                        
-                        [alert addAction:action];
+                            [self presentViewController:alert animated:YES completion:^{
+                                
+                            }];
+                            
+                            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                                
+                            }];
+                            
+                            [alert addAction:action];
+                        }
+                        else if([self.delegate_type isEqualToString:@"2"])
+                        {
+                            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您已经是代理商了" preferredStyle:(UIAlertControllerStyleAlert)];
+                            
+                            [self presentViewController:alert animated:YES completion:^{
+                                
+                            }];
+                            
+                            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                                
+                            }];
+                            
+                            [alert addAction:action];
+                        }
                     }
                 }
             }
@@ -722,7 +747,7 @@
             return @"我的收藏";
             break;
         case 2:
-            return @"申请加盟";
+            return @"设置";
             break;
         default:
             return nil;

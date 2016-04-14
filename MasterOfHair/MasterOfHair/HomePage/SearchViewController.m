@@ -13,6 +13,12 @@
 #import "AppDelegate.h"
 #import "WebStroeCollectionViewCell.h"
 #import "chanpingxiangqingViewController.h"
+#import "HYSegmentedControl.h"
+#import "ShangmengViewController.h"
+#import "TuwenViewController.h"
+
+
+
 @interface SearchViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITextField * search_text;
@@ -25,6 +31,9 @@
 @end
 
 @implementation SearchViewController
+{
+    HYSegmentedControl *segmentedControl;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -138,7 +147,19 @@
     layout.itemSize = CGSizeMake(item_length + 11, item_length + 40);
     layout.sectionInset = UIEdgeInsetsMake(5, 10, 0, 10);
     
-    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    
+    
+    segmentedControl = [[HYSegmentedControl alloc] initWithOriginY:64 Titles:@[@"商城", @"视频",@"图文",@"商盟"] delegate:self] ;
+    [self.view addSubview:segmentedControl];
+    
+    
+    
+    
+    
+    
+    
+    
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
     self.stroe_collectionView.delegate = self;
     self.stroe_collectionView.dataSource = self;
     self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -147,6 +168,61 @@
     
     //
     [self.stroe_collectionView registerClass:[WebStroeCollectionViewCell class] forCellWithReuseIdentifier:@"cell_webStroe"];
+}
+
+
+#pragma mark HYSegmentedControl的代理
+- (void)changeSegmentedControlWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+        {
+            [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
+        }
+            break;
+        case 1://视频
+        {
+            TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+            tuwenViewController.isTeacher = 0;
+            
+            [self showViewController:tuwenViewController sender:nil];
+        }
+            break;
+        case 2://图文
+        {
+            TuwenViewController * tuwenViewController = [[TuwenViewController alloc] init];
+            tuwenViewController.isTeacher = 1;
+            
+            [self showViewController:tuwenViewController sender:nil];
+        }
+            break;
+        case 3:
+        {
+            if([get_sp(@"member_type") isEqualToString:@"3"])
+            {
+                ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
+                
+                [self showViewController:shangmengViewController sender:nil];
+            }
+            else
+            {
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"只有代理商才有权限进入" preferredStyle:(UIAlertControllerStyleAlert)];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                
+                [alert addAction:action];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 //代理

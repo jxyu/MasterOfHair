@@ -35,6 +35,11 @@
 
 #import "CreditViewController.h"
 #import "CreditWebViewController.h"
+
+#import "WBPopMenuModel.h"
+#import "WBPopMenuSingleton.h"
+
+
 @interface HomePageViewController ()  <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -171,7 +176,30 @@
 - (void)search_btnAction:(UIButton *)sender
 {
 //    NSLog(@"搜索");
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
+//    [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:2];
+    
+    
+//    NSMutableArray *obj = [NSMutableArray array];
+//    
+//    for (NSInteger i = 0; i < [self titles].count; i++) {
+//        
+//        WBPopMenuModel * info = [WBPopMenuModel new];
+//        info.image = [self images][i];
+//        info.title = [self titles][i];
+//        [obj addObject:info];
+//    }
+//    
+//    [[WBPopMenuSingleton shareManager]showPopMenuSelecteWithFrame:150
+//                                                             item:obj
+//                                                           action:^(NSInteger index) {
+//                                                               NSLog(@"index:%ld",(long)index);
+//                                                               
+//                                                           }];
+    SearchViewController * searchVC=[[SearchViewController alloc] init];
+    
+    searchVC.is_maker=@"0";
+    
+    [self showViewController:searchVC sender:nil];
 }
 
 //显示tabbar
@@ -503,7 +531,7 @@
                 break;
             case 2:
             {
-                cell.name.text = @"纹绣联盟";
+                cell.name.text = @"名师联盟";
                 cell.imageView.image = [UIImage imageNamed:@"01_35"];
 
             }
@@ -815,11 +843,11 @@
     
 }
 
-#pragma mark - 商品推荐
+#pragma mark - 精品推荐
 - (void)p_stroe
 {
     self.store_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 70, 27)];
-    self.store_detail.text = @"商品推荐";
+    self.store_detail.text = @"精品推荐";
     
     self.stroe_all = [UIButton buttonWithType:(UIButtonTypeSystem)];
     self.stroe_all.frame = CGRectMake(SCREEN_WIDTH - 5 - 80, 15, 80, 25);
@@ -1288,5 +1316,22 @@
 }
 
 
+- (NSArray *) titles {
+    return @[@"扫一扫",
+             @"加好友",
+             @"创建讨论组",
+             @"发送到电脑",
+             @"面对面快传",
+             @"收钱"];
+}
+
+- (NSArray *) images {
+    return @[@"right_menu_QR@3x",
+             @"right_menu_addFri@3x",
+             @"right_menu_multichat@3x",
+             @"right_menu_sendFile@3x",
+             @"right_menu_facetoface@3x",
+             @"right_menu_payMoney@3x"];
+}
 
 @end

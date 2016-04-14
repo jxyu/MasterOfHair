@@ -89,15 +89,17 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
     
     [self.window makeKeyAndVisible];
+    
 //    mUserDefault = [NSUserDefaults standardUserDefaults];
+    
 //    NSString *mRegistAcount = [mUserDefault valueForKey:LogIn_UserID_key];
+    
 //    NSString *mRegistPwd = [mUserDefault valueForKey:LogIn_UserPass_key];
     self.window.rootViewController =_tabBarViewCol;
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]) {
         
 //        self.window.rootViewController =_tabBarViewCol;
-        
         
 //        if((mRegistAcount == nil||[mRegistAcount isEqualToString:@"" ])||(mRegistPwd == nil || [mRegistPwd isEqualToString:@"" ]))
 //        {
@@ -115,11 +117,8 @@
     else
     {
 //        self.window.rootViewController =firstCol;
-        
         [self.window makeKeyAndVisible];
         //[self getAliPay];
-        
-    
     }
 }
 

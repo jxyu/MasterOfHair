@@ -81,6 +81,13 @@
 {
     _lblTitle.text = @"商城";
     _lblTitle.font = [UIFont systemFontOfSize:19];
+    [self addLeftButton:@"iconfont-fanhui"];
+    
+}
+
+-(void)clickLeftButton:(UIButton *)sender
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:0];
 }
 
 //显示tabbar

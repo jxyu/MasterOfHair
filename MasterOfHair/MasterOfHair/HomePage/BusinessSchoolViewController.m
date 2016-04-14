@@ -70,6 +70,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
     [self p_navi];
     
     [self p_setupView];
@@ -85,7 +87,13 @@
 {
     _lblTitle.text = @"商学院";
     _lblTitle.font = [UIFont systemFontOfSize:19];
+    [self addLeftButton:@"iconfont-fanhui"];
     
+}
+
+-(void)clickLeftButton:(UIButton *)sender
+{
+     [(AppDelegate *)[[UIApplication sharedApplication] delegate] selectTableBarIndex:0];
 }
 
 //显示tabbar
@@ -145,10 +153,10 @@
             return 200;
             break;
         case 1:
-            return 150;
+            return 110;
             break;
         case 2:
-            return 100;
+            return 65;
             break;
         case 3:
             return (SCREEN_WIDTH ) / 4 + 105;
@@ -191,16 +199,16 @@
             break;
         case 1:
         {
-            cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 150);
+            cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 110);
             cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 140)];
+            UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 100)];
             view_white.backgroundColor = [UIColor whiteColor];
             
             [self p_classify];
             
-            [view_white addSubview:self.classify_detail];
+//            [view_white addSubview:self.classify_detail];
             [view_white addSubview:self.classify_collectionView];
             
             [cell addSubview:view_white];
@@ -400,20 +408,20 @@
 #pragma mark - 分类10个
 - (void)p_classify
 {
-    self.classify_detail = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 25)];
-    self.classify_detail.text = @"视频图文分类";
-    self.classify_detail.textColor = [UIColor grayColor];
-    self.classify_detail.font = [UIFont systemFontOfSize:15];
+//    self.classify_detail = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 25)];
+//    self.classify_detail.text = @"视频图文分类";
+//    self.classify_detail.textColor = [UIColor grayColor];
+//    self.classify_detail.font = [UIFont systemFontOfSize:15];
     
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     //每个item的大小
-    int  item_length = (SCREEN_WIDTH - 20) / 6;
+    int  item_length = (SCREEN_WIDTH - 40) / 4;
     layout.itemSize = CGSizeMake(item_length, item_length + 20);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.classify_detail.frame) + 5, SCREEN_WIDTH, 105) collectionViewLayout:layout];
+    self.classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 95) collectionViewLayout:layout];
     self.classify_collectionView.delegate = self;
     self.classify_collectionView.dataSource = self;
     
@@ -800,30 +808,30 @@
 - (void)p_videoAndPic
 {
     CGFloat length_x = (SCREEN_WIDTH - 15) / 2;
-    self.view_video = [[UIView alloc] initWithFrame:CGRectMake(5, 15 + 3, length_x, 77)];
+    self.view_video = [[UIView alloc] initWithFrame:CGRectMake(5, 15 + 3, length_x, 44)];
     self.view_video.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    UILabel * video_text = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 25)];
+    UILabel * video_text = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 24)];
     video_text.text = @"视频";
 //    video_text.backgroundColor = [UIColor orangeColor];
     video_text.textColor = navi_bar_bg_color;
     [self.view_video addSubview:video_text];
     
-    UILabel * video_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(video_text.frame) + 5, 80, 25)];
-    video_detail.text = @"视频推荐说明";
-    video_detail.font = [UIFont systemFontOfSize:13];
-//    video_detail.backgroundColor = [UIColor orangeColor];
-    [self.view_video addSubview:video_detail];
+//    UILabel * video_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(video_text.frame) + 5, 80, 25)];
+//    video_detail.text = @"视频推荐说明";
+//    video_detail.font = [UIFont systemFontOfSize:13];
+////    video_detail.backgroundColor = [UIColor orangeColor];
+//    [self.view_video addSubview:video_detail];
     
-    UIImageView * video_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 11, 55, 55)];
-    video_image.layer.cornerRadius = 55 / 2;
+    UIImageView * video_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 0, 44, 44)];
+    video_image.layer.cornerRadius = 44 / 2;
     video_image.layer.masksToBounds = YES;
 //    video_image.backgroundColor = [UIColor orangeColor];
     [video_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/11.png",Url_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
     [self.view_video addSubview:video_image];
     
 
-    self.view_pic = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view_video.frame) + 5, 15 + 3, length_x, 77)];
+    self.view_pic = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view_video.frame) + 5, 15 + 3, length_x, 44)];
     self.view_pic.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     UILabel * pic_text = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 25)];
@@ -832,14 +840,14 @@
     pic_text.textColor = navi_bar_bg_color;
     [self.view_pic addSubview:pic_text];
     
-    UILabel * pic_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(pic_text.frame) + 5, 80, 25)];
-    pic_detail.text = @"图文推荐说明";
-    pic_detail.font = [UIFont systemFontOfSize:13];
-    //    pic_detail.backgroundColor = [UIColor orangeColor];
-    [self.view_pic addSubview:pic_detail];
+//    UILabel * pic_detail = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(pic_text.frame) + 5, 80, 25)];
+//    pic_detail.text = @"图文推荐说明";
+//    pic_detail.font = [UIFont systemFontOfSize:13];
+//    //    pic_detail.backgroundColor = [UIColor orangeColor];
+//    [self.view_pic addSubview:pic_detail];
     
-    UIImageView * pic_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 11, 55, 55)];
-    pic_image.layer.cornerRadius = 55 / 2;
+    UIImageView * pic_image = [[UIImageView alloc] initWithFrame:CGRectMake(length_x - 60, 0, 44, 44)];
+    pic_image.layer.cornerRadius = 44 / 2;
     pic_image.layer.masksToBounds = YES;
 //    pic_image.backgroundColor = [UIColor orangeColor];
     [pic_image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@themes/default/images/12.png",Url_pic]] placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
