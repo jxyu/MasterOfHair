@@ -389,6 +389,7 @@
 		803A5D8A1CBF419D0023C3AE /* WBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 803A5D7D1CBF419D0023C3AE /* WBTableViewDataSource.m */; };
 		803A5D8B1CBF419D0023C3AE /* WBTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 803A5D7F1CBF419D0023C3AE /* WBTableViewDelegate.m */; };
 		803A5D921CBF6E8B0023C3AE /* HYSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 803A5D911CBF6E8B0023C3AE /* HYSegmentedControl.m */; };
+		803A5D941CBF904F0023C3AE /* set_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 803A5D931CBF904F0023C3AE /* set_icon@2x.png */; };
 		8043C6BD1C4DC94500369EEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BC1C4DC94500369EEF /* main.m */; };
 		8043C6C01C4DC94500369EEF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8043C6BF1C4DC94500369EEF /* AppDelegate.m */; };
 		8043C6C61C4DC94500369EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8043C6C41C4DC94500369EEF /* Main.storyboard */; };
@@ -1075,6 +1076,7 @@
 		803A5D7F1CBF419D0023C3AE /* WBTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewDelegate.m; sourceTree = "<group>"; };
 		803A5D901CBF6E8B0023C3AE /* HYSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYSegmentedControl.h; sourceTree = "<group>"; };
 		803A5D911CBF6E8B0023C3AE /* HYSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYSegmentedControl.m; sourceTree = "<group>"; };
+		803A5D931CBF904F0023C3AE /* set_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_icon@2x.png"; sourceTree = "<group>"; };
 		8043C6B81C4DC94500369EEF /* MasterOfHair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasterOfHair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8043C6BC1C4DC94500369EEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8043C6BE1C4DC94500369EEF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2875,6 +2877,7 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				803A5D931CBF904F0023C3AE /* set_icon@2x.png */,
 				7BDE11731C7944AD0087E607 /* sudisudiusidusidu.png */,
 				800E8F9F1C5DD77300CB8CC5 /* select_down@2x.png */,
 				8078846D1C59B546006B8BB3 /* placeholder_short.jpg */,
@@ -3185,6 +3188,7 @@
 				800E8FA21C5DDFD500CB8CC5 /* iconfont-fanhui@2x.png in Resources */,
 				7BBC0D1D1CA265210014A5B0 /* ios-social-sdk-comment-quick.html in Resources */,
 				7BDA3D021C9BABF50099D6B2 /* qwertyui.png in Resources */,
+				803A5D941CBF904F0023C3AE /* set_icon@2x.png in Resources */,
 				7B299A1A1C7D8D2400D57B76 /* 01weuiwueiwu_48.png in Resources */,
 				7BBC0D1B1CA265210014A5B0 /* iOS-social-releasenote.html in Resources */,
 				7B586CA41C71C91800BE4295 /* shuoshuo1212.png in Resources */,
