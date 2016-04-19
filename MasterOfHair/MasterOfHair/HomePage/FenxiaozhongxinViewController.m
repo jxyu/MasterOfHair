@@ -12,6 +12,10 @@
 #import "FenxiaozhongxinTableViewCell.h"
 #import "NextFenxiaozhongxinViewController.h"
 #import "NextFenxiaozhongxin1ViewController.h"
+#import "FenxiaoDetialViewController.h"
+
+
+
 @interface FenxiaozhongxinViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -156,23 +160,24 @@
     }
     else
     {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.image.image = [UIImage imageNamed:@"122323232323"];
         switch (indexPath.row) {
             case 0:
             {
                 cell.name.text = @"未付款订单佣金";
                 cell.price.text = @"¥ 1112";
-                cell.image_icon.hidden = YES;
-                cell.number.hidden = YES;
+                cell.price.hidden=YES;
+                cell.image_icon.hidden = NO;
+                cell.number.hidden = NO;
                 
                 if([self.no_pay_order_brokerage length] == 0)
                 {
-                    cell.price.text = @"¥ 0";
+                    cell.number.text = @"¥ 0";
                 }
                 else
                 {
-                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.no_pay_order_brokerage];
+                    cell.number.text = [NSString stringWithFormat:@"￥ %@",self.no_pay_order_brokerage];
                 }
             }
                 break;
@@ -180,16 +185,17 @@
             {
                 cell.name.text = @"已付款订单佣金";
                 cell.price.text = @"¥ 112";
-                cell.image_icon.hidden = YES;
-                cell.number.hidden = YES;
+                cell.price.hidden=YES;
+                cell.image_icon.hidden = NO;
+                cell.number.hidden = NO;
                 
                 if([self.pay_order_brokerage length] == 0)
                 {
-                    cell.price.text = @"¥ 0";
+                    cell.number.text = @"¥ 0";
                 }
                 else
                 {
-                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.pay_order_brokerage];
+                    cell.number.text = [NSString stringWithFormat:@"￥ %@",self.pay_order_brokerage];
                 }
             }
                 break;
@@ -197,16 +203,17 @@
             {
                 cell.name.text = @"已收货订单佣金";
                 cell.price.text = @"¥ 1312";
-                cell.image_icon.hidden = YES;
-                cell.number.hidden = YES;
+                cell.price.hidden=YES;
+                cell.image_icon.hidden = NO;
+                cell.number.hidden = NO;
                 
                 if([self.receive_order_brokerage length] == 0)
                 {
-                    cell.price.text = @"¥ 0";
+                    cell.number.text = @"¥ 0";
                 }
                 else
                 {
-                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.receive_order_brokerage];
+                    cell.number.text = [NSString stringWithFormat:@"￥ %@",self.receive_order_brokerage];
                 }
             }
                 break;
@@ -214,16 +221,17 @@
             {
                 cell.name.text = @"可提现余额";
                 cell.price.text = @"¥ 5112";
-                cell.image_icon.hidden = YES;
-                cell.number.hidden = YES;
+                cell.price.hidden=YES;
+                cell.image_icon.hidden = NO;
+                cell.number.hidden = NO;
                 
                 if([self.wallet_balance length] == 0)
                 {
-                    cell.price.text = @"¥ 0";
+                    cell.number.text = @"¥ 0";
                 }
                 else
                 {
-                    cell.price.text = [NSString stringWithFormat:@"￥ %@",self.wallet_balance];
+                    cell.number.text = [NSString stringWithFormat:@"￥ %@",self.wallet_balance];
                 }
             }
                 break;

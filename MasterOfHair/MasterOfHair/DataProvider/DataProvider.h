@@ -369,6 +369,9 @@
 #pragma mark - 获取某会员的收货地址
 - (void)getAddressesWithaddress_id:(NSString *)address_id;
 
+#pragma mark - 获取某会员的佣金来源详情
+-(void)GetyongjinDetialWithmember_id:(NSString *)member_id;
+
 
 
 

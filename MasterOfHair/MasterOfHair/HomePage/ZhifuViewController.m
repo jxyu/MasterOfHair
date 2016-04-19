@@ -194,7 +194,7 @@
 #pragma mark - 支付
 - (void)create:(id )dict
 {
-//    NSLog(@"%@",dict);
+    DLog(@"%@",dict);
     
     [SVProgressHUD dismiss];
     

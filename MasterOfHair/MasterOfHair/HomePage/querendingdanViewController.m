@@ -860,7 +860,7 @@
 #pragma mark - 支付
 - (void)dingdanzhifu:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     [SVProgressHUD dismiss];
     

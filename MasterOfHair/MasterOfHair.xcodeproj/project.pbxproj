@@ -417,6 +417,7 @@
 		807884681C59B0BD006B8BB3 /* shopCar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8078845E1C59B0BD006B8BB3 /* shopCar@2x.png */; };
 		8078846F1C59B546006B8BB3 /* placeholder_short.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8078846D1C59B546006B8BB3 /* placeholder_short.jpg */; };
 		807884701C59B546006B8BB3 /* Placeholder_long.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8078846E1C59B546006B8BB3 /* Placeholder_long.jpg */; };
+		807AD9C71CC4B63500CEBD6A /* FenxiaoDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 807AD9C61CC4B63500CEBD6A /* FenxiaoDetialViewController.m */; };
 		8082B49C1C740ADC0024EAD3 /* AdvertiseClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8082B49B1C740ADC0024EAD3 /* AdvertiseClassesViewController.m */; };
 		8082B4C01C7414320024EAD3 /* JKImagePickerController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8082B49F1C7414320024EAD3 /* JKImagePickerController.strings */; };
 		8082B4C11C7414320024EAD3 /* ImagesPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8082B4A11C7414320024EAD3 /* ImagesPicker.xcassets */; };
@@ -1120,6 +1121,8 @@
 		8078845E1C59B0BD006B8BB3 /* shopCar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopCar@2x.png"; sourceTree = "<group>"; };
 		8078846D1C59B546006B8BB3 /* placeholder_short.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder_short.jpg; sourceTree = "<group>"; };
 		8078846E1C59B546006B8BB3 /* Placeholder_long.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Placeholder_long.jpg; sourceTree = "<group>"; };
+		807AD9C51CC4B63500CEBD6A /* FenxiaoDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FenxiaoDetialViewController.h; sourceTree = "<group>"; };
+		807AD9C61CC4B63500CEBD6A /* FenxiaoDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FenxiaoDetialViewController.m; sourceTree = "<group>"; };
 		8082B49A1C740ADC0024EAD3 /* AdvertiseClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertiseClassesViewController.h; sourceTree = "<group>"; };
 		8082B49B1C740ADC0024EAD3 /* AdvertiseClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertiseClassesViewController.m; sourceTree = "<group>"; };
 		8082B4A01C7414320024EAD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JKImagePickerController.strings; sourceTree = "<group>"; };
@@ -2087,6 +2090,8 @@
 				7BB26FF11C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m */,
 				7BB26FF31C5B57BE001D332E /* NextFenxiaoTableViewCell.h */,
 				7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */,
+				807AD9C51CC4B63500CEBD6A /* FenxiaoDetialViewController.h */,
+				807AD9C61CC4B63500CEBD6A /* FenxiaoDetialViewController.m */,
 			);
 			name = fenxiaozhongxin;
 			sourceTree = "<group>";
@@ -3370,6 +3375,7 @@
 				802552A81C57442B00CFF875 /* SCAssetExportSession.m in Sources */,
 				802552A71C57442B00CFF875 /* README.md in Sources */,
 				7B46EE121C607ECD00E33E0E /* ShenqingdailishangViewController.m in Sources */,
+				807AD9C71CC4B63500CEBD6A /* FenxiaoDetialViewController.m in Sources */,
 				802552AF1C57442B00CFF875 /* SCImageView.m in Sources */,
 				7B8B33B51C731B3E008C6CD4 /* ZhaopiankuCollectionViewCell.m in Sources */,
 				7BF8780A1C9A55A9008F23A7 /* WenxiulianmengLocationViewController.m in Sources */,
