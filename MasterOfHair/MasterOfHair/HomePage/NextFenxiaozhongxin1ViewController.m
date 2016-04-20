@@ -9,7 +9,7 @@
 #import "NextFenxiaozhongxin1ViewController.h"
 
 #import "Fenxiaozhongxin_Model.h"
-
+#import "FenxiaoDetialViewController.h"
 #import "NextFenxiaoTableViewCell.h"
 @interface NextFenxiaozhongxin1ViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -140,6 +140,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Fenxiaozhongxin_Model * model = self.arr_data[indexPath.row];
+    FenxiaoDetialViewController * fenxiaoDetial=[[FenxiaoDetialViewController alloc] init];
+    
+    fenxiaoDetial.member_id=model.member_id;
+    
+    fenxiaoDetial.Order_stute=@"4";
+    
+    fenxiaoDetial.member_level=@"2";
+    
+    [self showViewController:fenxiaoDetial sender:nil ];
 }
 
 #pragma mark - 数据数据

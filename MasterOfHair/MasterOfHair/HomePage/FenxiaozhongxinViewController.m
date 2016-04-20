@@ -222,7 +222,7 @@
                 cell.name.text = @"可提现余额";
                 cell.price.text = @"¥ 5112";
                 cell.price.hidden=YES;
-                cell.image_icon.hidden = NO;
+                cell.image_icon.hidden = YES;
                 cell.number.hidden = NO;
                 
                 if([self.wallet_balance length] == 0)
@@ -261,6 +261,32 @@
             
             [self showViewController:nextFenxiaozhongxin1ViewController sender:nil];
         }
+    }else if (indexPath.section==1)
+    {
+        if (indexPath.row!=3) {
+            FenxiaoDetialViewController * fenxiaoDetial=[[FenxiaoDetialViewController alloc] init];
+            
+            fenxiaoDetial.member_id=get_sp(@"member_id");
+            
+            switch (indexPath.row) {
+                case 0:
+                    fenxiaoDetial.Order_stute=@"1";
+                    break;
+                case 1:
+                    fenxiaoDetial.Order_stute=@"2";
+                    break;
+                case 2:
+                    fenxiaoDetial.Order_stute=@"4";
+                    break;
+                default:
+                    break;
+            }
+            
+            fenxiaoDetial.member_level=@"0";
+            
+            [self showViewController:fenxiaoDetial sender:nil ];
+        }
+        
     }
 }
 

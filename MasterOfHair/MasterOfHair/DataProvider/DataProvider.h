@@ -370,7 +370,7 @@
 - (void)getAddressesWithaddress_id:(NSString *)address_id;
 
 #pragma mark - 获取某会员的佣金来源详情
--(void)GetyongjinDetialWithmember_id:(NSString *)member_id;
+-(void)GetyongjinDetialWithmember_id:(NSString *)member_id andorder_status:(NSString *)order_status andmember_level:(NSString *)member_level andpagenumber:(NSString *)pagenumber andpagesize:(NSString *)pagesize;
 
 
 

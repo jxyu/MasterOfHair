@@ -436,6 +436,8 @@
 		8082B4CE1C7414320024EAD3 /* UIView+JKPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8082B4BD1C7414320024EAD3 /* UIView+JKPicker.m */; };
 		8082B4CF1C7414320024EAD3 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8082B4BF1C7414320024EAD3 /* PhotoCell.m */; };
 		80CF4DEC1C5E038000CE2CB5 /* select_baise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80CF4DEB1C5E038000CE2CB5 /* select_baise@2x.png */; };
+		80EA06D61CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80EA06D41CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m */; };
+		80EA06D71CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80EA06D51CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1157,6 +1159,9 @@
 		8082B4BE1C7414320024EAD3 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		8082B4BF1C7414320024EAD3 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		80CF4DEB1C5E038000CE2CB5 /* select_baise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_baise@2x.png"; sourceTree = "<group>"; };
+		80EA06D31CC70B02009AFD3E /* FenxiaoDetialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FenxiaoDetialTableViewCell.h; sourceTree = "<group>"; };
+		80EA06D41CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FenxiaoDetialTableViewCell.m; sourceTree = "<group>"; };
+		80EA06D51CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FenxiaoDetialTableViewCell.xib; sourceTree = "<group>"; };
 		A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.release.xcconfig"; sourceTree = "<group>"; };
 		DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -2092,6 +2097,9 @@
 				7BB26FF41C5B57BE001D332E /* NextFenxiaoTableViewCell.m */,
 				807AD9C51CC4B63500CEBD6A /* FenxiaoDetialViewController.h */,
 				807AD9C61CC4B63500CEBD6A /* FenxiaoDetialViewController.m */,
+				80EA06D31CC70B02009AFD3E /* FenxiaoDetialTableViewCell.h */,
+				80EA06D41CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m */,
+				80EA06D51CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib */,
 			);
 			name = fenxiaozhongxin;
 			sourceTree = "<group>";
@@ -3234,6 +3242,7 @@
 				7BBC0CE61CA264690014A5B0 /* UMSnsAccountViewController.xib in Resources */,
 				7B142E451C58B97900B32809 /* 01_59@2x.png in Resources */,
 				7B302E941C92C246008CAC96 /* baomingkecheng@2x.png in Resources */,
+				80EA06D71CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib in Resources */,
 				7BAABAC31C59B14200C14DF8 /* 0000000000002.png in Resources */,
 				7BBC0CE51CA264690014A5B0 /* UMSLoginViewController.xib in Resources */,
 				7B142E4D1C58BC4E00B32809 /* 01shoppingCar_03.png in Resources */,
@@ -3338,6 +3347,7 @@
 				802553021C574F7100CFF875 /* MJRefreshComponent.m in Sources */,
 				802553071C574F7100CFF875 /* MJRefreshAutoStateFooter.m in Sources */,
 				7B0433C81C5C67AC0052F4AC /* QianbaoTableViewCell.m in Sources */,
+				80EA06D61CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m in Sources */,
 				7BCD55271C55D39500F32F16 /* MingshiViewController.m in Sources */,
 				8024922D1C78459B008BA570 /* MoviePlayer.m in Sources */,
 				803A5D921CBF6E8B0023C3AE /* HYSegmentedControl.m in Sources */,

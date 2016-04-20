@@ -1423,13 +1423,13 @@
 
 
 #pragma mark - 获取某会员的佣金来源详情
--(void)GetyongjinDetialWithmember_id:(NSString *)member_id andorder_status:(NSString *)order_status andmember_level:(NSString *)member_level
+-(void)GetyongjinDetialWithmember_id:(NSString *)member_id andorder_status:(NSString *)order_status andmember_level:(NSString *)member_level andpagenumber:(NSString *)pagenumber andpagesize:(NSString *)pagesize
 {
     if(member_id)
     {
         NSString * url=[NSString stringWithFormat:@"%@site/GetOrdersWithBrokerage",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\"}",member_id]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"order_status\":\"%@\",\"member_level\":\"%@\"}",member_id,order_status,member_level],@"page":[NSString stringWithFormat:@"{\"pagenumber\":\"%@\",\"pagesize\":\"%@\"}",pagenumber,pagesize]};
         
         [self PostRequest:url andpram:prm];
     }

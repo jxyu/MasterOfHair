@@ -12,5 +12,7 @@
 @interface FenxiaoDetialViewController : BaseNavigationController
 
 @property (nonatomic,strong) NSString * member_id;
+@property (nonatomic,strong) NSString * Order_stute;
+@property (nonatomic,strong) NSString * member_level;
 
 @end
