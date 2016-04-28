@@ -169,7 +169,7 @@
     
     self.head_name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 5, CGRectGetMinY(label_1.frame), SCREEN_WIDTH - CGRectGetMaxX(label_1.frame) - 15, 20)];
     self.head_name.font = [UIFont systemFontOfSize:15];
-    self.head_name.text = @"18888888888888";
+    self.head_name.text = @"18888888888";
     //    self.head_name.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.head_name];
     
