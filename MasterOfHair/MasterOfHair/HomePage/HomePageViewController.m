@@ -750,17 +750,11 @@
                 NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                 
                 
-                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"])
+                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"1"]||get_sp(@"member_type")==nil)
                 {
                     JinkahuiyuanViewController * jinkahuiyuanViewController = [[JinkahuiyuanViewController alloc] init];
                     
                     [self showViewController:jinkahuiyuanViewController sender:nil];
-                }
-                else if([[userdefault objectForKey:@"member_id"] length] == 0)
-                {
-                    LoginViewController * loginViewController = [[LoginViewController alloc] init];
-                    
-                    [self showViewController:loginViewController sender:nil];
                 }
                 else
                 {
@@ -823,14 +817,14 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
-        if([[userdefault objectForKey:@"member_id"] length] == 0)
-        {
-            LoginViewController * loginViewController = [[LoginViewController alloc] init];
-            
-            [self showViewController:loginViewController sender:nil];
-        }
-        else
-        {
+//        if([[userdefault objectForKey:@"member_id"] length] == 0)
+//        {
+//            LoginViewController * loginViewController = [[LoginViewController alloc] init];
+//            
+//            [self showViewController:loginViewController sender:nil];
+//        }
+//        else
+//        {
             TuWen_Models * model = self.arr_video[indexPath.item];
             
             VideoDetailViewController * videoDetailViewController = [[VideoDetailViewController alloc] init];
@@ -838,7 +832,7 @@
             videoDetailViewController.video_id = model.video_id;
             
             [self showViewController:videoDetailViewController sender:nil];
-        }
+//        }
     }
     
 }

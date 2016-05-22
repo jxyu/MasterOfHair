@@ -61,13 +61,19 @@
 @end
 
 @implementation chanpingxiangqingViewController
+{
+    int goodNum;
+    UILabel * lbl_num;
+    NSString * danwei;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-    
+    danwei=@"";
+    goodNum=1;
     [self p_navi];
     
     [self p_setupView];
@@ -138,7 +144,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,6 +168,10 @@
         {
             return 95 + 50 * (self.arr_list.count - 1);
         }
+    }
+    else if (indexPath.row==3)
+    {
+        return 95;
     }
     return SCREEN_HEIGHT / 3 * 2;
 }
@@ -326,6 +336,45 @@
         [self.tagList addTarget:self action:@selector(selectedTagsChanged:) forControlEvents:UIControlEventValueChanged];
         [cell addSubview:self.tagList];
     }
+    else if (indexPath.row==3)
+    {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [cell addSubview:view_line];
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 100, 20)];
+        label.text = [NSString stringWithFormat:@"购买数量%@",danwei];
+        label.font = [UIFont systemFontOfSize:15];
+        [cell addSubview:label];
+        
+        UIView * view_line1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label.frame) + 10, SCREEN_WIDTH, 1)];
+        view_line1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        [cell addSubview:view_line1];
+        
+        
+        UIButton * btn_jia=[[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-50, CGRectGetMaxY(view_line.frame)+35, 44, 44)];
+        [btn_jia setTitle:@"十" forState:UIControlStateNormal];
+        btn_jia.tag=2;
+        [btn_jia setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn_jia addTarget:self action:@selector(changeGoodNumber:) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:btn_jia];
+        
+        lbl_num=[[UILabel alloc] initWithFrame:CGRectMake(btn_jia.frame.origin.x-30, btn_jia.center.y-10, 30, 20)];
+        lbl_num.textAlignment=NSTextAlignmentCenter;
+        lbl_num.text=[NSString stringWithFormat:@"%d",goodNum];
+        [cell addSubview:lbl_num];
+        UIButton * btn_jian=[[UIButton alloc] initWithFrame:CGRectMake(lbl_num.frame.origin.x-44, btn_jia.frame.origin.y, 44, 44)];
+        btn_jian.tag=1;
+        [btn_jian setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn_jian setTitle:@"一" forState:UIControlStateNormal];
+        [btn_jian addTarget:self action:@selector(changeGoodNumber:) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:btn_jian];
+        
+    }
     else
     {
 //        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
@@ -373,7 +422,19 @@
     
     return cell;
 }
-
+-(void)changeGoodNumber:(UIButton *)sender
+{
+    if (sender.tag==1) {
+        if (goodNum>1) {
+            --goodNum;
+        }
+    }
+    else
+    {
+        ++goodNum;
+    }
+    lbl_num.text=[NSString stringWithFormat:@"%d",goodNum];
+}
 #pragma mark - 点击分享 和规格
 - (void)shareAction:(UIButton *)sender
 {
@@ -511,7 +572,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-            [dataprovider createWithProduction_id:self.production_id number:@"1" price:model.sell_price member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
+            [dataprovider createWithProduction_id:self.production_id number:[NSString stringWithFormat:@"%d",goodNum] price:model.sell_price member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
         }
         else
         {
@@ -787,6 +848,12 @@
                 [self.arr_list addObject:dic[@"specs_name"]];
                 
                 [self.arr_guige addObject:model];
+            }
+            
+            if (arr.firstObject[@"production_unit"]!=nil) {
+                if ([NSString stringWithFormat:@"%@",arr.firstObject[@"production_unit"]].length>0) {
+                    danwei=[NSString stringWithFormat:@"(%@)",arr.firstObject[@"production_unit"]];
+                }
             }
             
         }

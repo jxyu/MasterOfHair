@@ -16,6 +16,7 @@
 #import "GaojijishiViewController.h"
 #import "HezuomingdianViewController.h"
 #import "WenxiulianmengLocationViewController.h"
+#import "SearchViewController.h"
 @interface wenxiulianmengViewController () <UITableViewDataSource, UITableViewDelegate>
 
 //上面的btn
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) UIButton * top_btnFactory;
 @property (nonatomic, strong) UIView * top_viewPeople;
 @property (nonatomic, strong) UIView * top_viewFactory;
+@property (nonatomic, strong) UIButton *delegate_search;
 
 @property (nonatomic, assign) BOOL isTeacher;
 
@@ -176,6 +178,27 @@
     self.top_viewPeople.backgroundColor = navi_bar_bg_color;
     [self.top_white addSubview:self.top_viewPeople];
     self.top_viewPeople.hidden = YES;
+    
+    
+    self.delegate_search = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    self.delegate_search.frame = CGRectMake(10, 118, SCREEN_WIDTH - 20, 40);
+    self.delegate_search.layer.cornerRadius = SCREEN_WIDTH * 0.055;
+    self.delegate_search.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    self.delegate_search.layer.borderWidth = 1;
+    self.delegate_search.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.delegate_search];
+    [self.delegate_search addTarget:self action:@selector(delegate_searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
+    image.image = [UIImage imageNamed:@"iconfont-sousuo"];
+    [self.delegate_search addSubview:image];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 7.5, 90, 25)];
+    label.text = @"请输入关键字";
+    //    label.backgroundColor = [UIColor orangeColor];
+    label.font = [UIFont systemFontOfSize:15];
+    label.textColor = [UIColor grayColor];
+    [self.delegate_search addSubview:label];
 }
 
 #pragma mark - 合作店 和 纹绣师的btn
@@ -203,6 +226,15 @@
     });
 }
 
+
+-(void)delegate_searchAction:(UIButton *)sender
+{
+    SearchViewController * searchVC=[[SearchViewController alloc] init];
+    
+    searchVC.is_maker=@"0";
+    
+    [self showViewController:searchVC sender:nil];
+}
 //纹绣师的btn
 - (void)top_btnPeopleAction:(UIButton *)sender
 {
@@ -232,7 +264,8 @@
 #pragma mark - tableView
 - (void)p_tableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50 + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 64) style:(UITableViewStylePlain)];
+    UIView * lastView=[self.view.subviews lastObject];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lastView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - 50 - 64) style:(UITableViewStylePlain)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

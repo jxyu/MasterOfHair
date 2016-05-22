@@ -13,10 +13,11 @@
 #import "NextFenxiaozhongxinViewController.h"
 #import "NextFenxiaozhongxin1ViewController.h"
 #import "FenxiaoDetialViewController.h"
+#import "UMSocial.h"
 
 
 
-@interface FenxiaozhongxinViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FenxiaozhongxinViewController () <UITableViewDelegate, UITableViewDataSource,UMSocialUIDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -62,6 +63,16 @@
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
+    [self addRightbuttontitle:@"分享"];
+}
+-(void)clickRightButton:(UIButton *)sender
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"56e8cf6867e58ea9710004b8"
+                                      shareText:@"快来下载剃头匠"
+                                     shareImage:[UIImage imageNamed:@"sudisudiusidusidu"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil]
+                                       delegate:self];
 }
 
 //返回
@@ -339,10 +350,11 @@
     [view_white addSubview:label1];
     
     self.head_ID = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label1.frame) + 5, CGRectGetMinY(self.head_image.frame), SCREEN_WIDTH - CGRectGetMaxX(label1.frame) - 15, 25)];
-    self.head_ID.text = @"未设置";
+    self.head_ID.text = get_sp(@"member_username");
 //    self.head_ID.backgroundColor = [UIColor orangeColor];
     self.head_ID.font = [UIFont systemFontOfSize:15];
     [view_white addSubview:self.head_ID];
+    
     
     UIImageView * image_1 = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.head_image.frame) + 10, CGRectGetMaxY(label1.frame) + 10, 30, 30)];
 //    image_1.backgroundColor = [UIColor orangeColor];
@@ -486,7 +498,7 @@
 
             if([dic[@"spread_id"] length] == 0 || [dic[@"spread_id"] isEqual:[NSNull null]])
             {
-                self.head_ID.text = @"未设置";
+                self.head_ID.text = get_sp(@"member_username");
             }
             else
             {

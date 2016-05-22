@@ -129,7 +129,7 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_data2];
         
@@ -139,7 +139,7 @@
         [weakSelf loadNewData];
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_data1];
         
@@ -310,14 +310,27 @@
 #pragma mark - 头视图
 - (void)p_headView
 {
-    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 260)];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 260+SCREEN_WIDTH*165/320)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [self p_lunbotu];
     
     [self.head_view addSubview:self.lunbo_scrollView];
     [self.head_view addSubview:self.lunbo_pageControl];
+    UIImageView * img_backGround=[[UIImageView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, SCREEN_WIDTH*165/320)];
+    img_backGround.image=[UIImage imageNamed:@"10shangpu"];
+    img_backGround.userInteractionEnabled=YES;
     
+    [self.head_view addSubview:img_backGround];
+    for (int i=0; i<10; i++) {
+        UIButton * btn_item=[[UIButton alloc] init];
+        btn_item.bounds=CGRectMake(0, 0, SCREEN_WIDTH/5, img_backGround.frame.size.height/2);
+        btn_item.center=CGPointMake((SCREEN_WIDTH/10)*(2*(i%5)+1), i>=5?(img_backGround.frame.size.height/4)*3:(img_backGround.frame.size.height/4));
+        //        btn_item.backgroundColor=[UIColor redColor];
+        [btn_item addTarget:self action:@selector(fenleiBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        btn_item.tag=i;
+        [img_backGround addSubview:btn_item];
+    }
     //搜索。。。。。。。
     [self p_setupView2];
 }
@@ -326,8 +339,8 @@
 - (void)p_setupView2
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    self.headview_Factory = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
+    UIView * lastView=[self.head_view.subviews lastObject];
+    self.headview_Factory = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lastView.frame), SCREEN_WIDTH, 60)];
     self.headview_Factory.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.head_view addSubview:self.headview_Factory];
     
@@ -531,19 +544,19 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }
@@ -586,7 +599,12 @@
         
     }
 }
-
+-(void)fenleiBtnClick:(UIButton *)sender
+{
+    NSString * str_category=[NSString stringWithFormat:@"%ld",sender.tag+19];
+    set_sp(@"category_id", str_category);
+    [self example01];
+}
 - (void)lunsdsd
 {
     self.lunbo_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * (self.arr_lunboData.count + 2), 0);
@@ -669,15 +687,14 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"product:"];
     
-    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    if([[userdefault objectForKey:@"category_id"] length] == 0)
+    if([get_sp(@"category_id") length] == 0)
     {
         [dataprovider productWithcategory_id:@"0" is_maker:@"1" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
     }
     else
     {
-        [dataprovider productWithcategory_id:[userdefault objectForKey:@"category_id"] is_maker:@"1" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
+        [dataprovider productWithcategory_id:get_sp(@"category_id") is_maker:@"1" is_sell:@"1" pagenumber:@"1" pagesize:@"9"];
     }
 }
 

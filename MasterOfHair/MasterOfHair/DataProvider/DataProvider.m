@@ -1434,9 +1434,39 @@
         [self PostRequest:url andpram:prm];
     }
 }
+-(void)AppleVerifyWithmenber_id:(NSString *)member_id andverify_code:(NSData *)verify_code anduuid:(NSString *)uuid andtype:(NSString *)type
+{
+    if(member_id&&verify_code&&uuid&&type)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@AppleVerify/Verify",Url];
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"verify_code\":\"%@\",\"uuid\":\"%@\",\"type\":\"%@\"}",member_id,verify_code,uuid,type]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
-
-
+-(void)GetRightList:(NSString *)uuid
+{
+    if(uuid)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@AppleRight/GetRightList",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"uuid\":\"%@\"}",uuid]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+-(void)AppleRightUpdate:(NSString *)uuid andtype:(NSString *)type
+{
+    if(uuid&&type)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@AppleRight/GetRightList",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"uuid\":\"%@\",\"type\":\"%@\"}",uuid,type]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
 
 
 
@@ -1561,6 +1591,7 @@
     NSData *data=[NSData dataWithContentsOfFile:imagePath];
     NSURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:prm constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"filestream" fileName:@"avatar.jpg" mimeType:@"image/jpg"];
+//        [formData appendPartWithFileURL:<#(nonnull NSURL *)#> name:<#(nonnull NSString *)#> fileName:<#(nonnull NSString *)#> mimeType:<#(nonnull NSString *)#> error:<#(NSError *__autoreleasing  _Nullable * _Nullable)#>];
     }];
     
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];

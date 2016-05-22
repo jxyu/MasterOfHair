@@ -372,10 +372,12 @@
 #pragma mark - 获取某会员的佣金来源详情
 -(void)GetyongjinDetialWithmember_id:(NSString *)member_id andorder_status:(NSString *)order_status andmember_level:(NSString *)member_level andpagenumber:(NSString *)pagenumber andpagesize:(NSString *)pagesize;
 
-
-
-
-
+#pragma mark -  苹果支付凭证验证
+-(void)AppleVerifyWithmenber_id:(NSString *)member_id andverify_code:(NSData *)verify_code  anduuid:(NSString *)uuid andtype:(NSString *)type;
+#pragma mark - 获取用户手机看视频权限
+-(void)GetRightList:(NSString *)uuid;
+#pragma mark - 更新用户看视频权限
+-(void)AppleRightUpdate:(NSString *)uuid andtype:(NSString *)type;
 
 
 

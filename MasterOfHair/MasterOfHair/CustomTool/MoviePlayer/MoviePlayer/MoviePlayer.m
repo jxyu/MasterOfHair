@@ -10,6 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "MyActivityIndicatorView.h"
 #import "Slider.h"
+#import "DataProvider.h"
+#import "SvUDIDTools.h"
 @interface MoviePlayer ()<ProgressDelegate>
 
 @property (nonatomic, strong) MPMoviePlayerController *moviePlayer; // 视频播放控件
@@ -323,9 +325,26 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
     [self addGestureRecognizer:pan];
     
+    
+    set_sp(@"videozhifu_ok", @"0");
+    
+    DataProvider * dataprovoder=[[DataProvider alloc] init];
+    
+    [dataprovoder setDelegateObject:self setBackFunctionName:@"RequestCallBack:"];
+    
+    [dataprovoder AppleRightUpdate:[SvUDIDTools UDID] andtype:@"0"];
+    
 }
-
-
+-(void)RequestCallBack:(id)dict
+{
+    if ([dict[@"status"][@"succeed"] intValue] != 1) {
+        DataProvider * dataprovoder=[[DataProvider alloc] init];
+        
+        [dataprovoder setDelegateObject:self setBackFunctionName:@"RequestCallBack:"];
+        
+        [dataprovoder AppleRightUpdate:[SvUDIDTools UDID] andtype:@"0"];
+    }
+}
 #pragma mark - 平移手势方法
 - (void)panDirection:(UIPanGestureRecognizer *)pan
 {

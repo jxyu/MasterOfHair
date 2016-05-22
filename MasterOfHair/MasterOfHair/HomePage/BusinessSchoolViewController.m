@@ -115,7 +115,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.showsVerticalScrollIndicator=NO;
     [self.view addSubview:self.tableView];
     
     __weak __typeof(self) weakSelf = self;
@@ -130,7 +130,7 @@
         
         [self p_data2];
         //        self.isplay = 0;
-        [weakSelf.tableView reloadData];
+//        [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
     }];
 }
@@ -212,6 +212,16 @@
             [view_white addSubview:self.classify_collectionView];
             
             [cell addSubview:view_white];
+            UIImageView * img_left=[[UIImageView alloc] init];
+            img_left.center=CGPointMake(5, 55);
+            img_left.bounds=CGRectMake(0, 0, 20, 25);
+            img_left.image=[UIImage imageNamed:@"arrow_left"];
+            [cell addSubview:img_left];
+            UIImageView * img_right=[[UIImageView alloc] init];
+            img_right.center=CGPointMake(SCREEN_WIDTH-5, 55);
+            img_right.bounds=CGRectMake(0, 0, 20, 25);
+            img_right.image=[UIImage imageNamed:@"01fanhui_07"];
+            [cell addSubview:img_right];
         }
             break;
         case 2:
@@ -463,82 +473,17 @@
         
         if(self.arr_pic.count != 0)
         {
-            Shipintuwen_Models * model = self.arr_pic[indexPath.item];
-            
-            cell.name.text=[[NSString stringWithFormat:@"%@",model.channel_name] isEqual:@"<null>"]?@"":[NSString stringWithFormat:@"%@",model.channel_name];
-            
-            NSString * str =  [NSString stringWithFormat:@"%@uploads/channel/%@",Url_pic,model.channel_image];
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
-        }
-        else
-        {
-            switch (indexPath.row) {
-                case 0:
-                {
-                    cell.name.text = @"美业";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 1:
-                {
-                    cell.name.text = @"美发";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 2:
-                {
-                    cell.name.text = @"美容";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 3:
-                {
-                    cell.name.text = @"纹绣";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 4:
-                {
-                    cell.name.text = @"纹身";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 5:
-                {
-                    cell.name.text = @"足浴";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 6:
-                {
-                    cell.name.text = @"化妆";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 7:
-                {
-                    cell.name.text = @"美甲";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 8:
-                {
-                    cell.name.text = @"扎发";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                case 9:
-                {
-                    cell.name.text = @"更多";
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder_short.jpg"];
-                }
-                    break;
-                default:
-                    break;
+            if (indexPath.item<self.arr_pic.count) {
+                Shipintuwen_Models * model = self.arr_pic[indexPath.item];
+                
+                cell.name.text=[[NSString stringWithFormat:@"%@",model.channel_name] isEqual:@"<null>"]?@"":[NSString stringWithFormat:@"%@",model.channel_name];
+                
+                NSString * str =  [NSString stringWithFormat:@"%@uploads/channel/%@",Url_pic,model.channel_image];
+                [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str]placeholderImage:[UIImage imageNamed:@"placeholder_short.jpg"]];
+                
             }
-
-        }
-        
+            
+        }        
         return cell;
     }
     else if([collectionView isEqual:self.stroe_collectionView])
@@ -1076,7 +1021,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
-                [self.tableView reloadData];
+                [self.classify_collectionView reloadData];
             });
         }
     }
@@ -1125,7 +1070,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
                 
-                [self.tableView reloadData];
+                [self.stroe_collectionView reloadData];
             });
         }
     }
@@ -1172,7 +1117,7 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
-                [self.tableView reloadData];
+                [self.video_collectionView reloadData];
             });
         }
     }

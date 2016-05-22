@@ -12,6 +12,7 @@
 #import "wenxiuPeopleTableViewCell.h"
 #import "NextMingshiViewController.h"
 #import "Mingshimingdian_Model.h"
+#import "SearchViewController.h"
 @interface MingshiViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -68,7 +69,32 @@
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+    
+    
+    
+    
+     UIButton *delegate_search = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    delegate_search.frame = CGRectMake(10, 74, SCREEN_WIDTH - 20, 40);
+    delegate_search.layer.cornerRadius = SCREEN_WIDTH * 0.055;
+    delegate_search.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    delegate_search.layer.borderWidth = 1;
+    delegate_search.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:delegate_search];
+    [delegate_search addTarget:self action:@selector(delegate_searchAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
+    image.image = [UIImage imageNamed:@"iconfont-sousuo"];
+    [delegate_search addSubview:image];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image.frame) + 5, 7.5, 90, 25)];
+    label.text = @"请输入关键字";
+    //    label.backgroundColor = [UIColor orangeColor];
+    label.font = [UIFont systemFontOfSize:15];
+    label.textColor = [UIColor grayColor];
+    [delegate_search addSubview:label];
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(delegate_search.frame), SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -172,7 +198,16 @@
     });
     
 }
-
+//查找关键字
+- (void)delegate_searchAction:(UIButton *)sender
+{
+    //    NSLog(@"查找关键字");
+    
+    SearchViewController * searchViewController = [[SearchViewController alloc] init];
+    searchViewController.is_maker = @"0";
+    
+    [self showViewController:searchViewController sender:nil];
+}
 #pragma mark - 数据
 - (void)p_data
 {

@@ -17,6 +17,7 @@
 #import "FenleiViewController.h"
 
 #import "WebStroe_Model.h"
+#import "JCCollectionViewCell.h"
 
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -28,6 +29,10 @@
 
 //头视图
 @property (nonatomic, strong) UIView * head_view;
+
+
+//分类（10个）
+@property (nonatomic, strong) UICollectionView * classify_collectionView;
 //轮播图
 @property (nonatomic, strong) UIScrollView * lunbo_scrollView;
 @property (nonatomic, strong) UIPageControl * lunbo_pageControl;
@@ -65,10 +70,10 @@
 //    [self p_data2];
     [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
-    [self p_navi];
+    
     
     [self p_setupView];
-    
+    [self p_navi];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,10 +84,13 @@
 #pragma mark - navi
 - (void)p_navi
 {
+//    _topView.backgroundColor=[UIColor clearColor];
     _lblTitle.text = @"商城";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     [self addLeftButton:@"iconfont-fanhui"];
-    
+//    [self.view bringSubviewToFront:_imgLeft];
+//    [self.view bringSubviewToFront:_btnLeft];
+//    [self.view bringSubviewToFront:_lblTitle];
 }
 
 -(void)clickLeftButton:(UIButton *)sender
@@ -148,7 +156,7 @@
 {
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT - 49) style:(UITableViewStylePlain)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -165,9 +173,9 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [self p_data2];        
+        [self p_data2];
 //        self.isplay = 0;
         
         [self p_data];
@@ -176,7 +184,7 @@
         [weakSelf loadNewData];
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_data1];
         
@@ -302,11 +310,99 @@
 
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        return 10;
+    }
     return [self.arr_all[collectionView.tag] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
+        switch (indexPath.row) {
+            case 0:
+            {
+                cell.name.text = @"商学院";
+                cell.imageView.image = [UIImage imageNamed:@"01_29"];
+            }
+                break;
+            case 1:
+            {
+                cell.name.text = @"商城";
+                cell.imageView.image = [UIImage imageNamed:@"01_32"];
+                
+            }
+                break;
+            case 2:
+            {
+                cell.name.text = @"名师联盟";
+                cell.imageView.image = [UIImage imageNamed:@"01_35"];
+                
+            }
+                break;
+            case 3:
+            {
+                cell.name.text = @"名师名店";
+                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+                
+            }
+                break;
+            case 4:
+            {
+                cell.name.text = @"招聘";
+                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+                
+            }
+                break;
+            case 5:
+            {
+                cell.name.text = @"美业频道";
+                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+                
+            }
+                break;
+            case 6:
+            {
+                cell.name.text = @"说说";
+                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+                
+            }
+                break;
+            case 7:
+            {
+                cell.name.text = @"商盟";
+                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+                
+            }
+                break;
+            case 8:
+            {
+                cell.name.text = @"开通会员";
+                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+                
+            }
+                break;
+            case 9:
+            {
+                cell.name.text = @"课程报名";
+                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+                
+            }
+                break;
+            default:
+                break;
+        }
+        return cell;
+    }
+    
+    
+    
     
     WebStroe_Model * model = self.arr_all[collectionView.tag][indexPath.item];
     
@@ -333,6 +429,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        [self fenleiBtnClick:indexPath.item];
+        return;
+    }
+    
+    
 //    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
 //    NSLog(@"%ld",(long)indexPath.item);
     
@@ -350,14 +454,14 @@
 #pragma mark - 头视图
 - (void)p_headView
 {
-    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 260)];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60+(SCREEN_WIDTH - 20) / 3 + 70)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self p_lunbotu];
-    
-    [self.head_view addSubview:self.lunbo_scrollView];
-    [self.head_view addSubview:self.lunbo_pageControl];
-    
+//    [self p_lunbotu];
+//    
+//    [self.head_view addSubview:self.lunbo_scrollView];
+//    [self.head_view addSubview:self.lunbo_pageControl];
+    [self.head_view addSubview:self.classify_collectionView];
     //搜索。。。。。。。
     [self p_setupView2];
 }
@@ -366,8 +470,8 @@
 - (void)p_setupView2
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-    
-    self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 60)];
+    UIView * lastView=[self.head_view.subviews lastObject];
+    self.headview_Delegate = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lastView.frame), SCREEN_WIDTH, 60)];
     self.headview_Delegate.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.head_view addSubview:self.headview_Delegate];
     
@@ -644,7 +748,7 @@
 #pragma mark - 商城数据
 - (void)product:(id )dict
 {
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     
     [SVProgressHUD dismiss];
     
@@ -729,23 +833,30 @@
     }
 }
 
+
+-(void)fenleiBtnClick:(NSInteger)index
+{
+    NSString * str_category=[NSString stringWithFormat:@"%ld",index+19];
+    set_sp(@"category_id", str_category);
+    [self example01];
+}
 #pragma mark - 下拉刷新
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }
@@ -863,7 +974,25 @@
     return _arr_lunboData;
 }
 
-
+-(UICollectionView *)classify_collectionView
+{
+    if (!_classify_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        //每个item的大小
+        int  item_length = (SCREEN_WIDTH - 20) / 6;
+        layout.itemSize = CGSizeMake(item_length, item_length + 20);
+        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+        
+        _classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH - 20) / 3 + 70) collectionViewLayout:layout];
+        _classify_collectionView.delegate = self;
+        _classify_collectionView.dataSource = self;
+        
+        _classify_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        [_classify_collectionView registerClass:[JCCollectionViewCell class] forCellWithReuseIdentifier:@"cell_classify"];
+    }
+    return _classify_collectionView;
+}
 
 
 

@@ -19,6 +19,9 @@
 
 #import "Pingpp.h"
 
+#import "DataProvider.h"
+#import "SvUDIDTools.h"
+
 #define SMSapp_Key @"f7f43b8dec0c"
 #define SMSapp_Secret @"b58371f4502b0e800e461a27328e0ba8"
 
@@ -60,10 +63,10 @@
     [UMSocialData setAppKey:APIKey];
     
     //wx
-    [UMSocialWechatHandler setWXAppId:@"wxbbedabd1c20c8942" appSecret:@"4a8c42aeeca6c86bd84de31e4076903a" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:@"wxbbedabd1c20c8942" appSecret:@"4a8c42aeeca6c86bd84de31e4076903a" url:ShartUrl(get_sp(@"member_id"))];
     
     //qq
-    [UMSocialQQHandler setQQWithAppId:@"1105204231" appKey:@"qWWW6hLM0JDnxvN6" url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:@"1105204231" appKey:@"qWWW6hLM0JDnxvN6" url:ShartUrl(get_sp(@"member_id"))];
     
     //设置支持没有客户端情况下使用SSO授权
     [UMSocialQQHandler setSupportWebView:YES];
@@ -71,11 +74,37 @@
     //如果你要支持不同的屏幕方向，需要这样设置，否则在iPhone只支持一个竖屏方向
     [UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskAll];
     
+    
+    
+    
+    
     return YES;
+}
+
+-(void)requestCallBack:(id)dict
+{
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        NSArray * itemarry=dict[@"data"][@"rightlist"];
+        if (itemarry.count!=0) {
+            if ([dict[@"data"][@"rightlist"][0][@"type"] intValue]==1) {
+                set_sp(@"videozhifu_ok", @"1");
+            }
+            else if ([dict[@"data"][@"rightlist"][0][@"type"] intValue]==1)
+            {
+                set_sp(@"member_type", @"2");
+            }
+        }
+        
+    }
 }
 
 -(void)InitTabBarUI
 {
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    
+    [dataprovider setDelegateObject:self setBackFunctionName:@"requestCallBack:"];
+    
+    [dataprovider GetRightList:[SvUDIDTools UDID]];
     /**
      设置根VC
      */

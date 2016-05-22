@@ -18,6 +18,7 @@
 #import "ZhaopingDetailViewController.h"
 #import "YingpinfabuViewController.h"
 #import "ZhaopingfabuViewController.h"
+#import "SearchViewController.h"
 @interface AdvertiseViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 //上面的btn
@@ -62,8 +63,6 @@
 
 -(void)InitTopView
 {
-    _btnRight.hidden = YES;
-    _lblRight.hidden = YES;
     
     [self addLeftButton:@"iconfont-fanhui"];
     self.btn_top_location_select = [FL_Button fl_shareButton];
@@ -79,6 +78,9 @@
     }];
     
     [self.btn_top_location_select addTarget:self action:@selector(JumpToSecectCityVC) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addRightButton:@"search"];
+    [self.view bringSubviewToFront:_btnRight];
     
 }
 
@@ -188,7 +190,14 @@
     
     [self showViewController:zhaopinxinziViewController sender:nil];
 }
-
+-(void)clickRightButton:(UIButton *)sender
+{
+    SearchViewController * searchVC=[[SearchViewController alloc] init];
+    
+    searchVC.is_maker=@"0";
+    
+    [self showViewController:searchVC sender:nil];
+}
 #pragma mark - 布局
 -(void)BuildSegmentView
 {

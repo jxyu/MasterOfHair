@@ -19,7 +19,7 @@
 
 
 
-@interface SearchViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SearchViewController () <UITextFieldDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,HYSegmentedControlDelegate>
 
 @property (nonatomic, strong) UITextField * search_text;
 //数据
@@ -149,17 +149,14 @@
     
     
     
-    segmentedControl = [[HYSegmentedControl alloc] initWithOriginY:64 Titles:@[@"商城", @"视频",@"图文",@"商盟"] delegate:self] ;
+    segmentedControl = [[HYSegmentedControl alloc] initWithOriginY:64 Titles:@[@"商城", @"视频",@"图文",@"商盟",@"名师联盟", @"高级技师",@"名师名店",@"招聘应聘"] delegate:self] ;
     [self.view addSubview:segmentedControl];
     
     
     
     
     
-    
-    
-    
-    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:layout];
+    self.stroe_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(segmentedControl.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(segmentedControl.frame)) collectionViewLayout:layout];
     self.stroe_collectionView.delegate = self;
     self.stroe_collectionView.dataSource = self;
     self.stroe_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -172,7 +169,7 @@
 
 
 #pragma mark HYSegmentedControl的代理
-- (void)changeSegmentedControlWithIndex:(NSInteger)index
+- (void)hySegmentedControlSelectAtIndex:(NSInteger)index
 {
     switch (index) {
         case 0:
@@ -198,7 +195,7 @@
             break;
         case 3:
         {
-            if([get_sp(@"member_type") isEqualToString:@"3"])
+            if(![get_sp(@"member_type") isEqualToString:@"1"])
             {
                 ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
                 
@@ -206,7 +203,7 @@
             }
             else
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"只有代理商才有权限进入" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"普通会员无法进入" preferredStyle:(UIAlertControllerStyleAlert)];
                 
                 [self presentViewController:alert animated:YES completion:^{
                     

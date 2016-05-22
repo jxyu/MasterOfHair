@@ -11,8 +11,8 @@
 
 
 //外网地址
-#define Url @"http://115.28.67.86:8082/index.php?r=api/"
-#define Url_pic @"http://115.28.67.86:8082/"
+#define Url @"http://www.58titoujiang.com/index.php?r=api/"
+#define Url_pic @"http://www.58titoujiang.com/"
 
 
 //东东
@@ -57,6 +57,8 @@
 #define YellowBlock     [UIColor colorWithRed:0xef/255.0 green:0x9c/255.0 blue:0x00/255.0 alpha:1.0]
 
 #define RGB(a, b, c) [UIColor colorWithRed:(a) / 255.0 green:(b) / 255.0 blue:(c) / 255.0 alpha:1.0]
+
+#define ShartUrl(a) [NSString stringWithFormat:@"http://www.58titoujiang.com/index.php?r=api/web/spread&member_id=%@&client=ios",a] 
 
 
 #ifndef DEBUG

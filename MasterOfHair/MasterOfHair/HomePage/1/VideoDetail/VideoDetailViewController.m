@@ -725,14 +725,14 @@
                 }
                 else
                 {
-                    if([[userdefault objectForKey:@"videozhifu_ok"] length] == 0)
+                    if(get_sp(@"videozhifu_ok")==nil||[[userdefault objectForKey:@"videozhifu_ok"] length] == 0)
                     {
                         self.btn_play.hidden = YES;
                         
                         self.viwe_bgtilet = [[UILabel alloc] initWithFrame:CGRectMake(40, 50, SCREEN_WIDTH - 80, 60)];
                         self.viwe_bgtilet.textColor = [UIColor whiteColor];
                         self.viwe_bgtilet.font = [UIFont systemFontOfSize:15];
-                        NSString * str_price = [NSString stringWithFormat:@"本片为付费内容,价格为￥%@ 元,请付费后观看;也可以到个人中心页面申请开通金卡会员享免费观看",model.video_price];
+                        NSString * str_price = @"本片为付费内容,价格为￥6.00 ,请付费后观看;也可以到个人中心页面申请开通金卡会员享免费观看";//[NSString stringWithFormat:,model.video_price];
                         self.viwe_bgtilet.text = str_price;
                         self.viwe_bgtilet.numberOfLines = 0;
                         [self.view addSubview:self.viwe_bgtilet];
