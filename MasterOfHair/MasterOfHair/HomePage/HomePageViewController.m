@@ -1273,8 +1273,8 @@
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         //183
-        [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_id"];
-        [userdefault setObject:[NSString stringWithFormat:@""] forKey:@"city_name"];
+        [userdefault setObject:[NSString stringWithFormat:@"183"] forKey:@"city_id"];
+        [userdefault setObject:[NSString stringWithFormat:@"临沂"] forKey:@"city_name"];
         
         _lblLeft.text = @"定位";
     }

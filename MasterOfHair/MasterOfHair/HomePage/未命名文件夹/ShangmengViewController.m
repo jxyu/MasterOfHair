@@ -16,6 +16,7 @@
 #import "chanpingxiangqingViewController.h"
 #import "FenleiViewController.h"
 #import "WebStroe_Model.h"
+#import "JCCollectionViewCell.h"
 @interface ShangmengViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //tableView
@@ -23,6 +24,9 @@
 
 //collectionView
 @property (nonatomic, strong) UICollectionView * stroe_collectionView;
+
+//分类（10个）
+@property (nonatomic, strong) UICollectionView * classify_collectionView;
 
 //头视图
 @property (nonatomic, strong) UIView * head_view;
@@ -131,7 +135,7 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [self p_data2];
+//        [self p_data2];
         
         [self p_data];
         
@@ -266,11 +270,95 @@
 
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        return 10;
+    }
     return [self.arr_all[collectionView.tag] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
+        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
+        switch (indexPath.row) {
+            case 0:
+            {
+                cell.name.text = @"美发产品";
+                
+            }
+                break;
+            case 1:
+            {
+                cell.name.text = @"美容产品";
+                
+            }
+                break;
+            case 2:
+            {
+                cell.name.text = @"纹绣产品";
+                
+            }
+                break;
+            case 3:
+            {
+                cell.name.text = @"美甲产品";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+                
+            }
+                break;
+            case 4:
+            {
+                cell.name.text = @"化妆产品";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+                
+            }
+                break;
+            case 5:
+            {
+                cell.name.text = @"足浴";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+                
+            }
+                break;
+            case 6:
+            {
+                cell.name.text = @"纹身产品";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+                
+            }
+                break;
+            case 7:
+            {
+                cell.name.text = @"美业服饰";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+                
+            }
+                break;
+            case 8:
+            {
+                cell.name.text = @"国际品牌";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+                
+            }
+                break;
+            case 9:
+            {
+                cell.name.text = @"教学资料";
+                //                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+                
+            }
+                break;
+            default:
+                break;
+        }
+        return cell;
+    }
+    
     
     WebStroe_Model * model = self.arr_all[collectionView.tag][indexPath.item];
     
@@ -293,6 +381,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    if([collectionView isEqual:self.classify_collectionView])
+    {
+        [self fenleiBtnClick:indexPath.item];
+        return;
+    }
+    
+    
     //    NSLog(@"第几行tableView   %ld",collectionView.tag + 1);
     //    NSLog(@"%ld",(long)indexPath.item);
     
@@ -310,27 +407,27 @@
 #pragma mark - 头视图
 - (void)p_headView
 {
-    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 260+SCREEN_WIDTH*165/320)];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60+(SCREEN_WIDTH - 20) / 3 + 70)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
-    [self p_lunbotu];
-    
-    [self.head_view addSubview:self.lunbo_scrollView];
-    [self.head_view addSubview:self.lunbo_pageControl];
-    UIImageView * img_backGround=[[UIImageView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, SCREEN_WIDTH*165/320)];
-    img_backGround.image=[UIImage imageNamed:@"10shangpu"];
-    img_backGround.userInteractionEnabled=YES;
-    
-    [self.head_view addSubview:img_backGround];
-    for (int i=0; i<10; i++) {
-        UIButton * btn_item=[[UIButton alloc] init];
-        btn_item.bounds=CGRectMake(0, 0, SCREEN_WIDTH/5, img_backGround.frame.size.height/2);
-        btn_item.center=CGPointMake((SCREEN_WIDTH/10)*(2*(i%5)+1), i>=5?(img_backGround.frame.size.height/4)*3:(img_backGround.frame.size.height/4));
-        //        btn_item.backgroundColor=[UIColor redColor];
-        [btn_item addTarget:self action:@selector(fenleiBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        btn_item.tag=i;
-        [img_backGround addSubview:btn_item];
-    }
+    [self.head_view addSubview:self.classify_collectionView];
+//    [self p_lunbotu];
+//    
+//    [self.head_view addSubview:self.lunbo_scrollView];
+//    [self.head_view addSubview:self.lunbo_pageControl];
+//    UIImageView * img_backGround=[[UIImageView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, SCREEN_WIDTH*165/320)];
+//    img_backGround.image=[UIImage imageNamed:@"10shangpu"];
+//    img_backGround.userInteractionEnabled=YES;
+//    
+//    [self.head_view addSubview:img_backGround];
+//    for (int i=0; i<10; i++) {
+//        UIButton * btn_item=[[UIButton alloc] init];
+//        btn_item.bounds=CGRectMake(0, 0, SCREEN_WIDTH/5, img_backGround.frame.size.height/2);
+//        btn_item.center=CGPointMake((SCREEN_WIDTH/10)*(2*(i%5)+1), i>=5?(img_backGround.frame.size.height/4)*3:(img_backGround.frame.size.height/4));
+//        //        btn_item.backgroundColor=[UIColor redColor];
+//        [btn_item addTarget:self action:@selector(fenleiBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        btn_item.tag=i;
+//        [img_backGround addSubview:btn_item];
+//    }
     //搜索。。。。。。。
     [self p_setupView2];
 }
@@ -599,9 +696,9 @@
         
     }
 }
--(void)fenleiBtnClick:(UIButton *)sender
+-(void)fenleiBtnClick:(NSInteger *)index
 {
-    NSString * str_category=[NSString stringWithFormat:@"%ld",sender.tag+19];
+    NSString * str_category=[NSString stringWithFormat:@"%ld",index+19];
     set_sp(@"category_id", str_category);
     [self example01];
 }
@@ -805,8 +902,25 @@
     }
 }
 
-
-
+-(UICollectionView *)classify_collectionView
+{
+    if (!_classify_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        //每个item的大小
+        int  item_length = (SCREEN_WIDTH - 20) / 6;
+        layout.itemSize = CGSizeMake(item_length, item_length + 20);
+        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+        
+        _classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH - 20) / 3 + 70) collectionViewLayout:layout];
+        _classify_collectionView.delegate = self;
+        _classify_collectionView.dataSource = self;
+        
+        _classify_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        [_classify_collectionView registerClass:[JCCollectionViewCell class] forCellWithReuseIdentifier:@"cell_classify"];
+    }
+    return _classify_collectionView;
+}
 
 
 

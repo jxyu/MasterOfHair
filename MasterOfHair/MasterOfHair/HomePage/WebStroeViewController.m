@@ -325,73 +325,72 @@
     if([collectionView isEqual:self.classify_collectionView])
     {
         JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
+        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
         switch (indexPath.row) {
             case 0:
             {
-                cell.name.text = @"商学院";
-                cell.imageView.image = [UIImage imageNamed:@"01_29"];
+                cell.name.text = @"美发产品";
+                
             }
                 break;
             case 1:
             {
-                cell.name.text = @"商城";
-                cell.imageView.image = [UIImage imageNamed:@"01_32"];
+                cell.name.text = @"美容产品";
                 
             }
                 break;
             case 2:
             {
-                cell.name.text = @"名师联盟";
-                cell.imageView.image = [UIImage imageNamed:@"01_35"];
+                cell.name.text = @"纹绣产品";
                 
             }
                 break;
             case 3:
             {
-                cell.name.text = @"名师名店";
-                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+                cell.name.text = @"美甲产品";
+//                cell.imageView.image = [UIImage imageNamed:@"01_38"];
                 
             }
                 break;
             case 4:
             {
-                cell.name.text = @"招聘";
-                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+                cell.name.text = @"化妆产品";
+//                cell.imageView.image = [UIImage imageNamed:@"01_41"];
                 
             }
                 break;
             case 5:
             {
-                cell.name.text = @"美业频道";
-                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+                cell.name.text = @"足浴";
+//                cell.imageView.image = [UIImage imageNamed:@"01_59"];
                 
             }
                 break;
             case 6:
             {
-                cell.name.text = @"说说";
-                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+                cell.name.text = @"纹身产品";
+//                cell.imageView.image = [UIImage imageNamed:@"01_62"];
                 
             }
                 break;
             case 7:
             {
-                cell.name.text = @"商盟";
-                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+                cell.name.text = @"美业服饰";
+//                cell.imageView.image = [UIImage imageNamed:@"01_65"];
                 
             }
                 break;
             case 8:
             {
-                cell.name.text = @"开通会员";
-                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+                cell.name.text = @"国际品牌";
+//                cell.imageView.image = [UIImage imageNamed:@"01_68"];
                 
             }
                 break;
             case 9:
             {
-                cell.name.text = @"课程报名";
-                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+                cell.name.text = @"教学资料";
+//                cell.imageView.image = [UIImage imageNamed:@"01_71"];
                 
             }
                 break;

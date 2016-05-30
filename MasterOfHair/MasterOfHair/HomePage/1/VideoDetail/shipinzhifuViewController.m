@@ -48,7 +48,7 @@
     
     [self p_setupView];
     if ([[userdefault objectForKey:@"member_id"] length] == 0) {
-        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"开通金卡会员" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通会员" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
+        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"购买一次视频权限" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通一次 观看会员视频权限" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
         [alertview show];
     }
 }

@@ -39,7 +39,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRootView1:) name:@"changeRootView1" object:nil];
     [self InitTabBarUI];
     
 /**
@@ -110,7 +110,7 @@
      */
 //    _loginViewCtl = [[LoginViewController alloc] init];
     
-//    firstCol=[[FirstScrollController alloc]init];
+    _firstCol=[[FirstScrollController alloc]init];
     
     _tabBarViewCol = [[CustomTabBarViewController alloc] init];
     
@@ -119,15 +119,15 @@
     
     [self.window makeKeyAndVisible];
     
-//    mUserDefault = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *mUserDefault = [NSUserDefaults standardUserDefaults];
     
 //    NSString *mRegistAcount = [mUserDefault valueForKey:LogIn_UserID_key];
     
 //    NSString *mRegistPwd = [mUserDefault valueForKey:LogIn_UserPass_key];
-    self.window.rootViewController =_tabBarViewCol;
+    
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]) {
-        
+        self.window.rootViewController =_tabBarViewCol;
 //        self.window.rootViewController =_tabBarViewCol;
         
 //        if((mRegistAcount == nil||[mRegistAcount isEqualToString:@"" ])||(mRegistPwd == nil || [mRegistPwd isEqualToString:@"" ]))
@@ -145,12 +145,16 @@
     }
     else
     {
-//        self.window.rootViewController =firstCol;
+        self.window.rootViewController =_firstCol;
         [self.window makeKeyAndVisible];
         //[self getAliPay];
     }
 }
-
+-(void)changeRootView1:(id)sender
+{
+    self.window.rootViewController = _tabBarViewCol;
+    return;
+}
 
 //#pragma mark - 友盟回调
 //- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

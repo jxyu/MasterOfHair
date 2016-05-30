@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTabBarViewController.h"
+#import "FirstScrollController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic,strong) CustomTabBarViewController *tabBarViewCol;
+@property (nonatomic,strong) FirstScrollController *firstCol;
 
 - (void)showTabBar;
 - (void)hiddenTabBar;

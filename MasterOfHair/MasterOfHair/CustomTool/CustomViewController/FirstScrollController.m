@@ -30,7 +30,7 @@
     }
     
     pageCol=[[UIPageControl alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-30, 320, 20)];
-    pageCol.numberOfPages=3;
+    pageCol.numberOfPages=4;
     //pageCol.center=CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT-30);
     [self.view addSubview:pageCol];
     
