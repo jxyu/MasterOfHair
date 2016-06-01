@@ -774,6 +774,17 @@
     }
     else
     {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付密码不正确" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
         return;
     }
     

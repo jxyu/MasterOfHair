@@ -3790,7 +3790,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/ping++",
 					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.yjxNew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3828,7 +3828,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/ping++",
 					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.yjxNew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

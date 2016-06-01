@@ -7,8 +7,10 @@
 //
 
 #import "NextqianbaoViewController.h"
+#import "SetPayPwdViewController.h"
+#import "TXTradePasswordView.h"
 
-@interface NextqianbaoViewController () <UITextFieldDelegate>
+@interface NextqianbaoViewController () <UITextFieldDelegate,TXTradePasswordViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 //
@@ -37,6 +39,8 @@
     NSArray * jine_array;
     UIView * view_white1;
     NSString *quxianJine;
+    TXTradePasswordView *TXView;
+    UIButton *btn_back;
 }
 
 - (void)viewDidLoad {
@@ -135,21 +139,75 @@
     else
     {
         
-            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-            
-            DataProvider * dataprovider=[[DataProvider alloc] init];
-            
-            [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
-            
-            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:quxianJine];
+        if (get_sp(@"wallet_password")==nil) {
+            SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+            setPayPWD.fatherVC=self;
+            [self.navigationController pushViewController:setPayPWD animated:YES];
+            return;
+        }
+        //输入支付密码
+        TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请再次输入支付密码"];
+        TXView.tag=1;
+        TXView.backgroundColor=[UIColor whiteColor];
+        TXView.TXTradePasswordDelegate = self;
+        if (![TXView.TF becomeFirstResponder])
+        {
+            //成为第一响应者。弹出键盘
+            [TXView.TF becomeFirstResponder];
+        }
+        btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+        btn_back.backgroundColor=[UIColor lightGrayColor];
+        [self.view addSubview:btn_back];
+        
+        [self.view addSubview:TXView];
+        
+        return;
+        
+        
+
+    }
+}
+
+
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    if ([Password isEqualToString:get_sp(@"wallet_password")]) {
+        
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        
+        [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:quxianJine];
         
         
         
         
         [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-
     }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付密码不正确" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:action];
+        return;
+    }
+    
 }
+
+
+
 
 // 数据
 - (void)create:(id )dict
