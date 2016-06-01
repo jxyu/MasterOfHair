@@ -336,7 +336,7 @@
 {
     if(self.isTeacher == 0)
     {
-        return 200;
+        return 110;
     }
     return 110;
 }
@@ -349,6 +349,7 @@
         wenxiuFactoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell_wenxiuFactory"];
         
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        cell.contentView.backgroundColor=[UIColor whiteColor];
         
         [cell.image sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
 

@@ -7,14 +7,14 @@
 //
 
 #import "querendingdanViewController.h"
-
+#import "TXTradePasswordView.h"
 #import "AppDelegate.h"
 #import "SelectshouhuoViewController.h"
 #import "Shouhudizhi_Model.h"
-
+#import "SetPayPwdViewController.h"
 #import "Pingpp.h"
 #import "ShangchengdingdanViewController.h"
-@interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface querendingdanViewController () <UITableViewDelegate, UITableViewDataSource,TXTradePasswordViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 //头视图
@@ -51,6 +51,10 @@
 @end
 
 @implementation querendingdanViewController
+{
+    TXTradePasswordView *TXView;
+    UIButton * btn_back;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -647,6 +651,31 @@
         if(self.btn_myPurse.selected == 1)
         {
             str_zhifu = @"1";
+            if (get_sp(@"wallet_password")==nil) {
+                SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+                setPayPWD.fatherVC=self;
+                [self.navigationController pushViewController:setPayPWD animated:YES];
+                return;
+            }
+            //输入支付密码
+            TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请再次输入支付密码"];
+            TXView.tag=1;
+            TXView.backgroundColor=[UIColor whiteColor];
+            TXView.TXTradePasswordDelegate = self;
+            if (![TXView.TF becomeFirstResponder])
+            {
+                //成为第一响应者。弹出键盘
+                [TXView.TF becomeFirstResponder];
+            }
+            btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+            btn_back.backgroundColor=[UIColor lightGrayColor];
+            [self.view addSubview:btn_back];
+            
+            [self.view addSubview:TXView];
+            
+            return;
+            
+            
         }
         if(self.btn_weixin.selected == 1)
         {
@@ -656,6 +685,8 @@
         {
             str_zhifu = @"2";
         }
+        
+        
         
         NSMutableArray * arr_pro = [NSMutableArray array];
         NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
@@ -670,7 +701,83 @@
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
     }
 }
-
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    if ([Password isEqualToString:get_sp(@"wallet_password")]) {
+        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+        
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
+        
+        //配送
+        UILabel * label = [self.view viewWithTag:100];
+        NSString * str_peisong = [NSString stringWithFormat:@""];
+        if([label.text isEqualToString:@"同城派送"])
+        {
+            str_peisong = @"3";
+        }
+        else if([label.text isEqualToString:@"物流配送"])
+        {
+            str_peisong = @"1";
+        }
+        else
+        {
+            str_peisong = @"2";
+        }
+        
+        //留言
+        UITextField * text = [self.view viewWithTag:1000];
+        NSString * str_liuyan = [NSString stringWithFormat:@""];
+        if([text.text length] == 0)
+        {
+            str_liuyan = @"";
+        }
+        else
+        {
+            str_liuyan = text.text;
+        }
+        
+        //支付方式
+        NSString * str_zhifu = [NSString stringWithFormat:@""];
+        if(self.btn_myPurse.selected == 1)
+        {
+            str_zhifu = @"1";
+            
+            
+        }
+        if(self.btn_weixin.selected == 1)
+        {
+            str_zhifu = @"3";
+        }
+        if(self.btn_zhifubo.selected == 1)
+        {
+            str_zhifu = @"2";
+        }
+        
+        
+        
+        
+        
+        NSMutableArray * arr_pro = [NSMutableArray array];
+        NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:self.chanpinDetail.production_id,@"production_id",self.Chanpingxiangqing.specs_id,@"specs_id",@"1",@"production_count",nil];
+        NSLog(@"%@",dict);
+        
+        [arr_pro addObject:dict];
+        
+        Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+        
+        self.str_zhifutype = str_zhifu;
+        
+        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:self.chanpinDetail.shop_id shipping_method:str_peisong pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:str_liuyan production_info:arr_pro];
+    }
+    else
+    {
+        return;
+    }
+    
+}
 
 //
 - (void)btn_myPurseAction:(UIButton *)sender

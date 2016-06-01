@@ -28,8 +28,9 @@
 //    self.imageView.layer.masksToBounds = YES;
     [self.contentView addSubview:self.imageView];
     
-    self.name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxX(self.imageView.frame), self.contentView.frame.size.width, 20)];
+    self.name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxX(self.imageView.frame), self.contentView.frame.size.width, 30)];
     self.name.text = @"文秀联盟";
+    self.name.numberOfLines=2;
     self.name.font = [UIFont systemFontOfSize:12];
     self.name.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.name];

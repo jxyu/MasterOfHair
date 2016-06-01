@@ -7,9 +7,10 @@
 //
 
 #import "QianbaoViewController.h"
-
+#import "SetPayPwdViewController.h"
 #import "QianbaoTableViewCell.h"
 #import "NextqianbaoViewController.h"
+#import "VerifyPhoneViewController.h"
 #import "Qianbao_Model.h"
 @interface QianbaoViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -90,7 +91,7 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_data];
         
@@ -100,7 +101,7 @@
         
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_data1];
         
@@ -217,7 +218,26 @@
 //    self.money.backgroundColor = [UIColor orangeColor];
     [view_white addSubview:self.money];
     
-    self.introduce = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(view_white.frame) + 10, 100, 20)];
+    
+    
+    UIView * view_white1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white.frame)+10, SCREEN_WIDTH, 50)];
+    view_white1.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view_white1];
+    
+    UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 100, 30)];
+    label_2.text = @"支付密码";
+    label_2.font = [UIFont systemFontOfSize:15];
+    //    label_1.backgroundColor = [UIColor orangeColor];
+    [view_white1 addSubview:label_2];
+    
+    UIImageView * image_2 = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 5 - 20, 15, 20, 20)];
+    image_1.image = [UIImage imageNamed:@"iconfont-fanhuiyou"];
+    [view_white1 addSubview:image_2];
+    UIButton * btn_jumptopwd=[[UIButton alloc] initWithFrame:view_white1.bounds];
+    [btn_jumptopwd addTarget:self action:@selector(JumpToPWD:) forControlEvents:UIControlEventTouchUpInside];
+    [view_white1 addSubview:btn_jumptopwd];
+    
+    self.introduce = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(view_white1.frame) + 10, 100, 20)];
 //    self.introduce.textColor = [UIColor grayColor];
     self.introduce.text = @"历史提现列表";
     self.introduce.font = [UIFont systemFontOfSize:13];
@@ -231,6 +251,21 @@
 
 }
 
+-(void)JumpToPWD:(UIButton *)sender
+{
+    if (get_sp(@"wallet_password")==nil) {
+        SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+        setPayPWD.fatherVC=self;
+        [self.navigationController pushViewController:setPayPWD animated:YES];
+    }
+    else
+    {
+        VerifyPhoneViewController * verifyPhone=[[VerifyPhoneViewController alloc] init];
+        verifyPhone.fatherVC=self;
+        [self.navigationController pushViewController:verifyPhone animated:YES];
+    }
+    
+}
 //手势的点击方法
 -(void)tapGesture:(id)sender
 {
@@ -243,19 +278,19 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
 }
 

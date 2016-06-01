@@ -378,7 +378,13 @@
 -(void)GetRightList:(NSString *)uuid;
 #pragma mark - 更新用户看视频权限
 -(void)AppleRightUpdate:(NSString *)uuid andtype:(NSString *)type;
-
+/**
+ *  设置支付密码
+ *
+ *  @param member_id       <#member_id description#>
+ *  @param wallet_password <#wallet_password description#>
+ */
+-(void)setPasswordWithmember_id:(NSString *)member_id andwallet_password:(NSString *)wallet_password;
 
 
 

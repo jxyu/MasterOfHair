@@ -333,7 +333,7 @@
     if(city_id && is_sell)
     {
         NSString * url=[NSString stringWithFormat:@"%@product/getRecommendProducts",Url];
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"is_sell\":\"%@\"}",city_id,is_sell]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"city_id\":\"%@\",\"is_sell\":\"%@\",\"is_maker\":\"0\"}",city_id,is_sell]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1463,6 +1463,17 @@
         NSString * url=[NSString stringWithFormat:@"%@AppleRight/GetRightList",Url];
         
         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"uuid\":\"%@\",\"type\":\"%@\"}",uuid,type]};
+        
+        [self PostRequest:url andpram:prm];
+    }
+}
+-(void)setPasswordWithmember_id:(NSString *)member_id andwallet_password:(NSString *)wallet_password
+{
+    if(member_id&&wallet_password)
+    {
+        NSString * url=[NSString stringWithFormat:@"%@wallet/setPassword",Url];
+        
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"wallet_password\":\"%@\"}",member_id,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }

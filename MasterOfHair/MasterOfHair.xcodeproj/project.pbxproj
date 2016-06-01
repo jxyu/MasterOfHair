@@ -440,6 +440,9 @@
 		8B7C34B91CF29D6B004BCCB8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7C34B81CF29D6B004BCCB8 /* StoreKit.framework */; };
 		8B7C34BB1CF29F93004BCCB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C34BA1CF29F93004BCCB8 /* Default-568h@2x.png */; };
 		8B7C34BF1CF2E4EB004BCCB8 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7C34BE1CF2E4EB004BCCB8 /* MOBFoundation.framework */; };
+		8B9594EF1CFEB9340029EE23 /* SetPayPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */; };
+		8B9594F31CFEB9540029EE23 /* TXTradePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */; };
+		8B9594F61CFECD750029EE23 /* VerifyPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */; };
 		8BCBB7001CD1AF4D004DE9A2 /* index_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FC1CD1AF4D004DE9A2 /* index_0.png */; };
 		8BCBB7011CD1AF4D004DE9A2 /* index_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */; };
 		8BCBB7021CD1AF4D004DE9A2 /* index_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */; };
@@ -1160,6 +1163,12 @@
 		8B7C34B81CF29D6B004BCCB8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8B7C34BA1CF29F93004BCCB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8B7C34BE1CF2E4EB004BCCB8 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		8B9594ED1CFEB9340029EE23 /* SetPayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPayPwdViewController.h; sourceTree = "<group>"; };
+		8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPayPwdViewController.m; sourceTree = "<group>"; };
+		8B9594F11CFEB9540029EE23 /* TXTradePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXTradePasswordView.h; sourceTree = "<group>"; };
+		8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXTradePasswordView.m; sourceTree = "<group>"; };
+		8B9594F41CFECD750029EE23 /* VerifyPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyPhoneViewController.h; sourceTree = "<group>"; };
+		8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyPhoneViewController.m; sourceTree = "<group>"; };
 		8BCBB6FC1CD1AF4D004DE9A2 /* index_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_0.png; sourceTree = "<group>"; };
 		8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_1.png; sourceTree = "<group>"; };
 		8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_2.png; sourceTree = "<group>"; };
@@ -1282,6 +1291,9 @@
 		7B0433C21C5C5DC70052F4AC /* qianbao */ = {
 			isa = PBXGroup;
 			children = (
+				8B9594F01CFEB9540029EE23 /* TXTradePassword */,
+				8B9594ED1CFEB9340029EE23 /* SetPayPwdViewController.h */,
+				8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */,
 				7B19D3B91C97AFB60097C7C7 /* Model */,
 				7B0433C31C5C5E1A0052F4AC /* QianbaoViewController.h */,
 				7B0433C41C5C5E1A0052F4AC /* QianbaoViewController.m */,
@@ -1289,6 +1301,8 @@
 				7B0433C71C5C67AC0052F4AC /* QianbaoTableViewCell.m */,
 				7B0433C91C5C859B0052F4AC /* NextqianbaoViewController.h */,
 				7B0433CA1C5C859B0052F4AC /* NextqianbaoViewController.m */,
+				8B9594F41CFECD750029EE23 /* VerifyPhoneViewController.h */,
+				8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */,
 			);
 			name = qianbao;
 			sourceTree = "<group>";
@@ -2973,6 +2987,15 @@
 			path = UDID_Tools;
 			sourceTree = "<group>";
 		};
+		8B9594F01CFEB9540029EE23 /* TXTradePassword */ = {
+			isa = PBXGroup;
+			children = (
+				8B9594F11CFEB9540029EE23 /* TXTradePasswordView.h */,
+				8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */,
+			);
+			path = TXTradePassword;
+			sourceTree = "<group>";
+		};
 		FF5C9EFFE407E2D162E535C3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3052,7 +3075,7 @@
 				TargetAttributes = {
 					8043C6B71C4DC94500369EEF = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = QFHX5W6J8N;
+						DevelopmentTeam = M7YC435M3S;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -3374,6 +3397,7 @@
 				7BF5D36A1C992D3700F4F9C0 /* HezuomingdianViewController.m in Sources */,
 				7BB073941C50B26000AAFF07 /* WebStroeCollectionViewCell.m in Sources */,
 				8082B4CE1C7414320024EAD3 /* UIView+JKPicker.m in Sources */,
+				8B9594F61CFECD750029EE23 /* VerifyPhoneViewController.m in Sources */,
 				7B29EFB81C571D93003A020B /* EditshouhuoViewController.m in Sources */,
 				8043C6FA1C4E0C0900369EEF /* CustomTabBarViewController.m in Sources */,
 				7BF878071C9A49E4008F23A7 /* Wenxiulanmengdingdan_Model.m in Sources */,
@@ -3452,6 +3476,7 @@
 				8082B4C31C7414320024EAD3 /* JKAssetsCollectionFooterView.m in Sources */,
 				7BA007A21C4F7AD2009B3ABD /* PicAndVideoCollectionViewCell.m in Sources */,
 				8082B4CC1C7414320024EAD3 /* JKUtil.m in Sources */,
+				8B9594F31CFEB9540029EE23 /* TXTradePasswordView.m in Sources */,
 				7B18A7881C7EB06A00A32AE9 /* SearchTextViewController.m in Sources */,
 				8025530C1C574F7100CFF875 /* MJRefreshNormalHeader.m in Sources */,
 				802552B01C57442B00CFF875 /* SCIOPixelBuffers.m in Sources */,
@@ -3476,6 +3501,7 @@
 				7BF5D35E1C98E7B000F4F9C0 /* Mingshimingdian_Model.m in Sources */,
 				8082B4C21C7414320024EAD3 /* JKAssets.m in Sources */,
 				7B3F1A391C4F101900783F3B /* SettingViewController.m in Sources */,
+				8B9594EF1CFEB9340029EE23 /* SetPayPwdViewController.m in Sources */,
 				7B3305A91C5EE9AA0014C49C /* FenleiCollectionReusableView.m in Sources */,
 				7B1388261CAF64A600199958 /* shangchengdingdanDetailViewController.m in Sources */,
 				7BB26FF21C5B562A001D332E /* NextFenxiaozhongxin1ViewController.m in Sources */,
@@ -3764,7 +3790,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/ping++",
 					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.yjxNew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3802,7 +3828,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/ping++",
 					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zykj.yjxNew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

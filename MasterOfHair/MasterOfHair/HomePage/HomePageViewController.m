@@ -233,7 +233,7 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self p_chanpinliebiao];
         
         [self p_videoData];
@@ -501,7 +501,7 @@
     }
     else if([collectionView isEqual:self.stroe_collectionView])
     {
-        return 3;
+        return self.arr_chanpin.count;
     }
     else
     {
@@ -1080,13 +1080,13 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
     });
     
 }
@@ -1120,7 +1120,10 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {//[@"productlist"]
-            for (NSDictionary * dic in dict[@"data"])
+            
+            NSLog(@"class:%@",[dict[@"data"][@"productlist"] class]);
+            NSArray * dictArray=[[NSArray alloc] initWithArray:dict[@"data"][@"productlist"]];
+            for (NSDictionary * dic in dictArray)
             {
                 WebStroe_Model * model = [[WebStroe_Model alloc] init];
                 
@@ -1137,7 +1140,7 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新tableView(记住,要更新放在主线程中)
-                [self.tableView reloadData];
+                [self.stroe_collectionView reloadData];
             });
         }
     }

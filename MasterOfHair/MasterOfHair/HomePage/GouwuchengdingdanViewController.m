@@ -7,7 +7,8 @@
 //
 
 #import "GouwuchengdingdanViewController.h"
-
+#import "SetPayPwdViewController.h"
+#import "TXTradePasswordView.h"
 #import "AppDelegate.h"
 #import "SelectshouhuoViewController.h"
 #import "Shouhudizhi_Model.h"
@@ -15,7 +16,7 @@
 #import "ShopCarData_Models.h"
 #import "Pingpp.h"
 #import "ShangchengdingdanViewController.h"
-@interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource,TXTradePasswordViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 //头视图
@@ -61,6 +62,10 @@
 @end
 
 @implementation GouwuchengdingdanViewController
+{
+    TXTradePasswordView *TXView;
+    UIButton * btn_back;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -700,24 +705,46 @@
     }
     else
     {
+        //支付方式
+        NSString * str_zhifu = [NSString stringWithFormat:@""];
+        if(self.btn_myPurse.selected == 1)
+        {
+            str_zhifu = @"1";
+            if (get_sp(@"wallet_password")==nil) {
+                SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+                setPayPWD.fatherVC=self;
+                [self.navigationController pushViewController:setPayPWD animated:YES];
+                return;
+            }
+            //输入支付密码
+            TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请再次输入支付密码"];
+            TXView.tag=1;
+            TXView.backgroundColor=[UIColor whiteColor];
+            TXView.TXTradePasswordDelegate = self;
+            if (![TXView.TF becomeFirstResponder])
+            {
+                //成为第一响应者。弹出键盘
+                [TXView.TF becomeFirstResponder];
+            }
+            btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+            btn_back.backgroundColor=[UIColor lightGrayColor];
+            [self.view addSubview:btn_back];
+            
+            [self.view addSubview:TXView];
+            
+            return;
+        }
+        if(self.btn_weixin.selected == 1)
+        {
+            str_zhifu = @"3";
+        }
+        if(self.btn_zhifubo.selected == 1)
+        {
+            str_zhifu = @"2";
+        }
         for (int i = 0 ; i < self.arr_dataShop.count; i ++)
         {
             ShopCarData_Models * model_shop = self.arr_dataShop[i];
-            
-            //支付方式
-            NSString * str_zhifu = [NSString stringWithFormat:@""];
-            if(self.btn_myPurse.selected == 1)
-            {
-                str_zhifu = @"1";
-            }
-            if(self.btn_weixin.selected == 1)
-            {
-                str_zhifu = @"3";
-            }
-            if(self.btn_zhifubo.selected == 1)
-            {
-                str_zhifu = @"2";
-            }
             
             
             //产品信息
@@ -726,7 +753,7 @@
             {
                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",model.production_id],@"production_id",[NSString stringWithFormat:@"%@",model.specs_id],@"specs_id",[NSString stringWithFormat:@"%@",model.number],@"production_count",nil];
                 NSLog(@"%@",dict);
-
+                
                 [arr_pro addObject:dict];
             }
             
@@ -747,6 +774,66 @@
         }
     }
 }
+
+
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    if ([Password isEqualToString:get_sp(@"wallet_password")]) {
+        //支付方式
+        NSString * str_zhifu = [NSString stringWithFormat:@""];
+        if(self.btn_myPurse.selected == 1)
+        {
+            str_zhifu = @"1";
+        }
+        if(self.btn_weixin.selected == 1)
+        {
+            str_zhifu = @"3";
+        }
+        if(self.btn_zhifubo.selected == 1)
+        {
+            str_zhifu = @"2";
+        }
+        for (int i = 0 ; i < self.arr_dataShop.count; i ++)
+        {
+            ShopCarData_Models * model_shop = self.arr_dataShop[i];
+            
+            
+            //产品信息
+            NSMutableArray * arr_pro = [NSMutableArray array];
+            for (ShopCarData_Models * model in self.arr_dataList[i])
+            {
+                NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",model.production_id],@"production_id",[NSString stringWithFormat:@"%@",model.specs_id],@"specs_id",[NSString stringWithFormat:@"%@",model.number],@"production_count",nil];
+                NSLog(@"%@",dict);
+                
+                [arr_pro addObject:dict];
+            }
+            
+            //接口
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"chuangjiandangdan:"];
+            
+            Shouhudizhi_Model * model = self.arr_morenAddress.firstObject;
+            
+            self.str_zhifutype = str_zhifu;
+            
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+            
+            
+            NSLog(@"%ld",(unsigned long)self.arr_morenAddress.count);
+        }
+    }
+    else
+    {
+        return;
+    }
+    
+}
+
+
 
 - (void)btn_myPurseAction:(UIButton *)sender
 {
