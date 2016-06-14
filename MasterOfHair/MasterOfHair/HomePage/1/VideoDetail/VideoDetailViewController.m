@@ -153,7 +153,7 @@
     
     __weak __typeof(self) weakSelf = self;
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_data2];
         
@@ -1028,20 +1028,20 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
     
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }

@@ -241,7 +241,7 @@
 - (void)ifsignup:(id )dict
 {
 //    NSLog(@"%@",dict);
-    if([dict[@"status"][@"succeed"] integerValue] == 0)
+    if(![dict[@"status"][@"message"] isEqualToString:@"您已报名该课程"])
     {
         [self.btn_baoming setTitle:@"立即报名" forState:(UIControlStateNormal)];
     }

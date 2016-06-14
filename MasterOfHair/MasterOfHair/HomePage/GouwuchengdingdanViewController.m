@@ -18,6 +18,8 @@
 #import "ShangchengdingdanViewController.h"
 @interface GouwuchengdingdanViewController () <UITableViewDelegate, UITableViewDataSource,TXTradePasswordViewDelegate>
 
+
+
 @property (nonatomic, strong) UITableView * tableView;
 //头视图
 @property (nonatomic, strong) UIView * head_view;
@@ -59,6 +61,8 @@
 
 @property (nonatomic, copy) NSString * str_zhifutype;
 @property (nonatomic, copy) NSString * str_zhifusum;
+
+@property (nonatomic, strong)NSString * pwdStr;
 @end
 
 @implementation GouwuchengdingdanViewController
@@ -73,7 +77,7 @@
     //清空
     [Single_Model singel].shouhudizhi_Model = nil;
     [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
-
+    _pwdStr=@"";
     [self p_dataList];
     
     [self p_navi];
@@ -767,7 +771,7 @@
             
             self.str_zhifutype = str_zhifu;
             
-            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro andwallet_password:@""];
             
             
             NSLog(@"%ld",(unsigned long)self.arr_morenAddress.count);
@@ -780,7 +784,8 @@
 {
     [btn_back removeFromSuperview];
     [TXView removeFromSuperview];
-    if ([Password isEqualToString:get_sp(@"wallet_password")]) {
+    _pwdStr=Password;
+//    if ([Password isEqualToString:get_sp(@"wallet_password")]) {
         //支付方式
         NSString * str_zhifu = [NSString stringWithFormat:@""];
         if(self.btn_myPurse.selected == 1)
@@ -820,28 +825,28 @@
             
             self.str_zhifutype = str_zhifu;
             
-            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro];
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] shop_id:model_shop.shop_id shipping_method:self.arr_datapeisong[i] pay_method:str_zhifu address_id:model.address_id pay_status:@"0" leave_word:self.arr_dataliuyan[i] production_info:arr_pro andwallet_password:Password];
             
             
             NSLog(@"%ld",(unsigned long)self.arr_morenAddress.count);
         }
-    }
-    else
-    {
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付密码不正确" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-        
-        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        
-        [alert addAction:action];
-        return;
-    }
-    
+//    }
+//    else
+//    {
+//        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付密码不正确" preferredStyle:(UIAlertControllerStyleAlert)];
+//        
+//        [self presentViewController:alert animated:YES completion:^{
+//            
+//        }];
+//        
+//        UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//            
+//        }];
+//        
+//        [alert addAction:action];
+//        return;
+//    }
+
 }
 
 
@@ -1109,7 +1114,7 @@
                 if([self.str_zhifutype isEqualToString:@"1"])
                 {
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
-                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
                     
                     [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
 
@@ -1117,7 +1122,7 @@
                 else
                 {
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
-                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum];
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
                     [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
 
                 }

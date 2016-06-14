@@ -180,7 +180,7 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.stroe_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.stroe_collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_dataCollect];
         
@@ -287,7 +287,7 @@
             [self.arr_delect addObject:[NSString stringWithFormat:@"%@",model.favorite_id]];
         }
         
-        NSLog(@"%ld",self.arr_delect.count);
+//        NSLog(@"%ld(unsigned long)",self.arr_delect.count);
     }
 }
 
@@ -295,19 +295,19 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.stroe_collectionView.header beginRefreshing];
+    [self.stroe_collectionView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.stroe_collectionView.footer beginRefreshing];
+    [self.stroe_collectionView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.stroe_collectionView.header endRefreshing];
-        [self.stroe_collectionView.footer endRefreshing];
+        [self.stroe_collectionView.mj_header endRefreshing];
+        [self.stroe_collectionView.mj_footer endRefreshing];
     });
     
 }
@@ -334,7 +334,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"getProductionFavoriteList1:"];
     
-    [dataprovider getProductionFavoriteListWithMember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider getProductionFavoriteListWithMember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 
@@ -368,7 +368,7 @@
             {
                 __weak __typeof(self) weakSelf = self;
                 
-                self.stroe_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                self.stroe_collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                     
                     [self p_dataCollect1];
                     

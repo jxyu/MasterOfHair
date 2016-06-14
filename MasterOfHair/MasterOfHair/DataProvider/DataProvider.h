@@ -112,7 +112,7 @@
 - (void)deleteWithShopcart_id:(NSString *)shopcart_id;
 
 #pragma mark - 添加一个订单(POST提交)
-- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info;
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info andwallet_password:(NSString *)wallet_password;
 
 #pragma mark - 获取产品热门列表
 - (void)createWithMember_id:(NSString *)member_id production_id:(NSString *)production_id;
@@ -344,7 +344,7 @@
 
 
 #pragma mark -  订单支付接口
-- (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total;
+- (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total andwallet_password:(NSString *)wallet_password;
 
 
 #pragma mark -  升级金卡会员支付接口

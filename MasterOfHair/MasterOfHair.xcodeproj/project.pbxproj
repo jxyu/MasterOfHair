@@ -447,6 +447,7 @@
 		8BCBB7011CD1AF4D004DE9A2 /* index_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */; };
 		8BCBB7021CD1AF4D004DE9A2 /* index_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */; };
 		8BCBB7031CD1AF4D004DE9A2 /* index_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FF1CD1AF4D004DE9A2 /* index_3.png */; };
+		8BD31EF21D0FDBF50074E28F /* WebStoreNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD31EF11D0FDBF50074E28F /* WebStoreNextViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1173,6 +1174,8 @@
 		8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_1.png; sourceTree = "<group>"; };
 		8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_2.png; sourceTree = "<group>"; };
 		8BCBB6FF1CD1AF4D004DE9A2 /* index_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_3.png; sourceTree = "<group>"; };
+		8BD31EF01D0FDBF50074E28F /* WebStoreNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStoreNextViewController.h; sourceTree = "<group>"; };
+		8BD31EF11D0FDBF50074E28F /* WebStoreNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStoreNextViewController.m; sourceTree = "<group>"; };
 		A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasterOfHair.release.xcconfig"; path = "Pods/Target Support Files/Pods-MasterOfHair/Pods-MasterOfHair.release.xcconfig"; sourceTree = "<group>"; };
 		DC66A9C321D3889B49CE9222 /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1983,6 +1986,8 @@
 				7BA596B01C4E269200DBC69D /* WebStroeViewController.m */,
 				7BB073921C50B26000AAFF07 /* WebStroeCollectionViewCell.h */,
 				7BB073931C50B26000AAFF07 /* WebStroeCollectionViewCell.m */,
+				8BD31EF01D0FDBF50074E28F /* WebStoreNextViewController.h */,
+				8BD31EF11D0FDBF50074E28F /* WebStoreNextViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -3452,6 +3457,7 @@
 				8082B4C51C7414320024EAD3 /* JKAssetsGroupsView.m in Sources */,
 				802552B71C57442B00CFF875 /* SCRecorderTools.m in Sources */,
 				7BF7FF441C9F808D007E2133 /* Advertise_Model.m in Sources */,
+				8BD31EF21D0FDBF50074E28F /* WebStoreNextViewController.m in Sources */,
 				7B299A161C7D7B0C00D57B76 /* TuWen_Models.m in Sources */,
 				7B19D3BC1C97AFD00097C7C7 /* Qianbao_Model.m in Sources */,
 				7BCD55221C55C13900F32F16 /* wenxiuPeopleTableViewCell.m in Sources */,
@@ -3763,7 +3769,7 @@
 			baseConfigurationReference = 03F26EC288BF815B6F74F01E /* Pods-MasterOfHair.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MasterOfHair/KeychainAccessGroups.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -3801,7 +3807,7 @@
 			baseConfigurationReference = A6E1962F8F8DEA43471321E4 /* Pods-MasterOfHair.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MasterOfHair/KeychainAccessGroups.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

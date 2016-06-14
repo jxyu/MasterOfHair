@@ -190,7 +190,7 @@ static const char kKeyChainUDIDAccessGroup[] = "QFHX5W6J8N.com.sgq.titoujiang";
         NSLog(@"KeyChain Item: %@ not found!!!", [NSString stringWithUTF8String:kKeychainUDIDItemIdentifier]);
     }
     else if (queryErr != errSecSuccess) {
-        NSLog(@"KeyChain Item query Error!!! Error code:%ld", queryErr);
+        NSLog(@"KeyChain Item query Error!!! Error code:%d", (int)queryErr);
     }
     if (queryErr == errSecSuccess) {
         NSLog(@"KeyChain Item: %@", udidValue);
@@ -247,7 +247,7 @@ static const char kKeyChainUDIDAccessGroup[] = "QFHX5W6J8N.com.sgq.titoujiang";
     else {          // add item to keychain
         writeErr = SecItemAdd((CFDictionaryRef)dictForAdd, NULL);
         if (writeErr != errSecSuccess) {
-            NSLog(@"Add KeyChain Item Error!!! Error Code:%ld", writeErr);
+            NSLog(@"Add KeyChain Item Error!!! Error Code:%d", (int)writeErr);
             return NO;
         }
         else {
@@ -270,7 +270,7 @@ static const char kKeyChainUDIDAccessGroup[] = "QFHX5W6J8N.com.sgq.titoujiang";
     OSStatus deleteErr = noErr;
     deleteErr = SecItemDelete((CFDictionaryRef)dictToDelete);
     if (deleteErr != errSecSuccess) {
-        NSLog(@"delete UUID from KeyChain Error!!! Error code:%ld", deleteErr);
+        NSLog(@"delete UUID from KeyChain Error!!! Error code:%d", (int)deleteErr);
         return NO;
     }
     else {
@@ -318,7 +318,7 @@ static const char kKeyChainUDIDAccessGroup[] = "QFHX5W6J8N.com.sgq.titoujiang";
         
         updateErr = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)dictForUpdate);
         if (updateErr != errSecSuccess) {
-            NSLog(@"Update KeyChain Item Error!!! Error Code:%ld", updateErr);
+            NSLog(@"Update KeyChain Item Error!!! Error Code:%d", (int)updateErr);
             
             return NO;
         }

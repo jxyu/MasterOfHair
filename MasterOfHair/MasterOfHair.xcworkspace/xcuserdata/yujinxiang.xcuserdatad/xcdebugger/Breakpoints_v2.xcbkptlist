@@ -74,27 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MasterOfHair/HomePage/WebStroeViewController.m"
-            timestampString = "485659742.054549"
+            timestampString = "487578915.841417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "838"
-            endingLineNumber = "838"
-            landmarkName = "-fenleiBtnClick:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MasterOfHair/HomePage/WebStroeViewController.m"
-            timestampString = "485659742.054549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "799"
-            endingLineNumber = "799"
+            startingLineNumber = "803"
+            endingLineNumber = "803"
             landmarkName = "-product1:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MasterOfHair/HomePage/querendingdanViewController.m"
-            timestampString = "486461595.170309"
+            timestampString = "487049568.791623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "691"
-            endingLineNumber = "691"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "-btn_zhifuOKAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MasterOfHair/HomePage/querendingdanViewController.m"
-            timestampString = "486461595.170309"
+            timestampString = "487049568.791623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "708"
-            endingLineNumber = "708"
+            startingLineNumber = "710"
+            endingLineNumber = "710"
             landmarkName = "-TXTradePasswordView:WithPasswordString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -144,6 +128,70 @@
             startingLineNumber = "178"
             endingLineNumber = "178"
             landmarkName = "-TXTradePasswordView:WithPasswordString:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasterOfHair/HomePage/ShangchengdingdanViewController.m"
+            timestampString = "487048775.884977"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
+            landmarkName = "-btn_first:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasterOfHair/HomePage/ShangchengdingdanViewController.m"
+            timestampString = "487048808.709599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "888"
+            endingLineNumber = "888"
+            landmarkName = "-TXTradePasswordView:WithPasswordString:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasterOfHair/HomePage/ShangchengdingdanViewController.m"
+            timestampString = "487048952.889472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "896"
+            endingLineNumber = "896"
+            landmarkName = "-TXTradePasswordView:WithPasswordString:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MasterOfHair/DataProvider/DataProvider.m"
+            timestampString = "487049816.690403"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1338"
+            endingLineNumber = "1338"
+            landmarkName = "-createWithMember_id:orders_id:pay_method:orders_total:andwallet_password:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

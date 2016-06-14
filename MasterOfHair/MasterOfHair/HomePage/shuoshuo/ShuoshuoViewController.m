@@ -139,7 +139,7 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_data];
         
@@ -147,7 +147,7 @@
         [weakSelf loadNewData];
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_data1];
         
@@ -760,7 +760,7 @@
     DataProvider * dataprovider=[[DataProvider alloc] init];
     [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     
-    [dataprovider talkAllWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider talkAllWithmember_id:[userdefault objectForKey:@"member_id"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 //接口
@@ -1087,19 +1087,19 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }

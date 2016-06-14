@@ -280,7 +280,7 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         if(self.isTeacher == 0)
         {
@@ -298,7 +298,7 @@
         
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         if(self.isTeacher == 0)
         {
@@ -419,19 +419,19 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }
@@ -536,7 +536,7 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"SeniorTechnician:"];
     
-    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider SeniorTechnicianWithcity_id:[userdefault objectForKey:@"diquweizhi_id1"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
     
 //    [dataprovider SeniorTechnicianWithcity_id:@"109" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
 }

@@ -451,7 +451,7 @@
     switch (component) {
         case 0:
         {
-            NSLog(@"%ld",row);
+//            NSLog(@"%ld",(long)row);
             self.index1 = row + 1;
             //
             Shengshiqu_Model * model = self.arr_sheng[row];

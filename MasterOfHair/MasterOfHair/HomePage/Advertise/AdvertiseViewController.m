@@ -341,13 +341,13 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.mTableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.mTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
     
         [weakSelf.mTableView reloadData];
         [weakSelf loadNewData];
     }];
     
-    self.mTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.mTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         if(self.isTeacher == 1)
         {
@@ -566,7 +566,7 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider talkWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider talkWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 #pragma mark - 数据_2
@@ -599,7 +599,7 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Recruit:"];
     //
-    [dataprovider VitaeWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"15"];
+    [dataprovider VitaeWithArea_id:[userdefault objectForKey:@"diquweizhi_id2"] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id"] type_id:[userdefault objectForKey:@"zhaopingfei_id"] pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"15"];
 }
 
 //数据
@@ -670,19 +670,19 @@
     }
     
     // 马上进入刷新状态
-    [self.mTableView.header beginRefreshing];
+    [self.mTableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.mTableView.footer beginRefreshing];
+    [self.mTableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.mTableView.header endRefreshing];
-        [self.mTableView.footer endRefreshing];
+        [self.mTableView.mj_header endRefreshing];
+        [self.mTableView.mj_footer endRefreshing];
     });
     
 }

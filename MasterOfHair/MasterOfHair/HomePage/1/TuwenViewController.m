@@ -158,7 +158,7 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.video_collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_dataTuwen];
         
@@ -170,7 +170,7 @@
         
     }];
     
-    self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.video_collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_NextDataTuWen];
         
@@ -469,20 +469,20 @@
 - (void)example01
 {
     // 马上进入刷新状态
-    [self.video_collectionView.header beginRefreshing];
+    [self.video_collectionView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
     
-    [self.video_collectionView.footer beginRefreshing];
+    [self.video_collectionView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.video_collectionView.header endRefreshing];
-        [self.video_collectionView.footer endRefreshing];
+        [self.video_collectionView.mj_header endRefreshing];
+        [self.video_collectionView.mj_footer endRefreshing];
     });
     
 }
@@ -519,7 +519,7 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.video_collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_shipinData:self.str_type];
         
@@ -529,7 +529,7 @@
         
     }];
     
-    self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.video_collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_NextshipinData:self.str_type];
         
@@ -572,7 +572,7 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.video_collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.video_collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self p_dataTuwen];
         
@@ -582,7 +582,7 @@
         
     }];
     
-    self.video_collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.video_collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         [self p_NextDataTuWen];
         
@@ -625,16 +625,16 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
     {
-        [dataprovider getArticleListWithChannel_id:@"0" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+        [dataprovider getArticleListWithChannel_id:@"0" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"12"];
     }
     else
     {
-        [dataprovider getArticleListWithChannel_id:[userdefault objectForKey:@"TuwenFeilei"] status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+        [dataprovider getArticleListWithChannel_id:[userdefault objectForKey:@"TuwenFeilei"] status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"12"];
     }
     
     
     
-    [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"12"];
+    [dataprovider getArticleListWithChannel_id:@"6" status_code:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"12"];
 }
 
 - (void)getArticleList:(id )dict
@@ -740,11 +740,11 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"TuwenFeilei"] length] == 0)
     {
-        [dataprovider getArticleListWithVideo_type:@"0" is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
+        [dataprovider getArticleListWithVideo_type:@"0" is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page1] pagesize:@"10"];
     }
     else
     {
-        [dataprovider getArticleListWithVideo_type:[userdefault objectForKey:@"TuwenFeilei"] is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",self.page1] pagesize:@"10"];
+        [dataprovider getArticleListWithVideo_type:[userdefault objectForKey:@"TuwenFeilei"] is_free:is_free pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page1] pagesize:@"10"];
     }
 }
 

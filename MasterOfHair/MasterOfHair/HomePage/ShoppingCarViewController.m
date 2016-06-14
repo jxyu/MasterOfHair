@@ -291,7 +291,7 @@
         [self.tableView reloadData];
     });
     
-    NSLog(@"%ld",self.arr_baocun.count);
+//    NSLog(@"%ld",(unsigned long)self.arr_baocun.count);
 }
 
 //结算
@@ -372,7 +372,7 @@
         [self.tableView reloadData];
     });
     
-    NSLog(@"%ld",self.arr_baocun.count);
+//    NSLog(@"%ld",(unsigned long)self.arr_baocun.count);
 }
 
 #pragma mark - 加减

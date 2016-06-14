@@ -19,6 +19,8 @@
 #import "WebStroe_Model.h"
 #import "JCCollectionViewCell.h"
 
+#import "WebStoreNextViewController.h"
+
 @interface WebStroeViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 //tableView
@@ -67,7 +69,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self p_data2];
+    [self p_data2];
     [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
     
     
@@ -325,72 +327,74 @@
     if([collectionView isEqual:self.classify_collectionView])
     {
         JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
-        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
+//        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
+        cell.imageView.layer.cornerRadius=6;
         switch (indexPath.row) {
             case 0:
             {
                 cell.name.text = @"美发产品";
+                cell.imageView.image = [UIImage imageNamed:@"1meifa"];
                 
             }
                 break;
             case 1:
             {
                 cell.name.text = @"美容产品";
-                
+                cell.imageView.image = [UIImage imageNamed:@"2meirong"];
             }
                 break;
             case 2:
             {
                 cell.name.text = @"纹绣产品";
-                
+                cell.imageView.image = [UIImage imageNamed:@"3wenxiu"];
             }
                 break;
             case 3:
             {
                 cell.name.text = @"美甲产品";
-//                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+                cell.imageView.image = [UIImage imageNamed:@"4meijia"];
                 
             }
                 break;
             case 4:
             {
                 cell.name.text = @"化妆产品";
-//                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+                cell.imageView.image = [UIImage imageNamed:@"5huazhuangpin"];
                 
             }
                 break;
             case 5:
             {
                 cell.name.text = @"足浴";
-//                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+                cell.imageView.image = [UIImage imageNamed:@"6zuyu"];
                 
             }
                 break;
             case 6:
             {
                 cell.name.text = @"纹身产品";
-//                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+                cell.imageView.image = [UIImage imageNamed:@"7wenshen"];
                 
             }
                 break;
             case 7:
             {
                 cell.name.text = @"美业服饰";
-//                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+                cell.imageView.image = [UIImage imageNamed:@"8meiyefushi"];
                 
             }
                 break;
             case 8:
             {
                 cell.name.text = @"国际品牌";
-//                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+                cell.imageView.image = [UIImage imageNamed:@"9guojipinpai"];
                 
             }
                 break;
             case 9:
             {
                 cell.name.text = @"教学资料";
-//                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+                cell.imageView.image = [UIImage imageNamed:@"10ziliao"];
                 
             }
                 break;
@@ -453,13 +457,13 @@
 #pragma mark - 头视图
 - (void)p_headView
 {
-    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60+(SCREEN_WIDTH - 20) / 3 + 70)];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60+(SCREEN_WIDTH - 20) / 3 + 270)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-//    [self p_lunbotu];
-//    
-//    [self.head_view addSubview:self.lunbo_scrollView];
-//    [self.head_view addSubview:self.lunbo_pageControl];
+    [self p_lunbotu];
+    
+    [self.head_view addSubview:self.lunbo_scrollView];
+    [self.head_view addSubview:self.lunbo_pageControl];
     [self.head_view addSubview:self.classify_collectionView];
     //搜索。。。。。。。
     [self p_setupView2];
@@ -736,11 +740,11 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"category_id"] length] == 0)
     {
-        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:@"0" is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"9"];
     }
     else
     {
-        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page]pagesize:@"9"];
+        [dataprovider productWithcity_id:[userdefault objectForKey:@"diquweizhi_id"] category_id:[userdefault objectForKey:@"category_id"] is_maker:@"0" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page]pagesize:@"9"];
     }
 }
 
@@ -837,7 +841,10 @@
 {
     NSString * str_category=[NSString stringWithFormat:@"%ld",index+19];
     set_sp(@"category_id", str_category);
-    [self example01];
+    WebStoreNextViewController * webNext=[[WebStoreNextViewController alloc] init];
+    
+    [self showViewController:webNext sender:nil];
+//    [self example01];
 }
 #pragma mark - 下拉刷新
 - (void)example01
@@ -982,7 +989,7 @@
         layout.itemSize = CGSizeMake(item_length, item_length + 20);
         layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         
-        _classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH - 20) / 3 + 70) collectionViewLayout:layout];
+        _classify_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, (SCREEN_WIDTH - 20) / 3 + 70) collectionViewLayout:layout];
         _classify_collectionView.delegate = self;
         _classify_collectionView.dataSource = self;
         

@@ -451,7 +451,7 @@
 
 - (void)selectedTagsChanged: (VOTagList *)tagList{
     
-    NSLog(@"%ld", tagList.selectedIndexSet.firstIndex);
+//    NSLog(@"%ld", (unsigned long)tagList.selectedIndexSet.firstIndex);
     
     
     if(tagList.selectedIndexSet.firstIndex < 100)

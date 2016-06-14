@@ -46,14 +46,14 @@
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.mainTableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf p_GetDetialData];
         
         
     }];
     
-    self.mainTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         
     }];

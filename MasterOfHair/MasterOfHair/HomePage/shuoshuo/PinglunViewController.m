@@ -229,7 +229,7 @@
     {
         Shuoshuo_Model * model = self.arr_replylist[indexPath.row];
     
-        self.index = [NSString stringWithFormat:@"%ld",indexPath.row];
+        self.index = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
         //回复
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         

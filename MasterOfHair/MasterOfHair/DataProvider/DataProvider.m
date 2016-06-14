@@ -366,15 +366,15 @@
 
 
 #pragma mark - 添加一个订单(POST提交)
-- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info
+- (void)createWithMember_id:(NSString *)member_id shop_id:(NSString *)shop_id shipping_method:(NSString *)shipping_method pay_method:(NSString *)pay_method address_id:(NSString *)address_id pay_status:(NSString *)pay_status leave_word:(NSString *)leave_word production_info:(NSMutableArray *)production_info andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info && address_id)
+    if(member_id && shop_id && shipping_method && pay_method && pay_status && leave_word && production_info && address_id &&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@order/createOrder",Url];
         
         NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
         
-         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"address_id\":\"%@\",\"production_info\":%@}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,address_id,jsonString]};
+         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"address_id\":\"%@\",\"production_info\":\"%@\",\"wallet_password\":\"%@\"}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,address_id,jsonString,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1327,13 +1327,13 @@
 
 
 #pragma mark -  订单支付接口
-- (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total
+- (void)createWithMember_id:(NSString *)member_id orders_id:(NSString *)orders_id pay_method:(NSString *)pay_method orders_total:(NSString * )orders_total andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && orders_id && pay_method && orders_total)
+    if(member_id && orders_id && pay_method && orders_total&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@order/payOrder",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"orders_id\":\"%@\",\"pay_method\":\"%@\",\"orders_total\":\"%@\"}",member_id,orders_id,pay_method,orders_total]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"orders_id\":\"%@\",\"pay_method\":\"%@\",\"orders_total\":\"%@\",\"wallet_password\":\"%@\"}",member_id,orders_id,pay_method,orders_total,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }

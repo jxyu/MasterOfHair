@@ -12,9 +12,12 @@
 #import "MineViewController.h"
 #import "chanpingxiangqingViewController.h"
 
+#import "SetPayPwdViewController.h"
+#import "TXTradePasswordView.h"
+
 #import "shangchengdingdanDetailViewController.h"
 
-@interface ShangchengdingdanViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ShangchengdingdanViewController () <UITableViewDataSource, UITableViewDelegate,TXTradePasswordViewDelegate>
 
 @property (nonatomic, strong) UIView * top_white;
 
@@ -45,6 +48,11 @@
 @end
 
 @implementation ShangchengdingdanViewController
+{
+    TXTradePasswordView *TXView;
+    UIButton * btn_back;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -108,13 +116,13 @@
     
     __weak __typeof(self) weakSelf = self;
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf.tableView reloadData];
         [weakSelf loadNewData];
     }];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
 //        if([self.index length] == 0 && [self.index isEqualToString:@"0"])
 //        {
@@ -162,7 +170,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld",indexPath.row);
+//    NSLog(@"%ld",(long)indexPath.row);
     
     if(indexPath.row == 0 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 1 || indexPath.row == [self.arr_dataList[indexPath.section] count] + 2)
     {
@@ -439,16 +447,37 @@
             
             UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 
-                if([model.pay_method isEqualToString:@"1"])
+                if([model.pay_method isEqualToString:@"1"])//钱包支付
                 {
-                    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                     
-                    DataProvider * dataprovider=[[DataProvider alloc] init];
-                    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
+                    if (get_sp(@"wallet_password")==nil) {
+                        SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+                        setPayPWD.fatherVC=self;
+                        [self.navigationController pushViewController:setPayPWD animated:YES];
+                        return;
+                    }
+                    //输入支付密码
+                    TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请再次输入支付密码"];
+                    TXView.tag=index_x;
+                    TXView.backgroundColor=[UIColor whiteColor];
+                    TXView.TXTradePasswordDelegate = self;
+                    if (![TXView.TF becomeFirstResponder])
+                    {
+                        //成为第一响应者。弹出键盘
+                        [TXView.TF becomeFirstResponder];
+                    }
+                    btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+                    btn_back.backgroundColor=[UIColor lightGrayColor];
+                    [self.view addSubview:btn_back];
                     
-                    //            NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+                    [self.view addSubview:TXView];
                     
-                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total];
+                    return;
+
+                    
+                    
+                    
+                    
                     
 //                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
                 }
@@ -461,7 +490,7 @@
                     
                     //            NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
                     
-                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total];
+                    [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total andwallet_password:@""];
                     
                     [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
                 }
@@ -811,19 +840,19 @@
     [self p_data_state];
     
     // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)example02
 {
-    [self.tableView.footer beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)loadNewData
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
     
 }
@@ -854,6 +883,24 @@
 
 
 
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    
+    DINGDAN_Model * model = self.arr_dataAll[view.tag];
+    
+    DLog(@"view.tag:%ld",(long)view.tag);
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
+    
+    //            NSLog(@"%@",[userdefault objectForKey:@"member_id"]);
+    
+    [dataprovider createWithMember_id:get_sp(@"member_id") orders_id:model.orders_id pay_method:model.pay_method orders_total:model.orders_total andwallet_password:Password
+     ];
+    
+}
 
 
 

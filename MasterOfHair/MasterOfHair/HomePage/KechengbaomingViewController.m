@@ -175,7 +175,7 @@
     
     [dataprovider setDelegateObject:self setBackFunctionName:@"Course:"];
     
-    [dataprovider CourseWithPagenumber:[NSString stringWithFormat:@"%ld",self.page] status:@"2"];
+    [dataprovider CourseWithPagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] status:@"2"];
 }
 
 //数据

@@ -284,72 +284,74 @@
     if([collectionView isEqual:self.classify_collectionView])
     {
         JCCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell_classify" forIndexPath:indexPath];
-        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
+        //        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"class_%ld",(long)indexPath.item]];
+        cell.imageView.layer.cornerRadius=6;
         switch (indexPath.row) {
             case 0:
             {
                 cell.name.text = @"美发产品";
+                cell.imageView.image = [UIImage imageNamed:@"1meifa"];
                 
             }
                 break;
             case 1:
             {
                 cell.name.text = @"美容产品";
-                
+                cell.imageView.image = [UIImage imageNamed:@"2meirong"];
             }
                 break;
             case 2:
             {
                 cell.name.text = @"纹绣产品";
-                
+                cell.imageView.image = [UIImage imageNamed:@"3wenxiu"];
             }
                 break;
             case 3:
             {
                 cell.name.text = @"美甲产品";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_38"];
+                cell.imageView.image = [UIImage imageNamed:@"4meijia"];
                 
             }
                 break;
             case 4:
             {
                 cell.name.text = @"化妆产品";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_41"];
+                cell.imageView.image = [UIImage imageNamed:@"5huazhuangpin"];
                 
             }
                 break;
             case 5:
             {
                 cell.name.text = @"足浴";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_59"];
+                cell.imageView.image = [UIImage imageNamed:@"6zuyu"];
                 
             }
                 break;
             case 6:
             {
                 cell.name.text = @"纹身产品";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_62"];
+                cell.imageView.image = [UIImage imageNamed:@"7wenshen"];
                 
             }
                 break;
             case 7:
             {
                 cell.name.text = @"美业服饰";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_65"];
+                cell.imageView.image = [UIImage imageNamed:@"8meiyefushi"];
                 
             }
                 break;
             case 8:
             {
                 cell.name.text = @"国际品牌";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_68"];
+                cell.imageView.image = [UIImage imageNamed:@"9guojipinpai"];
                 
             }
                 break;
             case 9:
             {
                 cell.name.text = @"教学资料";
-                //                cell.imageView.image = [UIImage imageNamed:@"01_71"];
+                cell.imageView.image = [UIImage imageNamed:@"10ziliao"];
                 
             }
                 break;
@@ -806,11 +808,11 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"category_id"] length] == 0)
     {
-        [dataprovider productWithcategory_id:@"0" is_maker:@"1" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page] pagesize:@"9"];
+        [dataprovider productWithcategory_id:@"0" is_maker:@"1" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page] pagesize:@"9"];
     }
     else
     {
-        [dataprovider productWithcategory_id:[userdefault objectForKey:@"category_id"] is_maker:@"1" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",self.page]pagesize:@"9"];
+        [dataprovider productWithcategory_id:[userdefault objectForKey:@"category_id"] is_maker:@"1" is_sell:@"1" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page]pagesize:@"9"];
     }
 }
 

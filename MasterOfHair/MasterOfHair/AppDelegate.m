@@ -37,7 +37,7 @@
 
 @implementation AppDelegate
 
-
+//Code Singing Entitle                 MasterOfHair/KeychainAccessGroups.plist
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRootView1:) name:@"changeRootView1" object:nil];
     [self InitTabBarUI];
