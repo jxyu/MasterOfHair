@@ -839,9 +839,71 @@
 
 -(void)fenleiBtnClick:(NSInteger)index
 {
-    NSString * str_category=[NSString stringWithFormat:@"%ld",index+19];
+    NSString * str_category=[NSString stringWithFormat:@"%d",index+19];
     set_sp(@"category_id", str_category);
     WebStoreNextViewController * webNext=[[WebStoreNextViewController alloc] init];
+    switch (index) {
+        case 0:
+        {
+            webNext.type_title = @"美发产品";
+            
+        }
+            break;
+        case 1:
+        {
+            webNext.type_title= @"美容产品";
+        }
+            break;
+        case 2:
+        {
+            webNext.type_title=@"纹绣产品";
+        }
+            break;
+        case 3:
+        {
+            webNext.type_title= @"美甲产品";
+            
+        }
+            break;
+        case 4:
+        {
+            webNext.type_title= @"化妆产品";
+            
+        }
+            break;
+        case 5:
+        {
+            webNext.type_title= @"足浴";
+            
+        }
+            break;
+        case 6:
+        {
+            webNext.type_title= @"纹身产品";
+        }
+            break;
+        case 7:
+        {
+            webNext.type_title= @"美业服饰";
+            
+        }
+            break;
+        case 8:
+        {
+            webNext.type_title= @"国际品牌";
+            
+        }
+            break;
+        case 9:
+        {
+            webNext.type_title= @"教学资料";
+            
+        }
+            break;
+        default:
+            webNext.type_title=@"全部分类";
+            break;
+    }
     
     [self showViewController:webNext sender:nil];
 //    [self example01];

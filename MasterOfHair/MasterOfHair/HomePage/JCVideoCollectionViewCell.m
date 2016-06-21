@@ -30,6 +30,7 @@
 {
     self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
     self.image.layer.masksToBounds = YES;
+    self.image.contentMode=UIViewContentModeCenter;
     self.image.layer.cornerRadius = 8;
     [self.contentView addSubview:self.image];
     

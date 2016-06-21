@@ -494,6 +494,7 @@
     {
         Shuoshuo_Model * modle_list = self.arr_filelist[section][count];
         
+        
         if([modle_list.file_type isEqualToString:@"1"])
         {
             self.view_viewbg.hidden = NO;
@@ -505,7 +506,7 @@
             self.scrollView .contentSize = CGSizeMake(SCREEN_WIDTH * [self.arr_filelist[section] count], 0);
             self.scrollView .pagingEnabled = YES;
             self.scrollView.tag = 5000000;
-
+//            [self.scrollView addSubview:img_back];
             for (int i = 0 ; i < [self.arr_filelist[section] count]; i ++)
             {
                 Shuoshuo_Model * model_pic = self.arr_filelist[section][i];
@@ -931,6 +932,10 @@
     self.view_viewbg.backgroundColor = [UIColor blackColor];
     self.view_viewbg.hidden = YES;
     [self.view addSubview:self.view_viewbg];
+    UIImageView * img_back=[[UIImageView alloc] initWithFrame:CGRectMake(15, 30, 25, 25)];
+    img_back.image=[UIImage imageNamed:@"iconfont-fanhui"];
+    
+    [self.view_viewbg addSubview:img_back];
     
     
     //手势

@@ -62,6 +62,7 @@
 
 //获取视频
 @property (nonatomic, strong) NSMutableArray * arr_video;
+@property (nonatomic, assign) NSInteger page1;
 @end
 
 @implementation BusinessSchoolViewController
@@ -122,7 +123,8 @@
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [self p_videoData];
+//        [self p_videoData];
+        [self p_shipinData];
         
         [self p_dataTuwenData];
         
@@ -131,6 +133,10 @@
         [self p_data2];
         //        self.isplay = 0;
 //        [weakSelf.tableView reloadData];
+        [weakSelf loadNewData];
+    }];
+    self.tableView.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self p_NextshipinData];
         [weakSelf loadNewData];
     }];
 }
@@ -166,11 +172,11 @@
             //判断奇数还是偶数
             if(self.arr_video.count % 2 == 0)
             {
-                return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4) + 100;
+                return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4+8) + 40;
             }
             else
             {
-                return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
+                return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4+8) + 40;
             }
         }
             break;
@@ -273,6 +279,7 @@
             [self p_videoList];
             
             [cell addSubview:self.video_name];
+            self.video_collectionView.frame=CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, ((self.arr_video.count % 2) == 0?(self.arr_video.count / 2):(self.arr_video.count + 1) / 2 ) * (SCREEN_WIDTH / 4+8) + 40 - CGRectGetMaxY(self.video_name.frame) - 5);
             [cell addSubview:self.video_collectionView];
         }
             break;
@@ -871,14 +878,14 @@
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
-    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 4 * 3);
+    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length/4*3);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
+    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 5 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
     self.video_collectionView.delegate = self;
     self.video_collectionView.dataSource = self;
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+    self.video_collectionView.scrollEnabled=NO;
     [self.video_collectionView registerClass:[JCVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_video"];
 }
 
@@ -979,6 +986,7 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView.mj_header endRefreshing];
+        
     });
     
 }
@@ -1126,6 +1134,110 @@
         
     }
 }
+
+
+#pragma mark - 视频的数据
+- (void)p_shipinData
+{
+    self.page1 = 1;
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping:"];
+    
+    [dataprovider getArticleListWithVideo_type:@"0" is_free:@"" pagenumber:@"1" pagesize:@"10"];
+    
+    
+}
+
+- (void)p_NextshipinData
+{
+    
+    //    NSLog(@"%ld",self.page);
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"getArticleListshiping1:"];
+    [dataprovider getArticleListWithVideo_type:@"0" is_free:@"" pagenumber:[NSString stringWithFormat:@"%ld",(long)self.page1] pagesize:@"10"];
+
+}
+
+- (void)getArticleListshiping:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    self.arr_video = nil;
+    
+    [SVProgressHUD dismiss];
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            self.page1 ++ ;
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_video addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+}
+
+- (void)getArticleListshiping1:(id )dict
+{
+    //    NSLog(@"%@",dict);
+    
+    if ([dict[@"status"][@"succeed"] intValue] == 1) {
+        @try
+        {
+            self.page1 ++ ;
+            for (NSDictionary * dic in dict[@"data"][@"videolist"])
+            {
+                TuWen_Models * model = [[TuWen_Models alloc] init];
+                
+                [model setValuesForKeysWithDictionary:dic];
+                
+                [self.arr_video addObject:model];
+            }
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新tableView(记住,要更新放在主线程中)
+                [self.tableView reloadData];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+    }
+    [self.tableView.mj_footer endRefreshing];
+}
+
+
+
+
 
 
 #pragma mark - 懒加载

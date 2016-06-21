@@ -27,6 +27,7 @@
 @property (nonatomic, copy) NSString * shipping_time;
 @property (nonatomic, copy) NSString * shop_id;
 @property (nonatomic, copy) NSString * shop_name;
+@property (nonatomic, copy) NSString * shop_tel;
 
 
 

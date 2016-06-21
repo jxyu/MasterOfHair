@@ -176,16 +176,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(self.arr_data.count != 0)
-    {
-        ShoppingCar_Model * model = self.arr_data[indexPath.row];
-        
-        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
-        
-        chanpingxiangqing.production_id = model.production_id;
-        
-        [self showViewController:chanpingxiangqing sender:nil];
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,8 +210,11 @@
         [cell.btn_Subtract addTarget:self action:@selector(btn_SubtractAction:) forControlEvents:(UIControlEventTouchUpInside)];
         cell.btn_Subtract.tag = indexPath.row + 100001;
         
+        UIButton  * btn_Jump=[[UIButton alloc] initWithFrame:CGRectMake(80, 0, SCREEN_WIDTH-80, cell.frame.size.height)];
+        [btn_Jump addTarget:self action:@selector(JumptoShangPin:) forControlEvents:UIControlEventTouchUpInside];
         
-        
+        btn_Jump.tag=indexPath.row;
+        [cell addSubview:btn_Jump];
         for (ShoppingCar_Model * model1 in self.arr_baocun)
         {
             if([model1.shopcart_id isEqualToString:model.shopcart_id])
@@ -472,7 +465,20 @@
     }
 }
 
+-(void)JumptoShangPin:(UIButton *)sender
+{
+    if(self.arr_data.count != 0)
+    {
+        ShoppingCar_Model * model = self.arr_data[sender.tag];
+        
+        chanpingxiangqingViewController * chanpingxiangqing = [[chanpingxiangqingViewController alloc] init];
+        
+        chanpingxiangqing.production_id = model.production_id;
+        
+        [self showViewController:chanpingxiangqing sender:nil];
+    }
 
+}
 
 #pragma mark - 左滑删除
 

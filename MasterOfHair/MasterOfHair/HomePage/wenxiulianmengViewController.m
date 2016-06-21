@@ -57,7 +57,7 @@
 #pragma mark - navi
 - (void)p_navi
 {
-    _lblTitle.text = [NSString stringWithFormat:@"纹绣联盟"];
+    _lblTitle.text = [NSString stringWithFormat:@"名师联盟"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];

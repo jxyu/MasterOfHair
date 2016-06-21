@@ -180,8 +180,6 @@
     {        
         if(self.arr_dataList.count != 0)
         {
-            
-            
 //            DINGDAN_Model * model = self.arr_dataList[indexPath.section][indexPath.row - 1];
             
             DINGDAN_Model * model_all = self.arr_dataAll[indexPath.section];

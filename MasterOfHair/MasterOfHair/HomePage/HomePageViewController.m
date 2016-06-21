@@ -228,7 +228,17 @@
     
     [self.view addSubview:self.tableView];
     
-    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    UIView  * tablefooterView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+    tablefooterView.backgroundColor=[UIColor clearColor];
+    UIButton * btn_more=[[UIButton alloc] initWithFrame:CGRectMake(30, 8, SCREEN_WIDTH-60, 44)];
+    btn_more.backgroundColor=_topView.backgroundColor;
+    [btn_more setTitle:@"查看更多视频" forState:UIControlStateNormal];
+    [btn_more setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn_more addTarget:self action:@selector(JumpToshangxueyuan) forControlEvents:UIControlEventTouchUpInside];
+    [tablefooterView addSubview:btn_more];
+    
+    self.tableView.tableFooterView = tablefooterView;
     
     
     __weak __typeof(self) weakSelf = self;
@@ -277,11 +287,11 @@
 //        NSLog(@"%ld",self.arr_video.count);
         if(self.arr_video.count % 2 == 0)
         {
-            return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4) + 100;
+            return (self.arr_video.count / 2) * (SCREEN_WIDTH / 3) + 100;
         }
         else
         {
-            return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4) + 100;
+            return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 3) + 100;
         }
 //        return 4 * (SCREEN_WIDTH / 4) + 100;
     }
@@ -324,7 +334,7 @@
     }
     else if(indexPath.row == 3)
     {
-        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100);
+        cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 3) + 100);
         cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -882,14 +892,14 @@
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
-    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length / 4 * 3);
+    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length );
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
+    self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 5 * (SCREEN_WIDTH / 3) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];
     self.video_collectionView.delegate = self;
     self.video_collectionView.dataSource = self;
     self.video_collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+    self.video_collectionView.scrollEnabled=NO;
     [self.video_collectionView registerClass:[JCVideoCollectionViewCell class] forCellWithReuseIdentifier:@"cell_video"];
 }
 
@@ -1311,7 +1321,10 @@
         
     }
 }
-
+-(void)JumpToshangxueyuan
+{
+    [_app_  selectTableBarIndex:1];
+}
 
 - (NSArray *) titles {
     return @[@"扫一扫",

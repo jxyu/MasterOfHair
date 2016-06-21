@@ -105,7 +105,7 @@
     
     if([[userdefault objectForKey:@"category_name"] length] == 0)
     {
-        [self.delegate_class setTitle:@"全部分类" forState:UIControlStateNormal];
+        [self.delegate_class setTitle:self.type_title?self.type_title:@"全部分类" forState:UIControlStateNormal];
     }
     else
     {
@@ -504,7 +504,7 @@
     
     if([[userdefault objectForKey:@"category_name"] length] == 0)
     {
-        [self.delegate_class setTitle:@"全部分类" forState:UIControlStateNormal];
+        [self.delegate_class setTitle:self.type_title?self.type_title:@"全部分类" forState:UIControlStateNormal];
     }
     else
     {

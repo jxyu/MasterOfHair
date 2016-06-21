@@ -497,7 +497,7 @@
             
             self.name.text = [NSString stringWithFormat:@"%@",model.article_title];
             
-            if([model.article_click length] * 2 >= 5)
+            if([[NSString stringWithFormat:@"%@",model.article_click] length] * 2 >= 5)
             {
                 float x = [model.article_click integerValue] / 10000.0;
                 self.read_number.text = [NSString stringWithFormat:@"%.2f万",x];

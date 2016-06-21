@@ -374,7 +374,7 @@
         
         NSString *jsonString = [[NSString alloc] initWithData:[self toJSONData:production_info] encoding:NSUTF8StringEncoding];
         
-         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"address_id\":\"%@\",\"production_info\":\"%@\",\"wallet_password\":\"%@\"}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,address_id,jsonString,wallet_password]};
+         NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"shop_id\":\"%@\",\"shipping_method\":\"%@\",\"pay_method\":\"%@\",\"pay_status\":\"%@\",\"leave_word\":\"%@\",\"address_id\":\"%@\",\"production_info\":%@,\"wallet_password\":\"%@\"}",member_id,shop_id,shipping_method,pay_method,pay_status,leave_word,address_id,jsonString,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E2B7300FDA285A56A80D8129F880356"
+               BlueprintIdentifier = "8752C534843C99AD1639A5FF30EDA25F"
                BuildableName = "Pods_MasterOfHair.framework"
                BlueprintName = "Pods-MasterOfHair"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3E2B7300FDA285A56A80D8129F880356"
+            BlueprintIdentifier = "8752C534843C99AD1639A5FF30EDA25F"
             BuildableName = "Pods_MasterOfHair.framework"
             BlueprintName = "Pods-MasterOfHair"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3E2B7300FDA285A56A80D8129F880356"
-            BuildableName = "Pods_MasterOfHair.framework"
-            BlueprintName = "Pods-MasterOfHair"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -10,5 +10,6 @@
 #import "BaseNavigationController.h"
 
 @interface WebStoreNextViewController : BaseNavigationController
+@property (nonatomic,strong)NSString * type_title;
 
 @end

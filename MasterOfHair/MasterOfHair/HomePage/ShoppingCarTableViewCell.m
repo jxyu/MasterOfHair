@@ -125,9 +125,9 @@
     self.bg_image.frame = self.contentView.frame;
     
 //    self.btn_select.frame = CGRectMake(0, 0, 30, 130);
-    self.btn_select.frame = CGRectMake(2.5, 52.5, 25, 25);
+    self.btn_select.frame = CGRectMake(10, 52.5, 25, 25);
     
-    self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 5, 15, 100, 100);
+    self.image.frame = CGRectMake(CGRectGetMaxX(self.btn_select.frame) + 5, 15, 90, 90);
     
     self.title.frame = CGRectMake(CGRectGetMaxX(self.image.frame) + 10, 15, self.contentView.frame.size.width - 15 - CGRectGetMaxX(self.image.frame), 35);
     

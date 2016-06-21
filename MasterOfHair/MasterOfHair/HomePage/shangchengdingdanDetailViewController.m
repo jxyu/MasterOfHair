@@ -105,7 +105,7 @@
     
     self.tel = [[UILabel alloc] init];
     self.tel.frame = CGRectMake(CGRectGetMaxX(self.name.frame) + 10, 10, length_x, 25);
-//            self.tel.text = @"1888888888888";
+    //self.tel.text = @"1888888888888";
     self.tel.textAlignment = NSTextAlignmentRight;
     self.tel.textColor = [UIColor grayColor];
     [self.view_bg addSubview:self.tel];
@@ -113,7 +113,7 @@
     
     self.address = [[UILabel alloc] init];
     self.address.frame = CGRectMake(20, CGRectGetMaxY(self.name.frame) + 13, SCREEN_WIDTH - 40, 34);
-    //        self.address.text = @"山东省临沂市山东省临沂市山东省临沂市山东省临沂市";
+    //self.address.text = @"山东省临沂市山东省临沂市山东省临沂市山东省临沂市";
     self.address.font = [UIFont systemFontOfSize:14];
     self.address.numberOfLines = 2;
     self.address.textColor = [UIColor grayColor];
@@ -145,7 +145,7 @@
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6 + self.arr_list.count;
+    return 7 + self.arr_list.count;
 }
 
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -159,6 +159,10 @@
         return 50;
     }
     else if(indexPath.row == self.arr_list.count + 5)
+    {
+        return 50;
+    }
+    else if(indexPath.row == self.arr_list.count + 6)
     {
         return 40;
     }
@@ -278,6 +282,35 @@
     }
     else if(indexPath.row == self.arr_list.count + 5)
     {
+        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 70, 30)];
+//        name.textColor = [UIColor grayColor];
+        name.text = @"联系方式";
+        name.font=[UIFont systemFontOfSize:15];
+        name.textAlignment = NSTextAlignmentRight;
+        [cell addSubview:name];
+        
+        UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 5, 10, 1, 30)];
+        view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [cell addSubview:view_line];
+        
+        
+        UIView * view_call = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line.frame) + 5, 0, SCREEN_WIDTH - CGRectGetMaxX(view_line.frame) - 10, 50)];
+        //            view_call.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:view_call];
+        
+        UIImageView * image_ = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 15, 10, 30, 30)];
+        image_.image = [UIImage imageNamed:@"yijianbohao"];
+        //            image_.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:image_];
+        
+        UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_.frame) , 10, 70, 30)];
+        detail.textColor = navi_bar_bg_color;
+        detail.text = @"一键拨号";
+        
+        [cell addSubview:detail];
+    }
+    else if(indexPath.row == self.arr_list.count + 6)
+    {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIView * viewline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
@@ -289,6 +322,7 @@
         label.text = @"收货信息";
         [cell addSubview:label];
     }
+    
     else
     {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -343,9 +377,27 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if(indexPath.row == 0 || indexPath.row == 1 || indexPath.row == self.arr_list.count + 2 || indexPath.row == self.arr_list.count + 3 || indexPath.row == self.arr_list.count + 4 || indexPath.row == self.arr_list.count + 5)
+    if(indexPath.row == 0 || indexPath.row == 1 || indexPath.row == self.arr_list.count + 2 || indexPath.row == self.arr_list.count + 3 || indexPath.row == self.arr_list.count + 4)
     {
         
+    }
+    else if(indexPath.row == self.arr_list.count + 5)
+    {
+//        _model_all;
+        UIAlertController * alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"是否拨打商户电话" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * action_Cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alert addAction:action_Cancel];
+        UIAlertAction * action_MakeCall=[UIAlertAction actionWithTitle:@"拨打" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.model_all.shop_tel]]];
+        }];
+        [alert addAction:action_MakeCall];
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+//        [self presentViewController:alert animated:YES completion:nil];
     }
     else
     {
