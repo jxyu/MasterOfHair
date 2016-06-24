@@ -83,6 +83,8 @@
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 }
 
 //返回

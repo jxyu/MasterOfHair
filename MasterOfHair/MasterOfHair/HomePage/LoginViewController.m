@@ -45,7 +45,8 @@
     
     [self addLeftButton:@"iconfont-fanhui"];
     
-    
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
     [self addRightbuttontitle:@"注册"];
 }
 

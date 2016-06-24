@@ -89,7 +89,8 @@
     _lblTitle.text = @"商学院";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     [self addLeftButton:@"iconfont-fanhui"];
-    
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 }
 
 -(void)clickLeftButton:(UIButton *)sender
@@ -172,11 +173,11 @@
             //判断奇数还是偶数
             if(self.arr_video.count % 2 == 0)
             {
-                return (self.arr_video.count / 2) * (SCREEN_WIDTH / 4+8) + 40;
+                return (self.arr_video.count / 2) * (SCREEN_WIDTH / 3+10) +40;
             }
             else
             {
-                return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 4+8) + 40;
+                return ((self.arr_video.count + 1) / 2 )* (SCREEN_WIDTH / 3+10) +40;
             }
         }
             break;
@@ -272,14 +273,14 @@
             break;
         case 4:
         {
-            cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 4) + 100);
+//            cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, 4 * (SCREEN_WIDTH / 3) + 100);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
             
             [self p_videoList];
             
             [cell addSubview:self.video_name];
-            self.video_collectionView.frame=CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, ((self.arr_video.count % 2) == 0?(self.arr_video.count / 2):(self.arr_video.count + 1) / 2 ) * (SCREEN_WIDTH / 4+8) + 40 - CGRectGetMaxY(self.video_name.frame) - 5);
+            self.video_collectionView.frame=CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, ((self.arr_video.count % 2) == 0?(self.arr_video.count / 2):(self.arr_video.count + 1) / 2 ) * (SCREEN_WIDTH / 3+10) +40 - CGRectGetMaxY(self.video_name.frame) - 5);
             [cell addSubview:self.video_collectionView];
         }
             break;
@@ -878,7 +879,7 @@
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
     //每个item的大小
     int  item_length = (SCREEN_WIDTH ) / 3;
-    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length/4*3);
+    layout.itemSize = CGSizeMake(item_length / 3 * 4.13, item_length);
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     self.video_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.video_name.frame) , SCREEN_WIDTH, 5 * (SCREEN_WIDTH / 4) + 100 - CGRectGetMaxY(self.video_name.frame) - 5) collectionViewLayout:layout];

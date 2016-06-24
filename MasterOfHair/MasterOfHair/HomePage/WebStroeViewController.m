@@ -90,6 +90,8 @@
     _lblTitle.text = @"商城";
     _lblTitle.font = [UIFont systemFontOfSize:19];
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 //    [self.view bringSubviewToFront:_imgLeft];
 //    [self.view bringSubviewToFront:_btnLeft];
 //    [self.view bringSubviewToFront:_lblTitle];

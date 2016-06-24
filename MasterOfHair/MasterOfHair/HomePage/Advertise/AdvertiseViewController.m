@@ -65,6 +65,8 @@
 {
     
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
     self.btn_top_location_select = [FL_Button fl_shareButton];
     [self.btn_top_location_select setImage:[UIImage imageNamed:@"select_baise"] forState:UIControlStateNormal];
     [self.btn_top_location_select setTitle:@"定位" forState:UIControlStateNormal];

@@ -92,7 +92,8 @@
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
-    
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
     [self addRightButton:@"01shoppingCar_03"];
     _imgRight.frame = CGRectMake(SCREEN_WIDTH - 47, _imgRight.frame.origin.y + 10, _imgRight.frame.size.width - 20, _imgRight.frame.size.height - 20);
     //    [self addRightbuttontitle:@"签到"];

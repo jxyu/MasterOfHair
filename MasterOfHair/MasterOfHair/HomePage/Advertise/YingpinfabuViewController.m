@@ -59,6 +59,8 @@
     _btnRight.hidden = YES;
 
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 }
 
 //返回

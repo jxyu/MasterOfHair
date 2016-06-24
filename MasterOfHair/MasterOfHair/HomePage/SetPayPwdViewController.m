@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
     self.view.backgroundColor=[UIColor whiteColor];
     _lblTitle.text=@"设置支付密码";
     TXView1 = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请输入支付密码"];

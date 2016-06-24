@@ -443,10 +443,11 @@
 		8B9594EF1CFEB9340029EE23 /* SetPayPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */; };
 		8B9594F31CFEB9540029EE23 /* TXTradePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */; };
 		8B9594F61CFECD750029EE23 /* VerifyPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */; };
+		8BBFFE751D1D07B3002EF47A /* index_start_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBFFE741D1D07B3002EF47A /* index_start_1.png */; };
 		8BCBB7001CD1AF4D004DE9A2 /* index_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FC1CD1AF4D004DE9A2 /* index_0.png */; };
 		8BCBB7011CD1AF4D004DE9A2 /* index_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */; };
 		8BCBB7021CD1AF4D004DE9A2 /* index_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */; };
-		8BCBB7031CD1AF4D004DE9A2 /* index_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FF1CD1AF4D004DE9A2 /* index_3.png */; };
+		8BCBB7031CD1AF4D004DE9A2 /* index_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBB6FF1CD1AF4D004DE9A2 /* index_start.png */; };
 		8BD31EF21D0FDBF50074E28F /* WebStoreNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD31EF11D0FDBF50074E28F /* WebStoreNextViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -1171,10 +1172,11 @@
 		8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXTradePasswordView.m; sourceTree = "<group>"; };
 		8B9594F41CFECD750029EE23 /* VerifyPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyPhoneViewController.h; sourceTree = "<group>"; };
 		8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyPhoneViewController.m; sourceTree = "<group>"; };
+		8BBFFE741D1D07B3002EF47A /* index_start_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_start_1.png; sourceTree = "<group>"; };
 		8BCBB6FC1CD1AF4D004DE9A2 /* index_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_0.png; sourceTree = "<group>"; };
 		8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_1.png; sourceTree = "<group>"; };
 		8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_2.png; sourceTree = "<group>"; };
-		8BCBB6FF1CD1AF4D004DE9A2 /* index_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_3.png; sourceTree = "<group>"; };
+		8BCBB6FF1CD1AF4D004DE9A2 /* index_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_start.png; sourceTree = "<group>"; };
 		8BD31EF01D0FDBF50074E28F /* WebStoreNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebStoreNextViewController.h; sourceTree = "<group>"; };
 		8BD31EF11D0FDBF50074E28F /* WebStoreNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebStoreNextViewController.m; sourceTree = "<group>"; };
 		9E2BF41A483EDE720F34586F /* Pods_MasterOfHair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MasterOfHair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2900,12 +2902,13 @@
 		8043C7111C4E1DFC00369EEF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8BBFFE741D1D07B3002EF47A /* index_start_1.png */,
 				8B7C34BA1CF29F93004BCCB8 /* Default-568h@2x.png */,
 				8B6409501CE9C13100EEA5EF /* arrow_left@2x.png */,
 				8BCBB6FC1CD1AF4D004DE9A2 /* index_0.png */,
 				8BCBB6FD1CD1AF4D004DE9A2 /* index_1.png */,
 				8BCBB6FE1CD1AF4D004DE9A2 /* index_2.png */,
-				8BCBB6FF1CD1AF4D004DE9A2 /* index_3.png */,
+				8BCBB6FF1CD1AF4D004DE9A2 /* index_start.png */,
 				803A5D931CBF904F0023C3AE /* set_icon@2x.png */,
 				7BDE11731C7944AD0087E607 /* sudisudiusidusidu.png */,
 				800E8F9F1C5DD77300CB8CC5 /* select_down@2x.png */,
@@ -3146,7 +3149,7 @@
 				8B6409511CE9C13100EEA5EF /* arrow_left@2x.png in Resources */,
 				802492361C784E41008BA570 /* ALBBQuPaiPlugin.bundle in Resources */,
 				7B586C971C71766600BE4295 /* 00000play.png in Resources */,
-				8BCBB7031CD1AF4D004DE9A2 /* index_3.png in Resources */,
+				8BCBB7031CD1AF4D004DE9A2 /* index_start.png in Resources */,
 				7BAABAB51C59ACF500C14DF8 /* 00003.png in Resources */,
 				7BDE11741C7944AD0087E607 /* sudisudiusidusidu.png in Resources */,
 				7BAABAB41C59ACF500C14DF8 /* 00002.png in Resources */,
@@ -3232,6 +3235,7 @@
 				80CF4DEC1C5E038000CE2CB5 /* select_baise@2x.png in Resources */,
 				800E8FAE1C5E014900CB8CC5 /* 01_03@2x.png in Resources */,
 				7BBC0D251CA265210014A5B0 /* markdown.css in Resources */,
+				8BBFFE751D1D07B3002EF47A /* index_start_1.png in Resources */,
 				802552C41C57442B00CFF875 /* WechatShortVideo_close@2x.png in Resources */,
 				800E8FA21C5DDFD500CB8CC5 /* iconfont-fanhui@2x.png in Resources */,
 				7BBC0D1D1CA265210014A5B0 /* ios-social-sdk-comment-quick.html in Resources */,
@@ -3769,7 +3773,7 @@
 			baseConfigurationReference = 3E5AC00FBFF3A74C342EFE18 /* Pods-MasterOfHair.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = MasterOfHair/KeychainAccessGroups.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -3814,7 +3818,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -3823,7 +3827,7 @@
 			baseConfigurationReference = 7537CF964007640DDA6EA85B /* Pods-MasterOfHair.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = MasterOfHair/KeychainAccessGroups.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -3867,7 +3871,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};

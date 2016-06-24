@@ -25,7 +25,7 @@
     
     for (int i=0; i<4; i++) {
         UIImageView *imgInfo=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*i,0,SCREEN_WIDTH,SCREEN_HEIGHT)];
-        imgInfo.image=[UIImage imageNamed:[NSString stringWithFormat:@"index_%d.png",i+1]];
+        imgInfo.image=[UIImage imageNamed:[NSString stringWithFormat:@"index_%d.png",i]];
         [scrollBG addSubview:imgInfo];
     }
     

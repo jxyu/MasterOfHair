@@ -43,7 +43,7 @@
     islogin=YES;
     if ([get_sp(@"member_id") length] == 0) {
         islogin=NO;
-        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"开通金卡会员" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通会员" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
+        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"活动期间开通金卡会员" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通会员" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
         [alertview show];
     }
     
@@ -66,6 +66,8 @@
     _lblTitle.font = [UIFont systemFontOfSize:19];
     
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 }
 
 //返回
@@ -96,7 +98,7 @@
     [view_1 addSubview:label_1];
     
     self.price = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 5, 10, SCREEN_WIDTH - CGRectGetMaxX(label_1.frame) - 20, 30)];
-    self.price.text = @"199元";
+    self.price.text = @"$14.99";
     self.price.textAlignment = NSTextAlignmentRight;
     [view_1 addSubview:self.price];
     
@@ -319,7 +321,8 @@
 // 下面的ProductId应该是事先在itunesConnect中添加好的，已存在的付费项目。否则查询会失败。
 - (void)getProductInfo {
         [SVProgressHUD showWithStatus:@"正在请求产品数据.." maskType:SVProgressHUDMaskTypeBlack];
-        NSSet * set = [NSSet setWithArray:@[@"titoujiang_jinkahuiyuan"]];
+//        NSSet * set = [NSSet setWithArray:@[@"titoujiang_jinkahuiyuan"]];（正常金卡会员）
+    NSSet * set = [NSSet setWithArray:@[@"huodongjinkahuiyuan"]];//活动期间金卡会员
         SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
         request.delegate = self;
         [request start];

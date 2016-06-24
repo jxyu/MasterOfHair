@@ -123,6 +123,8 @@
     _lblTitle.text = [NSString stringWithFormat:@"佣金详情"];
     _lblTitle.font = [UIFont systemFontOfSize:19];
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 }
 
 

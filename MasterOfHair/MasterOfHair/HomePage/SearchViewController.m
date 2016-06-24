@@ -53,6 +53,8 @@
 - (void)p_navi
 {
     [self addLeftButton:@"iconfont-fanhui"];
+    _lblLeft.text=@"返回";
+    _lblLeft.textAlignment=NSTextAlignmentLeft;
 //    _btnLeft.backgroundColor = [UIColor orangeColor];
     
     //右边为搜索
