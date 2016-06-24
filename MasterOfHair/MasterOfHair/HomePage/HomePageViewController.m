@@ -236,6 +236,8 @@
     [btn_more setTitle:@"查看更多视频" forState:UIControlStateNormal];
     [btn_more setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn_more addTarget:self action:@selector(JumpToshangxueyuan) forControlEvents:UIControlEventTouchUpInside];
+    btn_more.layer.masksToBounds=YES;
+    btn_more.layer.cornerRadius=22;
     [tablefooterView addSubview:btn_more];
     
     self.tableView.tableFooterView = tablefooterView;

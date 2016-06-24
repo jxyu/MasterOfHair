@@ -3796,6 +3796,7 @@
 					"$(PROJECT_DIR)/MasterOfHair/ping++",
 					"$(PROJECT_DIR)/MasterOfHair/ping++/One",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -3813,6 +3814,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -3865,6 +3867,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sgq.titoujiang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

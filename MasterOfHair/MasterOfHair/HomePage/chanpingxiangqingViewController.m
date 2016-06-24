@@ -612,7 +612,7 @@
             
             querendingdan.chanpinDetail = self.arr_detail.firstObject;
             querendingdan.Chanpingxiangqing = self.arr_guige[self.tagList.selectedIndexSet.firstIndex];
-            
+            querendingdan.good_Num= goodNum;
             [self showViewController:querendingdan sender:nil];
         }
         else
@@ -628,7 +628,7 @@
 - (void)p_lunbotu
 {
     self.lunbo_scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
-//      self.lunbo_scrollView.backgroundColor = [UIColor orangeColor];
+//  self.lunbo_scrollView.backgroundColor = [UIColor orangeColor];
     self.lunbo_scrollView.pagingEnabled = YES;
     self.lunbo_scrollView.showsHorizontalScrollIndicator = NO;
     self.lunbo_scrollView.delegate = self;

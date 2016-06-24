@@ -237,7 +237,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 10, 90, 30)];
-        float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
+        float sum_price = ([self.Chanpingxiangqing.sell_price floatValue] * self.good_Num) + [self.chanpinDetail.logistics_freight floatValue];
         
         self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
         
@@ -292,7 +292,7 @@
         [cell addSubview:label];
         
         UILabel * number = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label.frame) + 5, CGRectGetMaxY(detail.frame) + 15, 50, 20)];
-        number.text = @"1";
+        number.text = [NSString stringWithFormat:@"¥ %ld",(long)_good_Num];
         number.font = [UIFont systemFontOfSize:14];
         [cell addSubview:number];
         
@@ -676,8 +676,6 @@
             [self.view addSubview:TXView];
             
             return;
-            
-            
         }
         if(self.btn_weixin.selected == 1)
         {

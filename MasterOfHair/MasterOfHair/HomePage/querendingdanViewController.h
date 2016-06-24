@@ -17,6 +17,6 @@
 
 @property (nonatomic, strong) Chanpingxiangqing_Models * Chanpingxiangqing;
 
-
+@property (nonatomic) NSInteger good_Num;
 
 @end
