@@ -158,7 +158,7 @@
     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"2" Path:self.VideoFilePath];
 
     
-    [SVProgressHUD showWithStatus:@"正在上传视频..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"正在上传视频..." ];
 }
 
 
@@ -171,7 +171,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"  ];
             
             [self.navigationController popViewControllerAnimated:YES];
             
@@ -187,7 +187,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -197,7 +197,7 @@
 {
     NSLog(@"%@",dict);
     [SVProgressHUD dismiss];
-    [SVProgressHUD showWithStatus:@"正在保存视频信息..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"正在保存视频信息..." ];
     
 //    code = 200;
 //    date =     {
@@ -257,7 +257,7 @@
     [SVProgressHUD dismiss];
     if ([dict[@"code"] intValue]==200) {
         
-        [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showSuccessWithStatus:@"发布成功" ];
         
         
 //        [self.navigationController popViewControllerAnimated:YES];

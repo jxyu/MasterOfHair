@@ -78,7 +78,7 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     if([[userdefault objectForKey:@"member_id"] length] != 0)
     {
-        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." ];
     }
     
     self.arr_baocun = nil;
@@ -386,7 +386,7 @@
         
         [dataprovider createWithProduction_id:model.production_id number:@"1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
         
-        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍等..." ];
     }
 }
 
@@ -404,7 +404,7 @@
     
     [dataprovider createWithProduction_id:model.production_id number:@"-1" member_id:[userdefault objectForKey:@"member_id"] specs_id:model.specs_id];
     
-    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"请稍等..." ];
 
     
 //    if([model.number integerValue] == 1)
@@ -443,7 +443,7 @@
         {
             [self p_data];
             
-            [SVProgressHUD showSuccessWithStatus:@"操作成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"操作成功"  ];
 
         }
         @catch (NSException *exception)
@@ -461,7 +461,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -537,7 +537,7 @@
         {
             [self p_data];
             
-            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -554,7 +554,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -615,7 +615,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

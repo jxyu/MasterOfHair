@@ -375,7 +375,7 @@
 
 - (void)clearCacheSuccess
 {
-    [SVProgressHUD showSuccessWithStatus:@"清除成功" maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showSuccessWithStatus:@"清除成功" ];
 }
 
 

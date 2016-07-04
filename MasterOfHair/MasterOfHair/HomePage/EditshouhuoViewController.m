@@ -690,7 +690,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"设置成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"设置成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -703,7 +703,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 
 }
@@ -748,7 +748,7 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
     
 }
@@ -783,7 +783,7 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
     
 }
@@ -817,7 +817,7 @@
     }
     else
     {
-        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
     
 }
@@ -830,7 +830,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"删除成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -843,7 +843,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -855,7 +855,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"修改成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -868,7 +868,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

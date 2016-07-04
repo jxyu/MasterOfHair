@@ -207,7 +207,7 @@
 //合作店的btn
 - (void)top_btnFactoryAction:(UIButton *)sender
 {
-    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD showWithStatus:@"数据加载中..."  ];
     
     self.isTeacher = NO;
     
@@ -242,7 +242,7 @@
 {
     self.isTeacher = YES;
 
-    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD showWithStatus:@"数据加载中..."  ];
     
     //变颜色
     [self.top_btnFactory setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];

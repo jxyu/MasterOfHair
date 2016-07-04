@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." ];
     
     [self p_navi];
     
@@ -595,7 +595,7 @@
     }
     else
     {
-        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -684,7 +684,7 @@
             
             [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
             
-            [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:@"正在发布..." ];
 
         }
         else
@@ -702,7 +702,7 @@
                 
                 [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:self.bottom_text.text reply_status:@"0"];
                 
-                [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"正在发布..." ];
 
             }
             else
@@ -717,7 +717,7 @@
                     
                     [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
                     
-                    [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+                    [SVProgressHUD showWithStatus:@"正在发布..." ];
                 }
                 else
                 {
@@ -728,7 +728,7 @@
                     
                     [dataprovider TakeGoodWithTalk_id:self.talk_id member_id:[userdefault objectForKey:@"member_id"] reply_content:str reply_status:@"0"];
                     
-                    [SVProgressHUD showWithStatus:@"正在发布..." maskType:SVProgressHUDMaskTypeBlack];
+                    [SVProgressHUD showWithStatus:@"正在发布..." ];
                 }
                 
                 
@@ -750,7 +750,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"  ];
             
             self.bottom_text.text = nil;
         }
@@ -765,7 +765,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

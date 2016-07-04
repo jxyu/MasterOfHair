@@ -127,7 +127,7 @@
         
         [dataprovider getVideoListWithVideo_keyword:self.search_text.text pagenumber:@"1" pagesize:@"1000"];
         
-        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
+        [SVProgressHUD showWithStatus:@"正在搜索"  ];
     }
 }
 
@@ -227,7 +227,7 @@
         
         [dataprovider getVideoListWithVideo_keyword:self.search_text.text pagenumber:@"1" pagesize:@"1000"];
         
-        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
+        [SVProgressHUD showWithStatus:@"正在搜索"  ];
 
     }
     
@@ -279,7 +279,7 @@
             }
             else
             {
-                [SVProgressHUD showSuccessWithStatus:@"搜索成功" maskType:(SVProgressHUDMaskTypeBlack)];
+                [SVProgressHUD showSuccessWithStatus:@"搜索成功"  ];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -291,7 +291,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

@@ -1168,7 +1168,7 @@
             {
                 UITextField * text = [self.view viewWithTag:10011];
                 
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
                 
                 [dataprovider createWithimage:self.imageData number:self.arr_data[1] workname:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] area_id:[userdefault objectForKey:@"diquweizhi_id3_"] location:self.arr_data[5] job_description:self.arr_data[6] company_name:self.arr_data[7] company_locat:self.arr_data[11] company_scale:self.arr_data[8] company_brief:self.arr_data[12] company_natrue:self.arr_data[9] company_industry:self.arr_data[10] telephone:text.text];
                 
@@ -1176,7 +1176,7 @@
             }
             else
             {
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
                 
                 //[userdefault objectForKey:@"diquweizhi_id3_"]
                 [dataprovider createWithimage:self.imageData number:self.arr_data[1] workname:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] area_id:[userdefault objectForKey:@"diquweizhi_id3_"] location:self.arr_data[5] job_description:self.arr_data[6] company_name:self.arr_data[7] company_locat:self.arr_data[11] company_scale:self.arr_data[8] company_brief:self.arr_data[12] company_natrue:self.arr_data[9] company_industry:self.arr_data[10] telephone:self.arr_data[13]];
@@ -1194,7 +1194,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"  ];
             
             [self.navigationController popViewControllerAnimated:YES];
 
@@ -1210,7 +1210,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

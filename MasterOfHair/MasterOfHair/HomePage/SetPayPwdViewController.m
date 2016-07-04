@@ -65,7 +65,7 @@
         
         if (firstPWD&&secondPWD) {
             if ([firstPWD isEqualToString:secondPWD]) {
-                [SVProgressHUD showWithStatus:@"正在保存。。" maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"正在保存。。" ];
                 DataProvider * dataprovider=[[DataProvider alloc] init];
                 [dataprovider setDelegateObject:self setBackFunctionName:@"SetPWDCallBack:"];
                 [dataprovider setPasswordWithmember_id:get_sp(@"member_id") andwallet_password:secondPWD];
@@ -78,7 +78,7 @@
 {
     [SVProgressHUD dismiss];
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
-        [SVProgressHUD showSuccessWithStatus:@"支付密码保存成功" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showSuccessWithStatus:@"支付密码保存成功" ];
         [self.navigationController popToViewController:self.fatherVC animated:YES];
         set_sp(@"wallet_password", secondPWD);
     }

@@ -320,7 +320,7 @@
             
             peisong.text = @"到店自取";
             
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue];
+            float sum_price = [self.Chanpingxiangqing.sell_price floatValue]*self.good_Num;
             
             
             self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
@@ -335,7 +335,7 @@
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"同城派送";
             
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.city_freight floatValue];
+            float sum_price = [self.Chanpingxiangqing.sell_price floatValue]*self.good_Num + [self.chanpinDetail.city_freight floatValue];
             
             self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
 
@@ -349,7 +349,7 @@
             UILabel * peisong = [self.view viewWithTag:(100 + indexPath.section)];
             peisong.text = @"物流配送";
             
-            float sum_price = [self.Chanpingxiangqing.sell_price floatValue] + [self.chanpinDetail.logistics_freight floatValue];
+            float sum_price = [self.Chanpingxiangqing.sell_price floatValue]*self.good_Num + [self.chanpinDetail.logistics_freight floatValue];
             
             self.str_zhifusum = [NSString stringWithFormat:@"%f",sum_price];
 
@@ -922,7 +922,7 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -934,7 +934,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功"  ];
             
             if([self.str_zhifutype isEqualToString:@"1"])
             {
@@ -947,7 +947,7 @@
                 
                 [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:[NSString stringWithFormat:@"%@",dict[@"data"][@"order_id"]] pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
                 
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
             }
             else
             {
@@ -960,7 +960,7 @@
                 
                 [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:[NSString stringWithFormat:@"%@",dict[@"data"][@"order_id"]] pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
                 
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
             }
         }
         @catch (NSException *exception)
@@ -974,7 +974,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -998,11 +998,11 @@
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功
                            [self.navigationController popViewControllerAnimated:YES];
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
                        } else {
                            // 支付失败或取消
 //                           NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
                        }
                    }];
         }
@@ -1017,7 +1017,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1031,7 +1031,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"  ];
             
         }
         @catch (NSException *exception)
@@ -1048,7 +1048,7 @@
     else
     {
         NSLog(@"%@",dict[@"status"][@"message"]);
-        [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"支付失败" ];
     }
 }
 

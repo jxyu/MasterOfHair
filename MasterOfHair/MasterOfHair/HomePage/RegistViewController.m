@@ -198,7 +198,7 @@
         
         if (self.text_tel.text.length == 11)
         {
-            [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:@"正在发送" ];
             
             [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.text_tel.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
                 if (!error)
@@ -338,7 +338,7 @@
                 [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
                 [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
                 
-                [SVProgressHUD showWithStatus:@"正在注册,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"正在注册,请稍等..." ];
 
             }
             
@@ -369,7 +369,7 @@
     {
         [SVProgressHUD dismiss];
         
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -411,7 +411,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

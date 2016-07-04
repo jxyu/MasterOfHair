@@ -163,7 +163,7 @@
     else
     {//都有
         
-        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." ];
 
         DataProvider * dataprovider=[[DataProvider alloc] init];
         [dataprovider setDelegateObject:self setBackFunctionName:@"CreateAutoLoginUrl:"];
@@ -1284,7 +1284,7 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         //183

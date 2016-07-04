@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [SVProgressHUD showWithStatus:@"数据加载中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD showWithStatus:@"数据加载中..."  ];
     
     [self p_navi];
     
@@ -481,7 +481,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

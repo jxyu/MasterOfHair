@@ -238,7 +238,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"保存成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"保存成功"];
             
             NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
             
@@ -255,7 +255,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"]];
     }
 }
 
@@ -267,7 +267,7 @@
     [SVProgressHUD dismiss];
     if ([dict[@"status"][@"succeed"] intValue]==1) {
         //准备刷新头像
-        [SVProgressHUD showSuccessWithStatus:@"图片上传成功" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showSuccessWithStatus:@"图片上传成功"];
         
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
@@ -277,7 +277,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"]];
     }
 }
 
@@ -307,7 +307,7 @@
         
         NSData *imageData = UIImagePNGRepresentation(editedImage);
         
-        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍等..."];
 
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 

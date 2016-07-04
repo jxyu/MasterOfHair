@@ -159,7 +159,7 @@
         
         if (self.text_tel.text.length == 11)
         {
-            [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:@"正在发送" ];
             
             [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:self.text_tel.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
                 if (!error)
@@ -289,7 +289,7 @@
     {
         [SVProgressHUD dismiss];
         
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -331,7 +331,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

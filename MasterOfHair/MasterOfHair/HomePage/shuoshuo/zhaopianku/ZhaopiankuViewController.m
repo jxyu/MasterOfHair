@@ -118,7 +118,7 @@
         
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] talk_content:self.text_View.text file_type:@"1" arr:self.arr_dataList];
         
-        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍等..." ];
     }
 }
 
@@ -132,7 +132,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"  ];
             
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -147,7 +147,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

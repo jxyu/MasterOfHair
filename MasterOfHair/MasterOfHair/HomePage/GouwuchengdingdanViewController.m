@@ -76,7 +76,7 @@
     // Do any additional setup after loading the view.
     //清空
     [Single_Model singel].shouhudizhi_Model = nil;
-    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"加载数据中,请稍等..." ];
     _pwdStr=@"";
     [self p_dataList];
     
@@ -984,7 +984,7 @@
     }
     else
     {
-        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1063,7 +1063,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1075,7 +1075,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功" maskType:(SVProgressHUDMaskTypeBlack)];
+//            [SVProgressHUD showSuccessWithStatus:@"生成订单成功"  ];
             
             [self.arr_zhifu addObject:dict[@"data"][@"order_id"]];
         }
@@ -1118,14 +1118,14 @@
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
                     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
                     
-                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                    [SVProgressHUD showWithStatus:@"请稍等..." ];
 
                 }
                 else
                 {
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
                     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
-                    [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                    [SVProgressHUD showWithStatus:@"请稍等..." ];
 
                 }
             }
@@ -1133,7 +1133,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1157,11 +1157,11 @@
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功
                            [self.navigationController popViewControllerAnimated:YES];
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
                        } else {
                            // 支付失败或取消
                            NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
                        }
                    }];
         }
@@ -1176,7 +1176,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1189,7 +1189,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"支付成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -1204,7 +1204,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:@"支付失败" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"支付失败" ];
     }
 }
 

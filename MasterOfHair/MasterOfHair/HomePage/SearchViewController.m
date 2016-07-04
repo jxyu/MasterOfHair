@@ -134,7 +134,7 @@
         
         [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
         
-        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
+        [SVProgressHUD showWithStatus:@"正在搜索"  ];
     }
 }
 
@@ -302,7 +302,7 @@
         
         [dataprovider getProductListWithProduction_keyword:self.search_text.text is_maker:self.is_maker is_sell:@"1"];
         
-        [SVProgressHUD showWithStatus:@"正在搜索" maskType:(SVProgressHUDMaskTypeBlack)];
+        [SVProgressHUD showWithStatus:@"正在搜索"  ];
     }
     
     //进行检索
@@ -352,7 +352,7 @@
             }
             else
             {
-                [SVProgressHUD showSuccessWithStatus:@"搜索成功" maskType:(SVProgressHUDMaskTypeBlack)];
+                [SVProgressHUD showSuccessWithStatus:@"搜索成功"  ];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -364,7 +364,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

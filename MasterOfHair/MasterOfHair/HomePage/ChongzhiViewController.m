@@ -193,7 +193,7 @@
         {
             [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] pay_total:self.money.text pay_method:@"1"];
         }
-        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍等..."];
         
     }
     
@@ -219,11 +219,11 @@
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功
                            [self.navigationController popViewControllerAnimated:YES];
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~"];
                        } else {
                            // 支付失败或取消
                            NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
                        }
                    }];
         }
@@ -238,7 +238,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

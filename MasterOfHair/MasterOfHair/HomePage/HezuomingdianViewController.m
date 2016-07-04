@@ -40,7 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [SVProgressHUD showWithStatus:@"加载数据中..." maskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD showWithStatus:@"加载数据中..."  ];
     
     [self p_navi];
     

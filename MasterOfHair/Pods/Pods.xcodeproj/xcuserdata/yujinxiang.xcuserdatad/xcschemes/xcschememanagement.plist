@@ -4,27 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-MasterOfHair.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SDWebImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09F250930319340DF372E85D67997506</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1708521657A95D777D78A77F847A7AA7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>29DD99664D189A7CA206368F493B1E0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2E586B0D7545885EC8F9DDBE2FD7FC73</key>
+		<key>4D764509A20D99A2713D81BC41D674BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4878C70B21CA37D7CB8A476BF986741B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8752C534843C99AD1639A5FF30EDA25F</key>
+		<key>F36E9ADF550ED3EF5370F1442467270C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -218,7 +218,7 @@
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
             [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1" pay_method:@"2"];
-            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:@"请稍等..." ];
 
         }
         else
@@ -227,7 +227,7 @@
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
             [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1" pay_method:@"3"];
-            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:@"请稍等..." ];
 
         }
     }
@@ -254,11 +254,11 @@
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功
                            [self.navigationController popViewControllerAnimated:YES];
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
                        } else {
                            // 支付失败或取消
                            NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
                        }
                    }];
         }
@@ -273,7 +273,7 @@
     }
     else
     {
-//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

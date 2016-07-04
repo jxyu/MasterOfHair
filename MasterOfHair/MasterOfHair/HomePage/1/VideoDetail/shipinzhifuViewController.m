@@ -252,7 +252,7 @@
 //            
 //            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"1"];
 //            
-//            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showWithStatus:@"请稍等..." ];
 //        }
 //        else
 //        {
@@ -263,7 +263,7 @@
 //            
 //            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"2"];
 //            
-//            [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showWithStatus:@"请稍等..." ];
 //            
 //        }
 //    }
@@ -290,7 +290,7 @@
                        if ([result isEqualToString:@"success"]) {
                            // 支付成功
                            [self.navigationController popViewControllerAnimated:YES];
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
                            
                            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
                            
@@ -301,7 +301,7 @@
                        } else {
                            // 支付失败或取消
                            NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" maskType:SVProgressHUDMaskTypeBlack];
+                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
                        }
                    }];
         }
@@ -316,7 +316,7 @@
     }
     else
     {
-        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -375,7 +375,7 @@
 #pragma mark 内付费开始
 // 下面的ProductId应该是事先在itunesConnect中添加好的，已存在的付费项目。否则查询会失败。
 - (void)getProductInfo {
-    [SVProgressHUD showWithStatus:@"正在请求产品数据.." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"正在请求产品数据.." ];
     NSSet * set = [NSSet setWithArray:@[@"lookVideoOnce"]];
     SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
     request.delegate = self;
@@ -391,7 +391,7 @@
     }
     SKPayment * payment = [SKPayment paymentWithProduct:myProduct[0]];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-    [SVProgressHUD showWithStatus:@"正在进行验证.." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"正在进行验证.." ];
 }
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -452,7 +452,7 @@
 
 -(void)JumpToPaySuccess:(SKPaymentTransaction *)transaction
 {
-    [SVProgressHUD showWithStatus:@"正在等待服务器验证" maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:@"正在等待服务器验证" ];
     DataProvider *dataProvider = [[DataProvider alloc] init];
     [dataProvider setDelegateObject:self setBackFunctionName:@"becomeVipCallBack:"];
     if (uuid.length<=0) {

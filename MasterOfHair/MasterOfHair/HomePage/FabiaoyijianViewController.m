@@ -82,7 +82,7 @@
         
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] suggest_content:self.text.text];
         
-        [SVProgressHUD showWithStatus:@"正在保存" maskType:(SVProgressHUDMaskTypeBlack)];
+        [SVProgressHUD showWithStatus:@"正在保存"  ];
 
     }
 }
@@ -115,7 +115,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发表成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发表成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -128,7 +128,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 

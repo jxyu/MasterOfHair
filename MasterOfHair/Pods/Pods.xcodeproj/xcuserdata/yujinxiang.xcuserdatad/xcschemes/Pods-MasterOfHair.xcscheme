@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8752C534843C99AD1639A5FF30EDA25F"
+               BlueprintIdentifier = "4D764509A20D99A2713D81BC41D674BF"
                BuildableName = "Pods_MasterOfHair.framework"
                BlueprintName = "Pods-MasterOfHair"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8752C534843C99AD1639A5FF30EDA25F"
+            BlueprintIdentifier = "4D764509A20D99A2713D81BC41D674BF"
             BuildableName = "Pods_MasterOfHair.framework"
             BlueprintName = "Pods-MasterOfHair"
             ReferencedContainer = "container:Pods.xcodeproj">

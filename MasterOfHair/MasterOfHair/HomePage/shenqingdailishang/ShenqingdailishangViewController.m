@@ -243,7 +243,7 @@
         [dataprovider setDelegateObject:self setBackFunctionName:@"update:"];
         
 //        NSLog(@"%@",self.data1);
-        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍等..." ];
 
         [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] applyAgent_name:self.name.text applyAgent_phone:self.tel.text idcard_frond:self.data1 idcard_side:self.data2 framework_image:self.data3 business_image:self.data4];
 
@@ -261,7 +261,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"上传成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"上传成功"  ];
         }
         @catch (NSException *exception)
         {
@@ -274,7 +274,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -386,7 +386,7 @@
         }
         
         
-//        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showWithStatus:@"请稍等..." ];
 //        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
 //        
 //        DataProvider * dataprovider=[[DataProvider alloc] init];

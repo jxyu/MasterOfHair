@@ -846,13 +846,13 @@
             {
                 UITextField * text = [self.view viewWithTag:10008];
                 
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
                 
                 [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:text.text intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
             }
             else
             {
-                [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithStatus:@"请稍等..." ];
                 
                 [dataprovider createWithimage:self.imageData member_id:@"1" name:self.arr_data[5] age:self.arr_data[6] sex:self.arr_data[7] domicile:self.arr_data[8] work_experience:self.arr_data[9] telephone:self.arr_data[10] intention_position:self.arr_data[0] salary_id:[userdefault objectForKey:@"zhaopingxinzi_id_1"] type_id:[userdefault objectForKey:@"zhaopingfei_id_2"] locationid:self.arr_data[4] area_id:[userdefault objectForKey:@"diquweizhi_id3_"]];
             }
@@ -869,7 +869,7 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"发布成功" maskType:(SVProgressHUDMaskTypeBlack)];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"  ];
             
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -884,7 +884,7 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
 }
 
@@ -1075,7 +1075,7 @@
         self.image_pic.image = editedImage;
         self.imageData = imageData;
 
-        //        [SVProgressHUD showWithStatus:@"请稍等..." maskType:SVProgressHUDMaskTypeBlack];
+        //        [SVProgressHUD showWithStatus:@"请稍等..." ];
         //        NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         //
         //        DataProvider * dataprovider=[[DataProvider alloc] init];
