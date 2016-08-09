@@ -43,5 +43,5 @@
 + (BOOL) canUserPickVideosFromPhotoLibrary;
 + (BOOL) canUserPickPhotosFromPhotoLibrary;
 + (BOOL) cameraSupportsMedia:(NSString *)paramMediaType sourceType:(UIImagePickerControllerSourceType)paramSourceType;
-
++(void)makeCall:(NSString *)phoneNum;
 @end

@@ -206,6 +206,7 @@
             [userdefault setObject:@"1" forKey:@"Login_Success"];
             
             //保存用户信息（后期可能更多）
+            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_phone"]] forKey:@"member_phone"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_headpic"]] forKey:@"member_headpic"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_id"]] forKey:@"member_id"];
             [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"member_nickname"]] forKey:@"member_nickname"];

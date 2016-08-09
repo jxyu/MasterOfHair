@@ -261,7 +261,10 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            [SVProgressHUD showSuccessWithStatus:@"上传成功"  ];
+//            [SVProgressHUD showSuccessWithStatus:@"上传成功"  ];
+            UIAlertView * alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"提交成功" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         @catch (NSException *exception)
         {
@@ -274,7 +277,8 @@
     }
     else
     {
-        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
+        UIAlertView * alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"保存信息失败，请重新保存" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
     }
 }
 

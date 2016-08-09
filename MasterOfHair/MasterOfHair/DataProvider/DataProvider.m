@@ -1341,13 +1341,13 @@
 
 
 #pragma mark -  升级金卡会员支付接口
-- (void)upgradeRecordWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString * )pay_method
+- (void)upgradeRecordWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString * )pay_method andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && pay_total && pay_method)
+    if(member_id && pay_total && pay_method&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@upgradeRecord/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\"}",member_id,pay_total,pay_method]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\",\"wallet_password\":\"%@\"}",member_id,pay_total,pay_method,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1466,6 +1466,12 @@
         
         [self PostRequest:url andpram:prm];
     }
+}
+-(void)IsShowVIP
+{
+    NSString * url=[NSString stringWithFormat:@"%@AppleRight/ShowOrHideControl",Url];
+    
+    [self PostRequest:url andpram:nil];
 }
 -(void)setPasswordWithmember_id:(NSString *)member_id andwallet_password:(NSString *)wallet_password
 {

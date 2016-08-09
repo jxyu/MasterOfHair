@@ -723,7 +723,7 @@
                 return;
             }
             //输入支付密码
-            TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请再次输入支付密码"];
+            TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请输入支付密码"];
             TXView.tag=1;
             TXView.backgroundColor=[UIColor whiteColor];
             TXView.TXTradePasswordDelegate = self;

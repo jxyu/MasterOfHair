@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIView * view_bg5;
 @property (nonatomic, strong) UIView * view_5;
 @property (nonatomic, strong) UIView * view_4;
+@property (nonatomic, strong) UIView * view_7;
 @end
 
 @implementation GaojijishiViewController
@@ -172,13 +173,69 @@
     view_line4.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view_4 addSubview:view_line4];
     
-    
     self.yewu = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(view_line4.frame) + 10, 10, SCREEN_WIDTH - CGRectGetMaxX(view_line4.frame) - 20, 40)];
 //    self.yewu.text = @"hahah刘深刻的接口设计的开始就看到是打开数据库的时间看到";
     self.yewu.numberOfLines = 2;
     self.yewu.font = [UIFont systemFontOfSize:14];
     [self.view_4 addSubview:self.yewu];
     
+    
+    self.view_7 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view_4.frame) + 2, SCREEN_WIDTH, 60)];
+    self.view_7.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.view_7];
+    
+    UILabel * label_6_1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 18, 110, 15)];
+    label_6_1.text = @"联系方式";
+    label_6_1.textAlignment = NSTextAlignmentCenter;
+    label_6_1.font = [UIFont systemFontOfSize:15];
+    label_6_1.textColor = [UIColor grayColor];
+    [self.view_7 addSubview:label_6_1];
+    
+    //    UILabel * label_4_2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 31, 110, 15)];
+    //    label_4_2.text = @"(主要业务)";
+    //    label_4_2.textAlignment = NSTextAlignmentCenter;
+    //    label_4_2.font = [UIFont systemFontOfSize:15];
+    //    label_4_2.textColor = [UIColor grayColor];
+    //    [self.view_4 addSubview:label_4_2];
+    
+    UIView * view_line6 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_6_1.frame), 5, 1, 50)];
+    view_line6.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.view_7 addSubview:view_line6];
+    UIImageView * image_ = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 15, 10, 30, 30)];
+    image_.image = [UIImage imageNamed:@"yijianbohao"];
+    //            image_.backgroundColor = [UIColor orangeColor];
+    [self.view_7 addSubview:image_];
+    
+    UILabel * detail = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(image_.frame) , 10, 70, 30)];
+    detail.textColor = navi_bar_bg_color;
+    detail.text = @"一键拨号";
+    
+    [self.view_7 addSubview:detail];
+    UIButton * btn_makeCall=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view_7.frame.size.width, self.view_7.frame.size.height)];
+    [btn_makeCall addTarget:self action:@selector(MakeCall) forControlEvents:UIControlEventTouchUpInside];
+    [self.view_7 addSubview:btn_makeCall];
+    
+}
+
+-(void)MakeCall
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否拨打电话？" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"不拨打" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action];
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"拨打" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        [Toolkit makeCall:self.model.technician_mobile];
+        
+    }];
+    
+    [alert addAction:action1];
 }
 
 #pragma mark - 数据
@@ -235,7 +292,7 @@
                 x_length = 40;
             }
             
-            self.view_5 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view_4.frame) + 10, SCREEN_WIDTH, x_length + 50)];
+            self.view_5 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view_7.frame) + 10, SCREEN_WIDTH, x_length + 50)];
             self.view_5.backgroundColor = [UIColor whiteColor];
             [self.scrollView addSubview:self.view_5];
             

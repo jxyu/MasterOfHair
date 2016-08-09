@@ -264,4 +264,20 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
      //return [[self getSystemLanguage] isEqualToString:kEnglish] ? YES : NO;
  }
 
++(void)makeCall:(NSString *)phoneNum
+{
+    if(phoneNum ==nil||phoneNum.length==0)
+    {
+        return;
+    }
+    
+    phoneNum = [phoneNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+    phoneNum = [phoneNum stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phoneNum];
+    NSLog(@"str======%@",str);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    
+}
+
 @end

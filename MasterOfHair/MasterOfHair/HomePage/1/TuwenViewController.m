@@ -254,14 +254,29 @@
         [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
 
         cell.name.text = model.video_title;
-        if([model.is_free isEqualToString:@"1"])
-        {
-            cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+        if (get_Bsp(@"IsShowVIP")) {
+            if([model.is_free isEqualToString:@"0"])
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+                
+            }
+            else
+            {
+                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+            }
         }
         else
         {
-            cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+            cell.isFree.hidden=YES;
         }
+//        if([model.is_free isEqualToString:@"1"])
+//        {
+//            cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+//        }
+//        else
+//        {
+//            cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+//        }
         
         return cell;
     }
@@ -578,7 +593,7 @@
         
         [self p_dataTuwen];
         
-        [weakSelf.video_collectionView reloadData];
+//        [weakSelf.video_collectionView reloadData];
         
         [weakSelf loadNewData];
         
@@ -588,7 +603,7 @@
         
         [self p_NextDataTuWen];
         
-        [weakSelf.video_collectionView reloadData];
+//        [weakSelf.video_collectionView reloadData];
         
         [weakSelf loadNewData];
     }];

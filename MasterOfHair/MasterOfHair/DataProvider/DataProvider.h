@@ -348,7 +348,7 @@
 
 
 #pragma mark -  升级金卡会员支付接口
-- (void)upgradeRecordWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString * )pay_method;
+- (void)upgradeRecordWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString * )pay_method andwallet_password:(NSString *)wallet_password;
 
 #pragma mark -  	（3）会员报名
 - (void)SignupWithMember_id:(NSString *)member_id course_id:(NSString *)course_id pay_method:(NSString * )pay_method;
@@ -386,7 +386,9 @@
  */
 -(void)setPasswordWithmember_id:(NSString *)member_id andwallet_password:(NSString *)wallet_password;
 
-
-
+/**
+ *  是否显示VIP
+ */
+-(void)IsShowVIP;
 
 @end

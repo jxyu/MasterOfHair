@@ -41,8 +41,10 @@
 
 #define remove_sp(a) [[NSUserDefaults standardUserDefaults] removeObjectForKey:a]
 #define get_sp(a) [[NSUserDefaults standardUserDefaults] objectForKey:a]
+#define get_Bsp(a) [[NSUserDefaults standardUserDefaults] boolForKey:a]
 #define get_Dsp(a) [[NSUserDefaults standardUserDefaults]dictionaryForKey:a]
 #define set_sp(a,b) [[NSUserDefaults standardUserDefaults] setObject:b forKey:a]
+#define set_Bsp(a,b) [[NSUserDefaults standardUserDefaults] setBool:b forKey:a]
 #define sp [NSUserDefaults standardUserDefaults]
 #define img(a) [UIImage imageNamed:a]
 #define _app_ ((AppDelegate *)[UIApplication sharedApplication].delegate)

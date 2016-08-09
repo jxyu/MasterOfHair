@@ -220,14 +220,14 @@
             
             [cell addSubview:view_white];
             UIImageView * img_left=[[UIImageView alloc] init];
-            img_left.center=CGPointMake(5, 55);
-            img_left.bounds=CGRectMake(0, 0, 20, 25);
-            img_left.image=[UIImage imageNamed:@"arrow_left"];
+            img_left.center=CGPointMake(5, 100);
+            img_left.bounds=CGRectMake(0, 100, 20, 25);
+            img_left.image=[UIImage imageNamed:@"left_arrow"];
             [cell addSubview:img_left];
             UIImageView * img_right=[[UIImageView alloc] init];
-            img_right.center=CGPointMake(SCREEN_WIDTH-5, 55);
-            img_right.bounds=CGRectMake(0, 0, 20, 25);
-            img_right.image=[UIImage imageNamed:@"01fanhui_07"];
+            img_right.center=CGPointMake(SCREEN_WIDTH-5, 100);
+            img_right.bounds=CGRectMake(0, 100, 20, 25);
+            img_right.image=[UIImage imageNamed:@"right_arrow"];
             [cell addSubview:img_right];
         }
             break;
@@ -527,15 +527,30 @@
             
             cell.name.text = model.video_title;
             
-            if([model.is_free isEqualToString:@"0"])
-            {
-                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
-                
+            if (get_Bsp(@"IsShowVIP")) {
+                if([model.is_free isEqualToString:@"0"])
+                {
+                    cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+                    
+                }
+                else
+                {
+                    cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+                }
             }
             else
             {
-                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+                cell.isFree.hidden=YES;
             }
+//            if([model.is_free isEqualToString:@"0"])
+//            {
+//                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+//                
+//            }
+//            else
+//            {
+//                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+//            }
         }
         
         return cell;

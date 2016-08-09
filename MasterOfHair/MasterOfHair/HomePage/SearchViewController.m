@@ -197,25 +197,56 @@
             break;
         case 3:
         {
-            if(![get_sp(@"member_type") isEqualToString:@"1"])
+//            if(![get_sp(@"member_type") isEqualToString:@"1"])
+//            {
+//                ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
+//                
+//                [self showViewController:shangmengViewController sender:nil];
+//            }
+//            else
+//            {
+//                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"普通会员无法进入" preferredStyle:(UIAlertControllerStyleAlert)];
+//                
+//                [self presentViewController:alert animated:YES completion:^{
+//                    
+//                }];
+//                
+//                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//                    
+//                }];
+//                
+//                [alert addAction:action];
+//            }
+            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+            
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
             {
-                ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
                 
-                [self showViewController:shangmengViewController sender:nil];
+                [self showViewController:loginViewController sender:nil];
             }
             else
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"普通会员无法进入" preferredStyle:(UIAlertControllerStyleAlert)];
-                
-                [self presentViewController:alert animated:YES completion:^{
+                if([[userdefault objectForKey:@"member_type"] isEqualToString:@"3"])
+                {
+                    ShangmengViewController * shangmengViewController = [[ShangmengViewController alloc] init];
                     
-                }];
-                
-                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    [self showViewController:shangmengViewController sender:nil];
+                }
+                else
+                {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"只有代理商才有权限进入" preferredStyle:(UIAlertControllerStyleAlert)];
                     
-                }];
-                
-                [alert addAction:action];
+                    [self presentViewController:alert animated:YES completion:^{
+                        
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    
+                    [alert addAction:action];
+                }
             }
         }
             break;

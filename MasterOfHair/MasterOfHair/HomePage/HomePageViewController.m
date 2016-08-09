@@ -638,16 +638,23 @@
             [cell.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@uploads/video/%@",Url_pic,model.video_img]] placeholderImage:[UIImage imageNamed:@"Placeholder_long.jpg"]];
             
             cell.name.text = model.video_title;
-            
-            if([model.is_free isEqualToString:@"0"])
-            {
-                cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
-
+            if (get_Bsp(@"IsShowVIP")) {
+                if([model.is_free isEqualToString:@"0"])
+                {
+                    cell.isFree.image = [UIImage imageNamed:@"01weuiwueiwu_48"];
+                    
+                }
+                else
+                {
+                    cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+                }
             }
             else
             {
-                cell.isFree.image = [UIImage imageNamed:@"01jskjdksjdksjkdjsk_55"];
+                cell.isFree.hidden=YES;
             }
+            
+            
         }
 
         return cell;
@@ -942,8 +949,6 @@
             [userdefault setObject:@"" forKey:@"category_id"];
             [userdefault setObject:@"" forKey:@"channel_name"];
             [userdefault setObject:@"" forKey:@"TuwenFeilei"];
-            [userdefault setObject:@"" forKey:@"city_id"];
-            [userdefault setObject:@"" forKey:@"city_name"];
             
             [userdefault setObject:@"" forKey:@"diquweizhi_id"];
             [userdefault setObject:@"" forKey:@"diquweizhi"];
@@ -1261,12 +1266,48 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-
-            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] forKey:@"city_id"];
-            [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_name"]] forKey:@"city_name"];
+            if (get_sp(@"city_id")!=nil) {
+                DLog(@"%@,,%@",dict[@"data"][@"city_id"],get_sp(@"city_id"));
+                if (![[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] isEqualToString:[NSString stringWithFormat:@"%@",get_sp(@"city_id")]]) {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您的位置有变动，是否切换到当前位置" preferredStyle:(UIAlertControllerStyleAlert)];
+                    
+                    [self presentViewController:alert animated:YES completion:^{
+                        
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"不切换" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        [self addLeftbuttontitle:get_sp(@"city_name")];
+                        
+                    }];
+                    
+                    [alert addAction:action];
+                    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"切换" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        set_sp(@"city_id", dict[@"data"][@"city_id"]);
+                        set_sp(@"city_name", dict[@"data"][@"city_name"]);
+                        
+                        [self addLeftbuttontitle:dict[@"data"][@"city_name"]];
+                        
+                    }];
+                    
+                    [alert addAction:action1];
+                    return;
+                }
+                else
+                {
+                    [self addLeftbuttontitle:get_sp(@"city_name")];
+                }
+            }
+            else
+            {
+                NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+                
+                [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_id"]] forKey:@"city_id"];
+                [userdefault setObject:[NSString stringWithFormat:@"%@",dict[@"data"][@"city_name"]] forKey:@"city_name"];
+                
+                [self addLeftbuttontitle:dict[@"data"][@"city_name"]];
+            }
             
-            [self addLeftbuttontitle:dict[@"data"][@"city_name"]];
+            
             
         }
         @catch (NSException *exception)

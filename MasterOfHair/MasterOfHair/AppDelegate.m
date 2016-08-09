@@ -40,7 +40,18 @@
 //Code Singing Entitle                 MasterOfHair/KeychainAccessGroups.plist
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRootView1:) name:@"changeRootView1" object:nil];
-    [self InitTabBarUI];
+    
+    
+    if (!get_Bsp(@"IsShowVIP")) {
+        DataProvider * dataprovider=[[DataProvider alloc] init];
+        [dataprovider setDelegateObject:self setBackFunctionName:@"IsShowVIPCallBack:"];
+        [dataprovider IsShowVIP];
+    }
+    
+    
+    
+    
+    
     
 /**
  *  短信设置
@@ -76,9 +87,22 @@
     
     
     
-    
+    [self InitTabBarUI];
     
     return YES;
+}
+-(void)IsShowVIPCallBack:(id)dict
+{
+    DLog(@"%@",dict);
+    if ([dict[@"status"][@"succeed"] intValue]==1) {
+        if ([dict[@"data"][@"flag"] intValue]==1) {
+            set_Bsp(@"IsShowVIP", YES);
+        }
+        else
+        {
+            set_Bsp(@"IsShowVIP", NO);
+        }
+    }
 }
 
 -(void)requestCallBack:(id)dict
@@ -119,7 +143,7 @@
     
     [self.window makeKeyAndVisible];
     
-    NSUserDefaults *mUserDefault = [NSUserDefaults standardUserDefaults];
+//    NSUserDefaults *mUserDefault = [NSUserDefaults standardUserDefaults];
     
 //    NSString *mRegistAcount = [mUserDefault valueForKey:LogIn_UserID_key];
     

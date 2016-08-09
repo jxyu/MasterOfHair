@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong) UIButton * head_vip;
 @property (nonatomic, strong) UIButton * head_edit;
+@property (nonatomic ,strong) UILabel * shangjiaID;//我的上家推广id
 @property (nonatomic, strong) UIButton * head_cancel;
 
 @property (nonatomic, strong) UIView * head_view_white;
@@ -54,11 +55,13 @@
 @end
 
 @implementation MineViewController
+{
+    NSString *tuiguangidStr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
+    tuiguangidStr=@"未设置";
     [self p_navi];
     
 //    [self p_setupView];
@@ -138,10 +141,10 @@
 {
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
-    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 190)];
+    self.head_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
     self.head_view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 7, SCREEN_WIDTH, 120)];
+    UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 7, SCREEN_WIDTH, 140)];
     view_white.backgroundColor = [UIColor whiteColor];
     [self.head_view addSubview:view_white];
     
@@ -196,7 +199,10 @@
     self.head_vip.layer.borderColor = [UIColor orangeColor].CGColor;
     [self.head_vip setTitle:@"开通金卡会员" forState:(UIControlStateNormal)];
     [self.head_vip setTintColor:[UIColor orangeColor]];
-    [view_white addSubview:self.head_vip];
+    if (get_Bsp(@"IsShowVIP")) {
+        [view_white addSubview:self.head_vip];
+    }
+    
     [self.head_vip addTarget:self action:@selector(head_vipAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
@@ -226,6 +232,24 @@
     [self.head_edit setTintColor:navi_bar_bg_color];
     [view_white addSubview:self.head_edit];
     [self.head_edit addTarget:self action:@selector(head_editAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    //    if (!self.shangjiaID) {
+    self.shangjiaID=[[UILabel alloc] initWithFrame:CGRectMake(self.head_edit.frame.origin.x, CGRectGetMaxY(self.head_edit.frame)+10, SCREEN_WIDTH-self.head_edit.frame.origin.x-10, 15)];
+    DLog(@"%@",get_sp(@"member_phone"));
+    if (get_sp(@"member_phone")!=nil) {
+        self.shangjiaID.text=[NSString stringWithFormat:@"我的推广ID:%@",get_sp(@"member_phone")];
+    }
+    else
+    {
+        self.shangjiaID.text=@"我的推广ID:未设置";
+    }
+    
+    
+    self.shangjiaID.font=[UIFont systemFontOfSize:13];
+    //    }
+    
+    [view_white addSubview:self.shangjiaID];
+    
 
     
     UIView * footerview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
@@ -282,6 +306,9 @@
             break;
         default:
             break;
+    }
+    if (get_Bsp(@"IsShowVIP")) {
+        self.head_vip.hidden=YES;
     }
 }
 
@@ -447,7 +474,7 @@
 #pragma mark - tableView的代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -463,6 +490,9 @@
             return 1;
             break;
         case 3:
+            return 1;
+            break;
+        case 4:
             return 1;
             break;
         default:
@@ -554,6 +584,13 @@
                     cell.type.hidden = YES;
                 }
             }
+        }
+            break;
+            case 4:
+        {
+            cell.name.text = [NSString stringWithFormat:@"我的上家推广ID:%@",tuiguangidStr];
+//            cell.image.image = [UIImage imageNamed:@"00001"];
+            cell.arrows_switch.hidden = YES;
         }
             break;
         default:
@@ -751,6 +788,9 @@
         case 3:
             return @"申请加盟";
             break;
+        case 4:
+            return @"我的上家推广ID";
+            break;
         default:
             return nil;
             break;
@@ -908,7 +948,35 @@
     }
 }
 
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (get_sp(@"member_id")!=nil) {
+        if ([NSString stringWithFormat:@"%@",get_sp(@"member_id")].length>0) {
+            DataProvider * dataprovider=[[DataProvider alloc] init];
+            [dataprovider setDelegateObject:self setBackFunctionName:@"GetTuiGuangIDCallBack:"];
+            [dataprovider GetMembersWithMember_id:get_sp(@"member_id")];
+        }
+        
+    }
+}
+-(void)GetTuiGuangIDCallBack:(id)dict
+{
+//    [@"dsakf" stringByReplacingOccurrencesOfString:@"<null>" withString:@"" options:NSWidthInsensitiveSearch range:<#(NSRange)#>]
+    
+    if (![[NSString stringWithFormat:@"%@",dict[@"data"][@"memberlist"][0][@"spread_id"]] isEqualToString:@"<null>"]) {
+        NSString * itemstr=[NSString stringWithFormat:@"%@",dict[@"data"][@"memberlist"][0][@"member_brokerage"]];
+        set_sp(@"member_brokerage", itemstr);
+        tuiguangidStr=[NSString stringWithFormat:@"%@",dict[@"data"][@"memberlist"][0][@"spread_id"]];
+        if ([tuiguangidStr isEqualToString:@""]) {
+            tuiguangidStr=@"未设置";
+        }
+        else
+        {
+           [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:4]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
+    
+}
 
 
 @end

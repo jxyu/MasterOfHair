@@ -27,6 +27,7 @@
 @property (nonatomic, copy) NSString * technician_name;
 @property (nonatomic, copy) NSString * technician_status;
 @property (nonatomic, copy) NSString * work_limit;
+@property (nonatomic, copy) NSString * technician_mobile;
 
 
 @property (nonatomic, copy) NSString * product_id;

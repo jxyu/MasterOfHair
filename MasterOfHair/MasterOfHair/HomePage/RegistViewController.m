@@ -352,7 +352,8 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-//            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         @catch (NSException *exception)
         {
@@ -360,9 +361,9 @@
         }
         @finally
         {
-            DataProvider * dataprovider=[[DataProvider alloc] init];
-            [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
-            [dataprovider loginWithMember_username:self.text_tel.text member_password:self.text_pass.text];
+//            DataProvider * dataprovider=[[DataProvider alloc] init];
+//            [dataprovider setDelegateObject:self setBackFunctionName:@"login_register:"];
+//            [dataprovider loginWithMember_username:self.text_tel.text member_password:self.text_pass.text];
         }
     }
     else

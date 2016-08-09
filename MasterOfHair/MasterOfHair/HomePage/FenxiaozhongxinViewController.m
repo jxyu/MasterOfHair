@@ -40,6 +40,9 @@
 @end
 
 @implementation FenxiaozhongxinViewController
+{
+    UILabel * lbl_ketixianyue;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,7 +123,7 @@
 {
     if(section == 0)
     {
-        return 2;
+        return 3;
     }
     else
     {
@@ -155,7 +158,7 @@
                 cell.number.text = [NSString stringWithFormat:@"%@人",self.level1];
             }
         }
-        else
+        else if(indexPath.row==1)
         {
             cell.name.text = @"二级会员";
 //            cell.number.text = @"11人";
@@ -170,6 +173,49 @@
                 cell.number.text = [NSString stringWithFormat:@"%@人",self.level2];
             }
         }
+        else
+        {
+            cell.name.hidden=YES;
+            cell.price.hidden=YES;
+            cell.number.hidden=YES;
+            cell.image_icon.hidden=YES;
+            cell.image.hidden=YES;
+            UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 1, 4, 2, 40)];
+            view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            [cell addSubview:view_line];
+            CGFloat lenth_x = (SCREEN_WIDTH - 2) / 2;
+            
+            
+            if (!self.num_sell) {
+                UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, 70, 30)];
+                label_1.text = @"累计销售额:";
+                label_1.font = [UIFont systemFontOfSize:13];
+                //    label_1.backgroundColor = [UIColor orangeColor];
+                [cell addSubview:label_1];
+                self.num_sell = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 5, 9, lenth_x - CGRectGetMaxX(label_1.frame) - 10, 30)];
+                //    self.num_sell.backgroundColor = [UIColor orangeColor];
+                self.num_sell.text = @"2";
+                self.num_sell.textColor = [UIColor orangeColor];
+                self.num_sell.font = [UIFont systemFontOfSize:13];
+            }
+            [cell addSubview:self.num_sell];
+            
+            if (!self.num_commission) {
+                UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(15 + CGRectGetMaxX(view_line.frame), 9, 70, 30)];
+                label_2.text = @"累计佣金:";
+                label_2.textAlignment = NSTextAlignmentCenter;
+                label_2.font = [UIFont systemFontOfSize:13];
+                //    label_1.backgroundColor = [UIColor orangeColor];
+                [cell addSubview:label_2];
+                
+                self.num_commission = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 +85, 9, lenth_x - 91, 30)];
+                //        self.num_commission.backgroundColor = [UIColor orangeColor];
+                self.num_commission.text = @"333";
+                self.num_commission.textColor = [UIColor orangeColor];
+                self.num_commission.font = [UIFont systemFontOfSize:13];
+            }
+            [cell addSubview:self.num_commission];
+        }
     }
     else
     {
@@ -177,6 +223,24 @@
         cell.image.image = [UIImage imageNamed:@"122323232323"];
         switch (indexPath.row) {
             case 0:
+            {
+                cell.name.text = @"我的累计佣金";
+                cell.price.text = @"¥ 5112";
+                cell.price.hidden=YES;
+                cell.image_icon.hidden = YES;
+                cell.number.hidden = NO;
+                
+                if([get_sp(@"member_brokerage") length] == 0)
+                {
+                    cell.number.text = @"¥ 0";
+                }
+                else
+                {
+                    cell.number.text = [NSString stringWithFormat:@"￥ %@",get_sp(@"member_brokerage")];
+                }
+            }
+                break;
+            case 1:
             {
                 cell.name.text = @"未付款订单佣金";
                 cell.price.text = @"¥ 1112";
@@ -194,7 +258,7 @@
                 }
             }
                 break;
-            case 1:
+            case 2:
             {
                 cell.name.text = @"已付款订单佣金";
                 cell.price.text = @"¥ 112";
@@ -212,7 +276,7 @@
                 }
             }
                 break;
-            case 2:
+            case 3:
             {
                 cell.name.text = @"已收货订单佣金";
                 cell.price.text = @"¥ 1312";
@@ -230,24 +294,7 @@
                 }
             }
                 break;
-            case 3:
-            {
-                cell.name.text = @"可提现余额";
-                cell.price.text = @"¥ 5112";
-                cell.price.hidden=YES;
-                cell.image_icon.hidden = YES;
-                cell.number.hidden = NO;
-                
-                if([self.wallet_balance length] == 0)
-                {
-                    cell.number.text = @"¥ 0";
-                }
-                else
-                {
-                    cell.number.text = [NSString stringWithFormat:@"￥ %@",self.wallet_balance];
-                }
-            }
-                break;
+            
             default:
                 break;
         }
@@ -268,27 +315,30 @@
             
             [self showViewController:nextFenxiaozhongxinViewController sender:nil];
         }
-        else
+        else if(indexPath.row==1)
         {
             NextFenxiaozhongxin1ViewController * nextFenxiaozhongxin1ViewController = [[NextFenxiaozhongxin1ViewController alloc] init];
             
             [self showViewController:nextFenxiaozhongxin1ViewController sender:nil];
         }
+        else
+        {
+        }
     }else if (indexPath.section==1)
     {
-        if (indexPath.row!=3) {
+        if (indexPath.row!=0) {
             FenxiaoDetialViewController * fenxiaoDetial=[[FenxiaoDetialViewController alloc] init];
             
             fenxiaoDetial.member_id=get_sp(@"member_id");
             
             switch (indexPath.row) {
-                case 0:
+                case 1:
                     fenxiaoDetial.Order_stute=@"1";
                     break;
-                case 1:
+                case 2:
                     fenxiaoDetial.Order_stute=@"2";
                     break;
-                case 2:
+                case 3:
                     fenxiaoDetial.Order_stute=@"4";
                     break;
                 default:
@@ -331,10 +381,10 @@
 
 - (void)p_headView
 {
-    self.head_View = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
+    self.head_View = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 125)];
     self.head_View.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 5, SCREEN_WIDTH, 90)];
+    UIView * view_white = [[UIView alloc] initWithFrame:CGRectMake(0, 5, SCREEN_WIDTH, 120)];
     view_white.backgroundColor = [UIColor whiteColor];
     [self.head_View addSubview:view_white];
     
@@ -375,46 +425,12 @@
     [view_white addSubview:label2];
     
     
-    UIView * view_white1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view_white.frame) + 5, SCREEN_WIDTH, 48)];
-    view_white1.backgroundColor = [UIColor whiteColor];
-    [self.head_View addSubview:view_white1];
+    lbl_ketixianyue=[[UILabel alloc] initWithFrame:CGRectMake(image_1.frame.origin.x, CGRectGetMaxY(label2.frame)+10, SCREEN_WIDTH-image_1.frame.origin.x-20, 20)];
     
+    lbl_ketixianyue.text=@"可提现余额:￥0.00";
+    lbl_ketixianyue.font=[UIFont systemFontOfSize:15];
+    [view_white addSubview:lbl_ketixianyue];
     
-    UIView * view_line = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 1, 4, 2, 40)];
-    view_line.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [view_white1 addSubview:view_line];
-    
-    CGFloat lenth_x = (SCREEN_WIDTH - 2) / 2;
-    
-    
-    UILabel * label_1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 9, 70, 30)];
-    label_1.text = @"累计销售额:";
-    label_1.font = [UIFont systemFontOfSize:13];
-//    label_1.backgroundColor = [UIColor orangeColor];
-    [view_white1 addSubview:label_1];
-    
-    self.num_sell = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_1.frame) + 5, 9, lenth_x - CGRectGetMaxX(label_1.frame) - 10, 30)];
-//    self.num_sell.backgroundColor = [UIColor orangeColor];
-    self.num_sell.text = @"¥ 1000.00";
-    self.num_sell.textColor = [UIColor orangeColor];
-    self.num_sell.font = [UIFont systemFontOfSize:13];
-    [view_white1 addSubview:self.num_sell];
-    
-    
-    
-    UILabel * label_2 = [[UILabel alloc] initWithFrame:CGRectMake(15 + CGRectGetMaxX(view_line.frame), 9, 70, 30)];
-    label_2.text = @"累计佣金:";
-    label_2.textAlignment = NSTextAlignmentCenter;
-    label_2.font = [UIFont systemFontOfSize:13];
-    //    label_1.backgroundColor = [UIColor orangeColor];
-    [view_white1 addSubview:label_2];
-    
-    self.num_commission = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(label_2.frame) + 1, 9, lenth_x - CGRectGetMaxX(label_1.frame) - 5, 30)];
-//        self.num_commission.backgroundColor = [UIColor orangeColor];
-    self.num_commission.text = @"¥ 1000.00";
-    self.num_commission.textColor = [UIColor orangeColor];
-    self.num_commission.font = [UIFont systemFontOfSize:13];
-    [view_white1 addSubview:self.num_commission];
 }
 
 #pragma mark - 数据数据
@@ -452,6 +468,8 @@
             self.no_pay_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"no_pay_order_brokerage"]];
             self.pay_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"pay_order_brokerage"]];
             self.receive_order_brokerage = [NSString stringWithFormat:@"%@",dic1[@"receive_order_brokerage"]];
+            
+            lbl_ketixianyue.text=[NSString stringWithFormat:@"可提现余额:￥%@",self.wallet_balance];
         }
         @catch (NSException *exception)
         {
