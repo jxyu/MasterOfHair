@@ -47,7 +47,7 @@
     
     _lblLeft.text=@"返回";
     _lblLeft.textAlignment=NSTextAlignmentLeft;
-    [self addRightbuttontitle:@"注册"];
+//    [self addRightbuttontitle:@"注册"];
 }
 
 //返回
@@ -59,11 +59,7 @@
 //注册
 - (void)clickRightButton:(UIButton *)sender
 {
-    [self.text_account resignFirstResponder];
-    [self.text_password resignFirstResponder];
     
-    RegistViewController * registViewController = [[RegistViewController alloc] init];
-    [self showViewController:registViewController sender:nil];
 }
 
 //隐藏tabbar
@@ -145,15 +141,58 @@
     [self.view addSubview:btn_login];
     [btn_login addTarget:self action:@selector(btn_loginAction:) forControlEvents:(UIControlEventTouchUpInside)];
     
-    //找回密码
-    UIButton * btn_found = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 25, 15, 20, 20);
-//    btn_found.backgroundColor = [UIColor orangeColor];
-    [btn_found setImage:[UIImage imageNamed:@"06wenhao_03"] forState:(UIControlStateNormal)];
-    [btn_found setTintColor:navi_bar_bg_color];
-    [view_password addSubview:btn_found];
-    [btn_found addTarget:self action:@selector(btn_foundAction:) forControlEvents:(UIControlEventTouchUpInside)];
+//    //找回密码
+//    UIButton * btn_found = [UIButton buttonWithType:(UIButtonTypeSystem)];
+//    btn_found.frame = CGRectMake(CGRectGetMaxX(view_password.frame) - 20 - 25, 15, 20, 20);
+////    btn_found.backgroundColor = [UIColor orangeColor];
+//    [btn_found setImage:[UIImage imageNamed:@"06wenhao_03"] forState:(UIControlStateNormal)];
+//    [btn_found setTintColor:navi_bar_bg_color];
+//    [view_password addSubview:btn_found];
+//    [btn_found addTarget:self action:@selector(btn_foundAction:) forControlEvents:(UIControlEventTouchUpInside)];
+//    
+//    
     
+    
+    UIButton * btn_forget=[[UIButton alloc] init];
+    btn_forget.center=CGPointMake(SCREEN_WIDTH/4, CGRectGetMaxY(btn_login.frame)+50);
+    btn_forget.bounds=CGRectMake(0, 0, 80, 20);
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"忘记密码"];
+    NSRange strRange = {0,[str length]};
+    [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+    [str addAttribute:NSForegroundColorAttributeName value:_topView.backgroundColor range:strRange];
+    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:strRange];
+    [btn_forget setAttributedTitle:str forState:UIControlStateNormal];
+    [btn_forget addTarget:self action:@selector(btn_foundAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn_forget];
+    
+    
+    
+    
+    
+    UIButton * btn_register=[[UIButton alloc] init];
+    btn_register.center=CGPointMake(SCREEN_WIDTH/4*3, CGRectGetMaxY(btn_login.frame)+50);
+    btn_register.bounds=CGRectMake(0, 0, 80, 20);
+    
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:@"我要注册"];
+    NSRange strRange1 = {0,[str1 length]};
+    [str1 addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange1];
+    [str1 addAttribute:NSForegroundColorAttributeName value:_topView.backgroundColor range:strRange1];
+    [str1 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:strRange1];
+    [btn_register setAttributedTitle:str1 forState:UIControlStateNormal];
+    [btn_register addTarget:self action:@selector(RegisterAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn_register];
+    
+}
+
+-(void)RegisterAction
+{
+    [self.text_account resignFirstResponder];
+    
+    [self.text_password resignFirstResponder];
+    
+    RegistViewController * registViewController = [[RegistViewController alloc] init];
+    
+    [self showViewController:registViewController sender:nil];
 }
 
 #pragma mark - 登陆按钮
@@ -161,6 +200,7 @@
 {
 //    NSLog(@"登陆");
     [self.text_account resignFirstResponder];
+    
     [self.text_password resignFirstResponder];
     
     if([self.text_account.text length] == 0 || [self.text_password.text length] == 0)
