@@ -10,7 +10,7 @@
 #import "SetPayPwdViewController.h"
 #import "TXTradePasswordView.h"
 
-@interface NextqianbaoViewController () <UITextFieldDelegate,TXTradePasswordViewDelegate>
+@interface NextqianbaoViewController () <UITextFieldDelegate,TXTradePasswordViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView * scrollView;
 //
@@ -27,6 +27,8 @@
 @property (nonatomic, strong) UIImageView * image_3;
 @property (nonatomic, strong) UIImageView * image_4;
 @property (nonatomic, strong) UIImageView * image_5;
+@property (strong, nonatomic)  UITextView *TextV;
+@property (nonatomic, strong) UILabel *fankuiLabel;
 
 
 //
@@ -47,9 +49,19 @@
     [super viewDidLoad];
     jine_array=[[NSArray alloc] initWithObjects:@"50",@"100",@"200",@"500",@"1000",@"2500",@"5000",@"10000",@"25000",@"50000", nil];
     quxianJine=@"";
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapViewAction:) ];
+    tapGesture.numberOfTapsRequired = 1; //点击次数
+    tapGesture.numberOfTouchesRequired = 1; //点击手指数
+    [self.view addGestureRecognizer:tapGesture];
+
     [self p_navi];
     
     [self p_setupView];
+}
+
+-(void)tapViewAction:(id)sender
+{
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -182,8 +194,14 @@
         DataProvider * dataprovider=[[DataProvider alloc] init];
         
         [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+        if ([self JudgeIsPhoneNo:self.text_account.text]) {
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:quxianJine andremark:self.TextV.text andbank_account:@"" andwallet_password:Password];
+        }
+        else
+        {
+            [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:@"" change_amount:quxianJine andremark:self.TextV.text andbank_account:self.text_account.text andwallet_password:Password];
+        }
         
-        [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] record_type:@"1" change_type:@"2" alipay_account:self.text_account.text change_amount:quxianJine];
         
         
         
@@ -260,7 +278,37 @@
     [view_white addSubview:self.text_account];
     
     
-    UILabel * lable_2 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(view_white.frame) + 10, 100, 15)];
+    
+    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(view_white.frame) + 10, 100, 15)];
+    label_3.text = @"银行卡信息";
+    label_3.font = [UIFont systemFontOfSize:13];
+    [self.scrollView addSubview:label_3];
+    
+    self.TextV=[[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label_3.frame) + 8, SCREEN_WIDTH, 100)];
+    self.TextV.delegate=self;
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, 20)];
+    
+    label.enabled = NO;
+    
+    label.text = @"在此输入开户名、银行名称、开户行地址(支付宝账户无需填写本内容)...";
+    
+    label.font =  [UIFont systemFontOfSize:11];
+    
+    
+    label.textColor = [UIColor lightGrayColor];
+    
+    self.fankuiLabel = label;
+    
+    [self.TextV addSubview:label];
+    
+    
+//#warning 这个不确定
+//    UIView * view_white2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label_3.frame) + 8, SCREEN_WIDTH, 100)];
+//    view_white2.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.TextV];
+    
+    
+    UILabel * lable_2 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.TextV.frame) + 10, 100, 15)];
     lable_2.text = @"选择提现金额";
     lable_2.font = [UIFont systemFontOfSize:13];
     [self.scrollView addSubview:lable_2];
@@ -289,15 +337,7 @@
 
     }
     
-    UILabel * label_3 = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(view_white1.frame) + 10, 100, 15)];
-    label_3.text = @"申请提现说明";
-    label_3.font = [UIFont systemFontOfSize:13];
-    [self.scrollView addSubview:label_3];
     
-#warning 这个不确定
-    UIView * view_white2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label_3.frame) + 8, SCREEN_WIDTH, 100)];
-    view_white2.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:view_white2];
     
     
     self.scrollView.contentSize = CGSizeMake(0, 500);
@@ -343,8 +383,31 @@
     [self.text_account resignFirstResponder];
 }
 
+#pragma mark textView 的代理方法
+-(void) textViewDidChange:(UITextView *)textView {
+    
+    if (self.TextV.text.length == 0 ) {
+        
+        [self.fankuiLabel setHidden:NO];
+        
+    } else {
+        
+        [self.fankuiLabel setHidden:YES];
+    }
+}
 
 
-
+-(BOOL)JudgeIsPhoneNo:(NSString *)str
+{
+    NSRange  range=[str rangeOfString:@"1"];
+    if (range.length==1) {
+        return YES;
+    }
+    range=[str rangeOfString:@"@"];
+    if (range.length==1) {
+        return YES;
+    }
+    return NO;
+}
 
 @end

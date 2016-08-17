@@ -103,6 +103,10 @@
             set_Bsp(@"IsShowVIP", NO);
         }
     }
+    else
+    {
+        set_Bsp(@"IsShowVIP", NO);
+    }
 }
 
 -(void)requestCallBack:(id)dict

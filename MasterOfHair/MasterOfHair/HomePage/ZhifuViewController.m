@@ -8,18 +8,25 @@
 
 #import "ZhifuViewController.h"
 #import "Pingpp.h"
-@interface ZhifuViewController ()
+#import "TXTradePasswordView.h"
+#import "SetPayPwdViewController.h"
+@interface ZhifuViewController ()<TXTradePasswordViewDelegate>
 
 @property (nonatomic, strong) UIButton * btn_zhifu;
 
 @property (nonatomic, strong) UIButton * btn_zhifubo;
 @property (nonatomic, strong) UIButton * btn_weixin;
+@property (nonatomic,strong) UIButton * btn_myPurse;
 
 
 
 @end
 
 @implementation ZhifuViewController
+{
+    TXTradePasswordView *TXView;
+    UIButton * btn_back;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,7 +122,7 @@
     
     //微信支付
     self.btn_weixin = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.btn_weixin.frame = CGRectMake(30 + length_x, CGRectGetMaxY(label_2.frame) + 10, 25, 25);
+    self.btn_weixin.frame = CGRectMake(10 + length_x, CGRectGetMaxY(label_2.frame) + 10, 25, 25);
     //    self.btn_weixin.backgroundColor = [UIColor orangeColor];
     self.btn_weixin.selected = 0;
     [view_3 addSubview:self.btn_weixin];
@@ -128,6 +135,20 @@
     label_zhifubo.text = @"微信支付";
     label_zhifubo.font = [UIFont systemFontOfSize:12];
     [view_3 addSubview:label_zhifubo];
+    //钱包支付
+    self.btn_myPurse = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.btn_myPurse.frame = CGRectMake(10 + length_x*2, CGRectGetMaxY(label_2.frame) + 10, 25, 25);
+    //    btn_myPurse = [UIColor orangeColor];
+    self.btn_myPurse.selected = 0;
+    [view_3 addSubview:self.btn_myPurse];
+    [self.btn_myPurse addTarget:self action:@selector(btn_qianbaoAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    
+    UILabel * label_zhifubo1 = [[UILabel alloc] initWithFrame:CGRectMake(_btn_myPurse.frame.origin.x+_btn_myPurse.frame.size.width+ 145, CGRectGetMaxY(label_2.frame) + 7.5, length_x - CGRectGetMaxX(self.btn_myPurse.frame) , 30)];
+    //    label_zhifubo.backgroundColor = [UIColor orangeColor];
+    label_zhifubo1.text = @"钱包支付";
+    label_zhifubo1.font = [UIFont systemFontOfSize:12];
+    [view_3 addSubview:label_zhifubo1];
     
     
     self.btn_zhifu = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -148,7 +169,7 @@
 #pragma mark - 支付
 - (void)btn_zhifuAction:(UIButton *)sender
 {
-    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
+    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0 && self.btn_myPurse.selected == 0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -166,6 +187,33 @@
     {
 //        NSLog(@"走支付流程");
         
+        if(self.btn_myPurse.selected == 1)
+        {
+            if (get_sp(@"wallet_password")==nil) {
+                SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+                setPayPWD.fatherVC=self;
+                [self.navigationController pushViewController:setPayPWD animated:YES];
+                return;
+            }
+            //输入支付密码
+            TXView = [[TXTradePasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"请输入支付密码"];
+            TXView.tag=1;
+            TXView.backgroundColor=[UIColor whiteColor];
+            TXView.TXTradePasswordDelegate = self;
+            if (![TXView.TF becomeFirstResponder])
+            {
+                //成为第一响应者。弹出键盘
+                [TXView.TF becomeFirstResponder];
+            }
+            btn_back=[[UIButton alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+            btn_back.backgroundColor=[UIColor lightGrayColor];
+            [self.view addSubview:btn_back];
+            
+            [self.view addSubview:TXView];
+            
+            return;
+        }
+        
         NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
         
         if(self.btn_weixin.selected == 0)
@@ -174,7 +222,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"2"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"2" andwallet_password:@""];
             
             [SVProgressHUD showWithStatus:@"请稍等..." ];
         }
@@ -185,7 +233,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"3"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"3" andwallet_password:@""];
             
             [SVProgressHUD showWithStatus:@"请稍等..." ];
             
@@ -193,6 +241,21 @@
     }
     
 }
+
+
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] course_id:self.course_id pay_method:@"1" andwallet_password:Password];
+    
+    [SVProgressHUD showWithStatus:@"请稍等..." ];
+}
+
 #pragma mark - 支付
 - (void)create:(id )dict
 {
@@ -233,7 +296,14 @@
     }
     else
     {
-        //        [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
+        if ([dict[@"status"][@"succeed"] intValue] == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
+        }
     }
 }
 
@@ -255,6 +325,7 @@
 
 
 
+#pragma mark - 微信 和 支付宝
 - (void)btn_zhifuboAction:(UIButton *)sender
 {
     if(sender.selected == 0)
@@ -264,6 +335,8 @@
         
         self.btn_weixin.selected = 0;
         [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     }
     else
     {
@@ -281,6 +354,8 @@
         
         self.btn_zhifubo.selected = 0;
         [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     }
     else
     {
@@ -288,8 +363,24 @@
         sender.selected = 0;
     }
 }
-
-
+- (void)btn_qianbaoAction:(UIButton *)sender
+{
+    if(sender.selected == 0)
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
+        sender.selected = 1;
+        
+        self.btn_zhifubo.selected = 0;
+        [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_weixin.selected = 0;
+        [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        sender.selected = 0;
+    }
+}
 
 
 

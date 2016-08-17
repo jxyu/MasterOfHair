@@ -706,7 +706,7 @@
                 tuwenViewController.isTeacher = 0;
                 
                 NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
-                [userdefault setObject:@"1" forKey:@"TuwenFeilei"];
+                [userdefault setObject:@"71" forKey:@"TuwenFeilei"];
                 
                 [self showViewController:tuwenViewController sender:nil];
             }

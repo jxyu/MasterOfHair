@@ -237,7 +237,7 @@
     self.shangjiaID=[[UILabel alloc] initWithFrame:CGRectMake(self.head_edit.frame.origin.x, CGRectGetMaxY(self.head_edit.frame)+10, SCREEN_WIDTH-self.head_edit.frame.origin.x-10, 15)];
     DLog(@"%@",get_sp(@"member_phone"));
     if (get_sp(@"member_phone")!=nil) {
-        self.shangjiaID.text=[NSString stringWithFormat:@"我的推广ID:%@",get_sp(@"member_phone")];
+        self.shangjiaID.text=[NSString stringWithFormat:@"我的推广ID:%@",get_sp(@"member_username")];
     }
     else
     {
@@ -308,6 +308,10 @@
             break;
     }
     if (get_Bsp(@"IsShowVIP")) {
+        self.head_vip.hidden=NO;
+    }
+    else
+    {
         self.head_vip.hidden=YES;
     }
 }

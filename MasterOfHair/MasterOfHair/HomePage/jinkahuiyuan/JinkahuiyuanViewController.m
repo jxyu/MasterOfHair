@@ -49,8 +49,8 @@
     islogin=YES;
     if ([get_sp(@"member_id") length] == 0) {
         islogin=NO;
-        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"活动期间开通金卡会员" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通会员" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
-        [alertview show];
+//        UIAlertView * alertview=[[UIAlertView alloc] initWithTitle:@"活动期间开通金卡会员" message:@"登录剃头匠账号购买，可跨平台享受会员权益，直接购买，会为当前设备开通会员" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"直接购买",@"登录剃头匠账号购买", nil];
+//        [alertview show];
     }
     
     
@@ -288,24 +288,30 @@
     if ([dict[@"status"][@"succeed"] intValue] == 1) {
         @try
         {
-            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
-            NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            
-            [Pingpp createPayment:str_data
-                   viewController:self
-                     appURLScheme:@"MasterOfHair.zykj"
-                   withCompletion:^(NSString *result, PingppError *error) {
-                       if ([result isEqualToString:@"success"]) {
-                           // 支付成功
-                           [self.navigationController popViewControllerAnimated:YES];
-                           set_sp(@"member_type", @"2");
-                           [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
-                       } else {
-                           // 支付失败或取消
-                           NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
-                       }
-                   }];
+            if ([NSString stringWithFormat:@"%@",dict[@"data"][@"charge"]].length>5) {
+                NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+                NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                
+                [Pingpp createPayment:str_data
+                       viewController:self
+                         appURLScheme:@"MasterOfHair.zykj"
+                       withCompletion:^(NSString *result, PingppError *error) {
+                           if ([result isEqualToString:@"success"]) {
+                               // 支付成功
+                               [self.navigationController popViewControllerAnimated:YES];
+                               set_sp(@"member_type", @"2");
+                               [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
+                           } else {
+                               // 支付失败或取消
+                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
+                               [SVProgressHUD showErrorWithStatus:@"支付失败~" ];
+                           }
+                       }];
+                return;
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+            set_sp(@"member_type", @"2");
+            [SVProgressHUD showSuccessWithStatus:@"支付成功~" ];
 
         }
         @catch (NSException *exception)

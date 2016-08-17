@@ -434,6 +434,7 @@
 		80CF4DEC1C5E038000CE2CB5 /* select_baise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80CF4DEB1C5E038000CE2CB5 /* select_baise@2x.png */; };
 		80EA06D61CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80EA06D41CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m */; };
 		80EA06D71CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80EA06D51CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib */; };
+		8B334CC81D5AC2DF0075DB9D /* TextMyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B334CC71D5AC2DF0075DB9D /* TextMyView.m */; };
 		8B6409511CE9C13100EEA5EF /* arrow_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6409501CE9C13100EEA5EF /* arrow_left@2x.png */; };
 		8B7503F11CEC422B00F6E21B /* SvUDIDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7503F01CEC422B00F6E21B /* SvUDIDTools.m */; };
 		8B7503F31CEC48EE00F6E21B /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B7503F21CEC48EE00F6E21B /* KeychainAccessGroups.plist */; };
@@ -1187,6 +1188,8 @@
 		80EA06D31CC70B02009AFD3E /* FenxiaoDetialTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FenxiaoDetialTableViewCell.h; sourceTree = "<group>"; };
 		80EA06D41CC70B02009AFD3E /* FenxiaoDetialTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FenxiaoDetialTableViewCell.m; sourceTree = "<group>"; };
 		80EA06D51CC70B02009AFD3E /* FenxiaoDetialTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FenxiaoDetialTableViewCell.xib; sourceTree = "<group>"; };
+		8B334CC61D5AC2DF0075DB9D /* TextMyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMyView.h; sourceTree = "<group>"; };
+		8B334CC71D5AC2DF0075DB9D /* TextMyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMyView.m; sourceTree = "<group>"; };
 		8B6409501CE9C13100EEA5EF /* arrow_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_left@2x.png"; sourceTree = "<group>"; };
 		8B7503EF1CEC422B00F6E21B /* SvUDIDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SvUDIDTools.h; sourceTree = "<group>"; };
 		8B7503F01CEC422B00F6E21B /* SvUDIDTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SvUDIDTools.m; sourceTree = "<group>"; };
@@ -2934,6 +2937,8 @@
 		8043C6EE1C4E0C0000369EEF /* CustomTool */ = {
 			isa = PBXGroup;
 			children = (
+				8B334CC61D5AC2DF0075DB9D /* TextMyView.h */,
+				8B334CC71D5AC2DF0075DB9D /* TextMyView.m */,
 				8B9D68A21D2A05B40083D62D /* SVProgressHUD */,
 				8B7503EE1CEC422B00F6E21B /* UDID_Tools */,
 				803A5D8F1CBF6E8B0023C3AE /* segment */,
@@ -3780,6 +3785,7 @@
 				7B7F10541C99823B00EFF08C /* WenxiulanmengdingdanViewController.m in Sources */,
 				7BA5969A1C4E244A00DBC69D /* JCVideoCollectionViewCell.m in Sources */,
 				802552C01C57442B00CFF875 /* CALayer+AddUIColor.m in Sources */,
+				8B334CC81D5AC2DF0075DB9D /* TextMyView.m in Sources */,
 				7BFAA7791C8A85C400D86D81 /* BianjiziliaoViewController.m in Sources */,
 				7B1DE47F1C78124F0079B606 /* Chanpingxiangqing_Models.m in Sources */,
 				802552AC1C57442B00CFF875 /* SCFilter.m in Sources */,

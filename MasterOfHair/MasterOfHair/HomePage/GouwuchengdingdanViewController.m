@@ -1117,7 +1117,6 @@
                 {
                     [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu1:"];
                     [dataprovider createWithMember_id:[userdefault objectForKey:@"member_id"] orders_id:str_order pay_method:self.str_zhifutype orders_total:self.str_zhifusum andwallet_password:_pwdStr];
-                    
                     [SVProgressHUD showWithStatus:@"请稍等..." ];
 
                 }

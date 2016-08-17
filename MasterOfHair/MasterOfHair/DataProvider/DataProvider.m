@@ -842,13 +842,13 @@
 }
 
 #pragma mark - 申请提现
-- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type  change_type:(NSString *)change_type alipay_account:(NSString *)alipay_account change_amount:(NSString *)change_amount
+- (void)createWithMember_id:(NSString *)member_id record_type:(NSString *)record_type  change_type:(NSString *)change_type alipay_account:(NSString *)alipay_account change_amount:(NSString *)change_amount andremark:(NSString *)remark andbank_account:(NSString *)bank_account andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && record_type && change_type && alipay_account && change_amount)
+    if(member_id && record_type && change_type && alipay_account && change_amount&&remark&&bank_account&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@cashRecord/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"record_type\":\"%@\",\"change_type\":\"%@\",\"alipay_account\":\"%@\",\"change_amount\":\"%@\"}",member_id,record_type,change_type,alipay_account,change_amount]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"record_type\":\"%@\",\"change_type\":\"%@\",\"alipay_account\":\"%@\",\"change_amount\":\"%@\",\"remark\":\"%@\",\"bank_account\":\"%@\",\"wallet_password\":\"%@\"}",member_id,record_type,change_type,alipay_account,change_amount,remark,bank_account,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1001,13 +1001,13 @@
 
 
 #pragma mark - (3)添加一个订单
-- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status pay_method:(NSString *)pay_method
+- (void)createWithStore_id:(NSString *)store_id member_id:(NSString *)member_id product_id:(NSString *)product_id technician_id:(NSString *)technician_id order_payable:(NSString *)order_payable order_realpay:(NSString *)order_realpay union_order_status:(NSString *)union_order_status pay_method:(NSString *)pay_method andwallet_password:(NSString *)wallet_password
 {
-    if(store_id && member_id && product_id && technician_id && order_payable && order_realpay && union_order_status && pay_method)
+    if(store_id && member_id && product_id && technician_id && order_payable && order_realpay && union_order_status && pay_method&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@UnionOrder/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\",\"member_id\":\"%@\",\"product_id\":\"%@\",\"technician_id\":\"%@\",\"order_payable\":\"%@\",\"order_realpay\":\"%@\",\"union_order_status\":\"%@\",\"pay_method\":\"%@\"}",store_id,member_id,product_id,technician_id,order_payable,order_realpay,union_order_status,pay_method]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"store_id\":\"%@\",\"member_id\":\"%@\",\"product_id\":\"%@\",\"technician_id\":\"%@\",\"order_payable\":\"%@\",\"order_realpay\":\"%@\",\"union_order_status\":\"%@\",\"pay_method\":\"%@\",\"wallet_password\":\"%@\"}",store_id,member_id,product_id,technician_id,order_payable,order_realpay,union_order_status,pay_method,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1313,13 +1313,13 @@
 }
 
 #pragma mark -  充值
-- (void)createWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString *)pay_method
+- (void)createWithMember_id:(NSString *)member_id pay_total:(NSString *)pay_total pay_method:(NSString *)pay_method andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && pay_total && pay_method)
+    if(member_id && pay_total && pay_method&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@rechargeRecord/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\"}",member_id,pay_total,pay_method]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\",\"wallet_password\":\"%@\"}",member_id,pay_total,pay_method,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
@@ -1354,13 +1354,13 @@
 }
 
 #pragma mark -  	（3）会员报名
-- (void)SignupWithMember_id:(NSString *)member_id course_id:(NSString *)course_id pay_method:(NSString * )pay_method
+- (void)SignupWithMember_id:(NSString *)member_id course_id:(NSString *)course_id pay_method:(NSString * )pay_method andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && course_id && pay_method)
+    if(member_id && course_id && pay_method&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@Signup/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"course_id\":\"%@\",\"pay_method\":\"%@\"}",member_id,course_id,pay_method]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"course_id\":\"%@\",\"pay_method\":\"%@\",\"wallet_password\":\"%@\"}",member_id,course_id,pay_method,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }
