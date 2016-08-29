@@ -170,7 +170,7 @@
                 {
                     [SVProgressHUD dismiss];
                     
-                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"该号码不存在" preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error] preferredStyle:(UIAlertControllerStyleAlert)];
                     [self presentViewController:alert animated:YES completion:^{
                     }];
                     

@@ -239,11 +239,20 @@
     //赋值
 //    self.price.text = self.money;
 }
-
+-(void)TXTradePasswordView:(TXTradePasswordView *)view WithPasswordString:(NSString *)Password
+{
+    [btn_back removeFromSuperview];
+    [TXView removeFromSuperview];
+    
+    DataProvider * dataprovider=[[DataProvider alloc] init];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
+    
+    [dataprovider SignupWithMember_id:get_sp(@"member_id") video_id:self.video_id pay_total:self.money pay_method:@"1"andwallet_password:Password];
+}
 #pragma mark - 支付
 - (void)btn_zhifuAction:(UIButton *)sender
 {
-    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0)
+    if(self.btn_zhifubo.selected == 0 && self.btn_weixin.selected == 0&&self.btn_myPurse.selected==0)
     {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择支付方式" preferredStyle:(UIAlertControllerStyleAlert)];
         
@@ -296,7 +305,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"1"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"2"andwallet_password:@""];
             
             [SVProgressHUD showWithStatus:@"请稍等..." ];
         }
@@ -307,7 +316,7 @@
             DataProvider * dataprovider=[[DataProvider alloc] init];
             [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
             
-            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"2"];
+            [dataprovider SignupWithMember_id:[userdefault objectForKey:@"member_id"] video_id:self.video_id pay_total:self.money pay_method:@"3" andwallet_password:@""];
             
             [SVProgressHUD showWithStatus:@"请稍等..." ];
             
@@ -322,7 +331,7 @@
     
     [SVProgressHUD dismiss];
     
-    if (dict[@"data"][@"charge"] != nil)
+    if ([dict[@"status"][@"succeed"] intValue] == 1)
     {
         @try
         {

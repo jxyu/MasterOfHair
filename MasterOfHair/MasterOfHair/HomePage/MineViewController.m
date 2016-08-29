@@ -7,7 +7,7 @@
 //
 
 #import "MineViewController.h"
-
+#import "UMSocial.h"
 #import "JCMineTableViewCell.h"
 #import "SettingViewController.h"
 #import "AppDelegate.h"
@@ -478,7 +478,7 @@
 #pragma mark - tableView的代理
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -497,6 +497,9 @@
             return 1;
             break;
         case 4:
+            return 1;
+            break;
+        case 5:
             return 1;
             break;
         default:
@@ -594,6 +597,14 @@
         {
             cell.name.text = [NSString stringWithFormat:@"我的上家推广ID:%@",tuiguangidStr];
 //            cell.image.image = [UIImage imageNamed:@"00001"];
+            cell.arrows_switch.hidden = YES;
+        }
+            break;
+        case 5:
+        {
+            cell.name.text = [NSString stringWithFormat:@"邀请好友"];
+            //            cell.image.image = [UIImage imageNamed:@"00001"];
+            cell.image.hidden=YES;
             cell.arrows_switch.hidden = YES;
         }
             break;
@@ -771,6 +782,29 @@
         }
         
             break;
+            case 5:
+        {
+            if([[userdefault objectForKey:@"member_id"] length] == 0)
+            {
+                LoginViewController * loginViewController = [[LoginViewController alloc] init];
+                
+                [self showViewController:loginViewController sender:nil];
+            }
+            else
+            {
+                NSString * urlStr=[NSString stringWithFormat:@"http://www.58titoujiang.com/index.php?r=wx/site/share&spread_id=%@",get_sp(@"member_phone")];
+                [UMSocialData defaultData].extConfig.wechatSessionData.url = urlStr;
+                [UMSocialData defaultData].extConfig.wechatTimelineData.url = urlStr;
+                [UMSocialSnsService presentSnsIconSheetView:self
+                                                     appKey:@"56e8cf6867e58ea9710004b8"
+                                                  shareText:@"快来下载剃头匠"
+                                                 shareImage:[UIImage imageNamed:@"sudisudiusidusidu"]
+                                            shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                                   delegate:nil];
+            }
+            
+        }
+            break;
         default:
             break;
     }
@@ -794,6 +828,9 @@
             break;
         case 4:
             return @"我的上家推广ID";
+            break;
+        case 5:
+            return @"邀请二维码";
             break;
         default:
             return nil;

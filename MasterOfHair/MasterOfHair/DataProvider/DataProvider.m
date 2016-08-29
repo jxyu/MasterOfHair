@@ -1368,13 +1368,13 @@
 
 
 #pragma mark -  视频支付接口
-- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method
+- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method andwallet_password:(NSString *)wallet_password
 {
-    if(member_id && video_id && pay_total && pay_method)
+    if(member_id && video_id && pay_total && pay_method&&wallet_password)
     {
         NSString * url=[NSString stringWithFormat:@"%@VideoRecord/create",Url];
         
-        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\"}",member_id,video_id,pay_total,pay_method]};
+        NSDictionary * prm=@{@"json":[NSString stringWithFormat:@"{\"member_id\":\"%@\",\"video_id\":\"%@\",\"pay_total\":\"%@\",\"pay_method\":\"%@\",\"wallet_password\":\"%@\"}",member_id,video_id,pay_total,pay_method,wallet_password]};
         
         [self PostRequest:url andpram:prm];
     }

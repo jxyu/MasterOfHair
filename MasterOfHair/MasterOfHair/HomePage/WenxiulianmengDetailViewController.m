@@ -203,7 +203,7 @@
     NSUserDefaults * userdefault = [NSUserDefaults standardUserDefaults];
     
     DataProvider * dataprovider=[[DataProvider alloc] init];
-    [dataprovider setDelegateObject:self setBackFunctionName:@"dingdanzhifu:"];
+    [dataprovider setDelegateObject:self setBackFunctionName:@"create:"];
     [dataprovider createWithStore_id:self.model_baocun2.store_id member_id:[userdefault objectForKey:@"member_id"] product_id:self.model_baocun2.product_id technician_id:self.model_baocun1.technician_id order_payable:self.model_baocun2.product_price order_realpay:self.text_money.text union_order_status:@"1" pay_method:@"1" andwallet_password:Password];
     
     [SVProgressHUD showWithStatus:@"请稍等..." ];
@@ -301,11 +301,11 @@
     
     [SVProgressHUD dismiss];
     
-    if (dict[@"charge"] != nil)
+    if ([dict[@"status"][@"succeed"] intValue] == 1)
     {
         @try
         {
-            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict[@"data"][@"charge"] options:NSJSONWritingPrettyPrinted error:nil];
             NSString* str_data = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
             [Pingpp createPayment:str_data
@@ -358,6 +358,8 @@
         
         self.btn_weixin.selected = 0;
         [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     }
     else
     {
@@ -377,6 +379,8 @@
         
         self.btn_zhifubo.selected = 0;
         [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_myPurse.selected = 0;
+        [self.btn_myPurse setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
     }
     else
     {
@@ -385,7 +389,26 @@
     }
 }
 
-
+- (void)btn_qianbaoAction:(UIButton *)sender
+{
+    [self.text_money resignFirstResponder];
+    
+    if(sender.selected == 0)
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_06"] forState:(UIControlStateNormal)];
+        sender.selected = 1;
+        
+        self.btn_zhifubo.selected = 0;
+        [self.btn_zhifubo setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        self.btn_weixin.selected = 0;
+        [self.btn_weixin setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"01_03＿_03"] forState:(UIControlStateNormal)];
+        sender.selected = 0;
+    }
+}
 
 #pragma mark - 点击
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

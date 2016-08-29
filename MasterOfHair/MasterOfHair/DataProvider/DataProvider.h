@@ -358,7 +358,7 @@
 
 
 #pragma mark -  视频支付接口
-- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method;
+- (void)SignupWithMember_id:(NSString *)member_id video_id:(NSString *)video_id pay_total:(NSString * )pay_total pay_method:(NSString *)pay_method andwallet_password:(NSString *)wallet_password;
 
 #pragma mark -  首页签到接口
 - (void)CreateAutoLoginUrlWithMember_id:(NSString *)member_username;

@@ -255,7 +255,8 @@
 
 -(void)JumpToPWD:(UIButton *)sender
 {
-    if (get_sp(@"wallet_password")==nil) {
+    DLog(@"%@",get_sp(@"wallet_password"));
+    if (get_sp(@"wallet_password")==nil||[NSString stringWithFormat:@"%@",get_sp(@"wallet_password")].length==0) {
         SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
         setPayPWD.fatherVC=self;
         [self.navigationController pushViewController:setPayPWD animated:YES];
