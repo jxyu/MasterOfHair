@@ -36,6 +36,9 @@
     self.detail.numberOfLines = 1;
     [self.contentView addSubview:self.detail];
     
+    
+    
+    
     self.image_iocn = [[UIImageView alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width - 15, self.contentView.frame.size.height - 15, 15, 15)];
     self.image_iocn.image = [UIImage imageNamed:@"01sdjjdijsidjs_03"];
     self.image_iocn.hidden = YES;

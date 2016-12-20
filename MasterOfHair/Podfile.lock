@@ -1,15 +1,15 @@
 PODS:
-  - MJRefresh (3.1.9)
+  - MJRefresh (3.1.12)
   - ZXPAutoLayout (1.3.6)
 
 DEPENDENCIES:
-  - MJRefresh (~> 3.1.0)
+  - MJRefresh (~> 3.1.12)
   - ZXPAutoLayout (~> 1.3.4)
 
 SPEC CHECKSUMS:
-  MJRefresh: c5f1f1653e5a1b932c90f78074f2bc86f3f9bd5e
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   ZXPAutoLayout: 29907b0dc25c3293f120d958879f5b7554ee86d0
 
-PODFILE CHECKSUM: f6dc7fd4da44337487005b7f0378f1a91b1c2a63
+PODFILE CHECKSUM: d5e4b94fabd926b46cea665557543219566c3c8f
 
 COCOAPODS: 1.0.1

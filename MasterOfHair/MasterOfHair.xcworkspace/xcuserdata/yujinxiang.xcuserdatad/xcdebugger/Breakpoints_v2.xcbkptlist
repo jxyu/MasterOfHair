@@ -336,7 +336,7 @@
             startingLineNumber = "1324"
             endingLineNumber = "1324"
             landmarkName = "-createWithMember_id:pay_total:pay_method:andwallet_password:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -400,7 +400,7 @@
             startingLineNumber = "1379"
             endingLineNumber = "1379"
             landmarkName = "-SignupWithMember_id:video_id:pay_total:pay_method:andwallet_password:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
