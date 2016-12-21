@@ -239,8 +239,6 @@
 		7BD5E3291C9175E000357A3C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD5E3281C9175E000357A3C /* WebViewController.m */; };
 		7BD86C3D1C74472200D099BE /* LuxiangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD86C3C1C74472200D099BE /* LuxiangViewController.m */; };
 		7BD86C3F1C744ACD00D099BE /* return101010.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BD86C3E1C744ACD00D099BE /* return101010.png */; };
-		7BD86C471C745D6400D099BE /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD86C421C745D6400D099BE /* SMS_SDKLocalizable.strings */; };
-		7BD86C491C745D6400D099BE /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C451C745D6400D099BE /* SMS_SDK.framework */; };
 		7BD86C4B1C745DBC00D099BE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C4A1C745DBC00D099BE /* libz.tbd */; };
 		7BD86C4D1C745DE800D099BE /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C4C1C745DE800D099BE /* libicucore.tbd */; };
 		7BD86C4F1C745DF700D099BE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD86C4E1C745DF700D099BE /* MessageUI.framework */; };
@@ -440,7 +438,9 @@
 		8B7503F31CEC48EE00F6E21B /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B7503F21CEC48EE00F6E21B /* KeychainAccessGroups.plist */; };
 		8B7C34B91CF29D6B004BCCB8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7C34B81CF29D6B004BCCB8 /* StoreKit.framework */; };
 		8B7C34BB1CF29F93004BCCB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C34BA1CF29F93004BCCB8 /* Default-568h@2x.png */; };
-		8B7C34BF1CF2E4EB004BCCB8 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7C34BE1CF2E4EB004BCCB8 /* MOBFoundation.framework */; };
+		8B84CA091E0A217900D37ABE /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B84CA061E0A217900D37ABE /* MOBFoundation.framework */; };
+		8B84CA0A1E0A217900D37ABE /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B84CA071E0A217900D37ABE /* MOBFoundationEx.framework */; };
+		8B84CA0B1E0A217900D37ABE /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B84CA081E0A217900D37ABE /* SMS_SDK.framework */; };
 		8B9594EF1CFEB9340029EE23 /* SetPayPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */; };
 		8B9594F31CFEB9540029EE23 /* TXTradePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F21CFEB9540029EE23 /* TXTradePasswordView.m */; };
 		8B9594F61CFECD750029EE23 /* VerifyPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9594F51CFECD750029EE23 /* VerifyPhoneViewController.m */; };
@@ -865,9 +865,6 @@
 		7BD86C3B1C74472200D099BE /* LuxiangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuxiangViewController.h; sourceTree = "<group>"; };
 		7BD86C3C1C74472200D099BE /* LuxiangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuxiangViewController.m; sourceTree = "<group>"; };
 		7BD86C3E1C744ACD00D099BE /* return101010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = return101010.png; path = TabBar/return101010.png; sourceTree = "<group>"; };
-		7BD86C431C745D6400D099BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
-		7BD86C451C745D6400D099BE /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
-		7BD86C461C745D6400D099BE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
 		7BD86C4A1C745DBC00D099BE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7BD86C4C1C745DE800D099BE /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		7BD86C4E1C745DF700D099BE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1196,7 +1193,9 @@
 		8B7503F21CEC48EE00F6E21B /* KeychainAccessGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = KeychainAccessGroups.plist; sourceTree = "<group>"; };
 		8B7C34B81CF29D6B004BCCB8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8B7C34BA1CF29F93004BCCB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8B7C34BE1CF2E4EB004BCCB8 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		8B84CA061E0A217900D37ABE /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		8B84CA071E0A217900D37ABE /* MOBFoundationEx.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundationEx.framework; sourceTree = "<group>"; };
+		8B84CA081E0A217900D37ABE /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
 		8B9594ED1CFEB9340029EE23 /* SetPayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPayPwdViewController.h; sourceTree = "<group>"; };
 		8B9594EE1CFEB9340029EE23 /* SetPayPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPayPwdViewController.m; sourceTree = "<group>"; };
 		8B9594F11CFEB9540029EE23 /* TXTradePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXTradePasswordView.h; sourceTree = "<group>"; };
@@ -1298,20 +1297,21 @@
 				8024923F1C785349008BA570 /* CoreMedia.framework in Frameworks */,
 				8024923D1C78533E008BA570 /* CoreVideo.framework in Frameworks */,
 				8024923B1C785334008BA570 /* QuartzCore.framework in Frameworks */,
+				8B84CA0B1E0A217900D37ABE /* SMS_SDK.framework in Frameworks */,
 				802492391C785328008BA570 /* OpenGLES.framework in Frameworks */,
 				802492371C784E41008BA570 /* ALBBQuPaiPlugin.framework in Frameworks */,
-				8B7C34BF1CF2E4EB004BCCB8 /* MOBFoundation.framework in Frameworks */,
 				7BBC0D0B1CA265030014A5B0 /* libSocialWechat.a in Frameworks */,
 				7BD86C511C745E1800D099BE /* JavaScriptCore.framework in Frameworks */,
 				7BBC0D081CA265030014A5B0 /* libSocialQQ.a in Frameworks */,
+				8B84CA091E0A217900D37ABE /* MOBFoundation.framework in Frameworks */,
 				7BD86C4F1C745DF700D099BE /* MessageUI.framework in Frameworks */,
 				7BBC0DE61CA287F20014A5B0 /* libpingpp+alipay.a in Frameworks */,
 				7BD86C4D1C745DE800D099BE /* libicucore.tbd in Frameworks */,
-				7BD86C491C745D6400D099BE /* SMS_SDK.framework in Frameworks */,
 				7BBC0DE91CA287F20014A5B0 /* libpingpp.a in Frameworks */,
 				7BBC0DE71CA287F20014A5B0 /* libpingpp+wx.a in Frameworks */,
 				7BBC0D091CA265030014A5B0 /* TencentOpenAPI.framework in Frameworks */,
 				5BFD92AC06CC56C8CD53B543 /* Pods_MasterOfHair.framework in Frameworks */,
+				8B84CA0A1E0A217900D37ABE /* MOBFoundationEx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,6 +1673,7 @@
 		7B29EFA81C56FCDF003A020B /* frameWork */ = {
 			isa = PBXGroup;
 			children = (
+				8B84CA051E0A217900D37ABE /* SMS_SDK */,
 				8B9D68C91D2A108C0083D62D /* SDWebImage */,
 				7B1D03DB1CA918A900259989 /* duiba */,
 				7BBC0DD61CA287E50014A5B0 /* ping++ */,
@@ -1682,7 +1683,6 @@
 				7BFAA77C1C8AAEC500D86D81 /* UpLoadImage */,
 				7B00BF5B1C77018300988119 /* Location */,
 				7B00BF541C76F58900988119 /* ChineseSorting */,
-				7BD86C411C745D6400D099BE /* SMS_SDK */,
 				7B29EFA91C56FD0D003A020B /* VOTagList */,
 			);
 			name = frameWork;
@@ -2425,16 +2425,6 @@
 			path = luxiang;
 			sourceTree = "<group>";
 		};
-		7BD86C411C745D6400D099BE /* SMS_SDK */ = {
-			isa = PBXGroup;
-			children = (
-				8B7C34BE1CF2E4EB004BCCB8 /* MOBFoundation.framework */,
-				7BD86C421C745D6400D099BE /* SMS_SDKLocalizable.strings */,
-				7BD86C451C745D6400D099BE /* SMS_SDK.framework */,
-			);
-			path = SMS_SDK;
-			sourceTree = "<group>";
-		};
 		7BDA3D031C9BB2360099D6B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3098,6 +3088,16 @@
 			path = UDID_Tools;
 			sourceTree = "<group>";
 		};
+		8B84CA051E0A217900D37ABE /* SMS_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				8B84CA061E0A217900D37ABE /* MOBFoundation.framework */,
+				8B84CA071E0A217900D37ABE /* MOBFoundationEx.framework */,
+				8B84CA081E0A217900D37ABE /* SMS_SDK.framework */,
+			);
+			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
 		8B9594F01CFEB9540029EE23 /* TXTradePassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -3312,7 +3312,6 @@
 				7B3305B01C5EECE50014C49C /* 01sdjjdijsidjs_03.png in Resources */,
 				803A5D811CBF419D0023C3AE /* right_menu_facetoface@3x.png in Resources */,
 				8B7503F31CEC48EE00F6E21B /* KeychainAccessGroups.plist in Resources */,
-				7BD86C471C745D6400D099BE /* SMS_SDKLocalizable.strings in Resources */,
 				7BAABAD11C59E21100C14DF8 /* 01_03＿_061111.png in Resources */,
 				7BF7FF531C9FD5F1007E2133 /* yijianbohao.png in Resources */,
 				8082B4C11C7414320024EAD3 /* ImagesPicker.xcassets in Resources */,
@@ -3851,15 +3850,6 @@
 				7BBC0CDD1CA264690014A5B0 /* zh-Hans */,
 			);
 			name = UMSocialLocalizable.strings;
-			sourceTree = "<group>";
-		};
-		7BD86C421C745D6400D099BE /* SMS_SDKLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7BD86C431C745D6400D099BE /* en */,
-				7BD86C461C745D6400D099BE /* zh-Hans */,
-			);
-			name = SMS_SDKLocalizable.strings;
 			sourceTree = "<group>";
 		};
 		8043C6C41C4DC94500369EEF /* Main.storyboard */ = {

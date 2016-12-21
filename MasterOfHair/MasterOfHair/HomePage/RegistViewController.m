@@ -320,7 +320,7 @@
     
     if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0 && [self.text_pass.text isEqualToString:self.text_password.text] && [self.text_pass.text length] >= 6 && [self.text_password.text length] >= 6)
     {
-        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(SMSSDKUserInfo *userInfo, NSError *error) {
             
             if(error)
             {

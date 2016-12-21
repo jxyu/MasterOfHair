@@ -208,7 +208,7 @@
             startingLineNumber = "355"
             endingLineNumber = "355"
             landmarkName = "-register_register:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -224,7 +224,7 @@
             startingLineNumber = "373"
             endingLineNumber = "373"
             landmarkName = "-register_register:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -240,7 +240,7 @@
             startingLineNumber = "352"
             endingLineNumber = "352"
             landmarkName = "-register_register:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -416,7 +416,7 @@
             startingLineNumber = "259"
             endingLineNumber = "259"
             landmarkName = "-btn_changeAction:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

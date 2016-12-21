@@ -242,7 +242,7 @@
     
     if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0)
     {
-        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(SMSSDKUserInfo *userInfo, NSError *error) {
             
             if(error)
             {
