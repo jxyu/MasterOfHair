@@ -51,7 +51,7 @@ typedef void(^MOBFHttpFaultEvent) (NSError *error);
  *  @param totalBytes  总字节数
  *  @param loadedBytes 上传字节数据
  */
-typedef void(^MOBFHttpUploadProgressEvent) (NSInteger totalBytes, NSInteger loadedBytes);
+typedef void(^MOBFHttpUploadProgressEvent) (int64_t totalBytes, int64_t loadedBytes);
 
 /**
  *  HTTP服务类
@@ -62,6 +62,11 @@ typedef void(^MOBFHttpUploadProgressEvent) (NSInteger totalBytes, NSInteger load
  *	@brief	提交方式，默认为GET
  */
 @property (nonatomic, copy) NSString *method;
+
+/**
+ 超时时间
+ */
+@property (nonatomic) NSTimeInterval timeout;
 
 /**
  *	@brief	是否缓存回复对象，默认为YES
@@ -109,12 +114,26 @@ typedef void(^MOBFHttpUploadProgressEvent) (NSInteger totalBytes, NSInteger load
 - (void)addHeader:(NSString *)header value:(NSString *)value;
 
 /**
+ *  添加HTTP头集合
+ *
+ *  @param headers 头集合
+ */
+- (void)addHeaders:(NSDictionary *)headers;
+
+/**
  *  添加参数
  *
  *  @param value 参数值
  *  @param key   参数名字
  */
 - (void)addParameter:(id)value forKey:(NSString *)key;
+
+/**
+ *  添加多个参数
+ *
+ *  @param parameters 参数集合
+ */
+- (void)addParameters:(NSDictionary *)parameters;
 
 /**
  *  添加上传文件参数
@@ -130,6 +149,13 @@ typedef void(^MOBFHttpUploadProgressEvent) (NSInteger totalBytes, NSInteger load
                 mimeType:(NSString *)mimeType
         transferEncoding:(NSString *)transferEncoding
                   forKey:(NSString *)key;
+
+/**
+ *  设置请求体数据，可以为NSData或者NSInputStream
+ *
+ *  @param body 请求体数据
+ */
+- (void)setBody:(id)body;
 
 /**
  *  发送请求
@@ -164,6 +190,30 @@ typedef void(^MOBFHttpUploadProgressEvent) (NSInteger totalBytes, NSInteger load
                                          method:(NSString *)method
                                      parameters:(NSDictionary *)parameters
                                         headers:(NSDictionary *)headers
+                                       onResult:(MOBFHttpResultEvent)resultHandler
+                                        onFault:(MOBFHttpFaultEvent)faultHandler
+                               onUploadProgress:(MOBFHttpUploadProgressEvent)uploadProgressHandler;
+
+
+/**
+ *  发送HTTP请求
+ *
+ *  @param urlString             请求地址
+ *  @param method                请求方式
+ *  @param parameters            请求参数
+ *  @param headers               请求头集合
+ *  @param timeout               请求超时
+ *  @param resultHandler         返回回调
+ *  @param faultHandler          错误回调
+ *  @param uploadProgressHandler 上传数据进度回调
+ *
+ *  @return HTTP服务对象
+ */
++ (MOBFHttpService *)sendHttpRequestByURLString:(NSString *)urlString
+                                         method:(NSString *)method
+                                     parameters:(NSDictionary *)parameters
+                                        headers:(NSDictionary *)headers
+                                        timeout:(NSTimeInterval)timeout
                                        onResult:(MOBFHttpResultEvent)resultHandler
                                         onFault:(MOBFHttpFaultEvent)faultHandler
                                onUploadProgress:(MOBFHttpUploadProgressEvent)uploadProgressHandler;

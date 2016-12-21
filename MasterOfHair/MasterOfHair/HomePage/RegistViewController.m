@@ -320,28 +320,32 @@
     
     if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0 && [self.text_pass.text isEqualToString:self.text_password.text] && [self.text_pass.text length] >= 6 && [self.text_password.text length] >= 6)
     {
-        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+        
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(SMSSDKUserInfo *userInfo, NSError *error) {
             
-            if(error)
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
-                [self presentViewController:alert animated:YES completion:^{
-                }];
-                
-                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                }];
-                [alert addAction:action];
+                if (!error)
+                {
+                    DataProvider * dataprovider=[[DataProvider alloc] init];
+                    [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
+                    [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
+                    
+                    [SVProgressHUD showWithStatus:@"正在注册,请稍等..." ];
+                    
+                    
+                }
+                else
+                {
+                    NSLog(@"错误信息:%@",error);
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
+                    [self presentViewController:alert animated:YES completion:^{
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    }];
+                    [alert addAction:action];
+                }
             }
-            else
-            {//验证成功
-                DataProvider * dataprovider=[[DataProvider alloc] init];
-                [dataprovider setDelegateObject:self setBackFunctionName:@"register_register:"];
-                [dataprovider registerWithMember_username:self.text_tel.text member_password:self.text_pass.text spread_id:self.text_extend.text];
-                
-                [SVProgressHUD showWithStatus:@"正在注册,请稍等..." ];
-
-            }
-            
         }];
     }
     

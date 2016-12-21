@@ -242,26 +242,29 @@
     
     if([self.text_tel.text length] == 11 && [self.text_captcha.text length] != 0)
     {
-        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(NSError *error) {
+        
+        [SMSSDK commitVerificationCode:self.text_captcha.text phoneNumber:self.text_tel.text zone:@"86" result:^(SMSSDKUserInfo *userInfo, NSError *error) {
             
-            if(error)
             {
-                UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
-                [self presentViewController:alert animated:YES completion:^{
-                }];
-                
-                UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                }];
-                [alert addAction:action];
+                if (!error)
+                {
+                    
+                    NSLog(@"验证成功");
+                    SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
+                    setPayPWD.fatherVC=self.fatherVC;
+                    [self.navigationController pushViewController:setPayPWD animated:YES];
+                }
+                else
+                {
+                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"输入的验证码错误" preferredStyle:(UIAlertControllerStyleAlert)];
+                    [self presentViewController:alert animated:YES completion:^{
+                    }];
+                    
+                    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    }];
+                    [alert addAction:action];
+                }
             }
-            else
-            {//验证成功
-                SetPayPwdViewController * setPayPWD=[[SetPayPwdViewController alloc] init];
-                setPayPWD.fatherVC=self.fatherVC;
-                [self.navigationController pushViewController:setPayPWD animated:YES];
-                
-            }
-            
         }];
     }
     
