@@ -368,7 +368,7 @@
     }
     else
     {
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
         
         [SVProgressHUD showErrorWithStatus:dict[@"status"][@"message"] ];
     }
